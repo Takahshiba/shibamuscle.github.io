@@ -449,6 +449,7 @@ li {
         white-space: normal;
     }
 
+
     .exercise-image img {
         width: 250px;
         height: 250px;
@@ -457,12 +458,10 @@ li {
 
     .exercise-cards-container {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px; /* 追加: カード間のギャップ調整 */
     }
 
     .exercise-card {
-        flex: 0 0 calc(50% - 10px);
-        padding: 10px; /* 追加: パディング調整 */
+        flex: 0 0 calc(50% - 15px);
     }
 
     .exercise-card img {
@@ -504,27 +503,6 @@ li {
 
     .footer-links a {
         font-size: 12px;
-    }
-
-    /* 検索バーのスタイル */
-    .search-bar-container {
-        width: 90%; /* 幅を広げて中央揃え */
-        margin: 0 auto 20px auto; /* 上下にマージンを追加 */
-    }
-
-    #search-bar {
-        width: 100%; /* 幅を100%に */
-        max-width: none; /* 最大幅制限を解除 */
-        padding: 10px;
-        border: 2px solid #23d160; 
-        border-radius: 5px;
-        font-size: 16px;
-        box-sizing: border-box;
-        outline: none;
-    }
-
-    #search-bar:focus {
-        border-color: #23d160; 
     }
 }
 
