@@ -2897,17 +2897,14 @@
             }
         }
 
-       function filterExercises() {
-    const input = document.getElementById('search-bar').value.toLowerCase();
-    console.log('Input:', input); // デバッグ用コンソールログ
-    const cards = document.getElementsByClassName('exercise-card');
-    const names = document.getElementsByClassName('name');
-    
-    for (let i = 0; i < cards.length; i++) {
+   function filterExercises() {
+    　　　　　const input = document.getElementById('search-bar').value.toLowerCase();
+    　　　const cards = document.getElementsByClassName('exercise-card');
+    　　　const names = document.getElementsByClassName('name');
+
+    　for (let i = 0; i < cards.length; i++) {
         const card = cards[i];
         const name = names[i].textContent.toLowerCase();
-        console.log('Name:', name); // デバッグ用コンソールログ
-        console.log('Parent Element Tag:', card.parentElement.tagName); // 親要素のタグ名を出力
 
         if (name.includes(input)) {
             card.parentElement.style.display = '';
