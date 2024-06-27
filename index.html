@@ -2,26 +2,21 @@
 <html lang="ja">
 
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1929290636844177"
-     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShibaMuscle</title>
     <meta name="description" content="各種ワークアウトの重量やレップ数の基準、平均を性別,年齢別,体重別のデータでお届けします。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="./ShibaMuscle/Assets/ShibaFavicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./ShibaMuscle/Assets/ShibaFavicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./ShibaMuscle/Assets/ShibaFavicon/favicon-16x16.png">
-    <link rel="manifest" href="./ShibaMuscle/Assets/ShibaFavicon/site.webmanifest">
-    <link rel="mask-icon" href="./ShibaMuscle/Assets/ShibaFavicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="./ShibaMuscle/CSS/sanitize.css">
-    <link rel="stylesheet" href="./ShibaMuscle/CSS/homeStyle.css">
+    <link rel="preconnect" href="./ShibaMuscle/WorkoutMenu/https://fonts.googleapis.com">
+    <link rel="preconnect" href="./ShibaMuscle/WorkoutMenu/https://fonts.gstatic.com" crossorigin>
+    <link href="./ShibaMuscle/WorkoutMenu/https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./ShibaMuscle/WorkoutMenu//Assets/ShibaFavicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./ShibaMuscle/WorkoutMenu//Assets/ShibaFavicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./ShibaMuscle/WorkoutMenu//Assets/ShibaFavicon/favicon-16x16.png">
+    <link rel="manifest" href="./ShibaMuscle/WorkoutMenu//Assets/ShibaFavicon/site.webmanifest">
+    <link rel="stylesheet" href="./ShibaMuscle/WorkoutMenu/./ShibaMuscle/CSS/sanitize.css">
+    <link rel="stylesheet" href="./ShibaMuscle/WorkoutMenu/./ShibaMuscle/CSS/homeStyle.css">
 </head>
-    <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9K58THBFM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -42,19 +37,33 @@
             &#9776;
         </button>
         <ul class="menu" id="menu">
-            <li><a href="#table-view">テーブルの見方</a></li>
-            <li><a href="#caution">注意事項</a></li>
-            <li><a href="./ShibaMuscle/Others/Contact.html">お問い合わせ</a></li>
-            <li><a href="./ShibaMuscle/Others/PrivacyPolicy.html">プライバシーポリシー</a></li>
+            <li><a href="./ShibaMuscle/WorkoutMenu/#table-view">テーブルの見方</a></li>
+            <li><a href="./ShibaMuscle/WorkoutMenu/#caution">注意事項</a></li>
+            <li><a href="./ShibaMuscle/WorkoutMenu//Others/Contact.html">お問い合わせ</a></li>
+            <li><a href="./ShibaMuscle/WorkoutMenu//Others/PrivacyPolicy.html">プライバシーポリシー</a></li>
         </ul>
     </header>
     <main>
         <div class="container">
             <div class="section-box">
-                <div class="title-more-excercises">ワークアウトを探す</div>
-                <!-- Whole Body Section -->
-               <h2 id="WholeBodySection" class="title-each-category">全身トレーニング</h2>
-               <div class="exercise-cards-container">
+                　<div class="title-more-excercises">ワークアウトを探す</div>
+
+                <ul class="jump-buttons-container">
+                    <li><button class="jump-button" onclick="scrollToSection('WholeBodySection')">全身</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('ChestSection')">胸</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('BackSection')">背中</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('ShoulderSection')">肩</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('ArmSection')">腕</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('LegSection')">脚</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('CoreSection')">体幹</button></li>
+                </ul>
+
+                <div class="search-bar-container">
+                    <input type="text" id="search-bar" placeholder="🔍" onkeyup="filterExercises()">
+                </div>
+
+                <h2 id="WholeBodySection" class="title-each-category">全身トレーニング</h2>
+                <div class="exercise-cards-container">
                     <a href="./ShibaMuscle/WorkoutMenu/Deadlift.html" class="card-link">
                         <div class="exercise-card">
                             <img src="./ShibaMuscle/Assets/WorkoutImages/Deadlift.PNG" alt="Deadlift" loading="lazy">
@@ -91,402 +100,397 @@
                             </div>
                         </div>
                     </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/PowerClean.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/PowerClean.PNG" alt="PowerClean" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">パワークリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/PowerClean.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/PowerClean.PNG" alt="PowerClean" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">パワークリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/RomanianDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/RomanianDeadlift.PNG" alt="RomanianDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ルーマニアン<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/RomanianDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/RomanianDeadlift.PNG" alt="RomanianDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ルーマニアン<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SumoDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/SumoDeadlift.PNG" alt="SumoDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">相撲デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SumoDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/SumoDeadlift.PNG" alt="SumoDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">相撲デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/CleanAndJerk.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/CleanAndJerk.PNG" alt="CleanAndJerk" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーン＆ジャーク</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/CleanAndJerk.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/CleanAndJerk.PNG" alt="CleanAndJerk" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーン＆ジャーク</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/Snatch.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/Snatch.PNG" alt="Snatch" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/Snatch.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/Snatch.PNG" alt="Snatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/Clean.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/Clean.PNG" alt="Clean" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/Clean.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/Clean.PNG" alt="Clean" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/CleanAndPress.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/CleanAndPress.PNG" alt="CleanAndPress" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーン＆プレス</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/CleanAndPress.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/CleanAndPress.PNG" alt="CleanAndPress" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーン＆プレス</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/RackPull.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/RackPull.PNG" alt="RackPull" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ラックプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/RackPull.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/RackPull.PNG" alt="RackPull" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ラックプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellRomanianDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellRomanianDeadlift.PNG"
-                                    alt="DumbbellRomanianDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルルーマニアン<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellRomanianDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellRomanianDeadlift.PNG"
+                                alt="DumbbellRomanianDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルルーマニアン<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/HangClean.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/HangClean.PNG" alt="HangClean" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ハングクリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/HangClean.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/HangClean.PNG" alt="HangClean" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ハングクリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/StiffLegDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/StiffLegDeadlift.PNG" alt="StiffLegDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スティフレッグ<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/StiffLegDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/StiffLegDeadlift.PNG" alt="StiffLegDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スティフレッグ<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/MuscleUps.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/MuscleUps.PNG" alt="MuscleUps" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">マッスルアップ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/MuscleUps.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/MuscleUps.PNG" alt="MuscleUps" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">マッスルアップ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/PowerSnatch.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/PowerSnatch.PNG" alt="PowerSnatch" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">パワースナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/PowerSnatch.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/PowerSnatch.PNG" alt="PowerSnatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">パワースナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/Thruster.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/Thruster.PNG" alt="Thruster" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スラスター</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/Thruster.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/Thruster.PNG" alt="Thruster" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スラスター</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/PushJerk.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/PushJerk.PNG" alt="PushJerk" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">プッシュジャーク</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/PushJerk.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/PushJerk.PNG" alt="PushJerk" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">プッシュジャーク</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellDeadlift.PNG" alt="DumbbellDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルデッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellDeadlift.PNG" alt="DumbbellDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルデッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DeficitDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/DeficitDeadlift.PNG" alt="DeficitDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ディフィシット<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DeficitDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/DeficitDeadlift.PNG" alt="DeficitDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ディフィシット<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SingleLegRomanianDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/SingleLegRomanianDeadlift.PNG"
-                                    alt="SingleLegRomanianDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">片足ルーマニアン<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SingleLegRomanianDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/SingleLegRomanianDeadlift.PNG"
+                                alt="SingleLegRomanianDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">片足ルーマニアン<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/Burpees.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/Burpees.PNG" alt="Burpees" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">バーピージャンプ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/Burpees.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/Burpees.PNG" alt="Burpees" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">バーピージャンプ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/HangPowerClean.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/HangPowerClean.PNG" alt="HangPowerClean"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ハングパワークリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/HangPowerClean.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/HangPowerClean.PNG" alt="HangPowerClean" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ハングパワークリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SplitJerk.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/SplitJerk.PNG" alt="SplitJerk" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スプリットジャーク</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SplitJerk.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/SplitJerk.PNG" alt="SplitJerk" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スプリットジャーク</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellSnatch.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellSnatch.PNG" alt="DumbbellSnatch"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルスナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellSnatch.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellSnatch.PNG" alt="DumbbellSnatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルスナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/CleanHighPull.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/CleanHighPull.PNG" alt="CleanHighPull" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーンハイプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/CleanHighPull.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/CleanHighPull.PNG" alt="CleanHighPull" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーンハイプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SnatchDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/SnatchDeadlift.PNG" alt="SnatchDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スナッチデッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SnatchDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/SnatchDeadlift.PNG" alt="SnatchDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スナッチデッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/CleanPull.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/CleanPull.PNG" alt="CleanPull" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーンプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/CleanPull.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/CleanPull.PNG" alt="CleanPull" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーンプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/PauseDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/PauseDeadlift.PNG" alt="PauseDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ポーズデッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/PauseDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/PauseDeadlift.PNG" alt="PauseDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ポーズデッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SingleLegDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/SingleLegDeadlift.PNG" alt="SingleLegDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">片足デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SingleLegDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/SingleLegDeadlift.PNG" alt="SingleLegDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">片足デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/MuscleSnatch.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/MuscleSnatch.PNG" alt="MuscleSnatch" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">マッスルスナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/MuscleSnatch.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/MuscleSnatch.PNG" alt="MuscleSnatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">マッスルスナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/JeffersonDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/JeffersonDeadlift.PNG" alt="JeffersonDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ジェファーソン<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/JeffersonDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/JeffersonDeadlift.PNG" alt="JeffersonDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ジェファーソン<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SnatchPull.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/SnatchPull.PNG" alt="SnatchPull" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スナッチプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SnatchPull.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/SnatchPull.PNG" alt="SnatchPull" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スナッチプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/WallBall.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/WallBall.PNG" alt="WallBall" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ウォールボール</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/WallBall.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/WallBall.PNG" alt="WallBall" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ウォールボール</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/ZercherDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/ZercherDeadlift.PNG" alt="ZercherDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ザーチャー<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/ZercherDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/ZercherDeadlift.PNG" alt="ZercherDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ザーチャー<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SingleLegDumbbellDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/SingleLegDumbbellDeadlift.PNG"
-                                    alt="SingleLegDumbbellDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">片足ダンベル<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SingleLegDumbbellDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/SingleLegDumbbellDeadlift.PNG"
+                                alt="SingleLegDumbbellDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">片足ダンベル<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellCleanAndPress.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellCleanAndPress.PNG" alt="DumbbellCleanAndPress"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベル<br>クリーン＆プレス</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellCleanAndPress.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellCleanAndPress.PNG" alt="DumbbellCleanAndPress"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベル<br>クリーン＆プレス</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/RingMuscleUps.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/RingMuscleUps.PNG" alt="RingMuscleUps" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">リングマッスルアップ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/RingMuscleUps.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/RingMuscleUps.PNG" alt="RingMuscleUps" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">リングマッスルアップ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellThruster.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellThruster.PNG" alt="DumbbellThruster"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルスラスター</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellThruster.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellThruster.PNG" alt="DumbbellThruster"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルスラスター</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/HangSnatch.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/HangSnatch.PNG" alt="HangSnatch" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ハングスナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/HangSnatch.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/HangSnatch.PNG" alt="HangSnatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ハングスナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellHighPull.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellHighPull.PNG" alt="DumbbellHighPull"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルハイプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellHighPull.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellHighPull.PNG" alt="DumbbellHighPull"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルハイプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellHangClean.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellHangClean.PNG" alt="DumbbellHangClean"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルハングクリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DumbbellHangClean.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/DumbbellHangClean.PNG" alt="DumbbellHangClean"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルハングクリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/BehindTheBackDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/BehindTheBackDeadlift.PNG" alt="BehindTheBackDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">後背デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/BehindTheBackDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/BehindTheBackDeadlift.PNG" alt="BehindTheBackDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">後背デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/ClapPullUp.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/ClapPullUp.PNG" alt="ClapPullUp" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クラッププルアップ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/ClapPullUp.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/ClapPullUp.PNG" alt="ClapPullUp" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クラッププルアップ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SquatThrust.html">
-                            <div class="exercise-card">
-                                <img src="./ShibaMuscle/Assets/WorkoutImages/SquatThrust.PNG" alt="SquatThrust">
-                                <div class="exercise-details">
-                                    <div class="name">スクワットスラスト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="./ShibaMuscle/WorkoutMenu/SquatThrust.html">
+                        <div class="exercise-card">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/SquatThrust.PNG" alt="SquatThrust">
+                            <div class="exercise-details">
+                                <div class="name">スクワットスラスト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
+                        </div>
+                    </a>
                 </div>
                 <!-- Chest Section -->
                 <h2 id="ChestSection" class="title-each-category">胸トレ</h2>
@@ -579,7 +583,7 @@
                     </a>
                     <a class="card-link" href="./ShibaMuscle/WorkoutMenu/DeclineBenchPress.html">
                         <div class="exercise-card">
-                            <img src="./ShibaMuscle/Assets/WorkoutImages/DeclineBenchPress.PNG" alt="DeclineBenchPress"
+                            <img src=" ../Assets/WorkoutImages/DeclineBenchPress.PNG" alt="DeclineBenchPress"
                                 loading="lazy">
                             <div class="exercise-details">
                                 <div class="name">デクライン<br>ベンチプレス</div>
@@ -1083,7 +1087,8 @@
                     </a>
                     <a class="card-link" href="./ShibaMuscle/WorkoutMenu/OneArmLatPulldown.html">
                         <div class="exercise-card">
-                            <img src="./ShibaMuscle/Assets/WorkoutImages/OneArmLatPulldown.PNG" alt="OneArmLatPulldown" loading="lazy">
+                            <img src="./ShibaMuscle/Assets/WorkoutImages/OneArmLatPulldown.PNG" alt="OneArmLatPulldown"
+                                loading="lazy">
                             <div class="exercise-details">
                                 <div class="name">片腕ラットプルダウン</div>
                                 <div class="category">背中</div>
@@ -2877,8 +2882,8 @@
     <footer class="footer">
         <div class="container">
             <ul class="footer-links">
-                <li><a href="./ShibaMuscle/Others/Contact.html">お問い合わせ</a></li>
-                <li><a href="./ShibaMuscle/Others/PrivacyPolicy.html">プライバシーポリシー</a></li>
+                <li><a href="./ShibaMuscle/WorkoutMenu//Others/Contact.html">お問い合わせ</a></li>
+                <li><a href="./ShibaMuscle/WorkoutMenu//Others/PrivacyPolicy.html">プライバシーポリシー</a></li>
             </ul>
         </div>
     </footer>
@@ -2891,6 +2896,29 @@
                 menu.style.display = "block";
             }
         }
+
+        function filterExercises() {
+            const input = document.getElementById('search-bar').value.toLowerCase();
+            const cards = document.getElementsByClassName('exercise-card');
+            const names = document.getElementsByClassName('name');
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const name = names[i].textContent.toLowerCase();
+
+                if (name.includes(input)) {
+                    card.parentElement.style.display = '';
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
     </script>
 </body>
 
