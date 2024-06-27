@@ -2,8 +2,6 @@
 <html lang="ja">
 
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1929290636844177"
-     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShibaMuscle</title>
@@ -13,14 +11,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="../Assets/ShibaFavicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/ShibaFavicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../Assets/ShibaFavicon/favicon-16x16.png">
-<link rel="manifest" href="../Assets/ShibaFavicon/site.webmanifest">
-<link rel="mask-icon" href="../Assets/ShibaFavicon/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/ShibaFavicon/favicon-16x16.png">
+    <link rel="manifest" href="../Assets/ShibaFavicon/site.webmanifest">
     <link rel="stylesheet" href="../CSS/sanitize.css">
     <link rel="stylesheet" href="../CSS/homeStyle.css">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D9K58THBFM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D9K58THBFM');
+</script>
 
 <body>
     <header>
@@ -42,10 +46,24 @@
     <main>
         <div class="container">
             <div class="section-box">
-                <div class="title-more-excercises">ワークアウトを探す</div>
-                <!-- Whole Body Section -->
-               <h2 class="title-each-category">全身トレーニング</h2>
-               <div class="exercise-cards-container">
+                　<div class="title-more-excercises">ワークアウトを探す</div>
+
+                <ul class="jump-buttons-container">
+                    <li><button class="jump-button" onclick="scrollToSection('WholeBodySection')">全身</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('ChestSection')">胸</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('BackSection')">背中</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('ShoulderSection')">肩</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('ArmSection')">腕</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('LegSection')">脚</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('CoreSection')">体幹</button></li>
+                </ul>
+
+                <div class="search-bar-container">
+                    <input type="text" id="search-bar" placeholder="🔍" onkeyup="filterExercises()">
+                </div>
+
+                <h2 id="WholeBodySection" class="title-each-category">全身トレーニング</h2>
+                <div class="exercise-cards-container">
                     <a href="Deadlift.html" class="card-link">
                         <div class="exercise-card">
                             <img src="../Assets/WorkoutImages/Deadlift.PNG" alt="Deadlift" loading="lazy">
@@ -82,405 +100,400 @@
                             </div>
                         </div>
                     </a>
-                        <a class="card-link" href="PowerClean.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/PowerClean.PNG" alt="PowerClean" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">パワークリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                    <a class="card-link" href="PowerClean.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/PowerClean.PNG" alt="PowerClean" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">パワークリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="RomanianDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/RomanianDeadlift.PNG" alt="RomanianDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ルーマニアン<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="RomanianDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/RomanianDeadlift.PNG" alt="RomanianDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ルーマニアン<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="SumoDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/SumoDeadlift.PNG" alt="SumoDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">相撲デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="SumoDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/SumoDeadlift.PNG" alt="SumoDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">相撲デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="CleanAndJerk.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/CleanAndJerk.PNG" alt="CleanAndJerk" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーン＆ジャーク</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="CleanAndJerk.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/CleanAndJerk.PNG" alt="CleanAndJerk" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーン＆ジャーク</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="Snatch.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/Snatch.PNG" alt="Snatch" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="Snatch.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/Snatch.PNG" alt="Snatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="Clean.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/Clean.PNG" alt="Clean" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="Clean.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/Clean.PNG" alt="Clean" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="CleanAndPress.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/CleanAndPress.PNG" alt="CleanAndPress" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーン＆プレス</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="CleanAndPress.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/CleanAndPress.PNG" alt="CleanAndPress" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーン＆プレス</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="RackPull.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/RackPull.PNG" alt="RackPull" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ラックプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="RackPull.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/RackPull.PNG" alt="RackPull" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ラックプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="DumbbellRomanianDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/DumbbellRomanianDeadlift.PNG"
-                                    alt="DumbbellRomanianDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルルーマニアン<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="DumbbellRomanianDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/DumbbellRomanianDeadlift.PNG"
+                                alt="DumbbellRomanianDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルルーマニアン<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="HangClean.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/HangClean.PNG" alt="HangClean" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ハングクリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="HangClean.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/HangClean.PNG" alt="HangClean" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ハングクリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="StiffLegDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/StiffLegDeadlift.PNG" alt="StiffLegDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スティフレッグ<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="StiffLegDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/StiffLegDeadlift.PNG" alt="StiffLegDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スティフレッグ<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="MuscleUps.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/MuscleUps.PNG" alt="MuscleUps" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">マッスルアップ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="MuscleUps.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/MuscleUps.PNG" alt="MuscleUps" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">マッスルアップ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="PowerSnatch.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/PowerSnatch.PNG" alt="PowerSnatch" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">パワースナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="PowerSnatch.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/PowerSnatch.PNG" alt="PowerSnatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">パワースナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="Thruster.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/Thruster.PNG" alt="Thruster" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スラスター</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="Thruster.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/Thruster.PNG" alt="Thruster" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スラスター</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="PushJerk.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/PushJerk.PNG" alt="PushJerk" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">プッシュジャーク</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="PushJerk.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/PushJerk.PNG" alt="PushJerk" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">プッシュジャーク</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="DumbbellDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/DumbbellDeadlift.PNG" alt="DumbbellDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルデッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="DumbbellDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/DumbbellDeadlift.PNG" alt="DumbbellDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルデッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="DeficitDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/DeficitDeadlift.PNG" alt="DeficitDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ディフィシット<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="DeficitDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/DeficitDeadlift.PNG" alt="DeficitDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ディフィシット<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="SingleLegRomanianDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/SingleLegRomanianDeadlift.PNG"
-                                    alt="SingleLegRomanianDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">片足ルーマニアン<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="SingleLegRomanianDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/SingleLegRomanianDeadlift.PNG"
+                                alt="SingleLegRomanianDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">片足ルーマニアン<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="Burpees.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/Burpees.PNG" alt="Burpees" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">バーピージャンプ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="Burpees.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/Burpees.PNG" alt="Burpees" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">バーピージャンプ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="HangPowerClean.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/HangPowerClean.PNG" alt="HangPowerClean"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ハングパワークリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="HangPowerClean.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/HangPowerClean.PNG" alt="HangPowerClean" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ハングパワークリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="SplitJerk.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/SplitJerk.PNG" alt="SplitJerk" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スプリットジャーク</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="SplitJerk.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/SplitJerk.PNG" alt="SplitJerk" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スプリットジャーク</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="DumbbellSnatch.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/DumbbellSnatch.PNG" alt="DumbbellSnatch"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルスナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="DumbbellSnatch.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/DumbbellSnatch.PNG" alt="DumbbellSnatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルスナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="CleanHighPull.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/CleanHighPull.PNG" alt="CleanHighPull" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーンハイプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="CleanHighPull.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/CleanHighPull.PNG" alt="CleanHighPull" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーンハイプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="SnatchDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/SnatchDeadlift.PNG" alt="SnatchDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スナッチデッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="SnatchDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/SnatchDeadlift.PNG" alt="SnatchDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スナッチデッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="CleanPull.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/CleanPull.PNG" alt="CleanPull" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クリーンプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="CleanPull.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/CleanPull.PNG" alt="CleanPull" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クリーンプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="PauseDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/PauseDeadlift.PNG" alt="PauseDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ポーズデッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="PauseDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/PauseDeadlift.PNG" alt="PauseDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ポーズデッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="SingleLegDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/SingleLegDeadlift.PNG" alt="SingleLegDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">片足デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="SingleLegDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/SingleLegDeadlift.PNG" alt="SingleLegDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">片足デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="MuscleSnatch.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/MuscleSnatch.PNG" alt="MuscleSnatch" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">マッスルスナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="MuscleSnatch.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/MuscleSnatch.PNG" alt="MuscleSnatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">マッスルスナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="JeffersonDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/JeffersonDeadlift.PNG" alt="JeffersonDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ジェファーソン<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="JeffersonDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/JeffersonDeadlift.PNG" alt="JeffersonDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ジェファーソン<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="SnatchPull.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/SnatchPull.PNG" alt="SnatchPull" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">スナッチプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="SnatchPull.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/SnatchPull.PNG" alt="SnatchPull" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">スナッチプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="WallBall.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/WallBall.PNG" alt="WallBall" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ウォールボール</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="WallBall.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/WallBall.PNG" alt="WallBall" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ウォールボール</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="ZercherDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/ZercherDeadlift.PNG" alt="ZercherDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ザーチャー<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="ZercherDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/ZercherDeadlift.PNG" alt="ZercherDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ザーチャー<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="SingleLegDumbbellDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/SingleLegDumbbellDeadlift.PNG"
-                                    alt="SingleLegDumbbellDeadlift" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">片足ダンベル<br>デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="SingleLegDumbbellDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/SingleLegDumbbellDeadlift.PNG"
+                                alt="SingleLegDumbbellDeadlift" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">片足ダンベル<br>デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="DumbbellCleanAndPress.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/DumbbellCleanAndPress.PNG" alt="DumbbellCleanAndPress"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベル<br>クリーン＆プレス</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="DumbbellCleanAndPress.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/DumbbellCleanAndPress.PNG" alt="DumbbellCleanAndPress"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベル<br>クリーン＆プレス</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="RingMuscleUps.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/RingMuscleUps.PNG" alt="RingMuscleUps" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">リングマッスルアップ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="RingMuscleUps.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/RingMuscleUps.PNG" alt="RingMuscleUps" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">リングマッスルアップ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="DumbbellThruster.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/DumbbellThruster.PNG" alt="DumbbellThruster"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルスラスター</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="DumbbellThruster.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/DumbbellThruster.PNG" alt="DumbbellThruster"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルスラスター</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="HangSnatch.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/HangSnatch.PNG" alt="HangSnatch" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ハングスナッチ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="HangSnatch.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/HangSnatch.PNG" alt="HangSnatch" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ハングスナッチ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="DumbbellHighPull.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/DumbbellHighPull.PNG" alt="DumbbellHighPull"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルハイプル</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="DumbbellHighPull.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/DumbbellHighPull.PNG" alt="DumbbellHighPull"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルハイプル</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="DumbbellHangClean.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/DumbbellHangClean.PNG" alt="DumbbellHangClean"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">ダンベルハングクリーン</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="DumbbellHangClean.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/DumbbellHangClean.PNG" alt="DumbbellHangClean"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">ダンベルハングクリーン</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="BehindTheBackDeadlift.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/BehindTheBackDeadlift.PNG" alt="BehindTheBackDeadlift"
-                                    loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">後背デッドリフト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="BehindTheBackDeadlift.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/BehindTheBackDeadlift.PNG" alt="BehindTheBackDeadlift"
+                                loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">後背デッドリフト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="ClapPullUp.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/ClapPullUp.PNG" alt="ClapPullUp" loading="lazy">
-                                <div class="exercise-details">
-                                    <div class="name">クラッププルアップ</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="ClapPullUp.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/ClapPullUp.PNG" alt="ClapPullUp" loading="lazy">
+                            <div class="exercise-details">
+                                <div class="name">クラッププルアップ</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
-                        <a class="card-link" href="SquatThrust.html">
-                            <div class="exercise-card">
-                                <img src="../Assets/WorkoutImages/SquatThrust.PNG" alt="SquatThrust">
-                                <div class="exercise-details">
-                                    <div class="name">スクワットスラスト</div>
-                                    <div class="category">全身</div>
-                                </div>
+                        </div>
+                    </a>
+                    <a class="card-link" href="SquatThrust.html">
+                        <div class="exercise-card">
+                            <img src="../Assets/WorkoutImages/SquatThrust.PNG" alt="SquatThrust">
+                            <div class="exercise-details">
+                                <div class="name">スクワットスラスト</div>
+                                <div class="category">全身</div>
                             </div>
-                        </a>
+                        </div>
+                    </a>
                 </div>
                 <!-- Chest Section -->
-                <h2 class="title-each-category">胸トレ</h2>
+                <h2 id="ChestSection" class="title-each-category">胸トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="BenchPress.html">
                         <div class="exercise-card">
@@ -780,7 +793,7 @@
                     </a>
                 </div>
                 <!-- Back Section -->
-                <h2 class="title-each-category">背中トレ</h2>
+                <h2 id="BackSection" class="title-each-category">背中トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="Deadlift.html">
                         <div class="exercise-card">
@@ -1074,7 +1087,8 @@
                     </a>
                     <a class="card-link" href="OneArmLatPulldown.html">
                         <div class="exercise-card">
-                            <img src="../Assets/WorkoutImages/OneArmLatPulldown.PNG" alt="OneArmLatPulldown" loading="lazy">
+                            <img src="../Assets/WorkoutImages/OneArmLatPulldown.PNG" alt="OneArmLatPulldown"
+                                loading="lazy">
                             <div class="exercise-details">
                                 <div class="name">片腕ラットプルダウン</div>
                                 <div class="category">背中</div>
@@ -1197,7 +1211,7 @@
                     </a>
                 </div>
                 <!-- Shoulder Section -->
-                <h2 class="title-each-category">肩トレ</h2>
+                <h2 id="ShoulderSection" class="title-each-category">肩トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="ShoulderPress.html">
                         <div class="exercise-card">
@@ -1509,7 +1523,7 @@
 
 
                 <!-- Arm Section -->
-                <h2 class="title-each-category">腕トレ</h2>
+                <h2 id="ArmSection" class="title-each-category">腕トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="DumbbellCurl.html">
                         <div class="exercise-card">
@@ -1941,7 +1955,7 @@
                     </a>
                 </div>
                 <!-- Leg Section -->
-                <h2 class="title-each-category">脚トレ</h2>
+                <h2 id="LegSection" class="title-each-category">脚トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="Squat.html">
                         <div class="exercise-card">
@@ -2301,7 +2315,7 @@
                         <div class="exercise-card">
                             <img src="../Assets/WorkoutImages/SafetyBarSquat.PNG" alt="SafetyBarSquat" loading="lazy">
                             <div class="exercise-details">
-                                <div class="name">サーフティーバー<br>スクワット</div>
+                                <div class="name">セーフティーバー<br>スクワット</div>
                                 <div class="category">脚</div>
                             </div>
                         </div>
@@ -2578,7 +2592,7 @@
                     </a>
                 </div>
                 <!-- Core Section -->
-                <h2 class="title-each-category">体幹トレーニング</h2>
+                <h2 id="CoreSection" class="title-each-category">体幹トレーニング</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="SitUps.html">
                         <div class="exercise-card">
@@ -2882,6 +2896,29 @@
                 menu.style.display = "block";
             }
         }
+
+        function filterExercises() {
+            const input = document.getElementById('search-bar').value.toLowerCase();
+            const cards = document.getElementsByClassName('exercise-card');
+            const names = document.getElementsByClassName('name');
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const name = names[i].textContent.toLowerCase();
+
+                if (name.includes(input)) {
+                    card.parentElement.style.display = '';
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
     </script>
 </body>
 

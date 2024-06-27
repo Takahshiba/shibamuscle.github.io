@@ -17,24 +17,19 @@ body {
 }
 
 header {
+    position: relative;
     background-color: white;
     padding: 10px 0;
     box-shadow: 0 4px 2px -2px gray;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center; 
-    position: relative; 
-}
-
-.left-space {
-    flex: 1; 
 }
 
 .logo-container {
-    display: inline-block;
-    position: absolute; 
-    left: 50%; 
-    transform: translateX(-50%); 
+    flex: 1;
+    text-align: center;
+    margin-left: 58px;
 }
 
 .logo {
@@ -46,22 +41,60 @@ header {
     transform: scale(1.1);
 }
 
-.question-link-container {
-    margin-left: auto; 
-    padding-right: 20px; 
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
 }
 
-.question-link {
-    font-size: 20px; 
-    text-decoration: none; 
-    color: #333333; 
-    transition: color 0.3s; 
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 200px;
+    text-align: left;
+    display: none;
+    z-index: 1;
 }
 
-.question-link:hover {
-    color: #23d160; 
+.menu li {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
 }
 
+.menu li:last-child {
+    border-bottom: none;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.menu li a:hover {
+    color: #23d160;
+}
+
+.logo-container {
+    display: inline-block;
+}
+
+.logo {
+    max-height: 60px;
+    transition: transform 0.3s;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
 
 .main {
     padding: 20px;
@@ -77,6 +110,64 @@ header {
     margin-bottom: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.jump-buttons-container {
+    list-style: none; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 0px; 
+    margin-left: 250px; 
+    margin-right: 250px;
+    flex-wrap: wrap;
+}
+
+.jump-buttons-container li {
+    margin: 0;
+    flex: 1;
+}
+
+.jump-button {
+    padding: 6px 12px;
+    background-color: #f4f4f4;
+    color: #23d160;
+    border: 2px solid #23d160;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 60px;
+    box-sizing: border-box;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.jump-button:hover {
+    background-color: #e4e4e4; 
+}
+
+.search-bar-container {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#search-bar {
+    width: 100%;
+    max-width: 600px; 
+    padding: 10px;
+    border: 2px solid #23d160; 
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#search-bar:focus {
+    border-color: #23d160; 
 }
 
 .title {
@@ -347,6 +438,17 @@ header {
         font-size: 1.7rem;
     }
 
+    .jump-buttons-container {
+        margin-left: 100px; 
+        margin-right: 100px; 
+    }
+
+    .jump-button {
+        padding: 8px 14px;
+        font-size: 12px; 
+        min-width: 60px; 
+    }
+
     .karate-image {
         width: 40px;
         height: auto;
@@ -391,8 +493,19 @@ header {
         font-size: 1.0rem;
     }
 
-    .question-link {
-        font-size: 16px; 
+    .section-box {
+        padding: 10px;
+    }
+    
+    .jump-buttons-container {
+        margin-left: 20px; 
+        margin-right: 20px; 
+    }
+
+    .jump-button {
+        padding: 6px 10px; 
+        font-size: 10px; 
+        min-width: 50px; 
     }
 
     .exercise-subtitle {

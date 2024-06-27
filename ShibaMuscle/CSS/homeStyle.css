@@ -47,10 +47,8 @@ header {
     background: none;
     border: none;
     font-size: 24px;
-    /* Increase font size */
     cursor: pointer;
     margin-right: 10px;
-    /* Add margin to separate from the logo */
 }
 
 .menu {
@@ -62,11 +60,9 @@ header {
     position: absolute;
     top: 50px;
     right: 10px;
-    /* Adjust as needed */
     width: 200px;
     text-align: left;
     display: none;
-    /* Hide by default */
     z-index: 1;
 }
 
@@ -88,7 +84,6 @@ header {
 .menu li a:hover {
     color: #23d160;
 }
-
 
 .logo-container {
     display: inline-block;
@@ -117,6 +112,64 @@ header {
     margin-bottom: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.jump-buttons-container {
+    list-style: none; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 0px; 
+    margin-left: 250px; 
+    margin-right: 250px;
+    flex-wrap: wrap;
+}
+
+.jump-buttons-container li {
+    margin: 0;
+    flex: 1;
+}
+
+.jump-button {
+    padding: 6px 12px;
+    background-color: #f4f4f4;
+    color: #23d160;
+    border: 2px solid #23d160;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 60px;
+    box-sizing: border-box;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.jump-button:hover {
+    background-color: #e4e4e4; 
+}
+
+.search-bar-container {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#search-bar {
+    width: 100%;
+    max-width: 600px; 
+    padding: 10px;
+    border: 2px solid #23d160; 
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#search-bar:focus {
+    border-color: #23d160; 
 }
 
 .title-more-excercises {
@@ -289,6 +342,17 @@ li {
 
     .title {
         font-size: 1.3rem;
+    }
+
+    .jump-buttons-container {
+        margin-left: 100px; 
+        margin-right: 100px; 
+    }
+
+    .jump-button {
+        padding: 8px 14px;
+        font-size: 12px; 
+        min-width: 60px; 
     }
 
     .karate-image {

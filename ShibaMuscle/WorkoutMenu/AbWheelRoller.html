@@ -30,17 +30,22 @@
   gtag('config', 'G-D9K58THBFM');
 </script>
 <body>
-<header>
-  <div class="left-space"></div>
-  <div class="logo-container">
-    <a href="001Home.html">
-      <img src="../Assets/ShibaIcon.png" alt="ShibaMuscle" class="logo">
-    </a>
-  </div>
-  <div class="question-link-container">
-    <a href="001Home.html#table-view" class="question-link">？</a>
-  </div>
-</header>
+    <header>
+        <div class="logo-container">
+            <a href="001Home.html">
+                <img src="../Assets/ShibaIcon.png" alt="ShibaMuscle" class="logo">
+            </a>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">
+            &#9776;
+        </button>
+        <ul class="menu" id="menu">
+            <li><a href="001Home.html#table-view">テーブルの見方</a></li>
+            <li><a href="001Home.html#caution">注意事項</a></li>
+            <li><a href="../Others/Contact.html">お問い合わせ</a></li>
+            <li><a href="../Others/PrivacyPolicy.html">プライバシーポリシー</a></li>
+        </ul>
+    </header>
     <main class="section py-0 mb-4">
         <div class="container">
             <div class="section-box">
@@ -263,9 +268,23 @@
                 </div>
             </div>
             <div class="section-box">
-                <div class="title-more-excercises">その他のワークアウト</div>
+　　　　　 <div class="title-more-excercises">その他のワークアウト</div>
+
+                <ul class="jump-buttons-container">
+                    <li><button class="jump-button" onclick="scrollToSection('WholeBodySection')">全身</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('ChestSection')">胸</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('BackSection')">背中</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('ShoulderSection')">肩</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('ArmSection')">腕</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('LegSection')">脚</button></li>
+                    <li><button class="jump-button" onclick="scrollToSection('CoreSection')">体幹</button></li>
+                </ul>
+
+                <div class="search-bar-container">
+                    <input type="text" id="search-bar" placeholder="🔍" onkeyup="filterExercises()">
+                </div>
                 <!-- Whole Body Section -->
-                <h2 class="title-each-category">全身トレーニング</h2>
+                <h2 id="WholeBodySection" class="title-each-category">全身トレーニング</h2>
                 <div class="exercise-cards-container">
                     <a href="Deadlift.html" class="card-link">
                         <div class="exercise-card">
@@ -700,7 +719,7 @@
                         </a>
                 </div>
                 <!-- Chest Section -->
-                <h2 class="title-each-category">胸トレ</h2>
+                <h2 id="ChestSection" class="title-each-category">胸トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="BenchPress.html">
                         <div class="exercise-card">
@@ -1000,7 +1019,7 @@
                     </a>
                 </div>
                 <!-- Back Section -->
-                <h2 class="title-each-category">背中トレ</h2>
+                <h2 id="BackSection" class="title-each-category">背中トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="Deadlift.html">
                         <div class="exercise-card">
@@ -1417,7 +1436,7 @@
                     </a>
                 </div>
                 <!-- Shoulder Section -->
-                <h2 class="title-each-category">肩トレ</h2>
+                <h2 id="ShoulderSection" class="title-each-category">肩トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="ShoulderPress.html">
                         <div class="exercise-card">
@@ -1729,7 +1748,7 @@
 
 
                 <!-- Arm Section -->
-                <h2 class="title-each-category">腕トレ</h2>
+                <h2 id="ArmSection" class="title-each-category">腕トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="DumbbellCurl.html">
                         <div class="exercise-card">
@@ -2161,7 +2180,7 @@
                     </a>
                 </div>
                 <!-- Leg Section -->
-                <h2 class="title-each-category">脚トレ</h2>
+                <h2 id="LegSection" class="title-each-category">脚トレ</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="Squat.html">
                         <div class="exercise-card">
@@ -2521,7 +2540,7 @@
                         <div class="exercise-card">
                             <img src="../Assets/WorkoutImages/SafetyBarSquat.PNG" alt="SafetyBarSquat" loading="lazy">
                             <div class="exercise-details">
-                                <div class="name">サーフティーバー<br>スクワット</div>
+                                <div class="name">セーフティーバー<br>スクワット</div>
                                 <div class="category">脚</div>
                             </div>
                         </div>
@@ -2798,7 +2817,7 @@
                     </a>
                 </div>
                 <!-- Core Section -->
-                <h2 class="title-each-category">体幹トレーニング</h2>
+                <h2 id="CoreSection" class="title-each-category">体幹トレーニング</h2>
                 <div class="exercise-cards-container">
                     <a class="card-link" href="SitUps.html">
                         <div class="exercise-card">
@@ -3081,6 +3100,38 @@
             document.querySelector('.category-group ul li[data-tab="By Bodyweight"]').classList.add('is-active');
             updateTabContent();
         });
+
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+
+        function filterExercises() {
+            const input = document.getElementById('search-bar').value.toLowerCase();
+            const cards = document.getElementsByClassName('exercise-card');
+            const names = document.getElementsByClassName('name');
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const name = names[i].textContent.toLowerCase();
+
+                if (name.includes(input)) {
+                    card.parentElement.style.display = '';
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
     </script>
 </body>
 </html>
