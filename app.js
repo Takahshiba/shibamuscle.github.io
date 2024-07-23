@@ -71,6 +71,8 @@ function toggleMenu() {
 }
 
 // search exercise card here
+document.getElementById('search-bar').addEventListener('input', filterExercises);
+
 function filterExercises() {
     const input = document.getElementById('search-bar').value.toLowerCase();
     const cards = document.getElementsByClassName('exercise-card');
