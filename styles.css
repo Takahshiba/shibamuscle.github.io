@@ -5,157 +5,119 @@ html {
 }
 
 body {
-    font-family: "Noto Sans JP", "Helvetica Neue", "Arial", "sans-serif";
     margin: 0;
-    line-height: 1.6;
-    background-color: #d2d1d1;
-    padding-top: 120px;
-}
-
-header {
-    background-color: white;
-    color: black;
-    padding: 8px 16px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 0;
+    font-family: "Noto Sans JP", "Helvetica Neue", "Arial", "sans-serif";
+    padding-top: 100px;
+    background-color: #E0F7E9;
+    overflow-x: hidden;
 }
 
 .header-logo {
-    flex: 1;
-    text-align: left;
-    margin-left: 4px;
+    display: flex;
+    align-items: center;
+    transform: translateX(-15px);
+    padding: 10px;
 }
 
-.shiba-logo {
+.header-logo img {
+    width: 30px;
+    height: auto;
+    margin-right: 5px;
+}
+
+.header-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.header-dumbbell-logo {
     max-height: 48px;
     max-width: 48px;
     transition: transform 0.3s, opacity 0.3s;
 }
 
-.header-logo a:hover .shiba-logo {
+.header-link:hover {
     transform: scale(1.1);
     opacity: 0.8;
 }
 
-.menu a,
-.right-menu a {
-    color: black;
-    text-decoration: none;
-    margin: 0 8px;
-    transition: color 0.3s, transform 0.3s;
-}
-
-.menu a.active {
-    background-color: #04AA6D;
-    padding: 6px 12px;
-    border-radius: 20px;
-}
-
-.right-menu button {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 20px;
-    margin-left: 8px;
-    cursor: pointer;
-}
-
 .header-text {
+    font-size: 16px;
+    margin-left: 1px;
     color: black;
+    font-weight: 600;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+}
+
+
+.menu {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    transform: translateX(-40px);
+}
+
+.menu li {
+    margin-left: 20px;
+}
+
+.menu a {
     text-decoration: none;
-    transition: color 0.3s, transform 0.3s;
+    color: inherit;
+    font-weight: 600;
     font-size: 0.8em;
 }
 
-.header-text:hover {
+.menu a:hover {
     color: #04AA6D;
     transform: scale(1.1);
 }
 
-.separator {
-    color: rgba(45, 41, 41, 0.5);
-    font-weight: lighter;
-}
-
-.language-menu {
-    position: relative;
-    display: inline-block;
-}
-
-.language-btn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.language-btn .icon {
-    background-image: url('./assets/language-icon.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    margin-right: 6px;
-}
-
-.language-dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #f9f9f9;
-    min-width: 128px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.language-dropdown a {
-    color: black;
-    padding: 10px 12px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.language-dropdown a:hover {
-    background-color: #f1f1f1;
-}
-
-.language-menu:hover .language-dropdown {
-    display: block;
-}
-
-.flag-icon {
-    width: 16px;
-    height: auto;
-    margin-right: 8px;
-}
-
 .sub-nav {
-    background-color: #282A35;
-    color: white;
-    padding: 8px 16px;
-    overflow-x: auto;
-    white-space: nowrap;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: calc(100% - 40px);
+    padding: 0 20px;
+    height: 50px;
+    background-color: #282A35;
+    color: white;
+    border-top: 1px solid #eee;
     position: fixed;
-    top: 60px;
-    width: 100%;
+    top: 65px;
     z-index: 999;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 0 auto;
+}
+
+.sub-nav::-webkit-scrollbar {
+    height: 4px;
+}
+
+.sub-nav::-webkit-scrollbar-track {
+    background: #282A35;
+}
+
+.sub-nav::-webkit-scrollbar-thumb {
+    background: #2c2f38;
+    border-radius: 4px;
 }
 
 .sub-nav a {
@@ -179,91 +141,198 @@ nav {
 .sub-nav a:hover {
     background-color: #57585d;
     border-radius: 20px;
-}
-
-.sub-nav a:hover {
     transform: scale(1.2);
 }
 
+.top-divider {
+    border: 0;
+    height: 20px;
+    background-color: #E0F7E9;
+}
+
 .container {
-    width: 90%;
-    margin: auto;
-    overflow: hidden;
-    text-align: center;
-    padding: 20px 0;
-}
-
-.main {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.section-box {
-    padding: 20px;
-    background-color: #fff;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.search-bar-container {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-#search-bar {
-    width: 100%;
-    max-width: 600px;
-    padding: 10px;
-    border: 2px solid #23d160;
-    border-radius: 5px;
-    font-size: 16px;
+    background-color: rgb(245, 245, 247);
+    width: 60%;
     box-sizing: border-box;
-    outline: none;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
 }
 
-#search-bar:focus {
-    border-color: #23d160;
+.section-title {
+    text-align: left;
+    font-size: 25px;
 }
 
-.title {
-    color: #444444;
-    font-size: 2.2rem;
-}
+/* Main section below */
 
-.exercise-subtitle {
-    font-size: 0.875rem;
-    color: #888;
-    margin-top: 5px;
-}
-
-.exercise-image {
+.main-image-title {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.workout-main-image {
+    width: 250px;
+    height: 250px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.main-image-title h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+    padding-top: 20px;
+}
+
+/* muscle-activated-section */
+
+.container h1 {
+    font-size: 28px;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.muscle-activated-table {
+    width: 100%;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.muscle-activated-table th,
+.muscle-activated-table td {
+    padding: 20px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+.muscle-activated-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.muscle-activated-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* average section below */
+
+.average-section {
+    padding: 20px;
+    width: 100%;
+}
+
+.tooltip-average {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.tooltip-average .tooltiptext-average {
+    visibility: hidden;
+    width: 220px;
+    background-color: #d4edda;
+    color: #155724;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 12px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -110px;
+    opacity: 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s;
+}
+
+.tooltip-average .tooltiptext-average::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #d4edda transparent transparent transparent;
+}
+
+.tooltip-average:hover .tooltiptext-average {
+    visibility: visible;
+    opacity: 1;
+}
+
+.info-button {
+    margin-left: 10px;
+    display: inline-flex;
     align-items: center;
 }
 
-.exercise-image img {
-    width: 400px;
-    height: 400px;
+.info-icon {
+    width: 20px;
+    height: auto;
+    margin-top: 17px;
+    transition: transform 0.3s ease;
 }
 
-.title-standards {
-    font-size: 1.2em;
+.info-button:hover .info-icon {
+    transform: scale(1.2);
 }
 
-.subtitle-standards {
-    font-size: 1em;
+.average-section-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
 
+.average-section-table th,
+.average-section-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.average-section-table th {
+    color: #777;
+    font-size: 16px;
+}
+
+.average-section-table td {
+    font-size: 18px;
 }
 
 .karate-image {
-    width: 60px;
+    width: 30px;
     height: auto;
+}
+
+.gender-icon {
+    width: 30px;
+    height: auto;
+}
+
+.average-section-note {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* standards section below */
+
+.subtitle-standards {
+    color: #777;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .tabs {
@@ -291,25 +360,24 @@ nav {
     margin: 0 5px;
 }
 
-.tabs ul li img {
-    width: 50px;
-    height: 50px;
+.standards-gender-icon {
+    width: 30px;
+    height: auto;
 }
 
 .tabs ul li a {
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: black;
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: #f4f4f4;
     transition: background-color 0.3s ease;
     height: 50px;
     font-size: 0.9rem;
 }
-
 
 .tabs ul li a:hover {
     background-color: #e0e0e0;
@@ -334,9 +402,11 @@ nav {
 }
 
 .tabs.is-toggle ul li.is-active a {
-    background-color: #23d160;
+    background-color: #34C759;
     color: white;
     font-weight: bold;
+    border-radius: 20px;
+    padding: 5px 10px;
 }
 
 .table {
@@ -347,49 +417,209 @@ nav {
 
 .table th,
 .table td {
-    padding: auto;
     text-align: center;
-    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
 }
 
 .table th {
-    background-color: #23d160;
-    color: #fff;
+    background-color: rgb(230, 230, 230);
+    color: black;
+    font-weight: 500;
+    padding: 5px;
 }
 
 .table tr td {
-    padding: 6px;
+    padding: 20px 0;
 }
 
 .table-striped tbody tr:nth-child(odd) {
     background-color: #f9f9f9;
 }
 
-.media {
+.tooltip {
+    position: relative;
+    cursor: pointer;
+    color: #777;
+    text-decoration: underline;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 220px;
+    background-color: #d4edda;
+    color: #155724;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 12px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -110px;
+    opacity: 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #d4edda transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* world record section */
+
+.record-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.record-card {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+    box-sizing: border-box;
+}
+
+.record-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.record-content {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.media-content {
-    text-align: center;
+.profile-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
 }
 
-.title-more-excercises {
-    color: #444444;
-    font-size: 1.2rem;
+.record-info {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+.record-weight {
+    font-size: 24px;
     font-weight: bold;
-    padding-bottom: 20px;
+    color: #000;
 }
 
-.title-each-category {
-    color: #444444;
-    font-size: 1em;
-    text-align: center;
-    padding-top: 150px;
-    margin-top: -120px;
-    padding-bottom: 30px;
+.record-holder {
+    font-size: 14px;
+    color: #555;
+}
+
+.update-info {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.record-holder a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.record-holder a:hover {
+    text-decoration: underline;
+}
+
+.flag-icon {
+    width: 20px;
+    height: 12px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.official-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+}
+
+/* テーブルの見方 section below */
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
     font-weight: bold;
+}
+
+td img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: block;
+}
+
+/* other workouts section below */
+
+.search-bar-container {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#search-bar {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    border: 2px solid #23d160;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#search-bar:focus {
+    border-color: #23d160;
 }
 
 .section-divider {
@@ -399,32 +629,20 @@ nav {
     margin: 20px 0;
 }
 
-.ad-space {
-    height: 200px;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.ad-space p {
-    font-size: 20px;
-    color: #999;
-}
-
 .exercise-cards-container {
     display: grid;
     flex-wrap: wrap;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     justify-content: center;
     gap: 15px;
     padding-bottom: 50px;
     align-items: stretch;
+    box-sizing: border-box;
 }
 
 .exercise-card {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
     border-radius: 10px;
     width: 100%;
     padding: 5px;
@@ -462,7 +680,7 @@ nav {
 
 .exercise-card .name {
     font-size: 0.8em;
-    margin: 0;
+    margin-bottom: 4px;
     overflow: hidden;
     text-overflow: ellipsis;
     align-items: center;
@@ -474,85 +692,243 @@ nav {
     font-size: 0.7em;
 }
 
-.footer {
-    background-color: #fff;
-    color: black;
+/* footer section below */
+
+footer {
+    background-color: rgb(245, 245, 247);
     padding: 20px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-container {
+    display: block; 
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-section {
+    margin-bottom: 20px; 
+}
+
+.footer-section h4 {
+    margin-bottom: 10px; 
+    font-size: 18px;
+    font-weight: bold;
     text-align: center;
 }
 
-.footer .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-.footer-links {
-    list-style-type: none;
+.footer-section ul {
+    list-style: none;
     padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+    text-align: center; 
 }
 
-.footer-links li {
-    display: inline;
+.footer-section ul li {
+    margin-bottom: 10px; 
+    display: inline-block; 
 }
 
-.footer-links a {
-    color: black;
+.footer-section ul li a {
     text-decoration: none;
+    color: #333;
+    margin-left: 0; 
+}
+
+.footer-section ul li + li {
+    margin-left: 15px; 
+}
+
+.footer-section ul li a:hover {
+    color: #04AA6D;
+    transform: scale(1.1);
+}
+
+.link-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle; 
+    margin-right: 0; 
+}
+
+.flag-icon {
+    width: 22px;
+    height: 19px;  
+}
+
+.footer-divider {
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 20px 0;
+}
+
+.footer-bottom {
+    text-align: center;
     font-size: 14px;
+    color: #777;
 }
 
-.footer-links a:hover {
-    text-decoration: underline;
+.footer-bottom p {
+    margin: 0;
 }
 
-@media (min-width: 670px) and (max-width: 1280px) {
+@media (min-width: 600px) and (max-width: 1280px) {
 
     .container {
         width: 100%;
+        max-width: 100%;
+        padding: 15px;
     }
 
-    .title {
-        font-size: 1.7rem;
+    .main-image-title h1 {
+        font-size: 30px;
     }
 
-    .header-logo {
-        margin-left: 2px;
-    }
-
-    .menu a,
-    .right-menu a {
-        margin: 0 6px;
-        font-size: 0.7em;
-    }
-
-    .right-menu button {
-        padding: 5px 10px;
-        font-size: 0.7em;
+    .header-dumbbell-logo {
+        max-height: 36px;
+        max-width: 36px;
     }
 
     .header-text {
-        font-size: 0.7em;
+        font-size: 12px;
     }
 
     .sub-nav {
-        padding: 8px 12px;
-        top: 62px;
+        width: calc(100% - 20px);
+        padding: 0 8px;
     }
 
     .sub-nav a {
-        font-size: 11px;
-        padding: 6px;
+        font-size: 10px;
+    }
+
+    .sub-nav a:hover {
+        transform: scale(1.1);
+    }
+
+    .menu a {
+        font-size: 0.75em;
+    }
+
+    /* average section below */
+
+    .muscle-activated-table {
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    /* average section below */
+
+    .average-section {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .average-section-title {
+        font-size: 24px;
+    }
+
+    .average-section-table th {
+        font-size: 14px;
+    }
+
+    .average-section-table td {
+        font-size: 16px;
     }
 
     .karate-image {
-        width: 40px;
-        height: auto;
+        width: 25px;
     }
+
+    .gender-icon {
+        width: 25px;
+    }
+
+    .average-section-note {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .info-icon {
+        width: 18px;
+    }
+
+    .tooltip-average .tooltiptext-average {
+        width: 180px;
+        font-size: 14px;
+        margin-left: -90px;
+    }
+
+    .tooltip-average .tooltiptext-average::after {
+        margin-left: -4px;
+    }
+
+    /* standard section below */
+
+    .tabs ul li a {
+        font-size: 0.8rem;
+    }
+
+    .standards-gender-icon {
+        width: 25px;
+    }
+
+    .title-standards {
+        font-size: 22px;
+    }
+
+    .subtitle-standards {
+        font-size: 12px;
+    }
+
+    .table th,
+    .table td {
+        font-size: 0.8rem;
+    }
+
+    .tooltip .tooltiptext {
+        width: 180px;
+        font-size: 14px;
+        margin-left: -90px;
+    }
+
+    .tooltip .tooltiptext::after {
+        margin-left: -4px;
+    }
+
+    /* world record section below */
+
+    .record-card {
+        padding: 15px;
+        width: calc(50% - 15px);
+    }
+
+    .flag-icon {
+        width: 18px;
+        height: 12px;
+    }
+
+    /* テーブルの見方 section below */
+
+    h1 {
+        font-size: 22px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    /* other worlouts section below */
 
     .exercise-subtitle {
         font-size: 0.85rem;
@@ -573,7 +949,9 @@ nav {
     .exercise-card .category {
         font-size: 0.58em;
     }
-
+    
+    /* footer section below */
+    
     .footer-links {
         gap: 15px;
     }
@@ -581,87 +959,241 @@ nav {
     .footer-links a {
         font-size: 13px;
     }
+
 }
 
-@media (max-width: 670px) {
+@media (max-width: 600px) {
 
     .container {
         width: 100%;
+        max-width: 100%;
+        margin: 0;
+        margin-bottom: 20px;
+        padding: 10px;
     }
 
-    .title {
-        font-size: 1.0rem;
+    .main-image-title h1 {
+        font-size: 26px;
     }
 
-    .header-logo {
-        margin-left: 1px;
+    .header-logo a {
+        display: flex;
+        align-items: center;
+        padding-left: 0px;
     }
 
-    .shiba-logo {
-        max-height: 36px;
-        max-width: 36px;
+    .header-logo img {
+        width: 22px;
+        margin-right: 4px;
     }
 
-    .menu a,
-    .right-menu a {
-        margin: 0 4px;
-        font-size: 0.6em;
-    }
-
-    .right-menu button {
-        padding: 4px 8px;
-        font-size: 0.6em;
+    .header-dumbbell-logo {
+        max-height: 30px;
+        max-width: 30px;
     }
 
     .header-text {
-        font-size: 0.6em;
+        font-size: 12px;
+    }
+
+    .menu {
+        transform: translateX(-30px);
+    }
+
+    .menu li {
+        margin-left: 10px;
+    }
+
+    .menu a {
+        font-size: 0.65em;
     }
 
     .sub-nav {
-        padding: 6px 6px;
-        top: 50px;
+        width: 100%;
+        padding: 0 5px;
+        top: 59px;
     }
 
     .sub-nav a {
         font-size: 10px;
-        padding: 5px;
     }
 
-    .section-box {
+    .sub-nav a:hover {
+        transform: scale(1.1);
+    }
+
+    /* muscle-activated-section */
+
+    .container h1 {
+        font-size: 24px;
+    }
+
+    .muscle-activated-table {
+        max-width: 100%;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .muscle-activated-table th,
+    .muscle-activated-table td {
         padding: 10px;
+        font-size: 12px;
     }
 
-    .exercise-subtitle {
-        font-size: 0.8rem;
+    /* average section below */
+
+    .average-section {
+        padding: 15px;
+        width: 100%;
     }
 
-    .tabs ul li img {
-        width: 40px;
-        height: 40px;
+    .average-section-title {
+        font-size: 20px;
     }
+
+    .average-section-table th {
+        font-size: 12px;
+    }
+
+    .average-section-table td {
+        font-size: 12px;
+    }
+
+    .karate-image {
+        width: 25px;
+    }
+
+    .gender-icon {
+        width: 25px;
+    }
+
+    .average-section-note {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .info-icon {
+        width: 16px;
+    }
+
+    .average-section-note {
+        font-size: 10px;
+        line-height: 1.2;
+    }
+
+    .tooltip-average .tooltiptext-average {
+        width: 180px;
+        font-size: 14px;
+        margin-left: -90px;
+    }
+
+    .tooltip-average .tooltiptext-average::after {
+        margin-left: -4px;
+    }
+
+    /* standard section below */
 
     .tabs ul li a {
         font-size: 0.8rem;
     }
 
+    .standards-gender-icon {
+        width: 25px;
+    }
+
     .title-standards {
-        font-size: 0.85em;
+        font-size: 20px;
     }
 
     .subtitle-standards {
-        font-size: 0.75em;
+        font-size: 12px;
     }
 
-    .karate-image {
+    .table th,
+    .table td {
+        font-size: 0.7rem;
+    }
+
+    .tooltip .tooltiptext {
+        width: 180px;
+        font-size: 14px;
+        margin-left: -90px;
+    }
+
+    .tooltip .tooltiptext::after {
+        margin-left: -4px;
+    }
+
+    /* world record section below */
+
+    .record-cards {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .record-card {
+        flex: 1 1 calc(80% - 10px);
+        min-width: 100%;
+        margin-bottom: 5px;
+        padding: 20px;
+    }
+
+    .record-title {
+        font-size: 12px;
+    }
+
+    .profile-photo {
         width: 40px;
-        height: auto;
+        height: 40px;
     }
 
-    .exercise-image img {
-        width: 250px;
-        height: 250px;
-        padding-right: 10px;
+    .record-weight {
+        font-size: 15px;
     }
+
+    .record-holder {
+        font-size: 11px;
+    }
+
+    .update-info {
+        font-size: 11px;
+    }
+
+    .flag-icon {
+        width: 14px;
+        height: 10px;
+    }
+
+    .official-icon {
+        top: 8px;
+        right: 8px;
+        width: 20px;
+        height: 20px;
+    }
+
+    /* テーブルの見方 section below */
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    /* other workouts section below */
 
     .exercise-cards-container {
         grid-template-columns: repeat(2, 1fr);
@@ -672,26 +1204,23 @@ nav {
     }
 
     .exercise-card img {
-        width: 65px;
-        height: 65px;
+        width: 60px;
+        height: 60px;
+        box-sizing: border-box;
     }
 
     .exercise-card .name {
         font-size: 0.575em;
+        box-sizing: border-box;
     }
 
     .exercise-card .category {
         font-size: 0.5em;
+        box-sizing: border-box;
     }
-
-    .title-more-excercises {
-        font-size: 1em;
-    }
-
-    .title-each-category {
-        font-size: 0.8em;
-    }
-
+    
+    /* footer section below */
+    
     .footer {
         padding: 15px 0;
     }
@@ -707,4 +1236,5 @@ nav {
     .footer-links a {
         font-size: 12px;
     }
+
 }

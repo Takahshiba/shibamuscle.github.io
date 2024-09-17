@@ -1,126 +1,12 @@
 @charset "utf-8";
 
 body {
-    font-family: "Noto Sans JP", "Helvetica Neue", "Arial", "sans-serif";
     margin: 0;
-    line-height: 1.6;
-    background-color: #d2d1d1;
-    padding-top: 120px;
-    color: #333;
-}
-
-header {
-    background-color: white;
-    color: black;
-    padding: 8px 16px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.header-logo {
-    flex: 1;
-    text-align: left;
-    margin-left: 4px;
-}
-
-.shiba-logo {
-    max-height: 48px;
-    max-width: 48px;
-    transition: transform 0.3s, opacity 0.3s;
-}
-
-.header-logo a:hover .shiba-logo {
-    transform: scale(1.1);
-    opacity: 0.8;
-}
-
-.menu a,
-.right-menu a {
-    color: black;
-    text-decoration: none;
-    margin: 0 8px;
-    transition: color 0.3s, transform 0.3s;
-}
-
-.menu a.active {
-    background-color: #04AA6D;
-    padding: 6px 12px;
-    border-radius: 20px;
-}
-
-.right-menu button {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 20px;
-    margin-left: 8px;
-    cursor: pointer;
-}
-
-.language-menu {
-    position: relative;
-    display: inline-block;
-}
-
-.language-btn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.language-btn .icon {
-    background-image: url('./assets/language-icon.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    margin-right: 6px;
-}
-
-.language-dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #f9f9f9;
-    min-width: 128px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.language-dropdown a {
-    color: black;
-    padding: 10px 12px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.language-dropdown a:hover {
-    background-color: #f1f1f1;
-}
-
-.language-menu:hover .language-dropdown {
-    display: block;
-}
-
-.flag-icon {
-    width: 16px;
-    height: auto;
-    margin-right: 8px;
+    padding: 0;
+    font-family: "Noto Sans JP", "Helvetica Neue", "Arial", "sans-serif";
+    padding-top: 100px;
+    background-color: #E0F7E9;
+    overflow-x: hidden;
 }
 
 .container {
@@ -170,11 +56,120 @@ ul li:before {
     color: #888;
 }
 
+.top-divider {
+    border: 0;
+    height: 30px;
+    background-color: #E0F7E9;
+}
+
 footer {
+    background-color: rgb(245, 245, 247);
+    padding: 20px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-container {
+    display: block;
     text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    background: #ddd;
-    font-size: 0.9em;
-    color: #555;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-section {
+    margin-bottom: 20px;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 0;
+}
+
+.footer-section ul li+li {
+    margin-left: 15px;
+}
+
+.footer-section ul li a:hover {
+    color: #04AA6D;
+    transform: scale(1.1);
+}
+
+.link-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 0;
+}
+
+.flag-icon {
+    width: 22px;
+    height: 19px;
+}
+
+.footer-divider {
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 20px 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+@media (min-width: 600px) and (max-width: 1280px) {
+
+    .footer-links {
+        gap: 15px;
+    }
+
+    .footer-links a {
+        font-size: 13px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .footer {
+        padding: 15px 0;
+    }
+
+    .footer .container {
+        padding: 0 10px;
+    }
+
+    .footer-links {
+        gap: 10px;
+    }
+
+    .footer-links a {
+        font-size: 12px;
+    }
+
 }

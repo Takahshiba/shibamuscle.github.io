@@ -1,28 +1,60 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お問い合わせ - Shiba Muscle</title>
+    <title>Contact - Shiba Muscle</title>
     <meta name="description" content="Shiba Muscleのサービスに関するお問い合わせはこちら。">
 
-    <!-- Google Fonts here -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="precaonnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <meta name="msapplication-square70x70logo" content="./assets/site-tile-70x70.png">
+    <meta name="msapplication-square150x150logo" content="./assets/site-tile-150x150.png">
+    <meta name="msapplication-wide310x150logo" content="./assets/site-tile-310x150.png">
+    <meta name="msapplication-square310x310logo" content="./assets/site-tile-310x310.png">
+    <meta name="msapplication-TileColor" content="#0078d7">
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="./assets/favicon.ico">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="./assets/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./assets/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./assets/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./assets/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./assets/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./assets/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./assets/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="36x36" href="./assets/android-chrome-36x36.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="./assets/android-chrome-48x48.png">
+    <link rel="icon" type="image/png" sizes="72x72" href="./assets/android-chrome-72x72.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./assets/android-chrome-96x96.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="./assets/android-chrome-128x128.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="./assets/android-chrome-144x144.png">
+    <link rel="icon" type="image/png" sizes="152x152" href="./assets/android-chrome-152x152.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="./assets/android-chrome-256x256.png">
+    <link rel="icon" type="image/png" sizes="384x384" href="./assets/android-chrome-384x384.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="36x36" href="./assets/icon-36x36.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="./assets/icon-48x48.png">
+    <link rel="icon" type="image/png" sizes="72x72" href="./assets/icon-72x72.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./assets/icon-96x96.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="./assets/icon-128x128.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="./assets/icon-144x144.png">
+    <link rel="icon" type="image/png" sizes="152x152" href="./assets/icon-152x152.png">
+    <link rel="icon" type="image/png" sizes="160x160" href="./assets/icon-160x160.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="196x196" href="./assets/icon-196x196.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="./assets/icon-256x256.png">
+    <link rel="icon" type="image/png" sizes="384x384" href="./assets/icon-384x384.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/icon-512x512.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icon-16x16.png">
+    <link rel="icon" type="image/png" sizes="24x24" href="./assets/icon-24x24.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icon-32x32.png">
+    <link rel="manifest" href="./assets/manifest.json">
 
-    <!-- Favicon here -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
-    <link rel="manifest" href="/assets/site.webmanifest">
-    <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#394e54">
-    <link rel="icon" href="/assets/favicon.ico">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-
+        
     <!-- sanitize css here -->
     <link rel="stylesheet" href="sanitize.css">
     <link rel="stylesheet" href="contact.css">
@@ -30,75 +62,65 @@
 </head>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D9K58THBFM"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZPM6B2KLSV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-D9K58THBFM');
+
+  gtag('config', 'G-ZPM6B2KLSV');
 </script>
 
 <body>
 
-    <header>
-        <nav>
-            <div class="header-logo">
-                <a href="index.html">
-                    <img src="./assets/shiba-icon-black.png" alt="ShibaMuscle" class="shiba-logo">
-                </a>
-            </div>
-            <div class="right-menu">
-                <div class="language-menu">
-                    <button class="language-btn">
-                        <span class="icon"></span>
-                        ▼
-                    </button>
-                    <div class="language-dropdown">
-                        <a href="https://shibamuscle.com/" data-lang="ja">
-                            <img src="./assets/japan-flag.webp" alt="日本" class="flag-icon"> 日本語
-                        </a>
-                        <a href="https://ko.shibamuscle.com/" data-lang="ko">
-                            <img src="./assets/korea-flag.webp" alt="korea" class="flag-icon"> 한국어
-                        </a>
-                        <a href="https://en.shibamuscle.com/" data-lang="en">
-                            <span style="white-space: nowrap;">
-                                <img src="./assets/uk-flag.webp" alt="English" class="flag-icon"> English [kg]
-                            </span>                            
-                        </a>
-                        <a href="https://cn.shibamuscle.com/" data-lang="zh">
-                            <img src="./assets/china-flag.webp" alt="中国" class="flag-icon"> 中文
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
     <div class="container">
-        <h1>お問い合わせ先</h1>
+        <h1>Contact Information</h1>
         <p>
-            サービスや商品に関するご質問、サポートが必要な場合は、以下のメールアドレスまでご連絡ください。
+            For questions about our services or products, or if you need support, please contact us at the email address below.
         </p>
         <p class="email">
-            メールアドレス: <a href="mailto:info@shibamuscle.com">info@shibamuscle.com</a>
+            Email: <a href="mailto:info@shibamuscle.com">info@shibamuscle.com</a>
         </p>
         <div class="note">
             <p>
-                ご連絡いただいた内容には、迅速に対応するよう努めておりますが、回答にお時間をいただく場合がございます。あらかじめご了承ください。
+                We strive to respond promptly to your inquiries, but please note that it may take some time to reply.
             </p>
             <p>
-                お問い合わせの際は、なるべく詳細な情報をお知らせいただけますと、より適切な対応が可能です。また、個人情報に関するお問い合わせについては、ご本人確認のための情報をお願いする場合がございます。
+                Providing detailed information in your inquiry will help us respond more effectively. For inquiries related to personal information, we may request information to verify your identity.
             </p>
         </div>
     </div>
-
-    <hr class="section-divider">
+    
+    <hr class="top-divider">
 
     <footer>
-        &copy; 2024 ShibaMuscle. All rights reserved.
+        <div class="footer-container">
+            <div class="footer-section links">
+                <h4>リンク</h4>
+                <ul>
+                    <li><img src="./assets/contact-icon.webp" alt="Contact" class="link-icon">
+                        <a href="contact.html">お問い合わせ</a>
+                    </li>
+                    <li><img src="./assets/privacy-policy-icon.webp" alt="Privacy Policy" class="link-icon">
+                        <a href="privacy-policy.html">プライバシーポリシー</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-section languages">
+                <h4>言語</h4>
+                <ul>
+                    <li><img src="./assets/uk-flag.webp" alt="UK" class="flag-icon"> <a href="https://en.shibamuscle.com/" data-lang="en">English</a></li>
+                    <li><img src="./assets/japan-flag.webp" alt="Japan" class="flag-icon"> <a href="https://shibamuscle.com/" data-lang="ja">日本語</a></li>
+                    <li><img src="./assets/china-flag.webp" alt="China" class="flag-icon"> <a href="https://cn.shibamuscle.com/" data-lang="zh">中文</a></li>
+                    <li><img src="./assets/korea-flag.webp" alt="Korea" class="flag-icon"> <a href="https://ko.shibamuscle.com/" data-lang="ko">한국어</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+            <p>©ShibaMuscle, 2023 All rights reserved.</p>
+        </div>
     </footer>
-
-    <script src="app.js"></script>
 
 </body>
 
