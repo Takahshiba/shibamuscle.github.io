@@ -51,7 +51,6 @@ ul li {
 }
 
 ul li:before {
-    content: "•";
     padding-right: 5px;
     color: #888;
 }
