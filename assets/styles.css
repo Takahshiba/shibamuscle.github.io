@@ -186,7 +186,7 @@
         <table class="average-section-table">
             <thead>
                 <tr>
-                    <th>級</th>
+                    <th>レベル</th>
                     <th><img class="gender-icon" src="./assets/male-icon.webp" alt="male"></th>
                     <th><img class="gender-icon" src="./assets/female-icon.webp" alt="female"></th>
                 </tr>
@@ -390,7 +390,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>級</th>
+                    <th>レベル</th>
                     <th>色</th>
                     <th>説明</th>
                     <th>分布</th>
