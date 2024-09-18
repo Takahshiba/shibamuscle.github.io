@@ -1113,8 +1113,8 @@ footer {
     }
 
     .tooltip .tooltiptext {
-        width: 180px;
-        font-size: 14px;
+        width: 100px;
+        font-size: 10px;
         margin-left: -90px;
     }
 
