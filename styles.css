@@ -1033,7 +1033,7 @@ footer {
     }
 
     .section-title {
-        font-size: 20px;
+        font-size: 17px;
     }
 
     .muscle-activated-table th,
@@ -1186,11 +1186,11 @@ footer {
     th,
     td {
         padding: 8px;
-        font-size: 12px;
+        font-size: 10px;
     }
 
     table {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     /* other workouts section below */
