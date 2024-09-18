@@ -1025,7 +1025,7 @@ footer {
     /* muscle-activated-section */
 
     .container h1 {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .muscle-activated-table {
@@ -1033,7 +1033,7 @@ footer {
     }
 
     .section-title {
-        font-size: 10px;
+        font-size: 15px;
     }
 
     .muscle-activated-table th,
@@ -1101,10 +1101,6 @@ footer {
 
     .standards-gender-icon {
         width: 25px;
-    }
-
-    .title-standards {
-        font-size: 20px;
     }
 
     .subtitle-standards {
@@ -1178,7 +1174,7 @@ footer {
     /* テーブルの見方 section below */
 
     h1 {
-        font-size: 13px;
+        font-size: 20px;
         margin-bottom: 15px;
         text-align: center;
     }
