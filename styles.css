@@ -600,6 +600,27 @@ td img {
     display: block;
 }
 
+/* calorie burn section below */
+
+.calorie-burn-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.calorie-burn-table thead {
+    background-color: #f0f0f0;
+}
+
+
+.calorie-burn-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.calorie-burn-intensity-list li {
+    margin-bottom: 5px;
+}
+
 /* other workouts section below */
 
 .search-bar-container {
