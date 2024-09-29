@@ -1,0 +1,100 @@
+.workout-tabs {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    padding: 5px;
+}
+
+.workout-tab-button {
+    flex: 1;
+    border: none;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #8c8c8c;
+}
+
+.workout-tab-button.active {
+    background-color: white;
+    color: #000;
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.workout-tab-content {
+    display: none;
+}
+
+.workout-tab-content.active {
+    display: block;
+}
+
+.workout-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.workout-table thead {
+    background-color: #f0f0f0;
+}
+
+.workout-table th, .workout-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.workout-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.exercise-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+}
+
+.exercise-link:hover {
+    color: #04AA6D;
+}
+
+.exercise-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+@media (min-width: 600px) and (max-width: 1280px) {
+    
+.exercise-image {
+    width: 45px;
+    height: 45px;
+}
+
+.workout-tab-button {
+    font-size: 12px;
+}
+    
+}
+
+@media (max-width: 600px) {
+    
+.exercise-image {
+    width: 35px;
+    height: 35px;
+}
+
+.workout-tab-button {
+    font-size: 10px;
+}
+    
+}
+
