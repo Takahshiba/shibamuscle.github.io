@@ -579,6 +579,7 @@ td {
 
 th {
     font-weight: 500;
+    white-space: nowrap;
 }
 
 td img {
