@@ -260,7 +260,7 @@ nav {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: #d4edda transparent transparent transparent;
+    border-color: #fecdcd transparent transparent transparent;
 }
 
 .tooltip-average:hover .tooltiptext-average {
@@ -742,7 +742,7 @@ footer {
 }
 
 .footer-section ul li a:hover {
-    color: #04AA6D;
+    color: #ff4e4e;
     transform: scale(1.1);
 }
 
