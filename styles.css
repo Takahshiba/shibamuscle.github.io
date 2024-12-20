@@ -9,7 +9,7 @@ body {
     padding: 0;
     font-family: "Noto Sans JP", "Helvetica Neue", "Arial", "sans-serif";
     padding-top: 100px;
-    background-color: #E0F7E9;
+    background-color: #f9f9f9;
     overflow-x: hidden;
 }
 
@@ -85,7 +85,7 @@ nav {
 }
 
 .menu a:hover {
-    color: #04AA6D;
+    color: #ff4e4e;
     transform: scale(1.1);
 }
 
@@ -147,7 +147,7 @@ nav {
 .top-divider {
     border: 0;
     height: 20px;
-    background-color: #E0F7E9;
+    background-color: #f9f9f9;
 }
 
 .container {
@@ -236,8 +236,8 @@ nav {
 .tooltip-average .tooltiptext-average {
     visibility: hidden;
     width: 220px;
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #fecdcd;
+    color: #ff4e4e;
     text-align: center;
     border-radius: 6px;
     font-size: 12px;
@@ -438,8 +438,8 @@ nav {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 220px;
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #fecdcd;
+    color: #ff4e4e;
     text-align: center;
     border-radius: 6px;
     font-size: 12px;
