@@ -64,29 +64,42 @@ nav {
     background-color: white;
 }
 
-
-.menu {
-    list-style-type: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    transform: translateX(-40px);
+.toggle-buttons {
+    display: inline-flex;
+    border: 1px solid #282A35;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-right: 40px;
 }
 
-.menu li {
-    margin-left: 20px;
-}
-
-.menu a {
+.toggle-buttons a {
     text-decoration: none;
-    color: inherit;
-    font-weight: 600;
-    font-size: 0.8em;
+    padding: 0.4rem 1rem;
+    color: #282A35;
+    font-weight: 500;
+    font-size: 0.9rem;
+    background-color: white;
+    transition: all 0.3s ease;
+    text-align: center;
 }
 
-.menu a:hover {
-    color: #ff4e4e;
-    transform: scale(1.1);
+.toggle-buttons a:hover {
+    background-color: #e0e0e0;
+    border-radius: 30px;
+}
+
+.toggle-buttons a.active {
+    background-color: #282A35;
+    color: white;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 0.4rem 1.1rem;
+    box-shadow: inset 0 -1px 3px rgba(0, 0, 0, 0.2);
+}
+
+a:active {
+    transform: scale(0.95);
 }
 
 .sub-nav {
@@ -617,7 +630,7 @@ footer {
 }
 
 .footer-container {
-    display: block; 
+    display: block;
     text-align: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -625,11 +638,11 @@ footer {
 }
 
 .footer-section {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 .footer-section h4 {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -638,22 +651,22 @@ footer {
 .footer-section ul {
     list-style: none;
     padding: 0;
-    text-align: center; 
+    text-align: center;
 }
 
 .footer-section ul li {
-    margin-bottom: 10px; 
-    display: inline-block; 
+    margin-bottom: 10px;
+    display: inline-block;
 }
 
 .footer-section ul li a {
     text-decoration: none;
     color: #333;
-    margin-left: 0; 
+    margin-left: 0;
 }
 
-.footer-section ul li + li {
-    margin-left: 15px; 
+.footer-section ul li+li {
+    margin-left: 15px;
 }
 
 .footer-section ul li a:hover {
@@ -664,13 +677,13 @@ footer {
 .link-icon {
     width: 20px;
     height: 20px;
-    vertical-align: middle; 
-    margin-right: 0; 
+    vertical-align: middle;
+    margin-right: 0;
 }
 
 .flag-icon {
     width: 22px;
-    height: 19px;  
+    height: 19px;
 }
 
 .footer-divider {
@@ -724,8 +737,17 @@ footer {
         transform: scale(1.1);
     }
 
-    .menu a {
-        font-size: 0.75em;
+    .toggle-buttons {
+        margin-right: 35px;
+    }
+
+    .toggle-buttons a {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .toggle-buttons a.active {
+        padding: 0.3rem 0.9rem;
     }
 
     /* average section below */
@@ -861,9 +883,9 @@ footer {
     .exercise-card .category {
         font-size: 0.58em;
     }
-    
+
     /* footer section below */
-    
+
     .footer-links {
         gap: 15px;
     }
@@ -908,16 +930,19 @@ footer {
         font-size: 12px;
     }
 
-    .menu {
-        transform: translateX(-30px);
+    .toggle-buttons {
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        margin-right: 35px;
     }
 
-    .menu li {
-        margin-left: 10px;
+    .toggle-buttons a {
+        padding: 0.2rem 0.6rem;
+        font-size: 0.8rem;
     }
 
-    .menu a {
-        font-size: 0.65em;
+    .toggle-buttons a.active {
+        padding: 0.2rem 0.7rem;
+        box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.2);
     }
 
     .sub-nav {
@@ -1122,9 +1147,9 @@ footer {
         font-size: 0.5em;
         box-sizing: border-box;
     }
-    
+
     /* footer section below */
-    
+
     .footer {
         padding: 15px 0;
     }

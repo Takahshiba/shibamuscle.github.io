@@ -62,7 +62,7 @@
 
 
     <link rel="stylesheet" href="sanitize.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-lb.css">
 
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -85,10 +85,10 @@
                     <span class="header-text">ShibaMuscle</span>
                 </a>
             </div>
-            <ul class="menu">
-                <li><a href="#about-table">テーブルの見方</a></li>
-                <li><a href="#other-workouts">ワークアウト</a></li>
-            </ul>
+            <div class="toggle-buttons">
+                <a href="kg_.html" class="active">kg</a>
+                <a href="lb_.html">lb</a>
+            </div>
         </nav>
 
         <div class="sub-nav">
@@ -194,28 +194,28 @@
             <tbody>
                 <tr>
                     <th>基礎</th>
-                    <td> kg<br>( lbs)</td>
-                    <td> kg<br>( lbs)</td>
+                    <td> kg<br>( lb)</td>
+                    <td> kg<br>( lb)</td>
                 </tr>
                 <tr>
                     <th>初級</th>
-                    <td> kg<br>( lbs)</td>
-                    <td> kg<br>( lbs)</td>
+                    <td> kg<br>( lb)</td>
+                    <td> kg<br>( lb)</td>
                 </tr>
                 <tr>
                     <th>中級</th>
-                    <td> kg<br>( lbs)</td>
-                    <td> kg<br>( lbs)</td>
+                    <td> kg<br>( lb)</td>
+                    <td> kg<br>( lb)</td>
                 </tr>
                 <tr>
                     <th>上級</th>
-                    <td> kg<br>( lbs)</td>
-                    <td> kg<br>( lbs)</td>
+                    <td> kg<br>( lb)</td>
+                    <td> kg<br>( lb)</td>
                 </tr>
                 <tr>
                     <th>プロ</th>
-                    <td> kg<br>( lbs)</td>
-                    <td> kg<br>( lbs)</td>
+                    <td> kg<br>( lb)</td>
+                    <td> kg<br>( lb)</td>
                 </tr>
             </tbody>
         </table>
@@ -224,7 +224,7 @@
     </div>
 
     <div class="container">
-        <h1 class="section-title">Deadlift 基準重量(kg)</h1>
+        <h1 class="section-title">Deadlift 基準重量(lb)</h1>
         <div class="tabs-container block" data-tab-group="Standards Exercise">
             <div class="tabs image-group is-toggle">
                 <ul>
@@ -254,7 +254,7 @@
                 <div class="tab is-active" id="Male-By bodyweight">
                     <div class="section-box">
                         <h4 class="subtitle-standards">
-                            男性・体重別(kg)データ [1RM]
+                            男性・体重別(lb)データ [1RM]
                         </h4>
                         <div class="table-container">
                             <table class="table table-striped">
@@ -302,7 +302,7 @@
                 <div class="tab" id="Female-By bodyweight">
                     <div class="section-box">
                         <h4 class="subtitle-standards">
-                            女性・体重別(kg)データ [1RM]
+                            女性・体重別(lb)データ [1RM]
                         </h4>
                         <div class="table-container">
                             <table class="table table-striped">
@@ -347,7 +347,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="average-section-note">注：表中のダンベルの重さはダンベル1個あたりの重さです。ジムのバーベルは基本的に20kgです。</p>
+                <p class="average-section-note">注：表中のダンベルの重さはダンベル1個あたりの重さです。ジムのバーベルは基本的に44lbです。</p>
             </div>
         </div>
     </div>

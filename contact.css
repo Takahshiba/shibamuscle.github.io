@@ -5,7 +5,7 @@ body {
     padding: 0;
     font-family: "Noto Sans JP", "Helvetica Neue", "Arial", "sans-serif";
     padding-top: 100px;
-    background-color: #E0F7E9;
+    background-color: #f9f9f9;
     overflow-x: hidden;
 }
 
@@ -55,8 +55,10 @@ p {
 .top-divider {
     border: 0;
     height: 30px;
-    background-color: #E0F7E9;
+    background-color: #f9f9f9;
 }
+
+/* footer section below */
 
 footer {
     background-color: rgb(245, 245, 247);
@@ -105,7 +107,7 @@ footer {
 }
 
 .footer-section ul li a:hover {
-    color: #04AA6D;
+    color: #ff4e4e;
     transform: scale(1.1);
 }
 
