@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>シフト → iPhone カレンダー（ICS）</title>
+  <!-- TailwindCSS CDN (play.cdn) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- PDF.js v2 (安定版) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+  </script>
+  
+</head>
+<body class="min-h-screen bg-gradient-to-tr from-sky-50 to-indigo-100 flex items-center justify-center p-4">
+  <main class="w-full max-w-xl bg-white/90 backdrop-blur-md shadow-2xl rounded-2xl p-6 space-y-6">
+    <!-- Header -->
+    <header class="text-center space-y-1">
+      <h1 class="text-3xl font-extrabold text-indigo-700 tracking-tight">シフト表 → iPhone カレンダー</h1>
+      <p class="text-sm text-gray-500">PDF から勤務日だけを抽出し、ICS をワンクリック生成</p>
+    </header>
+
+    <!-- PDF upload -->
+    <section>
+      <label for="pdfInput" class="block font-medium mb-2">シフト PDF</label>
+      <div id="dropzone" class="relative flex items-center justify-center border-2 border-dashed border-indigo-300 rounded-xl p-6 text-center cursor-pointer transition hover:bg-indigo-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h10a4 4 0 004-4m-5-6l-4-4m0 0L7 9m5-4v12" />
+        </svg>
+        <p class="text-gray-600"><span class="font-semibold text-indigo-600">クリック</span> または <span class="font-semibold text-indigo-600">ドラッグ＆ドロップ</span></p>
+        <input id="pdfInput" type="file" accept="application/pdf" class="absolute inset-0 opacity-0 cursor-pointer" />
+      </div>
+    </section>
+
+    <!-- name input -->
+    <section>
+      <label for="nameInput" class="block font-medium mb-2">氏名（フルネーム完全一致）</label>
+      <input id="nameInput" type="text" placeholder="例：松岡実里" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-300 focus:outline-none" />
+    </section>
+
+    <!-- Action buttons -->
+    <div class="space-y-3">
+      <button id="convertBtn" class="w-full py-3 font-semibold rounded-xl bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 disabled:bg-indigo-300 disabled:cursor-not-allowed transition">
+        ICS を作成
+      </button>
+      <a id="downloadLink" href="#" download="shift.ics" class="hidden w-full py-3 font-semibold rounded-xl bg-emerald-500 text-white text-center shadow-lg hover:bg-emerald-600 transition">ICS ファイルをダウンロード</a>
+    </div>
+
+    <!-- spinner & log -->
+    <div id="spinner" class="hidden flex justify-center">
+      <svg class="animate-spin h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3.536-3.536A8 8 0 0120 12h-4l3.536 3.536A8 8 0 0112 20v-4L8.464 19.536A8 8 0 014 12h4L4.464 8.464A7.963 7.963 0 014 12z"></path>
+      </svg>
+    </div>
+    <pre id="log" class="hidden bg-gray-100 p-4 rounded-xl text-sm overflow-x-auto whitespace-pre-wrap"></pre>
+  </main>
+
+  <script>
+    // === 定数定義 ===
+    const SHIFT_TIMES = {
+      "A(M)": { start: "08:30", end: "15:30" },
+      "A(E)": { start: "14:30", end: "21:30" },
+    };
+    const CODE_RE = /(A\(M\)|A\(E\)|Off|Day Off)/g;
+
+    const logEl = document.getElementById("log");
+    const spinnerEl = document.getElementById("spinner");
+    const dropzone = document.getElementById("dropzone");
+
+    // Drag & Drop styling
+    ;["dragover", "dragleave", "drop"].forEach(evt => {
+      dropzone.addEventListener(evt, e => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (evt === "dragover") dropzone.classList.add("bg-indigo-100");
+        else dropzone.classList.remove("bg-indigo-100");
+      });
+    });
+    dropzone.addEventListener("drop", e => {
+      const files = e.dataTransfer.files;
+      if (files.length) document.getElementById("pdfInput").files = files;
+    });
+
+    function log(msg) {
+      logEl.textContent += msg + "\n";
+      logEl.classList.remove("hidden");
+    }
+    function clearLog() {
+      logEl.textContent = "";
+      logEl.classList.add("hidden");
+    }
+    function showSpinner(show) {
+      spinnerEl.classList.toggle("hidden", !show);
+    }
+
+    async function pdfToText(file) {
+      if (typeof pdfjsLib === "undefined") {
+        throw new Error("pdfjsLib がロードされていません。ネット接続またはスクリプト URL を確認してください。");
+      }
+      const pdfData = new Uint8Array(await file.arrayBuffer());
+      const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+      let fullText = "";
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        fullText += content.items.map((item) => item.str).join("\n") + "\n";
+      }
+      return fullText;
+    }
+
+    function extractSchedule(name, text) {
+      const lines = text.split(/\n/).filter((l) => l.trim() !== "");
+      const nameIndex = lines.findIndex((l) => l.trim() === name);
+      if (nameIndex === -1) throw new Error(`氏名「${name}」が見つかりません。`);
+      const dayRowIdx = lines.findIndex((l) => /^1\s+2\s+3/.test(l));
+      if (dayRowIdx === -1) throw new Error("日付行が見つかりません。");
+      const shiftStartIdx = dayRowIdx + 3 + nameIndex;
+      const shiftLine = lines[shiftStartIdx];
+      if (!shiftLine) throw new Error("シフト行の取り出しに失敗しました。");
+      const codes = shiftLine.match(CODE_RE);
+      if (!codes) throw new Error("シフトコードが解析できませんでした。");
+      const schedule = [];
+      const today = new Date();
+      const year = today.getFullYear();
+      const monthIndex = 4; // TODO: 固定 May → 将来自動判定
+      for (let day = 1; day <= codes.length; day++) {
+        const code = codes[day - 1];
+        if (code === "A(M)" || code === "A(E)") {
+          const dateObj = new Date(year, monthIndex, day);
+          schedule.push({ date: dateObj, code });
+        }
+      }
+      return schedule;
+    }
+
+    function generateICS(schedule, name) {
+      const pad = (n) => String(n).padStart
