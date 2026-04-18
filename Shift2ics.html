@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>シフト → iPhone カレンダー（ICS）</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2819086765117537"
+    crossorigin="anonymous"></script>
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- PDF.js v2 安定版 -->
@@ -22,22 +24,24 @@
     </header>
 
     <!-- PDF upload -->
-    <section>
-      <label for="pdfInput" class="block font-medium mb-2">シフト PDF</label>
+    <section class="space-y-2">
+      <label for="pdfInput" class="block font-medium">シフト PDF</label>
+      <!-- Dropzone -->
       <div id="dropzone" class="relative flex flex-col items-center justify-center gap-1 border-2 border-dashed border-indigo-300 rounded-xl p-6 text-center cursor-pointer transition-colors hover:bg-indigo-50">
-        <svg id="uploadIcon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-400 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h10a4 4 0 004-4m-5-6l-4-4m0 0L7 9m5-4v12" />
         </svg>
-        <p id="uploadText" class="text-gray-600 transition-colors"><span class="font-semibold text-indigo-600">クリック</span> または <span class="font-semibold text-indigo-600">ドラッグ＆ドロップ</span></p>
+        <p class="text-gray-600"><span class="font-semibold text-indigo-600">クリック</span> または <span class="font-semibold text-indigo-600">ドラッグ＆ドロップ</span></p>
         <input id="pdfInput" type="file" accept="application/pdf" class="absolute inset-0 opacity-0 cursor-pointer" />
       </div>
-      <!-- upload success info -->
-      <p id="fileInfo" class="hidden mt-2 flex items-center gap-1 text-emerald-600 text-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <!-- Success card (hidden by default) -->
+      <div id="successCard" class="hidden flex items-center gap-2 p-4 border border-emerald-400 bg-emerald-50 rounded-xl text-emerald-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clip-rule="evenodd" />
         </svg>
-        <span id="fileName"></span> を読み込みました
-      </p>
+        <span id="fileName" class="truncate"></span>
+        <span>を読み込みました</span>
+      </div>
     </section>
 
     <!-- name input -->
@@ -77,27 +81,14 @@
     const spinnerEl = document.getElementById("spinner");
     const dropzone = document.getElementById("dropzone");
     const pdfInput = document.getElementById("pdfInput");
-    const fileInfo = document.getElementById("fileInfo");
+    const successCard = document.getElementById("successCard");
     const fileNameSpan = document.getElementById("fileName");
-    const uploadIcon = document.getElementById("uploadIcon");
-    const uploadText = document.getElementById("uploadText");
 
-    // === アップロード完了 UI ===
+    // ===== アップロード完了表示 =====
     function showUploadSuccess(file) {
-      // ボーダーを緑色に変更
-      dropzone.classList.remove("border-indigo-300", "bg-indigo-50");
-      dropzone.classList.add("border-emerald-400", "bg-emerald-50");
-      // アイコンをチェックアイコンへ切替
-      uploadIcon.outerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 10-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clip-rule="evenodd" />
-        </svg>`;
-      uploadText.textContent = "アップロード完了";
-      uploadText.classList.remove("text-gray-600");
-      uploadText.classList.add("text-emerald-600", "font-medium");
-      // ファイル名表示
+      dropzone.classList.add("hidden");
       fileNameSpan.textContent = file.name;
-      fileInfo.classList.remove("hidden");
+      successCard.classList.remove("hidden");
     }
 
     // ===== Drag & Drop =====
@@ -161,29 +152,4 @@
       if (dayRowIdx === -1) throw new Error("日付行が見つかりません。");
       const shiftStartIdx = dayRowIdx + 3 + nameIndex;
       const shiftLine = lines[shiftStartIdx];
-      if (!shiftLine) throw new Error("シフト行の取り出しに失敗しました。");
-      const codes = shiftLine.match(CODE_RE);
-      if (!codes) throw new Error("シフトコードが解析できませんでした。");
-      const schedule = [];
-      const today = new Date();
-      const year = today.getFullYear();
-      const monthIndex = 4; // TODO: 固定 May → 将来自動判定
-      for (let day = 1; day <= codes.length; day++) {
-        const code = codes[day - 1];
-        if (code === "A(M)" || code === "A(E)") {
-          const dateObj = new Date(year, monthIndex, day);
-          schedule.push({ date: dateObj, code });
-        }
-      }
-      return schedule;
-    }
-
-    // === ICS 生成 ===
-    function generateICS(schedule, name) {
-      const pad = (n) => String(n).padStart(2, "0");
-      const fmt = (d, t) => d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + "T" + t.replace(":", "");
-      let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n";
-      schedule.forEach(({ date, code }) => {
-        const { start, end } = SHIFT_TIMES[code];
-        const uid = `${date.getTime()}-${name.replace(/\s+/g, "")}@shift2ics`;
-        ics += `BEGIN:VEVENT\nUID
+      if (!shiftLine) throw new Error("シフト行の取り出
