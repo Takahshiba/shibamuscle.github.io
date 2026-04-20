@@ -616,11 +616,14 @@ ol {
     margin-top: 16px;
 }
 
-.table-shell {
+.table-shell,
+.table-container {
+    position: relative;
     overflow-x: auto;
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     background: var(--surface);
+    -webkit-overflow-scrolling: touch;
 }
 
 table,
@@ -1217,6 +1220,10 @@ table tbody tr:hover {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .search-bar-container ~ .exercise-cards-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .footer-grid,
     .footer-meta {
         grid-template-columns: 1fr;
@@ -1295,6 +1302,17 @@ table tbody tr:hover {
     .exercise-cards-container,
     .exercise-cards-container--compact {
         grid-template-columns: 1fr;
+    }
+
+    .search-bar-container ~ .exercise-cards-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .table-shell,
+    .table-container {
+        box-shadow:
+            inset 18px 0 18px -18px rgba(31, 41, 36, 0.28),
+            inset -18px 0 18px -18px rgba(31, 41, 36, 0.28);
     }
 
     table,
