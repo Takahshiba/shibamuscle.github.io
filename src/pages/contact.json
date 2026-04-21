@@ -1,0 +1,35 @@
+{
+  "file": "contact.html",
+  "kind": "content",
+  "title": "お問い合わせ | Shiba Muscle",
+  "description": "Shiba Muscleへのお問い合わせページです。サービスに関するご質問、ご相談、掲載内容に関するご連絡はこちらからお送りください。",
+  "heading": "お問い合わせ",
+  "shellClass": "contact-shell",
+  "stylesheets": [
+    "sanitize.css",
+    "styles.css",
+    "contact.css"
+  ],
+  "intro": [
+    "サービス内容や掲載情報に関するご質問、ご相談、各種ご連絡は、下記メールアドレスまでお願いします。"
+  ],
+  "sections": [
+    {
+      "className": "content-card contact-card",
+      "blocks": [
+        {
+          "type": "email",
+          "label": "Email",
+          "value": "info@shibamuscle.com"
+        }
+      ]
+    },
+    {
+      "className": "content-card note",
+      "paragraphs": [
+        "内容を確認のうえ順次返信しておりますが、お問い合わせ内容によっては回答までにお時間をいただく場合があります。",
+        "状況やご希望をできるだけ具体的に記載いただくと、よりスムーズにご案内できます。個人情報に関するお問い合わせについては、ご本人確認をお願いする場合があります。"
+      ]
+    }
+  ]
+}

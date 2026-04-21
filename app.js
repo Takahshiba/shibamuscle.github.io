@@ -20,33 +20,31 @@ const HOME_FEATURES = {
 const HOME_ENTRY_ROUTES = [
     {
         id: "popular",
-        label: "定番",
-        eyebrow: "Popular",
-        title: "よく見られる種目",
-        copy: "比較されやすい定番ページから見始めたいときの入口です。",
+        label: "定番比較",
+        eyebrow: "Quick Compare",
+        title: "定番の比較スタート",
+        copy: "比較されやすい定番種目から、最短でデータを見比べるための入口です。",
         slugs: HOME_FEATURES.popular
     },
     {
         id: "big3",
         label: "Big 3",
-        eyebrow: "Big 3",
-        title: "Big 3 基準ページ",
-        copy: "重量比較の入口として使いやすい3種目を先にまとめています。",
+        eyebrow: "Performance Baselines",
+        title: "Big 3 ベースライン",
+        copy: "重量比較の基準として見られやすい3種目を先にまとめています。",
         slugs: HOME_FEATURES.big3
     },
     {
         id: "beginner",
-        label: "初心者",
+        label: "導入向け",
         eyebrow: "Starter Paths",
-        title: "初心者の入口",
+        title: "始めやすい比較ルート",
         copy: "まずは扱いやすい種目から見比べたいときのスタート地点です。",
         slugs: HOME_FEATURES.beginner
     }
 ];
 
 const LIBRARY_INITIAL_CARD_LIMIT = 8;
-
-let activeLibraryController = null;
 
 normalizeAdSenseMarkup();
 ensureAdSenseScript();
@@ -65,22 +63,20 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (pageType === "exercise") {
         libraryContext = enhanceExercisePage(main);
     } else {
-        enhanceContentPage(main);
+        libraryContext = enhanceContentPage(main);
     }
 
     initStandardsTabs();
     initHeaderActions();
 
-    if (libraryContext) {
-        initLibrarySearch(libraryContext);
+    if (pageType === "home") {
+        initHomeDashboardInteractions();
     }
-});
 
-window.filterExercises = function () {
-    if (activeLibraryController) {
-        activeLibraryController.apply();
-    }
-};
+    window.requestAnimationFrame(() => {
+        initializeAds();
+    });
+});
 
 window.toggleMenu = function () {
     document.body.classList.toggle("nav-open");
@@ -171,7 +167,6 @@ function buildHeader(pageType, unitSwitch) {
                 ${(unitSwitch || pageType === "exercise") ? `
                     <div class="header-actions">
                         ${unitSwitch}
-                        ${pageType === "exercise" ? '<button type="button" class="header-search-button" data-action="jump-to-search">種目検索</button>' : ""}
                     </div>
                 ` : ""}
             </nav>
@@ -193,6 +188,13 @@ function buildFooter() {
             </a>
         `;
     }).join("");
+
+    const languageLinks = [
+        { href: localizedDomainHref("https://en.shibamuscle.com"), label: "English", lang: "en" },
+        { href: localizedDomainHref("https://shibamuscle.com"), label: "日本語", lang: "ja" },
+        { href: localizedDomainHref("https://cn.shibamuscle.com"), label: "中文", lang: "zh" },
+        { href: localizedDomainHref("https://ko.shibamuscle.com"), label: "한국어", lang: "ko" }
+    ].map((item) => `<a href="${item.href}" data-lang="${item.lang}">${item.label}</a>`).join("");
 
     return htmlToElement(`
         <footer class="site-footer">
@@ -216,12 +218,7 @@ function buildFooter() {
                 </div>
             </div>
             <div class="footer-meta">
-                <div class="footer-languages">
-                    <a href="https://en.shibamuscle.com/" data-lang="en">English</a>
-                    <a href="https://shibamuscle.com/" data-lang="ja">日本語</a>
-                    <a href="https://cn.shibamuscle.com/" data-lang="zh">中文</a>
-                    <a href="https://ko.shibamuscle.com/" data-lang="ko">한국어</a>
-                </div>
+                <div class="footer-languages">${languageLinks}</div>
                 <p>© Shiba Muscle</p>
             </div>
         </footer>
@@ -255,66 +252,130 @@ function ensureMainShell() {
 function enhanceHomePage(main) {
     document.body.classList.add("home-page");
 
-    const libraryContainer = Array.from(main.children).find((child) => child.classList.contains("container"));
+    const containers = Array.from(main.children).filter((child) => child.classList.contains("container"));
+    const libraryContainer = containers.find((child) => child.querySelector("#other-workouts")) || containers[0];
+    const adContainers = containers.filter((container) => container.querySelector("ins.adsbygoogle"));
     if (!libraryContainer) {
         return null;
     }
 
     const titleHeading = replaceHeadingTag(libraryContainer.querySelector(".section-title"), "h2");
-    const searchWrapper = libraryContainer.querySelector(".search-bar-container");
     const libraryData = collectLibrarySections(libraryContainer);
     const allCards = libraryData.allCards;
+    const homeEntryRoutes = buildHomeEntryRoutes(allCards);
+    const popularPreviewCards = homeEntryRoutes[0]?.cards.slice(0, 4) || allCards.slice(0, 4);
 
     const hero = htmlToElement(`
         <section class="container home-hero" id="database-top">
-            <div class="home-hero-copy">
-                <p class="eyebrow">Workout Data Platform</p>
-                <h1>ワークアウトデータを最短で探す</h1>
-                <p class="hero-description">
-                    平均重量、基準表、関連種目をすばやく横断できるフィットネスデータベース。
-                </p>
-                <div class="hero-stat-grid">
-                    <div class="summary-card">
-                        <span class="metric-label">掲載カテゴリ</span>
-                        <strong class="metric-value">${libraryData.sections.length}</strong>
-                        <span class="metric-subvalue">主要部位</span>
+            <div class="home-hero-layout">
+                <div class="home-hero-copy">
+                    <p class="eyebrow">Performance Dashboard</p>
+                    <h1>ワークアウトデータを、最短で比較する</h1>
+                    <p class="hero-description">
+                        平均重量、基準重量、対象筋群を、種目ごとにすばやく横断できるフィットネスデータベース。
+                    </p>
+                    <div class="hero-chip-row" aria-label="クイックアクション">
+                        <button type="button" class="hero-action-chip" data-dashboard-route="popular">定番比較</button>
+                        <button type="button" class="hero-action-chip" data-dashboard-route="big3">BIG3</button>
+                        <button type="button" class="hero-action-chip" data-dashboard-route="beginner">導入向け</button>
+                        <a href="#chest-section" class="hero-action-chip">胸</a>
+                        <a href="#back-section" class="hero-action-chip">背中</a>
+                        <a href="#leg-section" class="hero-action-chip">脚</a>
                     </div>
-                    <div class="summary-card">
-                        <span class="metric-label">掲載種目</span>
-                        <strong class="metric-value">${allCards.length}</strong>
-                        <span class="metric-subvalue">カテゴリ閲覧</span>
+                    <div class="hero-stat-grid">
+                        <div class="summary-card">
+                            <span class="metric-label">掲載カテゴリ</span>
+                            <strong class="metric-value">${libraryData.sections.length}</strong>
+                            <span class="metric-subvalue">主要部位ダッシュボード</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">掲載種目</span>
+                            <strong class="metric-value">${allCards.length}</strong>
+                            <span class="metric-subvalue">横断比較できる種目数</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="metric-label">比較モード</span>
+                            <strong class="metric-value">kg / lb</strong>
+                            <span class="metric-subvalue">全ページで単位切替</span>
+                        </div>
                     </div>
-                    <div class="summary-card">
-                        <span class="metric-label">表示単位</span>
-                        <strong class="metric-value">kg / lb</strong>
-                        <span class="metric-subvalue">全ページ切替</span>
+                </div>
+                <aside class="dashboard-preview">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-panel-heading">
+                            <p class="eyebrow">Snapshot</p>
+                            <h2>比較ダッシュボード</h2>
+                        </div>
+                        <div class="dashboard-panel-grid">
+                            <article class="dashboard-mini-card">
+                                <span class="metric-label">平均重量</span>
+                                <strong class="metric-value">1RM</strong>
+                                <span class="metric-subvalue">レベル別の目安を確認</span>
+                            </article>
+                            <article class="dashboard-mini-card">
+                                <span class="metric-label">基準重量</span>
+                                <strong class="metric-value">体重 / 年齢</strong>
+                                <span class="metric-subvalue">切替タブで詳細比較</span>
+                            </article>
+                            <article class="dashboard-mini-card">
+                                <span class="metric-label">筋群</span>
+                                <strong class="metric-value">主働筋</strong>
+                                <span class="metric-subvalue">種目ごとの効き方を把握</span>
+                            </article>
+                            <article class="dashboard-mini-card">
+                                <span class="metric-label">比較導線</span>
+                                <strong class="metric-value">関連種目</strong>
+                                <span class="metric-subvalue">同カテゴリを続けて閲覧</span>
+                            </article>
+                        </div>
+                        <div class="dashboard-spotlight-list">
+                            <div class="dashboard-spotlight-heading">
+                                <span class="metric-label">今すぐ見比べる</span>
+                            </div>
+                            ${popularPreviewCards.map((card) => {
+                                return `
+                                    <a class="dashboard-spotlight-link" href="${escapeAttribute(card.href)}">
+                                        <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy">
+                                        <span>
+                                            <strong>${escapeHtml(card.name)}</strong>
+                                            <small>${escapeHtml(card.category || cleanSectionLabel(card.sectionTitle))}</small>
+                                        </span>
+                                    </a>
+                                `;
+                            }).join("")}
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     `);
 
-    searchWrapper?.remove();
-
-    const homeEntryRoutes = buildHomeEntryRoutes(allCards);
     const quickStartSection = buildQuickStartSection(homeEntryRoutes);
-    const postQuickStartAd = buildStandaloneAdBlock(null, "おすすめ入口のあと");
+    const postQuickStartAd = prepareAdContainer(adContainers[0], "おすすめ入口のあと");
 
     const categoryOverview = htmlToElement(`
         <section class="container section-band">
             <div class="section-heading">
-                <p class="eyebrow">Categories</p>
-                <h2>カテゴリから探す</h2>
-                <p>部位ごとに基準ページをまとめて見渡せる入口です。</p>
+                <p class="eyebrow">Category Dashboard</p>
+                <h2>部位別ダッシュボード</h2>
+                <p>部位ごとの件数、代表種目、比較の切り口をまとめて見渡せる入口です。</p>
             </div>
             <div class="category-overview-grid">
                 ${libraryData.sections.map((section) => {
-                    const description = CATEGORY_LINKS.find((item) => item.id === section.id)?.description || "関連種目をまとめて確認";
+                    const categoryMeta = CATEGORY_LINKS.find((item) => item.id === section.id);
+                    const description = categoryMeta?.description || "関連種目をまとめて確認";
+                    const sampleNames = section.cards.slice(0, 3).map((card) => card.name).join(" / ");
                     return `
                         <a class="category-tile" href="#${section.id}">
+                            <div class="category-tile-header">
+                                <span class="category-tile-icon" aria-hidden="true">
+                                    <img src="${escapeAttribute(categoryMeta?.icon || "./assets/dumbbell-logo.png")}" alt="">
+                                </span>
+                                <span class="category-tile-count">${section.cards.length}種目</span>
+                            </div>
                             <span class="category-tile-name">${cleanSectionLabel(section.title)}</span>
-                            <span class="category-tile-count">${section.cards.length}種目</span>
                             <span class="category-tile-copy">${description}</span>
+                            <span class="category-tile-samples">${escapeHtml(sampleNames)}</span>
                         </a>
                     `;
                 }).join("")}
@@ -323,16 +384,16 @@ function enhanceHomePage(main) {
     `);
 
     main.prepend(hero);
-    hero.after(quickStartSection, postQuickStartAd, categoryOverview);
+    hero.after(...[quickStartSection, postQuickStartAd, categoryOverview].filter(Boolean));
     initQuickStartSection(quickStartSection, homeEntryRoutes);
 
-    titleHeading.textContent = "エクササイズデータベース";
+    titleHeading.textContent = "全種目ライブラリ";
     titleHeading.id = "database";
     titleHeading.classList.add("section-title--database");
 
     const homeIntro = htmlToElement(`
         <p class="section-intro">
-            部位別の一覧からそのまま各種目ページへ移動できます。
+            部位別のまとまりから、必要な比較ページへそのまま移動できます。
         </p>
     `);
     titleHeading.after(homeIntro);
@@ -344,12 +405,15 @@ function enhanceHomePage(main) {
     return decorateLibraryExplorer({
         root: libraryContainer,
         sections: libraryData.sections,
-        allCards
+        allCards,
+        explorerTitle: "Performance Library",
+        explorerCopy: "部位別に、全種目の比較ページを横断できます。"
     });
 }
 
 function enhanceExercisePage(main) {
     document.body.classList.add("exercise-page");
+    removeStaticBreadcrumbs(main);
 
     const containers = Array.from(main.children).filter((child) => child.classList.contains("container"));
     const heroContainer = containers.find((container) => container.querySelector(".main-image-title"));
@@ -372,29 +436,65 @@ function enhanceExercisePage(main) {
     const muscles = extractMuscleGroups(muscleContainer.querySelector(".muscle-activated-table"));
     const heroTitle = normalizeText(heroContainer.querySelector("h1")?.textContent || "");
     const heroImage = heroContainer.querySelector("img");
-    const sectionLabel = cleanSectionLabel(currentCard?.sectionTitle || "全身トレーニング");
-    const sameSectionCards = libraryData.sections.find((section) => section.id === currentCard?.sectionId)?.cards.filter((card) => card.slug !== currentCard?.slug) || [];
+    const measurementKind = main.dataset.measurementKind || currentCard?.measurementKind || "weight";
+    const averageLabel = main.dataset.averageLabel || (measurementKind === "reps" ? "平均レップ数" : "平均重量");
+    const standardsLabel = main.dataset.standardsLabel || (measurementKind === "reps" ? "基準レップ数" : "基準重量");
+    const sectionId = main.dataset.categoryId || currentCard?.sectionId || "whole-body-section";
+    const sectionLabel = main.dataset.categoryLabel || cleanSectionLabel(currentCard?.sectionTitle || "全身");
+    const summaryText = main.dataset.summary || currentCard?.description || "";
+    const relatedTags = splitPipeList(main.dataset.relatedTags || "");
+    const currentSlug = main.dataset.exerciseSlug || currentCard?.slug || "";
+    const sameSectionCards = libraryData.sections.find((section) => section.id === sectionId)?.cards.filter((card) => card.slug !== currentSlug) || [];
 
     const breadcrumb = buildBreadcrumb([
         { label: "Home", href: "index.html" },
-        { label: sectionLabel, href: currentCard?.sectionId ? `index.html#${currentCard.sectionId}` : "index.html#whole-body-section" },
+        { label: sectionLabel, href: `index.html#${sectionId}` },
         { label: heroTitle }
     ]);
 
     const primaryMuscles = muscles.find((item) => item.label.includes("主働"))?.items || [];
+    const averageHighlights = extractAverageHighlights(averageContainer.querySelector(".average-section-table"));
+    const performanceSnapshot = buildExercisePerformanceSnapshot({
+        averageHighlights,
+        primaryMuscles,
+        sectionLabel,
+        standardsLabel,
+        measurementKind,
+        sameSectionCount: sameSectionCards.length + 1
+    });
 
     heroContainer.classList.add("hero-band");
     heroContainer.innerHTML = `
         <div class="exercise-hero">
             <div class="exercise-hero-copy">
-                <p class="eyebrow">Exercise Database</p>
+                <p class="eyebrow">Performance Dashboard</p>
                 <h1>${escapeHtml(heroTitle)}</h1>
+                ${summaryText ? `<p class="hero-description">${escapeHtml(summaryText)}</p>` : ""}
                 <div class="muscle-chip-row">
                     ${primaryMuscles.map((muscle) => `<span class="muscle-chip">${escapeHtml(muscle)}</span>`).join("")}
+                    ${relatedTags.slice(0, 3).map((tag) => `<span class="muscle-chip">${escapeHtml(tag)}</span>`).join("")}
+                </div>
+                <div class="hero-glance-grid">
+                    <article class="hero-glance-card">
+                        <span class="metric-label">カテゴリ</span>
+                        <strong>${escapeHtml(sectionLabel)}</strong>
+                        <span class="metric-subvalue">${measurementKind === "reps" ? "回数ベースの比較ページ" : "重量ベースの比較ページ"}</span>
+                    </article>
+                    <article class="hero-glance-card">
+                        <span class="metric-label">主働筋</span>
+                        <strong>${escapeHtml(`${primaryMuscles.length || 0}筋群`)}</strong>
+                        <span class="metric-subvalue">${escapeHtml(primaryMuscles.slice(0, 3).join(" / ") || "筋群データを掲載")}</span>
+                    </article>
+                    <article class="hero-glance-card">
+                        <span class="metric-label">比較先</span>
+                        <strong>${escapeHtml(`${sameSectionCards.length + 1}種目`)}</strong>
+                        <span class="metric-subvalue">同カテゴリの関連比較あり</span>
+                    </article>
                 </div>
             </div>
             <div class="exercise-hero-media">
                 <img src="${escapeAttribute(heroImage?.getAttribute("src") || "")}" alt="${escapeAttribute(heroImage?.getAttribute("alt") || heroTitle)}" class="workout-main-image">
+                <p class="exercise-media-caption">${escapeHtml(standardsLabel)}と平均データを同じ流れで確認できます。</p>
             </div>
         </div>
     `;
@@ -419,10 +519,22 @@ function enhanceExercisePage(main) {
         </div>
     `;
 
-    decorateDataContainer(averageContainer, "average-data", "Average", "平均重量", "レベル別の1RM目安を先に確認できます。");
+    decorateDataContainer(
+        averageContainer,
+        "average-data",
+        "Average",
+        averageLabel,
+        measurementKind === "reps" ? "レベル別の平均レップ数を先に確認できます。" : "レベル別の1RM目安を先に確認できます。"
+    );
     decorateTableShell(averageContainer.querySelector(".average-section-table"));
 
-    decorateDataContainer(standardsContainer, "standards-data", "Standards", "基準重量", "男女と比較軸を切り替えながら基準を確認できます。");
+    decorateDataContainer(
+        standardsContainer,
+        "standards-data",
+        "Standards",
+        standardsLabel,
+        measurementKind === "reps" ? "体重別・年齢別のレップ数基準を切り替えながら確認できます。" : "男女と比較軸を切り替えながら基準を確認できます。"
+    );
     standardsContainer.querySelectorAll(".table").forEach((table) => decorateTableShell(table, true));
     standardsContainer.querySelectorAll(".tab .section-box").forEach((box) => box.classList.add("table-panel"));
 
@@ -446,7 +558,6 @@ function enhanceExercisePage(main) {
     const relatedContainer = buildRelatedSection(sectionLabel, sameSectionCards);
 
     const libraryTitle = replaceHeadingTag(libraryContainer.querySelector("#other-workouts"), "h2");
-    const searchInput = libraryData.searchInput;
 
     libraryContainer.classList.add("section-band", "library-band");
     libraryTitle.textContent = "種目ライブラリ";
@@ -456,20 +567,14 @@ function enhanceExercisePage(main) {
     const existingIntro = libraryContainer.querySelector(".section-intro");
     const libraryIntro = existingIntro || htmlToElement(`
         <p class="section-intro">
-            部位別の一覧から他の種目も探せます。
+            同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。
         </p>
     `);
 
     if (!existingIntro) {
         libraryTitle.after(libraryIntro);
     } else {
-        libraryIntro.textContent = "部位別の一覧から他の種目も探せます。";
-    }
-
-    if (searchInput) {
-        searchInput.id = "database-search";
-        searchInput.placeholder = "種目名・部位・器具で検索";
-        searchInput.setAttribute("aria-label", "種目ライブラリ検索");
+        libraryIntro.textContent = "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。";
     }
 
     libraryData.sections.forEach((section) => {
@@ -478,21 +583,22 @@ function enhanceExercisePage(main) {
 
     const libraryContext = decorateLibraryExplorer({
         root: libraryContainer,
-        searchInput,
         sections: libraryData.sections,
-        allCards
+        allCards,
+        explorerTitle: "Compare More Exercises",
+        explorerCopy: "関連する種目ページへそのまま移動して、比較の流れを広げられます。"
     });
 
-    const postStandardsAd = buildStandaloneAdBlock(adContainers[0], "基準表のあと");
-    const postRelatedAd = buildStandaloneAdBlock(adContainers[1], "関連種目のあと");
-    const preFooterAd = buildStandaloneAdBlock(adContainers[2], "フッター直前");
-    const anchorAdPlaceholder = buildAnchorAdPlaceholder();
+    const postStandardsAd = prepareAdContainer(adContainers[0], "基準表のあと");
+    const postRelatedAd = prepareAdContainer(adContainers[1], "関連種目のあと");
+    const preFooterAd = prepareAdContainer(adContainers[2], "フッター直前");
 
     adContainers.slice(3).forEach((container) => container.remove());
 
     const orderedNodes = [
         breadcrumb,
         heroContainer,
+        performanceSnapshot,
         muscleContainer,
         averageContainer,
         recordContainer,
@@ -506,28 +612,50 @@ function enhanceExercisePage(main) {
     ].filter(Boolean);
 
     orderedNodes.forEach((node) => main.append(node));
-    if (anchorAdPlaceholder) {
-        document.body.append(anchorAdPlaceholder);
-    }
 
     return libraryContext;
 }
 
 function enhanceContentPage(main) {
     document.body.classList.add("content-page");
-
     const firstContainer = Array.from(main.children).find((child) => child.classList.contains("container"));
     if (!firstContainer) {
-        return;
+        return null;
     }
 
-    const heading = firstContainer.querySelector("h1");
-    const breadcrumb = buildBreadcrumb([
-        { label: "Home", href: "index.html" },
-        { label: normalizeText(heading?.textContent || "ページ") }
-    ]);
+    if (!main.querySelector(":scope > .breadcrumb-container")) {
+        const heading = firstContainer.querySelector("h1");
+        const breadcrumb = buildBreadcrumb([
+            { label: "Home", href: "index.html" },
+            { label: normalizeText(heading?.textContent || "ページ") }
+        ]);
 
-    main.prepend(breadcrumb);
+        main.prepend(breadcrumb);
+    }
+
+    const libraryContainer = Array.from(main.children).find((child) => child.classList.contains("container") && child.querySelector("#other-workouts"));
+    if (!libraryContainer) {
+        return null;
+    }
+
+    const libraryData = collectLibrarySections(libraryContainer);
+    const libraryTitle = replaceHeadingTag(libraryContainer.querySelector("#other-workouts"), "h2");
+
+    libraryContainer.classList.add("section-band", "library-band");
+    libraryTitle.classList.add("section-title--database");
+    libraryTitle.textContent = libraryTitle.textContent || "データベースから続けて探す";
+
+    libraryData.sections.forEach((section) => {
+        section.heading = replaceHeadingTag(section.heading, "h3");
+    });
+
+    return decorateLibraryExplorer({
+        root: libraryContainer,
+        sections: libraryData.sections,
+        allCards: libraryData.allCards,
+        explorerTitle: "種目ライブラリ",
+        explorerCopy: "関連する種目ページへそのまま移動できます。"
+    });
 }
 
 function buildHomeEntryRoutes(allCards) {
@@ -550,9 +678,9 @@ function buildQuickStartSection(routes) {
     return htmlToElement(`
         <section class="container section-band quick-start-band" id="quick-start">
             <div class="section-heading">
-                <p class="eyebrow">Quick Start</p>
-                <h2>おすすめの入口</h2>
-                <p>迷ったらまずここから。目的別に最初の数ページへすばやく入れます。</p>
+                <p class="eyebrow">Quick Compare</p>
+                <h2>比較スタート</h2>
+                <p>迷ったらまずここから。比較されやすいルートを最初にまとめています。</p>
             </div>
             <div class="quick-start-switcher" aria-label="おすすめの入口">
                 ${routes.map((route, index) => {
@@ -684,35 +812,45 @@ function decorateTableShell(table, center = false) {
     wrapper.append(table);
 }
 
-function buildStandaloneAdBlock(container, placementLabel) {
-    const block = document.createElement("section");
-    block.className = "container standalone-ad-band";
-    block.dataset.adPlacement = placementLabel;
-    block.innerHTML = `
-        <div class="ad-placeholder ad-placeholder--standalone">
-            <span class="ad-placeholder-label">広告スペース</span>
-            <span class="ad-placeholder-note">${escapeHtml(placementLabel)}</span>
-        </div>
-    `;
-
-    if (container) {
-        container.remove();
+function prepareAdContainer(container, placementLabel) {
+    if (!container) {
+        return null;
     }
-    return block;
+
+    container.classList.add("standalone-ad-band");
+    container.dataset.adPlacement = placementLabel;
+
+    container.querySelectorAll("script").forEach((script) => script.remove());
+
+    if (!container.querySelector(".ad-slot-label")) {
+        container.prepend(htmlToElement(`
+            <p class="ad-slot-label">
+                <span>広告</span>
+                <span>${escapeHtml(placementLabel)}</span>
+            </p>
+        `));
+    }
+
+    return container;
 }
 
-function buildAnchorAdPlaceholder() {
-    return htmlToElement(`
-        <div class="adsense-anchor-slot is-active" aria-hidden="true">
-            <div class="ad-placeholder ad-placeholder--anchor">
-                <span class="ad-placeholder-label">広告スペース</span>
-                <span class="ad-placeholder-note">下部アンカー広告</span>
-            </div>
-        </div>
-    `);
+function initializeAds() {
+    document.querySelectorAll("ins.adsbygoogle").forEach((slot) => {
+        slot.setAttribute("data-ad-client", ADSENSE_CLIENT_ID);
+
+        if (slot.dataset.adsbygoogleStatus) {
+            return;
+        }
+
+        try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (error) {
+            // Ignore already-initialized or script-race errors.
+        }
+    });
 }
 
-function decorateLibraryExplorer({ root, searchInput, sections, allCards, explorerTitle = "", explorerCopy = "" }) {
+function decorateLibraryExplorer({ root, sections, allCards, explorerTitle = "", explorerCopy = "" }) {
     root.classList.add("section-band", "library-band");
 
     sections.forEach((section) => {
@@ -734,20 +872,12 @@ function decorateLibraryExplorer({ root, searchInput, sections, allCards, explor
     });
 
     const firstSection = sections[0]?.heading;
-    const searchWrapper = searchInput?.closest(".search-bar-container");
-    const searchAnchor = searchWrapper && root.contains(searchWrapper) ? searchWrapper : null;
-    const anchor = searchAnchor || firstSection;
+    const anchor = firstSection;
 
     const toolbar = htmlToElement(`
         <div class="library-toolbar">
             ${explorerTitle ? `<div class="library-copy"><h3>${escapeHtml(explorerTitle)}</h3><p>${escapeHtml(explorerCopy)}</p></div>` : ""}
-            <div class="category-chip-row" aria-label="部位で絞り込み">
-                <button type="button" class="category-chip is-active" data-section-filter="all" aria-pressed="true">すべて</button>
-                ${sections.map((section) => {
-                    return `<button type="button" class="category-chip" data-section-filter="${section.id}" aria-pressed="false">${escapeHtml(cleanSectionLabel(section.title))}</button>`;
-                }).join("")}
-            </div>
-            <p class="results-status" aria-live="polite"></p>
+            <p class="results-status" aria-live="polite">${allCards.length}種目を掲載</p>
         </div>
     `);
 
@@ -757,94 +887,40 @@ function decorateLibraryExplorer({ root, searchInput, sections, allCards, explor
         root.append(toolbar);
     }
 
-    return {
-        input: searchInput,
-        sections,
-        allCards,
-        resultsNode: toolbar.querySelector(".results-status"),
-        sectionFilterButtons: Array.from(toolbar.querySelectorAll("[data-section-filter]"))
-    };
-}
-
-function initLibrarySearch(context) {
-    if (!context) {
-        return;
-    }
-
-    let activeSectionFilter = "all";
-
-    activeLibraryController = {
-        apply: applyFilter
-    };
-
-    context.input?.addEventListener("input", applyFilter);
-    context.sectionFilterButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            activeSectionFilter = button.dataset.sectionFilter || "all";
-            applyFilter();
-        });
-    });
-    context.sections.forEach((section) => {
+    sections.forEach((section) => {
         section.toggleButton?.addEventListener("click", () => {
             section.isExpanded = !section.isExpanded;
-            applyFilter();
+            applySectionVisibility(section);
         });
     });
 
-    applyFilter();
+    sections.forEach((section) => applySectionVisibility(section));
 
-    function applyFilter() {
-        const query = normalizeText(context.input?.value || "").toLowerCase();
-        const hasActiveCriteria = Boolean(query || activeSectionFilter !== "all");
-        let visibleCount = 0;
+    return {
+        sections,
+        allCards,
+        resultsNode: toolbar.querySelector(".results-status")
+    };
 
-        context.sectionFilterButtons.forEach((button) => {
-            const isActive = (button.dataset.sectionFilter || "all") === activeSectionFilter;
-            button.classList.toggle("is-active", isActive);
-            button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    function applySectionVisibility(section) {
+        const visibleCards = section.isExpanded
+            ? section.cards
+            : section.cards.slice(0, LIBRARY_INITIAL_CARD_LIMIT);
+        const visibleSet = new Set(visibleCards);
+
+        section.cards.forEach((card) => {
+            card.anchor.style.display = visibleSet.has(card) ? "" : "none";
         });
 
-        context.sections.forEach((section) => {
-            const matchesSection = activeSectionFilter === "all" || section.id === activeSectionFilter;
-            const matchingCards = section.cards.filter((card) => {
-                const haystack = buildCardSearchText(card, section);
-                const matchesQuery = !query || haystack.includes(query);
-                return matchesSection && matchesQuery;
-            });
-            const visibleCards = hasActiveCriteria || section.isExpanded
-                ? matchingCards
-                : matchingCards.slice(0, LIBRARY_INITIAL_CARD_LIMIT);
-            const visibleSet = new Set(visibleCards);
-            const sectionMatches = matchingCards.length;
-
-            section.cards.forEach((card) => {
-                card.anchor.style.display = visibleSet.has(card) ? "" : "none";
-            });
-
-            section.heading.style.display = sectionMatches ? "" : "none";
-            section.cardsContainer.style.display = sectionMatches ? "" : "none";
-            if (section.toggleRow) {
-                const hasMoreVisibleResults = sectionMatches > visibleCards.length;
-                const shouldShowToggle = sectionMatches > 0 && !hasActiveCriteria && hasMoreVisibleResults;
-                section.toggleRow.hidden = !shouldShowToggle;
-                section.toggleRow.style.display = shouldShowToggle ? "" : "none";
-                if (section.toggleButton) {
-                    section.toggleButton.textContent = section.isExpanded
-                        ? "表示を減らす"
-                        : `もっと見る (${sectionMatches - visibleCards.length}件)`;
-                }
-            }
-            visibleCount += sectionMatches;
-        });
-
-        if (context.resultsNode) {
-            if (!hasActiveCriteria) {
-                context.resultsNode.textContent = `${context.allCards.length}種目を掲載`;
-            } else if (activeSectionFilter !== "all" && !query) {
-                const activeSection = context.sections.find((section) => section.id === activeSectionFilter);
-                context.resultsNode.textContent = `${cleanSectionLabel(activeSection?.title || "")}で${visibleCount}件ヒット`;
-            } else {
-                context.resultsNode.textContent = `${visibleCount}件ヒット`;
+        if (section.toggleRow) {
+            const remainingCount = section.cards.length - visibleCards.length;
+            const shouldShowToggle = remainingCount > 0 || section.isExpanded;
+            section.toggleRow.hidden = !shouldShowToggle;
+            section.toggleRow.style.display = shouldShowToggle ? "" : "none";
+            if (section.toggleButton) {
+                section.toggleButton.textContent = section.isExpanded
+                    ? "表示を減らす"
+                    : `もっと見る (${remainingCount}件)`;
             }
         }
     }
@@ -854,7 +930,7 @@ function buildRelatedSection(sectionLabel, cards) {
     const container = htmlToElement(`
         <section class="container section-band">
             <h2 id="related-exercises" class="section-title section-title--database">関連種目</h2>
-            <p class="section-intro">同じ部位の種目だけに絞って並べています。</p>
+            <p class="section-intro">同じカテゴリの種目を続けて見比べられるように並べています。</p>
         </section>
     `);
 
@@ -918,12 +994,7 @@ function initStandardsTabs() {
 }
 
 function initHeaderActions() {
-    const searchButtons = document.querySelectorAll('[data-action="jump-to-search"]');
     const menuButton = document.querySelector('[data-action="toggle-menu"]');
-
-    searchButtons.forEach((button) => {
-        button.addEventListener("click", jumpToSearch);
-    });
 
     menuButton?.addEventListener("click", () => {
         window.toggleMenu();
@@ -937,25 +1008,6 @@ function initHeaderActions() {
     });
 }
 
-function jumpToSearch() {
-    const searchInput = document.getElementById("database-search");
-
-    if (searchInput) {
-        searchInput.scrollIntoView({ behavior: "smooth", block: "center" });
-        window.setTimeout(() => searchInput.focus(), 250);
-        return;
-    }
-
-    const target = document.getElementById("exercise-library") || document.getElementById("related-exercises");
-
-    if (!target) {
-        window.location.href = "index.html#database";
-        return;
-    }
-
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
 function syncMenuState() {
     const button = document.querySelector(".header-menu-button");
     if (!button) {
@@ -963,6 +1015,10 @@ function syncMenuState() {
     }
 
     button.setAttribute("aria-expanded", document.body.classList.contains("nav-open") ? "true" : "false");
+}
+
+function removeStaticBreadcrumbs(main) {
+    main.querySelectorAll(":scope > .breadcrumb-container").forEach((node) => node.remove());
 }
 
 function bindTabSet(tabs, onChange) {
@@ -976,7 +1032,6 @@ function bindTabSet(tabs, onChange) {
 }
 
 function collectLibrarySections(container) {
-    const searchInput = container.querySelector(".search-bar-container input");
     const headings = Array.from(container.querySelectorAll(":scope > h2.section-title"));
     const sections = headings.map((heading) => {
         const cardsContainer = heading.nextElementSibling;
@@ -991,7 +1046,6 @@ function collectLibrarySections(container) {
     }).filter((section) => section.cardsContainer && section.cards.length);
 
     return {
-        searchInput,
         sections,
         allCards: sections.flatMap((section) => section.cards)
     };
@@ -1006,6 +1060,7 @@ function extractCards(container, heading) {
         const name = normalizeText(anchor.querySelector(".name")?.textContent || "");
         const category = normalizeText(anchor.querySelector(".category")?.textContent || "");
         const image = anchor.querySelector("img")?.getAttribute("src") || "";
+        const card = anchor.querySelector(".exercise-card");
         return {
             anchor,
             href: anchor.getAttribute("href") || "",
@@ -1013,6 +1068,12 @@ function extractCards(container, heading) {
             name,
             category,
             image,
+            description: normalizeText(card?.dataset.description || ""),
+            primaryMuscles: splitPipeList(card?.dataset.primaryMuscles || ""),
+            tags: splitPipeList(card?.dataset.tags || ""),
+            aliases: splitPipeList(card?.dataset.aliases || ""),
+            searchTerms: splitPipeList(card?.dataset.searchTerms || ""),
+            measurementKind: card?.dataset.measurementKind || "",
             sectionId: heading.id || "",
             sectionTitle: normalizeText(heading.textContent)
         };
@@ -1042,11 +1103,6 @@ function pickCardsBySlugs(allCards, slugs) {
     }).filter(Boolean);
 }
 
-function buildCardSearchText(card, section) {
-    const slugText = card.slug.replace(/-/g, " ");
-    return `${card.name} ${card.category} ${section.title} ${slugText}`.toLowerCase();
-}
-
 function renderExerciseCardGrid(cards, className = "exercise-cards-container") {
     return `
         <div class="${className}">
@@ -1056,6 +1112,7 @@ function renderExerciseCardGrid(cards, className = "exercise-cards-container") {
 }
 
 function renderExerciseCard(card) {
+    const badges = buildExerciseCardBadges(card);
     return `
         <a class="card-link" href="${escapeAttribute(card.href)}">
             <article class="exercise-card">
@@ -1063,10 +1120,123 @@ function renderExerciseCard(card) {
                 <div class="exercise-details">
                     <div class="name">${escapeHtml(card.name)}</div>
                     <div class="category">${escapeHtml(card.category || cleanSectionLabel(card.sectionTitle))}</div>
+                    ${badges.length ? `<div class="exercise-badges">${badges.map((badge) => `<span class="exercise-badge">${escapeHtml(badge)}</span>`).join("")}</div>` : ""}
                 </div>
             </article>
         </a>
     `;
+}
+
+function buildExerciseCardBadges(card) {
+    const badges = [];
+
+    if ((card.tags || []).some((tag) => tag.toUpperCase() === "BIG3")) {
+        badges.push("BIG3");
+    }
+
+    if (card.measurementKind === "reps") {
+        badges.push("回数");
+    } else if (card.measurementKind === "weight") {
+        badges.push("重量");
+    }
+
+    if (card.primaryMuscles[0]) {
+        badges.push(card.primaryMuscles[0]);
+    }
+
+    return badges.slice(0, 3);
+}
+
+function initHomeDashboardInteractions() {
+    document.querySelectorAll("[data-dashboard-route]").forEach((button) => {
+        button.addEventListener("click", () => {
+            const routeId = button.dataset.dashboardRoute;
+            const quickStartButton = document.querySelector(`.quick-start-option[data-route-id="${routeId}"]`);
+            if (quickStartButton instanceof HTMLElement) {
+                quickStartButton.click();
+                document.getElementById("quick-start")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        });
+    });
+}
+
+function buildExercisePerformanceSnapshot({ averageHighlights, primaryMuscles, sectionLabel, standardsLabel, measurementKind, sameSectionCount }) {
+    const baselineLine = averageHighlights.baseline;
+    const intermediateLine = averageHighlights.intermediate;
+
+    return htmlToElement(`
+        <section class="container section-band performance-snapshot-band">
+            <div class="section-heading">
+                <p class="eyebrow">Snapshot</p>
+                <h2>パフォーマンススナップショット</h2>
+                <p>最初に押さえたい基準ラインと比較の切り口を、表より先にまとめています。</p>
+            </div>
+            <div class="performance-signal-grid">
+                ${renderPerformanceSignalCard(
+                    baselineLine?.label || "基礎ライン",
+                    baselineLine?.primary || "掲載データあり",
+                    baselineLine?.secondary || "平均データを掲載",
+                    true
+                )}
+                ${renderPerformanceSignalCard(
+                    intermediateLine?.label || "中級ライン",
+                    intermediateLine?.primary || standardsLabel,
+                    intermediateLine?.secondary || "比較データを掲載"
+                )}
+                ${renderPerformanceSignalCard(
+                    "主働筋",
+                    `${primaryMuscles.length || 0}筋群`,
+                    primaryMuscles.slice(0, 3).join(" / ") || "主働筋データを掲載"
+                )}
+                ${renderPerformanceSignalCard(
+                    "比較ビュー",
+                    `${sameSectionCount}種目`,
+                    `${sectionLabel} / ${measurementKind === "reps" ? "回数比較" : "重量比較"}`
+                )}
+            </div>
+        </section>
+    `);
+}
+
+function renderPerformanceSignalCard(label, value, copy, accent = false) {
+    return `
+        <article class="performance-signal-card${accent ? " performance-signal-card--accent" : ""}">
+            <span class="metric-label">${escapeHtml(label)}</span>
+            <strong class="signal-value">${escapeHtml(value)}</strong>
+            <span class="signal-subvalue">${escapeHtml(copy)}</span>
+        </article>
+    `;
+}
+
+function extractAverageHighlights(table) {
+    const rows = Array.from(table?.querySelectorAll("tbody tr") || []);
+    if (!rows.length) {
+        return {};
+    }
+
+    const parsedRows = rows.map((row) => {
+        const cells = Array.from(row.children);
+        return {
+            label: normalizeText(cells[0]?.textContent || ""),
+            primary: formatAverageMetric(cells[1]),
+            secondary: formatSecondaryMetric(cells[2])
+        };
+    });
+
+    return {
+        baseline: parsedRows.find((row) => row.label.includes("基礎")) || parsedRows[0],
+        intermediate: parsedRows.find((row) => row.label.includes("中級")) || parsedRows[Math.min(2, parsedRows.length - 1)]
+    };
+}
+
+function formatAverageMetric(cell) {
+    const value = normalizeText(cell?.innerText || cell?.textContent || "");
+    return value ? `男性 ${value}` : "掲載データあり";
+}
+
+function formatSecondaryMetric(cell) {
+    const value = normalizeText(cell?.innerText || cell?.textContent || "");
+    return value ? `女性 ${value}` : "比較データを掲載";
 }
 
 function replaceHeadingTag(heading, nextTag) {
@@ -1094,6 +1264,15 @@ function currentPath() {
     return window.location.pathname.split("/").pop() || "index.html";
 }
 
+function localizedDomainHref(baseUrl) {
+    const path = currentPath();
+    if (path === "index.html" || path === "") {
+        return `${baseUrl}/`;
+    }
+
+    return `${baseUrl}/${path}`;
+}
+
 function getUnitPrefix() {
     return currentPath().startsWith("lb_") ? "lb" : "kg";
 }
@@ -1103,7 +1282,7 @@ function exerciseHref(slug) {
 }
 
 function slugFromHref(href) {
-    return href.split("/").pop().replace(".html", "");
+    return href.split("/").pop().replace(".html", "").replace(/^(kg|lb)_/, "");
 }
 
 function cleanSectionLabel(text) {
@@ -1112,6 +1291,10 @@ function cleanSectionLabel(text) {
 
 function splitList(text) {
     return normalizeText(text).split(/[、,]/).map((item) => item.trim()).filter(Boolean);
+}
+
+function splitPipeList(text) {
+    return normalizeText(text).split("|").map((item) => item.trim()).filter(Boolean);
 }
 
 function normalizeText(text) {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">デッドリフトの体重別1RMを見たい人へ</title>
+  <desc id="desc">デッドリフトの体重別1RMを見たい人向けに、kg/lb表の見方と関連種目をまとめた入口ページです。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff9f0" />
+      <stop offset="100%" stop-color="#f0efe8" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" rx="28" />
+  <rect x="56" y="56" width="180" height="42" rx="21" fill="#10261f" />
+  <text x="84" y="83" fill="#ffffff" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">Intent Guide</text>
+  <text x="56" y="172" fill="#10261f" font-size="60" font-weight="800" font-family="'Noto Sans JP', sans-serif">デッドリフトの体重別1RMを見たい人へ</text>
+  <text x="56" y="242" fill="#4e5b55" font-size="26" font-family="'Noto Sans JP', sans-serif">デッドリフト / 相撲デッドリフト / ラックプル</text>
+  <rect x="56" y="302" width="1088" height="264" rx="32" fill="#ffffff" opacity="0.92" />
+  <text x="96" y="372" fill="#5a6c64" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">男性中級の平均: 152 kg / (336 lbs)</text>
+  <text x="428" y="372" fill="#5a6c64" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">体重80kgの中級: 151</text>
+  <text x="760" y="372" fill="#5a6c64" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">女性60kgの中級: 83</text>
+  <text x="96" y="506" fill="#10261f" font-size="30" font-weight="700" font-family="'Noto Sans JP', sans-serif">男性・女性の体重別データを先に見る / 平均1RMと基準表を同じ導線で比較する</text>
+</svg>

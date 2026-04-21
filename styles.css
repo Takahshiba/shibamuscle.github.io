@@ -5,17 +5,20 @@
     --surface: #ffffff;
     --surface-muted: #f5f7f4;
     --surface-strong: #eef3ef;
+    --surface-tint: #f2f8f5;
     --line: #dfe5df;
     --line-strong: #c9d2ca;
     --text: #1f2924;
     --muted: #617068;
     --accent: #148a6a;
+    --accent-strong: #0f7257;
     --accent-soft: #e7f5f0;
     --max-content: 1160px;
     --max-reading: 760px;
     --radius-sm: 6px;
     --radius-md: 8px;
     --shadow-soft: 0 10px 28px rgba(31, 41, 36, 0.04);
+    --shadow-panel: 0 18px 40px rgba(20, 40, 32, 0.08);
 }
 
 * {
@@ -29,7 +32,9 @@ html {
 body {
     margin: 0;
     font-family: "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
-    background: var(--bg);
+    background:
+        radial-gradient(circle at top left, rgba(20, 138, 106, 0.06), transparent 26%),
+        linear-gradient(180deg, #f8fbf9 0%, var(--bg) 28%);
     color: var(--text);
     line-height: 1.65;
     overflow-x: hidden;
@@ -90,6 +95,14 @@ ol {
     line-height: 1.2;
     letter-spacing: 0;
     color: var(--text);
+}
+
+.container > .section-title {
+    margin-bottom: 20px;
+}
+
+.container > .section-title + * {
+    margin-top: 0;
 }
 
 .section-heading p,
@@ -171,27 +184,6 @@ ol {
     align-items: center;
     gap: 12px;
     flex-shrink: 0;
-}
-
-.header-search-button {
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--text);
-    border-radius: var(--radius-sm);
-}
-
-.header-search-button {
-    height: 40px;
-    padding: 0 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.header-search-button:hover,
-.header-search-button:focus-visible {
-    border-color: var(--accent);
-    color: var(--accent);
 }
 
 .toggle-buttons {
@@ -312,13 +304,7 @@ ol {
 
 .home-hero,
 .hero-band {
-    padding-top: 8px;
-}
-
-.home-hero-copy,
-.exercise-hero {
-    display: grid;
-    gap: 28px;
+    padding-top: 12px;
 }
 
 .home-hero h1,
@@ -336,9 +322,133 @@ ol {
     font-size: 1rem;
 }
 
+.home-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 420px);
+    gap: 22px;
+    align-items: stretch;
+}
+
+.home-hero-copy,
+.exercise-hero-copy,
+.dashboard-preview,
+.dashboard-panel,
+.dashboard-spotlight-list,
+.dashboard-panel-heading {
+    display: grid;
+    gap: 18px;
+}
+
+.dashboard-panel,
+.quick-start-band,
+.performance-snapshot-band {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 248, 245, 0.96));
+    box-shadow: var(--shadow-panel);
+}
+.hero-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.hero-action-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    min-height: 38px;
+    padding: 0 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text);
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-action-chip:hover,
+.hero-action-chip:focus-visible {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
+}
+
+.dashboard-panel {
+    padding: 20px;
+}
+
+.dashboard-panel-heading h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    line-height: 1.25;
+}
+
+.dashboard-panel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.dashboard-mini-card,
+.hero-glance-card,
+.performance-signal-card {
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.94);
+    display: grid;
+    gap: 8px;
+}
+
+.dashboard-spotlight-list {
+    gap: 10px;
+}
+
+.dashboard-spotlight-link {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.86);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.dashboard-spotlight-link:hover,
+.dashboard-spotlight-link:focus-visible {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.dashboard-spotlight-link img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+}
+
+.dashboard-spotlight-link strong,
+.dashboard-spotlight-link small {
+    display: block;
+}
+
+.dashboard-spotlight-link small {
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
 .quick-start-band {
     display: grid;
     gap: 24px;
+    padding: 24px;
 }
 
 .quick-start-switcher {
@@ -350,8 +460,8 @@ ol {
 .quick-start-option {
     padding: 18px;
     border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    background: var(--surface);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.92);
     color: var(--text);
     display: grid;
     gap: 8px;
@@ -368,7 +478,7 @@ ol {
 
 .quick-start-option.is-active {
     border-color: var(--accent);
-    background: var(--accent-soft);
+    background: linear-gradient(180deg, var(--accent-soft), rgba(255, 255, 255, 0.95));
 }
 
 .quick-start-option-label,
@@ -410,33 +520,80 @@ ol {
     display: grid;
 }
 
-.search-bar-container {
-    margin: 0;
+.discovery-band,
+.discovery-page-hero,
+.discovery-copy-band,
+.discovery-related-band {
+    display: grid;
+    gap: 24px;
 }
 
-#database-search,
-#search-bar {
-    width: 100%;
-    min-height: 56px;
-    padding: 0 18px;
+.discovery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.discovery-card {
+    min-height: 100%;
+    padding: 20px;
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     background: var(--surface);
-    color: var(--text);
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: 12px;
+    transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
 }
 
-#database-search::placeholder,
-#search-bar::placeholder {
-    color: #8e9991;
-}
-
-#database-search:focus,
-#search-bar:focus {
+.discovery-card:hover,
+.discovery-card:focus-visible {
     border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(20, 138, 106, 0.08);
+    transform: translateY(-1px);
+    background: var(--accent-soft);
+}
+
+.discovery-card h3 {
+    margin: 0;
+    font-size: 1.06rem;
+    line-height: 1.35;
+}
+
+.discovery-card p,
+.discovery-link {
+    margin: 0;
+    color: var(--muted);
+}
+
+.discovery-type {
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.discovery-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.discovery-highlight-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--muted);
+    display: grid;
+    gap: 10px;
+}
+
+.discovery-highlight-list li {
+    padding-left: 4px;
+}
+
+.discovery-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
 }
 
 .hero-stat-grid,
@@ -470,6 +627,7 @@ ol {
     gap: 8px;
     min-height: 140px;
     align-content: start;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 248, 245, 0.92));
 }
 
 .metric-label {
@@ -496,7 +654,7 @@ ol {
 .category-tile {
     padding: 18px;
     display: grid;
-    gap: 6px;
+    gap: 10px;
     transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -506,6 +664,30 @@ ol {
 .exercise-card:focus-within {
     border-color: var(--accent);
     transform: translateY(-1px);
+}
+
+.category-tile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.category-tile-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-tile-icon img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%);
 }
 
 .category-tile-name {
@@ -524,24 +706,30 @@ ol {
     margin: 0;
 }
 
-.exercise-hero {
-    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 360px);
-    align-items: start;
+.category-tile-samples {
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.45;
 }
 
-.exercise-hero-copy {
+.exercise-hero {
     display: grid;
-    gap: 18px;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 360px);
+    align-items: start;
+    gap: 22px;
+    margin-bottom: 0;
 }
 
 .exercise-hero-media {
     min-height: 320px;
     padding: 22px;
     border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    background: var(--surface);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 248, 245, 0.94));
     display: grid;
     place-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-panel);
 }
 
 .workout-main-image {
@@ -550,6 +738,13 @@ ol {
     max-height: 320px;
     object-fit: contain;
     margin: 0 auto;
+}
+
+.exercise-media-caption {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-align: center;
 }
 
 .muscle-chip-row,
@@ -593,6 +788,39 @@ ol {
     background: var(--accent-soft);
 }
 
+.hero-glance-grid,
+.performance-signal-grid {
+    display: grid;
+    gap: 14px;
+}
+
+.hero-glance-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.performance-snapshot-band {
+    padding: 24px;
+}
+
+.performance-signal-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.performance-signal-card--accent {
+    border-color: rgba(20, 138, 106, 0.4);
+    background: linear-gradient(180deg, rgba(231, 245, 240, 0.88), rgba(255, 255, 255, 0.96));
+}
+
+.signal-value {
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    line-height: 1.2;
+}
+
+.signal-subvalue {
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
 .muscle-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -618,12 +846,18 @@ ol {
 
 .table-shell,
 .table-container {
+    display: block;
+    width: 100%;
+    max-width: 100%;
     position: relative;
     overflow-x: auto;
+    overflow-y: hidden;
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     background: var(--surface);
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y;
 }
 
 table,
@@ -631,8 +865,8 @@ table,
 .average-section-table,
 .muscle-activated-table,
 .calorie-burn-table {
-    width: 100%;
-    min-width: 640px;
+    width: max-content;
+    min-width: max(100%, 640px);
     border-collapse: collapse;
     margin: 0;
     background: transparent;
@@ -834,6 +1068,24 @@ table tbody tr:hover {
     font-size: 0.84rem;
 }
 
+.exercise-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.exercise-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: var(--surface-tint);
+    color: var(--accent-strong);
+    font-size: 0.77rem;
+    font-weight: 600;
+}
+
 .card-link {
     display: block;
     height: 100%;
@@ -843,14 +1095,32 @@ table tbody tr:hover {
     display: grid;
     gap: 16px;
     margin-bottom: 40px;
-}
-
-.library-band .search-bar-container {
-    margin-bottom: 32px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 248, 245, 0.9));
+    box-shadow: var(--shadow-soft);
 }
 
 .library-band > h3.section-title {
     margin-bottom: 16px;
+}
+
+.container > #other-workouts.section-title,
+.container > #exercise-library.section-title,
+.container > #database.section-title,
+.container > #related-exercises.section-title {
+    margin-bottom: 24px;
+}
+
+.container > h2.section-title[id$="-section"] {
+    margin-top: 44px;
+    margin-bottom: 24px;
+    scroll-margin-top: 152px;
+}
+
+.container > h2.section-title[id$="-section"] + .exercise-cards-container {
+    margin-top: 0;
 }
 
 .exercise-cards-container--library {
@@ -898,58 +1168,34 @@ table tbody tr:hover {
 }
 
 .standalone-ad-band {
-    padding: 0;
+    padding: 20px;
     margin-top: 0;
-}
-
-.ad-placeholder {
-    width: 100%;
-    border: 1px dashed var(--line-strong);
+    border: 1px solid var(--line);
     border-radius: var(--radius-md);
-    background: linear-gradient(180deg, #fcfdfb 0%, #f5f7f4 100%);
+    background: var(--surface);
+    box-shadow: var(--shadow-soft);
+}
+
+.ad-slot-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 0 12px;
     color: var(--muted);
-    display: grid;
-    place-items: center;
-    text-align: center;
-}
-
-.ad-placeholder--standalone {
-    min-height: 180px;
-    padding: 24px;
-}
-
-.ad-placeholder--anchor {
-    min-height: 64px;
-    padding: 10px 16px;
-}
-
-.ad-placeholder-label,
-.ad-placeholder-note {
-    display: block;
-}
-
-.ad-placeholder-label {
-    color: var(--text);
-    font-size: 0.95rem;
+    font-size: 0.76rem;
     font-weight: 700;
+    letter-spacing: 0.08em;
 }
 
-.ad-placeholder-note {
-    margin-top: 6px;
-    font-size: 0.82rem;
+.ad-slot-label span:last-child {
+    letter-spacing: 0;
+    font-weight: 600;
 }
 
-.adsense-anchor-slot {
-    position: fixed;
-    left: 16px;
-    right: 16px;
-    bottom: 12px;
-    z-index: 980;
-    display: none;
-}
-
-.adsense-anchor-slot.is-active {
+.standalone-ad-band .adsbygoogle {
     display: block;
+    width: 100%;
 }
 
 .record-cards {
@@ -1181,11 +1427,23 @@ table tbody tr:hover {
 }
 
 @media (max-width: 1100px) {
+    .home-hero-layout,
+    .exercise-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-panel-grid,
+    .hero-glance-grid,
+    .performance-signal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .exercise-cards-container {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .quick-start-switcher,
+    .discovery-grid,
     .category-overview-grid,
     .record-cards {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1204,10 +1462,13 @@ table tbody tr:hover {
 
     .hero-stat-grid,
     .summary-grid,
+    .discovery-stat-grid,
     .quick-start-switcher,
+    .discovery-grid,
     .category-overview-grid,
     .record-cards,
-    .exercise-hero {
+    .dashboard-panel-grid,
+    .hero-glance-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1215,13 +1476,13 @@ table tbody tr:hover {
         grid-template-columns: 1fr;
     }
 
-    .exercise-cards-container,
-    .exercise-cards-container--compact {
+    .performance-signal-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .search-bar-container ~ .exercise-cards-container {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+    .exercise-cards-container,
+    .exercise-cards-container--compact {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .footer-grid,
@@ -1232,6 +1493,12 @@ table tbody tr:hover {
 
     .footer-meta {
         justify-content: start;
+    }
+
+    .dashboard-panel,
+    .quick-start-band,
+    .performance-snapshot-band {
+        padding: 20px;
     }
 }
 
@@ -1269,15 +1536,22 @@ table tbody tr:hover {
         padding-inline: 12px;
     }
 
-    .header-search-button {
-        padding-inline: 12px;
-        font-size: 0.9rem;
-    }
-
     .sub-nav a {
         gap: 8px;
         min-height: 38px;
         padding-right: 12px;
+    }
+
+    .dashboard-panel,
+    .quick-start-band,
+    .performance-snapshot-band {
+        padding: 16px;
+    }
+
+    .hero-action-chip {
+        min-height: 36px;
+        padding-inline: 12px;
+        font-size: 0.88rem;
     }
 
     .category-nav-icon {
@@ -1304,8 +1578,12 @@ table tbody tr:hover {
         grid-template-columns: 1fr;
     }
 
-    .search-bar-container ~ .exercise-cards-container {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .dashboard-panel-grid,
+    .performance-signal-grid,
+    .hero-glance-grid,
+    .discovery-grid,
+    .discovery-stat-grid {
+        grid-template-columns: 1fr;
     }
 
     .table-shell,
@@ -1320,6 +1598,6 @@ table tbody tr:hover {
     .average-section-table,
     .muscle-activated-table,
     .calorie-burn-table {
-        min-width: 560px;
+        min-width: max(100%, 560px);
     }
 }

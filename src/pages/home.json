@@ -1,0 +1,11 @@
+{
+  "file": "index.html",
+  "kind": "home",
+  "title": "Shiba Muscle | ワークアウトデータベース",
+  "description": "部位別・種目別に平均重量、基準重量、鍛えられる筋肉を探せるShiba Muscleのトレーニングデータベースです。kgとlbの切り替えにも対応しています。",
+  "heading": "ワークアウトを見つける",
+  "unit": "kg",
+  "stylesheets": [
+    "styles.css"
+  ]
+}

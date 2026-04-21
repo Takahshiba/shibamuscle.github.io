@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">メドウズロウ</title>
+  <desc id="desc">メドウズロウの平均重量と基準重量を、背中の代表種目として確認できます。主働筋は広背筋です。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5fbf8" />
+      <stop offset="100%" stop-color="#d9f0e6" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#148a6a" />
+      <stop offset="100%" stop-color="#0f6c55" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" rx="28" />
+  <circle cx="1020" cy="160" r="150" fill="#ffffff" opacity="0.7" />
+  <circle cx="1120" cy="560" r="220" fill="#ffffff" opacity="0.45" />
+  <rect x="56" y="48" width="220" height="44" rx="22" fill="url(#accent)" />
+  <text x="84" y="77" fill="#ffffff" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">Shiba Muscle</text>
+  <text x="56" y="170" fill="#10261f" font-size="64" font-weight="800" font-family="'Noto Sans JP', sans-serif">メドウズロウ</text>
+  <text x="56" y="232" fill="#2f5b4d" font-size="28" font-weight="600" font-family="'Noto Sans JP', sans-serif">平均重量 / 基準重量</text>
+  <text x="56" y="302" fill="#345448" font-size="24" font-family="'Noto Sans JP', sans-serif">広背筋</text>
+  <rect x="56" y="358" width="520" height="152" rx="28" fill="#ffffff" opacity="0.92" />
+  <text x="92" y="410" fill="#587268" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">中級の目安</text>
+  <text x="92" y="474" fill="#10261f" font-size="42" font-weight="800" font-family="'Noto Sans JP', sans-serif">男性 39 kg / (86 lbs) | 女性 21 kg / (45 lbs)</text>
+  <text x="92" y="520" fill="#587268" font-size="22" font-family="'Noto Sans JP', sans-serif">背中 / 重量</text>
+  <rect x="780" y="120" width="320" height="320" rx="36" fill="#ffffff" opacity="0.96" />
+  <image href="../../meadows-row-gif.webp" x="820" y="150" width="240" height="240" preserveAspectRatio="xMidYMid meet" />
+  <rect x="780" y="468" width="320" height="82" rx="26" fill="#10261f" opacity="0.92" />
+  <text x="820" y="518" fill="#ffffff" font-size="28" font-weight="700" font-family="'Noto Sans JP', sans-serif">背中 / 背中トレ</text>
+</svg>

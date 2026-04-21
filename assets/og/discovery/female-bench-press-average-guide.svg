@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">女性のベンチプレス平均を知りたい人へ</title>
+  <desc id="desc">女性のベンチプレス平均を見たい人向けに、平均重量、体重別基準、比較しやすい胸トレ種目をまとめた入口ページです。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff9f0" />
+      <stop offset="100%" stop-color="#f0efe8" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" rx="28" />
+  <rect x="56" y="56" width="180" height="42" rx="21" fill="#10261f" />
+  <text x="84" y="83" fill="#ffffff" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">Intent Guide</text>
+  <text x="56" y="172" fill="#10261f" font-size="60" font-weight="800" font-family="'Noto Sans JP', sans-serif">女性のベンチプレス平均を知りたい人へ</text>
+  <text x="56" y="242" fill="#4e5b55" font-size="26" font-family="'Noto Sans JP', sans-serif">ベンチプレス / ダンベルベンチプレス / チェストプレス</text>
+  <rect x="56" y="302" width="1088" height="264" rx="32" fill="#ffffff" opacity="0.92" />
+  <text x="96" y="372" fill="#5a6c64" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">女性初級の平均: 31 kg / (69 lbs)</text>
+  <text x="428" y="372" fill="#5a6c64" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">女性中級の平均: 51 kg / (111 lbs)</text>
+  <text x="760" y="372" fill="#5a6c64" font-size="22" font-weight="700" font-family="'Noto Sans JP', sans-serif">体重60kgの中級: 47</text>
+  <text x="96" y="506" fill="#10261f" font-size="30" font-weight="700" font-family="'Noto Sans JP', sans-serif">女性平均値を先に確認する / 体重別の中級ラインを見る</text>
+</svg>

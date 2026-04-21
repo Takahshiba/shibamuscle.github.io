@@ -1,0 +1,188 @@
+{
+  "locale": "ja",
+  "sections": [
+    {
+      "id": "whole-body-section",
+      "label": {
+        "ja": "全身"
+      },
+      "legacyTitles": {
+        "ja": [
+          "全身トレーニング"
+        ]
+      },
+      "aliases": {
+        "ja": [
+          "全身トレ",
+          "BIG3/全身"
+        ]
+      },
+      "description": {
+        "ja": "デッドリフト、クリーン、スナッチなど全身連動の基準ページ"
+      },
+      "defaultTags": {
+        "ja": [
+          "全身",
+          "全身連動"
+        ]
+      }
+    },
+    {
+      "id": "chest-section",
+      "label": {
+        "ja": "胸"
+      },
+      "legacyTitles": {
+        "ja": [
+          "胸トレ"
+        ]
+      },
+      "aliases": {
+        "ja": [
+          "胸トレーニング",
+          "大胸筋"
+        ]
+      },
+      "description": {
+        "ja": "プレス系の平均値と押す種目の比較"
+      },
+      "defaultTags": {
+        "ja": [
+          "胸",
+          "プレス"
+        ]
+      }
+    },
+    {
+      "id": "back-section",
+      "label": {
+        "ja": "背中"
+      },
+      "legacyTitles": {
+        "ja": [
+          "背中トレ"
+        ]
+      },
+      "aliases": {
+        "ja": [
+          "背中トレーニング",
+          "広背筋"
+        ]
+      },
+      "description": {
+        "ja": "ローイング、プル系、ヒンジ系の比較"
+      },
+      "defaultTags": {
+        "ja": [
+          "背中",
+          "プル"
+        ]
+      }
+    },
+    {
+      "id": "shoulder-section",
+      "label": {
+        "ja": "肩"
+      },
+      "legacyTitles": {
+        "ja": [
+          "肩トレ"
+        ]
+      },
+      "aliases": {
+        "ja": [
+          "肩トレーニング",
+          "三角筋"
+        ]
+      },
+      "description": {
+        "ja": "プレス、レイズ、安定性の種目一覧"
+      },
+      "defaultTags": {
+        "ja": [
+          "肩",
+          "プレス"
+        ]
+      }
+    },
+    {
+      "id": "arm-section",
+      "label": {
+        "ja": "腕"
+      },
+      "legacyTitles": {
+        "ja": [
+          "腕トレ"
+        ]
+      },
+      "aliases": {
+        "ja": [
+          "腕トレーニング",
+          "二頭",
+          "三頭"
+        ]
+      },
+      "description": {
+        "ja": "カール、トライセプス、前腕の種目"
+      },
+      "defaultTags": {
+        "ja": [
+          "腕",
+          "カール"
+        ]
+      }
+    },
+    {
+      "id": "leg-section",
+      "label": {
+        "ja": "脚"
+      },
+      "legacyTitles": {
+        "ja": [
+          "脚トレ"
+        ]
+      },
+      "aliases": {
+        "ja": [
+          "脚トレーニング",
+          "下半身"
+        ]
+      },
+      "description": {
+        "ja": "スクワット、ランジ、ヒップ主導の種目"
+      },
+      "defaultTags": {
+        "ja": [
+          "脚",
+          "スクワット"
+        ]
+      }
+    },
+    {
+      "id": "core-section",
+      "label": {
+        "ja": "体幹"
+      },
+      "legacyTitles": {
+        "ja": [
+          "体幹トレーニング"
+        ]
+      },
+      "aliases": {
+        "ja": [
+          "体幹トレ",
+          "腹筋"
+        ]
+      },
+      "description": {
+        "ja": "腹筋、回旋、体幹安定の種目"
+      },
+      "defaultTags": {
+        "ja": [
+          "体幹",
+          "腹筋"
+        ]
+      }
+    }
+  ]
+}
