@@ -2,13 +2,76 @@ const ADSENSE_CLIENT_ID = "ca-pub-2819086765117537";
 const ADSENSE_SCRIPT_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`;
 
 const CATEGORY_LINKS = [
-    { id: "whole-body-section", label: "全身", icon: "./assets/power-clean-white-icon.webp", description: "デッドリフト、クリーン、スナッチなど全身連動の基準ページ" },
-    { id: "chest-section", label: "胸", icon: "./assets/bench-press-white-icon.webp", description: "プレス系の平均重量と押す種目の比較" },
-    { id: "back-section", label: "背中", icon: "./assets/deadlift-white-icon.webp", description: "ローイング、プル系、ヒンジ系の比較" },
-    { id: "shoulder-section", label: "肩", icon: "./assets/shoulder-press-white-icon.webp", description: "プレス、レイズ、安定性の種目一覧" },
-    { id: "arm-section", label: "腕", icon: "./assets/hammer-curl-white-icon.webp", description: "カール、トライセプス、前腕の種目" },
-    { id: "leg-section", label: "脚", icon: "./assets/squat-white-icon.webp", description: "スクワット、ランジ、ヒップ主導の種目" },
-    { id: "core-section", label: "体幹", icon: "./assets/sit-ups-white-icon.webp", description: "腹筋、回旋、体幹安定の種目" }
+    {
+        id: "whole-body-section",
+        key: "wholeBody",
+        icon: "power-clean-white-icon.webp",
+        labels: { ja: "全身", ko: "전신" },
+        descriptions: {
+            ja: "デッドリフト、クリーン、スナッチなど全身連動の基準ページ",
+            ko: "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지"
+        }
+    },
+    {
+        id: "chest-section",
+        key: "chest",
+        icon: "bench-press-white-icon.webp",
+        labels: { ja: "胸", ko: "가슴" },
+        descriptions: {
+            ja: "プレス系の平均重量と押す種目の比較",
+            ko: "프레스 계열 평균 중량과 미는 운동 비교"
+        }
+    },
+    {
+        id: "back-section",
+        key: "back",
+        icon: "deadlift-white-icon.webp",
+        labels: { ja: "背中", ko: "등" },
+        descriptions: {
+            ja: "ローイング、プル系、ヒンジ系の比較",
+            ko: "로우, 풀, 힌지 계열 운동 비교"
+        }
+    },
+    {
+        id: "shoulder-section",
+        key: "shoulder",
+        icon: "shoulder-press-white-icon.webp",
+        labels: { ja: "肩", ko: "어깨" },
+        descriptions: {
+            ja: "プレス、レイズ、安定性の種目一覧",
+            ko: "프레스, 레이즈, 안정성 운동 목록"
+        }
+    },
+    {
+        id: "arm-section",
+        key: "arm",
+        icon: "hammer-curl-white-icon.webp",
+        labels: { ja: "腕", ko: "팔" },
+        descriptions: {
+            ja: "カール、トライセプス、前腕の種目",
+            ko: "컬, 삼두, 전완 운동"
+        }
+    },
+    {
+        id: "leg-section",
+        key: "leg",
+        icon: "squat-white-icon.webp",
+        labels: { ja: "脚", ko: "하체" },
+        descriptions: {
+            ja: "スクワット、ランジ、ヒップ主導の種目",
+            ko: "스쿼트, 런지, 힙 중심 운동"
+        }
+    },
+    {
+        id: "core-section",
+        key: "core",
+        icon: "sit-ups-white-icon.webp",
+        labels: { ja: "体幹", ko: "코어" },
+        descriptions: {
+            ja: "腹筋、回旋、体幹安定の種目",
+            ko: "복근, 회전, 코어 안정화 운동"
+        }
+    }
 ];
 
 const HOME_FEATURES = {
@@ -20,29 +83,236 @@ const HOME_FEATURES = {
 const HOME_ENTRY_ROUTES = [
     {
         id: "popular",
-        label: "定番比較",
-        eyebrow: "Quick Compare",
-        title: "定番の比較スタート",
-        copy: "比較されやすい定番種目から、最短でデータを見比べるための入口です。",
-        slugs: HOME_FEATURES.popular
+        slugs: HOME_FEATURES.popular,
+        locales: {
+            ja: {
+                label: "定番比較",
+                eyebrow: "Quick Compare",
+                title: "定番の比較スタート",
+                copy: "比較されやすい定番種目から、最短でデータを見比べるための入口です。"
+            },
+            ko: {
+                label: "대표 비교",
+                eyebrow: "Quick Compare",
+                title: "대표 운동 비교 시작",
+                copy: "자주 비교되는 대표 운동부터 가장 빠르게 데이터를 확인할 수 있는 시작점입니다."
+            }
+        }
     },
     {
         id: "big3",
-        label: "Big 3",
-        eyebrow: "Performance Baselines",
-        title: "Big 3 ベースライン",
-        copy: "重量比較の基準として見られやすい3種目を先にまとめています。",
-        slugs: HOME_FEATURES.big3
+        slugs: HOME_FEATURES.big3,
+        locales: {
+            ja: {
+                label: "Big 3",
+                eyebrow: "Performance Baselines",
+                title: "Big 3 ベースライン",
+                copy: "重量比較の基準として見られやすい3種目を先にまとめています。"
+            },
+            ko: {
+                label: "Big 3",
+                eyebrow: "Performance Baselines",
+                title: "Big 3 기준",
+                copy: "중량 비교의 기준으로 자주 보는 세 가지 운동을 먼저 모았습니다."
+            }
+        }
     },
     {
         id: "beginner",
-        label: "導入向け",
-        eyebrow: "Starter Paths",
-        title: "始めやすい比較ルート",
-        copy: "まずは扱いやすい種目から見比べたいときのスタート地点です。",
-        slugs: HOME_FEATURES.beginner
+        slugs: HOME_FEATURES.beginner,
+        locales: {
+            ja: {
+                label: "導入向け",
+                eyebrow: "Starter Paths",
+                title: "始めやすい比較ルート",
+                copy: "まずは扱いやすい種目から見比べたいときのスタート地点です。"
+            },
+            ko: {
+                label: "입문용",
+                eyebrow: "Starter Paths",
+                title: "시작하기 쉬운 비교 루트",
+                copy: "먼저 다루기 쉬운 운동부터 비교하고 싶을 때의 출발점입니다."
+            }
+        }
     }
 ];
+
+const UI_TEXT = {
+    ja: {
+        ad: "広告",
+        adAfterQuickStart: "おすすめ入口のあと",
+        adBeforeFooter: "フッター直前",
+        adAfterRelated: "関連種目のあと",
+        adAfterStandards: "基準表のあと",
+        average: "平均重量",
+        averageEyebrow: "Average",
+        averageReps: "平均レップ数",
+        category: "カテゴリ",
+        categoryDashboard: "部位別ダッシュボード",
+        categoryDashboardCopy: "部位ごとの件数、代表種目、比較の切り口をまとめて見渡せる入口です。",
+        compareDestination: "比較先",
+        compareFlow: "比較導線",
+        compareMode: "比較モード",
+        contentLibraryCopy: "関連する種目ページへそのまま移動できます。",
+        contentLibraryTitle: "種目ライブラリ",
+        dataAvailable: "掲載データあり",
+        databaseLibraryTitle: "全種目ライブラリ",
+        databaseLibraryIntro: "部位別のまとまりから、必要な比較ページへそのまま移動できます。",
+        detailByTabs: "切替タブで詳細比較",
+        exerciseLibraryTitle: "種目ライブラリ",
+        exercisesListed: (count) => `${count}種目を掲載`,
+        female: "女性",
+        home: "Home",
+        homeHeroActionLabel: "クイックアクション",
+        homeHeroDescription: "平均重量、基準重量、対象筋群を、種目ごとにすばやく横断できるフィットネスデータベース。",
+        homeHeroTitle: "ワークアウトデータを、最短で比較する",
+        languageEnglish: "English",
+        languageJapanese: "日本語",
+        languageKorean: "한국어",
+        languageChinese: "中文",
+        levelAverageAvailable: "平均データを掲載",
+        libraryExplorerCopy: "部位別に、全種目の比較ページを横断できます。",
+        libraryExplorerTitle: "Performance Library",
+        libraryMore: (count) => `もっと見る (${count}件)`,
+        libraryLess: "表示を減らす",
+        majorCategoryDashboard: "主要部位ダッシュボード",
+        male: "男性",
+        muscleGroups: "筋群",
+        muscles: "筋群",
+        musclesCopy: "主働筋、副働筋、安定筋を分けて確認できます。",
+        musclesHeading: "鍛えられる筋肉",
+        page: "ページ",
+        pages: (count) => `${count}ページ`,
+        performanceDashboard: "Performance Dashboard",
+        performanceLibraryCount: "掲載種目",
+        performanceSnapshot: "パフォーマンススナップショット",
+        performanceSnapshotCopy: "最初に押さえたい基準ラインと比較の切り口を、表より先にまとめています。",
+        primaryMuscle: "主働筋",
+        primaryMuscleFallback: "主働筋データを掲載",
+        quickCompare: "Quick Compare",
+        quickStart: "比較スタート",
+        quickStartCopy: "迷ったらまずここから。比較されやすいルートを最初にまとめています。",
+        quickStartLabel: "おすすめの入口",
+        relatedExercises: "関連種目",
+        relatedExercisesCopy: "同じカテゴリの種目を続けて見比べられるように並べています。",
+        relatedExplorerCopy: "関連する種目ページへそのまま移動して、比較の流れを広げられます。",
+        relatedExplorerTitle: "Compare More Exercises",
+        relatedNone: "現在表示できる同部位の関連種目はありません。",
+        relatedSameCategory: "同じ部位の種目だけを並べています。",
+        reps: "回数",
+        repsComparison: "回数比較",
+        repsPage: "回数ベースの比較ページ",
+        resultsAvailable: "比較データを掲載",
+        snapshot: "Snapshot",
+        snapshotDashboard: "比較ダッシュボード",
+        standards: "基準重量",
+        standardsEyebrow: "Standards",
+        standardsReps: "基準レップ数",
+        standardsWeightCopy: "男女と比較軸を切り替えながら基準を確認できます。",
+        standardsRepsCopy: "体重別・年齢別のレップ数基準を切り替えながら確認できます。",
+        support: "サポート",
+        contact: "お問い合わせ",
+        privacy: "プライバシーポリシー",
+        tableGuide: "基準表の見方",
+        tableGuideCopy: "各レベルの分布とトレーニング継続期間の目安です。",
+        tableGuideEyebrow: "Notes",
+        totalCategories: "掲載カテゴリ",
+        totalExercisesCopy: "横断比較できる種目数",
+        unitSwitchCopy: "全ページで単位切替",
+        viewRelatedCategories: "同カテゴリの関連比較あり",
+        weight: "重量",
+        weightComparison: "重量比較",
+        weightPage: "重量ベースの比較ページ",
+        worldRecord: "世界記録"
+    },
+    ko: {
+        ad: "광고",
+        adAfterQuickStart: "추천 시작점 뒤",
+        adBeforeFooter: "푸터 직전",
+        adAfterRelated: "관련 운동 뒤",
+        adAfterStandards: "기준표 뒤",
+        average: "평균 중량",
+        averageEyebrow: "Average",
+        averageReps: "평균 반복 횟수",
+        category: "카테고리",
+        categoryDashboard: "부위별 대시보드",
+        categoryDashboardCopy: "부위별 운동 수, 대표 운동, 비교 기준을 한눈에 볼 수 있는 시작점입니다.",
+        compareDestination: "비교 대상",
+        compareFlow: "비교 동선",
+        compareMode: "비교 모드",
+        contentLibraryCopy: "관련 운동 페이지로 바로 이동할 수 있습니다.",
+        contentLibraryTitle: "운동 라이브러리",
+        dataAvailable: "데이터 있음",
+        databaseLibraryTitle: "전체 운동 라이브러리",
+        databaseLibraryIntro: "부위별 묶음에서 필요한 비교 페이지로 바로 이동할 수 있습니다.",
+        detailByTabs: "탭을 바꿔 상세 비교",
+        exerciseLibraryTitle: "운동 라이브러리",
+        exercisesListed: (count) => `운동 ${count}개 수록`,
+        female: "여성",
+        home: "홈",
+        homeHeroActionLabel: "빠른 작업",
+        homeHeroDescription: "평균 중량, 기준 중량, 대상 근육을 운동별로 빠르게 비교할 수 있는 피트니스 데이터베이스입니다.",
+        homeHeroTitle: "운동 데이터를 빠르게 비교하기",
+        languageEnglish: "English",
+        languageJapanese: "日本語",
+        languageKorean: "한국어",
+        languageChinese: "中文",
+        levelAverageAvailable: "평균 데이터 수록",
+        libraryExplorerCopy: "부위별로 모든 운동 비교 페이지를 둘러볼 수 있습니다.",
+        libraryExplorerTitle: "Performance Library",
+        libraryMore: (count) => `더 보기 (${count}개)`,
+        libraryLess: "접기",
+        majorCategoryDashboard: "주요 부위 대시보드",
+        male: "남성",
+        muscleGroups: "근육",
+        muscles: "근육",
+        musclesCopy: "주동근, 보조근, 안정근을 나누어 확인할 수 있습니다.",
+        musclesHeading: "자극되는 근육",
+        page: "페이지",
+        pages: (count) => `${count}페이지`,
+        performanceDashboard: "Performance Dashboard",
+        performanceLibraryCount: "수록 운동",
+        performanceSnapshot: "퍼포먼스 스냅샷",
+        performanceSnapshotCopy: "표를 보기 전에 먼저 확인할 기준선과 비교 포인트를 정리했습니다.",
+        primaryMuscle: "주동근",
+        primaryMuscleFallback: "주동근 데이터 수록",
+        quickCompare: "Quick Compare",
+        quickStart: "비교 시작",
+        quickStartCopy: "어디서 시작할지 고민된다면 여기부터 보세요. 자주 비교되는 루트를 먼저 모았습니다.",
+        quickStartLabel: "추천 시작점",
+        relatedExercises: "관련 운동",
+        relatedExercisesCopy: "같은 카테고리의 운동을 이어서 비교할 수 있도록 정리했습니다.",
+        relatedExplorerCopy: "관련 운동 페이지로 바로 이동해 비교 흐름을 이어갈 수 있습니다.",
+        relatedExplorerTitle: "Compare More Exercises",
+        relatedNone: "현재 표시할 수 있는 같은 부위의 관련 운동이 없습니다.",
+        relatedSameCategory: "같은 부위의 운동만 모았습니다.",
+        reps: "반복",
+        repsComparison: "반복 비교",
+        repsPage: "반복 횟수 기준 비교 페이지",
+        resultsAvailable: "비교 데이터 수록",
+        snapshot: "Snapshot",
+        snapshotDashboard: "비교 대시보드",
+        standards: "기준 중량",
+        standardsEyebrow: "Standards",
+        standardsReps: "기준 반복 횟수",
+        standardsWeightCopy: "성별과 비교 기준을 바꿔가며 기준을 확인할 수 있습니다.",
+        standardsRepsCopy: "체중별, 나이별 반복 횟수 기준을 탭으로 전환해 확인할 수 있습니다.",
+        support: "지원",
+        contact: "문의하기",
+        privacy: "개인정보 처리방침",
+        tableGuide: "기준표 보는 법",
+        tableGuideCopy: "각 레벨의 분포와 운동 지속 기간의 기준입니다.",
+        tableGuideEyebrow: "Notes",
+        totalCategories: "수록 카테고리",
+        totalExercisesCopy: "비교 가능한 운동 수",
+        unitSwitchCopy: "모든 페이지에서 단위 전환",
+        viewRelatedCategories: "같은 카테고리 관련 비교 있음",
+        weight: "중량",
+        weightComparison: "중량 비교",
+        weightPage: "중량 기준 비교 페이지",
+        worldRecord: "세계 기록"
+    }
+};
 
 const LIBRARY_INITIAL_CARD_LIMIT = 8;
 
@@ -54,17 +324,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const locale = detectLocale();
     document.body.dataset.pageType = pageType;
     document.body.dataset.locale = locale;
-
-    if (locale !== "ja") {
-        document.body.classList.add(`${pageType}-page`);
-        initStandardsTabs();
-        initHeaderActions();
-
-        window.requestAnimationFrame(() => {
-            initializeAds();
-        });
-        return;
-    }
 
     rebuildSharedChrome(pageType);
 
@@ -142,6 +401,37 @@ function detectPageType() {
     return "content";
 }
 
+function t(key, ...args) {
+    const locale = detectLocale();
+    const value = UI_TEXT[locale]?.[key] ?? UI_TEXT.ja[key] ?? key;
+    return typeof value === "function" ? value(...args) : value;
+}
+
+function getCategoryLinks() {
+    const locale = detectLocale();
+    return CATEGORY_LINKS.map((item) => ({
+        id: item.id,
+        key: item.key,
+        icon: assetPath(item.icon),
+        label: item.labels[locale] || item.labels.ja,
+        description: item.descriptions[locale] || item.descriptions.ja
+    }));
+}
+
+function getHomeEntryRouteDefinitions() {
+    const locale = detectLocale();
+    return HOME_ENTRY_ROUTES.map((route) => ({
+        id: route.id,
+        slugs: route.slugs,
+        ...(route.locales[locale] || route.locales.ja)
+    }));
+}
+
+function assetPath(file) {
+    const normalized = String(file || "").replace(/^\.?\/?assets\//, "");
+    return `${detectLocale() === "ko" ? "../assets" : "./assets"}/${normalized}`;
+}
+
 function rebuildSharedChrome(pageType) {
     const existingHeader = document.querySelector("header");
     const unitSwitch = existingHeader?.querySelector(".toggle-buttons")?.outerHTML || "";
@@ -156,7 +446,7 @@ function rebuildSharedChrome(pageType) {
 }
 
 function buildHeader(pageType, unitSwitch) {
-    const categoryLinks = CATEGORY_LINKS.map((item) => {
+    const categoryLinks = getCategoryLinks().map((item) => {
         const href = pageType === "home" ? `#${item.id}` : `index.html#${item.id}`;
         return `
             <a href="${href}" class="category-nav-link">
@@ -173,7 +463,7 @@ function buildHeader(pageType, unitSwitch) {
             <nav class="site-topbar">
                 <div class="header-brand">
                     <a href="index.html" class="header-link">
-                        <img src="./assets/dumbbell-logo.png" alt="Shiba Muscle" class="header-dumbbell-logo">
+                        <img src="${assetPath("dumbbell-logo.png")}" alt="Shiba Muscle" class="header-dumbbell-logo">
                         <span class="header-text">Shiba Muscle</span>
                     </a>
                 </div>
@@ -191,7 +481,7 @@ function buildHeader(pageType, unitSwitch) {
 }
 
 function buildFooter() {
-    const categoryLinks = CATEGORY_LINKS.map((item) => {
+    const categoryLinks = getCategoryLinks().map((item) => {
         return `
             <a href="index.html#${item.id}" class="footer-category-link">
                 <span class="category-nav-icon" aria-hidden="true">
@@ -203,10 +493,10 @@ function buildFooter() {
     }).join("");
 
     const languageLinks = [
-        { href: localizedDomainHref("https://en.shibamuscle.com"), label: "English", lang: "en" },
-        { href: localizedDomainHref("https://shibamuscle.com"), label: "日本語", lang: "ja" },
-        { href: localizedDomainHref("https://cn.shibamuscle.com"), label: "中文", lang: "zh" },
-        { href: localizedDomainHref("https://shibamuscle.com/ko"), label: "한국어", lang: "ko" }
+        { href: localizedDomainHref("https://en.shibamuscle.com"), label: t("languageEnglish"), lang: "en" },
+        { href: localizedDomainHref("https://shibamuscle.com"), label: t("languageJapanese"), lang: "ja" },
+        { href: localizedDomainHref("https://cn.shibamuscle.com"), label: t("languageChinese"), lang: "zh" },
+        { href: localizedDomainHref("https://shibamuscle.com/ko"), label: t("languageKorean"), lang: "ko" }
     ].map((item) => `<a href="${item.href}" data-lang="${item.lang}">${item.label}</a>`).join("");
 
     return htmlToElement(`
@@ -214,19 +504,19 @@ function buildFooter() {
             <div class="footer-grid">
                 <div class="footer-column">
                     <div class="footer-brand">
-                        <img src="./assets/dumbbell-logo.png" alt="Shiba Muscle" class="footer-brand-logo">
+                        <img src="${assetPath("dumbbell-logo.png")}" alt="Shiba Muscle" class="footer-brand-logo">
                         <h4>Shiba Muscle</h4>
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h4>カテゴリ</h4>
+                    <h4>${escapeHtml(t("category"))}</h4>
                     <div class="footer-link-list footer-link-list--categories">${categoryLinks}</div>
                 </div>
                 <div class="footer-column">
-                    <h4>サポート</h4>
+                    <h4>${escapeHtml(t("support"))}</h4>
                     <div class="footer-link-list footer-link-list--support">
-                        <a href="contact.html">お問い合わせ</a>
-                        <a href="privacy-policy.html">プライバシーポリシー</a>
+                        <a href="contact.html">${escapeHtml(t("contact"))}</a>
+                        <a href="privacy-policy.html">${escapeHtml(t("privacy"))}</a>
                     </div>
                 </div>
             </div>
@@ -295,68 +585,68 @@ function enhanceHomePage(main) {
         <section class="container home-hero" id="database-top">
             <div class="home-hero-layout">
                 <div class="home-hero-copy">
-                    <p class="eyebrow">Performance Dashboard</p>
-                    <h1>ワークアウトデータを、最短で比較する</h1>
+                    <p class="eyebrow">${escapeHtml(t("performanceDashboard"))}</p>
+                    <h1>${escapeHtml(t("homeHeroTitle"))}</h1>
                     <p class="hero-description">
-                        平均重量、基準重量、対象筋群を、種目ごとにすばやく横断できるフィットネスデータベース。
+                        ${escapeHtml(t("homeHeroDescription"))}
                     </p>
-                    <div class="hero-chip-row" aria-label="クイックアクション">
-                        <button type="button" class="hero-action-chip" data-dashboard-route="popular">定番比較</button>
+                    <div class="hero-chip-row" aria-label="${escapeAttribute(t("homeHeroActionLabel"))}">
+                        <button type="button" class="hero-action-chip" data-dashboard-route="popular">${escapeHtml(homeEntryRoutes.find((route) => route.id === "popular")?.label || "")}</button>
                         <button type="button" class="hero-action-chip" data-dashboard-route="big3">BIG3</button>
-                        <button type="button" class="hero-action-chip" data-dashboard-route="beginner">導入向け</button>
-                        <a href="#chest-section" class="hero-action-chip">胸</a>
-                        <a href="#back-section" class="hero-action-chip">背中</a>
-                        <a href="#leg-section" class="hero-action-chip">脚</a>
+                        <button type="button" class="hero-action-chip" data-dashboard-route="beginner">${escapeHtml(homeEntryRoutes.find((route) => route.id === "beginner")?.label || "")}</button>
+                        <a href="#chest-section" class="hero-action-chip">${escapeHtml(getCategoryLabel("chest"))}</a>
+                        <a href="#back-section" class="hero-action-chip">${escapeHtml(getCategoryLabel("back"))}</a>
+                        <a href="#leg-section" class="hero-action-chip">${escapeHtml(getCategoryLabel("leg"))}</a>
                     </div>
                     <div class="hero-stat-grid">
                         <div class="summary-card">
-                            <span class="metric-label">掲載カテゴリ</span>
+                            <span class="metric-label">${escapeHtml(t("totalCategories"))}</span>
                             <strong class="metric-value">${libraryData.sections.length}</strong>
-                            <span class="metric-subvalue">主要部位ダッシュボード</span>
+                            <span class="metric-subvalue">${escapeHtml(t("majorCategoryDashboard"))}</span>
                         </div>
                         <div class="summary-card">
-                            <span class="metric-label">掲載種目</span>
+                            <span class="metric-label">${escapeHtml(t("performanceLibraryCount"))}</span>
                             <strong class="metric-value">${allCards.length}</strong>
-                            <span class="metric-subvalue">横断比較できる種目数</span>
+                            <span class="metric-subvalue">${escapeHtml(t("totalExercisesCopy"))}</span>
                         </div>
                         <div class="summary-card">
-                            <span class="metric-label">比較モード</span>
+                            <span class="metric-label">${escapeHtml(t("compareMode"))}</span>
                             <strong class="metric-value">kg / lb</strong>
-                            <span class="metric-subvalue">全ページで単位切替</span>
+                            <span class="metric-subvalue">${escapeHtml(t("unitSwitchCopy"))}</span>
                         </div>
                     </div>
                 </div>
                 <aside class="dashboard-preview">
                     <div class="dashboard-panel">
                         <div class="dashboard-panel-heading">
-                            <p class="eyebrow">Snapshot</p>
-                            <h2>比較ダッシュボード</h2>
+                            <p class="eyebrow">${escapeHtml(t("snapshot"))}</p>
+                            <h2>${escapeHtml(t("snapshotDashboard"))}</h2>
                         </div>
                         <div class="dashboard-panel-grid">
                             <article class="dashboard-mini-card">
-                                <span class="metric-label">平均重量</span>
+                                <span class="metric-label">${escapeHtml(t("average"))}</span>
                                 <strong class="metric-value">1RM</strong>
-                                <span class="metric-subvalue">レベル別の目安を確認</span>
+                                <span class="metric-subvalue">${escapeHtml(t("levelAverageAvailable"))}</span>
                             </article>
                             <article class="dashboard-mini-card">
-                                <span class="metric-label">基準重量</span>
-                                <strong class="metric-value">体重 / 年齢</strong>
-                                <span class="metric-subvalue">切替タブで詳細比較</span>
+                                <span class="metric-label">${escapeHtml(t("standards"))}</span>
+                                <strong class="metric-value">${escapeHtml(detectLocale() === "ko" ? "체중 / 나이" : "体重 / 年齢")}</strong>
+                                <span class="metric-subvalue">${escapeHtml(t("detailByTabs"))}</span>
                             </article>
                             <article class="dashboard-mini-card">
-                                <span class="metric-label">筋群</span>
-                                <strong class="metric-value">主働筋</strong>
-                                <span class="metric-subvalue">種目ごとの効き方を把握</span>
+                                <span class="metric-label">${escapeHtml(t("muscleGroups"))}</span>
+                                <strong class="metric-value">${escapeHtml(t("primaryMuscle"))}</strong>
+                                <span class="metric-subvalue">${escapeHtml(detectLocale() === "ko" ? "운동별 자극 부위 확인" : "種目ごとの効き方を把握")}</span>
                             </article>
                             <article class="dashboard-mini-card">
-                                <span class="metric-label">比較導線</span>
-                                <strong class="metric-value">関連種目</strong>
-                                <span class="metric-subvalue">同カテゴリを続けて閲覧</span>
+                                <span class="metric-label">${escapeHtml(t("compareFlow"))}</span>
+                                <strong class="metric-value">${escapeHtml(t("relatedExercises"))}</strong>
+                                <span class="metric-subvalue">${escapeHtml(detectLocale() === "ko" ? "같은 카테고리 이어보기" : "同カテゴリを続けて閲覧")}</span>
                             </article>
                         </div>
                         <div class="dashboard-spotlight-list">
                             <div class="dashboard-spotlight-heading">
-                                <span class="metric-label">今すぐ見比べる</span>
+                                <span class="metric-label">${escapeHtml(detectLocale() === "ko" ? "바로 비교하기" : "今すぐ見比べる")}</span>
                             </div>
                             ${popularPreviewCards.map((card) => {
                                 return `
@@ -377,27 +667,27 @@ function enhanceHomePage(main) {
     `);
 
     const quickStartSection = buildQuickStartSection(homeEntryRoutes);
-    const postQuickStartAd = prepareAdContainer(adContainers[0], "おすすめ入口のあと");
+    const postQuickStartAd = prepareAdContainer(adContainers[0], t("adAfterQuickStart"));
 
     const categoryOverview = htmlToElement(`
         <section class="container section-band">
             <div class="section-heading">
                 <p class="eyebrow">Category Dashboard</p>
-                <h2>部位別ダッシュボード</h2>
-                <p>部位ごとの件数、代表種目、比較の切り口をまとめて見渡せる入口です。</p>
+                <h2>${escapeHtml(t("categoryDashboard"))}</h2>
+                <p>${escapeHtml(t("categoryDashboardCopy"))}</p>
             </div>
             <div class="category-overview-grid">
                 ${libraryData.sections.map((section) => {
-                    const categoryMeta = CATEGORY_LINKS.find((item) => item.id === section.id);
-                    const description = categoryMeta?.description || "関連種目をまとめて確認";
+                    const categoryMeta = getCategoryLinks().find((item) => item.id === section.id);
+                    const description = categoryMeta?.description || (detectLocale() === "ko" ? "관련 운동을 한 번에 확인" : "関連種目をまとめて確認");
                     const sampleNames = section.cards.slice(0, 3).map((card) => card.name).join(" / ");
                     return `
                         <a class="category-tile" href="#${section.id}">
                             <div class="category-tile-header">
                                 <span class="category-tile-icon" aria-hidden="true">
-                                    <img src="${escapeAttribute(categoryMeta?.icon || "./assets/dumbbell-logo.png")}" alt="">
+                                    <img src="${escapeAttribute(categoryMeta?.icon || assetPath("dumbbell-logo.png"))}" alt="">
                                 </span>
-                                <span class="category-tile-count">${section.cards.length}種目</span>
+                                <span class="category-tile-count">${escapeHtml(formatExerciseCount(section.cards.length))}</span>
                             </div>
                             <span class="category-tile-name">${cleanSectionLabel(section.title)}</span>
                             <span class="category-tile-copy">${description}</span>
@@ -413,13 +703,13 @@ function enhanceHomePage(main) {
     hero.after(...[quickStartSection, postQuickStartAd, categoryOverview].filter(Boolean));
     initQuickStartSection(quickStartSection, homeEntryRoutes);
 
-    titleHeading.textContent = "全種目ライブラリ";
+    titleHeading.textContent = t("databaseLibraryTitle");
     titleHeading.id = "database";
     titleHeading.classList.add("section-title--database");
 
     const homeIntro = htmlToElement(`
         <p class="section-intro">
-            部位別のまとまりから、必要な比較ページへそのまま移動できます。
+            ${escapeHtml(t("databaseLibraryIntro"))}
         </p>
     `);
     titleHeading.after(homeIntro);
@@ -432,8 +722,8 @@ function enhanceHomePage(main) {
         root: libraryContainer,
         sections: libraryData.sections,
         allCards,
-        explorerTitle: "Performance Library",
-        explorerCopy: "部位別に、全種目の比較ページを横断できます。"
+        explorerTitle: t("libraryExplorerTitle"),
+        explorerCopy: t("libraryExplorerCopy")
     });
 }
 
@@ -446,9 +736,9 @@ function enhanceExercisePage(main) {
     const muscleContainer = containers.find((container) => container.querySelector(".muscle-activated-table"));
     const averageContainer = containers.find((container) => container.querySelector(".average-section-table"));
     const standardsContainer = containers.find((container) => container.querySelector('.tabs-container.block[data-tab-group="Standards Exercise"]'));
-    const recordContainer = containers.find((container) => containsSectionHeading(container, "世界記録"));
+    const recordContainer = containers.find((container) => containsSectionHeading(container, t("worldRecord")) || containsSectionHeading(container, "世界記録"));
     const aboutContainer = containers.find((container) => container.querySelector("#about-table"));
-    const calorieContainer = containers.find((container) => containsSectionHeading(container, "消費カロリー"));
+    const calorieContainer = containers.find((container) => containsSectionHeading(container, "消費カロリー") || containsSectionHeading(container, "칼로리"));
     const libraryContainer = containers.find((container) => container.querySelector("#other-workouts"));
     const adContainers = containers.filter((container) => container.querySelector(".adsbygoogle"));
 
@@ -463,22 +753,22 @@ function enhanceExercisePage(main) {
     const heroTitle = normalizeText(heroContainer.querySelector("h1")?.textContent || "");
     const heroImage = heroContainer.querySelector("img");
     const measurementKind = main.dataset.measurementKind || currentCard?.measurementKind || "weight";
-    const averageLabel = main.dataset.averageLabel || (measurementKind === "reps" ? "平均レップ数" : "平均重量");
-    const standardsLabel = main.dataset.standardsLabel || (measurementKind === "reps" ? "基準レップ数" : "基準重量");
+    const averageLabel = main.dataset.averageLabel || (measurementKind === "reps" ? t("averageReps") : t("average"));
+    const standardsLabel = main.dataset.standardsLabel || (measurementKind === "reps" ? t("standardsReps") : t("standards"));
     const sectionId = main.dataset.categoryId || currentCard?.sectionId || "whole-body-section";
-    const sectionLabel = main.dataset.categoryLabel || cleanSectionLabel(currentCard?.sectionTitle || "全身");
+    const sectionLabel = main.dataset.categoryLabel || cleanSectionLabel(currentCard?.sectionTitle || getCategoryLabel("wholeBody"));
     const summaryText = main.dataset.summary || currentCard?.description || "";
     const relatedTags = splitPipeList(main.dataset.relatedTags || "");
     const currentSlug = main.dataset.exerciseSlug || currentCard?.slug || "";
     const sameSectionCards = libraryData.sections.find((section) => section.id === sectionId)?.cards.filter((card) => card.slug !== currentSlug) || [];
 
     const breadcrumb = buildBreadcrumb([
-        { label: "Home", href: "index.html" },
+        { label: t("home"), href: "index.html" },
         { label: sectionLabel, href: `index.html#${sectionId}` },
         { label: heroTitle }
     ]);
 
-    const primaryMuscles = muscles.find((item) => item.label.includes("主働"))?.items || [];
+    const primaryMuscles = getPrimaryMuscles(muscles, main);
     const averageHighlights = extractAverageHighlights(averageContainer.querySelector(".average-section-table"));
     const performanceSnapshot = buildExercisePerformanceSnapshot({
         averageHighlights,
@@ -493,7 +783,7 @@ function enhanceExercisePage(main) {
     heroContainer.innerHTML = `
         <div class="exercise-hero">
             <div class="exercise-hero-copy">
-                <p class="eyebrow">Performance Dashboard</p>
+                <p class="eyebrow">${escapeHtml(t("performanceDashboard"))}</p>
                 <h1>${escapeHtml(heroTitle)}</h1>
                 ${summaryText ? `<p class="hero-description">${escapeHtml(summaryText)}</p>` : ""}
                 <div class="muscle-chip-row">
@@ -502,25 +792,25 @@ function enhanceExercisePage(main) {
                 </div>
                 <div class="hero-glance-grid">
                     <article class="hero-glance-card">
-                        <span class="metric-label">カテゴリ</span>
+                        <span class="metric-label">${escapeHtml(t("category"))}</span>
                         <strong>${escapeHtml(sectionLabel)}</strong>
-                        <span class="metric-subvalue">${measurementKind === "reps" ? "回数ベースの比較ページ" : "重量ベースの比較ページ"}</span>
+                        <span class="metric-subvalue">${escapeHtml(measurementKind === "reps" ? t("repsPage") : t("weightPage"))}</span>
                     </article>
                     <article class="hero-glance-card">
-                        <span class="metric-label">主働筋</span>
-                        <strong>${escapeHtml(`${primaryMuscles.length || 0}筋群`)}</strong>
-                        <span class="metric-subvalue">${escapeHtml(primaryMuscles.slice(0, 3).join(" / ") || "筋群データを掲載")}</span>
+                        <span class="metric-label">${escapeHtml(t("primaryMuscle"))}</span>
+                        <strong>${escapeHtml(formatMuscleCount(primaryMuscles.length || 0))}</strong>
+                        <span class="metric-subvalue">${escapeHtml(primaryMuscles.slice(0, 3).join(" / ") || t("primaryMuscleFallback"))}</span>
                     </article>
                     <article class="hero-glance-card">
-                        <span class="metric-label">比較先</span>
-                        <strong>${escapeHtml(`${sameSectionCards.length + 1}種目`)}</strong>
-                        <span class="metric-subvalue">同カテゴリの関連比較あり</span>
+                        <span class="metric-label">${escapeHtml(t("compareDestination"))}</span>
+                        <strong>${escapeHtml(formatExerciseCount(sameSectionCards.length + 1))}</strong>
+                        <span class="metric-subvalue">${escapeHtml(t("viewRelatedCategories"))}</span>
                     </article>
                 </div>
             </div>
             <div class="exercise-hero-media">
                 <img src="${escapeAttribute(heroImage?.getAttribute("src") || "")}" alt="${escapeAttribute(heroImage?.getAttribute("alt") || heroTitle)}" class="workout-main-image">
-                <p class="exercise-media-caption">${escapeHtml(standardsLabel)}と平均データを同じ流れで確認できます。</p>
+                <p class="exercise-media-caption">${escapeHtml(formatStandardsCaption(standardsLabel))}</p>
             </div>
         </div>
     `;
@@ -530,8 +820,8 @@ function enhanceExercisePage(main) {
     muscleContainer.innerHTML = `
         <div class="section-heading">
             <p class="eyebrow">Muscles</p>
-            <h2>鍛えられる筋肉</h2>
-            <p>主働筋、副働筋、安定筋を分けて確認できます。</p>
+            <h2>${escapeHtml(t("musclesHeading"))}</h2>
+            <p>${escapeHtml(t("musclesCopy"))}</p>
         </div>
         <div class="muscle-grid">
             ${muscles.map((group) => {
@@ -548,24 +838,26 @@ function enhanceExercisePage(main) {
     decorateDataContainer(
         averageContainer,
         "average-data",
-        "Average",
+        t("averageEyebrow"),
         averageLabel,
-        measurementKind === "reps" ? "レベル別の平均レップ数を先に確認できます。" : "レベル別の1RM目安を先に確認できます。"
+        measurementKind === "reps"
+            ? (detectLocale() === "ko" ? "레벨별 평균 반복 횟수를 먼저 확인할 수 있습니다." : "レベル別の平均レップ数を先に確認できます。")
+            : (detectLocale() === "ko" ? "레벨별 1RM 기준을 먼저 확인할 수 있습니다." : "レベル別の1RM目安を先に確認できます。")
     );
     decorateTableShell(averageContainer.querySelector(".average-section-table"));
 
     decorateDataContainer(
         standardsContainer,
         "standards-data",
-        "Standards",
+        t("standardsEyebrow"),
         standardsLabel,
-        measurementKind === "reps" ? "体重別・年齢別のレップ数基準を切り替えながら確認できます。" : "男女と比較軸を切り替えながら基準を確認できます。"
+        measurementKind === "reps" ? t("standardsRepsCopy") : t("standardsWeightCopy")
     );
     standardsContainer.querySelectorAll(".table").forEach((table) => decorateTableShell(table, true));
     standardsContainer.querySelectorAll(".tab .section-box").forEach((box) => box.classList.add("table-panel"));
 
     if (aboutContainer) {
-        decorateDataContainer(aboutContainer, "table-guide", "Notes", "基準表の見方", "各レベルの分布とトレーニング継続期間の目安です。");
+        decorateDataContainer(aboutContainer, "table-guide", t("tableGuideEyebrow"), t("tableGuide"), t("tableGuideCopy"));
         decorateTableShell(aboutContainer.querySelector("table"));
     }
 
@@ -575,7 +867,7 @@ function enhanceExercisePage(main) {
         replaceHeadingTag(heading, "h2");
         const sectionHeading = recordContainer.querySelector("h2");
         if (sectionHeading) {
-            sectionHeading.textContent = "世界記録";
+            sectionHeading.textContent = t("worldRecord");
         }
     }
 
@@ -586,21 +878,25 @@ function enhanceExercisePage(main) {
     const libraryTitle = replaceHeadingTag(libraryContainer.querySelector("#other-workouts"), "h2");
 
     libraryContainer.classList.add("section-band", "library-band");
-    libraryTitle.textContent = "種目ライブラリ";
+    libraryTitle.textContent = t("exerciseLibraryTitle");
     libraryTitle.id = "exercise-library";
     libraryTitle.classList.add("section-title--database");
 
     const existingIntro = libraryContainer.querySelector(".section-intro");
     const libraryIntro = existingIntro || htmlToElement(`
         <p class="section-intro">
-            同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。
+            ${escapeHtml(detectLocale() === "ko"
+                ? "같은 카테고리와 다른 부위의 운동을 비교하면서 다음 페이지로 이동할 수 있습니다."
+                : "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。")}
         </p>
     `);
 
     if (!existingIntro) {
         libraryTitle.after(libraryIntro);
     } else {
-        libraryIntro.textContent = "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。";
+        libraryIntro.textContent = detectLocale() === "ko"
+            ? "같은 카테고리와 다른 부위의 운동을 비교하면서 다음 페이지로 이동할 수 있습니다."
+            : "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。";
     }
 
     libraryData.sections.forEach((section) => {
@@ -611,13 +907,13 @@ function enhanceExercisePage(main) {
         root: libraryContainer,
         sections: libraryData.sections,
         allCards,
-        explorerTitle: "Compare More Exercises",
-        explorerCopy: "関連する種目ページへそのまま移動して、比較の流れを広げられます。"
+        explorerTitle: t("relatedExplorerTitle"),
+        explorerCopy: t("relatedExplorerCopy")
     });
 
-    const postStandardsAd = prepareAdContainer(adContainers[0], "基準表のあと");
-    const postRelatedAd = prepareAdContainer(adContainers[1], "関連種目のあと");
-    const preFooterAd = prepareAdContainer(adContainers[2], "フッター直前");
+    const postStandardsAd = prepareAdContainer(adContainers[0], t("adAfterStandards"));
+    const postRelatedAd = prepareAdContainer(adContainers[1], t("adAfterRelated"));
+    const preFooterAd = prepareAdContainer(adContainers[2], t("adBeforeFooter"));
 
     adContainers.slice(3).forEach((container) => container.remove());
 
@@ -652,8 +948,8 @@ function enhanceContentPage(main) {
     if (!main.querySelector(":scope > .breadcrumb-container")) {
         const heading = firstContainer.querySelector("h1");
         const breadcrumb = buildBreadcrumb([
-            { label: "Home", href: "index.html" },
-            { label: normalizeText(heading?.textContent || "ページ") }
+            { label: t("home"), href: "index.html" },
+            { label: normalizeText(heading?.textContent || t("page")) }
         ]);
 
         main.prepend(breadcrumb);
@@ -669,7 +965,7 @@ function enhanceContentPage(main) {
 
     libraryContainer.classList.add("section-band", "library-band");
     libraryTitle.classList.add("section-title--database");
-    libraryTitle.textContent = libraryTitle.textContent || "データベースから続けて探す";
+    libraryTitle.textContent = libraryTitle.textContent || (detectLocale() === "ko" ? "데이터베이스에서 계속 찾기" : "データベースから続けて探す");
 
     libraryData.sections.forEach((section) => {
         section.heading = replaceHeadingTag(section.heading, "h3");
@@ -679,13 +975,13 @@ function enhanceContentPage(main) {
         root: libraryContainer,
         sections: libraryData.sections,
         allCards: libraryData.allCards,
-        explorerTitle: "種目ライブラリ",
-        explorerCopy: "関連する種目ページへそのまま移動できます。"
+        explorerTitle: t("contentLibraryTitle"),
+        explorerCopy: t("contentLibraryCopy")
     });
 }
 
 function buildHomeEntryRoutes(allCards) {
-    return HOME_ENTRY_ROUTES.map((route) => {
+    return getHomeEntryRouteDefinitions().map((route) => {
         return {
             ...route,
             cards: pickCardsBySlugs(allCards, route.slugs)
@@ -704,17 +1000,17 @@ function buildQuickStartSection(routes) {
     return htmlToElement(`
         <section class="container section-band quick-start-band" id="quick-start">
             <div class="section-heading">
-                <p class="eyebrow">Quick Compare</p>
-                <h2>比較スタート</h2>
-                <p>迷ったらまずここから。比較されやすいルートを最初にまとめています。</p>
+                <p class="eyebrow">${escapeHtml(t("quickCompare"))}</p>
+                <h2>${escapeHtml(t("quickStart"))}</h2>
+                <p>${escapeHtml(t("quickStartCopy"))}</p>
             </div>
-            <div class="quick-start-switcher" aria-label="おすすめの入口">
+            <div class="quick-start-switcher" aria-label="${escapeAttribute(t("quickStartLabel"))}">
                 ${routes.map((route, index) => {
                     return `
                         <button type="button" class="quick-start-option${index === 0 ? " is-active" : ""}" data-route-id="${route.id}" aria-pressed="${index === 0 ? "true" : "false"}">
                             <span class="quick-start-option-label">${escapeHtml(route.label)}</span>
                             <strong class="quick-start-option-title">${escapeHtml(route.title)}</strong>
-                            <span class="quick-start-option-meta">${route.cards.length}ページ</span>
+                            <span class="quick-start-option-meta">${escapeHtml(t("pages", route.cards.length))}</span>
                         </button>
                     `;
                 }).join("")}
@@ -785,7 +1081,7 @@ function buildCardBand(eyebrow, title, copy, cards, id = "") {
 function buildBreadcrumb(items) {
     return htmlToElement(`
         <div class="container breadcrumb-container">
-            <nav class="breadcrumb" aria-label="Breadcrumb">
+            <nav class="breadcrumb" aria-label="${escapeAttribute(detectLocale() === "ko" ? "이동 경로" : "Breadcrumb")}">
                 ${items.map((item, index) => {
                     const label = escapeHtml(item.label);
                     const separator = index < items.length - 1 ? '<span class="breadcrumb-separator">/</span>' : "";
@@ -851,7 +1147,7 @@ function prepareAdContainer(container, placementLabel) {
     if (!container.querySelector(".ad-slot-label")) {
         container.prepend(htmlToElement(`
             <p class="ad-slot-label">
-                <span>広告</span>
+                <span>${escapeHtml(t("ad"))}</span>
                 <span>${escapeHtml(placementLabel)}</span>
             </p>
         `));
@@ -903,7 +1199,7 @@ function decorateLibraryExplorer({ root, sections, allCards, explorerTitle = "",
     const toolbar = htmlToElement(`
         <div class="library-toolbar">
             ${explorerTitle ? `<div class="library-copy"><h3>${escapeHtml(explorerTitle)}</h3><p>${escapeHtml(explorerCopy)}</p></div>` : ""}
-            <p class="results-status" aria-live="polite">${allCards.length}種目を掲載</p>
+            <p class="results-status" aria-live="polite">${escapeHtml(t("exercisesListed", allCards.length))}</p>
         </div>
     `);
 
@@ -945,8 +1241,8 @@ function decorateLibraryExplorer({ root, sections, allCards, explorerTitle = "",
             section.toggleRow.style.display = shouldShowToggle ? "" : "none";
             if (section.toggleButton) {
                 section.toggleButton.textContent = section.isExpanded
-                    ? "表示を減らす"
-                    : `もっと見る (${remainingCount}件)`;
+                    ? t("libraryLess")
+                    : t("libraryMore", remainingCount);
             }
         }
     }
@@ -955,8 +1251,8 @@ function decorateLibraryExplorer({ root, sections, allCards, explorerTitle = "",
 function buildRelatedSection(sectionLabel, cards) {
     const container = htmlToElement(`
         <section class="container section-band">
-            <h2 id="related-exercises" class="section-title section-title--database">関連種目</h2>
-            <p class="section-intro">同じカテゴリの種目を続けて見比べられるように並べています。</p>
+            <h2 id="related-exercises" class="section-title section-title--database">${escapeHtml(t("relatedExercises"))}</h2>
+            <p class="section-intro">${escapeHtml(t("relatedExercisesCopy"))}</p>
         </section>
     `);
 
@@ -970,8 +1266,8 @@ function buildSameSectionRelatedMarkup(sectionLabel, cards) {
             <div class="related-cluster-grid">
                 <section class="related-cluster">
                     <div class="related-cluster-copy">
-                        <h3>${escapeHtml(sectionLabel)}の関連種目</h3>
-                        <p>現在表示できる同部位の関連種目はありません。</p>
+                        <h3>${escapeHtml(formatRelatedHeading(sectionLabel))}</h3>
+                        <p>${escapeHtml(t("relatedNone"))}</p>
                     </div>
                 </section>
             </div>
@@ -982,8 +1278,8 @@ function buildSameSectionRelatedMarkup(sectionLabel, cards) {
         <div class="related-cluster-grid">
             <section class="related-cluster">
                 <div class="related-cluster-copy">
-                    <h3>${escapeHtml(sectionLabel)}の関連種目</h3>
-                    <p>同じ部位の種目だけを並べています。</p>
+                    <h3>${escapeHtml(formatRelatedHeading(sectionLabel))}</h3>
+                    <p>${escapeHtml(t("relatedSameCategory"))}</p>
                 </div>
                 ${renderExerciseCardGrid(cards.slice(0, 12), "exercise-cards-container exercise-cards-container--compact")}
             </section>
@@ -1161,9 +1457,9 @@ function buildExerciseCardBadges(card) {
     }
 
     if (card.measurementKind === "reps") {
-        badges.push("回数");
+        badges.push(t("reps"));
     } else if (card.measurementKind === "weight") {
-        badges.push("重量");
+        badges.push(t("weight"));
     }
 
     if (card.primaryMuscles[0]) {
@@ -1193,31 +1489,31 @@ function buildExercisePerformanceSnapshot({ averageHighlights, primaryMuscles, s
     return htmlToElement(`
         <section class="container section-band performance-snapshot-band">
             <div class="section-heading">
-                <p class="eyebrow">Snapshot</p>
-                <h2>パフォーマンススナップショット</h2>
-                <p>最初に押さえたい基準ラインと比較の切り口を、表より先にまとめています。</p>
+                <p class="eyebrow">${escapeHtml(t("snapshot"))}</p>
+                <h2>${escapeHtml(t("performanceSnapshot"))}</h2>
+                <p>${escapeHtml(t("performanceSnapshotCopy"))}</p>
             </div>
             <div class="performance-signal-grid">
                 ${renderPerformanceSignalCard(
-                    baselineLine?.label || "基礎ライン",
-                    baselineLine?.primary || "掲載データあり",
-                    baselineLine?.secondary || "平均データを掲載",
+                    baselineLine?.label || (detectLocale() === "ko" ? "입문 기준" : "基礎ライン"),
+                    baselineLine?.primary || t("dataAvailable"),
+                    baselineLine?.secondary || t("levelAverageAvailable"),
                     true
                 )}
                 ${renderPerformanceSignalCard(
-                    intermediateLine?.label || "中級ライン",
+                    intermediateLine?.label || (detectLocale() === "ko" ? "중급 기준" : "中級ライン"),
                     intermediateLine?.primary || standardsLabel,
-                    intermediateLine?.secondary || "比較データを掲載"
+                    intermediateLine?.secondary || t("resultsAvailable")
                 )}
                 ${renderPerformanceSignalCard(
-                    "主働筋",
-                    `${primaryMuscles.length || 0}筋群`,
-                    primaryMuscles.slice(0, 3).join(" / ") || "主働筋データを掲載"
+                    t("primaryMuscle"),
+                    formatMuscleCount(primaryMuscles.length || 0),
+                    primaryMuscles.slice(0, 3).join(" / ") || t("primaryMuscleFallback")
                 )}
                 ${renderPerformanceSignalCard(
-                    "比較ビュー",
-                    `${sameSectionCount}種目`,
-                    `${sectionLabel} / ${measurementKind === "reps" ? "回数比較" : "重量比較"}`
+                    detectLocale() === "ko" ? "비교 보기" : "比較ビュー",
+                    formatExerciseCount(sameSectionCount),
+                    `${sectionLabel} / ${measurementKind === "reps" ? t("repsComparison") : t("weightComparison")}`
                 )}
             </div>
         </section>
@@ -1250,19 +1546,19 @@ function extractAverageHighlights(table) {
     });
 
     return {
-        baseline: parsedRows.find((row) => row.label.includes("基礎")) || parsedRows[0],
-        intermediate: parsedRows.find((row) => row.label.includes("中級")) || parsedRows[Math.min(2, parsedRows.length - 1)]
+        baseline: parsedRows.find((row) => row.label.includes("基礎") || row.label.includes("입문")) || parsedRows[0],
+        intermediate: parsedRows.find((row) => row.label.includes("中級") || row.label.includes("중급")) || parsedRows[Math.min(2, parsedRows.length - 1)]
     };
 }
 
 function formatAverageMetric(cell) {
     const value = normalizeText(cell?.innerText || cell?.textContent || "");
-    return value ? `男性 ${value}` : "掲載データあり";
+    return value ? `${t("male")} ${value}` : t("dataAvailable");
 }
 
 function formatSecondaryMetric(cell) {
     const value = normalizeText(cell?.innerText || cell?.textContent || "");
-    return value ? `女性 ${value}` : "比較データを掲載";
+    return value ? `${t("female")} ${value}` : t("resultsAvailable");
 }
 
 function replaceHeadingTag(heading, nextTag) {
@@ -1284,6 +1580,47 @@ function replaceHeadingTag(heading, nextTag) {
 
     heading.replaceWith(replacement);
     return replacement;
+}
+
+function getCategoryLabel(key) {
+    return getCategoryLinks().find((item) => item.key === key || item.id === key)?.label || key;
+}
+
+function getPrimaryMuscles(muscles, main) {
+    const fromDataset = splitPipeList(main?.dataset.primaryMuscles || "");
+    if (fromDataset.length) {
+        return fromDataset;
+    }
+
+    const primary = muscles.find((item) => {
+        return item.label.includes("主働") || item.label.includes("主動") || item.label.includes("주동");
+    });
+
+    return primary?.items || muscles[0]?.items || [];
+}
+
+function formatExerciseCount(count) {
+    return detectLocale() === "ko" ? `${count}개 운동` : `${count}種目`;
+}
+
+function formatMuscleCount(count) {
+    return detectLocale() === "ko" ? `${count}개 근육` : `${count}筋群`;
+}
+
+function formatStandardsCaption(standardsLabel) {
+    if (detectLocale() === "ko") {
+        return `${standardsLabel}과 평균 데이터를 같은 흐름에서 확인할 수 있습니다.`;
+    }
+
+    return `${standardsLabel}と平均データを同じ流れで確認できます。`;
+}
+
+function formatRelatedHeading(sectionLabel) {
+    if (detectLocale() === "ko") {
+        return `${sectionLabel} 관련 운동`;
+    }
+
+    return `${sectionLabel}の関連種目`;
 }
 
 function currentPath() {
@@ -1321,7 +1658,12 @@ function slugFromHref(href) {
 }
 
 function cleanSectionLabel(text) {
-    return normalizeText(text).replace("トレーニング", "").replace("トレ", "");
+    const normalized = normalizeText(text);
+    if (detectLocale() === "ko") {
+        return normalized.replace(/\s*운동/g, "").trim();
+    }
+
+    return normalized.replace("トレーニング", "").replace("トレ", "");
 }
 
 function splitList(text) {
