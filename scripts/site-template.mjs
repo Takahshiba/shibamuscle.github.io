@@ -213,10 +213,6 @@ function renderExerciseLibrary(catalogData, { unit = "kg", titleTag = "h2", titl
     <div class="container">
         <${titleTag} class="section-title" id="${escapeAttribute(titleId)}">${escapeHtml(heading)}</${titleTag}>
 
-        <div class="search-bar-container">
-            <input type="text" id="search-bar" placeholder="🔍" aria-label="${escapeAttribute(getUiText(locale, "searchExercises"))}" onkeyup="filterExercises()">
-        </div>
-
 ${catalogData.sections.map((section) => {
         const localizedTitle = locale === "ja" ? section.titles.ja : getCategoryLabel(section, locale);
         return `        <h2 id="${escapeAttribute(section.id)}" class="section-title">${escapeHtml(localizedTitle)}</h2>
@@ -236,7 +232,6 @@ ${cards.map((card) => renderCard(card, unit, locale)).join("\n")}
 
 function renderCard(card, unit, locale = "ja", section = {}) {
     const localizedCard = buildLocalizedCard(card, section, locale);
-    const searchTerms = (localizedCard.searchTerms?.[locale] || localizedCard.searchTerms?.ja || []).join(" | ");
     const tags = (localizedCard.tags?.[locale] || localizedCard.tags?.ja || []).join(" | ");
     const aliases = (localizedCard.aliases?.[locale] || localizedCard.aliases?.ja || []).join(" | ");
     const primaryMuscles = (localizedCard.primaryMuscles?.[locale] || localizedCard.primaryMuscles?.ja || []).join(" | ");
@@ -252,8 +247,7 @@ function renderCard(card, unit, locale = "ja", section = {}) {
                     data-description="${escapeAttribute(description)}"
                     data-primary-muscles="${escapeAttribute(primaryMuscles)}"
                     data-tags="${escapeAttribute(tags)}"
-                    data-aliases="${escapeAttribute(aliases)}"
-                    data-search-terms="${escapeAttribute(searchTerms)}">
+                    data-aliases="${escapeAttribute(aliases)}">
                     <img src="${escapeAttribute(localizeImageHref(card.image, locale))}" alt="${escapeAttribute(name || card.imageAlt)}" loading="lazy">
                     <div class="exercise-details">
                         <div class="name">${escapeHtml(name)}</div>

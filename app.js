@@ -1528,7 +1528,6 @@ function extractCards(container, heading) {
             primaryMuscles: splitPipeList(card?.dataset.primaryMuscles || ""),
             tags: splitPipeList(card?.dataset.tags || ""),
             aliases: splitPipeList(card?.dataset.aliases || ""),
-            searchTerms: splitPipeList(card?.dataset.searchTerms || ""),
             measurementKind: card?.dataset.measurementKind || "",
             sectionId: heading.id || "",
             sectionTitle: normalizeText(heading.textContent)

@@ -26,7 +26,6 @@ import {
     getLocalizedMuscleGroups,
     getMeasurementCopy,
     getRelatedTags,
-    getSearchTerms,
     getUiText,
     localizeExerciseHtml,
     stylesheetHref
@@ -66,7 +65,6 @@ function renderExercisePage(exercise, catalogData, unit, variant, locale) {
     const summary = buildExerciseSummary(exercise, currentCategory, measurementKind, locale);
     const description = buildExerciseDescription(exercise, currentCategory, measurementKind, locale);
     const relatedTags = getRelatedTags(exercise, exercise.categoryId, locale);
-    const searchTerms = getSearchTerms(exercise, exercise.categoryId, locale);
     const unitSwitchHtml = `<div class="toggle-buttons">
                 <a href="kg_${exercise.slug}.html"${unit === "kg" ? ' class="active"' : ""}>kg</a>
                 <a href="lb_${exercise.slug}.html"${unit === "lb" ? ' class="active"' : ""}>lb</a>
@@ -85,8 +83,7 @@ function renderExercisePage(exercise, catalogData, unit, variant, locale) {
         data-summary="${escapeAttribute(summary)}"
         data-description="${escapeAttribute(description)}"
         data-primary-muscles="${escapeAttribute((getLocalizedPrimaryMuscles(exercise, locale)).join(" | "))}"
-        data-related-tags="${escapeAttribute(relatedTags.join(" | "))}"
-        data-search-terms="${escapeAttribute(searchTerms.join(" | "))}">
+        data-related-tags="${escapeAttribute(relatedTags.join(" | "))}">
 ${renderBreadcrumb([
         { label: getUiText(locale, "home"), href: "index.html" },
         { label: cleanSectionLabel(categoryLabel, locale), href: `index.html#${exercise.categoryId || "whole-body-section"}` },
