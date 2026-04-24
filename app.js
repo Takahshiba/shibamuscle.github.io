@@ -6,70 +6,77 @@ const CATEGORY_LINKS = [
         id: "whole-body-section",
         key: "wholeBody",
         icon: "power-clean-white-icon.webp",
-        labels: { ja: "全身", ko: "전신" },
+        labels: { ja: "全身", ko: "전신", es: "Cuerpo completo" },
         descriptions: {
             ja: "デッドリフト、クリーン、スナッチなど全身連動の基準ページ",
-            ko: "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지"
+            ko: "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지",
+            es: "Ejercicios globales como peso muerto, clean y snatch"
         }
     },
     {
         id: "chest-section",
         key: "chest",
         icon: "bench-press-white-icon.webp",
-        labels: { ja: "胸", ko: "가슴" },
+        labels: { ja: "胸", ko: "가슴", es: "Pecho" },
         descriptions: {
             ja: "プレス系の平均重量と押す種目の比較",
-            ko: "프레스 계열 평균 중량과 미는 운동 비교"
+            ko: "프레스 계열 평균 중량과 미는 운동 비교",
+            es: "Pesos medios y comparativas de empuje"
         }
     },
     {
         id: "back-section",
         key: "back",
         icon: "deadlift-white-icon.webp",
-        labels: { ja: "背中", ko: "등" },
+        labels: { ja: "背中", ko: "등", es: "Espalda" },
         descriptions: {
             ja: "ローイング、プル系、ヒンジ系の比較",
-            ko: "로우, 풀, 힌지 계열 운동 비교"
+            ko: "로우, 풀, 힌지 계열 운동 비교",
+            es: "Remos, jalones y bisagras de cadera"
         }
     },
     {
         id: "shoulder-section",
         key: "shoulder",
         icon: "shoulder-press-white-icon.webp",
-        labels: { ja: "肩", ko: "어깨" },
+        labels: { ja: "肩", ko: "어깨", es: "Hombros" },
         descriptions: {
             ja: "プレス、レイズ、安定性の種目一覧",
-            ko: "프레스, 레이즈, 안정성 운동 목록"
+            ko: "프레스, 레이즈, 안정성 운동 목록",
+            es: "Presses, elevaciones y estabilidad del hombro"
         }
     },
     {
         id: "arm-section",
         key: "arm",
         icon: "hammer-curl-white-icon.webp",
-        labels: { ja: "腕", ko: "팔" },
+        labels: { ja: "腕", ko: "팔", es: "Brazos" },
         descriptions: {
             ja: "カール、トライセプス、前腕の種目",
-            ko: "컬, 삼두, 전완 운동"
+            ko: "컬, 삼두, 전완 운동",
+            es: "Curls, tríceps y antebrazos"
         }
     },
     {
         id: "leg-section",
         key: "leg",
         icon: "squat-white-icon.webp",
-        labels: { ja: "脚", ko: "하체" },
+        labels: { ja: "脚", ko: "하체", es: "Piernas" },
         descriptions: {
             ja: "スクワット、ランジ、ヒップ主導の種目",
-            ko: "스쿼트, 런지, 힙 중심 운동"
+            ko: "스쿼트, 런지, 힙 중심 운동",
+            es: "Sentadillas, zancadas y ejercicios dominantes de cadera"
         }
     },
     {
         id: "core-section",
         key: "core",
         icon: "sit-ups-white-icon.webp",
-        labels: { ja: "体幹", ko: "코어" },
+        labels: { ja: "体幹", ko: "코어", es: "Core" },
         descriptions: {
             ja: "腹筋、回旋、体幹安定の種目",
-            ko: "복근, 회전, 코어 안정화 운동"
+            ko: "복근, 회전, 코어 안정화 운동",
+            es: "Abdominales, rotación y estabilidad del core"
         }
     }
 ];
@@ -96,6 +103,12 @@ const HOME_ENTRY_ROUTES = [
                 eyebrow: "Quick Compare",
                 title: "대표 운동 비교 시작",
                 copy: "자주 비교되는 대표 운동부터 가장 빠르게 데이터를 확인할 수 있는 시작점입니다."
+            },
+            es: {
+                label: "Comparativas clave",
+                eyebrow: "Comparación rápida",
+                title: "Empieza con los ejercicios más consultados",
+                copy: "Un acceso directo a los ejercicios que más se comparan para revisar datos sin rodeos."
             }
         }
     },
@@ -114,6 +127,12 @@ const HOME_ENTRY_ROUTES = [
                 eyebrow: "Performance Baselines",
                 title: "Big 3 기준",
                 copy: "중량 비교의 기준으로 자주 보는 세 가지 운동을 먼저 모았습니다."
+            },
+            es: {
+                label: "Big 3",
+                eyebrow: "Referencias de fuerza",
+                title: "Base del Big 3",
+                copy: "Los tres levantamientos más usados como referencia para comparar fuerza."
             }
         }
     },
@@ -132,6 +151,12 @@ const HOME_ENTRY_ROUTES = [
                 eyebrow: "Starter Paths",
                 title: "시작하기 쉬운 비교 루트",
                 copy: "먼저 다루기 쉬운 운동부터 비교하고 싶을 때의 출발점입니다."
+            },
+            es: {
+                label: "Para empezar",
+                eyebrow: "Rutas iniciales",
+                title: "Comparativas fáciles para arrancar",
+                copy: "Un punto de partida cuando quieres revisar ejercicios accesibles antes de profundizar."
             }
         }
     }
@@ -147,9 +172,11 @@ const UI_TEXT = {
         average: "平均重量",
         averageEyebrow: "Average",
         averageReps: "平均レップ数",
+        breadcrumb: "Breadcrumb",
         category: "カテゴリ",
         categoryDashboard: "部位別ダッシュボード",
         categoryDashboardCopy: "部位ごとの件数、代表種目、比較の切り口をまとめて見渡せる入口です。",
+        categoryDashboardEyebrow: "Category Dashboard",
         compareDestination: "比較先",
         compareFlow: "比較導線",
         compareMode: "比較モード",
@@ -170,6 +197,7 @@ const UI_TEXT = {
         languageJapanese: "日本語",
         languageKorean: "한국어",
         languageChinese: "中文",
+        languageSpanish: "Español",
         levelAverageAvailable: "平均データを掲載",
         libraryExplorerCopy: "部位別に、全種目の比較ページを横断できます。",
         libraryExplorerTitle: "Performance Library",
@@ -180,6 +208,7 @@ const UI_TEXT = {
         muscleGroups: "筋群",
         muscles: "筋群",
         musclesCopy: "主働筋、副働筋、安定筋を分けて確認できます。",
+        musclesEyebrow: "Muscles",
         musclesHeading: "鍛えられる筋肉",
         page: "ページ",
         pages: (count) => `${count}ページ`,
@@ -234,9 +263,11 @@ const UI_TEXT = {
         average: "평균 중량",
         averageEyebrow: "Average",
         averageReps: "평균 반복 횟수",
+        breadcrumb: "이동 경로",
         category: "카테고리",
         categoryDashboard: "부위별 대시보드",
         categoryDashboardCopy: "부위별 운동 수, 대표 운동, 비교 기준을 한눈에 볼 수 있는 시작점입니다.",
+        categoryDashboardEyebrow: "Category Dashboard",
         compareDestination: "비교 대상",
         compareFlow: "비교 동선",
         compareMode: "비교 모드",
@@ -257,6 +288,7 @@ const UI_TEXT = {
         languageJapanese: "日本語",
         languageKorean: "한국어",
         languageChinese: "中文",
+        languageSpanish: "Español",
         levelAverageAvailable: "평균 데이터 수록",
         libraryExplorerCopy: "부위별로 모든 운동 비교 페이지를 둘러볼 수 있습니다.",
         libraryExplorerTitle: "Performance Library",
@@ -267,6 +299,7 @@ const UI_TEXT = {
         muscleGroups: "근육",
         muscles: "근육",
         musclesCopy: "주동근, 보조근, 안정근을 나누어 확인할 수 있습니다.",
+        musclesEyebrow: "Muscles",
         musclesHeading: "자극되는 근육",
         page: "페이지",
         pages: (count) => `${count}페이지`,
@@ -311,6 +344,97 @@ const UI_TEXT = {
         weightComparison: "중량 비교",
         weightPage: "중량 기준 비교 페이지",
         worldRecord: "세계 기록"
+    },
+    es: {
+        ad: "Anuncio",
+        adAfterQuickStart: "Después de accesos recomendados",
+        adBeforeFooter: "Antes del pie",
+        adAfterRelated: "Después de ejercicios relacionados",
+        adAfterStandards: "Después de estándares",
+        average: "Peso medio",
+        averageEyebrow: "Promedio",
+        averageReps: "Repeticiones medias",
+        breadcrumb: "Ruta de navegación",
+        category: "Categoría",
+        categoryDashboard: "Panel por zonas",
+        categoryDashboardCopy: "Una entrada para revisar cantidad de ejercicios, movimientos destacados y criterios de comparación por zona.",
+        categoryDashboardEyebrow: "Panel por categoría",
+        compareDestination: "Comparar con",
+        compareFlow: "Flujo de comparación",
+        compareMode: "Modo de comparación",
+        contentLibraryCopy: "Puedes ir directamente a páginas de ejercicios relacionados.",
+        contentLibraryTitle: "Biblioteca de ejercicios",
+        dataAvailable: "Datos disponibles",
+        databaseLibraryTitle: "Biblioteca completa de ejercicios",
+        databaseLibraryIntro: "Entra por grupos musculares y pasa directamente a la página de comparación que necesitas.",
+        detailByTabs: "Comparación detallada con pestañas",
+        exerciseLibraryTitle: "Biblioteca de ejercicios",
+        exercisesListed: (count) => `${count} ejercicios publicados`,
+        female: "Mujeres",
+        home: "Inicio",
+        homeHeroActionLabel: "Acciones rápidas",
+        homeHeroDescription: "Base de datos fitness para comparar rápidamente peso medio, estándares de fuerza y músculos trabajados por ejercicio.",
+        homeHeroTitle: "Compara datos de entrenamiento en menos pasos",
+        languageEnglish: "English",
+        languageJapanese: "日本語",
+        languageKorean: "한국어",
+        languageChinese: "中文",
+        languageSpanish: "Español",
+        levelAverageAvailable: "Datos medios publicados",
+        libraryExplorerCopy: "Explora páginas de comparación de todos los ejercicios por zona.",
+        libraryExplorerTitle: "Biblioteca de rendimiento",
+        libraryMore: (count) => `Ver más (${count})`,
+        libraryLess: "Ver menos",
+        majorCategoryDashboard: "Panel de zonas principales",
+        male: "Hombres",
+        muscleGroups: "Músculos",
+        muscles: "Músculos",
+        musclesCopy: "Revisa músculos principales, secundarios y estabilizadores por separado.",
+        musclesEyebrow: "Músculos",
+        musclesHeading: "Músculos trabajados",
+        page: "Página",
+        pages: (count) => `${count} páginas`,
+        performanceDashboard: "Panel de rendimiento",
+        performanceLibraryCount: "Ejercicios publicados",
+        performanceSnapshot: "Resumen de rendimiento",
+        performanceSnapshotCopy: "Las referencias y puntos de comparación clave aparecen antes de la tabla.",
+        primaryMuscle: "Músculo principal",
+        primaryMuscleFallback: "Datos de músculos principales publicados",
+        quickCompare: "Comparación rápida",
+        quickStart: "Empieza a comparar",
+        quickStartCopy: "Si no sabes por dónde empezar, prueba estas rutas con ejercicios que se consultan a menudo.",
+        quickStartLabel: "Accesos recomendados",
+        relatedExercises: "Ejercicios relacionados",
+        relatedExercisesCopy: "Organizados para seguir comparando ejercicios de la misma categoría.",
+        relatedExplorerCopy: "Pasa directamente a ejercicios relacionados y amplía la comparación.",
+        relatedExplorerTitle: "Comparar más ejercicios",
+        relatedNone: "No hay ejercicios relacionados de la misma zona para mostrar ahora.",
+        relatedSameCategory: "Solo ejercicios de la misma zona.",
+        reps: "Reps",
+        repsComparison: "Comparativa de repeticiones",
+        repsPage: "Página basada en repeticiones",
+        resultsAvailable: "Datos de comparación publicados",
+        snapshot: "Resumen",
+        snapshotDashboard: "Panel de comparación",
+        standards: "Estándares de fuerza",
+        standardsEyebrow: "Estándares",
+        standardsReps: "Estándares de repeticiones",
+        standardsWeightCopy: "Cambia entre sexo y criterio de comparación para revisar los estándares.",
+        standardsRepsCopy: "Consulta estándares de repeticiones por peso corporal y edad mediante pestañas.",
+        support: "Soporte",
+        contact: "Contacto",
+        privacy: "Política de privacidad",
+        tableGuide: "Cómo leer la tabla",
+        tableGuideCopy: "Referencia de distribución y tiempo de entrenamiento para cada nivel.",
+        tableGuideEyebrow: "Notas",
+        totalCategories: "Categorías publicadas",
+        totalExercisesCopy: "Ejercicios comparables",
+        unitSwitchCopy: "Cambio de unidades en todas las páginas",
+        viewRelatedCategories: "Comparativas relacionadas de la misma categoría",
+        weight: "Peso",
+        weightComparison: "Comparativa de peso",
+        weightPage: "Página basada en peso",
+        worldRecord: "Récord mundial"
     }
 };
 
@@ -407,6 +531,11 @@ function t(key, ...args) {
     return typeof value === "function" ? value(...args) : value;
 }
 
+function localeText(values) {
+    const locale = detectLocale();
+    return values[locale] ?? values.ja ?? "";
+}
+
 function getCategoryLinks() {
     const locale = detectLocale();
     return CATEGORY_LINKS.map((item) => ({
@@ -429,7 +558,7 @@ function getHomeEntryRouteDefinitions() {
 
 function assetPath(file) {
     const normalized = String(file || "").replace(/^\.?\/?assets\//, "");
-    return `${detectLocale() === "ko" ? "../assets" : "./assets"}/${normalized}`;
+    return `${detectLocale() === "ja" ? "./assets" : "../assets"}/${normalized}`;
 }
 
 function rebuildSharedChrome(pageType) {
@@ -496,7 +625,8 @@ function buildFooter() {
         { href: localizedDomainHref("https://en.shibamuscle.com"), label: t("languageEnglish"), lang: "en" },
         { href: localizedDomainHref("https://shibamuscle.com"), label: t("languageJapanese"), lang: "ja" },
         { href: localizedDomainHref("https://cn.shibamuscle.com"), label: t("languageChinese"), lang: "zh" },
-        { href: localizedDomainHref("https://shibamuscle.com/ko"), label: t("languageKorean"), lang: "ko" }
+        { href: localizedDomainHref("https://shibamuscle.com/ko"), label: t("languageKorean"), lang: "ko" },
+        { href: localizedDomainHref("https://shibamuscle.com/es"), label: t("languageSpanish"), lang: "es" }
     ].map((item) => `<a href="${item.href}" data-lang="${item.lang}">${item.label}</a>`).join("");
 
     return htmlToElement(`
@@ -630,23 +760,23 @@ function enhanceHomePage(main) {
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("standards"))}</span>
-                                <strong class="metric-value">${escapeHtml(detectLocale() === "ko" ? "체중 / 나이" : "体重 / 年齢")}</strong>
+                                <strong class="metric-value">${escapeHtml(localeText({ ja: "体重 / 年齢", ko: "체중 / 나이", es: "Peso / edad" }))}</strong>
                                 <span class="metric-subvalue">${escapeHtml(t("detailByTabs"))}</span>
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("muscleGroups"))}</span>
                                 <strong class="metric-value">${escapeHtml(t("primaryMuscle"))}</strong>
-                                <span class="metric-subvalue">${escapeHtml(detectLocale() === "ko" ? "운동별 자극 부위 확인" : "種目ごとの効き方を把握")}</span>
+                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "種目ごとの効き方を把握", ko: "운동별 자극 부위 확인", es: "Estímulo por ejercicio" }))}</span>
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("compareFlow"))}</span>
                                 <strong class="metric-value">${escapeHtml(t("relatedExercises"))}</strong>
-                                <span class="metric-subvalue">${escapeHtml(detectLocale() === "ko" ? "같은 카테고리 이어보기" : "同カテゴリを続けて閲覧")}</span>
+                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "同カテゴリを続けて閲覧", ko: "같은 카테고리 이어보기", es: "Seguir en la misma categoría" }))}</span>
                             </article>
                         </div>
                         <div class="dashboard-spotlight-list">
                             <div class="dashboard-spotlight-heading">
-                                <span class="metric-label">${escapeHtml(detectLocale() === "ko" ? "바로 비교하기" : "今すぐ見比べる")}</span>
+                                <span class="metric-label">${escapeHtml(localeText({ ja: "今すぐ見比べる", ko: "바로 비교하기", es: "Comparar ahora" }))}</span>
                             </div>
                             ${popularPreviewCards.map((card) => {
                                 return `
@@ -672,14 +802,14 @@ function enhanceHomePage(main) {
     const categoryOverview = htmlToElement(`
         <section class="container section-band">
             <div class="section-heading">
-                <p class="eyebrow">Category Dashboard</p>
+                <p class="eyebrow">${escapeHtml(t("categoryDashboardEyebrow"))}</p>
                 <h2>${escapeHtml(t("categoryDashboard"))}</h2>
                 <p>${escapeHtml(t("categoryDashboardCopy"))}</p>
             </div>
             <div class="category-overview-grid">
                 ${libraryData.sections.map((section) => {
                     const categoryMeta = getCategoryLinks().find((item) => item.id === section.id);
-                    const description = categoryMeta?.description || (detectLocale() === "ko" ? "관련 운동을 한 번에 확인" : "関連種目をまとめて確認");
+                    const description = categoryMeta?.description || localeText({ ja: "関連種目をまとめて確認", ko: "관련 운동을 한 번에 확인", es: "Revisar ejercicios relacionados" });
                     const sampleNames = section.cards.slice(0, 3).map((card) => card.name).join(" / ");
                     return `
                         <a class="category-tile" href="#${section.id}">
@@ -819,7 +949,7 @@ function enhanceExercisePage(main) {
     muscleContainer.classList.add("section-band");
     muscleContainer.innerHTML = `
         <div class="section-heading">
-            <p class="eyebrow">Muscles</p>
+            <p class="eyebrow">${escapeHtml(t("musclesEyebrow"))}</p>
             <h2>${escapeHtml(t("musclesHeading"))}</h2>
             <p>${escapeHtml(t("musclesCopy"))}</p>
         </div>
@@ -841,8 +971,8 @@ function enhanceExercisePage(main) {
         t("averageEyebrow"),
         averageLabel,
         measurementKind === "reps"
-            ? (detectLocale() === "ko" ? "레벨별 평균 반복 횟수를 먼저 확인할 수 있습니다." : "レベル別の平均レップ数を先に確認できます。")
-            : (detectLocale() === "ko" ? "레벨별 1RM 기준을 먼저 확인할 수 있습니다." : "レベル別の1RM目安を先に確認できます。")
+            ? localeText({ ja: "レベル別の平均レップ数を先に確認できます。", ko: "레벨별 평균 반복 횟수를 먼저 확인할 수 있습니다.", es: "Consulta primero las repeticiones medias por nivel." })
+            : localeText({ ja: "レベル別の1RM目安を先に確認できます。", ko: "레벨별 1RM 기준을 먼저 확인할 수 있습니다.", es: "Consulta primero la referencia de 1RM por nivel." })
     );
     decorateTableShell(averageContainer.querySelector(".average-section-table"));
 
@@ -887,7 +1017,9 @@ function enhanceExercisePage(main) {
         <p class="section-intro">
             ${escapeHtml(detectLocale() === "ko"
                 ? "같은 카테고리와 다른 부위의 운동을 비교하면서 다음 페이지로 이동할 수 있습니다."
-                : "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。")}
+                : detectLocale() === "es"
+                    ? "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página."
+                    : "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。")}
         </p>
     `);
 
@@ -896,7 +1028,9 @@ function enhanceExercisePage(main) {
     } else {
         libraryIntro.textContent = detectLocale() === "ko"
             ? "같은 카테고리와 다른 부위의 운동을 비교하면서 다음 페이지로 이동할 수 있습니다."
-            : "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。";
+            : detectLocale() === "es"
+                ? "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página."
+                : "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。";
     }
 
     libraryData.sections.forEach((section) => {
@@ -965,7 +1099,7 @@ function enhanceContentPage(main) {
 
     libraryContainer.classList.add("section-band", "library-band");
     libraryTitle.classList.add("section-title--database");
-    libraryTitle.textContent = libraryTitle.textContent || (detectLocale() === "ko" ? "데이터베이스에서 계속 찾기" : "データベースから続けて探す");
+    libraryTitle.textContent = libraryTitle.textContent || localeText({ ja: "データベースから続けて探す", ko: "데이터베이스에서 계속 찾기", es: "Seguir explorando la base de datos" });
 
     libraryData.sections.forEach((section) => {
         section.heading = replaceHeadingTag(section.heading, "h3");
@@ -1081,7 +1215,7 @@ function buildCardBand(eyebrow, title, copy, cards, id = "") {
 function buildBreadcrumb(items) {
     return htmlToElement(`
         <div class="container breadcrumb-container">
-            <nav class="breadcrumb" aria-label="${escapeAttribute(detectLocale() === "ko" ? "이동 경로" : "Breadcrumb")}">
+            <nav class="breadcrumb" aria-label="${escapeAttribute(t("breadcrumb"))}">
                 ${items.map((item, index) => {
                     const label = escapeHtml(item.label);
                     const separator = index < items.length - 1 ? '<span class="breadcrumb-separator">/</span>' : "";
@@ -1495,13 +1629,13 @@ function buildExercisePerformanceSnapshot({ averageHighlights, primaryMuscles, s
             </div>
             <div class="performance-signal-grid">
                 ${renderPerformanceSignalCard(
-                    baselineLine?.label || (detectLocale() === "ko" ? "입문 기준" : "基礎ライン"),
+                    baselineLine?.label || localeText({ ja: "基礎ライン", ko: "입문 기준", es: "Referencia principiante" }),
                     baselineLine?.primary || t("dataAvailable"),
                     baselineLine?.secondary || t("levelAverageAvailable"),
                     true
                 )}
                 ${renderPerformanceSignalCard(
-                    intermediateLine?.label || (detectLocale() === "ko" ? "중급 기준" : "中級ライン"),
+                    intermediateLine?.label || localeText({ ja: "中級ライン", ko: "중급 기준", es: "Referencia intermedia" }),
                     intermediateLine?.primary || standardsLabel,
                     intermediateLine?.secondary || t("resultsAvailable")
                 )}
@@ -1511,7 +1645,7 @@ function buildExercisePerformanceSnapshot({ averageHighlights, primaryMuscles, s
                     primaryMuscles.slice(0, 3).join(" / ") || t("primaryMuscleFallback")
                 )}
                 ${renderPerformanceSignalCard(
-                    detectLocale() === "ko" ? "비교 보기" : "比較ビュー",
+                    localeText({ ja: "比較ビュー", ko: "비교 보기", es: "Vista comparativa" }),
                     formatExerciseCount(sameSectionCount),
                     `${sectionLabel} / ${measurementKind === "reps" ? t("repsComparison") : t("weightComparison")}`
                 )}
@@ -1546,8 +1680,8 @@ function extractAverageHighlights(table) {
     });
 
     return {
-        baseline: parsedRows.find((row) => row.label.includes("基礎") || row.label.includes("입문")) || parsedRows[0],
-        intermediate: parsedRows.find((row) => row.label.includes("中級") || row.label.includes("중급")) || parsedRows[Math.min(2, parsedRows.length - 1)]
+        baseline: parsedRows.find((row) => row.label.includes("基礎") || row.label.includes("입문") || row.label.includes("Principiante")) || parsedRows[0],
+        intermediate: parsedRows.find((row) => row.label.includes("中級") || row.label.includes("중급") || row.label.includes("Intermedio")) || parsedRows[Math.min(2, parsedRows.length - 1)]
     };
 }
 
@@ -1600,16 +1734,20 @@ function getPrimaryMuscles(muscles, main) {
 }
 
 function formatExerciseCount(count) {
-    return detectLocale() === "ko" ? `${count}개 운동` : `${count}種目`;
+    return localeText({ ja: `${count}種目`, ko: `${count}개 운동`, es: `${count} ejercicios` });
 }
 
 function formatMuscleCount(count) {
-    return detectLocale() === "ko" ? `${count}개 근육` : `${count}筋群`;
+    return localeText({ ja: `${count}筋群`, ko: `${count}개 근육`, es: `${count} músculos` });
 }
 
 function formatStandardsCaption(standardsLabel) {
     if (detectLocale() === "ko") {
         return `${standardsLabel}과 평균 데이터를 같은 흐름에서 확인할 수 있습니다.`;
+    }
+
+    if (detectLocale() === "es") {
+        return `Puedes revisar ${standardsLabel.toLowerCase()} y datos medios en el mismo flujo.`;
     }
 
     return `${standardsLabel}と平均データを同じ流れで確認できます。`;
@@ -1618,6 +1756,10 @@ function formatStandardsCaption(standardsLabel) {
 function formatRelatedHeading(sectionLabel) {
     if (detectLocale() === "ko") {
         return `${sectionLabel} 관련 운동`;
+    }
+
+    if (detectLocale() === "es") {
+        return `Ejercicios relacionados de ${sectionLabel.toLowerCase()}`;
     }
 
     return `${sectionLabel}の関連種目`;
@@ -1629,6 +1771,10 @@ function currentPath() {
 
 function detectLocale() {
     const lang = document.documentElement.lang || "";
+    if (lang.toLowerCase().startsWith("es") || window.location.pathname.split("/").includes("es")) {
+        return "es";
+    }
+
     if (lang.toLowerCase().startsWith("ko") || window.location.pathname.split("/").includes("ko")) {
         return "ko";
     }
@@ -1659,6 +1805,10 @@ function slugFromHref(href) {
 
 function cleanSectionLabel(text) {
     const normalized = normalizeText(text);
+    if (detectLocale() === "es") {
+        return normalized.replace(/\s*ejercicios?/gi, "").trim();
+    }
+
     if (detectLocale() === "ko") {
         return normalized.replace(/\s*운동/g, "").trim();
     }

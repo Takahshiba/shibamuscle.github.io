@@ -26,6 +26,18 @@
       "generated": true
     },
     {
+      "code": "es",
+      "routePrefix": "/es/",
+      "outputDir": "es",
+      "displayName": "Español",
+      "hreflang": "es",
+      "dir": "ltr",
+      "defaultUnit": "kg",
+      "origin": "https://shibamuscle.com",
+      "ogLocale": "es_ES",
+      "generated": true
+    },
+    {
       "code": "en",
       "routePrefix": "/",
       "outputDir": "",

@@ -59,6 +59,33 @@
           ]
         }
       ]
+    },
+    "es": {
+      "title": "Contacto | Shiba Muscle",
+      "description": "Página de contacto de Shiba Muscle. Para preguntas sobre el servicio, los datos o el contenido publicado, consulta aquí cómo escribirnos.",
+      "heading": "Contacto",
+      "intro": [
+        "Para preguntas sobre el servicio, los datos publicados, colaboraciones u otros temas, escribe a la dirección de correo que aparece abajo."
+      ],
+      "sections": [
+        {
+          "className": "content-card contact-card",
+          "blocks": [
+            {
+              "type": "email",
+              "label": "Email",
+              "value": "info@shibamuscle.com"
+            }
+          ]
+        },
+        {
+          "className": "content-card note",
+          "paragraphs": [
+            "Revisamos los mensajes y respondemos por orden. Según el contenido de la consulta, la respuesta puede tardar un poco.",
+            "Si describes tu situación y lo que necesitas con el mayor detalle posible, podremos orientarte mejor. En consultas relacionadas con datos personales, puede que pidamos verificar tu identidad."
+          ]
+        }
+      ]
     }
   }
 }

@@ -13,6 +13,11 @@
       "title": "Shiba Muscle | 운동 데이터베이스",
       "description": "부위별, 운동별로 평균 중량, 기준 중량, 자극되는 근육을 빠르게 찾아볼 수 있는 Shiba Muscle 운동 데이터베이스입니다. kg와 lb 단위 전환도 지원합니다.",
       "heading": "운동 찾기"
+    },
+    "es": {
+      "title": "Shiba Muscle | Base de datos de ejercicios",
+      "description": "Base de datos de entrenamiento de Shiba Muscle para consultar pesos medios, estándares de fuerza y músculos trabajados por zona y ejercicio. Incluye cambio entre kg y lb.",
+      "heading": "Encuentra ejercicios"
     }
   }
 }

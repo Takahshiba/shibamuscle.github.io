@@ -16,6 +16,7 @@ const UI_TEXT = {
         core: "体幹",
         data: "データ",
         female: "女性",
+        group: "グループ",
         home: "Home",
         language: "言語",
         leg: "脚",
@@ -23,6 +24,7 @@ const UI_TEXT = {
         male: "男性",
         moreWorkouts: "その他のワークアウト",
         muscles: "筋肉",
+        musclesHeading: "鍛えられる筋肉",
         privacy: "プライバシーポリシー",
         searchExercises: "ワークアウトを検索",
         shoulder: "肩",
@@ -40,6 +42,7 @@ const UI_TEXT = {
         core: "코어",
         data: "데이터",
         female: "여성",
+        group: "그룹",
         home: "홈",
         language: "언어",
         leg: "하체",
@@ -47,11 +50,38 @@ const UI_TEXT = {
         male: "남성",
         moreWorkouts: "다른 운동",
         muscles: "근육",
+        musclesHeading: "자극되는 근육",
         privacy: "개인정보 처리방침",
         searchExercises: "운동 검색",
         shoulder: "어깨",
         support: "지원",
         wholeBody: "전신"
+    },
+    es: {
+        ad: "Anuncio",
+        arm: "Brazos",
+        back: "Espalda",
+        breadcrumb: "Ruta de navegación",
+        categories: "Categorías",
+        chest: "Pecho",
+        contact: "Contacto",
+        core: "Core",
+        data: "Datos",
+        female: "Mujeres",
+        group: "Grupo",
+        home: "Inicio",
+        language: "Idioma",
+        leg: "Piernas",
+        links: "Enlaces",
+        male: "Hombres",
+        moreWorkouts: "Otros ejercicios",
+        muscles: "Músculos",
+        musclesHeading: "Músculos trabajados",
+        privacy: "Política de privacidad",
+        searchExercises: "Buscar ejercicios",
+        shoulder: "Hombros",
+        support: "Soporte",
+        wholeBody: "Cuerpo completo"
     }
 };
 
@@ -62,7 +92,8 @@ const CATEGORY_NAV = [
         icon: "power-clean-white-icon.webp",
         descriptions: {
             ja: "デッドリフト、クリーン、スナッチなど全身連動の基準ページ",
-            ko: "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지"
+            ko: "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지",
+            es: "Páginas de referencia para ejercicios globales como peso muerto, clean y snatch"
         }
     },
     {
@@ -71,7 +102,8 @@ const CATEGORY_NAV = [
         icon: "bench-press-white-icon.webp",
         descriptions: {
             ja: "プレス系の平均重量と押す種目の比較",
-            ko: "프레스 계열 평균 중량과 미는 운동 비교"
+            ko: "프레스 계열 평균 중량과 미는 운동 비교",
+            es: "Pesos medios y comparativas de ejercicios de empuje"
         }
     },
     {
@@ -80,7 +112,8 @@ const CATEGORY_NAV = [
         icon: "deadlift-white-icon.webp",
         descriptions: {
             ja: "ローイング、プル系、ヒンジ系の比較",
-            ko: "로우, 풀, 힌지 계열 운동 비교"
+            ko: "로우, 풀, 힌지 계열 운동 비교",
+            es: "Comparativas de remos, jalones y bisagras de cadera"
         }
     },
     {
@@ -89,7 +122,8 @@ const CATEGORY_NAV = [
         icon: "shoulder-press-white-icon.webp",
         descriptions: {
             ja: "プレス、レイズ、安定性の種目一覧",
-            ko: "프레스, 레이즈, 안정성 운동 목록"
+            ko: "프레스, 레이즈, 안정성 운동 목록",
+            es: "Ejercicios de press, elevaciones y estabilidad del hombro"
         }
     },
     {
@@ -98,7 +132,8 @@ const CATEGORY_NAV = [
         icon: "hammer-curl-white-icon.webp",
         descriptions: {
             ja: "カール、トライセプス、前腕の種目",
-            ko: "컬, 삼두, 전완 운동"
+            ko: "컬, 삼두, 전완 운동",
+            es: "Curls, tríceps y ejercicios de antebrazo"
         }
     },
     {
@@ -107,7 +142,8 @@ const CATEGORY_NAV = [
         icon: "squat-white-icon.webp",
         descriptions: {
             ja: "スクワット、ランジ、ヒップ主導の種目",
-            ko: "스쿼트, 런지, 힙 중심 운동"
+            ko: "스쿼트, 런지, 힙 중심 운동",
+            es: "Sentadillas, zancadas y ejercicios dominantes de cadera"
         }
     },
     {
@@ -116,7 +152,8 @@ const CATEGORY_NAV = [
         icon: "sit-ups-white-icon.webp",
         descriptions: {
             ja: "腹筋、回旋、体幹安定の種目",
-            ko: "복근, 회전, 코어 안정화 운동"
+            ko: "복근, 회전, 코어 안정화 운동",
+            es: "Abdominales, rotación y estabilidad del core"
         }
     }
 ];
@@ -149,6 +186,36 @@ const CATEGORY_DEFAULT_TAGS_KO = {
     "arm-section": ["팔", "컬"],
     "leg-section": ["하체", "스쿼트"],
     "core-section": ["코어", "복근"]
+};
+
+const CATEGORY_LABELS_ES = {
+    "whole-body-section": "Cuerpo completo",
+    "chest-section": "Pecho",
+    "back-section": "Espalda",
+    "shoulder-section": "Hombros",
+    "arm-section": "Brazos",
+    "leg-section": "Piernas",
+    "core-section": "Core"
+};
+
+const CATEGORY_ALIASES_ES = {
+    "whole-body-section": ["Ejercicios de cuerpo completo", "BIG3 / cuerpo completo"],
+    "chest-section": ["Ejercicios de pecho", "Pectoral"],
+    "back-section": ["Ejercicios de espalda", "Dorsal ancho"],
+    "shoulder-section": ["Ejercicios de hombro", "Deltoides"],
+    "arm-section": ["Ejercicios de brazos", "Bíceps", "Tríceps"],
+    "leg-section": ["Ejercicios de piernas", "Tren inferior"],
+    "core-section": ["Ejercicios de core", "Abdominales"]
+};
+
+const CATEGORY_DEFAULT_TAGS_ES = {
+    "whole-body-section": ["Cuerpo completo", "Coordinación total"],
+    "chest-section": ["Pecho", "Press"],
+    "back-section": ["Espalda", "Tirón"],
+    "shoulder-section": ["Hombros", "Press"],
+    "arm-section": ["Brazos", "Curl"],
+    "leg-section": ["Piernas", "Sentadilla"],
+    "core-section": ["Core", "Abdominales"]
 };
 
 const MUSCLE_GROUPS_KO = {
@@ -187,6 +254,42 @@ const MUSCLES_KO = {
     "腹直筋": "복직근"
 };
 
+const MUSCLE_GROUPS_ES = {
+    "グリップ": "Agarre",
+    "主働筋": "Músculos principales",
+    "主動筋": "Músculos principales",
+    "副働筋": "Músculos secundarios",
+    "副動筋": "Músculos secundarios",
+    "安定筋": "Estabilizadores"
+};
+
+const MUSCLES_ES = {
+    "なし": "Ninguno",
+    "ハムストリングス": "Isquiotibiales",
+    "三角筋": "Deltoides",
+    "上腕三頭筋": "Tríceps braquial",
+    "上腕二頭筋": "Bíceps braquial",
+    "下腿三頭筋": "Tríceps sural",
+    "僧帽筋": "Trapecio",
+    "内転筋群": "Aductores",
+    "前脛骨筋": "Tibial anterior",
+    "前腕伸筋群": "Extensores del antebrazo",
+    "前腕屈筋群": "Flexores del antebrazo",
+    "外腹斜筋": "Oblicuo externo",
+    "大円筋": "Redondo mayor",
+    "大胸筋": "Pectoral mayor",
+    "大胸筋上部": "Pectoral superior",
+    "大胸筋下部": "Pectoral inferior",
+    "大腿四頭筋": "Cuádriceps",
+    "大臀筋": "Glúteo mayor",
+    "広背筋": "Dorsal ancho",
+    "棘上筋": "Supraespinoso",
+    "棘下筋": "Infraespinoso",
+    "胸鎖乳突筋": "Esternocleidomastoideo",
+    "脊柱起立筋": "Erectores espinales",
+    "腹直筋": "Recto abdominal"
+};
+
 const EQUIPMENT_TAGS_KO = {
     BIG3: "BIG3",
     "ケーブル": "케이블",
@@ -195,6 +298,16 @@ const EQUIPMENT_TAGS_KO = {
     "バーベル": "바벨",
     "マシン": "머신",
     "自重": "맨몸"
+};
+
+const EQUIPMENT_TAGS_ES = {
+    BIG3: "BIG3",
+    "ケーブル": "Cable",
+    "スミスマシン": "Máquina Smith",
+    "ダンベル": "Mancuernas",
+    "バーベル": "Barra",
+    "マシン": "Máquina",
+    "自重": "Peso corporal"
 };
 
 const EXACT_EXERCISE_NAMES_KO = {
@@ -414,6 +527,262 @@ const TOKEN_NAME_PARTS_KO = {
     y: "Y"
 };
 
+const EXACT_EXERCISE_NAMES_ES = {
+    "ab-wheel-roller": "Rueda abdominal",
+    "bench-press": "Press de banca",
+    "bodyweight-squat": "Sentadilla con peso corporal",
+    "burpees": "Burpees",
+    "chin-ups": "Chin-ups",
+    "clean": "Clean",
+    "clean-and-jerk": "Clean and jerk",
+    "clean-and-press": "Clean and press",
+    "crunches": "Crunch abdominal",
+    "deadlift": "Peso muerto",
+    "dips": "Fondos",
+    "front-squat": "Sentadilla frontal",
+    "glute-bridge": "Puente de glúteos",
+    "good-morning": "Good morning",
+    "hammer-curl": "Curl martillo",
+    "hip-thrust": "Hip thrust",
+    "jumping-jack": "Jumping jack",
+    "lat-pulldown": "Jalón al pecho",
+    "lunge": "Zancada",
+    "military-press": "Press militar",
+    "mountain-climbers": "Mountain climbers",
+    "muscle-ups": "Muscle-ups",
+    "pull-ups": "Dominadas",
+    "push-ups": "Flexiones",
+    "romanian-deadlift": "Peso muerto rumano",
+    "russian-twist": "Giro ruso",
+    "sit-ups": "Sit-ups",
+    "snatch": "Snatch",
+    "squat": "Sentadilla",
+    "sumo-deadlift": "Peso muerto sumo",
+    "sumo-squat": "Sentadilla sumo",
+    "superman": "Superman",
+    "toes-to-bar": "Toes-to-bar",
+    "wall-ball": "Wall ball"
+};
+
+const PHRASE_NAME_PARTS_ES = {
+    "ab-wheel": "rueda abdominal",
+    "back-extension": "extensión lumbar",
+    "bench-dips": "fondos en banco",
+    "bench-press": "press de banca",
+    "bent-arm": "brazos flexionados",
+    "bent-over": "inclinado",
+    "behind-the-back": "detrás de la espalda",
+    "behind-the-neck": "tras nuca",
+    "bicep-curl": "curl de bíceps",
+    "bodyweight": "peso corporal",
+    "bulgarian-split-squat": "sentadilla búlgara",
+    "calf-raise": "elevación de gemelos",
+    "chest-fly": "apertura de pecho",
+    "chest-press": "press de pecho",
+    "chest-supported": "con apoyo de pecho",
+    "clean-and-jerk": "clean and jerk",
+    "clean-and-press": "clean and press",
+    "clean-high-pull": "clean high pull",
+    "clean-pull": "tirón de clean",
+    "close-grip": "agarre cerrado",
+    "concentration-curl": "curl de concentración",
+    "external-rotation": "rotación externa",
+    "ez-bar": "barra EZ",
+    "face-pull": "face pull",
+    "front-raise": "elevación frontal",
+    "front-squat": "sentadilla frontal",
+    "glute-bridge": "puente de glúteos",
+    "glute-ham-raise": "glute ham raise",
+    "glute-kickback": "patada de glúteo",
+    "goblet-squat": "sentadilla goblet",
+    "hack-squat": "hack squat",
+    "hammer-curl": "curl martillo",
+    "hang-clean": "hang clean",
+    "hang-power-clean": "hang power clean",
+    "hang-snatch": "hang snatch",
+    "hex-bar": "barra hexagonal",
+    "hanging-knee-raise": "elevación de rodillas colgado",
+    "hanging-leg-raise": "elevación de piernas colgado",
+    "high-pulley": "polea alta",
+    "hip-abduction": "abducción de cadera",
+    "hip-adduction": "aducción de cadera",
+    "hip-extension": "extensión de cadera",
+    "hip-thrust": "hip thrust",
+    "incline-bench-press": "press de banca inclinado",
+    "incline-push-ups": "flexiones inclinadas",
+    "inverted-row": "remo invertido",
+    "lat-pulldown": "jalón al pecho",
+    "lateral-raise": "elevación lateral",
+    "leg-curl": "curl femoral",
+    "leg-extension": "extensión de pierna",
+    "leg-press": "prensa de piernas",
+    "leg-raise": "elevación de piernas",
+    "muscle-snatch": "muscle snatch",
+    "muscle-ups": "muscle-ups",
+    "neck-curl": "curl de cuello",
+    "neck-extension": "extensión de cuello",
+    "neutral-grip": "agarre neutro",
+    "nordic-hamstring-curl": "curl nórdico de isquios",
+    "one-arm": "a un brazo",
+    "overhead-squat": "sentadilla overhead",
+    "pin-press": "pin press",
+    "pull-through": "pull through",
+    "pull-ups": "dominadas",
+    "push-jerk": "push jerk",
+    "push-press": "push press",
+    "push-ups": "flexiones",
+    "rack-pull": "rack pull",
+    "reverse-fly": "apertura inversa",
+    "reverse-grip": "agarre inverso",
+    "reverse-hyperextension": "hiperextensión inversa",
+    "reverse-wrist-curl": "curl de muñeca inverso",
+    "romanchair": "silla romana",
+    "romanian-deadlift": "peso muerto rumano",
+    "safety-bar": "safety bar",
+    "scissor-kicks": "tijeras abdominales",
+    "seated-cable-row": "remo sentado en cable",
+    "shoulder-press": "press de hombro",
+    "side-bend": "flexión lateral",
+    "side-crunches": "crunch lateral",
+    "side-leg-raise": "elevación lateral de pierna",
+    "single-leg": "a una pierna",
+    "sit-ups": "sit-ups",
+    "smith-machine": "máquina Smith",
+    "split-jerk": "split jerk",
+    "split-squat": "sentadilla split",
+    "squat-jump": "salto con sentadilla",
+    "squat-thrust": "squat thrust",
+    "stiff-leg-deadlift": "peso muerto con piernas rígidas",
+    "straight-arm": "brazos rectos",
+    "t-bar": "barra T",
+    "tricep-extension": "extensión de tríceps",
+    "tricep-pushdown": "jalón de tríceps",
+    "tricep-rope": "cuerda de tríceps",
+    "upright-row": "remo al mentón",
+    "wide-grip": "agarre amplio",
+    "wrist-curl": "curl de muñeca",
+    "y-raise": "elevación en Y"
+};
+
+const TOKEN_NAME_PARTS_ES = {
+    abduction: "abducción",
+    adduction: "aducción",
+    archer: "arquero",
+    arnold: "Arnold",
+    back: "espalda",
+    bar: "barra",
+    barbell: "barra",
+    bench: "banco",
+    bicycle: "bicicleta",
+    bicep: "bíceps",
+    box: "box",
+    cable: "cable",
+    calf: "gemelos",
+    cheat: "cheat",
+    clean: "clean",
+    curl: "curl",
+    deadlift: "peso muerto",
+    decline: "declinado",
+    deficit: "con déficit",
+    diamond: "diamante",
+    donkey: "donkey",
+    dumbbell: "mancuernas",
+    extension: "extensión",
+    fly: "apertura",
+    floor: "en el suelo",
+    flutter: "flutter",
+    front: "frontal",
+    glute: "glúteo",
+    hamstring: "isquios",
+    handstand: "pino",
+    hex: "hexagonal",
+    high: "alto",
+    horizontal: "horizontal",
+    incline: "inclinado",
+    jefferson: "Jefferson",
+    jm: "JM",
+    kickback: "patada",
+    landmine: "landmine",
+    lateral: "lateral",
+    log: "log",
+    lying: "tumbado",
+    machine: "máquina",
+    meadows: "Meadows",
+    military: "militar",
+    one: "un",
+    overhead: "overhead",
+    paused: "con pausa",
+    pendlay: "Pendlay",
+    pike: "pike",
+    pin: "pin",
+    pistol: "pistol",
+    power: "power",
+    preacher: "predicador",
+    press: "press",
+    pulldown: "jalón",
+    pull: "tirón",
+    pullover: "pullover",
+    raise: "elevación",
+    renegade: "renegade",
+    reverse: "inverso",
+    ring: "anillas",
+    roller: "rueda",
+    row: "remo",
+    seated: "sentado",
+    shrug: "encogimiento",
+    sissy: "sissy",
+    sled: "trineo",
+    snatch: "snatch",
+    spider: "spider",
+    spoto: "Spoto",
+    squat: "sentadilla",
+    standing: "de pie",
+    strict: "estricto",
+    tate: "Tate",
+    thruster: "thruster",
+    tricep: "tríceps",
+    vertical: "vertical",
+    viking: "Viking",
+    walking: "caminando",
+    yates: "Yates",
+    zercher: "Zercher",
+    zottman: "Zottman",
+    z: "Z"
+};
+
+const SPANISH_EQUIPMENT_PARTS = new Map([
+    ["barra", "con barra"],
+    ["mancuernas", "con mancuernas"],
+    ["cable", "en cable"],
+    ["máquina", "en máquina"],
+    ["máquina Smith", "en máquina Smith"],
+    ["barra EZ", "con barra EZ"],
+    ["barra hexagonal", "con barra hexagonal"],
+    ["barra T", "con barra T"],
+    ["anillas", "en anillas"],
+    ["landmine", "con landmine"]
+]);
+
+const SPANISH_POST_MODIFIERS = new Set([
+    "a un brazo",
+    "a una pierna",
+    "agarre amplio",
+    "agarre cerrado",
+    "agarre inverso",
+    "agarre neutro",
+    "brazos rectos",
+    "con apoyo de pecho",
+    "con déficit",
+    "con pausa",
+    "de pie",
+    "declinado",
+    "detrás de la espalda",
+    "inclinado",
+    "sentado",
+    "tras nuca",
+    "tumbado"
+]);
+
 const JAPANESE_TO_KOREAN_TEXT = [
     ["その他のワークアウト", "다른 운동"],
     ["ワークアウトデータベース", "운동 데이터베이스"],
@@ -460,6 +829,54 @@ const JAPANESE_TO_KOREAN_TEXT = [
     ["5年以上継続的にトレーニングに励む。", "5년 이상 꾸준히 운동한 단계입니다."],
     ["5年以上当該メニューを専門にトレーニング。", "해당 운동을 5년 이상 전문적으로 훈련한 단계입니다."],
     ["注：", "참고: "]
+].sort((left, right) => right[0].length - left[0].length);
+
+const JAPANESE_TO_SPANISH_TEXT = [
+    ["その他のワークアウト", "Otros ejercicios"],
+    ["ワークアウトデータベース", "Base de datos de ejercicios"],
+    ["鍛えられる筋肉", "Músculos trabajados"],
+    ["テーブルの見方", "Cómo leer la tabla"],
+    ["世界記録", "Récord mundial"],
+    ["公式記録", "Récord oficial"],
+    ["プライバシーポリシー", "Política de privacidad"],
+    ["お問い合わせ", "Contacto"],
+    ["リンク", "Enlaces"],
+    ["言語", "Idioma"],
+    ["男性・体重別", "Hombres por peso corporal"],
+    ["女性・体重別", "Mujeres por peso corporal"],
+    ["男性・年齢別", "Hombres por edad"],
+    ["女性・年齢別", "Mujeres por edad"],
+    ["平均レップ数", "Repeticiones medias"],
+    ["基準レップ数", "Estándares de repeticiones"],
+    ["平均重量", "Peso medio"],
+    ["基準重量", "Estándares de fuerza"],
+    ["レップ数", "Repeticiones"],
+    ["体重別", "Por peso corporal"],
+    ["年齢別", "Por edad"],
+    ["レベル", "Nivel"],
+    ["グループ", "Grupo"],
+    ["データ", "Datos"],
+    ["説明", "Descripción"],
+    ["分布", "Distribución"],
+    ["体重", "Peso corporal"],
+    ["年齢", "Edad"],
+    ["男性", "Hombres"],
+    ["女性", "Mujeres"],
+    ["筋肉", "Músculos"],
+    ["重量", "Peso"],
+    ["基礎", "Principiante"],
+    ["初級", "Novato"],
+    ["中級", "Intermedio"],
+    ["上級", "Avanzado"],
+    ["プロ", "Élite"],
+    ["上位", "Top"],
+    ["下位", "Parte inferior"],
+    ["正しいフォームを身につけ、1か月以上継続してトレーニングに励む。", "Domina la técnica correcta y entrena de forma constante durante al menos 1 mes."],
+    ["6か月以上継続的にトレーニングに励む。", "Entrena de forma constante durante al menos 6 meses."],
+    ["２年以上継続的にトレーニングに励む。", "Entrena de forma constante durante al menos 2 años."],
+    ["5年以上継続的にトレーニングに励む。", "Entrena de forma constante durante más de 5 años."],
+    ["5年以上当該メニューを専門にトレーニング。", "Entrena este ejercicio de forma especializada durante más de 5 años."],
+    ["注：", "Nota: "]
 ].sort((left, right) => right[0].length - left[0].length);
 
 const JAPANESE_LEFTOVER_PATTERNS = [
@@ -605,6 +1022,30 @@ function getUiText(localeCode, key) {
     return UI_TEXT[localeCode]?.[key] || UI_TEXT.ja[key] || key;
 }
 
+function getCategoryLabels(localeCode) {
+    if (localeCode === "ko") return CATEGORY_LABELS_KO;
+    if (localeCode === "es") return CATEGORY_LABELS_ES;
+    return null;
+}
+
+function getCategoryAliases(localeCode) {
+    if (localeCode === "ko") return CATEGORY_ALIASES_KO;
+    if (localeCode === "es") return CATEGORY_ALIASES_ES;
+    return {};
+}
+
+function getCategoryDefaultTags(localeCode) {
+    if (localeCode === "ko") return CATEGORY_DEFAULT_TAGS_KO;
+    if (localeCode === "es") return CATEGORY_DEFAULT_TAGS_ES;
+    return {};
+}
+
+function getEquipmentTags(localeCode) {
+    if (localeCode === "ko") return EQUIPMENT_TAGS_KO;
+    if (localeCode === "es") return EQUIPMENT_TAGS_ES;
+    return {};
+}
+
 function getCategoryNavItems(localeCode = "ja") {
     return CATEGORY_NAV.map((item) => ({
         id: item.id,
@@ -616,16 +1057,18 @@ function getCategoryNavItems(localeCode = "ja") {
 }
 
 function getCategoryLabel(sectionOrId, localeCode = "ja") {
+    const localizedLabels = getCategoryLabels(localeCode);
+
     if (typeof sectionOrId === "string") {
-        return localeCode === "ko" ? CATEGORY_LABELS_KO[sectionOrId] || sectionOrId : sectionOrId;
+        return localizedLabels?.[sectionOrId] || sectionOrId;
     }
 
     if (!sectionOrId) {
-        return localeCode === "ko" ? "전신" : "全身";
+        return localizedLabels?.["whole-body-section"] || "全身";
     }
 
-    if (localeCode === "ko") {
-        return sectionOrId.label?.ko || sectionOrId.titles?.ko || CATEGORY_LABELS_KO[sectionOrId.id] || sectionOrId.label?.ja || sectionOrId.titles?.ja || "";
+    if (localeCode !== "ja") {
+        return sectionOrId.label?.[localeCode] || sectionOrId.titles?.[localeCode] || localizedLabels?.[sectionOrId.id] || sectionOrId.label?.ja || sectionOrId.titles?.ja || "";
     }
 
     return sectionOrId.label?.ja || sectionOrId.titles?.ja || sectionOrId.title || "";
@@ -638,6 +1081,26 @@ function getCategoryDescription(sectionOrId, localeCode = "ja") {
 }
 
 function getMeasurementCopy(kind = "weight", localeCode = "ja") {
+    if (localeCode === "es") {
+        if (kind === "reps") {
+            return {
+                averageLabel: "Repeticiones medias",
+                standardsLabel: "Estándares de repeticiones",
+                detailLabel: "Repeticiones",
+                pageTerm: "Repeticiones",
+                note: "Los valores de la tabla son una referencia de repeticiones posibles en una serie."
+            };
+        }
+
+        return {
+            averageLabel: "Peso medio",
+            standardsLabel: "Estándares de fuerza",
+            detailLabel: "1RM",
+            pageTerm: "Peso",
+            note: "Los valores de la tabla son estimaciones basadas en 1RM."
+        };
+    }
+
     if (localeCode === "ko") {
         if (kind === "reps") {
             return {
@@ -678,6 +1141,11 @@ function getMeasurementCopy(kind = "weight", localeCode = "ja") {
 }
 
 function getExerciseName(exerciseOrCard, localeCode = "ja") {
+    if (localeCode === "es") {
+        const slug = exerciseOrCard.slug || "";
+        return exerciseOrCard.names?.es || EXACT_EXERCISE_NAMES_ES[slug] || inferSpanishExerciseName(slug);
+    }
+
     if (localeCode === "ko") {
         const slug = exerciseOrCard.slug || "";
         return exerciseOrCard.names?.ko || EXACT_EXERCISE_NAMES_KO[slug] || inferKoreanExerciseName(slug);
@@ -687,10 +1155,18 @@ function getExerciseName(exerciseOrCard, localeCode = "ja") {
 }
 
 function getMuscleGroupLabel(label, localeCode = "ja") {
+    if (localeCode === "es") {
+        return MUSCLE_GROUPS_ES[label] || label;
+    }
+
     return localeCode === "ko" ? MUSCLE_GROUPS_KO[label] || label : label;
 }
 
 function getMuscleName(name, localeCode = "ja") {
+    if (localeCode === "es") {
+        return MUSCLES_ES[name] || name;
+    }
+
     return localeCode === "ko" ? MUSCLES_KO[name] || name : name;
 }
 
@@ -724,8 +1200,20 @@ function formatKoreanMeasurementPair(copy) {
 }
 
 function buildExerciseSummary(exercise, section, measurementKind, localeCode = "ja") {
-    if (localeCode !== "ko") {
+    if (localeCode === "ja") {
         return exercise.metadata?.summary?.ja || "";
+    }
+
+    if (localeCode === "es") {
+        const name = getExerciseName(exercise, localeCode);
+        const category = getCategoryLabel(section || exercise.categoryId, localeCode);
+        const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "músculos principales";
+
+        if (measurementKind === "reps") {
+            return `${name} es un ejercicio de ${category.toLowerCase()} centrado en ${muscles}. Puedes consultar las repeticiones medias y los estándares de repeticiones en una sola página.`;
+        }
+
+        return `${name} permite consultar el peso medio y los estándares de fuerza como referencia dentro de ${category.toLowerCase()}. Los músculos principales son ${muscles}.`;
     }
 
     const name = getExerciseName(exercise, localeCode);
@@ -740,8 +1228,20 @@ function buildExerciseSummary(exercise, section, measurementKind, localeCode = "
 }
 
 function buildExerciseDescription(exercise, section, measurementKind, localeCode = "ja") {
-    if (localeCode !== "ko") {
+    if (localeCode === "ja") {
         return exercise.metadata?.description?.ja || "";
+    }
+
+    if (localeCode === "es") {
+        const name = getExerciseName(exercise, localeCode);
+        const category = getCategoryLabel(section || exercise.categoryId, localeCode);
+        const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "músculos principales";
+
+        if (measurementKind === "reps") {
+            return `${name} es una opción útil dentro de ${category.toLowerCase()}, especialmente para trabajo con peso corporal o baja carga. Compara repeticiones medias y estándares mientras revisas el estímulo en ${muscles}.`;
+        }
+
+        return `${name} es un ejercicio representativo de ${category.toLowerCase()}. Usa principalmente ${muscles} y permite comparar peso medio, estándares de fuerza y ejercicios relacionados.`;
     }
 
     const name = getExerciseName(exercise, localeCode);
@@ -756,12 +1256,23 @@ function buildExerciseDescription(exercise, section, measurementKind, localeCode
 }
 
 function buildExerciseSeo(exercise, measurementKind, unit, localeCode = "ja") {
-    if (localeCode !== "ko") {
+    if (localeCode === "ja") {
         const copy = getMeasurementCopy(measurementKind, "ja");
         const unitLabel = unit === "lb" ? "lb表" : "kg表";
         return {
             title: `${exercise.names.ja}の${copy.averageLabel}・${copy.standardsLabel} | Shiba Muscle`,
             descriptionPrefix: `${exercise.names.ja}の${copy.averageLabel}と${copy.standardsLabel}を${unitLabel}で確認できるページです。`
+        };
+    }
+
+    if (localeCode === "es") {
+        const copy = getMeasurementCopy(measurementKind, "es");
+        const name = getExerciseName(exercise, "es");
+        const unitLabel = unit === "lb" ? "tabla en lb" : "tabla en kg";
+
+        return {
+            title: `${name}: ${copy.averageLabel} y ${copy.standardsLabel} | Shiba Muscle`,
+            descriptionPrefix: `Página para consultar ${copy.averageLabel.toLowerCase()} y ${copy.standardsLabel.toLowerCase()} de ${name} con ${unitLabel}.`
         };
     }
 
@@ -776,7 +1287,7 @@ function buildExerciseSeo(exercise, measurementKind, unit, localeCode = "ja") {
 }
 
 function buildExerciseSeoDescription(exercise, section, measurementKind, unit, localeCode = "ja") {
-    if (localeCode !== "ko") {
+    if (localeCode === "ja") {
         const seo = buildExerciseSeo(exercise, measurementKind, unit, "ja");
         const primaryMuscles = exercise.metadata?.primaryMuscles?.ja || [];
         const metricSummary = measurementKind === "reps"
@@ -785,6 +1296,17 @@ function buildExerciseSeoDescription(exercise, section, measurementKind, unit, l
         const muscleDescription = primaryMuscles.length ? `主働筋は${primaryMuscles.join("・")}。` : "";
         const sectionDescription = section?.label?.ja || section?.titles?.ja ? `${section.label?.ja || section.titles?.ja}の代表種目です。` : "";
         return `${seo.descriptionPrefix}${sectionDescription}${muscleDescription}${metricSummary}`;
+    }
+
+    if (localeCode === "es") {
+        const seo = buildExerciseSeo(exercise, measurementKind, unit, "es");
+        const category = getCategoryLabel(section || exercise.categoryId, "es");
+        const primaryMuscles = getLocalizedMuscleGroups(exercise, "es")[0]?.items || [];
+        const metricSummary = measurementKind === "reps"
+            ? "También puedes revisar ejercicios relacionados."
+            : "Incluye tablas por peso corporal, tablas por edad y ejercicios relacionados.";
+        const muscleDescription = primaryMuscles.length ? `Los músculos principales son ${primaryMuscles.join(", ")}. ` : "";
+        return `${seo.descriptionPrefix} Es una referencia de ${category.toLowerCase()}. ${muscleDescription}${metricSummary}`;
     }
 
     const seo = buildExerciseSeo(exercise, measurementKind, unit, "ko");
@@ -798,7 +1320,7 @@ function buildExerciseSeoDescription(exercise, section, measurementKind, unit, l
 }
 
 function buildLocalizedCard(card, section, localeCode = "ja") {
-    if (localeCode !== "ko") {
+    if (localeCode === "ja") {
         return card;
     }
 
@@ -810,55 +1332,58 @@ function buildLocalizedCard(card, section, localeCode = "ja") {
         ...card,
         names: {
             ...(card.names || {}),
-            ko: getExerciseName(exerciseLike, localeCode)
+            [localeCode]: getExerciseName(exerciseLike, localeCode)
         },
         categories: {
             ...(card.categories || {}),
-            ko: formatCardCategory(section.id, card.slug, measurementKind, getRelatedTagsFromCard(card, section.id, localeCode))
+            [localeCode]: formatCardCategory(section.id, card.slug, measurementKind, getRelatedTagsFromCard(card, section.id, localeCode), localeCode)
         },
         description: {
             ...(card.description || {}),
-            ko: buildCardDescription(card, section, localeCode)
+            [localeCode]: buildCardDescription(card, section, localeCode)
         },
         primaryMuscles: {
             ...(card.primaryMuscles || {}),
-            ko: primaryMuscles
+            [localeCode]: primaryMuscles
         },
         tags: {
             ...(card.tags || {}),
-            ko: getRelatedTagsFromCard(card, section.id, localeCode)
+            [localeCode]: getRelatedTagsFromCard(card, section.id, localeCode)
         },
         aliases: {
             ...(card.aliases || {}),
-            ko: CATEGORY_ALIASES_KO[section.id] || []
+            [localeCode]: getCategoryAliases(localeCode)[section.id] || []
         },
         searchTerms: {
             ...(card.searchTerms || {}),
-            ko: getSearchTerms({ slug: card.slug, names: card.names, metadata: { measurementKind, primaryMuscles: { ko: primaryMuscles } } }, section.id, localeCode)
+            [localeCode]: getSearchTerms({ slug: card.slug, names: card.names, metadata: { measurementKind, primaryMuscles: { [localeCode]: primaryMuscles } } }, section.id, localeCode)
         }
     };
 }
 
 function getRelatedTags(exercise, sectionId, localeCode = "ja") {
-    if (localeCode !== "ko") {
+    if (localeCode === "ja") {
         return exercise.metadata?.relatedTags?.ja || [];
     }
 
     const measurementKind = exercise.metadata?.measurementKind || "weight";
     const primaryMuscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items || [];
+    const aliases = getCategoryAliases(localeCode);
+    const defaultTags = getCategoryDefaultTags(localeCode);
+
     return uniqueList([
         getCategoryLabel(sectionId, localeCode),
-        ...(CATEGORY_ALIASES_KO[sectionId] || []),
+        ...(aliases[sectionId] || []),
         ...primaryMuscles,
-        ...inferEquipmentTagsKo(exercise.slug),
-        ...(CATEGORY_DEFAULT_TAGS_KO[sectionId] || []),
+        ...inferEquipmentTags(exercise.slug, localeCode),
+        ...(defaultTags[sectionId] || []),
         getMeasurementCopy(measurementKind, localeCode).pageTerm,
         ...(isBig3(exercise.slug) ? ["BIG3"] : [])
     ]);
 }
 
 function getSearchTerms(exercise, sectionId, localeCode = "ja") {
-    if (localeCode !== "ko") {
+    if (localeCode === "ja") {
         return exercise.metadata?.searchTerms?.ja || [];
     }
 
@@ -872,7 +1397,7 @@ function getSearchTerms(exercise, sectionId, localeCode = "ja") {
 
 function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" } = {}) {
     let next = localizeHtmlAssetPaths(html || "", locale);
-    if (locale !== "ko") {
+    if (locale === "ja") {
         return next;
     }
 
@@ -880,36 +1405,63 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
     const copy = getMeasurementCopy(measurementKind, locale);
     const name = getExerciseName(exercise, locale);
     const suffix = measurementKind === "weight" ? " [1RM]" : "";
+    const isSpanish = locale === "es";
 
     next = next.replaceAll(exercise.names?.ja || "", name);
 
     if (block === "average") {
+        const heading = isSpanish
+            ? `${copy.averageLabel} de ${name}${suffix}`
+            : `${name} ${copy.averageLabel}${suffix}`;
         next = next.replace(/<h2 class="section-title">[\s\S]*?<\/h2>/i, `<h2 class="section-title">
-            ${escapeHtml(name)} ${escapeHtml(copy.averageLabel)}${suffix}
+            ${escapeHtml(heading)}
         </h2>`);
-        next = next.replace(/<p class="average-section-note">[\s\S]*?<\/p>/i, `<p class="average-section-note">${escapeHtml(buildAverageNote(measurementKind))}
+        next = next.replace(/<p class="average-section-note">[\s\S]*?<\/p>/i, `<p class="average-section-note">${escapeHtml(buildAverageNote(measurementKind, locale))}
         </p>`);
     }
 
     if (block === "standards") {
         const unitLabel = measurementKind === "weight" ? `(${unit})` : "";
-        const detailLabel = measurementKind === "weight" ? "1RM" : "반복 횟수";
-        next = next.replace(/<h2 class="section-title">[\s\S]*?<\/h2>/i, `<h2 class="section-title">${escapeHtml(name)} ${escapeHtml(copy.standardsLabel)}${unitLabel}</h2>`);
-        next = next.replace(/男性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `남성 체중별(${unit}) 데이터 [${detailLabel}]`);
-        next = next.replace(/女性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `여성 체중별(${unit}) 데이터 [${detailLabel}]`);
-        next = next.replace(/男性・年齢別データ \[[^\]]+\]/g, `남성 나이별 데이터 [${detailLabel}]`);
-        next = next.replace(/女性・年齢別データ \[[^\]]+\]/g, `여성 나이별 데이터 [${detailLabel}]`);
-        next = next.replace(/<p class="average-section-note">[\s\S]*?<\/p>/i, `<p class="average-section-note">${escapeHtml(buildStandardsNote(exercise, unit, measurementKind))}</p>`);
+        const detailLabel = measurementKind === "weight" ? "1RM" : copy.detailLabel;
+        const heading = isSpanish
+            ? `${copy.standardsLabel} de ${name}${unitLabel}`
+            : `${name} ${copy.standardsLabel}${unitLabel}`;
+        next = next.replace(/<h2 class="section-title">[\s\S]*?<\/h2>/i, `<h2 class="section-title">${escapeHtml(heading)}</h2>`);
+
+        if (isSpanish) {
+            next = next.replace(/男性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `Hombres por peso corporal (${unit}) [${detailLabel}]`);
+            next = next.replace(/女性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `Mujeres por peso corporal (${unit}) [${detailLabel}]`);
+            next = next.replace(/男性・年齢別データ \[[^\]]+\]/g, `Hombres por edad [${detailLabel}]`);
+            next = next.replace(/女性・年齢別データ \[[^\]]+\]/g, `Mujeres por edad [${detailLabel}]`);
+        } else {
+            next = next.replace(/男性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `남성 체중별(${unit}) 데이터 [${detailLabel}]`);
+            next = next.replace(/女性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `여성 체중별(${unit}) 데이터 [${detailLabel}]`);
+            next = next.replace(/男性・年齢別データ \[[^\]]+\]/g, `남성 나이별 데이터 [${detailLabel}]`);
+            next = next.replace(/女性・年齢別データ \[[^\]]+\]/g, `여성 나이별 데이터 [${detailLabel}]`);
+        }
+
+        next = next.replace(/<p class="average-section-note">[\s\S]*?<\/p>/i, `<p class="average-section-note">${escapeHtml(buildStandardsNote(exercise, unit, measurementKind, locale))}</p>`);
     }
 
-    next = replaceJapaneseText(next);
-    next = next
-        .replace(/alt="male"/g, 'alt="남성"')
-        .replace(/alt="female"/g, 'alt="여성"')
-        .replace(/alt="Male"/g, 'alt="남성"')
-        .replace(/alt="Female"/g, 'alt="여성"')
-        .replace(/alt="Official Record"/g, 'alt="공식 기록"')
-        .replace(/Last Updated:/g, "업데이트:");
+    next = replaceJapaneseText(next, locale);
+
+    if (isSpanish) {
+        next = next
+            .replace(/alt="male"/g, 'alt="Hombres"')
+            .replace(/alt="female"/g, 'alt="Mujeres"')
+            .replace(/alt="Male"/g, 'alt="Hombres"')
+            .replace(/alt="Female"/g, 'alt="Mujeres"')
+            .replace(/alt="Official Record"/g, 'alt="Récord oficial"')
+            .replace(/Last Updated:/g, "Actualizado:");
+    } else {
+        next = next
+            .replace(/alt="male"/g, 'alt="남성"')
+            .replace(/alt="female"/g, 'alt="여성"')
+            .replace(/alt="Male"/g, 'alt="남성"')
+            .replace(/alt="Female"/g, 'alt="여성"')
+            .replace(/alt="Official Record"/g, 'alt="공식 기록"')
+            .replace(/Last Updated:/g, "업데이트:");
+    }
 
     return next;
 }
@@ -928,6 +1480,10 @@ function stripIntentionalLanguageSwitchText(html) {
 }
 
 function cleanSectionLabel(text, localeCode = "ja") {
+    if (localeCode === "es") {
+        return String(text || "").replace(/\s*ejercicios?/gi, "").trim();
+    }
+
     if (localeCode === "ko") {
         return String(text || "").replace(/\s*운동/g, "").trim();
     }
@@ -974,15 +1530,68 @@ function inferKoreanExerciseName(slug) {
         .trim();
 }
 
-function formatCardCategory(sectionId, slug, measurementKind, tags) {
-    const sectionLabel = getCategoryLabel(sectionId, "ko");
+function inferSpanishExerciseName(slug) {
+    const tokens = slug.split("-");
+    const parts = [];
+    let index = 0;
+
+    while (index < tokens.length) {
+        let matched = false;
+        for (let size = Math.min(5, tokens.length - index); size > 0; size -= 1) {
+            const phrase = tokens.slice(index, index + size).join("-");
+            const value = PHRASE_NAME_PARTS_ES[phrase] || TOKEN_NAME_PARTS_ES[phrase];
+            if (value) {
+                parts.push(value);
+                index += size;
+                matched = true;
+                break;
+            }
+        }
+
+        if (!matched) {
+            const token = tokens[index];
+            parts.push(TOKEN_NAME_PARTS_ES[token] || token);
+            index += 1;
+        }
+    }
+
+    const equipment = [];
+    const modifiers = [];
+    const base = [];
+
+    parts.forEach((part) => {
+        if (SPANISH_EQUIPMENT_PARTS.has(part)) {
+            equipment.push(SPANISH_EQUIPMENT_PARTS.get(part));
+        } else if (SPANISH_POST_MODIFIERS.has(part)) {
+            modifiers.push(part);
+        } else {
+            base.push(part);
+        }
+    });
+
+    const name = [...base, ...modifiers, ...equipment].join(" ")
+        .replace(/press press/g, "press")
+        .replace(/curl curl/g, "curl")
+        .replace(/remo remo/g, "remo")
+        .replace(/peso muerto peso muerto/g, "peso muerto")
+        .replace(/sentadilla sentadilla/g, "sentadilla")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    return capitalizeSpanish(name || slug.replace(/-/g, " "));
+}
+
+function formatCardCategory(sectionId, slug, measurementKind, tags, localeCode = "ko") {
+    const sectionLabel = getCategoryLabel(sectionId, localeCode);
     if (isBig3(slug)) {
         return `${sectionLabel} / BIG3`;
     }
 
-    const equipmentTag = tags.find((tag) => ["덤벨", "바벨", "머신", "케이블", "스미스머신", "맨몸"].includes(tag));
-    if (measurementKind === "reps" && tags.includes("맨몸")) {
-        return `${sectionLabel} / 맨몸`;
+    const localizedEquipment = Object.values(getEquipmentTags(localeCode));
+    const bodyweightTag = getEquipmentTags(localeCode)["自重"];
+    const equipmentTag = tags.find((tag) => localizedEquipment.includes(tag));
+    if (measurementKind === "reps" && tags.includes(bodyweightTag)) {
+        return `${sectionLabel} / ${bodyweightTag}`;
     }
 
     return equipmentTag ? `${sectionLabel} / ${equipmentTag}` : sectionLabel;
@@ -994,6 +1603,14 @@ function buildCardDescription(card, section, localeCode) {
     const primaryMuscles = (card.primaryMuscles?.ja || []).map((item) => getMuscleName(item, localeCode)).slice(0, 3).join(", ");
     const measurementKind = card.measurementKind || "weight";
 
+    if (localeCode === "es") {
+        if (measurementKind === "reps") {
+            return `Consulta repeticiones medias y estándares de ${name} dentro de ${sectionLabel.toLowerCase()}.`;
+        }
+
+        return `Consulta el peso medio y los estándares de fuerza de ${name} dentro de ${sectionLabel.toLowerCase()}.${primaryMuscles ? ` Músculos principales: ${primaryMuscles}.` : ""}`;
+    }
+
     if (measurementKind === "reps") {
         return `${name}의 평균 반복 횟수와 기준 반복 횟수를 ${sectionLabel} 운동 기준으로 확인할 수 있습니다.`;
     }
@@ -1003,26 +1620,29 @@ function buildCardDescription(card, section, localeCode) {
 
 function getRelatedTagsFromCard(card, sectionId, localeCode) {
     const primaryMuscles = (card.primaryMuscles?.ja || []).map((item) => getMuscleName(item, localeCode));
+    const aliases = getCategoryAliases(localeCode);
+    const defaultTags = getCategoryDefaultTags(localeCode);
     return uniqueList([
         getCategoryLabel(sectionId, localeCode),
-        ...(CATEGORY_ALIASES_KO[sectionId] || []),
+        ...(aliases[sectionId] || []),
         ...primaryMuscles,
-        ...inferEquipmentTagsKo(card.slug),
-        ...(CATEGORY_DEFAULT_TAGS_KO[sectionId] || []),
+        ...inferEquipmentTags(card.slug, localeCode),
+        ...(defaultTags[sectionId] || []),
         getMeasurementCopy(card.measurementKind || "weight", localeCode).pageTerm,
         ...(isBig3(card.slug) ? ["BIG3"] : [])
     ]);
 }
 
-function inferEquipmentTagsKo(slug) {
+function inferEquipmentTags(slug, localeCode = "ko") {
+    const equipmentTags = getEquipmentTags(localeCode);
     const tags = [];
-    if (slug.includes("dumbbell")) tags.push(EQUIPMENT_TAGS_KO["ダンベル"]);
-    if (slug.includes("barbell")) tags.push(EQUIPMENT_TAGS_KO["バーベル"]);
-    if (slug.includes("machine")) tags.push(EQUIPMENT_TAGS_KO["マシン"]);
-    if (slug.includes("cable")) tags.push(EQUIPMENT_TAGS_KO["ケーブル"]);
-    if (slug.includes("smith-machine")) tags.push(EQUIPMENT_TAGS_KO["スミスマシン"]);
+    if (slug.includes("dumbbell")) tags.push(equipmentTags["ダンベル"]);
+    if (slug.includes("barbell")) tags.push(equipmentTags["バーベル"]);
+    if (slug.includes("machine")) tags.push(equipmentTags["マシン"]);
+    if (slug.includes("cable")) tags.push(equipmentTags["ケーブル"]);
+    if (slug.includes("smith-machine")) tags.push(equipmentTags["スミスマシン"]);
     if (/push-ups|pull-ups|chin-ups|dips|muscle-ups|burpees|jumping-jack|mountain-climbers|crunches|sit-ups|leg-raise|knee-raise|toes-to-bar|superman|flutter-kicks|scissor-kicks|russian-twist/.test(slug)) {
-        tags.push(EQUIPMENT_TAGS_KO["自重"]);
+        tags.push(equipmentTags["自重"]);
     }
     if (isBig3(slug)) tags.push("BIG3");
     return uniqueList(tags);
@@ -1032,7 +1652,15 @@ function isBig3(slug) {
     return ["bench-press", "deadlift", "squat"].includes(slug);
 }
 
-function buildAverageNote(measurementKind) {
+function buildAverageNote(measurementKind, localeCode = "ko") {
+    if (localeCode === "es") {
+        if (measurementKind === "reps") {
+            return "Nota: estos valores son estimaciones de repeticiones medias que pueden realizarse en una serie. Pueden variar según el peso corporal, el rango de movimiento, el tempo y otros factores personales. Consulta los datos detallados en la tabla inferior.";
+        }
+
+        return "Nota: estos estándares son estimaciones de 1RM basadas en levantadores promedio. Pueden variar según el peso corporal, la edad y otros factores personales. Consulta los datos detallados en la tabla inferior.";
+    }
+
     if (measurementKind === "reps") {
         return "참고: 이 기준은 한 세트에서 수행할 수 있는 평균 반복 횟수의 추정치입니다. 체중, 가동 범위, 템포 같은 개인 요인에 따라 달라질 수 있습니다. 자세한 데이터는 아래 표에서 확인하세요.";
     }
@@ -1040,12 +1668,29 @@ function buildAverageNote(measurementKind) {
     return "참고: 이 기준은 평균적인 리프터의 1RM을 기준으로 한 추정치입니다. 체중, 나이 등 개인 요인에 따라 달라질 수 있습니다. 자세한 데이터는 아래 표에서 확인하세요.";
 }
 
-function buildStandardsNote(exercise, unit, measurementKind) {
+function buildStandardsNote(exercise, unit, measurementKind, localeCode = "ko") {
+    if (localeCode === "es") {
+        if (measurementKind === "reps") {
+            return "Nota: los valores de la tabla son una referencia de repeticiones posibles en una serie. Usa los datos por peso corporal para estimar la carga relativa y los datos por edad para ver tendencias.";
+        }
+
+        const tags = inferEquipmentTags(exercise.slug, localeCode);
+        if (tags.includes("Mancuernas")) {
+            return "Nota: el peso de mancuerna mostrado en la tabla corresponde a una sola mancuerna.";
+        }
+
+        if (tags.some((tag) => ["Máquina", "Cable", "Máquina Smith"].includes(tag))) {
+            return "Nota: el peso indicado en máquinas y cables puede variar según el fabricante. Úsalo como referencia para comparar en equipos con condiciones similares.";
+        }
+
+        return `Nota: una barra estándar de gimnasio suele pesar ${unit === "lb" ? "44 lb" : "20 kg"}.`;
+    }
+
     if (measurementKind === "reps") {
         return "참고: 표의 수치는 한 세트에서 수행할 수 있는 반복 횟수의 기준입니다. 체중별 데이터는 상대적 부담을, 나이별 데이터는 경향 차이를 보는 데 활용하세요.";
     }
 
-    const tags = inferEquipmentTagsKo(exercise.slug);
+    const tags = inferEquipmentTags(exercise.slug, localeCode);
     if (tags.includes("덤벨")) {
         return "참고: 표에 표시된 덤벨 중량은 덤벨 한 개 기준입니다.";
     }
@@ -1057,22 +1702,30 @@ function buildStandardsNote(exercise, unit, measurementKind) {
     return `참고: 일반적인 헬스장 바벨은 기본적으로 ${unit === "lb" ? "44lb" : "20kg"}입니다.`;
 }
 
-function replaceJapaneseText(html) {
+function replaceJapaneseText(html, localeCode = "ko") {
     let next = html;
+    const muscleGroups = localeCode === "es" ? MUSCLE_GROUPS_ES : MUSCLE_GROUPS_KO;
+    const muscles = localeCode === "es" ? MUSCLES_ES : MUSCLES_KO;
+    const replacements = localeCode === "es" ? JAPANESE_TO_SPANISH_TEXT : JAPANESE_TO_KOREAN_TEXT;
 
-    Object.entries(MUSCLE_GROUPS_KO).forEach(([ja, ko]) => {
-        next = next.replaceAll(ja, ko);
+    Object.entries(muscleGroups).forEach(([ja, localized]) => {
+        next = next.replaceAll(ja, localized);
     });
 
-    Object.entries(MUSCLES_KO).forEach(([ja, ko]) => {
-        next = next.replaceAll(ja, ko);
+    Object.entries(muscles).forEach(([ja, localized]) => {
+        next = next.replaceAll(ja, localized);
     });
 
-    JAPANESE_TO_KOREAN_TEXT.forEach(([ja, ko]) => {
-        next = next.replaceAll(ja, ko);
+    replacements.forEach(([ja, localized]) => {
+        next = next.replaceAll(ja, localized);
     });
 
     return next;
+}
+
+function capitalizeSpanish(value) {
+    const text = String(value || "").trim();
+    return text ? `${text.charAt(0).toUpperCase()}${text.slice(1)}` : "";
 }
 
 function toTitleCase(value) {

@@ -171,6 +171,89 @@
           ]
         }
       ]
+    },
+    "es": {
+      "title": "Política de privacidad | Shiba Muscle",
+      "description": "Página que resume la política de privacidad, la política de cookies, la publicidad y las condiciones de uso de Shiba Muscle.",
+      "heading": "Política de privacidad",
+      "intro": [
+        "En Shiba Muscle tratamos la información solo en la medida necesaria para prestar el servicio y nos esforzamos por proteger la privacidad de quienes usan el sitio. A continuación explicamos cómo se gestiona la información y cuáles son las condiciones de uso."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Condiciones de uso",
+          "blocks": [
+            {
+              "type": "subheading",
+              "text": "Uso del contenido"
+            },
+            {
+              "type": "paragraph",
+              "text": "La información del sitio puede consultarse o citarse dentro de un uso razonable. No se permite republicarla de forma engañosa, usarla con mala fe ni emplearla de manera que perjudique a terceros. Al citar o reutilizar contenido, indica el nombre del sitio como fuente."
+            },
+            {
+              "type": "subheading",
+              "text": "Conductas prohibidas"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Modificar sin permiso el contenido del sitio y redistribuirlo de una forma que pueda causar confusión",
+                "Molestar, perjudicar o causar daños a otras personas usuarias o a terceros",
+                "Obstaculizar el funcionamiento del servicio mediante accesos no autorizados, ataques al servidor u otras acciones similares"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Exención de responsabilidad"
+            },
+            {
+              "type": "paragraph",
+              "text": "Intentamos mantener la información publicada lo más precisa y actualizada posible, pero no garantizamos su integridad ni exactitud. El sitio no se hace responsable de los daños que puedan derivarse del uso de la información publicada."
+            },
+            {
+              "type": "subheading",
+              "text": "Cambios en el servicio"
+            },
+            {
+              "type": "paragraph",
+              "text": "El contenido, la estructura y los servicios ofrecidos por el sitio pueden cambiar, suspenderse o finalizar sin aviso previo. El sitio no se hace responsable de los daños derivados de esos cambios."
+            },
+            {
+              "type": "subheading",
+              "text": "Enlaces externos"
+            },
+            {
+              "type": "paragraph",
+              "text": "No asumimos responsabilidad por la información, los servicios u otros contenidos ofrecidos por sitios externos a los que se acceda mediante enlaces, banners u otros elementos desde este sitio."
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Derechos de autor",
+          "paragraphs": [
+            "Los derechos de autor de los textos, imágenes, datos y demás contenidos publicados pertenecen al operador del sitio o a sus titulares legítimos. Al citar o reutilizar contenido, indica la fuente y hazlo dentro de un alcance adecuado."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Política de cookies",
+          "paragraphs": [
+            "El sitio puede usar cookies y tecnologías similares para análisis de acceso, distribución de anuncios y mejora de la experiencia. Esto nos ayuda a comprender tendencias de uso, mejorar el sitio y mostrar anuncios más relevantes.",
+            "Si no deseas permitir cookies, puedes desactivarlas desde la configuración de tu navegador. También puedes gestionar la personalización de anuncios desde la configuración de anuncios de Google."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Publicidad",
+          "paragraphs": [
+            "El sitio utiliza Google AdSense, un servicio de publicidad de terceros. Google y otros proveedores de publicidad pueden mostrar anuncios basados en información de acceso anterior u otros datos similares.",
+            "Para más información sobre el contenido de los anuncios, la forma de distribución y la personalización, consulta las políticas de Google y de cada proveedor publicitario."
+          ]
+        }
+      ]
     }
   }
 }

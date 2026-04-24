@@ -14,7 +14,7 @@ const ADSENSE_CLIENT_ID = "ca-pub-2819086765117537";
 const ADSENSE_SCRIPT_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`;
 
 function buildFontBlock(locale = "ja") {
-    const family = locale === "ko" ? "Noto+Sans+KR" : "Noto+Sans+JP";
+    const family = locale === "ko" ? "Noto+Sans+KR" : locale === "ja" ? "Noto+Sans+JP" : "Noto+Sans";
     return `
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,16 +148,18 @@ function renderLegacyCategoryNav(pageType, locale = "ja") {
 function renderStaticFooter(file, locale = "ja") {
     const alternates = languageAlternates(file);
     const flagAlt = {
-        en: locale === "ko" ? "영국 국기" : "UK",
-        ja: locale === "ko" ? "일본 국기" : "Japan",
-        zh: locale === "ko" ? "중국 국기" : "China",
-        ko: locale === "ko" ? "한국 국기" : "Korea"
+        en: locale === "ko" ? "영국 국기" : locale === "es" ? "Bandera del Reino Unido" : "UK",
+        ja: locale === "ko" ? "일본 국기" : locale === "es" ? "Bandera de Japón" : "Japan",
+        zh: locale === "ko" ? "중국 국기" : locale === "es" ? "Bandera de China" : "China",
+        ko: locale === "ko" ? "한국 국기" : locale === "es" ? "Bandera de Corea" : "Korea",
+        es: locale === "ko" ? "스페인 국기" : locale === "es" ? "Bandera de España" : "Spain"
     };
     const flagIcon = {
         en: "uk-flag.webp",
         ja: "japan-flag.webp",
         zh: "china-flag.webp",
-        ko: "korea-flag.webp"
+        ko: "korea-flag.webp",
+        es: "spain-flag.svg"
     };
 
     return `
@@ -216,7 +218,7 @@ function renderExerciseLibrary(catalogData, { unit = "kg", titleTag = "h2", titl
         </div>
 
 ${catalogData.sections.map((section) => {
-        const localizedTitle = locale === "ko" ? getCategoryLabel(section, locale) : section.titles.ja;
+        const localizedTitle = locale === "ja" ? section.titles.ja : getCategoryLabel(section, locale);
         return `        <h2 id="${escapeAttribute(section.id)}" class="section-title">${escapeHtml(localizedTitle)}</h2>
         <div class="exercise-cards-container">
 ${section.cards.map((card) => renderCard(card, unit, locale, section)).join("\n")}
@@ -272,10 +274,10 @@ function renderDiscoveryGrid(section, pages, locale = "ja") {
         <div class="discovery-grid">
 ${pages.map((page) => {
         return `            <a class="discovery-card" href="${escapeAttribute(page.file)}">
-                <span class="discovery-type">${escapeHtml(page.type === "comparison" ? "Comparison" : "Intent")}</span>
+                <span class="discovery-type">${escapeHtml(locale === "es" ? (page.type === "comparison" ? "Comparativa" : "Objetivo") : page.type === "comparison" ? "Comparison" : "Intent")}</span>
                 <h3>${escapeHtml(page.heading)}</h3>
                 <p>${escapeHtml((page.intro || [])[0] || page.description || "")}</p>
-                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : "ページを見る"}</span>
+                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "es" ? "Ver página" : "ページを見る"}</span>
             </a>`;
     }).join("\n")}
         </div>

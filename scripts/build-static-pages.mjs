@@ -16,6 +16,7 @@ import {
 import {
     buildOutputPath,
     getGeneratedLocales,
+    getUiText,
     localizeStaticPage,
     stylesheetHref
 } from "./localization.mjs";
@@ -86,7 +87,7 @@ function renderContentPage(page, locale) {
     <hr class="top-divider">
     <main class="page-main">
 ${renderBreadcrumb([
-        { label: locale === "ko" ? "홈" : "Home", href: "index.html" },
+        { label: getUiText(locale, "home"), href: "index.html" },
         { label: page.heading }
     ], locale)}
 

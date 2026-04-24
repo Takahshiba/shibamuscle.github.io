@@ -7,6 +7,7 @@ import {
     JAPANESE_LEFTOVER_PATTERNS,
     absoluteUrlForFile,
     getGeneratedLocales,
+    getLocaleConfigs,
     getLocaleConfig,
     stripIntentionalLanguageSwitchText
 } from "./localization.mjs";
@@ -31,21 +32,29 @@ for (const entry of htmlEntries) {
     assert(!html.includes("G-ZPM6B2KLSV"), `${entry.relativePath}: legacy GA id is still present`);
     assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${entry.relativePath}: current GA script is missing`);
     assert(html.includes(`<html lang="${localeConfig.hreflang}"`), `${entry.relativePath}: html lang is incorrect`);
-    assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === 5, `${entry.relativePath}: hreflang set is incomplete`);
+    assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === getLocaleConfigs().length + 1, `${entry.relativePath}: hreflang set is incomplete`);
     assert(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${entry.relativePath}: canonical is missing or malformed`);
     assert(/<title>[^<]+<\/title>/.test(html), `${entry.relativePath}: title is missing`);
     assert(/<meta name="description" content="[^"]+">/.test(html), `${entry.relativePath}: meta description is missing`);
     assert(/<h1[\s>]/i.test(html) || isToolPage, `${entry.relativePath}: H1 is missing`);
     assert(sitemapUrls.has(canonicalUrl), `${entry.relativePath}: sitemap is missing ${canonicalUrl}`);
 
-    assert(html.includes(`<link rel="alternate" hreflang="ja" href="${absoluteUrlForFile(entry.file, "ja")}">`), `${entry.relativePath}: ja hreflang target is incorrect`);
-    assert(html.includes(`<link rel="alternate" hreflang="ko" href="${absoluteUrlForFile(entry.file, "ko")}">`), `${entry.relativePath}: ko hreflang target is incorrect`);
+    getLocaleConfigs().forEach((locale) => {
+        assert(html.includes(`<link rel="alternate" hreflang="${locale.hreflang}" href="${absoluteUrlForFile(entry.file, locale.code)}">`), `${entry.relativePath}: ${locale.code} hreflang target is incorrect`);
+    });
     assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(entry.file, "ja")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
 
     auditInternalLinks(entry, html);
 
     if (entry.locale === "ko") {
         auditKoreanHtml(entry, html);
+    }
+
+    if (entry.locale === "es") {
+        auditSpanishHtml(entry, html);
+    }
+
+    if (entry.locale !== "ja") {
         auditSectionDrift(entry, html);
     }
 
@@ -58,6 +67,8 @@ for (const entry of htmlEntries) {
 
         if (entry.locale === "ko") {
             assert(/<meta name="description" content="[^"]+(kg 기준표|lb 기준표)[^"]*주동근[^"]+">/.test(html), `${entry.relativePath}: Korean exercise description is not specific enough`);
+        } else if (entry.locale === "es") {
+            assert(/<meta name="description" content="[^"]+(tabla en kg|tabla en lb)[^"]*(músculos principales|estándares)[^"]+">/i.test(html), `${entry.relativePath}: Spanish exercise description is not specific enough`);
         } else {
             assert(/<meta name="description" content="[^"]+(kg表|lb表)[^"]*(主働筋は|主な筋肉は)[^"]+">/.test(html), `${entry.relativePath}: exercise description is not specific enough`);
         }
@@ -117,7 +128,19 @@ function auditKoreanHtml(entry, html) {
     assert(!/中文/.test(normalized), `${entry.relativePath}: Chinese language text remains outside the language switch`);
 }
 
-function auditSectionDrift(entry, koHtml) {
+function auditSpanishHtml(entry, html) {
+    const normalized = stripIntentionalLanguageSwitchText(html)
+        .replace(/<!--[\s\S]*?-->/g, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "");
+
+    JAPANESE_LEFTOVER_PATTERNS.forEach((pattern) => {
+        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in Spanish output`);
+    });
+
+    assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in Spanish output`);
+}
+
+function auditSectionDrift(entry, localizedHtml) {
     const jaPath = join(ROOT, entry.file);
     if (!existsSync(jaPath)) {
         return;
@@ -125,9 +148,9 @@ function auditSectionDrift(entry, koHtml) {
 
     const jaHtml = readFileSync(jaPath, "utf8");
     const jaSignature = buildStructureSignature(jaHtml);
-    const koSignature = buildStructureSignature(koHtml);
+    const localizedSignature = buildStructureSignature(localizedHtml);
 
-    assert(JSON.stringify(jaSignature) === JSON.stringify(koSignature), `${entry.relativePath}: section/table structure drifted from Japanese canonical page`);
+    assert(JSON.stringify(jaSignature) === JSON.stringify(localizedSignature), `${entry.relativePath}: section/table structure drifted from Japanese canonical page`);
 }
 
 function buildStructureSignature(html) {

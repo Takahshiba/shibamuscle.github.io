@@ -142,11 +142,11 @@ function renderMuscles(exercise, locale) {
     const groups = getLocalizedMuscleGroups(exercise, locale);
     return `
     <div class="container">
-        <h2 class="section-title">${escapeHtml(locale === "ko" ? "자극되는 근육" : "鍛えられる筋肉")}</h2>
+        <h2 class="section-title">${escapeHtml(getUiText(locale, "musclesHeading"))}</h2>
         <table class="muscle-activated-table">
             <thead>
                 <tr>
-                    <th>${escapeHtml(locale === "ko" ? "그룹" : "グループ")}</th>
+                    <th>${escapeHtml(getUiText(locale, "group"))}</th>
                     <th>${escapeHtml(getUiText(locale, "muscles"))}</th>
                 </tr>
             </thead>

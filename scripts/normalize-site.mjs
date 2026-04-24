@@ -12,8 +12,10 @@ import {
     buildExerciseSeoDescription,
     getExerciseName,
     getGeneratedLocales,
+    getLocaleConfigs,
     getLocaleConfig,
     getOgLocale,
+    getUiText,
     languageAlternates,
     localizeStaticPage
 } from "./localization.mjs";
@@ -132,7 +134,7 @@ function buildPageContext(entry, html) {
     const discoveryPage = discoveryFileIndex.get(file);
     const staticPage = staticPageIndex.get(file);
     const exerciseMatch = exerciseFileIndex.byFile.get(file);
-    const homeLabel = locale === "ko" ? "홈" : "Home";
+    const homeLabel = getUiText(locale, "home");
 
     if (file === "index.html") {
         const page = localizeStaticPage(staticPageIndex.get("index.html"), locale);
@@ -236,7 +238,7 @@ function buildPageContext(entry, html) {
         title: h1 ? `${h1} | Shiba Muscle` : "Shiba Muscle",
         pageLabel: h1 || (locale === "ko" ? "페이지" : "ページ"),
         homeLabel,
-        description: decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))) || (locale === "ko" ? "Shiba Muscle 페이지입니다." : "Shiba Muscleのページです。"),
+        description: decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))) || (locale === "ko" ? "Shiba Muscle 페이지입니다." : locale === "es" ? "Página de Shiba Muscle." : "Shiba Muscleのページです。"),
         canonicalUrl,
         ogImage: `${SITE_ORIGIN}/assets/dumbbell-logo.png`,
         type: "article",
@@ -281,7 +283,7 @@ function ensureHeadClose(html) {
 }
 
 function ensureFontBlock(html, locale) {
-    const family = locale === "ko" ? "Noto+Sans+KR" : "Noto+Sans+JP";
+    const family = locale === "ko" ? "Noto+Sans+KR" : locale === "ja" ? "Noto+Sans+JP" : "Noto+Sans";
     const fontBlock = `
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -289,7 +291,9 @@ function ensureFontBlock(html, locale) {
 `;
     const stripped = html
         .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
-        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="precaonnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n");
+        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans:wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
+        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="precaonnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
+        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="precaonnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans:wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n");
 
     if (stripped.includes("<!-- Favicon -->")) {
         return stripped.replace("<!-- Favicon -->", `${fontBlock}\n    <!-- Favicon -->`);
@@ -300,15 +304,16 @@ function ensureFontBlock(html, locale) {
 
 function buildSeoBlock(context) {
     const alternates = context.alternates;
+    const alternateLinks = getLocaleConfigs().map((locale) => {
+        return `    <link rel="alternate" hreflang="${locale.hreflang}" href="${alternates[locale.code]}">`;
+    }).join("\n");
+
     return `
     <meta name="description" content="${escapeAttribute(context.description)}">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#148a6a">
     <link rel="canonical" href="${context.canonicalUrl}">
-    <link rel="alternate" hreflang="ja" href="${alternates.ja}">
-    <link rel="alternate" hreflang="en" href="${alternates.en}">
-    <link rel="alternate" hreflang="zh" href="${alternates.zh}">
-    <link rel="alternate" hreflang="ko" href="${alternates.ko}">
+${alternateLinks}
     <link rel="alternate" hreflang="x-default" href="${alternates.ja}">
     <meta property="og:type" content="${context.type}">
     <meta property="og:site_name" content="Shiba Muscle">
@@ -384,7 +389,7 @@ function ensureBreadcrumb(html, items, locale) {
 }
 
 function buildBreadcrumbMarkup(items, locale) {
-    const ariaLabel = locale === "ko" ? "이동 경로" : "Breadcrumb";
+    const ariaLabel = getUiText(locale, "breadcrumb");
     const content = items.map((item, index) => {
         const label = escapeHtml(item.label);
         const separator = index < items.length - 1 ? '<span class="breadcrumb-separator">/</span>' : "";
