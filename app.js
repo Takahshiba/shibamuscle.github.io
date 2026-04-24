@@ -51,7 +51,20 @@ ensureAdSenseScript();
 
 document.addEventListener("DOMContentLoaded", () => {
     const pageType = detectPageType();
+    const locale = detectLocale();
     document.body.dataset.pageType = pageType;
+    document.body.dataset.locale = locale;
+
+    if (locale !== "ja") {
+        document.body.classList.add(`${pageType}-page`);
+        initStandardsTabs();
+        initHeaderActions();
+
+        window.requestAnimationFrame(() => {
+            initializeAds();
+        });
+        return;
+    }
 
     rebuildSharedChrome(pageType);
 
@@ -193,7 +206,7 @@ function buildFooter() {
         { href: localizedDomainHref("https://en.shibamuscle.com"), label: "English", lang: "en" },
         { href: localizedDomainHref("https://shibamuscle.com"), label: "日本語", lang: "ja" },
         { href: localizedDomainHref("https://cn.shibamuscle.com"), label: "中文", lang: "zh" },
-        { href: localizedDomainHref("https://ko.shibamuscle.com"), label: "한국어", lang: "ko" }
+        { href: localizedDomainHref("https://shibamuscle.com/ko"), label: "한국어", lang: "ko" }
     ].map((item) => `<a href="${item.href}" data-lang="${item.lang}">${item.label}</a>`).join("");
 
     return htmlToElement(`
@@ -1262,6 +1275,15 @@ function replaceHeadingTag(heading, nextTag) {
 
 function currentPath() {
     return window.location.pathname.split("/").pop() || "index.html";
+}
+
+function detectLocale() {
+    const lang = document.documentElement.lang || "";
+    if (lang.toLowerCase().startsWith("ko") || window.location.pathname.split("/").includes("ko")) {
+        return "ko";
+    }
+
+    return "ja";
 }
 
 function localizedDomainHref(baseUrl) {

@@ -1,6 +1,6 @@
 # Source Structure
 
-`src/` is the editable source of truth for the site pages that are generated into the repo root.
+`src/` is the editable source of truth for the site pages that are generated into the repo root and locale subdirectories.
 
 - `catalog.json`
   Shared exercise library data used by the homepage and exercise pages.
@@ -13,6 +13,8 @@
   Canonical category labels, aliases, and shared vocabulary used to normalize section names and search terms.
 - `pages/*.json`
   Source content for shared static pages like the homepage, contact page, and privacy policy.
+- `locales.json`
+  Locale routing and SEO configuration. Japanese is generated at `/`; Korean is generated under `/ko/`.
 
 Build flow:
 
@@ -24,7 +26,7 @@ The build also:
 
 - syncs exercise metadata back into `src/exercises/*.json` and `src/catalog.json`
 - generates dedicated OG assets in `assets/og/`
-- audits SEO, analytics, and breadcrumbs
+- audits SEO, analytics, breadcrumbs, locale routing, and Korean output quality
 
 Bootstrap / re-extract source from the current generated HTML:
 
@@ -32,6 +34,13 @@ Bootstrap / re-extract source from the current generated HTML:
 node scripts/extract-exercise-source.mjs
 ```
 
-The generated root HTML files are build outputs. Edit `src/` instead of editing the generated exercise pages directly.
+The generated root HTML files and `/ko/` HTML files are build outputs. Edit `src/` instead of editing the generated exercise pages directly.
 
 Today this covers the homepage, contact page, privacy policy, and all exercise pages. `Shift2ics.html` is still hand-maintained because it is a standalone PDF tool with its own inline runtime.
+
+Localization notes:
+
+- Japanese exercise numeric data, standards, and section structure are canonical.
+- Korean pages reuse the same filenames and slugs under `/ko/`.
+- Korean copy should use natural Korean gym terminology and must not visibly fall back to Japanese.
+- SEO normalization owns canonical, hreflang, OG/Twitter tags, footer language URLs, and sitemap entries for generated locales.

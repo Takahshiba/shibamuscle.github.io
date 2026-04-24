@@ -10,12 +10,14 @@ const ASSETS_ROOT = join(ROOT, "assets");
 const CATALOG_PATH = join(SRC_ROOT, "catalog.json");
 const TAXONOMY_PATH = join(SRC_ROOT, "taxonomy.json");
 const DISCOVERY_PATH = join(SRC_ROOT, "discovery.json");
+const LOCALES_PATH = join(SRC_ROOT, "locales.json");
 
 export {
     ASSETS_ROOT,
     CATALOG_PATH,
     DISCOVERY_PATH,
     EXERCISE_SRC_ROOT,
+    LOCALES_PATH,
     PAGES_ROOT,
     ROOT,
     SRC_ROOT,
@@ -28,6 +30,7 @@ export {
     loadDiscovery,
     loadExerciseFiles,
     loadExercises,
+    loadLocales,
     loadPages,
     loadTaxonomy,
     readJson,
@@ -56,6 +59,10 @@ function loadTaxonomy() {
 
 function loadDiscovery() {
     return readJson(DISCOVERY_PATH);
+}
+
+function loadLocales() {
+    return readJson(LOCALES_PATH);
 }
 
 function loadPages() {

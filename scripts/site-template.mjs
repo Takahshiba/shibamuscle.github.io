@@ -1,73 +1,79 @@
+import {
+    assetHref,
+    buildLocalizedCard,
+    cleanSectionLabel,
+    getCategoryLabel,
+    getCategoryNavItems,
+    getLocaleConfig,
+    getUiText,
+    languageAlternates,
+    stylesheetHref
+} from "./localization.mjs";
+
 const ADSENSE_CLIENT_ID = "ca-pub-2819086765117537";
 const ADSENSE_SCRIPT_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`;
 
-const CATEGORY_LINKS = [
-    { id: "whole-body-section", label: "全身", icon: "./assets/power-clean-white-icon.webp", alt: "全身" },
-    { id: "chest-section", label: "胸", icon: "./assets/bench-press-white-icon.webp", alt: "胸" },
-    { id: "back-section", label: "背中", icon: "./assets/deadlift-white-icon.webp", alt: "背中" },
-    { id: "shoulder-section", label: "肩", icon: "./assets/shoulder-press-white-icon.webp", alt: "Shoulder" },
-    { id: "arm-section", label: "腕", icon: "./assets/hammer-curl-white-icon.webp", alt: "Arm" },
-    { id: "leg-section", label: "脚", icon: "./assets/squat-white-icon.webp", alt: "Leg" },
-    { id: "core-section", label: "体幹", icon: "./assets/sit-ups-white-icon.webp", alt: "Core" }
-];
-
-const FONT_BLOCK = `
+function buildFontBlock(locale = "ja") {
+    const family = locale === "ko" ? "Noto+Sans+KR" : "Noto+Sans+JP";
+    return `
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=${family}:wght@100..900&display=swap" rel="stylesheet">
 `;
+}
 
-const FAVICON_BLOCK = `
+function buildFaviconBlock(locale = "ja") {
+    return `
     <!-- Favicon -->
-    <meta name="msapplication-square70x70logo" content="./assets/site-tile-70x70.png">
-    <meta name="msapplication-square150x150logo" content="./assets/site-tile-150x150.png">
-    <meta name="msapplication-wide310x150logo" content="./assets/site-tile-310x150.png">
-    <meta name="msapplication-square310x310logo" content="./assets/site-tile-310x310.png">
+    <meta name="msapplication-square70x70logo" content="${assetHref("site-tile-70x70.png", locale)}">
+    <meta name="msapplication-square150x150logo" content="${assetHref("site-tile-150x150.png", locale)}">
+    <meta name="msapplication-wide310x150logo" content="${assetHref("site-tile-310x150.png", locale)}">
+    <meta name="msapplication-square310x310logo" content="${assetHref("site-tile-310x310.png", locale)}">
     <meta name="msapplication-TileColor" content="#0078d7">
-    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="./assets/favicon.ico">
-    <link rel="icon" type="image/vnd.microsoft.icon" href="./assets/favicon.ico">
-    <link rel="apple-touch-icon" sizes="57x57" href="./assets/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="./assets/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="./assets/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="./assets/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="./assets/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="./assets/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="./assets/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="./assets/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="36x36" href="./assets/android-chrome-36x36.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="./assets/android-chrome-48x48.png">
-    <link rel="icon" type="image/png" sizes="72x72" href="./assets/android-chrome-72x72.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="./assets/android-chrome-96x96.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="./assets/android-chrome-128x128.png">
-    <link rel="icon" type="image/png" sizes="144x144" href="./assets/android-chrome-144x144.png">
-    <link rel="icon" type="image/png" sizes="152x152" href="./assets/android-chrome-152x152.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="./assets/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="256x256" href="./assets/android-chrome-256x256.png">
-    <link rel="icon" type="image/png" sizes="384x384" href="./assets/android-chrome-384x384.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="./assets/android-chrome-512x512.png">
-    <link rel="icon" type="image/png" sizes="36x36" href="./assets/icon-36x36.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="./assets/icon-48x48.png">
-    <link rel="icon" type="image/png" sizes="72x72" href="./assets/icon-72x72.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="./assets/icon-96x96.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="./assets/icon-128x128.png">
-    <link rel="icon" type="image/png" sizes="144x144" href="./assets/icon-144x144.png">
-    <link rel="icon" type="image/png" sizes="152x152" href="./assets/icon-152x152.png">
-    <link rel="icon" type="image/png" sizes="160x160" href="./assets/icon-160x160.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="196x196" href="./assets/icon-196x196.png">
-    <link rel="icon" type="image/png" sizes="256x256" href="./assets/icon-256x256.png">
-    <link rel="icon" type="image/png" sizes="384x384" href="./assets/icon-384x384.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="./assets/icon-512x512.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icon-16x16.png">
-    <link rel="icon" type="image/png" sizes="24x24" href="./assets/icon-24x24.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icon-32x32.png">
-    <link rel="manifest" href="./assets/manifest.json">
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="${assetHref("favicon.ico", locale)}">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="${assetHref("favicon.ico", locale)}">
+    <link rel="apple-touch-icon" sizes="57x57" href="${assetHref("apple-touch-icon-57x57.png", locale)}">
+    <link rel="apple-touch-icon" sizes="60x60" href="${assetHref("apple-touch-icon-60x60.png", locale)}">
+    <link rel="apple-touch-icon" sizes="72x72" href="${assetHref("apple-touch-icon-72x72.png", locale)}">
+    <link rel="apple-touch-icon" sizes="76x76" href="${assetHref("apple-touch-icon-76x76.png", locale)}">
+    <link rel="apple-touch-icon" sizes="114x114" href="${assetHref("apple-touch-icon-114x114.png", locale)}">
+    <link rel="apple-touch-icon" sizes="120x120" href="${assetHref("apple-touch-icon-120x120.png", locale)}">
+    <link rel="apple-touch-icon" sizes="144x144" href="${assetHref("apple-touch-icon-144x144.png", locale)}">
+    <link rel="apple-touch-icon" sizes="152x152" href="${assetHref("apple-touch-icon-152x152.png", locale)}">
+    <link rel="apple-touch-icon" sizes="180x180" href="${assetHref("apple-touch-icon-180x180.png", locale)}">
+    <link rel="icon" type="image/png" sizes="36x36" href="${assetHref("android-chrome-36x36.png", locale)}">
+    <link rel="icon" type="image/png" sizes="48x48" href="${assetHref("android-chrome-48x48.png", locale)}">
+    <link rel="icon" type="image/png" sizes="72x72" href="${assetHref("android-chrome-72x72.png", locale)}">
+    <link rel="icon" type="image/png" sizes="96x96" href="${assetHref("android-chrome-96x96.png", locale)}">
+    <link rel="icon" type="image/png" sizes="128x128" href="${assetHref("android-chrome-128x128.png", locale)}">
+    <link rel="icon" type="image/png" sizes="144x144" href="${assetHref("android-chrome-144x144.png", locale)}">
+    <link rel="icon" type="image/png" sizes="152x152" href="${assetHref("android-chrome-152x152.png", locale)}">
+    <link rel="icon" type="image/png" sizes="192x192" href="${assetHref("android-chrome-192x192.png", locale)}">
+    <link rel="icon" type="image/png" sizes="256x256" href="${assetHref("android-chrome-256x256.png", locale)}">
+    <link rel="icon" type="image/png" sizes="384x384" href="${assetHref("android-chrome-384x384.png", locale)}">
+    <link rel="icon" type="image/png" sizes="512x512" href="${assetHref("android-chrome-512x512.png", locale)}">
+    <link rel="icon" type="image/png" sizes="36x36" href="${assetHref("icon-36x36.png", locale)}">
+    <link rel="icon" type="image/png" sizes="48x48" href="${assetHref("icon-48x48.png", locale)}">
+    <link rel="icon" type="image/png" sizes="72x72" href="${assetHref("icon-72x72.png", locale)}">
+    <link rel="icon" type="image/png" sizes="96x96" href="${assetHref("icon-96x96.png", locale)}">
+    <link rel="icon" type="image/png" sizes="128x128" href="${assetHref("icon-128x128.png", locale)}">
+    <link rel="icon" type="image/png" sizes="144x144" href="${assetHref("icon-144x144.png", locale)}">
+    <link rel="icon" type="image/png" sizes="152x152" href="${assetHref("icon-152x152.png", locale)}">
+    <link rel="icon" type="image/png" sizes="160x160" href="${assetHref("icon-160x160.png", locale)}">
+    <link rel="icon" type="image/png" sizes="192x192" href="${assetHref("icon-192x192.png", locale)}">
+    <link rel="icon" type="image/png" sizes="196x196" href="${assetHref("icon-196x196.png", locale)}">
+    <link rel="icon" type="image/png" sizes="256x256" href="${assetHref("icon-256x256.png", locale)}">
+    <link rel="icon" type="image/png" sizes="384x384" href="${assetHref("icon-384x384.png", locale)}">
+    <link rel="icon" type="image/png" sizes="512x512" href="${assetHref("icon-512x512.png", locale)}">
+    <link rel="icon" type="image/png" sizes="16x16" href="${assetHref("icon-16x16.png", locale)}">
+    <link rel="icon" type="image/png" sizes="24x24" href="${assetHref("icon-24x24.png", locale)}">
+    <link rel="icon" type="image/png" sizes="32x32" href="${assetHref("icon-32x32.png", locale)}">
+    <link rel="manifest" href="${assetHref("manifest.json", locale)}">
 `;
+}
 
 export {
     ADSENSE_CLIENT_ID,
-    CATEGORY_LINKS,
     cleanSectionLabel,
     escapeAttribute,
     escapeHtml,
@@ -82,12 +88,13 @@ export {
     renderStaticHeader
 };
 
-function renderDocument({ title, stylesheets = ["styles.css"], body, generatedComment }) {
+function renderDocument({ title, stylesheets = ["styles.css"], body, generatedComment, locale = "ja" }) {
+    const localeConfig = getLocaleConfig(locale);
     const comment = generatedComment ? `${generatedComment}\n` : "";
-    const stylesheetLinks = stylesheets.map((href) => `    <link rel="stylesheet" href="${escapeAttribute(href)}">`).join("\n");
+    const stylesheetLinks = stylesheets.map((href) => `    <link rel="stylesheet" href="${escapeAttribute(stylesheetHref(href, locale))}">`).join("\n");
 
     return `<!DOCTYPE html>
-${comment}<html lang="ja">
+${comment}<html lang="${escapeAttribute(localeConfig.hreflang)}" dir="${escapeAttribute(localeConfig.dir || "ltr")}">
 
 <head>
     <meta charset="UTF-8">
@@ -96,8 +103,8 @@ ${comment}<html lang="ja">
 
     <script async src="${ADSENSE_SCRIPT_SRC}"
      crossorigin="anonymous"></script>
-${FONT_BLOCK}
-${FAVICON_BLOCK}
+${buildFontBlock(locale)}
+${buildFaviconBlock(locale)}
 ${stylesheetLinks}
 </head>
 <body>
@@ -108,14 +115,14 @@ ${body}
 `;
 }
 
-function renderStaticHeader({ pageType = "content", unitSwitchHtml = "" } = {}) {
-    const categoryNav = renderLegacyCategoryNav(pageType);
+function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja" } = {}) {
+    const categoryNav = renderLegacyCategoryNav(pageType, locale);
 
     return `    <header>
         <nav>
             <div class="header-logo">
                 <a href="index.html" class="header-link">
-                    <img src="./assets/dumbbell-logo.png" alt="Shiba Muscle" class="header-dumbbell-logo">
+                    <img src="${assetHref("dumbbell-logo.png", locale)}" alt="Shiba Muscle" class="header-dumbbell-logo">
                     <span class="header-text">Shiba Muscle</span>
                 </a>
             </div>
@@ -127,40 +134,50 @@ ${categoryNav}
     </header>`;
 }
 
-function renderLegacyCategoryNav(pageType) {
-    return CATEGORY_LINKS.map((item, index) => {
+function renderLegacyCategoryNav(pageType, locale = "ja") {
+    const categoryLinks = getCategoryNavItems(locale);
+    return categoryLinks.map((item, index) => {
         const href = pageType === "home" ? `#${item.id}` : `index.html#${item.id}`;
-        const divider = index < CATEGORY_LINKS.length - 1 ? '\n            <div class="divider">|</div>' : "";
+        const divider = index < categoryLinks.length - 1 ? '\n            <div class="divider">|</div>' : "";
         return `            <a href="${href}">
                 <img src="${item.icon}" alt="${item.alt}" class="exercise-icon"> ${item.label}
             </a>${divider}`;
     }).join("\n");
 }
 
-function renderStaticFooter(file) {
-    const path = file === "index.html" ? "/" : `/${file}`;
+function renderStaticFooter(file, locale = "ja") {
+    const alternates = languageAlternates(file);
+    const flagAlt = {
+        en: locale === "ko" ? "영국 국기" : "UK",
+        ja: locale === "ko" ? "일본 국기" : "Japan",
+        zh: locale === "ko" ? "중국 국기" : "China",
+        ko: locale === "ko" ? "한국 국기" : "Korea"
+    };
+    const flagIcon = {
+        en: "uk-flag.webp",
+        ja: "japan-flag.webp",
+        zh: "china-flag.webp",
+        ko: "korea-flag.webp"
+    };
 
     return `
     <footer>
         <div class="footer-container">
             <div class="footer-section links">
-                <h4>リンク</h4>
+                <h4>${escapeHtml(getUiText(locale, "links"))}</h4>
                 <ul>
-                    <li><img src="./assets/contact-icon.webp" alt="Contact" class="link-icon">
-                        <a href="contact.html">お問い合わせ</a>
+                    <li><img src="${assetHref("contact-icon.webp", locale)}" alt="${escapeAttribute(getUiText(locale, "contact"))}" class="link-icon">
+                        <a href="contact.html">${escapeHtml(getUiText(locale, "contact"))}</a>
                     </li>
-                    <li><img src="./assets/privacy-policy-icon.webp" alt="Privacy Policy" class="link-icon">
-                        <a href="privacy-policy.html">プライバシーポリシー</a>
+                    <li><img src="${assetHref("privacy-policy-icon.webp", locale)}" alt="${escapeAttribute(getUiText(locale, "privacy"))}" class="link-icon">
+                        <a href="privacy-policy.html">${escapeHtml(getUiText(locale, "privacy"))}</a>
                     </li>
                 </ul>
             </div>
             <div class="footer-section languages">
-                <h4>言語</h4>
+                <h4>${escapeHtml(getUiText(locale, "language"))}</h4>
                 <ul>
-                    <li><img src="./assets/uk-flag.webp" alt="UK" class="flag-icon"> <a href="https://en.shibamuscle.com${path}" data-lang="en">English</a></li>
-                    <li><img src="./assets/japan-flag.webp" alt="Japan" class="flag-icon"> <a href="https://shibamuscle.com${path}" data-lang="ja">日本語</a></li>
-                    <li><img src="./assets/china-flag.webp" alt="China" class="flag-icon"> <a href="https://cn.shibamuscle.com${path}" data-lang="zh">中文</a></li>
-                    <li><img src="./assets/korea-flag.webp" alt="Korea" class="flag-icon"> <a href="https://ko.shibamuscle.com${path}" data-lang="ko">한국어</a></li>
+${alternates.map((item) => `                    <li><img src="${assetHref(flagIcon[item.code], locale)}" alt="${escapeAttribute(flagAlt[item.code])}" class="flag-icon"> <a href="${escapeAttribute(item.href)}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a></li>`).join("\n")}
                 </ul>
             </div>
         </div>
@@ -171,7 +188,7 @@ function renderStaticFooter(file) {
     </footer>`;
 }
 
-function renderBreadcrumb(items) {
+function renderBreadcrumb(items, locale = "ja") {
     const renderedItems = items.map((item) => {
         if (item.href) {
             return `<a href="${escapeAttribute(item.href)}">${escapeHtml(item.label)}</a>`;
@@ -182,44 +199,49 @@ function renderBreadcrumb(items) {
 
     return `
     <div class="container breadcrumb-container">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
+        <nav class="breadcrumb" aria-label="${escapeAttribute(getUiText(locale, "breadcrumb"))}">
             ${renderedItems}
         </nav>
     </div>`;
 }
 
-function renderExerciseLibrary(catalogData, { unit = "kg", titleTag = "h2", titleText = "その他のワークアウト", titleId = "other-workouts" } = {}) {
+function renderExerciseLibrary(catalogData, { unit = "kg", titleTag = "h2", titleText = "", titleId = "other-workouts", locale = "ja" } = {}) {
+    const heading = titleText || getUiText(locale, "moreWorkouts");
     return `
     <div class="container">
-        <${titleTag} class="section-title" id="${escapeAttribute(titleId)}">${escapeHtml(titleText)}</${titleTag}>
+        <${titleTag} class="section-title" id="${escapeAttribute(titleId)}">${escapeHtml(heading)}</${titleTag}>
 
         <div class="search-bar-container">
-            <input type="text" id="search-bar" placeholder="🔍" onkeyup="filterExercises()">
+            <input type="text" id="search-bar" placeholder="🔍" aria-label="${escapeAttribute(getUiText(locale, "searchExercises"))}" onkeyup="filterExercises()">
         </div>
 
 ${catalogData.sections.map((section) => {
-        return `        <h2 id="${escapeAttribute(section.id)}" class="section-title">${escapeHtml(section.titles.ja)}</h2>
+        const localizedTitle = locale === "ko" ? getCategoryLabel(section, locale) : section.titles.ja;
+        return `        <h2 id="${escapeAttribute(section.id)}" class="section-title">${escapeHtml(localizedTitle)}</h2>
         <div class="exercise-cards-container">
-${section.cards.map((card) => renderCard(card, unit)).join("\n")}
+${section.cards.map((card) => renderCard(card, unit, locale, section)).join("\n")}
         </div>`;
     }).join("\n")}
     </div>`;
 }
 
-function renderCardGrid(cards, { unit = "kg", className = "exercise-cards-container exercise-cards-container--feature" } = {}) {
+function renderCardGrid(cards, { unit = "kg", className = "exercise-cards-container exercise-cards-container--feature", locale = "ja" } = {}) {
     return `
         <div class="${escapeAttribute(className)}">
-${cards.map((card) => renderCard(card, unit)).join("\n")}
+${cards.map((card) => renderCard(card, unit, locale)).join("\n")}
         </div>`;
 }
 
-function renderCard(card, unit) {
-    const searchTerms = (card.searchTerms?.ja || []).join(" | ");
-    const tags = (card.tags?.ja || []).join(" | ");
-    const aliases = (card.aliases?.ja || []).join(" | ");
-    const primaryMuscles = (card.primaryMuscles?.ja || []).join(" | ");
-    const description = card.description?.ja || "";
+function renderCard(card, unit, locale = "ja", section = {}) {
+    const localizedCard = buildLocalizedCard(card, section, locale);
+    const searchTerms = (localizedCard.searchTerms?.[locale] || localizedCard.searchTerms?.ja || []).join(" | ");
+    const tags = (localizedCard.tags?.[locale] || localizedCard.tags?.ja || []).join(" | ");
+    const aliases = (localizedCard.aliases?.[locale] || localizedCard.aliases?.ja || []).join(" | ");
+    const primaryMuscles = (localizedCard.primaryMuscles?.[locale] || localizedCard.primaryMuscles?.ja || []).join(" | ");
+    const description = localizedCard.description?.[locale] || localizedCard.description?.ja || "";
     const measurementKind = card.measurementKind || "";
+    const name = localizedCard.names?.[locale] || localizedCard.names?.ja || "";
+    const category = localizedCard.categories?.[locale] || localizedCard.categories?.ja || "";
 
     return `            <a class="card-link" href="${escapeAttribute(`${unit}_${card.slug}.html`)}">
                 <div class="exercise-card"
@@ -230,16 +252,16 @@ function renderCard(card, unit) {
                     data-tags="${escapeAttribute(tags)}"
                     data-aliases="${escapeAttribute(aliases)}"
                     data-search-terms="${escapeAttribute(searchTerms)}">
-                    <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.imageAlt)}" loading="lazy">
+                    <img src="${escapeAttribute(localizeImageHref(card.image, locale))}" alt="${escapeAttribute(name || card.imageAlt)}" loading="lazy">
                     <div class="exercise-details">
-                        <div class="name">${escapeHtml(card.names.ja)}</div>
-                        <div class="category">${escapeHtml(card.categories.ja)}</div>
+                        <div class="name">${escapeHtml(name)}</div>
+                        <div class="category">${escapeHtml(category)}</div>
                     </div>
                 </div>
             </a>`;
 }
 
-function renderDiscoveryGrid(section, pages) {
+function renderDiscoveryGrid(section, pages, locale = "ja") {
     return `
     <section class="container section-band discovery-band" id="${escapeAttribute(section.id)}">
         <div class="section-heading">
@@ -253,7 +275,7 @@ ${pages.map((page) => {
                 <span class="discovery-type">${escapeHtml(page.type === "comparison" ? "Comparison" : "Intent")}</span>
                 <h3>${escapeHtml(page.heading)}</h3>
                 <p>${escapeHtml((page.intro || [])[0] || page.description || "")}</p>
-                <span class="discovery-link">ページを見る</span>
+                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : "ページを見る"}</span>
             </a>`;
     }).join("\n")}
         </div>
@@ -273,12 +295,20 @@ function renderAdSlot() {
     </div>`;
 }
 
-function cleanSectionLabel(text) {
-    return normalizeText(text).replace("トレーニング", "").replace("トレ", "");
-}
-
 function normalizeText(text) {
     return (text || "").replace(/\s+/g, " ").trim();
+}
+
+function localizeImageHref(href, locale = "ja") {
+    if (!href || /^https?:\/\//i.test(href)) {
+        return href || "";
+    }
+
+    if (href.startsWith("./assets/")) {
+        return assetHref(href, locale);
+    }
+
+    return href;
 }
 
 function escapeHtml(value) {

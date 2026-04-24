@@ -1,0 +1,53 @@
+{
+  "defaultLocale": "ja",
+  "locales": [
+    {
+      "code": "ja",
+      "routePrefix": "/",
+      "outputDir": "",
+      "displayName": "日本語",
+      "hreflang": "ja",
+      "dir": "ltr",
+      "defaultUnit": "kg",
+      "origin": "https://shibamuscle.com",
+      "ogLocale": "ja_JP",
+      "generated": true
+    },
+    {
+      "code": "ko",
+      "routePrefix": "/ko/",
+      "outputDir": "ko",
+      "displayName": "한국어",
+      "hreflang": "ko",
+      "dir": "ltr",
+      "defaultUnit": "kg",
+      "origin": "https://shibamuscle.com",
+      "ogLocale": "ko_KR",
+      "generated": true
+    },
+    {
+      "code": "en",
+      "routePrefix": "/",
+      "outputDir": "",
+      "displayName": "English",
+      "hreflang": "en",
+      "dir": "ltr",
+      "defaultUnit": "kg",
+      "origin": "https://en.shibamuscle.com",
+      "ogLocale": "en_US",
+      "generated": false
+    },
+    {
+      "code": "zh",
+      "routePrefix": "/",
+      "outputDir": "",
+      "displayName": "中文",
+      "hreflang": "zh",
+      "dir": "ltr",
+      "defaultUnit": "kg",
+      "origin": "https://cn.shibamuscle.com",
+      "ogLocale": "zh_CN",
+      "generated": false
+    }
+  ]
+}

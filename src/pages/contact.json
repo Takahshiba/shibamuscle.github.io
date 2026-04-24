@@ -31,5 +31,34 @@
         "状況やご希望をできるだけ具体的に記載いただくと、よりスムーズにご案内できます。個人情報に関するお問い合わせについては、ご本人確認をお願いする場合があります。"
       ]
     }
-  ]
+  ],
+  "locales": {
+    "ko": {
+      "title": "문의하기 | Shiba Muscle",
+      "description": "Shiba Muscle 문의 페이지입니다. 서비스, 데이터, 게시 내용과 관련한 질문이나 요청은 이곳에서 확인해 주세요.",
+      "heading": "문의하기",
+      "intro": [
+        "서비스 내용, 게시 데이터, 제휴 및 기타 문의는 아래 이메일 주소로 보내 주세요."
+      ],
+      "sections": [
+        {
+          "className": "content-card contact-card",
+          "blocks": [
+            {
+              "type": "email",
+              "label": "Email",
+              "value": "info@shibamuscle.com"
+            }
+          ]
+        },
+        {
+          "className": "content-card note",
+          "paragraphs": [
+            "문의 내용은 확인 후 순서대로 답변하고 있습니다. 내용에 따라 답변까지 시간이 걸릴 수 있습니다.",
+            "상황과 요청 사항을 가능한 한 구체적으로 적어 주시면 더 정확하게 안내할 수 있습니다. 개인정보와 관련된 문의는 본인 확인을 요청할 수 있습니다."
+          ]
+        }
+      ]
+    }
+  }
 }

@@ -1,54 +1,74 @@
 #!/usr/bin/env node
 
-import { readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { join, posix } from "node:path";
+
+import {
+    JAPANESE_LEFTOVER_PATTERNS,
+    absoluteUrlForFile,
+    getGeneratedLocales,
+    getLocaleConfig,
+    stripIntentionalLanguageSwitchText
+} from "./localization.mjs";
 
 const ROOT = process.cwd();
 const ANALYTICS_ID = "G-D9K58THBFM";
-
-const htmlFiles = readdirSync(ROOT)
-    .filter((file) => file.endsWith(".html"))
-    .sort((left, right) => left.localeCompare(right));
-
+const htmlEntries = listHtmlEntries();
+const availableHtml = new Set(htmlEntries.map((entry) => entry.relativePath));
+const sitemap = readFileSync(join(ROOT, "sitemap.xml"), "utf8");
+const sitemapUrls = new Set(Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)).map((match) => match[1]));
 const errors = [];
 
-for (const file of htmlFiles) {
-    const html = readFileSync(join(ROOT, file), "utf8");
-    const isExercisePage = /^(kg|lb)_/.test(file);
-    const isHomePage = file === "index.html";
+for (const entry of htmlEntries) {
+    const html = readFileSync(entry.path, "utf8");
+    const isExercisePage = /^(kg|lb)_/.test(entry.file);
+    const isHomePage = entry.file === "index.html";
+    const isToolPage = entry.file === "Shift2ics.html";
+    const localeConfig = getLocaleConfig(entry.locale);
+    const canonicalUrl = absoluteUrlForFile(entry.file, entry.locale);
 
-    assert(!html.includes("precaonnect"), `${file}: precaonnect typo is still present`);
-    assert(!html.includes("G-ZPM6B2KLSV"), `${file}: legacy GA id is still present`);
-    assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${file}: current GA script is missing`);
-    assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === 5, `${file}: hreflang set is incomplete`);
-    assert(/<link rel="canonical" href="https:\/\/shibamuscle\.com\//.test(html), `${file}: canonical is missing or malformed`);
-    assert(/<meta name="description" content="[^"]+">/.test(html), `${file}: meta description is missing`);
+    assert(!html.includes("precaonnect"), `${entry.relativePath}: precaonnect typo is still present`);
+    assert(!html.includes("G-ZPM6B2KLSV"), `${entry.relativePath}: legacy GA id is still present`);
+    assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${entry.relativePath}: current GA script is missing`);
+    assert(html.includes(`<html lang="${localeConfig.hreflang}"`), `${entry.relativePath}: html lang is incorrect`);
+    assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === 5, `${entry.relativePath}: hreflang set is incomplete`);
+    assert(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${entry.relativePath}: canonical is missing or malformed`);
+    assert(/<title>[^<]+<\/title>/.test(html), `${entry.relativePath}: title is missing`);
+    assert(/<meta name="description" content="[^"]+">/.test(html), `${entry.relativePath}: meta description is missing`);
+    assert(/<h1[\s>]/i.test(html) || isToolPage, `${entry.relativePath}: H1 is missing`);
+    assert(sitemapUrls.has(canonicalUrl), `${entry.relativePath}: sitemap is missing ${canonicalUrl}`);
+
+    assert(html.includes(`<link rel="alternate" hreflang="ja" href="${absoluteUrlForFile(entry.file, "ja")}">`), `${entry.relativePath}: ja hreflang target is incorrect`);
+    assert(html.includes(`<link rel="alternate" hreflang="ko" href="${absoluteUrlForFile(entry.file, "ko")}">`), `${entry.relativePath}: ko hreflang target is incorrect`);
+    assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(entry.file, "ja")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
+
+    auditInternalLinks(entry, html);
+
+    if (entry.locale === "ko") {
+        auditKoreanHtml(entry, html);
+        auditSectionDrift(entry, html);
+    }
 
     if (isExercisePage) {
-        const expectedLocaleTargets = [
-            `https://en.shibamuscle.com/${file}`,
-            `https://shibamuscle.com/${file}`,
-            `https://cn.shibamuscle.com/${file}`,
-            `https://ko.shibamuscle.com/${file}`
-        ];
+        assert(/<main class="page-main"/.test(html), `${entry.relativePath}: static main wrapper is missing`);
+        assert(/<nav class="breadcrumb" aria-label="/.test(html), `${entry.relativePath}: static breadcrumb is missing`);
+        assert(!/href="#whole-body-section"/.test(html), `${entry.relativePath}: broken in-page category link remains`);
+        assert(!/<h1 class="section-title"/.test(html), `${entry.relativePath}: section heading is still h1`);
+        assert(html.includes("/assets/og/exercises/"), `${entry.relativePath}: dedicated exercise OG image is missing`);
 
-        assert(/<main class="page-main">/.test(html), `${file}: static main wrapper is missing`);
-        assert(/<nav class="breadcrumb" aria-label="Breadcrumb">/.test(html), `${file}: static breadcrumb is missing`);
-        assert(!/href="#whole-body-section"/.test(html), `${file}: broken in-page category link remains`);
-        assert(!/<h1 class="section-title"/.test(html), `${file}: section heading is still h1`);
-        expectedLocaleTargets.forEach((target) => {
-            assert(html.includes(target), `${file}: localized path link is missing for ${target}`);
-        });
-        assert(/<meta name="description" content="[^"]+(kg表|lb表)[^"]*(主働筋は|主な筋肉は)[^"]+">/.test(html), `${file}: exercise description is not specific enough`);
-        assert(html.includes("/assets/og/exercises/"), `${file}: dedicated exercise OG image is missing`);
+        if (entry.locale === "ko") {
+            assert(/<meta name="description" content="[^"]+(kg 기준표|lb 기준표)[^"]*주동근[^"]+">/.test(html), `${entry.relativePath}: Korean exercise description is not specific enough`);
+        } else {
+            assert(/<meta name="description" content="[^"]+(kg表|lb表)[^"]*(主働筋は|主な筋肉は)[^"]+">/.test(html), `${entry.relativePath}: exercise description is not specific enough`);
+        }
     }
 
     if (isHomePage) {
-        assert((html.match(/<h2 id="[^"]+-section" class="section-title">/g) || []).length === 7, `${file}: homepage category sections are incomplete`);
+        assert((html.match(/<h2 id="[^"]+-section" class="section-title">/g) || []).length === 7, `${entry.relativePath}: homepage category sections are incomplete`);
     }
 
-    if (!isHomePage && !/Shift2ics\.html$/.test(file)) {
-        assert(/<nav class="breadcrumb" aria-label="Breadcrumb">/.test(html), `${file}: breadcrumb is missing`);
+    if (!isHomePage && !isToolPage) {
+        assert(/<nav class="breadcrumb" aria-label="/.test(html), `${entry.relativePath}: breadcrumb is missing`);
     }
 }
 
@@ -58,7 +78,104 @@ if (errors.length) {
     process.exit(1);
 }
 
-console.log(`Site audit passed for ${htmlFiles.length} HTML files.`);
+console.log(`Site audit passed for ${htmlEntries.length} HTML files.`);
+
+function listHtmlEntries() {
+    const entries = [];
+
+    getGeneratedLocales().forEach((locale) => {
+        const dir = locale.outputDir ? join(ROOT, locale.outputDir) : ROOT;
+        if (!existsSync(dir)) {
+            return;
+        }
+
+        readdirSync(dir)
+            .filter((file) => file.endsWith(".html"))
+            .sort((left, right) => left.localeCompare(right))
+            .forEach((file) => {
+                entries.push({
+                    file,
+                    locale: locale.code,
+                    relativePath: locale.outputDir ? `${locale.outputDir}/${file}` : file,
+                    path: join(dir, file)
+                });
+            });
+    });
+
+    return entries;
+}
+
+function auditKoreanHtml(entry, html) {
+    const normalized = stripIntentionalLanguageSwitchText(html)
+        .replace(/<!--[\s\S]*?-->/g, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "");
+
+    JAPANESE_LEFTOVER_PATTERNS.forEach((pattern) => {
+        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in Korean output`);
+    });
+
+    assert(!/中文/.test(normalized), `${entry.relativePath}: Chinese language text remains outside the language switch`);
+}
+
+function auditSectionDrift(entry, koHtml) {
+    const jaPath = join(ROOT, entry.file);
+    if (!existsSync(jaPath)) {
+        return;
+    }
+
+    const jaHtml = readFileSync(jaPath, "utf8");
+    const jaSignature = buildStructureSignature(jaHtml);
+    const koSignature = buildStructureSignature(koHtml);
+
+    assert(JSON.stringify(jaSignature) === JSON.stringify(koSignature), `${entry.relativePath}: section/table structure drifted from Japanese canonical page`);
+}
+
+function buildStructureSignature(html) {
+    return {
+        sectionIds: Array.from(html.matchAll(/<h[23]\s+id="([^"]+)"\s+class="section-title"/g)).map((match) => match[1]),
+        tables: count(html, /<table\b/g),
+        cards: count(html, /class="exercise-card"/g),
+        averageTables: count(html, /class="average-section-table"/g),
+        standardsGroups: count(html, /data-tab-group="Standards Exercise"/g),
+        tabs: count(html, /<div class="tab/g)
+    };
+}
+
+function auditInternalLinks(entry, html) {
+    const links = Array.from(html.matchAll(/<a\b[^>]*href="([^"]+)"/g)).map((match) => match[1]);
+
+    links.forEach((href) => {
+        if (shouldSkipHref(href)) {
+            return;
+        }
+
+        const resolved = resolveInternalHref(entry.relativePath, href);
+        if (!resolved.endsWith(".html")) {
+            return;
+        }
+
+        assert(availableHtml.has(resolved), `${entry.relativePath}: broken internal link to ${href}`);
+    });
+}
+
+function shouldSkipHref(href) {
+    return !href
+        || href.startsWith("#")
+        || href.startsWith("mailto:")
+        || href.startsWith("tel:")
+        || href.startsWith("javascript:")
+        || /^https?:\/\//i.test(href);
+}
+
+function resolveInternalHref(from, href) {
+    const withoutHash = href.split("#")[0];
+    const baseDir = posix.dirname(from);
+    return posix.normalize(posix.join(baseDir === "." ? "" : baseDir, withoutHash));
+}
+
+function count(text, pattern) {
+    return (text.match(pattern) || []).length;
+}
 
 function assert(condition, message) {
     if (!condition) {

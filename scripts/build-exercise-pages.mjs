@@ -3,7 +3,6 @@
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { getMeasurementCopy } from "./exercise-metadata.mjs";
 import {
     cleanSectionLabel,
     escapeAttribute,
@@ -15,110 +14,144 @@ import {
     renderStaticFooter,
     renderStaticHeader
 } from "./site-template.mjs";
-import { ROOT, loadCatalog, loadExercises } from "./source-data.mjs";
+import {
+    assetHref,
+    buildExerciseDescription,
+    buildExerciseSeo,
+    buildExerciseSummary,
+    buildOutputPath,
+    getCategoryLabel,
+    getExerciseName,
+    getGeneratedLocales,
+    getLocalizedMuscleGroups,
+    getMeasurementCopy,
+    getRelatedTags,
+    getSearchTerms,
+    getUiText,
+    localizeExerciseHtml,
+    stylesheetHref
+} from "./localization.mjs";
+import { ensureDirectory, loadCatalog, loadExercises } from "./source-data.mjs";
 
 const catalog = loadCatalog();
 const exercises = loadExercises();
+const locales = getGeneratedLocales();
 
 let generatedPages = 0;
 
-for (const exercise of exercises) {
-    for (const [unit, variant] of Object.entries(exercise.variants)) {
-        const html = renderExercisePage(exercise, catalog, unit, variant);
-        writeFileSync(join(ROOT, variant.file), html);
-        generatedPages += 1;
+for (const locale of locales) {
+    if (locale.outputDir) {
+        ensureDirectory(join(process.cwd(), locale.outputDir));
+    }
+
+    for (const exercise of exercises) {
+        for (const [unit, variant] of Object.entries(exercise.variants)) {
+            const html = renderExercisePage(exercise, catalog, unit, variant, locale.code);
+            writeFileSync(buildOutputPath(variant.file, locale.code), html);
+            generatedPages += 1;
+        }
     }
 }
 
-console.log(`Generated ${generatedPages} exercise pages from src/.`);
+console.log(`Generated ${generatedPages} localized exercise pages from src/.`);
 
-function renderExercisePage(exercise, catalogData, unit, variant) {
-    const name = exercise.names.ja;
+function renderExercisePage(exercise, catalogData, unit, variant, locale) {
+    const name = getExerciseName(exercise, locale);
     const currentFile = variant.file;
     const currentCategory = catalogData.sections.find((section) => section.id === exercise.categoryId);
     const measurementKind = exercise.metadata?.measurementKind || "weight";
-    const measurementCopy = getMeasurementCopy(measurementKind);
-    const title = `${name}の${measurementCopy.averageLabel}・${measurementCopy.standardsLabel} | Shiba Muscle`;
+    const measurementCopy = getMeasurementCopy(measurementKind, locale);
+    const title = buildExerciseSeo(exercise, measurementKind, unit, locale).title;
+    const categoryLabel = getCategoryLabel(currentCategory || exercise.categoryId, locale);
+    const summary = buildExerciseSummary(exercise, currentCategory, measurementKind, locale);
+    const description = buildExerciseDescription(exercise, currentCategory, measurementKind, locale);
+    const relatedTags = getRelatedTags(exercise, exercise.categoryId, locale);
+    const searchTerms = getSearchTerms(exercise, exercise.categoryId, locale);
     const unitSwitchHtml = `<div class="toggle-buttons">
                 <a href="kg_${exercise.slug}.html"${unit === "kg" ? ' class="active"' : ""}>kg</a>
                 <a href="lb_${exercise.slug}.html"${unit === "lb" ? ' class="active"' : ""}>lb</a>
             </div>`;
-    const body = `${renderStaticHeader({ pageType: "exercise", unitSwitchHtml })}
+    const body = `${renderStaticHeader({ pageType: "exercise", unitSwitchHtml, locale })}
 
     <hr class="top-divider">
 
     <main class="page-main"
         data-exercise-slug="${escapeAttribute(exercise.slug)}"
         data-category-id="${escapeAttribute(exercise.categoryId)}"
-        data-category-label="${escapeAttribute(exercise.metadata?.category?.label?.ja || "")}"
+        data-category-label="${escapeAttribute(categoryLabel)}"
         data-measurement-kind="${escapeAttribute(measurementKind)}"
         data-average-label="${escapeAttribute(measurementCopy.averageLabel)}"
         data-standards-label="${escapeAttribute(measurementCopy.standardsLabel)}"
-        data-summary="${escapeAttribute(exercise.metadata?.summary?.ja || "")}"
-        data-description="${escapeAttribute(exercise.metadata?.description?.ja || "")}"
-        data-primary-muscles="${escapeAttribute((exercise.metadata?.primaryMuscles?.ja || []).join(" | "))}"
-        data-related-tags="${escapeAttribute((exercise.metadata?.relatedTags?.ja || []).join(" | "))}">
+        data-summary="${escapeAttribute(summary)}"
+        data-description="${escapeAttribute(description)}"
+        data-primary-muscles="${escapeAttribute((getLocalizedPrimaryMuscles(exercise, locale)).join(" | "))}"
+        data-related-tags="${escapeAttribute(relatedTags.join(" | "))}"
+        data-search-terms="${escapeAttribute(searchTerms.join(" | "))}">
 ${renderBreadcrumb([
-        { label: "Home", href: "index.html" },
-        { label: cleanSectionLabel(currentCategory?.titles?.ja || exercise.metadata?.category?.label?.ja || "全身"), href: `index.html#${exercise.categoryId || "whole-body-section"}` },
+        { label: getUiText(locale, "home"), href: "index.html" },
+        { label: cleanSectionLabel(categoryLabel, locale), href: `index.html#${exercise.categoryId || "whole-body-section"}` },
         { label: name }
-    ])}
-        ${renderHero(exercise, measurementCopy)}
-        ${renderMuscles(exercise)}
+    ], locale)}
+        ${renderHero(exercise, measurementCopy, locale)}
+        ${renderMuscles(exercise, locale)}
 ${renderAdSlot()}
-        ${variant.averageBlock.trim()}
-        ${variant.standardsBlock.trim()}
-        ${exercise.sharedBlocks.records ? exercise.sharedBlocks.records.trim() : ""}
-        ${exercise.sharedBlocks.about ? exercise.sharedBlocks.about.trim() : ""}
+        ${localizeExerciseHtml(variant.averageBlock, { exercise, unit, locale, block: "average" }).trim()}
+        ${localizeExerciseHtml(variant.standardsBlock, { exercise, unit, locale, block: "standards" }).trim()}
+        ${exercise.sharedBlocks.records ? localizeExerciseHtml(exercise.sharedBlocks.records, { exercise, unit, locale, block: "records" }).trim() : ""}
+        ${exercise.sharedBlocks.about ? localizeExerciseHtml(exercise.sharedBlocks.about, { exercise, unit, locale, block: "about" }).trim() : ""}
 ${renderAdSlot()}
-${renderExerciseLibrary(catalogData, { unit })}
+${renderExerciseLibrary(catalogData, { unit, locale })}
 ${renderAdSlot()}
     </main>
 
-${renderStaticFooter(currentFile)}
+${renderStaticFooter(currentFile, locale)}
 
-    <script src="app.js"></script>
+    <script src="${stylesheetHref("app.js", locale)}"></script>
 `;
 
     return renderDocument({
         title,
         stylesheets: ["styles.css"],
         body,
+        locale,
         generatedComment: "<!-- Generated by scripts/build-exercise-pages.mjs. Edit src/exercises/*.json and src/catalog.json instead of editing this file directly. -->"
     });
 }
 
-function renderHero(exercise, measurementCopy) {
-    const tags = (exercise.metadata?.relatedTags?.ja || []).filter((tag) => tag !== measurementCopy.pageTerm).slice(0, 5);
+function renderHero(exercise, measurementCopy, locale) {
+    const tags = getRelatedTags(exercise, exercise.categoryId, locale).filter((tag) => tag !== measurementCopy.pageTerm).slice(0, 5);
+    const name = getExerciseName(exercise, locale);
+    const summary = buildExerciseSummary(exercise, null, exercise.metadata?.measurementKind || "weight", locale);
 
     return `
     <div class="container">
         <div class="main-image-title">
-            <h1>${escapeHtml(exercise.names.ja)}</h1>
-            <p class="hero-description">${escapeHtml(exercise.metadata?.summary?.ja || "")}</p>
+            <h1>${escapeHtml(name)}</h1>
+            <p class="hero-description">${escapeHtml(summary)}</p>
             <div class="muscle-chip-row">
                 <span class="muscle-chip">${escapeHtml(measurementCopy.averageLabel)}</span>
                 ${tags.map((tag) => `<span class="muscle-chip">${escapeHtml(tag)}</span>`).join("")}
             </div>
-            <img loading="eager" src="${escapeAttribute(exercise.image.src)}" alt="${escapeAttribute(exercise.image.alt)}" class="workout-main-image">
+            <img loading="eager" src="${escapeAttribute(assetHref(exercise.image.src, locale))}" alt="${escapeAttribute(name)}" class="workout-main-image">
         </div>
     </div>
 `;
 }
 
-function renderMuscles(exercise) {
+function renderMuscles(exercise, locale) {
+    const groups = getLocalizedMuscleGroups(exercise, locale);
     return `
     <div class="container">
-        <h2 class="section-title">鍛えられる筋肉</h2>
+        <h2 class="section-title">${escapeHtml(locale === "ko" ? "자극되는 근육" : "鍛えられる筋肉")}</h2>
         <table class="muscle-activated-table">
             <thead>
                 <tr>
-                    <th>グループ</th>
-                    <th>筋肉</th>
+                    <th>${escapeHtml(locale === "ko" ? "그룹" : "グループ")}</th>
+                    <th>${escapeHtml(getUiText(locale, "muscles"))}</th>
                 </tr>
             </thead>
             <tbody>
-                ${exercise.muscles.map((group) => {
+                ${groups.map((group) => {
                     return `
                 <tr>
                     <th>${escapeHtml(group.label)}</th>
@@ -130,4 +163,8 @@ function renderMuscles(exercise) {
         </table>
     </div>
 `;
+}
+
+function getLocalizedPrimaryMuscles(exercise, locale) {
+    return getLocalizedMuscleGroups(exercise, locale)[0]?.items || [];
 }
