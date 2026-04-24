@@ -26,7 +26,6 @@ const UI_TEXT = {
         muscles: "筋肉",
         musclesHeading: "鍛えられる筋肉",
         privacy: "プライバシーポリシー",
-        searchExercises: "ワークアウトを検索",
         shoulder: "肩",
         support: "サポート",
         wholeBody: "全身"
@@ -52,7 +51,6 @@ const UI_TEXT = {
         muscles: "근육",
         musclesHeading: "자극되는 근육",
         privacy: "개인정보 처리방침",
-        searchExercises: "운동 검색",
         shoulder: "어깨",
         support: "지원",
         wholeBody: "전신"
@@ -78,7 +76,6 @@ const UI_TEXT = {
         muscles: "Músculos",
         musclesHeading: "Músculos trabajados",
         privacy: "Política de privacidad",
-        searchExercises: "Buscar ejercicios",
         shoulder: "Hombros",
         support: "Soporte",
         wholeBody: "Cuerpo completo"
