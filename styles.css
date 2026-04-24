@@ -1143,6 +1143,13 @@ table tbody tr:hover {
     font-size: 0.9rem;
 }
 
+.tabs-container.block[data-tab-group="Standards Exercise"] .table th,
+.tabs-container.block[data-tab-group="Standards Exercise"] .table td,
+#standards-data .table th,
+#standards-data .table td {
+    text-align: center;
+}
+
 .library-more-row {
     margin: -12px 0 28px;
     display: flex;
@@ -1485,6 +1492,15 @@ table tbody tr:hover {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .library-band .exercise-cards-container,
+    .library-band .exercise-cards-container--library {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    main.page-main[data-exercise-slug] + main.page-main h2.section-title[id$="-section"] + .exercise-cards-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .footer-grid,
     .footer-meta {
         grid-template-columns: 1fr;
@@ -1504,7 +1520,7 @@ table tbody tr:hover {
 
 @media (max-width: 640px) {
     body {
-        padding-top: 116px;
+        padding-top: 102px;
     }
 
     .container {
@@ -1514,32 +1530,40 @@ table tbody tr:hover {
 
     .site-topbar {
         width: calc(100% - 20px);
-        height: 64px;
+        height: 58px;
+        gap: 16px;
     }
 
     .sub-nav {
         width: calc(100% - 20px);
-        padding-bottom: 12px;
+        gap: 8px;
+        padding-bottom: 8px;
+    }
+
+    .header-link {
+        gap: 10px;
     }
 
     .header-text {
-        font-size: 0.95rem;
+        font-size: 0.88rem;
     }
 
     .header-dumbbell-logo {
-        width: 34px;
-        height: 34px;
+        width: 30px;
+        height: 30px;
     }
 
     .toggle-buttons a {
-        min-width: 42px;
-        padding-inline: 12px;
+        min-width: 38px;
+        padding: 8px 10px;
+        font-size: 0.82rem;
     }
 
     .sub-nav a {
-        gap: 8px;
-        min-height: 38px;
-        padding-right: 12px;
+        gap: 6px;
+        min-height: 34px;
+        padding: 2px 10px;
+        font-size: 0.82rem;
     }
 
     .dashboard-panel,
@@ -1555,13 +1579,13 @@ table tbody tr:hover {
     }
 
     .category-nav-icon {
-        width: 26px;
-        height: 26px;
+        width: 22px;
+        height: 22px;
     }
 
     .category-nav-icon img {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
     }
 
     .exercise-card {
@@ -1576,6 +1600,15 @@ table tbody tr:hover {
     .exercise-cards-container,
     .exercise-cards-container--compact {
         grid-template-columns: 1fr;
+    }
+
+    .library-band .exercise-cards-container,
+    .library-band .exercise-cards-container--library {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    main.page-main[data-exercise-slug] + main.page-main h2.section-title[id$="-section"] + .exercise-cards-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .dashboard-panel-grid,
@@ -1599,5 +1632,38 @@ table tbody tr:hover {
     .muscle-activated-table,
     .calorie-burn-table {
         min-width: max(100%, 560px);
+    }
+
+    #average-data .table-shell,
+    #standards-data .table-shell,
+    #standards-data .table-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #average-data .average-section-table,
+    #standards-data .table {
+        min-width: 680px;
+    }
+
+    main.page-main[data-exercise-slug] + main.page-main .average-section-table {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        min-width: 680px;
+    }
+
+    main.page-main[data-exercise-slug] + main.page-main .table-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    main.page-main[data-exercise-slug] + main.page-main .table-container .table {
+        min-width: 680px;
     }
 }

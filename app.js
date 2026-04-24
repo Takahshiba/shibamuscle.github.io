@@ -239,9 +239,22 @@ function buildFooter() {
 }
 
 function ensureMainShell() {
-    const existingMain = document.querySelector("main.page-main");
-    if (existingMain) {
-        return existingMain;
+    const existingMains = Array.from(document.querySelectorAll("main.page-main"));
+    if (existingMains.length) {
+        const primaryMain = existingMains[0];
+
+        existingMains.slice(1).forEach((extraMain) => {
+            Array.from(extraMain.children).forEach((child) => primaryMain.append(child));
+            extraMain.remove();
+        });
+
+        const nestedMains = Array.from(primaryMain.querySelectorAll("main.page-main"));
+        nestedMains.forEach((nestedMain) => {
+            Array.from(nestedMain.children).forEach((child) => primaryMain.append(child));
+            nestedMain.remove();
+        });
+
+        return primaryMain;
     }
 
     const main = document.createElement("main");
