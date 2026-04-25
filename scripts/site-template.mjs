@@ -148,18 +148,20 @@ function renderLegacyCategoryNav(pageType, locale = "ja") {
 function renderStaticFooter(file, locale = "ja") {
     const alternates = languageAlternates(file);
     const flagAlt = {
-        en: locale === "ko" ? "영국 국기" : locale === "es" ? "Bandera del Reino Unido" : "UK",
-        ja: locale === "ko" ? "일본 국기" : locale === "es" ? "Bandera de Japón" : "Japan",
-        zh: locale === "ko" ? "중국 국기" : locale === "es" ? "Bandera de China" : "China",
-        ko: locale === "ko" ? "한국 국기" : locale === "es" ? "Bandera de Corea" : "Korea",
-        es: locale === "ko" ? "스페인 국기" : locale === "es" ? "Bandera de España" : "Spain"
+        en: locale === "ko" ? "영국 국기" : locale === "es" ? "Bandera del Reino Unido" : locale === "fr" ? "Drapeau du Royaume-Uni" : "UK",
+        ja: locale === "ko" ? "일본 국기" : locale === "es" ? "Bandera de Japón" : locale === "fr" ? "Drapeau du Japon" : "Japan",
+        zh: locale === "ko" ? "중국 국기" : locale === "es" ? "Bandera de China" : locale === "fr" ? "Drapeau de la Chine" : "China",
+        ko: locale === "ko" ? "한국 국기" : locale === "es" ? "Bandera de Corea" : locale === "fr" ? "Drapeau de la Corée" : "Korea",
+        es: locale === "ko" ? "스페인 국기" : locale === "es" ? "Bandera de España" : locale === "fr" ? "Drapeau de l'Espagne" : "Spain",
+        fr: locale === "ko" ? "프랑스 국기" : locale === "es" ? "Bandera de Francia" : locale === "fr" ? "Drapeau de la France" : "France"
     };
     const flagIcon = {
         en: "uk-flag.webp",
         ja: "japan-flag.webp",
         zh: "china-flag.webp",
         ko: "korea-flag.webp",
-        es: "spain-flag.svg"
+        es: "spain-flag.svg",
+        fr: "france-flag.svg"
     };
 
     return `
@@ -268,10 +270,10 @@ function renderDiscoveryGrid(section, pages, locale = "ja") {
         <div class="discovery-grid">
 ${pages.map((page) => {
         return `            <a class="discovery-card" href="${escapeAttribute(page.file)}">
-                <span class="discovery-type">${escapeHtml(locale === "es" ? (page.type === "comparison" ? "Comparativa" : "Objetivo") : page.type === "comparison" ? "Comparison" : "Intent")}</span>
+                <span class="discovery-type">${escapeHtml(locale === "fr" ? (page.type === "comparison" ? "Comparatif" : "Objectif") : locale === "es" ? (page.type === "comparison" ? "Comparativa" : "Objetivo") : page.type === "comparison" ? "Comparison" : "Intent")}</span>
                 <h3>${escapeHtml(page.heading)}</h3>
                 <p>${escapeHtml((page.intro || [])[0] || page.description || "")}</p>
-                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "es" ? "Ver página" : "ページを見る"}</span>
+                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "es" ? "Ver página" : locale === "fr" ? "Voir la page" : "ページを見る"}</span>
             </a>`;
     }).join("\n")}
         </div>

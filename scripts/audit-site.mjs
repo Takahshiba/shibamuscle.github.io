@@ -54,6 +54,10 @@ for (const entry of htmlEntries) {
         auditSpanishHtml(entry, html);
     }
 
+    if (entry.locale === "fr") {
+        auditFrenchHtml(entry, html);
+    }
+
     if (entry.locale !== "ja") {
         auditSectionDrift(entry, html);
     }
@@ -69,6 +73,8 @@ for (const entry of htmlEntries) {
             assert(/<meta name="description" content="[^"]+(kg 기준표|lb 기준표)[^"]*주동근[^"]+">/.test(html), `${entry.relativePath}: Korean exercise description is not specific enough`);
         } else if (entry.locale === "es") {
             assert(/<meta name="description" content="[^"]+(tabla en kg|tabla en lb)[^"]*(músculos principales|estándares)[^"]+">/i.test(html), `${entry.relativePath}: Spanish exercise description is not specific enough`);
+        } else if (entry.locale === "fr") {
+            assert(/<meta name="description" content="[^"]+(tableau en kg|tableau en lb)[^"]*(muscles principaux|standards)[^"]+">/i.test(html), `${entry.relativePath}: French exercise description is not specific enough`);
         } else {
             assert(/<meta name="description" content="[^"]+(kg表|lb表)[^"]*(主働筋は|主な筋肉は)[^"]+">/.test(html), `${entry.relativePath}: exercise description is not specific enough`);
         }
@@ -138,6 +144,18 @@ function auditSpanishHtml(entry, html) {
     });
 
     assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in Spanish output`);
+}
+
+function auditFrenchHtml(entry, html) {
+    const normalized = stripIntentionalLanguageSwitchText(html)
+        .replace(/<!--[\s\S]*?-->/g, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "");
+
+    JAPANESE_LEFTOVER_PATTERNS.forEach((pattern) => {
+        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in French output`);
+    });
+
+    assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in French output`);
 }
 
 function auditSectionDrift(entry, localizedHtml) {

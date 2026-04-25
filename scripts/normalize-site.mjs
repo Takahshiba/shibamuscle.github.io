@@ -124,6 +124,8 @@ function normalizeHtml(entry, html) {
         ], entry.locale);
     }
 
+    next = next.replace(/[ \t]+$/gm, "");
+
     return `${next.trim()}\n`;
 }
 
@@ -236,9 +238,9 @@ function buildPageContext(entry, html) {
     const h1 = decodeHtml(stripTags(extractFirst(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i)));
     return {
         title: h1 ? `${h1} | Shiba Muscle` : "Shiba Muscle",
-        pageLabel: h1 || (locale === "ko" ? "페이지" : "ページ"),
+        pageLabel: h1 || (locale === "ko" ? "페이지" : locale === "fr" ? "Page" : "ページ"),
         homeLabel,
-        description: decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))) || (locale === "ko" ? "Shiba Muscle 페이지입니다." : locale === "es" ? "Página de Shiba Muscle." : "Shiba Muscleのページです。"),
+        description: decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))) || (locale === "ko" ? "Shiba Muscle 페이지입니다." : locale === "es" ? "Página de Shiba Muscle." : locale === "fr" ? "Page Shiba Muscle." : "Shiba Muscleのページです。"),
         canonicalUrl,
         ogImage: `${SITE_ORIGIN}/assets/dumbbell-logo.png`,
         type: "article",

@@ -18,6 +18,11 @@
       "title": "Shiba Muscle | Base de datos de ejercicios",
       "description": "Base de datos de entrenamiento de Shiba Muscle para consultar pesos medios, estándares de fuerza y músculos trabajados por zona y ejercicio. Incluye cambio entre kg y lb.",
       "heading": "Encuentra ejercicios"
+    },
+    "fr": {
+      "title": "Shiba Muscle | Base de données de musculation",
+      "description": "Base de données Shiba Muscle pour consulter les charges moyennes, les standards de force et les muscles ciblés par groupe musculaire et par exercice. Compatible kg et lb.",
+      "heading": "Trouver un exercice"
     }
   }
 }

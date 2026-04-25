@@ -6,7 +6,8 @@
       "label": {
         "ja": "全身",
         "ko": "전신",
-        "es": "Cuerpo completo"
+        "es": "Cuerpo completo",
+        "fr": "Corps entier"
       },
       "legacyTitles": {
         "ja": [
@@ -17,6 +18,9 @@
         ],
         "es": [
           "Ejercicios de cuerpo completo"
+        ],
+        "fr": [
+          "Exercices corps entier"
         ]
       },
       "aliases": {
@@ -31,12 +35,17 @@
         "es": [
           "Ejercicios de cuerpo completo",
           "BIG3 / cuerpo completo"
+        ],
+        "fr": [
+          "Musculation corps entier",
+          "BIG3 / corps entier"
         ]
       },
       "description": {
         "ja": "デッドリフト、クリーン、スナッチなど全身連動の基準ページ",
         "ko": "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지",
-        "es": "Páginas de referencia para ejercicios globales como peso muerto, clean y snatch"
+        "es": "Páginas de referencia para ejercicios globales como peso muerto, clean y snatch",
+        "fr": "Pages de référence pour les exercices globaux comme le soulevé de terre, le clean et le snatch"
       },
       "defaultTags": {
         "ja": [
@@ -50,6 +59,10 @@
         "es": [
           "Cuerpo completo",
           "Coordinación total"
+        ],
+        "fr": [
+          "Corps entier",
+          "Coordination globale"
         ]
       }
     },
@@ -58,7 +71,8 @@
       "label": {
         "ja": "胸",
         "ko": "가슴",
-        "es": "Pecho"
+        "es": "Pecho",
+        "fr": "Pectoraux"
       },
       "legacyTitles": {
         "ja": [
@@ -69,6 +83,9 @@
         ],
         "es": [
           "Ejercicios de pecho"
+        ],
+        "fr": [
+          "Exercices pectoraux"
         ]
       },
       "aliases": {
@@ -83,12 +100,17 @@
         "es": [
           "Ejercicios de pecho",
           "Pectoral"
+        ],
+        "fr": [
+          "Entraînement des pectoraux",
+          "Pectoral"
         ]
       },
       "description": {
         "ja": "プレス系の平均値と押す種目の比較",
         "ko": "프레스 계열 평균 중량과 미는 운동 비교",
-        "es": "Pesos medios y comparativas de ejercicios de empuje"
+        "es": "Pesos medios y comparativas de ejercicios de empuje",
+        "fr": "Charges moyennes et comparaisons des exercices de poussée"
       },
       "defaultTags": {
         "ja": [
@@ -102,6 +124,10 @@
         "es": [
           "Pecho",
           "Press"
+        ],
+        "fr": [
+          "Pectoraux",
+          "Développé"
         ]
       }
     },
@@ -110,7 +136,8 @@
       "label": {
         "ja": "背中",
         "ko": "등",
-        "es": "Espalda"
+        "es": "Espalda",
+        "fr": "Dos"
       },
       "legacyTitles": {
         "ja": [
@@ -121,6 +148,9 @@
         ],
         "es": [
           "Ejercicios de espalda"
+        ],
+        "fr": [
+          "Exercices dos"
         ]
       },
       "aliases": {
@@ -135,12 +165,17 @@
         "es": [
           "Ejercicios de espalda",
           "Dorsal ancho"
+        ],
+        "fr": [
+          "Entraînement du dos",
+          "Grand dorsal"
         ]
       },
       "description": {
         "ja": "ローイング、プル系、ヒンジ系の比較",
         "ko": "로우, 풀, 힌지 계열 운동 비교",
-        "es": "Comparativas de remos, jalones y bisagras de cadera"
+        "es": "Comparativas de remos, jalones y bisagras de cadera",
+        "fr": "Comparaisons des tirages, rowings et mouvements de charnière"
       },
       "defaultTags": {
         "ja": [
@@ -154,6 +189,10 @@
         "es": [
           "Espalda",
           "Tirón"
+        ],
+        "fr": [
+          "Dos",
+          "Tirage"
         ]
       }
     },
@@ -162,7 +201,8 @@
       "label": {
         "ja": "肩",
         "ko": "어깨",
-        "es": "Hombros"
+        "es": "Hombros",
+        "fr": "Épaules"
       },
       "legacyTitles": {
         "ja": [
@@ -173,6 +213,9 @@
         ],
         "es": [
           "Ejercicios de hombro"
+        ],
+        "fr": [
+          "Exercices épaules"
         ]
       },
       "aliases": {
@@ -187,12 +230,17 @@
         "es": [
           "Ejercicios de hombro",
           "Deltoides"
+        ],
+        "fr": [
+          "Entraînement des épaules",
+          "Deltoïdes"
         ]
       },
       "description": {
         "ja": "プレス、レイズ、安定性の種目一覧",
         "ko": "프레스, 레이즈, 안정성 운동 목록",
-        "es": "Ejercicios de press, elevaciones y estabilidad del hombro"
+        "es": "Ejercicios de press, elevaciones y estabilidad del hombro",
+        "fr": "Exercices de développé, d'élévation et de stabilité des épaules"
       },
       "defaultTags": {
         "ja": [
@@ -206,6 +254,10 @@
         "es": [
           "Hombros",
           "Press"
+        ],
+        "fr": [
+          "Épaules",
+          "Développé"
         ]
       }
     },
@@ -214,7 +266,8 @@
       "label": {
         "ja": "腕",
         "ko": "팔",
-        "es": "Brazos"
+        "es": "Brazos",
+        "fr": "Bras"
       },
       "legacyTitles": {
         "ja": [
@@ -225,6 +278,9 @@
         ],
         "es": [
           "Ejercicios de brazos"
+        ],
+        "fr": [
+          "Exercices bras"
         ]
       },
       "aliases": {
@@ -242,12 +298,18 @@
           "Ejercicios de brazos",
           "Bíceps",
           "Tríceps"
+        ],
+        "fr": [
+          "Entraînement des bras",
+          "Biceps",
+          "Triceps"
         ]
       },
       "description": {
         "ja": "カール、トライセプス、前腕の種目",
         "ko": "컬, 삼두, 전완 운동",
-        "es": "Curls, tríceps y ejercicios de antebrazo"
+        "es": "Curls, tríceps y ejercicios de antebrazo",
+        "fr": "Curls, triceps et exercices d'avant-bras"
       },
       "defaultTags": {
         "ja": [
@@ -261,6 +323,10 @@
         "es": [
           "Brazos",
           "Curl"
+        ],
+        "fr": [
+          "Bras",
+          "Curl"
         ]
       }
     },
@@ -269,7 +335,8 @@
       "label": {
         "ja": "脚",
         "ko": "하체",
-        "es": "Piernas"
+        "es": "Piernas",
+        "fr": "Jambes"
       },
       "legacyTitles": {
         "ja": [
@@ -280,6 +347,9 @@
         ],
         "es": [
           "Ejercicios de piernas"
+        ],
+        "fr": [
+          "Exercices jambes"
         ]
       },
       "aliases": {
@@ -294,12 +364,17 @@
         "es": [
           "Ejercicios de piernas",
           "Tren inferior"
+        ],
+        "fr": [
+          "Entraînement des jambes",
+          "Bas du corps"
         ]
       },
       "description": {
         "ja": "スクワット、ランジ、ヒップ主導の種目",
         "ko": "스쿼트, 런지, 힙 중심 운동",
-        "es": "Sentadillas, zancadas y ejercicios dominantes de cadera"
+        "es": "Sentadillas, zancadas y ejercicios dominantes de cadera",
+        "fr": "Squats, fentes et exercices dominants hanche"
       },
       "defaultTags": {
         "ja": [
@@ -313,6 +388,10 @@
         "es": [
           "Piernas",
           "Sentadilla"
+        ],
+        "fr": [
+          "Jambes",
+          "Squat"
         ]
       }
     },
@@ -321,7 +400,8 @@
       "label": {
         "ja": "体幹",
         "ko": "코어",
-        "es": "Core"
+        "es": "Core",
+        "fr": "Tronc"
       },
       "legacyTitles": {
         "ja": [
@@ -332,6 +412,9 @@
         ],
         "es": [
           "Ejercicios de core"
+        ],
+        "fr": [
+          "Exercices de gainage"
         ]
       },
       "aliases": {
@@ -346,12 +429,17 @@
         "es": [
           "Ejercicios de core",
           "Abdominales"
+        ],
+        "fr": [
+          "Entraînement du tronc",
+          "Abdominaux"
         ]
       },
       "description": {
         "ja": "腹筋、回旋、体幹安定の種目",
         "ko": "복근, 회전, 코어 안정화 운동",
-        "es": "Abdominales, rotación y estabilidad del core"
+        "es": "Abdominales, rotación y estabilidad del core",
+        "fr": "Abdominaux, rotation et stabilité du tronc"
       },
       "defaultTags": {
         "ja": [
@@ -365,6 +453,10 @@
         "es": [
           "Core",
           "Abdominales"
+        ],
+        "fr": [
+          "Tronc",
+          "Abdominaux"
         ]
       }
     }
