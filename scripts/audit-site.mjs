@@ -63,8 +63,8 @@ for (const entry of htmlEntries) {
         auditSpanishHtml(entry, html);
     }
 
-    if (entry.locale === "de") {
-        auditGermanHtml(entry, html);
+    if (entry.locale === "fr") {
+        auditFrenchHtml(entry, html);
     }
 
     if (entry.locale !== "ja") {
@@ -86,8 +86,8 @@ for (const entry of htmlEntries) {
             assert(/<meta name="description" content="[^"]+(kg 表|lb 表)[^"]*(主要肌群|相关训练动作)[^"]+">/.test(html), `${entry.relativePath}: Simplified Chinese exercise description is not specific enough`);
         } else if (entry.locale === "es") {
             assert(/<meta name="description" content="[^"]+(tabla en kg|tabla en lb)[^"]*(músculos principales|estándares)[^"]+">/i.test(html), `${entry.relativePath}: Spanish exercise description is not specific enough`);
-        } else if (entry.locale === "de") {
-            assert(/<meta name="description" content="[^"]+(kg Tabelle|lb Tabelle)[^"]*(Zielmuskulatur|Kraftstandards|Wiederholungsstandards)[^"]+">/i.test(html), `${entry.relativePath}: German exercise description is not specific enough`);
+        } else if (entry.locale === "fr") {
+            assert(/<meta name="description" content="[^"]+(tableau en kg|tableau en lb)[^"]*(muscles principaux|standards)[^"]+">/i.test(html), `${entry.relativePath}: French exercise description is not specific enough`);
         } else {
             assert(/<meta name="description" content="[^"]+(kg表|lb表)[^"]*(主働筋は|主な筋肉は)[^"]+">/.test(html), `${entry.relativePath}: exercise description is not specific enough`);
         }
@@ -195,17 +195,16 @@ function auditSpanishHtml(entry, html) {
     assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in Spanish output`);
 }
 
-function auditGermanHtml(entry, html) {
+function auditFrenchHtml(entry, html) {
     const normalized = stripIntentionalLanguageSwitchText(html)
         .replace(/<!--[\s\S]*?-->/g, "")
         .replace(/<script[\s\S]*?<\/script>/gi, "");
 
     JAPANESE_LEFTOVER_PATTERNS.forEach((pattern) => {
-        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in German output`);
+        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in French output`);
     });
 
-    assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in German output`);
-    assert(!/kr\.shibamuscle\.com|cn\.shibamuscle\.com|de\.shibamuscle\.com/.test(html), `${entry.relativePath}: legacy locale subdomain remains`);
+    assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in French output`);
 }
 
 function auditSectionDrift(entry, localizedHtml) {

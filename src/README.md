@@ -14,7 +14,7 @@
 - `pages/*.json`
   Source content for shared static pages like the homepage, contact page, and privacy policy.
 - `locales.json`
-  Locale routing and SEO configuration. Japanese is generated at `/`; Korean is generated under `/ko/`; Traditional Chinese is generated under `/zh-hant/`; Simplified Chinese is generated under `/zh-hans/`.
+  Locale routing and SEO configuration. Japanese is generated at `/`; Korean, Traditional Chinese, Simplified Chinese, Spanish, and French are generated under `/ko/`, `/zh-hant/`, `/zh-hans/`, `/es/`, and `/fr/`.
 
 Build flow:
 
@@ -26,7 +26,7 @@ The build also:
 
 - syncs exercise metadata back into `src/exercises/*.json` and `src/catalog.json`
 - generates dedicated OG assets in `assets/og/`
-- audits SEO, analytics, breadcrumbs, locale routing, and Korean output quality
+- audits SEO, analytics, breadcrumbs, locale routing, and localized output quality
 
 Bootstrap / re-extract source from the current generated HTML:
 
@@ -34,17 +34,14 @@ Bootstrap / re-extract source from the current generated HTML:
 node scripts/extract-exercise-source.mjs
 ```
 
-The generated root HTML files and `/ko/` HTML files are build outputs. Edit `src/` instead of editing the generated exercise pages directly.
+The generated root HTML files and locale HTML files under `/ko/`, `/zh-hant/`, `/zh-hans/`, `/es/`, and `/fr/` are build outputs. Edit `src/` instead of editing the generated exercise pages directly.
 
 Today this covers the homepage, contact page, privacy policy, and all exercise pages. `Shift2ics.html` is still hand-maintained because it is a standalone PDF tool with its own inline runtime.
 
 Localization notes:
 
 - Japanese exercise numeric data, standards, and section structure are canonical.
-- Korean pages reuse the same filenames and slugs under `/ko/`.
-- Traditional Chinese pages reuse the same filenames and slugs under `/zh-hant/`.
-- Simplified Chinese pages reuse the same filenames and slugs under `/zh-hans/`.
-- Korean copy should use natural Korean gym terminology and must not visibly fall back to Japanese.
-- Traditional Chinese copy should use natural Traditional Chinese gym terminology and must not visibly fall back to Japanese or Simplified Chinese.
-- Simplified Chinese copy should use natural Simplified Chinese gym terminology and must not visibly fall back to Japanese or Traditional Chinese.
+- Localized pages reuse the same filenames and slugs under their locale directory.
+- Localized copy should use natural local gym terminology and must not visibly fall back to Japanese.
+- Simplified Chinese copy must use Simplified Chinese terminology and must not visibly fall back to Japanese, Traditional Chinese, or old Chinese subdomain URLs.
 - SEO normalization owns canonical, hreflang, OG/Twitter tags, footer language URLs, and sitemap entries for generated locales.

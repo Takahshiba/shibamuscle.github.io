@@ -62,15 +62,15 @@
       "generated": true
     },
     {
-      "code": "de",
-      "routePrefix": "/de/",
-      "outputDir": "de",
-      "displayName": "Deutsch",
-      "hreflang": "de",
+      "code": "fr",
+      "routePrefix": "/fr/",
+      "outputDir": "fr",
+      "displayName": "Français",
+      "hreflang": "fr",
       "dir": "ltr",
       "defaultUnit": "kg",
       "origin": "https://shibamuscle.com",
-      "ogLocale": "de_DE",
+      "ogLocale": "fr_FR",
       "generated": true
     },
     {

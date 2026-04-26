@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ROOT, loadLocales } from "./source-data.mjs";
 
 const SITE_ORIGIN = "https://shibamuscle.com";
-const ACTIVE_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "en"];
+const ACTIVE_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "en"];
 const INACTIVE_LOCALE_CODES = new Set(["de"]);
 let cachedLocaleConfigs = null;
 const SIMPLIFIED_CHINESE_LOCALE_CONFIG = {
@@ -119,30 +119,30 @@ const UI_TEXT = {
         support: "Soporte",
         wholeBody: "Cuerpo completo"
     },
-    de: {
-        ad: "Anzeige",
-        arm: "Arme",
-        back: "Rücken",
-        breadcrumb: "Breadcrumb",
-        categories: "Kategorien",
-        chest: "Brust",
-        contact: "Kontakt",
-        core: "Rumpf",
-        data: "Daten",
-        female: "Frauen",
-        group: "Gruppe",
-        home: "Startseite",
-        language: "Sprache",
-        leg: "Beine",
-        links: "Links",
-        male: "Männer",
-        moreWorkouts: "Weitere Übungen",
-        muscles: "Muskeln",
-        musclesHeading: "Zielmuskulatur",
-        privacy: "Datenschutzerklärung",
-        shoulder: "Schultern",
+    fr: {
+        ad: "Annonce",
+        arm: "Bras",
+        back: "Dos",
+        breadcrumb: "Fil d'Ariane",
+        categories: "Catégories",
+        chest: "Pectoraux",
+        contact: "Contact",
+        core: "Tronc",
+        data: "Données",
+        female: "Femmes",
+        group: "Groupe",
+        home: "Accueil",
+        language: "Langue",
+        leg: "Jambes",
+        links: "Liens",
+        male: "Hommes",
+        moreWorkouts: "Autres exercices",
+        muscles: "Muscles",
+        musclesHeading: "Muscles ciblés",
+        privacy: "Politique de confidentialité",
+        shoulder: "Épaules",
         support: "Support",
-        wholeBody: "Ganzkörper"
+        wholeBody: "Corps entier"
     }
 };
 
@@ -170,7 +170,7 @@ const CATEGORY_NAV = [
             ko: "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지",
             "zh-hant": "硬舉、翻站、抓舉等全身協調動作的標準頁面",
             es: "Páginas de referencia para ejercicios globales como peso muerto, clean y snatch",
-            de: "Referenzseiten für Ganzkörperübungen wie Kreuzheben, Clean und Snatch"
+            fr: "Pages de référence pour les exercices globaux comme le soulevé de terre, le clean et le snatch"
         }
     },
     {
@@ -182,7 +182,7 @@ const CATEGORY_NAV = [
             ko: "프레스 계열 평균 중량과 미는 운동 비교",
             "zh-hant": "推類動作的平均重量與訓練標準比較",
             es: "Pesos medios y comparativas de ejercicios de empuje",
-            de: "Durchschnittsgewichte und Vergleiche für Druckübungen"
+            fr: "Charges moyennes et comparaisons des exercices de poussée"
         }
     },
     {
@@ -194,7 +194,7 @@ const CATEGORY_NAV = [
             ko: "로우, 풀, 힌지 계열 운동 비교",
             "zh-hant": "划船、下拉與髖鉸鏈類動作比較",
             es: "Comparativas de remos, jalones y bisagras de cadera",
-            de: "Vergleiche für Rudern, Zugübungen und Hüftstreckbewegungen"
+            fr: "Comparaisons des tirages, rowings et mouvements de charnière"
         }
     },
     {
@@ -206,7 +206,7 @@ const CATEGORY_NAV = [
             ko: "프레스, 레이즈, 안정성 운동 목록",
             "zh-hant": "肩推、平舉與穩定性訓練動作列表",
             es: "Ejercicios de press, elevaciones y estabilidad del hombro",
-            de: "Schulterdrücken, Seitheben und Stabilitätsübungen"
+            fr: "Exercices de développé, d'élévation et de stabilité des épaules"
         }
     },
     {
@@ -218,7 +218,7 @@ const CATEGORY_NAV = [
             ko: "컬, 삼두, 전완 운동",
             "zh-hant": "彎舉、三頭肌與前臂訓練動作",
             es: "Curls, tríceps y ejercicios de antebrazo",
-            de: "Curls, Trizeps- und Unterarmübungen"
+            fr: "Curls, triceps et exercices d'avant-bras"
         }
     },
     {
@@ -230,7 +230,7 @@ const CATEGORY_NAV = [
             ko: "스쿼트, 런지, 힙 중심 운동",
             "zh-hant": "深蹲、弓箭步與臀腿主導動作",
             es: "Sentadillas, zancadas y ejercicios dominantes de cadera",
-            de: "Kniebeugen, Ausfallschritte und hüftdominante Übungen"
+            fr: "Squats, fentes et exercices dominants hanche"
         }
     },
     {
@@ -242,7 +242,7 @@ const CATEGORY_NAV = [
             ko: "복근, 회전, 코어 안정화 운동",
             "zh-hant": "腹肌、旋轉與核心穩定訓練動作",
             es: "Abdominales, rotación y estabilidad del core",
-            de: "Bauchübungen, Rotation und Rumpfstabilität"
+            fr: "Abdominaux, rotation et stabilité du tronc"
         }
     }
 ];
@@ -367,34 +367,34 @@ const CATEGORY_DEFAULT_TAGS_ES = {
     "core-section": ["Core", "Abdominales"]
 };
 
-const CATEGORY_LABELS_DE = {
-    "whole-body-section": "Ganzkörper",
-    "chest-section": "Brust",
-    "back-section": "Rücken",
-    "shoulder-section": "Schultern",
-    "arm-section": "Arme",
-    "leg-section": "Beine",
-    "core-section": "Rumpf"
+const CATEGORY_LABELS_FR = {
+    "whole-body-section": "Corps entier",
+    "chest-section": "Pectoraux",
+    "back-section": "Dos",
+    "shoulder-section": "Épaules",
+    "arm-section": "Bras",
+    "leg-section": "Jambes",
+    "core-section": "Tronc"
 };
 
-const CATEGORY_ALIASES_DE = {
-    "whole-body-section": ["Ganzkörperübungen", "BIG3 / Ganzkörper"],
-    "chest-section": ["Brustübungen", "Brustmuskel"],
-    "back-section": ["Rückenübungen", "Latissimus"],
-    "shoulder-section": ["Schulterübungen", "Deltamuskel"],
-    "arm-section": ["Armübungen", "Bizeps", "Trizeps"],
-    "leg-section": ["Beinübungen", "Unterkörper"],
-    "core-section": ["Rumpfübungen", "Bauchmuskeln", "Core"]
+const CATEGORY_ALIASES_FR = {
+    "whole-body-section": ["Exercices corps entier", "BIG3 / corps entier"],
+    "chest-section": ["Exercices pectoraux", "Pectoral"],
+    "back-section": ["Exercices dos", "Grand dorsal"],
+    "shoulder-section": ["Exercices épaules", "Deltoïdes"],
+    "arm-section": ["Exercices bras", "Biceps", "Triceps"],
+    "leg-section": ["Exercices jambes", "Bas du corps"],
+    "core-section": ["Exercices de gainage", "Abdominaux"]
 };
 
-const CATEGORY_DEFAULT_TAGS_DE = {
-    "whole-body-section": ["Ganzkörper", "Krafttraining"],
-    "chest-section": ["Brust", "Drücken"],
-    "back-section": ["Rücken", "Ziehen"],
-    "shoulder-section": ["Schultern", "Schulterdrücken"],
-    "arm-section": ["Arme", "Curls"],
-    "leg-section": ["Beine", "Kniebeuge"],
-    "core-section": ["Rumpf", "Bauchmuskeln"]
+const CATEGORY_DEFAULT_TAGS_FR = {
+    "whole-body-section": ["Corps entier", "Coordination globale"],
+    "chest-section": ["Pectoraux", "Développé"],
+    "back-section": ["Dos", "Tirage"],
+    "shoulder-section": ["Épaules", "Développé"],
+    "arm-section": ["Bras", "Curl"],
+    "leg-section": ["Jambes", "Squat"],
+    "core-section": ["Tronc", "Abdominaux"]
 };
 
 const MUSCLE_GROUPS_KO = {
@@ -541,40 +541,40 @@ const MUSCLES_ES = {
     "腹直筋": "Recto abdominal"
 };
 
-const MUSCLE_GROUPS_DE = {
-    "グリップ": "Griff",
-    "主働筋": "Zielmuskulatur",
-    "主動筋": "Zielmuskulatur",
-    "副働筋": "Sekundäre Muskeln",
-    "副動筋": "Sekundäre Muskeln",
-    "安定筋": "Stabilisatoren"
+const MUSCLE_GROUPS_FR = {
+    "グリップ": "Prise",
+    "主働筋": "Muscles principaux",
+    "主動筋": "Muscles principaux",
+    "副働筋": "Muscles secondaires",
+    "副動筋": "Muscles secondaires",
+    "安定筋": "Stabilisateurs"
 };
 
-const MUSCLES_DE = {
-    "なし": "Keine",
-    "ハムストリングス": "Hamstrings",
-    "三角筋": "Deltamuskel",
-    "上腕三頭筋": "Trizeps",
-    "上腕二頭筋": "Bizeps",
-    "下腿三頭筋": "Wadenmuskulatur",
-    "僧帽筋": "Trapezmuskel",
-    "内転筋群": "Adduktoren",
-    "前脛骨筋": "Tibialis anterior",
-    "前腕伸筋群": "Unterarmstrecker",
-    "前腕屈筋群": "Unterarmbeuger",
-    "外腹斜筋": "Äußere schräge Bauchmuskeln",
-    "大円筋": "Teres major",
-    "大胸筋": "Brustmuskel",
-    "大胸筋上部": "Oberer Brustmuskel",
-    "大胸筋下部": "Unterer Brustmuskel",
-    "大腿四頭筋": "Quadrizeps",
-    "大臀筋": "Gluteus maximus",
-    "広背筋": "Latissimus",
-    "棘上筋": "Supraspinatus",
-    "棘下筋": "Infraspinatus",
-    "胸鎖乳突筋": "Sternocleidomastoideus",
-    "脊柱起立筋": "Rückenstrecker",
-    "腹直筋": "Gerader Bauchmuskel"
+const MUSCLES_FR = {
+    "なし": "Aucun",
+    "ハムストリングス": "Ischio-jambiers",
+    "三角筋": "Deltoïdes",
+    "上腕三頭筋": "Triceps brachial",
+    "上腕二頭筋": "Biceps brachial",
+    "下腿三頭筋": "Triceps sural",
+    "僧帽筋": "Trapèzes",
+    "内転筋群": "Adducteurs",
+    "前脛骨筋": "Tibial antérieur",
+    "前腕伸筋群": "Extenseurs de l'avant-bras",
+    "前腕屈筋群": "Fléchisseurs de l'avant-bras",
+    "外腹斜筋": "Obliques externes",
+    "大円筋": "Grand rond",
+    "大胸筋": "Grand pectoral",
+    "大胸筋上部": "Haut des pectoraux",
+    "大胸筋下部": "Bas des pectoraux",
+    "大腿四頭筋": "Quadriceps",
+    "大臀筋": "Grand fessier",
+    "広背筋": "Grand dorsal",
+    "棘上筋": "Supra-épineux",
+    "棘下筋": "Infra-épineux",
+    "胸鎖乳突筋": "Sterno-cléido-mastoïdien",
+    "脊柱起立筋": "Érecteurs du rachis",
+    "腹直筋": "Grand droit"
 };
 
 const EQUIPMENT_TAGS_KO = {
@@ -617,14 +617,14 @@ const EQUIPMENT_TAGS_ES = {
     "自重": "Peso corporal"
 };
 
-const EQUIPMENT_TAGS_DE = {
+const EQUIPMENT_TAGS_FR = {
     BIG3: "BIG3",
-    "ケーブル": "Kabelzug",
-    "スミスマシン": "Smith-Maschine",
-    "ダンベル": "Kurzhantel",
-    "バーベル": "Langhantel",
-    "マシン": "Maschine",
-    "自重": "Körpergewicht"
+    "ケーブル": "Poulie",
+    "スミスマシン": "Smith machine",
+    "ダンベル": "Haltères",
+    "バーベル": "Barre",
+    "マシン": "Machine",
+    "自重": "Poids du corps"
 };
 
 const EXACT_EXERCISE_NAMES_KO = {
@@ -1383,464 +1383,360 @@ const SPANISH_POST_MODIFIERS = new Set([
     "tumbado"
 ]);
 
-const EXACT_EXERCISE_NAMES_DE = {
-    "ab-wheel-roller": "Bauchroller",
-    "archer-push-ups": "Bogenschützen-Liegestütze",
-    "arnold-press": "Arnold Press",
-    "back-extension": "Rückenstrecken",
-    "bench-dips": "Bank-Dips",
-    "bench-pin-press": "Pin Press auf der Bank",
-    "bench-press": "Bankdrücken",
-    "bench-pull": "Bankziehen",
-    "bent-arm-barbell-pullover": "Langhantel-Pullover mit gebeugten Armen",
-    "bent-over-dumbbell-row": "Vorgebeugtes Kurzhantelrudern",
-    "bent-over-row": "Vorgebeugtes Rudern",
-    "bicycle-crunches": "Bicycle Crunches",
-    "bodyweight-calf-raise": "Wadenheben mit Körpergewicht",
-    "bodyweight-squat": "Kniebeuge mit Körpergewicht",
-    "box-squat": "Box Squat",
-    "bulgarian-split-squat": "Bulgarische Split-Kniebeuge",
+const EXACT_EXERCISE_NAMES_FR = {
+    "ab-wheel-roller": "Roue abdominale",
+    "arnold-press": "Développé Arnold",
+    "back-extension": "Extension lombaire",
+    "bench-dips": "Dips sur banc",
+    "bench-pin-press": "Développé couché aux pins",
+    "bench-press": "Développé couché",
+    "bench-pull": "Rowing sur banc",
+    "bent-arm-barbell-pullover": "Pull-over barre bras fléchis",
+    "bent-over-row": "Rowing buste penché",
+    "bicycle-crunches": "Crunch bicyclette",
+    "bodyweight-calf-raise": "Mollets au poids du corps",
+    "bodyweight-squat": "Squat au poids du corps",
+    "box-squat": "Box squat",
+    "bulgarian-split-squat": "Squat bulgare",
     "burpees": "Burpees",
-    "cable-bicep-curl": "Bizepscurls am Kabelzug",
-    "cable-crunches": "Cable Crunches",
-    "cable-external-rotation": "Außenrotation am Kabelzug",
-    "cable-fly": "Kabel-Flys",
-    "cable-hammer-curl": "Hammer Curls am Kabelzug",
-    "cable-kickback": "Kickbacks am Kabelzug",
-    "cable-lateral-raise": "Seitheben am Kabelzug",
-    "cable-leg-extension": "Beinstrecken am Kabelzug",
-    "cable-overhead-tricep-extension": "Überkopf-Trizepsstrecken am Kabelzug",
-    "cable-pull-through": "Pull-through am Kabelzug",
-    "cable-reverse-fly": "Reverse Flys am Kabelzug",
-    "cable-shrug": "Shrugs am Kabelzug",
-    "cable-upright-row": "Aufrechtes Rudern am Kabelzug",
-    "cable-woodchopper": "Woodchopper am Kabelzug",
-    "cheat-curl": "Cheat Curl",
-    "chest-press": "Brustpresse",
-    "chest-supported-dumbbell-row": "Brustgestütztes Kurzhantelrudern",
-    "chin-ups": "Klimmzüge im Untergriff",
-    "clap-pull-up": "Klimmzüge mit Klatschen",
+    "chest-press": "Chest press",
+    "chest-supported-dumbbell-row": "Rowing haltères avec appui poitrine",
+    "chin-ups": "Tractions supination",
     "clean": "Clean",
-    "clean-and-jerk": "Clean and Jerk",
-    "clean-and-press": "Clean and Press",
-    "clean-high-pull": "Clean High Pull",
-    "clean-pull": "Clean Pull",
-    "close-grip-bench-press": "Enges Bankdrücken",
-    "close-grip-dumbbell-bench-press": "Enges Kurzhantel-Bankdrücken",
-    "close-grip-incline-bench-press": "Enges Schrägbankdrücken",
-    "close-grip-lat-pulldown": "Enger Latzug",
-    "close-grip-push-ups": "Enge Liegestütze",
-    "crunches": "Crunches",
-    "deadlift": "Kreuzheben",
-    "decline-bench-press": "Negativbankdrücken",
-    "decline-crunches": "Decline Crunches",
-    "decline-dumbbell-bench-press": "Kurzhantel-Negativbankdrücken",
-    "decline-dumbbell-fly": "Kurzhantel-Flys auf der Negativbank",
-    "decline-push-ups": "Negative Liegestütze",
-    "decline-sit-ups": "Decline Sit-ups",
-    "deficit-deadlift": "Defizit-Kreuzheben",
-    "diamond-push-ups": "Diamant-Liegestütze",
+    "clean-and-jerk": "Épaulé-jeté",
+    "clean-and-press": "Épaulé-développé",
+    "clean-high-pull": "Clean high pull",
+    "clean-pull": "Tirage de clean",
+    "crunches": "Crunch",
+    "deadlift": "Soulevé de terre",
+    "decline-crunches": "Crunch décliné",
+    "decline-sit-ups": "Sit-up décliné",
+    "diamond-push-ups": "Pompes diamant",
     "dips": "Dips",
-    "donkey-calf-raise": "Donkey Wadenheben",
-    "dumbbell-bench-press": "Kurzhantel-Bankdrücken",
-    "dumbbell-bench-pull": "Kurzhantel-Bankziehen",
-    "dumbbell-bulgarian-split-squat": "Kurzhantel-Bulgarian Split Squat",
-    "dumbbell-calf-raise": "Kurzhantel-Wadenheben",
-    "dumbbell-clean-and-press": "Kurzhantel-Clean and Press",
-    "dumbbell-concentration-curl": "Kurzhantel-Konzentrationscurl",
-    "dumbbell-curl": "Kurzhantel-Curl",
-    "dumbbell-deadlift": "Kurzhantel-Kreuzheben",
-    "dumbbell-external-rotation": "Kurzhantel-Außenrotation",
-    "dumbbell-face-pull": "Kurzhantel-Face Pull",
-    "dumbbell-floor-press": "Kurzhantel-Floor Press",
-    "dumbbell-fly": "Kurzhantel-Flys",
-    "dumbbell-front-raise": "Kurzhantel-Frontheben",
-    "dumbbell-front-squat": "Kurzhantel-Frontkniebeuge",
-    "dumbbell-hang-clean": "Kurzhantel-Hang Clean",
-    "dumbbell-high-pull": "Kurzhantel-High Pull",
-    "dumbbell-incline-y-raise": "Kurzhantel-Y-Raise auf der Schrägbank",
-    "dumbbell-lateral-raise": "Kurzhantel-Seitheben",
-    "dumbbell-lunge": "Kurzhantel-Ausfallschritt",
-    "dumbbell-pullover": "Kurzhantel-Pullover",
-    "dumbbell-push-press": "Kurzhantel-Push Press",
-    "dumbbell-reverse-curl": "Kurzhantel-Reverse Curl",
-    "dumbbell-reverse-fly": "Kurzhantel-Reverse Fly",
-    "dumbbell-reverse-wrist-curl": "Kurzhantel-Reverse Wrist Curl",
-    "dumbbell-romanian-deadlift": "Kurzhantel-rumänisches Kreuzheben",
-    "dumbbell-row": "Kurzhantelrudern",
-    "dumbbell-shoulder-press": "Kurzhantel-Schulterdrücken",
-    "dumbbell-shrug": "Kurzhantel-Shrug",
-    "dumbbell-side-bend": "Kurzhantel-Seitbeuge",
-    "dumbbell-snatch": "Kurzhantel-Snatch",
-    "dumbbell-split-squat": "Kurzhantel-Split Squat",
-    "dumbbell-squat": "Kurzhantel-Kniebeuge",
-    "dumbbell-thruster": "Kurzhantel-Thruster",
-    "dumbbell-tricep-extension": "Kurzhantel-Trizepsstrecken",
-    "dumbbell-tricep-kickback": "Kurzhantel-Trizeps-Kickback",
-    "dumbbell-upright-row": "Kurzhantel-Aufrechtes Rudern",
-    "dumbbell-walking-calf-raise": "Kurzhantel-Wadenheben im Gehen",
-    "dumbbell-wrist-curl": "Kurzhantel-Wrist Curl",
-    "dumbbell-z-press": "Kurzhantel-Z-Press",
-    "ez-bar-curl": "SZ-Stangen-Curl",
-    "face-pull": "Face Pull",
-    "floor-press": "Floor Press",
-    "flutter-kicks": "Flutter Kicks",
-    "front-squat": "Frontkniebeuge",
-    "glute-bridge": "Glute Bridge",
-    "glute-ham-raise": "Glute-Ham Raise",
-    "glute-kickback": "Glute Kickback",
-    "goblet-squat": "Goblet Squat",
-    "good-morning": "Good Morning",
-    "hack-squat": "Hack Squat",
-    "half-squat": "Halbe Kniebeuge",
-    "hammer-curl": "Hammer Curl",
-    "handstand-push-ups": "Handstand-Liegestütze",
-    "hang-clean": "Hang Clean",
-    "hang-power-clean": "Hang Power Clean",
-    "hang-snatch": "Hang Snatch",
-    "hanging-knee-raise": "Hängendes Knieheben",
-    "hanging-leg-raise": "Hängendes Beinheben",
-    "hex-bar-deadlift": "Hex-Bar-Kreuzheben",
-    "hex-bar-shrug": "Hex-Bar-Shrug",
-    "high-pulley-crunches": "Crunches am hohen Kabelzug",
-    "hip-abduction": "Hüftabduktion",
-    "hip-adduction": "Hüftadduktion",
-    "hip-extension": "Hüftstrecken",
-    "hip-thrust": "Hip Thrust",
-    "horizontal-leg-press": "Horizontale Beinpresse",
-    "incline-bench-press": "Schrägbankdrücken",
-    "incline-cable-curl": "Schrägbank-Curl am Kabelzug",
-    "incline-dumbbell-bench-press": "Kurzhantel-Schrägbankdrücken",
-    "incline-dumbbell-curl": "Kurzhantel-Curl auf der Schrägbank",
-    "incline-dumbbell-fly": "Kurzhantel-Flys auf der Schrägbank",
-    "incline-hammer-curl": "Hammer Curl auf der Schrägbank",
-    "incline-push-ups": "Erhöhte Liegestütze",
-    "inverted-row": "Inverted Row",
-    "jefferson-deadlift": "Jefferson-Kreuzheben",
-    "jefferson-squat": "Jefferson-Kniebeuge",
-    "jm-press": "JM Press",
-    "jumping-jack": "Hampelmann",
-    "landmine-press": "Landmine Press",
-    "landmine-squat": "Landmine Squat",
-    "lat-pulldown": "Latzug",
-    "leg-extension": "Beinstrecker",
-    "log-press": "Log Press",
-    "lunge": "Ausfallschritt",
-    "lying-cable-curl": "Liegender Kabelcurl",
-    "lying-dumbbell-tricep-extension": "Liegendes Kurzhantel-Trizepsstrecken",
-    "lying-leg-curl": "Liegender Beinbeuger",
-    "lying-leg-raise": "Liegendes Beinheben",
-    "lying-tricep-extension": "Liegendes Trizepsstrecken",
-    "machine-back-extension": "Rückenstrecken an der Maschine",
-    "machine-bicep-curl": "Bizepscurls an der Maschine",
-    "machine-calf-raise": "Wadenheben an der Maschine",
-    "machine-chest-fly": "Butterfly",
-    "machine-lateral-raise": "Seitheben an der Maschine",
-    "machine-reverse-fly": "Reverse Fly an der Maschine",
-    "machine-row": "Rudern an der Maschine",
-    "machine-seated-crunches": "Sitzende Crunches an der Maschine",
-    "machine-shoulder-press": "Schulterpresse",
-    "machine-shrug": "Shrug an der Maschine",
-    "machine-tricep-extension": "Trizepsstrecken an der Maschine",
-    "meadows-row": "Meadows Row",
-    "military-press": "Military Press",
-    "mountain-climbers": "Mountain Climbers",
-    "muscle-snatch": "Muscle Snatch",
+    "donkey-calf-raise": "Mollets donkey",
+    "ez-bar-curl": "Curl barre EZ",
+    "face-pull": "Face pull",
+    "floor-press": "Développé au sol",
+    "flutter-kicks": "Battements de jambes",
+    "front-squat": "Front squat",
+    "glute-bridge": "Pont fessier",
+    "glute-ham-raise": "Glute ham raise",
+    "glute-kickback": "Kickback fessier",
+    "goblet-squat": "Goblet squat",
+    "good-morning": "Good morning",
+    "hack-squat": "Hack squat",
+    "hammer-curl": "Curl marteau",
+    "handstand-push-ups": "Pompes en équilibre",
+    "hang-clean": "Hang clean",
+    "hang-power-clean": "Hang power clean",
+    "hang-snatch": "Hang snatch",
+    "hanging-knee-raise": "Relevé de genoux suspendu",
+    "hanging-leg-raise": "Relevé de jambes suspendu",
+    "hex-bar-deadlift": "Soulevé de terre à la trap bar",
+    "hex-bar-shrug": "Shrug à la trap bar",
+    "high-pulley-crunches": "Crunch à la poulie haute",
+    "hip-abduction": "Abduction de hanche",
+    "hip-adduction": "Adduction de hanche",
+    "hip-extension": "Extension de hanche",
+    "hip-thrust": "Hip thrust",
+    "horizontal-leg-press": "Presse à cuisses horizontale",
+    "inverted-row": "Rowing inversé",
+    "jefferson-deadlift": "Soulevé de terre Jefferson",
+    "jefferson-squat": "Squat Jefferson",
+    "jm-press": "JM press",
+    "jumping-jack": "Jumping jack",
+    "lat-pulldown": "Tirage vertical",
+    "leg-extension": "Leg extension",
+    "log-press": "Log press",
+    "lunge": "Fente",
+    "meadows-row": "Rowing Meadows",
+    "military-press": "Développé militaire",
+    "mountain-climbers": "Mountain climbers",
+    "muscle-snatch": "Muscle snatch",
     "muscle-ups": "Muscle-ups",
-    "neck-curl": "Nackencurl",
-    "neck-extension": "Nackenstrecken",
-    "neutral-grip-pull-ups": "Klimmzüge im neutralen Griff",
-    "nordic-hamstring-curl": "Nordic Hamstring Curl",
-    "overhead-squat": "Überkopfkniebeuge",
-    "pendlay-row": "Pendlay Row",
-    "pike-push-ups": "Pike Push-ups",
-    "pistol-squat": "Pistol Squat",
-    "power-clean": "Power Clean",
-    "power-snatch": "Power Snatch",
-    "preacher-curl": "Scottcurl",
-    "pull-ups": "Klimmzüge",
-    "push-jerk": "Push Jerk",
-    "push-press": "Push Press",
-    "push-ups": "Liegestütze",
-    "rack-pull": "Rack Pull",
-    "renegade-row": "Renegade Row",
-    "reverse-barbell-curl": "Reverse Curl mit Langhantel",
-    "reverse-crunches": "Reverse Crunches",
-    "reverse-grip-bench-press": "Bankdrücken im Untergriff",
-    "reverse-grip-lat-pulldown": "Latzug im Untergriff",
-    "reverse-grip-tricep-pushdown": "Trizepsdrücken im Untergriff",
-    "reverse-hyperextension": "Reverse Hyperextension",
-    "reverse-lunge": "Rückwärts-Ausfallschritt",
-    "reverse-wrist-curl": "Reverse Wrist Curl",
-    "ring-dips": "Ring-Dips",
-    "ring-muscle-ups": "Ring Muscle-ups",
-    "romanchair-side-bend": "Seitbeuge auf der Römischen Bank",
-    "romanian-deadlift": "Rumänisches Kreuzheben",
-    "russian-twist": "Russian Twist",
-    "safety-bar-squat": "Safety-Bar-Kniebeuge",
-    "scissor-kicks": "Scissor Kicks",
-    "seated-cable-row": "Sitzendes Kabelrudern",
-    "seated-calf-raise": "Sitzendes Wadenheben",
-    "seated-dips-machine": "Sitzende Dip-Maschine",
-    "seated-dumbbell-curl": "Sitzender Kurzhantel-Curl",
-    "seated-dumbbell-shoulder-press": "Sitzendes Kurzhantel-Schulterdrücken",
-    "seated-dumbbell-tricep-extension": "Sitzendes Kurzhantel-Trizepsstrecken",
-    "seated-leg-curl": "Sitzender Beinbeuger",
-    "seated-shoulder-press": "Sitzendes Schulterdrücken",
-    "shoulder-pin-press": "Schulter-Pin-Press",
-    "shoulder-press": "Schulterdrücken",
-    "side-crunches": "Seitliche Crunches",
-    "side-leg-raise": "Seitliches Beinheben",
-    "side-lunge": "Seitlicher Ausfallschritt",
-    "single-leg-deadlift": "Einbeiniges Kreuzheben",
-    "single-leg-dumbbell-deadlift": "Einbeiniges Kurzhantel-Kreuzheben",
-    "single-leg-press": "Einbeinige Beinpresse",
-    "single-leg-romanian-deadlift": "Einbeiniges rumänisches Kreuzheben",
-    "single-leg-seated-calf-raise": "Einbeiniges sitzendes Wadenheben",
-    "single-leg-squat": "Einbeinige Kniebeuge",
-    "sissy-squat": "Sissy Squat",
+    "neck-curl": "Curl de cou",
+    "neck-extension": "Extension de cou",
+    "neutral-grip-pull-ups": "Tractions prise neutre",
+    "nordic-hamstring-curl": "Nordic curl",
+    "overhead-squat": "Overhead squat",
+    "pendlay-row": "Rowing Pendlay",
+    "pike-push-ups": "Pompes pike",
+    "pistol-squat": "Pistol squat",
+    "power-clean": "Power clean",
+    "power-snatch": "Power snatch",
+    "preacher-curl": "Curl pupitre",
+    "pull-ups": "Tractions",
+    "push-jerk": "Push jerk",
+    "push-press": "Push press",
+    "push-ups": "Pompes",
+    "rack-pull": "Rack pull",
+    "renegade-row": "Renegade row",
+    "reverse-crunches": "Crunch inversé",
+    "reverse-hyperextension": "Hyperextension inversée",
+    "ring-dips": "Dips aux anneaux",
+    "ring-muscle-ups": "Muscle-ups aux anneaux",
+    "romanchair-side-bend": "Flexion latérale à la chaise romaine",
+    "romanian-deadlift": "Soulevé de terre roumain",
+    "russian-twist": "Russian twist",
+    "safety-bar-squat": "Squat à la safety bar",
+    "scissor-kicks": "Ciseaux abdominaux",
+    "seated-cable-row": "Rowing assis à la poulie",
+    "seated-dips-machine": "Dips assis à la machine",
+    "shoulder-press": "Développé épaules",
+    "side-crunches": "Crunch latéral",
+    "side-leg-raise": "Relevé latéral de jambe",
+    "side-lunge": "Fente latérale",
+    "single-leg-deadlift": "Soulevé de terre une jambe",
+    "sissy-squat": "Sissy squat",
     "sit-ups": "Sit-ups",
-    "sled-leg-press": "Beinpresse am Schlitten",
-    "sled-press-calf-raise": "Wadenheben an der Schlittenpresse",
-    "smith-machine-bench-press": "Bankdrücken an der Smith-Maschine",
-    "smith-machine-shrug": "Shrug an der Smith-Maschine",
-    "smith-machine-squat": "Kniebeuge an der Smith-Maschine",
-    "snatch-deadlift": "Snatch-Kreuzheben",
-    "snatch-pull": "Snatch Pull",
+    "sled-leg-press": "Presse à cuisses",
     "snatch": "Snatch",
-    "spider-curl": "Spider Curl",
-    "split-jerk": "Split Jerk",
-    "split-squat": "Split Squat",
-    "spoto-press": "Spoto Press",
-    "squat-jump": "Kniebeugensprung",
-    "squat-thrust": "Squat Thrust",
-    "squat": "Kniebeuge",
-    "standing-cable-crunches": "Stehende Cable Crunches",
-    "standing-leg-curl": "Stehender Beinbeuger",
-    "stiff-leg-deadlift": "Kreuzheben mit gestreckten Beinen",
-    "straight-arm-pulldown": "Straight-Arm Pulldown",
-    "strict-curl": "Strict Curl",
-    "sumo-deadlift": "Sumo-Kreuzheben",
-    "sumo-squat": "Sumo-Kniebeuge",
+    "snatch-deadlift": "Soulevé de terre prise snatch",
+    "snatch-pull": "Tirage de snatch",
+    "spider-curl": "Spider curl",
+    "split-jerk": "Split jerk",
+    "split-squat": "Split squat",
+    "squat": "Squat",
+    "squat-jump": "Squat jump",
+    "squat-thrust": "Squat thrust",
+    "stiff-leg-deadlift": "Soulevé de terre jambes tendues",
+    "strict-curl": "Curl strict",
+    "sumo-deadlift": "Soulevé de terre sumo",
+    "sumo-squat": "Squat sumo",
     "superman": "Superman",
-    "t-bar-row": "T-Bar Rudern",
-    "tate-press": "Tate Press",
+    "t-bar-row": "Rowing T-bar",
     "thruster": "Thruster",
-    "toes-to-bar": "Toes-to-Bar",
-    "tricep-extension": "Trizepsstrecken",
-    "tricep-pushdown": "Trizepsdrücken",
-    "tricep-rope-pushdown": "Trizepsdrücken mit Seil",
-    "upright-row": "Aufrechtes Rudern",
-    "vertical-leg-press": "Vertikale Beinpresse",
-    "viking-press": "Viking Press",
-    "walking-lunge": "Walking Lunge",
-    "wall-ball": "Wall Ball",
-    "wide-grip-bench-press": "Bankdrücken mit weitem Griff",
-    "wrist-curl": "Wrist Curl",
-    "yates-row": "Yates Row",
-    "z-press": "Z-Press",
-    "zercher-deadlift": "Zercher-Kreuzheben",
-    "zercher-squat": "Zercher-Kniebeuge",
-    "zottman-curl": "Zottman Curl"
+    "toes-to-bar": "Toes-to-bar",
+    "upright-row": "Tirage menton",
+    "vertical-leg-press": "Presse à cuisses verticale",
+    "walking-lunge": "Fentes marchées",
+    "wall-ball": "Wall ball",
+    "wrist-curl": "Curl poignets",
+    "yates-row": "Rowing Yates",
+    "z-press": "Z press",
+    "zercher-deadlift": "Soulevé de terre Zercher",
+    "zercher-squat": "Squat Zercher",
+    "zottman-curl": "Curl Zottman"
 };
 
-const PHRASE_NAME_PARTS_DE = {
-    "ab-wheel": "Bauchroller",
-    "back-extension": "Rückenstrecken",
-    "bench-dips": "Bank-Dips",
-    "bench-press": "Bankdrücken",
-    "bench-pull": "Bankziehen",
-    "bent-arm": "mit gebeugten Armen",
-    "bent-over": "vorgebeugt",
-    "behind-the-back": "hinter dem Rücken",
-    "behind-the-neck": "hinter dem Kopf",
-    "bicep-curl": "Bizepscurl",
-    "bodyweight": "mit Körpergewicht",
-    "bulgarian-split-squat": "Bulgarian Split Squat",
-    "calf-raise": "Wadenheben",
-    "chest-fly": "Brust-Fly",
-    "chest-press": "Brustpresse",
-    "chest-supported": "brustgestützt",
-    "clean-and-jerk": "Clean and Jerk",
-    "clean-and-press": "Clean and Press",
-    "clean-high-pull": "Clean High Pull",
-    "clean-pull": "Clean Pull",
-    "close-grip": "enger Griff",
-    "concentration-curl": "Konzentrationscurl",
-    "decline": "negativ",
-    "deficit": "Defizit",
-    "ez-bar": "SZ-Stange",
-    "external-rotation": "Außenrotation",
-    "face-pull": "Face Pull",
-    "front-raise": "Frontheben",
-    "front-squat": "Frontkniebeuge",
-    "glute-bridge": "Glute Bridge",
-    "glute-ham-raise": "Glute-Ham Raise",
-    "glute-kickback": "Glute Kickback",
-    "goblet-squat": "Goblet Squat",
-    "hack-squat": "Hack Squat",
-    "hammer-curl": "Hammer Curl",
-    "hang-clean": "Hang Clean",
-    "hang-power-clean": "Hang Power Clean",
-    "hang-snatch": "Hang Snatch",
-    "hanging-knee-raise": "hängendes Knieheben",
-    "hanging-leg-raise": "hängendes Beinheben",
-    "hex-bar": "Hex-Bar",
-    "high-pulley": "hoher Kabelzug",
-    "hip-abduction": "Hüftabduktion",
-    "hip-adduction": "Hüftadduktion",
-    "hip-extension": "Hüftstrecken",
-    "hip-thrust": "Hip Thrust",
-    "incline-bench-press": "Schrägbankdrücken",
-    "incline-push-ups": "erhöhte Liegestütze",
-    "inverted-row": "Inverted Row",
-    "lat-pulldown": "Latzug",
-    "lateral-raise": "Seitheben",
-    "leg-curl": "Beinbeuger",
-    "leg-extension": "Beinstrecker",
-    "leg-press": "Beinpresse",
-    "leg-raise": "Beinheben",
-    "machine-seated-crunches": "sitzende Crunches an der Maschine",
-    "muscle-snatch": "Muscle Snatch",
-    "muscle-ups": "Muscle-ups",
-    "neck-curl": "Nackencurl",
-    "neck-extension": "Nackenstrecken",
-    "neutral-grip": "neutraler Griff",
-    "nordic-hamstring-curl": "Nordic Hamstring Curl",
-    "one-arm": "einarmig",
-    "one-arm-pulldown": "einarmiger Pulldown",
-    "overhead-squat": "Überkopfkniebeuge",
-    "pin-press": "Pin Press",
-    "pull-through": "Pull-through",
-    "pull-ups": "Klimmzüge",
-    "push-jerk": "Push Jerk",
-    "push-press": "Push Press",
-    "push-ups": "Liegestütze",
-    "rack-pull": "Rack Pull",
-    "reverse-fly": "Reverse Fly",
-    "reverse-grip": "Untergriff",
-    "reverse-hyperextension": "Reverse Hyperextension",
-    "reverse-wrist-curl": "Reverse Wrist Curl",
-    "romanchair": "Römische Bank",
-    "romanian-deadlift": "rumänisches Kreuzheben",
-    "safety-bar": "Safety Bar",
-    "scissor-kicks": "Scissor Kicks",
-    "seated-cable-row": "sitzendes Kabelrudern",
-    "shoulder-press": "Schulterdrücken",
-    "side-bend": "Seitbeuge",
-    "side-crunches": "seitliche Crunches",
-    "side-leg-raise": "seitliches Beinheben",
-    "single-leg": "einbeinig",
-    "sit-ups": "Sit-ups",
-    "smith-machine": "Smith-Maschine",
-    "split-jerk": "Split Jerk",
-    "split-squat": "Split Squat",
-    "squat-jump": "Kniebeugensprung",
-    "squat-thrust": "Squat Thrust",
-    "stiff-leg-deadlift": "Kreuzheben mit gestreckten Beinen",
-    "straight-arm": "mit gestreckten Armen",
-    "t-bar": "T-Bar",
-    "toes-to-bar": "Toes-to-Bar",
-    "tricep-extension": "Trizepsstrecken",
-    "tricep-pushdown": "Trizepsdrücken",
-    "tricep-rope": "Trizepsseil",
-    "upright-row": "aufrechtes Rudern",
-    "wall-ball": "Wall Ball",
-    "wide-grip": "weiter Griff",
-    "wrist-curl": "Wrist Curl",
-    "y-raise": "Y-Raise"
+const PHRASE_NAME_PARTS_FR = {
+    "ab-wheel": "roue abdominale",
+    "back-extension": "extension lombaire",
+    "bench-dips": "dips sur banc",
+    "bench-press": "développé couché",
+    "bent-arm": "bras fléchis",
+    "bent-over": "buste penché",
+    "behind-the-back": "derrière le dos",
+    "behind-the-neck": "nuque",
+    "bicep-curl": "curl biceps",
+    "bodyweight": "poids du corps",
+    "bulgarian-split-squat": "squat bulgare",
+    "calf-raise": "élévation mollets",
+    "chest-fly": "écarté pectoraux",
+    "chest-press": "chest press",
+    "chest-supported": "avec appui poitrine",
+    "clean-and-jerk": "épaulé-jeté",
+    "clean-and-press": "épaulé-développé",
+    "clean-high-pull": "clean high pull",
+    "clean-pull": "tirage de clean",
+    "close-grip": "prise serrée",
+    "concentration-curl": "curl concentration",
+    "external-rotation": "rotation externe",
+    "ez-bar": "barre EZ",
+    "face-pull": "face pull",
+    "front-raise": "élévation frontale",
+    "front-squat": "front squat",
+    "glute-bridge": "pont fessier",
+    "glute-ham-raise": "glute ham raise",
+    "glute-kickback": "kickback fessier",
+    "goblet-squat": "goblet squat",
+    "hack-squat": "hack squat",
+    "hammer-curl": "curl marteau",
+    "hang-clean": "hang clean",
+    "hang-power-clean": "hang power clean",
+    "hang-snatch": "hang snatch",
+    "hex-bar": "trap bar",
+    "hanging-knee-raise": "relevé de genoux suspendu",
+    "hanging-leg-raise": "relevé de jambes suspendu",
+    "high-pulley": "poulie haute",
+    "hip-abduction": "abduction de hanche",
+    "hip-adduction": "adduction de hanche",
+    "hip-extension": "extension de hanche",
+    "hip-thrust": "hip thrust",
+    "incline-bench-press": "développé incliné",
+    "incline-push-ups": "pompes inclinées",
+    "inverted-row": "rowing inversé",
+    "lat-pulldown": "tirage vertical",
+    "lateral-raise": "élévation latérale",
+    "leg-curl": "leg curl",
+    "leg-extension": "leg extension",
+    "leg-press": "presse à cuisses",
+    "leg-raise": "relevé de jambes",
+    "muscle-snatch": "muscle snatch",
+    "muscle-ups": "muscle-ups",
+    "neck-curl": "curl de cou",
+    "neck-extension": "extension de cou",
+    "neutral-grip": "prise neutre",
+    "nordic-hamstring-curl": "nordic curl",
+    "one-arm": "unilatéral",
+    "overhead-squat": "overhead squat",
+    "pin-press": "pin press",
+    "pull-through": "pull through",
+    "pull-ups": "tractions",
+    "push-jerk": "push jerk",
+    "push-press": "push press",
+    "push-ups": "pompes",
+    "rack-pull": "rack pull",
+    "reverse-fly": "écarté inversé",
+    "reverse-grip": "prise inversée",
+    "reverse-hyperextension": "hyperextension inversée",
+    "reverse-wrist-curl": "curl poignets inversé",
+    "romanchair": "chaise romaine",
+    "romanian-deadlift": "soulevé de terre roumain",
+    "safety-bar": "safety bar",
+    "scissor-kicks": "ciseaux abdominaux",
+    "seated-cable-row": "rowing assis à la poulie",
+    "shoulder-press": "développé épaules",
+    "side-bend": "flexion latérale",
+    "side-crunches": "crunch latéral",
+    "side-leg-raise": "relevé latéral de jambe",
+    "single-leg": "une jambe",
+    "sit-ups": "sit-ups",
+    "smith-machine": "Smith machine",
+    "split-jerk": "split jerk",
+    "split-squat": "split squat",
+    "squat-jump": "squat jump",
+    "squat-thrust": "squat thrust",
+    "stiff-leg-deadlift": "soulevé de terre jambes tendues",
+    "straight-arm": "bras tendus",
+    "t-bar": "T-bar",
+    "tricep-extension": "extension triceps",
+    "tricep-pushdown": "pushdown triceps",
+    "tricep-rope": "corde triceps",
+    "upright-row": "tirage menton",
+    "wide-grip": "prise large",
+    "wrist-curl": "curl poignets",
+    "y-raise": "élévation en Y"
 };
 
-const TOKEN_NAME_PARTS_DE = {
-    abduction: "Abduktion",
-    adduction: "Adduktion",
-    archer: "Bogenschütze",
+const TOKEN_NAME_PARTS_FR = {
+    abduction: "abduction",
+    adduction: "adduction",
+    archer: "archer",
     arnold: "Arnold",
-    back: "Rücken",
-    bar: "Stange",
-    barbell: "Langhantel",
-    bench: "Bank",
-    bicycle: "Bicycle",
-    bicep: "Bizeps",
-    box: "Box",
-    cable: "Kabelzug",
-    calf: "Wade",
-    cheat: "Cheat",
-    clean: "Clean",
-    crunches: "Crunches",
-    curl: "Curl",
-    deadlift: "Kreuzheben",
-    diamond: "Diamant",
-    dips: "Dips",
-    donkey: "Donkey",
-    dumbbell: "Kurzhantel",
-    extension: "Strecken",
-    fly: "Fly",
-    floor: "Floor",
-    flutter: "Flutter",
-    front: "Front",
-    glute: "Glute",
-    good: "Good",
-    hamstring: "Hamstring",
-    handstand: "Handstand",
-    half: "halb",
-    high: "High",
+    back: "dos",
+    bar: "barre",
+    barbell: "barre",
+    bench: "banc",
+    bicycle: "bicyclette",
+    bicep: "biceps",
+    box: "box",
+    cable: "poulie",
+    calf: "mollets",
+    cheat: "cheat",
+    clean: "clean",
+    curl: "curl",
+    deadlift: "soulevé de terre",
+    decline: "décliné",
+    deficit: "déficit",
+    diamond: "diamant",
+    donkey: "donkey",
+    dumbbell: "haltères",
+    extension: "extension",
+    fly: "écarté",
+    floor: "au sol",
+    flutter: "battements",
+    front: "avant",
+    glute: "fessier",
+    hamstring: "ischios",
+    handstand: "équilibre",
+    hex: "hexagonale",
+    high: "haut",
     horizontal: "horizontal",
-    incline: "Schrägbank",
+    incline: "incliné",
     jefferson: "Jefferson",
     jm: "JM",
-    kickback: "Kickback",
-    landmine: "Landmine",
-    lateral: "Seitheben",
-    log: "Log",
-    lunge: "Ausfallschritt",
-    lying: "liegend",
-    machine: "Maschine",
+    kickback: "kickback",
+    landmine: "landmine",
+    lateral: "latéral",
+    log: "log",
+    lying: "couché",
+    machine: "machine",
     meadows: "Meadows",
-    military: "Military",
-    mountain: "Mountain",
-    one: "ein",
-    overhead: "Überkopf",
-    paused: "pausiert",
+    military: "militaire",
+    one: "un",
+    overhead: "overhead",
+    paused: "avec pause",
     pendlay: "Pendlay",
-    pike: "Pike",
-    pin: "Pin",
-    pistol: "Pistol",
-    power: "Power",
-    preacher: "Scott",
-    press: "Press",
-    pulldown: "Pulldown",
-    pull: "Pull",
-    pullover: "Pullover",
-    raise: "Heben",
-    renegade: "Renegade",
-    reverse: "Reverse",
-    ring: "Ring",
-    roller: "Roller",
-    row: "Rudern",
-    seated: "sitzend",
-    shrug: "Shrug",
-    sissy: "Sissy",
-    sled: "Schlitten",
-    snatch: "Snatch",
-    spider: "Spider",
+    pike: "pike",
+    pin: "pin",
+    pistol: "pistol",
+    power: "power",
+    preacher: "pupitre",
+    press: "développé",
+    pulldown: "tirage",
+    pull: "tirage",
+    pullover: "pull-over",
+    raise: "élévation",
+    renegade: "renegade",
+    reverse: "inversé",
+    ring: "anneaux",
+    roller: "roue",
+    row: "rowing",
+    seated: "assis",
+    shrug: "shrug",
+    sissy: "sissy",
+    sled: "presse",
+    snatch: "snatch",
+    spider: "spider",
     spoto: "Spoto",
-    squat: "Kniebeuge",
-    standing: "stehend",
-    strict: "Strict",
-    sumo: "Sumo",
-    superman: "Superman",
+    squat: "squat",
+    standing: "debout",
+    strict: "strict",
     tate: "Tate",
-    thruster: "Thruster",
-    tricep: "Trizeps",
-    vertical: "vertikal",
+    thruster: "thruster",
+    tricep: "triceps",
+    vertical: "vertical",
     viking: "Viking",
-    walking: "Walking",
+    walking: "marché",
     yates: "Yates",
     zercher: "Zercher",
     zottman: "Zottman",
     z: "Z"
 };
+
+
+const FRENCH_EQUIPMENT_PARTS = new Map([
+    ["barre", "à la barre"],
+    ["haltères", "aux haltères"],
+    ["poulie", "à la poulie"],
+    ["machine", "à la machine"],
+    ["Smith machine", "à la Smith machine"],
+    ["barre EZ", "à la barre EZ"],
+    ["trap bar", "à la trap bar"],
+    ["T-bar", "à la T-bar"],
+    ["anneaux", "aux anneaux"],
+    ["landmine", "à la landmine"]
+]);
+
+const FRENCH_POST_MODIFIERS = new Set([
+    "avec appui poitrine",
+    "avec pause",
+    "bras fléchis",
+    "bras tendus",
+    "buste penché",
+    "décliné",
+    "derrière le dos",
+    "déficit",
+    "incliné",
+    "nuque",
+    "prise inversée",
+    "prise large",
+    "prise neutre",
+    "prise serrée",
+    "unilatéral",
+    "une jambe"
+]);
 
 const JAPANESE_TO_KOREAN_TEXT = [
     ["その他のワークアウト", "다른 운동"],
@@ -2011,52 +1907,52 @@ const JAPANESE_TO_SPANISH_TEXT = [
     ["注：", "Nota: "]
 ].sort((left, right) => right[0].length - left[0].length);
 
-const JAPANESE_TO_GERMAN_TEXT = [
-    ["その他のワークアウト", "Weitere Übungen"],
-    ["ワークアウトデータベース", "Krafttraining-Datenbank"],
-    ["鍛えられる筋肉", "Zielmuskulatur"],
-    ["テーブルの見方", "Tabellenhinweise"],
-    ["世界記録", "Weltrekord"],
-    ["公式記録", "Offizieller Rekord"],
-    ["プライバシーポリシー", "Datenschutzerklärung"],
-    ["お問い合わせ", "Kontakt"],
-    ["リンク", "Links"],
-    ["言語", "Sprache"],
-    ["男性・体重別", "Männer nach Körpergewicht"],
-    ["女性・体重別", "Frauen nach Körpergewicht"],
-    ["男性・年齢別", "Männer nach Alter"],
-    ["女性・年齢別", "Frauen nach Alter"],
-    ["平均レップ数", "Durchschnittliche Wiederholungen"],
-    ["基準レップ数", "Wiederholungsstandards"],
-    ["平均重量", "Durchschnittsgewicht"],
-    ["基準重量", "Kraftstandards"],
-    ["レップ数", "Wiederholungen"],
-    ["体重別", "Nach Körpergewicht"],
-    ["年齢別", "Nach Alter"],
-    ["レベル", "Level"],
-    ["グループ", "Gruppe"],
-    ["データ", "Daten"],
-    ["説明", "Beschreibung"],
-    ["分布", "Verteilung"],
-    ["体重", "Körpergewicht"],
-    ["年齢", "Alter"],
-    ["男性", "Männer"],
-    ["女性", "Frauen"],
-    ["筋肉", "Muskeln"],
-    ["重量", "Gewicht"],
-    ["基礎", "Einsteiger"],
-    ["初級", "Anfänger"],
-    ["中級", "Fortgeschrittene"],
-    ["上級", "Erfahrene"],
-    ["プロ", "Elite"],
+const JAPANESE_TO_FRENCH_TEXT = [
+    ["その他のワークアウト", "Autres exercices"],
+    ["ワークアウトデータベース", "Base de données de musculation"],
+    ["鍛えられる筋肉", "Muscles ciblés"],
+    ["テーブルの見方", "Comment lire le tableau"],
+    ["世界記録", "Record du monde"],
+    ["公式記録", "Record officiel"],
+    ["プライバシーポリシー", "Politique de confidentialité"],
+    ["お問い合わせ", "Contact"],
+    ["リンク", "Liens"],
+    ["言語", "Langue"],
+    ["男性・体重別", "Hommes par poids de corps"],
+    ["女性・体重別", "Femmes par poids de corps"],
+    ["男性・年齢別", "Hommes par âge"],
+    ["女性・年齢別", "Femmes par âge"],
+    ["平均レップ数", "Répétitions moyennes"],
+    ["基準レップ数", "Standards de répétitions"],
+    ["平均重量", "Charge moyenne"],
+    ["基準重量", "Standards de force"],
+    ["レップ数", "Répétitions"],
+    ["体重別", "Par poids de corps"],
+    ["年齢別", "Par âge"],
+    ["レベル", "Niveau"],
+    ["グループ", "Groupe"],
+    ["データ", "Données"],
+    ["説明", "Description"],
+    ["分布", "Répartition"],
+    ["体重", "Poids de corps"],
+    ["年齢", "Âge"],
+    ["男性", "Hommes"],
+    ["女性", "Femmes"],
+    ["筋肉", "Muscles"],
+    ["重量", "Charge"],
+    ["基礎", "Débutant"],
+    ["初級", "Novice"],
+    ["中級", "Intermédiaire"],
+    ["上級", "Avancé"],
+    ["プロ", "Élite"],
     ["上位", "Top"],
-    ["下位", "Untere"],
-    ["正しいフォームを身につけ、1か月以上継続してトレーニングに励む。", "Beherrscht die saubere Technik und trainiert seit mindestens 1 Monat regelmäßig."],
-    ["6か月以上継続的にトレーニングに励む。", "Trainiert seit mindestens 6 Monaten regelmäßig."],
-    ["２年以上継続的にトレーニングに励む。", "Trainiert seit mindestens 2 Jahren regelmäßig."],
-    ["5年以上継続的にトレーニングに励む。", "Trainiert seit mehr als 5 Jahren regelmäßig."],
-    ["5年以上当該メニューを専門にトレーニング。", "Trainiert diese Übung seit mehr als 5 Jahren gezielt."],
-    ["注：", "Hinweis: "]
+    ["下位", "Bas"],
+    ["正しいフォームを身につけ、1か月以上継続してトレーニングに励む。", "Maîtrise la bonne technique et s'entraîne régulièrement depuis au moins 1 mois."],
+    ["6か月以上継続的にトレーニングに励む。", "S'entraîne régulièrement depuis au moins 6 mois."],
+    ["２年以上継続的にトレーニングに励む。", "S'entraîne régulièrement depuis au moins 2 ans."],
+    ["5年以上継続的にトレーニングに励む。", "S'entraîne régulièrement depuis plus de 5 ans."],
+    ["5年以上当該メニューを専門にトレーニング。", "S'entraîne spécifiquement sur cet exercice depuis plus de 5 ans."],
+    ["注：", "Note : "]
 ].sort((left, right) => right[0].length - left[0].length);
 
 const JAPANESE_LEFTOVER_PATTERNS = [
@@ -2226,7 +2122,7 @@ function getCategoryLabels(localeCode) {
     if (localeCode === "zh-hant") return CATEGORY_LABELS_ZH_HANT;
     if (localeCode === "zh-hans") return CATEGORY_LABELS_ZH_HANS;
     if (localeCode === "es") return CATEGORY_LABELS_ES;
-    if (localeCode === "de") return CATEGORY_LABELS_DE;
+    if (localeCode === "fr") return CATEGORY_LABELS_FR;
     return null;
 }
 
@@ -2235,7 +2131,7 @@ function getCategoryAliases(localeCode) {
     if (localeCode === "zh-hant") return CATEGORY_ALIASES_ZH_HANT;
     if (localeCode === "zh-hans") return CATEGORY_ALIASES_ZH_HANS;
     if (localeCode === "es") return CATEGORY_ALIASES_ES;
-    if (localeCode === "de") return CATEGORY_ALIASES_DE;
+    if (localeCode === "fr") return CATEGORY_ALIASES_FR;
     return {};
 }
 
@@ -2244,7 +2140,7 @@ function getCategoryDefaultTags(localeCode) {
     if (localeCode === "zh-hant") return CATEGORY_DEFAULT_TAGS_ZH_HANT;
     if (localeCode === "zh-hans") return CATEGORY_DEFAULT_TAGS_ZH_HANS;
     if (localeCode === "es") return CATEGORY_DEFAULT_TAGS_ES;
-    if (localeCode === "de") return CATEGORY_DEFAULT_TAGS_DE;
+    if (localeCode === "fr") return CATEGORY_DEFAULT_TAGS_FR;
     return {};
 }
 
@@ -2253,7 +2149,7 @@ function getEquipmentTags(localeCode) {
     if (localeCode === "zh-hant") return EQUIPMENT_TAGS_ZH_HANT;
     if (localeCode === "zh-hans") return EQUIPMENT_TAGS_ZH_HANS;
     if (localeCode === "es") return EQUIPMENT_TAGS_ES;
-    if (localeCode === "de") return EQUIPMENT_TAGS_DE;
+    if (localeCode === "fr") return EQUIPMENT_TAGS_FR;
     return {};
 }
 
@@ -2353,14 +2249,14 @@ function getMeasurementCopy(kind = "weight", localeCode = "ja") {
         };
     }
 
-    if (localeCode === "de") {
+    if (localeCode === "fr") {
         if (kind === "reps") {
             return {
-                averageLabel: "Durchschnittliche Wiederholungen",
-                standardsLabel: "Wiederholungsstandards",
-                detailLabel: "Wiederholungen",
-                pageTerm: "Wiederholungen",
-                note: "Die Tabellenwerte sind Richtwerte für Wiederholungen, die in einem Satz möglich sind."
+                averageLabel: "Répétitions moyennes",
+                standardsLabel: "Standards de répétitions",
+                detailLabel: "Répétitions",
+                pageTerm: "Répétitions",
+                note: "Les valeurs du tableau indiquent une estimation des répétitions possibles sur une série."
             };
         }
 
@@ -2429,9 +2325,9 @@ function getExerciseName(exerciseOrCard, localeCode = "ja") {
         return exerciseOrCard.names?.es || EXACT_EXERCISE_NAMES_ES[slug] || inferSpanishExerciseName(slug);
     }
 
-    if (localeCode === "de") {
+    if (localeCode === "fr") {
         const slug = exerciseOrCard.slug || "";
-        return exerciseOrCard.names?.de || EXACT_EXERCISE_NAMES_DE[slug] || inferGermanExerciseName(slug);
+        return exerciseOrCard.names?.fr || EXACT_EXERCISE_NAMES_FR[slug] || inferFrenchExerciseName(slug);
     }
 
     if (localeCode === "ko") {
@@ -2456,8 +2352,8 @@ function getMuscleGroupLabel(label, localeCode = "ja") {
         return MUSCLE_GROUPS_ES[label] || label;
     }
 
-    if (localeCode === "de") {
-        return MUSCLE_GROUPS_DE[label] || label;
+    if (localeCode === "fr") {
+        return MUSCLE_GROUPS_FR[label] || label;
     }
 
     return localeCode === "ko" ? MUSCLE_GROUPS_KO[label] || label : label;
@@ -2477,8 +2373,8 @@ function getMuscleName(name, localeCode = "ja") {
         return MUSCLES_ES[name] || name;
     }
 
-    if (localeCode === "de") {
-        return MUSCLES_DE[name] || name;
+    if (localeCode === "fr") {
+        return MUSCLES_FR[name] || name;
     }
 
     return localeCode === "ko" ? MUSCLES_KO[name] || name : name;
@@ -2563,6 +2459,18 @@ function buildExerciseSummary(exercise, section, measurementKind, localeCode = "
     }
 
 
+    if (localeCode === "fr") {
+        const name = getExerciseName(exercise, localeCode);
+        const category = getCategoryLabel(section || exercise.categoryId, localeCode);
+        const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "muscles principaux";
+
+        if (measurementKind === "reps") {
+            return `${name} est un exercice de ${category.toLowerCase()} axé sur ${muscles}. Consulte les répétitions moyennes et les standards de répétitions sur une seule page.`;
+        }
+
+        return `${name} permet de consulter la charge moyenne et les standards de force comme repères pour ${category.toLowerCase()}. Les muscles principaux sont ${muscles}.`;
+    }
+
     const name = getExerciseName(exercise, localeCode);
     const category = getCategoryLabel(section || exercise.categoryId, localeCode);
     const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "주요 근육";
@@ -2623,6 +2531,18 @@ function buildExerciseDescription(exercise, section, measurementKind, localeCode
         return `${name} ist eine typische Übung für den Bereich ${category}. Sie beansprucht vor allem ${muscles} und hilft beim Vergleich von Durchschnittsgewicht, Kraftstandards und verwandten Übungen.`;
     }
 
+
+    if (localeCode === "fr") {
+        const name = getExerciseName(exercise, localeCode);
+        const category = getCategoryLabel(section || exercise.categoryId, localeCode);
+        const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "muscles principaux";
+
+        if (measurementKind === "reps") {
+            return `${name} est une option utile pour ${category.toLowerCase()}, surtout au poids du corps ou à faible charge. Compare les répétitions moyennes et les standards tout en vérifiant le travail sur ${muscles}.`;
+        }
+
+        return `${name} est un exercice représentatif pour ${category.toLowerCase()}. Il sollicite surtout ${muscles} et permet de comparer charge moyenne, standards de force et exercices liés.`;
+    }
 
     const name = getExerciseName(exercise, localeCode);
     const category = getCategoryLabel(section || exercise.categoryId, localeCode);
@@ -2690,6 +2610,17 @@ function buildExerciseSeo(exercise, measurementKind, unit, localeCode = "ja") {
     }
 
 
+    if (localeCode === "fr") {
+        const copy = getMeasurementCopy(measurementKind, "fr");
+        const name = getExerciseName(exercise, "fr");
+        const unitLabel = unit === "lb" ? "tableau en lb" : "tableau en kg";
+
+        return {
+            title: `${name} : ${copy.averageLabel} et ${copy.standardsLabel} | Shiba Muscle`,
+            descriptionPrefix: `Page pour consulter ${copy.averageLabel.toLowerCase()} et ${copy.standardsLabel.toLowerCase()} de ${name} avec un ${unitLabel}.`
+        };
+    }
+
     const copy = getMeasurementCopy(measurementKind, "ko");
     const name = getExerciseName(exercise, "ko");
     const unitLabel = unit === "lb" ? "lb 기준표" : "kg 기준표";
@@ -2756,6 +2687,17 @@ function buildExerciseSeoDescription(exercise, section, measurementKind, unit, l
         return `${seo.descriptionPrefix} Diese Seite ist eine Referenz für den Bereich ${category}. ${muscleDescription}${metricSummary}`;
     }
 
+
+    if (localeCode === "fr") {
+        const seo = buildExerciseSeo(exercise, measurementKind, unit, "fr");
+        const category = getCategoryLabel(section || exercise.categoryId, "fr");
+        const primaryMuscles = getLocalizedMuscleGroups(exercise, "fr")[0]?.items || [];
+        const metricSummary = measurementKind === "reps"
+            ? "Tu peux aussi consulter les exercices liés."
+            : "Inclut des tableaux par poids de corps, des tableaux par âge et des exercices liés.";
+        const muscleDescription = primaryMuscles.length ? `Les muscles principaux sont ${primaryMuscles.join(", ")}. ` : "";
+        return `${seo.descriptionPrefix} C'est une référence pour ${category.toLowerCase()}. ${muscleDescription}${metricSummary}`;
+    }
 
     const seo = buildExerciseSeo(exercise, measurementKind, unit, "ko");
     const category = getCategoryLabel(section || exercise.categoryId, "ko");
@@ -2858,11 +2800,12 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
     const isTraditionalChinese = locale === "zh-hant";
     const isSimplifiedChinese = locale === "zh-hans";
     const isChinese = isTraditionalChinese || isSimplifiedChinese;
+    const isFrench = locale === "fr";
 
     next = next.replaceAll(exercise.names?.ja || "", name);
 
     if (block === "average") {
-        const heading = isSpanish
+        const heading = isSpanish || isFrench
             ? `${copy.averageLabel} de ${name}${suffix}`
             : isGerman
                 ? `${name}: ${copy.averageLabel}${suffix}`
@@ -2879,35 +2822,20 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
     if (block === "standards") {
         const unitLabel = measurementKind === "weight" ? `(${unit})` : "";
         const detailLabel = measurementKind === "weight" ? "1RM" : copy.detailLabel;
-        const heading = isSpanish
-            ? `${copy.standardsLabel} de ${name}${unitLabel}`
-            : isGerman
-                ? `${name}: ${copy.standardsLabel}${unitLabel}`
-                : isChinese
-                    ? `${name}${copy.standardsLabel}${unitLabel}`
-                    : `${name} ${copy.standardsLabel}${unitLabel}`;
+        const heading = isSpanish || isFrench
+            ? `${copy.standardsLabel} de ${name}${unitLabel ? ` ${unitLabel}` : ""}`
+            : `${name} ${copy.standardsLabel}${unitLabel}`;
         next = next.replace(/<h2 class="section-title">[\s\S]*?<\/h2>/i, `<h2 class="section-title">${escapeHtml(heading)}</h2>`);
 
-        if (isSpanish) {
-            next = next.replace(/男性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `Hombres por peso corporal (${unit}) [${detailLabel}]`);
-            next = next.replace(/女性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `Mujeres por peso corporal (${unit}) [${detailLabel}]`);
-            next = next.replace(/男性・年齢別データ \[[^\]]+\]/g, `Hombres por edad [${detailLabel}]`);
-            next = next.replace(/女性・年齢別データ \[[^\]]+\]/g, `Mujeres por edad [${detailLabel}]`);
-        } else if (isTraditionalChinese) {
-            next = next.replace(/男性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `男性 體重別(${unit})資料 [${detailLabel}]`);
-            next = next.replace(/女性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `女性 體重別(${unit})資料 [${detailLabel}]`);
-            next = next.replace(/男性・年齢別データ \[[^\]]+\]/g, `男性 年齡別資料 [${detailLabel}]`);
-            next = next.replace(/女性・年齢別データ \[[^\]]+\]/g, `女性 年齡別資料 [${detailLabel}]`);
-        } else if (isSimplifiedChinese) {
-            next = next.replace(/男性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `男性 按体重(${unit})数据 [${detailLabel}]`);
-            next = next.replace(/女性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `女性 按体重(${unit})数据 [${detailLabel}]`);
-            next = next.replace(/男性・年齢別データ \[[^\]]+\]/g, `男性 按年龄数据 [${detailLabel}]`);
-            next = next.replace(/女性・年齢別データ \[[^\]]+\]/g, `女性 按年龄数据 [${detailLabel}]`);
-        } else if (isGerman) {
-            next = next.replace(/男性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `Männer nach Körpergewicht (${unit}) [${detailLabel}]`);
-            next = next.replace(/女性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `Frauen nach Körpergewicht (${unit}) [${detailLabel}]`);
-            next = next.replace(/男性・年齢別データ \[[^\]]+\]/g, `Männer nach Alter [${detailLabel}]`);
-            next = next.replace(/女性・年齢別データ \[[^\]]+\]/g, `Frauen nach Alter [${detailLabel}]`);
+        if (isSpanish || isFrench) {
+            const maleByWeight = isFrench ? `Hommes par poids de corps (${unit}) [${detailLabel}]` : `Hombres por peso corporal (${unit}) [${detailLabel}]`;
+            const femaleByWeight = isFrench ? `Femmes par poids de corps (${unit}) [${detailLabel}]` : `Mujeres por peso corporal (${unit}) [${detailLabel}]`;
+            const maleByAge = isFrench ? `Hommes par âge [${detailLabel}]` : `Hombres por edad [${detailLabel}]`;
+            const femaleByAge = isFrench ? `Femmes par âge [${detailLabel}]` : `Mujeres por edad [${detailLabel}]`;
+            next = next.replace(/男性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, maleByWeight);
+            next = next.replace(/女性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, femaleByWeight);
+            next = next.replace(/男性・年齢別データ \[[^\]]+\]/g, maleByAge);
+            next = next.replace(/女性・年齢別データ \[[^\]]+\]/g, femaleByAge);
         } else {
             next = next.replace(/男性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `남성 체중별(${unit}) 데이터 [${detailLabel}]`);
             next = next.replace(/女性・体重別\((kg|lb)\)データ \[[^\]]+\]/g, `여성 체중별(${unit}) 데이터 [${detailLabel}]`);
@@ -2928,30 +2856,21 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
             .replace(/alt="Female"/g, 'alt="Mujeres"')
             .replace(/alt="Official Record"/g, 'alt="Récord oficial"')
             .replace(/Last Updated:/g, "Actualizado:");
-    } else if (isTraditionalChinese) {
+    } else if (isFrench) {
         next = next
-            .replace(/alt="male"/g, 'alt="男性"')
-            .replace(/alt="female"/g, 'alt="女性"')
-            .replace(/alt="Male"/g, 'alt="男性"')
-            .replace(/alt="Female"/g, 'alt="女性"')
-            .replace(/alt="Official Record"/g, 'alt="官方紀錄"')
-            .replace(/Last Updated:/g, "更新日期：");
-    } else if (isSimplifiedChinese) {
-        next = next
-            .replace(/alt="male"/g, 'alt="男性"')
-            .replace(/alt="female"/g, 'alt="女性"')
-            .replace(/alt="Male"/g, 'alt="男性"')
-            .replace(/alt="Female"/g, 'alt="女性"')
-            .replace(/alt="Official Record"/g, 'alt="官方纪录"')
-            .replace(/Last Updated:/g, "更新日期：");
-    } else if (isGerman) {
-        next = next
-            .replace(/alt="male"/g, 'alt="Männer"')
-            .replace(/alt="female"/g, 'alt="Frauen"')
-            .replace(/alt="Male"/g, 'alt="Männer"')
-            .replace(/alt="Female"/g, 'alt="Frauen"')
-            .replace(/alt="Official Record"/g, 'alt="Offizieller Rekord"')
-            .replace(/Last Updated:/g, "Aktualisiert:");
+            .replace(/alt="male"/g, 'alt="Hommes"')
+            .replace(/alt="female"/g, 'alt="Femmes"')
+            .replace(/alt="Male"/g, 'alt="Hommes"')
+            .replace(/alt="Female"/g, 'alt="Femmes"')
+            .replace(/alt="Official Record"/g, 'alt="Record officiel"')
+            .replace(/Last Updated:/g, "Mis à jour :")
+            .replace(/Men's Raw/g, "Hommes raw")
+            .replace(/Men's Equipped/g, "Hommes équipé")
+            .replace(/Women's Raw/g, "Femmes raw")
+            .replace(/Women's Equipped/g, "Femmes équipé")
+            .replace(/Heaviest/g, "Plus lourd")
+            .replace(/Overall/g, "toutes catégories")
+            .replace(/Official Record/g, "Record officiel");
     } else {
         next = next
             .replace(/alt="male"/g, 'alt="남성"')
@@ -2997,6 +2916,10 @@ function cleanSectionLabel(text, localeCode = "ja") {
         return String(text || "").replace(/\s*(übungen|training)$/i, "").trim();
     }
 
+
+    if (localeCode === "fr") {
+        return String(text || "").replace(/\s*exercices?/gi, "").trim();
+    }
 
     if (localeCode === "ko") {
         return String(text || "").replace(/\s*운동/g, "").trim();
@@ -3154,7 +3077,7 @@ function inferSpanishExerciseName(slug) {
     return capitalizeSpanish(name || slug.replace(/-/g, " "));
 }
 
-function inferGermanExerciseName(slug) {
+function inferFrenchExerciseName(slug) {
     const tokens = slug.split("-");
     const parts = [];
     let index = 0;
@@ -3163,7 +3086,7 @@ function inferGermanExerciseName(slug) {
         let matched = false;
         for (let size = Math.min(5, tokens.length - index); size > 0; size -= 1) {
             const phrase = tokens.slice(index, index + size).join("-");
-            const value = PHRASE_NAME_PARTS_DE[phrase] || TOKEN_NAME_PARTS_DE[phrase];
+            const value = PHRASE_NAME_PARTS_FR[phrase] || TOKEN_NAME_PARTS_FR[phrase];
             if (value) {
                 parts.push(value);
                 index += size;
@@ -3174,23 +3097,35 @@ function inferGermanExerciseName(slug) {
 
         if (!matched) {
             const token = tokens[index];
-            parts.push(TOKEN_NAME_PARTS_DE[token] || toTitleCase(token));
+            parts.push(TOKEN_NAME_PARTS_FR[token] || token);
             index += 1;
         }
     }
 
-    return toGermanTitle(parts.join(" ")
-        .replace(/Kurzhantel Kurzhantel/g, "Kurzhantel")
-        .replace(/Langhantel Langhantel/g, "Langhantel")
-        .replace(/Kabelzug Kabelzug/g, "Kabelzug")
-        .replace(/Maschine Maschine/g, "Maschine")
-        .replace(/Kniebeuge Kniebeuge/g, "Kniebeuge")
-        .replace(/Kreuzheben Kreuzheben/g, "Kreuzheben")
-        .replace(/Press Press/g, "Press")
-        .replace(/Curl Curl/g, "Curl")
-        .replace(/Rudern Rudern/g, "Rudern")
+    const equipment = [];
+    const modifiers = [];
+    const base = [];
+
+    parts.forEach((part) => {
+        if (FRENCH_EQUIPMENT_PARTS.has(part)) {
+            equipment.push(FRENCH_EQUIPMENT_PARTS.get(part));
+        } else if (FRENCH_POST_MODIFIERS.has(part)) {
+            modifiers.push(part);
+        } else {
+            base.push(part);
+        }
+    });
+
+    const name = [...base, ...modifiers, ...equipment].join(" ")
+        .replace(/développé développé/g, "développé")
+        .replace(/curl curl/g, "curl")
+        .replace(/rowing rowing/g, "rowing")
+        .replace(/soulevé de terre soulevé de terre/g, "soulevé de terre")
+        .replace(/squat squat/g, "squat")
         .replace(/\s+/g, " ")
-        .trim());
+        .trim();
+
+    return capitalizeFrench(name || slug.replace(/-/g, " "));
 }
 
 function formatCardCategory(sectionId, slug, measurementKind, tags, localeCode = "ko") {
@@ -3246,6 +3181,14 @@ function buildCardDescription(card, section, localeCode) {
         return `Vergleiche Durchschnittsgewicht und Kraftstandards für ${name} im Bereich ${sectionLabel}.${primaryMuscles ? ` Zielmuskulatur: ${primaryMuscles}.` : ""}`;
     }
 
+
+    if (localeCode === "fr") {
+        if (measurementKind === "reps") {
+            return `Consulte les répétitions moyennes et les standards de ${name} pour ${sectionLabel.toLowerCase()}.`;
+        }
+
+        return `Consulte la charge moyenne et les standards de force de ${name} pour ${sectionLabel.toLowerCase()}.${primaryMuscles ? ` Muscles principaux : ${primaryMuscles}.` : ""}`;
+    }
 
     if (measurementKind === "reps") {
         return `${name}의 평균 반복 횟수와 기준 반복 횟수를 ${sectionLabel} 운동 기준으로 확인할 수 있습니다.`;
@@ -3314,6 +3257,14 @@ function buildAverageNote(measurementKind, localeCode = "ko") {
             : "Hinweis: Diese Standards sind 1RM-Schätzwerte auf Basis durchschnittlicher Kraftsportlerinnen und Kraftsportler. Körpergewicht, Alter und andere persönliche Faktoren können die Werte beeinflussen. Die detaillierten Daten stehen in der Tabelle unten.";
     }
 
+    if (localeCode === "fr") {
+        if (measurementKind === "reps") {
+            return "Note : ces valeurs sont des estimations des répétitions moyennes réalisables sur une série. Elles peuvent varier selon le poids de corps, l'amplitude, le tempo et d'autres facteurs personnels. Consulte les données détaillées dans le tableau ci-dessous.";
+        }
+
+        return "Note : ces standards sont des estimations de 1RM basées sur des pratiquants moyens. Ils peuvent varier selon le poids de corps, l'âge et d'autres facteurs personnels. Consulte les données détaillées dans le tableau ci-dessous.";
+    }
+
     if (measurementKind === "reps") {
         return "참고: 이 기준은 한 세트에서 수행할 수 있는 평균 반복 횟수의 추정치입니다. 체중, 가동 범위, 템포 같은 개인 요인에 따라 달라질 수 있습니다. 자세한 데이터는 아래 표에서 확인하세요.";
     }
@@ -3374,21 +3325,21 @@ function buildStandardsNote(exercise, unit, measurementKind, localeCode = "ko") 
         return `Nota: una barra estándar de gimnasio suele pesar ${unit === "lb" ? "44 lb" : "20 kg"}.`;
     }
 
-    if (localeCode === "de") {
+    if (localeCode === "fr") {
         if (measurementKind === "reps") {
-            return "Hinweis: Die Tabellenwerte sind Richtwerte für Wiederholungen, die in einem Satz möglich sind. Die Daten nach Körpergewicht helfen beim Einschätzen der relativen Belastung, die Daten nach Alter zeigen Trends.";
+            return "Note : les valeurs du tableau sont une référence des répétitions possibles sur une série. Utilise les données par poids de corps pour estimer la charge relative et les données par âge pour observer les tendances.";
         }
 
         const tags = inferEquipmentTags(exercise.slug, localeCode);
-        if (tags.includes("Kurzhantel")) {
-            return "Hinweis: Das angegebene Kurzhantelgewicht bezieht sich auf eine einzelne Kurzhantel.";
+        if (tags.includes("Haltères")) {
+            return "Note : la charge d'haltère indiquée dans le tableau correspond à un seul haltère.";
         }
 
-        if (tags.some((tag) => ["Maschine", "Kabelzug", "Smith-Maschine"].includes(tag))) {
-            return "Hinweis: Angezeigte Gewichte an Maschinen und Kabelzügen können je nach Hersteller abweichen. Nutze sie als Vergleichswert unter ähnlichen Bedingungen.";
+        if (tags.some((tag) => ["Machine", "Poulie", "Smith machine"].includes(tag))) {
+            return "Note : la charge affichée sur les machines et les poulies peut varier selon le fabricant. Utilise ces valeurs comme repères dans des conditions comparables.";
         }
 
-        return `Hinweis: Eine Standard-Langhantel im Fitnessstudio wiegt meist ${unit === "lb" ? "44 lb" : "20 kg"}.`;
+        return `Note : une barre standard de salle de sport pèse généralement ${unit === "lb" ? "44 lb" : "20 kg"}.`;
     }
 
     if (measurementKind === "reps") {
@@ -3409,32 +3360,32 @@ function buildStandardsNote(exercise, unit, measurementKind, localeCode = "ko") 
 
 function replaceJapaneseText(html, localeCode = "ko") {
     let next = html;
-    const muscleGroups = localeCode === "es"
-        ? MUSCLE_GROUPS_ES
-        : localeCode === "zh-hant"
-            ? MUSCLE_GROUPS_ZH_HANT
-            : localeCode === "zh-hans"
-                ? MUSCLE_GROUPS_ZH_HANS
-                : localeCode === "de"
-                    ? MUSCLE_GROUPS_DE
+    const muscleGroups = localeCode === "fr"
+        ? MUSCLE_GROUPS_FR
+        : localeCode === "es"
+            ? MUSCLE_GROUPS_ES
+            : localeCode === "zh-hant"
+                ? MUSCLE_GROUPS_ZH_HANT
+                : localeCode === "zh-hans"
+                    ? MUSCLE_GROUPS_ZH_HANS
                     : MUSCLE_GROUPS_KO;
-    const muscles = localeCode === "es"
-        ? MUSCLES_ES
-        : localeCode === "zh-hant"
-            ? MUSCLES_ZH_HANT
-            : localeCode === "zh-hans"
-                ? MUSCLES_ZH_HANS
-                : localeCode === "de"
-                    ? MUSCLES_DE
+    const muscles = localeCode === "fr"
+        ? MUSCLES_FR
+        : localeCode === "es"
+            ? MUSCLES_ES
+            : localeCode === "zh-hant"
+                ? MUSCLES_ZH_HANT
+                : localeCode === "zh-hans"
+                    ? MUSCLES_ZH_HANS
                     : MUSCLES_KO;
-    const replacements = localeCode === "es"
-        ? JAPANESE_TO_SPANISH_TEXT
-        : localeCode === "zh-hant"
-            ? JAPANESE_TO_ZH_HANT_TEXT
-            : localeCode === "zh-hans"
-                ? JAPANESE_TO_ZH_HANS_TEXT
-                : localeCode === "de"
-                    ? JAPANESE_TO_GERMAN_TEXT
+    const replacements = localeCode === "fr"
+        ? JAPANESE_TO_FRENCH_TEXT
+        : localeCode === "es"
+            ? JAPANESE_TO_SPANISH_TEXT
+            : localeCode === "zh-hant"
+                ? JAPANESE_TO_ZH_HANT_TEXT
+                : localeCode === "zh-hans"
+                    ? JAPANESE_TO_ZH_HANS_TEXT
                     : JAPANESE_TO_KOREAN_TEXT;
 
     Object.entries(muscleGroups).forEach(([ja, localized]) => {
@@ -3521,7 +3472,7 @@ function capitalizeSpanish(value) {
     return text ? `${text.charAt(0).toUpperCase()}${text.slice(1)}` : "";
 }
 
-function toGermanTitle(value) {
+function capitalizeFrench(value) {
     const text = String(value || "").trim();
     return text ? `${text.charAt(0).toUpperCase()}${text.slice(1)}` : "";
 }

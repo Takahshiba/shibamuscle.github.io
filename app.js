@@ -6,91 +6,91 @@ const CATEGORY_LINKS = [
         id: "whole-body-section",
         key: "wholeBody",
         icon: "power-clean-white-icon.webp",
-        labels: { ja: "全身", ko: "전신", "zh-hant": "全身", es: "Cuerpo completo", de: "Ganzkörper" },
+        labels: { ja: "全身", ko: "전신", "zh-hant": "全身", es: "Cuerpo completo", fr: "Corps entier" },
         descriptions: {
             ja: "デッドリフト、クリーン、スナッチなど全身連動の基準ページ",
             ko: "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지",
             "zh-hant": "硬舉、翻站、抓舉等全身協調動作的標準頁面",
             es: "Ejercicios globales como peso muerto, clean y snatch",
-            de: "Referenzseiten für Ganzkörperübungen wie Kreuzheben, Clean und Snatch"
+            fr: "Exercices globaux comme soulevé de terre, clean et snatch"
         }
     },
     {
         id: "chest-section",
         key: "chest",
         icon: "bench-press-white-icon.webp",
-        labels: { ja: "胸", ko: "가슴", "zh-hant": "胸部", es: "Pecho", de: "Brust" },
+        labels: { ja: "胸", ko: "가슴", "zh-hant": "胸部", es: "Pecho", fr: "Pectoraux" },
         descriptions: {
             ja: "プレス系の平均重量と押す種目の比較",
             ko: "프레스 계열 평균 중량과 미는 운동 비교",
             "zh-hant": "推類動作的平均重量與訓練標準比較",
             es: "Pesos medios y comparativas de empuje",
-            de: "Durchschnittsgewichte und Vergleiche für Druckübungen"
+            fr: "Charges moyennes et comparaisons des mouvements de poussée"
         }
     },
     {
         id: "back-section",
         key: "back",
         icon: "deadlift-white-icon.webp",
-        labels: { ja: "背中", ko: "등", "zh-hant": "背部", es: "Espalda", de: "Rücken" },
+        labels: { ja: "背中", ko: "등", "zh-hant": "背部", es: "Espalda", fr: "Dos" },
         descriptions: {
             ja: "ローイング、プル系、ヒンジ系の比較",
             ko: "로우, 풀, 힌지 계열 운동 비교",
             "zh-hant": "划船、下拉與髖鉸鏈類動作比較",
             es: "Remos, jalones y bisagras de cadera",
-            de: "Rudern, Zugübungen und Hüftstreckbewegungen im Vergleich"
+            fr: "Rowings, tirages et mouvements de charnière"
         }
     },
     {
         id: "shoulder-section",
         key: "shoulder",
         icon: "shoulder-press-white-icon.webp",
-        labels: { ja: "肩", ko: "어깨", "zh-hant": "肩部", es: "Hombros", de: "Schultern" },
+        labels: { ja: "肩", ko: "어깨", "zh-hant": "肩部", es: "Hombros", fr: "Épaules" },
         descriptions: {
             ja: "プレス、レイズ、安定性の種目一覧",
             ko: "프레스, 레이즈, 안정성 운동 목록",
             "zh-hant": "肩推、平舉與穩定性訓練動作列表",
             es: "Presses, elevaciones y estabilidad del hombro",
-            de: "Schulterdrücken, Seitheben und Stabilitätsübungen"
+            fr: "Développés, élévations et stabilité des épaules"
         }
     },
     {
         id: "arm-section",
         key: "arm",
         icon: "hammer-curl-white-icon.webp",
-        labels: { ja: "腕", ko: "팔", "zh-hant": "手臂", es: "Brazos", de: "Arme" },
+        labels: { ja: "腕", ko: "팔", "zh-hant": "手臂", es: "Brazos", fr: "Bras" },
         descriptions: {
             ja: "カール、トライセプス、前腕の種目",
             ko: "컬, 삼두, 전완 운동",
             "zh-hant": "彎舉、三頭肌與前臂訓練動作",
             es: "Curls, tríceps y antebrazos",
-            de: "Curls, Trizeps- und Unterarmübungen"
+            fr: "Curls, triceps et avant-bras"
         }
     },
     {
         id: "leg-section",
         key: "leg",
         icon: "squat-white-icon.webp",
-        labels: { ja: "脚", ko: "하체", "zh-hant": "腿部", es: "Piernas", de: "Beine" },
+        labels: { ja: "脚", ko: "하체", "zh-hant": "腿部", es: "Piernas", fr: "Jambes" },
         descriptions: {
             ja: "スクワット、ランジ、ヒップ主導の種目",
             ko: "스쿼트, 런지, 힙 중심 운동",
             "zh-hant": "深蹲、弓箭步與臀腿主導動作",
             es: "Sentadillas, zancadas y ejercicios dominantes de cadera",
-            de: "Kniebeugen, Ausfallschritte und hüftdominante Übungen"
+            fr: "Squats, fentes et mouvements dominants hanche"
         }
     },
     {
         id: "core-section",
         key: "core",
         icon: "sit-ups-white-icon.webp",
-        labels: { ja: "体幹", ko: "코어", "zh-hant": "核心", es: "Core", de: "Rumpf" },
+        labels: { ja: "体幹", ko: "코어", "zh-hant": "核心", es: "Core", fr: "Tronc" },
         descriptions: {
             ja: "腹筋、回旋、体幹安定の種目",
             ko: "복근, 회전, 코어 안정화 운동",
             "zh-hant": "腹肌、旋轉與核心穩定訓練動作",
             es: "Abdominales, rotación y estabilidad del core",
-            de: "Bauchübungen, Rotation und Rumpfstabilität"
+            fr: "Abdominaux, rotation et stabilité du tronc"
         }
     }
 ];
@@ -136,11 +136,11 @@ const HOME_ENTRY_ROUTES = [
                 title: "Empieza con los ejercicios más consultados",
                 copy: "Un acceso directo a los ejercicios que más se comparan para revisar datos sin rodeos."
             },
-            de: {
-                label: "Beliebte Vergleiche",
-                eyebrow: "Schnellvergleich",
-                title: "Mit häufig gesuchten Übungen starten",
-                copy: "Ein direkter Einstieg zu den Übungen, die im Krafttraining am häufigsten verglichen werden."
+            fr: {
+                label: "Comparatifs clés",
+                eyebrow: "Comparaison rapide",
+                title: "Commence par les exercices les plus consultés",
+                copy: "Un accès direct aux exercices souvent comparés pour vérifier les données sans détour."
             }
         }
     },
@@ -178,11 +178,11 @@ const HOME_ENTRY_ROUTES = [
                 title: "Base del Big 3",
                 copy: "Los tres levantamientos más usados como referencia para comparar fuerza."
             },
-            de: {
+            fr: {
                 label: "Big 3",
-                eyebrow: "Kraftstandards",
-                title: "Big-3-Basis",
-                copy: "Die drei klassischen Grundübungen als schnelle Orientierung für Kraftwerte."
+                eyebrow: "Repères de force",
+                title: "Base du Big 3",
+                copy: "Les trois mouvements les plus utilisés comme repères pour comparer la force."
             }
         }
     },
@@ -220,11 +220,11 @@ const HOME_ENTRY_ROUTES = [
                 title: "Comparativas fáciles para arrancar",
                 copy: "Un punto de partida cuando quieres revisar ejercicios accesibles antes de profundizar."
             },
-            de: {
-                label: "Einstieg",
-                eyebrow: "Startpunkte",
-                title: "Leichte Vergleiche für den Anfang",
-                copy: "Ein guter Start, wenn du zuerst gut zugängliche Übungen vergleichen möchtest."
+            fr: {
+                label: "Pour commencer",
+                eyebrow: "Parcours débutant",
+                title: "Comparatifs faciles pour démarrer",
+                copy: "Un point de départ pour explorer des exercices accessibles avant d'aller plus loin."
             }
         }
     }
@@ -266,7 +266,7 @@ const UI_TEXT = {
         languageKorean: "한국어",
         languageChinese: "繁體中文",
         languageSpanish: "Español",
-        languageGerman: "Deutsch",
+        languageFrench: "Français",
         levelAverageAvailable: "平均データを掲載",
         libraryExplorerCopy: "部位別に、全種目の比較ページを横断できます。",
         libraryExplorerTitle: "Performance Library",
@@ -358,7 +358,7 @@ const UI_TEXT = {
         languageKorean: "한국어",
         languageChinese: "繁體中文",
         languageSpanish: "Español",
-        languageGerman: "Deutsch",
+        languageFrench: "Français",
         levelAverageAvailable: "평균 데이터 수록",
         libraryExplorerCopy: "부위별로 모든 운동 비교 페이지를 둘러볼 수 있습니다.",
         libraryExplorerTitle: "Performance Library",
@@ -450,7 +450,7 @@ const UI_TEXT = {
         languageKorean: "한국어",
         languageChinese: "繁體中文",
         languageSpanish: "Español",
-        languageGerman: "Deutsch",
+        languageFrench: "Français",
         levelAverageAvailable: "收錄平均資料",
         libraryExplorerCopy: "依部位瀏覽所有訓練動作的比較頁面。",
         libraryExplorerTitle: "Performance Library",
@@ -542,7 +542,7 @@ const UI_TEXT = {
         languageKorean: "한국어",
         languageChinese: "繁體中文",
         languageSpanish: "Español",
-        languageGerman: "Deutsch",
+        languageFrench: "Français",
         levelAverageAvailable: "Datos medios publicados",
         libraryExplorerCopy: "Explora páginas de comparación de todos los ejercicios por zona.",
         libraryExplorerTitle: "Biblioteca de rendimiento",
@@ -599,97 +599,97 @@ const UI_TEXT = {
         weightPage: "Página basada en peso",
         worldRecord: "Récord mundial"
     },
-    de: {
-        ad: "Anzeige",
-        adAfterQuickStart: "Nach den empfohlenen Einstiegen",
-        adBeforeFooter: "Vor dem Footer",
-        adAfterRelated: "Nach den verwandten Übungen",
-        adAfterStandards: "Nach den Kraftstandards",
-        average: "Durchschnittsgewicht",
-        averageEyebrow: "Durchschnitt",
-        averageReps: "Durchschnittliche Wiederholungen",
-        breadcrumb: "Breadcrumb",
-        category: "Kategorie",
-        categoryDashboard: "Bereiche im Überblick",
-        categoryDashboardCopy: "Ein Einstieg, um Übungsanzahl, wichtige Bewegungen und Vergleichswerte pro Muskelbereich schnell zu erfassen.",
-        categoryDashboardEyebrow: "Kategorieübersicht",
-        compareDestination: "Vergleichen mit",
-        compareFlow: "Vergleichsfluss",
-        compareMode: "Vergleichsmodus",
-        contentLibraryCopy: "Du kannst direkt zu verwandten Übungsseiten springen.",
-        contentLibraryTitle: "Übungsbibliothek",
-        dataAvailable: "Daten verfügbar",
-        databaseLibraryTitle: "Komplette Übungsbibliothek",
-        databaseLibraryIntro: "Steige über Muskelgruppen ein und öffne direkt die passende Vergleichsseite.",
-        detailByTabs: "Detailvergleich über Tabs",
-        exerciseLibraryTitle: "Übungsbibliothek",
-        exercisesListed: (count) => `${count} Übungen veröffentlicht`,
-        female: "Frauen",
-        home: "Startseite",
-        homeHeroActionLabel: "Schnellaktionen",
-        homeHeroDescription: "Fitness-Datenbank zum schnellen Vergleich von Durchschnittsgewicht, Kraftstandards und Zielmuskulatur pro Übung.",
-        homeHeroTitle: "Trainingsdaten schneller vergleichen",
+    fr: {
+        ad: "Annonce",
+        adAfterQuickStart: "Après les accès recommandés",
+        adBeforeFooter: "Avant le pied de page",
+        adAfterRelated: "Après les exercices liés",
+        adAfterStandards: "Après les standards",
+        average: "Charge moyenne",
+        averageEyebrow: "Moyenne",
+        averageReps: "Répétitions moyennes",
+        breadcrumb: "Fil d'Ariane",
+        category: "Catégorie",
+        categoryDashboard: "Tableau par groupes musculaires",
+        categoryDashboardCopy: "Une entrée pour voir le nombre d'exercices, les mouvements clés et les angles de comparaison par zone.",
+        categoryDashboardEyebrow: "Tableau des catégories",
+        compareDestination: "Comparer avec",
+        compareFlow: "Parcours de comparaison",
+        compareMode: "Mode de comparaison",
+        contentLibraryCopy: "Accède directement aux pages d'exercices liés.",
+        contentLibraryTitle: "Bibliothèque d'exercices",
+        dataAvailable: "Données disponibles",
+        databaseLibraryTitle: "Bibliothèque complète d'exercices",
+        databaseLibraryIntro: "Entre par groupe musculaire et rejoins directement la page de comparaison utile.",
+        detailByTabs: "Comparaison détaillée par onglets",
+        exerciseLibraryTitle: "Bibliothèque d'exercices",
+        exercisesListed: (count) => `${count} exercices publiés`,
+        female: "Femmes",
+        home: "Accueil",
+        homeHeroActionLabel: "Actions rapides",
+        homeHeroDescription: "Base de données fitness pour comparer rapidement charge moyenne, standards de force et muscles ciblés par exercice.",
+        homeHeroTitle: "Compare les données d'entraînement en moins d'étapes",
         languageEnglish: "English",
         languageJapanese: "日本語",
         languageKorean: "한국어",
-        languageChinese: "繁體中文",
+        languageChinese: "中文",
         languageSpanish: "Español",
-        languageGerman: "Deutsch",
-        levelAverageAvailable: "Durchschnittswerte veröffentlicht",
-        libraryExplorerCopy: "Durchsuche Vergleichsseiten für alle Übungen nach Muskelbereich.",
-        libraryExplorerTitle: "Leistungsbibliothek",
-        libraryMore: (count) => `Mehr anzeigen (${count})`,
-        libraryLess: "Weniger anzeigen",
-        majorCategoryDashboard: "Hauptbereiche",
-        male: "Männer",
-        muscleGroups: "Muskeln",
-        muscles: "Muskeln",
-        musclesCopy: "Prüfe Hauptmuskeln, unterstützende Muskeln und Stabilisatoren getrennt.",
-        musclesEyebrow: "Muskeln",
-        musclesHeading: "Zielmuskulatur",
-        page: "Seite",
-        pages: (count) => `${count} Seiten`,
-        performanceDashboard: "Leistungsübersicht",
-        performanceLibraryCount: "Veröffentlichte Übungen",
-        performanceSnapshot: "Leistungsüberblick",
-        performanceSnapshotCopy: "Wichtige Referenzwerte und Vergleichspunkte stehen vor der Tabelle.",
-        primaryMuscle: "Hauptmuskel",
-        primaryMuscleFallback: "Daten zur Zielmuskulatur veröffentlicht",
-        quickCompare: "Schnellvergleich",
-        quickStart: "Vergleich starten",
-        quickStartCopy: "Wenn du nicht weißt, wo du anfangen sollst, nutze diese häufig gesuchten Übungen als Einstieg.",
-        quickStartLabel: "Empfohlene Einstiege",
-        relatedExercises: "Verwandte Übungen",
-        relatedExercisesCopy: "Sortiert, damit du Übungen aus derselben Kategorie weiter vergleichen kannst.",
-        relatedExplorerCopy: "Springe direkt zu verwandten Übungen und erweitere den Vergleich.",
-        relatedExplorerTitle: "Weitere Übungen vergleichen",
-        relatedNone: "Derzeit gibt es keine verwandten Übungen aus demselben Bereich.",
-        relatedSameCategory: "Nur Übungen aus demselben Bereich.",
-        reps: "Wdh.",
-        repsComparison: "Wiederholungsvergleich",
-        repsPage: "Wiederholungsbasierte Vergleichsseite",
-        resultsAvailable: "Vergleichsdaten veröffentlicht",
-        snapshot: "Überblick",
-        snapshotDashboard: "Vergleichsübersicht",
-        standards: "Kraftstandards",
+        languageFrench: "Français",
+        levelAverageAvailable: "Données moyennes disponibles",
+        libraryExplorerCopy: "Parcours les pages de comparaison de tous les exercices par zone.",
+        libraryExplorerTitle: "Bibliothèque de performance",
+        libraryMore: (count) => `Voir plus (${count})`,
+        libraryLess: "Voir moins",
+        majorCategoryDashboard: "Tableau des zones principales",
+        male: "Hommes",
+        muscleGroups: "Muscles",
+        muscles: "Muscles",
+        musclesCopy: "Consulte les muscles principaux, secondaires et stabilisateurs séparément.",
+        musclesEyebrow: "Muscles",
+        musclesHeading: "Muscles ciblés",
+        page: "Page",
+        pages: (count) => `${count} pages`,
+        performanceDashboard: "Tableau de performance",
+        performanceLibraryCount: "Exercices publiés",
+        performanceSnapshot: "Résumé de performance",
+        performanceSnapshotCopy: "Les repères et points de comparaison clés apparaissent avant le tableau.",
+        primaryMuscle: "Muscle principal",
+        primaryMuscleFallback: "Données de muscles principaux disponibles",
+        quickCompare: "Comparaison rapide",
+        quickStart: "Commencer à comparer",
+        quickStartCopy: "Si tu ne sais pas par où commencer, essaie ces parcours avec des exercices souvent consultés.",
+        quickStartLabel: "Accès recommandés",
+        relatedExercises: "Exercices liés",
+        relatedExercisesCopy: "Organisés pour continuer à comparer des exercices de la même catégorie.",
+        relatedExplorerCopy: "Passe directement aux exercices liés et élargis la comparaison.",
+        relatedExplorerTitle: "Comparer plus d'exercices",
+        relatedNone: "Aucun exercice lié de la même zone n'est disponible pour le moment.",
+        relatedSameCategory: "Uniquement des exercices de la même zone.",
+        reps: "Répétitions",
+        repsComparison: "Comparatif de répétitions",
+        repsPage: "Page basée sur les répétitions",
+        resultsAvailable: "Données de comparaison disponibles",
+        snapshot: "Résumé",
+        snapshotDashboard: "Tableau de comparaison",
+        standards: "Standards de force",
         standardsEyebrow: "Standards",
-        standardsReps: "Wiederholungsstandards",
-        standardsWeightCopy: "Wechsle Geschlecht und Vergleichskriterium, um die Standards zu prüfen.",
-        standardsRepsCopy: "Prüfe Wiederholungsstandards nach Körpergewicht und Alter über Tabs.",
+        standardsReps: "Standards de répétitions",
+        standardsWeightCopy: "Change de sexe et de critère de comparaison pour consulter les standards.",
+        standardsRepsCopy: "Consulte les standards de répétitions par poids de corps et âge avec les onglets.",
         support: "Support",
-        contact: "Kontakt",
-        privacy: "Datenschutzerklärung",
-        tableGuide: "Tabelle richtig lesen",
-        tableGuideCopy: "Referenz für Verteilung und Trainingsdauer je Level.",
-        tableGuideEyebrow: "Hinweise",
-        totalCategories: "Veröffentlichte Kategorien",
-        totalExercisesCopy: "Vergleichbare Übungen",
-        unitSwitchCopy: "Einheitenwechsel auf allen Seiten",
-        viewRelatedCategories: "Verwandte Vergleiche derselben Kategorie",
-        weight: "Gewicht",
-        weightComparison: "Gewichtsvergleich",
-        weightPage: "Gewichtsbasierte Vergleichsseite",
-        worldRecord: "Weltrekord"
+        contact: "Contact",
+        privacy: "Politique de confidentialité",
+        tableGuide: "Comment lire le tableau",
+        tableGuideCopy: "Repères de répartition et de durée d'entraînement pour chaque niveau.",
+        tableGuideEyebrow: "Notes",
+        totalCategories: "Catégories publiées",
+        totalExercisesCopy: "Exercices comparables",
+        unitSwitchCopy: "Changement d'unité sur toutes les pages",
+        viewRelatedCategories: "Comparatifs liés de la même catégorie",
+        weight: "Charge",
+        weightComparison: "Comparatif de charge",
+        weightPage: "Page basée sur la charge",
+        worldRecord: "Record du monde"
     }
 };
 
@@ -729,7 +729,7 @@ UI_TEXT["zh-hans"] = {
     languageChinese: "繁体中文",
     languageSimplifiedChinese: "简体中文",
     languageSpanish: "Español",
-    languageGerman: "Deutsch",
+    languageFrench: "Français",
     levelAverageAvailable: "收录平均数据",
     libraryExplorerCopy: "按部位浏览所有训练动作的比较页面。",
     libraryExplorerTitle: "训练动作库",
@@ -791,7 +791,7 @@ UI_TEXT.ja.languageSimplifiedChinese = "简体中文";
 UI_TEXT.ko.languageSimplifiedChinese = "간체 중국어";
 UI_TEXT["zh-hant"].languageSimplifiedChinese = "簡體中文";
 UI_TEXT.es.languageSimplifiedChinese = "Chino simplificado";
-UI_TEXT.de.languageSimplifiedChinese = "Vereinfachtes Chinesisch";
+UI_TEXT.fr.languageSimplifiedChinese = "Chinois simplifié";
 
 const LIBRARY_INITIAL_CARD_LIMIT = 8;
 
@@ -990,11 +990,9 @@ function buildFooter() {
         { href: localizedDomainHref("https://shibamuscle.com/zh-hant"), label: t("languageChinese"), lang: "zh-hant" },
         { href: localizedDomainHref("https://shibamuscle.com/zh-hans"), label: t("languageSimplifiedChinese"), lang: "zh-hans" },
         { href: localizedDomainHref("https://shibamuscle.com/ko"), label: t("languageKorean"), lang: "ko" },
-        { href: localizedDomainHref("https://shibamuscle.com/es"), label: t("languageSpanish"), lang: "es" }
-    ]
-        .filter((item) => item.lang !== "de")
-        .map((item) => `<a href="${item.href}" data-lang="${item.lang}">${item.label}</a>`)
-        .join("");
+        { href: localizedDomainHref("https://shibamuscle.com/es"), label: t("languageSpanish"), lang: "es" },
+        { href: localizedDomainHref("https://shibamuscle.com/fr"), label: t("languageFrench"), lang: "fr" }
+    ].map((item) => `<a href="${item.href}" data-lang="${item.lang}">${item.label}</a>`).join("");
 
     return htmlToElement(`
         <footer class="site-footer">
@@ -1128,22 +1126,26 @@ function enhanceHomePage(main) {
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("standards"))}</span>
                                 <strong class="metric-value">${escapeHtml(localeText({ ja: "体重 / 年齢", ko: "체중 / 나이", "zh-hant": "體重 / 年齡", es: "Peso / edad", de: "Körpergewicht / Alter" }))}</strong>
+                                <strong class="metric-value">${escapeHtml(localeText({ ja: "体重 / 年齢", ko: "체중 / 나이", es: "Peso / edad", fr: "Poids / âge" }))}</strong>
                                 <span class="metric-subvalue">${escapeHtml(t("detailByTabs"))}</span>
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("muscleGroups"))}</span>
                                 <strong class="metric-value">${escapeHtml(t("primaryMuscle"))}</strong>
                                 <span class="metric-subvalue">${escapeHtml(localeText({ ja: "種目ごとの効き方を把握", ko: "운동별 자극 부위 확인", "zh-hant": "查看每個動作的刺激部位", es: "Estímulo por ejercicio", de: "Zielmuskulatur je Übung prüfen" }))}</span>
+                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "種目ごとの効き方を把握", ko: "운동별 자극 부위 확인", es: "Estímulo por ejercicio", fr: "Travail musculaire par exercice" }))}</span>
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("compareFlow"))}</span>
                                 <strong class="metric-value">${escapeHtml(t("relatedExercises"))}</strong>
                                 <span class="metric-subvalue">${escapeHtml(localeText({ ja: "同カテゴリを続けて閲覧", ko: "같은 카테고리 이어보기", "zh-hant": "連續查看同分類動作", es: "Seguir en la misma categoría", de: "In derselben Kategorie weitersehen" }))}</span>
+                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "同カテゴリを続けて閲覧", ko: "같은 카테고리 이어보기", es: "Seguir en la misma categoría", fr: "Continuer dans la même catégorie" }))}</span>
                             </article>
                         </div>
                         <div class="dashboard-spotlight-list">
                             <div class="dashboard-spotlight-heading">
                                 <span class="metric-label">${escapeHtml(localeText({ ja: "今すぐ見比べる", ko: "바로 비교하기", "zh-hant": "立即比較", es: "Comparar ahora", de: "Jetzt vergleichen" }))}</span>
+                                <span class="metric-label">${escapeHtml(localeText({ ja: "今すぐ見比べる", ko: "바로 비교하기", es: "Comparar ahora", fr: "Comparer maintenant" }))}</span>
                             </div>
                             ${popularPreviewCards.map((card) => {
                                 return `
@@ -1176,7 +1178,7 @@ function enhanceHomePage(main) {
             <div class="category-overview-grid">
                 ${libraryData.sections.map((section) => {
                     const categoryMeta = getCategoryLinks().find((item) => item.id === section.id);
-                    const description = categoryMeta?.description || localeText({ ja: "関連種目をまとめて確認", ko: "관련 운동을 한 번에 확인", "zh-hant": "集中查看相關訓練動作", es: "Revisar ejercicios relacionados", de: "Verwandte Übungen gesammelt prüfen" });
+                    const description = categoryMeta?.description || localeText({ ja: "関連種目をまとめて確認", ko: "관련 운동을 한 번에 확인", "zh-hant": "集中查看相關訓練動作", "zh-hans": "集中查看相关训练动作", es: "Revisar ejercicios relacionados", fr: "Voir les exercices liés" });
                     const sampleNames = section.cards.slice(0, 3).map((card) => card.name).join(" / ");
                     return `
                         <a class="category-tile" href="#${section.id}">
@@ -1340,6 +1342,8 @@ function enhanceExercisePage(main) {
         measurementKind === "reps"
             ? localeText({ ja: "レベル別の平均レップ数を先に確認できます。", ko: "레벨별 평균 반복 횟수를 먼저 확인할 수 있습니다.", "zh-hant": "可先查看各等級的平均次數。", "zh-hans": "可先查看各等级的平均次数。", es: "Consulta primero las repeticiones medias por nivel.", de: "Prüfe zuerst die durchschnittlichen Wiederholungen je Level." })
             : localeText({ ja: "レベル別の1RM目安を先に確認できます。", ko: "레벨별 1RM 기준을 먼저 확인할 수 있습니다.", "zh-hant": "可先查看各等級的 1RM 參考。", "zh-hans": "可先查看各等级的 1RM 参考。", es: "Consulta primero la referencia de 1RM por nivel.", de: "Prüfe zuerst die 1RM-Referenz je Level." })
+            ? localeText({ ja: "レベル別の平均レップ数を先に確認できます。", ko: "레벨별 평균 반복 횟수를 먼저 확인할 수 있습니다.", es: "Consulta primero las repeticiones medias por nivel.", fr: "Consulte d'abord les répétitions moyennes par niveau." })
+            : localeText({ ja: "レベル別の1RM目安を先に確認できます。", ko: "레벨별 1RM 기준을 먼저 확인할 수 있습니다.", es: "Consulta primero la referencia de 1RM por nivel.", fr: "Consulte d'abord la référence 1RM par niveau." })
     );
     decorateTableShell(averageContainer.querySelector(".average-section-table"));
 
@@ -1389,6 +1393,13 @@ function enhanceExercisePage(main) {
                 es: "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página.",
                 de: "Vergleiche Übungen aus derselben Kategorie und anderen Muskelbereichen, bevor du zur nächsten Vergleichsseite wechselst."
             }))}
+            ${escapeHtml(detectLocale() === "ko"
+                ? "같은 카테고리와 다른 부위의 운동을 비교하면서 다음 페이지로 이동할 수 있습니다."
+                : detectLocale() === "es"
+                    ? "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página."
+                    : detectLocale() === "fr"
+                        ? "Compare des exercices de la même catégorie et d'autres zones avant de passer à la page suivante."
+                        : "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。")}
         </p>
     `);
 
@@ -1402,6 +1413,13 @@ function enhanceExercisePage(main) {
             es: "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página.",
             de: "Vergleiche Übungen aus derselben Kategorie und anderen Muskelbereichen, bevor du zur nächsten Vergleichsseite wechselst."
         });
+        libraryIntro.textContent = detectLocale() === "ko"
+            ? "같은 카테고리와 다른 부위의 운동을 비교하면서 다음 페이지로 이동할 수 있습니다."
+            : detectLocale() === "es"
+                ? "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página."
+                : detectLocale() === "fr"
+                    ? "Compare des exercices de la même catégorie et d'autres zones avant de passer à la page suivante."
+                    : "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。";
     }
 
     libraryData.sections.forEach((section) => {
@@ -1471,6 +1489,7 @@ function enhanceContentPage(main) {
     libraryContainer.classList.add("section-band", "library-band");
     libraryTitle.classList.add("section-title--database");
     libraryTitle.textContent = libraryTitle.textContent || localeText({ ja: "データベースから続けて探す", ko: "데이터베이스에서 계속 찾기", "zh-hant": "從資料庫繼續探索", es: "Seguir explorando la base de datos", de: "In der Datenbank weiterstöbern" });
+    libraryTitle.textContent = libraryTitle.textContent || localeText({ ja: "データベースから続けて探す", ko: "데이터베이스에서 계속 찾기", es: "Seguir explorando la base de datos", fr: "Continuer dans la base de données" });
 
     libraryData.sections.forEach((section) => {
         section.heading = replaceHeadingTag(section.heading, "h3");
@@ -2000,12 +2019,14 @@ function buildExercisePerformanceSnapshot({ averageHighlights, primaryMuscles, s
             <div class="performance-signal-grid">
                 ${renderPerformanceSignalCard(
                     baselineLine?.label || localeText({ ja: "基礎ライン", ko: "입문 기준", "zh-hant": "初學者基準", es: "Referencia principiante", de: "Anfänger-Referenz" }),
+                    baselineLine?.label || localeText({ ja: "基礎ライン", ko: "입문 기준", es: "Referencia principiante", fr: "Repère débutant" }),
                     baselineLine?.primary || t("dataAvailable"),
                     baselineLine?.secondary || t("levelAverageAvailable"),
                     true
                 )}
                 ${renderPerformanceSignalCard(
                     intermediateLine?.label || localeText({ ja: "中級ライン", ko: "중급 기준", "zh-hant": "中級者基準", es: "Referencia intermedia", de: "Fortgeschrittenen-Referenz" }),
+                    intermediateLine?.label || localeText({ ja: "中級ライン", ko: "중급 기준", es: "Referencia intermedia", fr: "Repère intermédiaire" }),
                     intermediateLine?.primary || standardsLabel,
                     intermediateLine?.secondary || t("resultsAvailable")
                 )}
@@ -2016,6 +2037,7 @@ function buildExercisePerformanceSnapshot({ averageHighlights, primaryMuscles, s
                 )}
                 ${renderPerformanceSignalCard(
                     localeText({ ja: "比較ビュー", ko: "비교 보기", "zh-hant": "比較視圖", "zh-hans": "比较视图", es: "Vista comparativa", de: "Vergleichsansicht" }),
+                    localeText({ ja: "比較ビュー", ko: "비교 보기", es: "Vista comparativa", fr: "Vue comparative" }),
                     formatExerciseCount(sameSectionCount),
                     `${sectionLabel} / ${measurementKind === "reps" ? t("repsComparison") : t("weightComparison")}`
                 )}
@@ -2098,6 +2120,7 @@ function getPrimaryMuscles(muscles, main) {
 
     const primary = muscles.find((item) => {
         return item.label.includes("主働") || item.label.includes("主動") || item.label.includes("主动") || item.label.includes("主要") || item.label.includes("주동") || item.label.includes("Ziel");
+        return item.label.includes("主働") || item.label.includes("主動") || item.label.includes("주동") || item.label.toLowerCase().includes("principal");
     });
 
     return primary?.items || muscles[0]?.items || [];
@@ -2109,6 +2132,11 @@ function formatExerciseCount(count) {
 
 function formatMuscleCount(count) {
     return localeText({ ja: `${count}筋群`, ko: `${count}개 근육`, "zh-hant": `${count} 個肌群`, es: `${count} músculos`, de: `${count} Muskeln` });
+    return localeText({ ja: `${count}種目`, ko: `${count}개 운동`, es: `${count} ejercicios`, fr: `${count} exercices` });
+}
+
+function formatMuscleCount(count) {
+    return localeText({ ja: `${count}筋群`, ko: `${count}개 근육`, es: `${count} músculos`, fr: `${count} muscles` });
 }
 
 function formatStandardsCaption(standardsLabel) {
@@ -2128,8 +2156,8 @@ function formatStandardsCaption(standardsLabel) {
         return `Puedes revisar ${standardsLabel.toLowerCase()} y datos medios en el mismo flujo.`;
     }
 
-    if (detectLocale() === "de") {
-        return `Du kannst ${standardsLabel} und Durchschnittswerte im selben Ablauf prüfen.`;
+    if (detectLocale() === "fr") {
+        return `Tu peux consulter ${standardsLabel.toLowerCase()} et les données moyennes dans le même parcours.`;
     }
 
     return `${standardsLabel}と平均データを同じ流れで確認できます。`;
@@ -2152,8 +2180,8 @@ function formatRelatedHeading(sectionLabel) {
         return `Ejercicios relacionados de ${sectionLabel.toLowerCase()}`;
     }
 
-    if (detectLocale() === "de") {
-        return `Verwandte Übungen für ${sectionLabel}`;
+    if (detectLocale() === "fr") {
+        return `Exercices liés pour ${sectionLabel.toLowerCase()}`;
     }
 
     return `${sectionLabel}の関連種目`;
@@ -2173,12 +2201,12 @@ function detectLocale() {
         return "zh-hant";
     }
 
-    if (lang.toLowerCase().startsWith("es") || window.location.pathname.split("/").includes("es")) {
-        return "es";
+    if (lang.toLowerCase().startsWith("fr") || window.location.pathname.split("/").includes("fr")) {
+        return "fr";
     }
 
-    if (lang.toLowerCase().startsWith("de") || window.location.pathname.split("/").includes("de")) {
-        return "de";
+    if (lang.toLowerCase().startsWith("es") || window.location.pathname.split("/").includes("es")) {
+        return "es";
     }
 
     if (lang.toLowerCase().startsWith("ko") || window.location.pathname.split("/").includes("ko")) {
@@ -2221,6 +2249,10 @@ function cleanSectionLabel(text) {
 
     if (detectLocale() === "zh-hans") {
         return normalized.replace(/\s*训练/g, "").trim();
+    }
+
+    if (detectLocale() === "fr") {
+        return normalized.replace(/\s*exercices?/gi, "").trim();
     }
 
     if (detectLocale() === "ko") {

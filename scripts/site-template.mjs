@@ -212,7 +212,8 @@ function renderStaticFooter(file, locale = "ja") {
         "zh-hans": locale === "ko" ? "간체 중국어" : locale === "zh-hant" ? "簡體中文" : locale === "zh-hans" ? "简体中文" : locale === "es" ? "Chino simplificado" : "Simplified Chinese",
         ko: locale === "ko" ? "한국 국기" : locale === "zh-hant" ? "韓國國旗" : locale === "zh-hans" ? "韩国国旗" : locale === "es" ? "Bandera de Corea" : "Korea",
         es: locale === "ko" ? "스페인 국기" : locale === "zh-hant" ? "西班牙國旗" : locale === "zh-hans" ? "西班牙国旗" : locale === "es" ? "Bandera de España" : locale === "de" ? "Spanien" : "Spain",
-        de: locale === "ko" ? "독일 국기" : locale === "zh-hant" ? "德國國旗" : locale === "zh-hans" ? "德国国旗" : locale === "es" ? "Bandera de Alemania" : locale === "de" ? "Deutschland" : "Germany"
+        zh: locale === "ko" ? "중국 국기" : locale === "es" ? "Bandera de China" : locale === "fr" ? "Drapeau de la Chine" : "China",
+        fr: locale === "ko" ? "프랑스 국기" : locale === "es" ? "Bandera de Francia" : locale === "fr" ? "Drapeau de la France" : "France"
     };
     const flagIcon = {
         en: "uk-flag.webp",
@@ -221,7 +222,7 @@ function renderStaticFooter(file, locale = "ja") {
         "zh-hans": "china-flag.webp",
         ko: "korea-flag.webp",
         es: "spain-flag.svg",
-        de: "germany-flag.svg"
+        fr: "france-flag.svg"
     };
 
     return `
@@ -338,6 +339,10 @@ ${pages.map((page) => {
                 <h3>${escapeHtml(page.heading)}</h3>
                 <p>${escapeHtml((page.intro || [])[0] || page.description || "")}</p>
                 <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "zh-hant" ? "查看頁面" : locale === "zh-hans" ? "查看页面" : locale === "es" ? "Ver página" : "ページを見る"}</span>
+                <span class="discovery-type">${escapeHtml(locale === "fr" ? (page.type === "comparison" ? "Comparatif" : "Objectif") : locale === "es" ? (page.type === "comparison" ? "Comparativa" : "Objetivo") : page.type === "comparison" ? "Comparison" : "Intent")}</span>
+                <h3>${escapeHtml(page.heading)}</h3>
+                <p>${escapeHtml((page.intro || [])[0] || page.description || "")}</p>
+                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "es" ? "Ver página" : locale === "fr" ? "Voir la page" : "ページを見る"}</span>
             </a>`;
     }).join("\n")}
         </div>
