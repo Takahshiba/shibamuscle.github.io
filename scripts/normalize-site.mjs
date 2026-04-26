@@ -42,24 +42,68 @@ const staticPages = loadPages();
 const exerciseFileIndex = buildExerciseFileIndex(exercises);
 const discoveryFileIndex = new Map(discovery.pages.map((page) => [page.file, page]));
 const staticPageIndex = new Map(staticPages.map((page) => [page.file, page]));
-const htmlEntries = listHtmlEntries();
+const allHtmlEntries = listHtmlEntries();
+const htmlEntries = filterHtmlEntries(allHtmlEntries);
+const sitemapOnly = process.env.SHIBA_NORMALIZE_SITEMAP_ONLY === "1";
 
 let changedFiles = 0;
 
-for (const entry of htmlEntries) {
-    const original = readFileSync(entry.path, "utf8").replace(/\r\n/g, "\n");
-    const normalized = normalizeHtml(entry, original);
+console.log(sitemapOnly
+    ? `Refreshing sitemap.xml from ${allHtmlEntries.length} HTML files...`
+    : `Normalizing ${htmlEntries.length}/${allHtmlEntries.length} HTML files...`);
 
-    if (normalized !== original) {
-        writeFileSync(entry.path, normalized);
-        changedFiles += 1;
+if (!sitemapOnly) {
+    for (const [index, entry] of htmlEntries.entries()) {
+        const original = readFileSync(entry.path, "utf8").replace(/\r\n/g, "\n");
+        const normalized = normalizeHtml(entry, original);
+
+        if (normalized !== original) {
+            writeFileSync(entry.path, normalized);
+            changedFiles += 1;
+        }
+
+        if ((index + 1) % 50 === 0 || index + 1 === htmlEntries.length) {
+            console.log(`Normalized ${index + 1}/${htmlEntries.length} HTML files...`);
+        }
     }
 }
 
-writeFileSync(join(ROOT, "sitemap.xml"), buildSitemap(htmlEntries));
-writeManifestFiles();
+if (process.env.SHIBA_NORMALIZE_SKIP_SITEMAP !== "1") {
+    writeFileSync(join(ROOT, "sitemap.xml"), buildSitemap(allHtmlEntries));
+    writeManifestFiles();
+}
 
-console.log(`Normalized ${changedFiles} HTML files and regenerated sitemap.xml.`);
+const sitemapStatus = process.env.SHIBA_NORMALIZE_SKIP_SITEMAP === "1" ? "skipped sitemap.xml for this chunk" : "regenerated sitemap.xml";
+const htmlStatus = sitemapOnly ? "Skipped HTML normalization" : `Normalized ${changedFiles} HTML files`;
+console.log(`${htmlStatus} and ${sitemapStatus}.`);
+
+function filterHtmlEntries(entries) {
+    const localeFilter = process.env.SHIBA_NORMALIZE_LOCALE_FILTER
+        ? new Set(process.env.SHIBA_NORMALIZE_LOCALE_FILTER.split(",").map((code) => code.trim()).filter(Boolean))
+        : null;
+    const fileFilter = process.env.SHIBA_NORMALIZE_FILE_FILTER
+        ? new Set(process.env.SHIBA_NORMALIZE_FILE_FILTER.split(",").map((file) => file.trim()).filter(Boolean))
+        : null;
+    const offset = Number.parseInt(process.env.SHIBA_NORMALIZE_OFFSET || "0", 10);
+    const limit = Number.parseInt(process.env.SHIBA_NORMALIZE_LIMIT || "0", 10);
+    const filtered = entries.filter((entry) => {
+        if (localeFilter && !localeFilter.has(entry.locale)) {
+            return false;
+        }
+
+        if (fileFilter && !fileFilter.has(entry.file) && !fileFilter.has(entry.relativePath)) {
+            return false;
+        }
+
+        return true;
+    });
+
+    if (Number.isFinite(limit) && limit > 0) {
+        return filtered.slice(Math.max(0, offset), Math.max(0, offset) + limit);
+    }
+
+    return filtered.slice(Math.max(0, offset));
+}
 
 function listHtmlEntries() {
     const entries = [];
@@ -283,16 +327,24 @@ function ensureHeadClose(html) {
 }
 
 function ensureFontBlock(html, locale) {
-    const family = locale === "ko" ? "Noto+Sans+KR" : locale === "ja" ? "Noto+Sans+JP" : "Noto+Sans";
+    const family = locale === "ko"
+        ? "Noto+Sans+KR"
+        : locale === "zh-hant"
+            ? "Noto+Sans+TC"
+            : locale === "zh-hans"
+                ? "Noto+Sans+SC"
+                : locale === "ja"
+                    ? "Noto+Sans+JP"
+                    : "Noto+Sans";
     const fontBlock = `
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=${family}:wght@100..900&display=swap" rel="stylesheet">
 `;
     const stripped = html
-        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
+        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR|SC|TC):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
         .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans:wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
-        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="precaonnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
+        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="precaonnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR|SC|TC):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
         .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="precaonnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans:wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n");
 
     if (stripped.includes("<!-- Favicon -->")) {
