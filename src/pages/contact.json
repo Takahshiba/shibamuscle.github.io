@@ -60,33 +60,6 @@
         }
       ]
     },
-    "zh-hant": {
-      "title": "聯絡我們 | Shiba Muscle",
-      "description": "Shiba Muscle 的聯絡頁面。關於服務、訓練資料或刊載內容的問題與合作需求，請從這裡確認聯絡方式。",
-      "heading": "聯絡我們",
-      "intro": [
-        "關於服務內容、刊載資料、合作或其他問題，請寄信至下方電子郵件地址。"
-      ],
-      "sections": [
-        {
-          "className": "content-card contact-card",
-          "blocks": [
-            {
-              "type": "email",
-              "label": "Email",
-              "value": "info@shibamuscle.com"
-            }
-          ]
-        },
-        {
-          "className": "content-card note",
-          "paragraphs": [
-            "我們會依序確認訊息並回覆。依詢問內容不同，可能需要一些時間才能回覆。",
-            "請盡量具體描述你的狀況與需求，這樣我們可以更準確地協助你。涉及個人資料的詢問，可能會需要確認本人身分。"
-          ]
-        }
-      ]
-    },
     "es": {
       "title": "Contacto | Shiba Muscle",
       "description": "Página de contacto de Shiba Muscle. Para preguntas sobre el servicio, los datos o el contenido publicado, consulta aquí cómo escribirnos.",
@@ -110,6 +83,33 @@
           "paragraphs": [
             "Revisamos los mensajes y respondemos por orden. Según el contenido de la consulta, la respuesta puede tardar un poco.",
             "Si describes tu situación y lo que necesitas con el mayor detalle posible, podremos orientarte mejor. En consultas relacionadas con datos personales, puede que pidamos verificar tu identidad."
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "title": "Contact | Shiba Muscle",
+      "description": "Page de contact de Shiba Muscle. Pour toute question sur le service, les données ou le contenu publié, retrouvez ici comment nous écrire.",
+      "heading": "Contact",
+      "intro": [
+        "Pour toute question sur le service, les données publiées, les collaborations ou un autre sujet, écrivez-nous à l'adresse e-mail ci-dessous."
+      ],
+      "sections": [
+        {
+          "className": "content-card contact-card",
+          "blocks": [
+            {
+              "type": "email",
+              "label": "Email",
+              "value": "info@shibamuscle.com"
+            }
+          ]
+        },
+        {
+          "className": "content-card note",
+          "paragraphs": [
+            "Nous lisons les messages et répondons dans l'ordre de réception. Selon la nature de la demande, un délai peut être nécessaire.",
+            "Plus votre situation et votre demande sont précises, plus nous pourrons vous orienter clairement. Pour les demandes liées aux données personnelles, une vérification d'identité peut être demandée."
           ]
         }
       ]

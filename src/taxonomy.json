@@ -6,8 +6,8 @@
       "label": {
         "ja": "全身",
         "ko": "전신",
-        "zh-hant": "全身",
         "es": "Cuerpo completo",
+        "fr": "Corps entier",
         "de": "Ganzkörper"
       },
       "legacyTitles": {
@@ -17,11 +17,11 @@
         "ko": [
           "전신 운동"
         ],
-        "zh-hant": [
-          "全身訓練"
-        ],
         "es": [
           "Ejercicios de cuerpo completo"
+        ],
+        "fr": [
+          "Exercices corps entier"
         ],
         "de": [
           "Ganzkörperübungen"
@@ -36,13 +36,13 @@
           "전신 운동",
           "BIG3/전신"
         ],
-        "zh-hant": [
-          "全身訓練",
-          "BIG3 / 全身"
-        ],
         "es": [
           "Ejercicios de cuerpo completo",
           "BIG3 / cuerpo completo"
+        ],
+        "fr": [
+          "Musculation corps entier",
+          "BIG3 / corps entier"
         ],
         "de": [
           "Ganzkörpertraining",
@@ -52,8 +52,8 @@
       "description": {
         "ja": "デッドリフト、クリーン、スナッチなど全身連動の基準ページ",
         "ko": "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지",
-        "zh-hant": "硬舉、翻站、抓舉等全身協調動作的標準頁面",
         "es": "Páginas de referencia para ejercicios globales como peso muerto, clean y snatch",
+        "fr": "Pages de référence pour les exercices globaux comme le soulevé de terre, le clean et le snatch",
         "de": "Referenzseiten für Ganzkörperübungen wie Kreuzheben, Clean und Snatch"
       },
       "defaultTags": {
@@ -65,13 +65,13 @@
           "전신",
           "전신 협응"
         ],
-        "zh-hant": [
-          "全身",
-          "全身協調"
-        ],
         "es": [
           "Cuerpo completo",
           "Coordinación total"
+        ],
+        "fr": [
+          "Corps entier",
+          "Coordination globale"
         ],
         "de": [
           "Ganzkörper",
@@ -84,8 +84,8 @@
       "label": {
         "ja": "胸",
         "ko": "가슴",
-        "zh-hant": "胸部",
         "es": "Pecho",
+        "fr": "Pectoraux",
         "de": "Brust"
       },
       "legacyTitles": {
@@ -95,11 +95,11 @@
         "ko": [
           "가슴 운동"
         ],
-        "zh-hant": [
-          "胸部訓練"
-        ],
         "es": [
           "Ejercicios de pecho"
+        ],
+        "fr": [
+          "Exercices pectoraux"
         ],
         "de": [
           "Brustübungen"
@@ -114,12 +114,12 @@
           "가슴 운동",
           "대흉근"
         ],
-        "zh-hant": [
-          "胸部訓練",
-          "胸大肌"
-        ],
         "es": [
           "Ejercicios de pecho",
+          "Pectoral"
+        ],
+        "fr": [
+          "Entraînement des pectoraux",
           "Pectoral"
         ],
         "de": [
@@ -130,8 +130,8 @@
       "description": {
         "ja": "プレス系の平均値と押す種目の比較",
         "ko": "프레스 계열 평균 중량과 미는 운동 비교",
-        "zh-hant": "推類動作的平均重量與訓練標準比較",
         "es": "Pesos medios y comparativas de ejercicios de empuje",
+        "fr": "Charges moyennes et comparaisons des exercices de poussée",
         "de": "Durchschnittsgewichte und Vergleiche für Druckübungen"
       },
       "defaultTags": {
@@ -143,13 +143,13 @@
           "가슴",
           "프레스"
         ],
-        "zh-hant": [
-          "胸部",
-          "推"
-        ],
         "es": [
           "Pecho",
           "Press"
+        ],
+        "fr": [
+          "Pectoraux",
+          "Développé"
         ],
         "de": [
           "Brust",
@@ -162,8 +162,8 @@
       "label": {
         "ja": "背中",
         "ko": "등",
-        "zh-hant": "背部",
         "es": "Espalda",
+        "fr": "Dos",
         "de": "Rücken"
       },
       "legacyTitles": {
@@ -173,11 +173,11 @@
         "ko": [
           "등 운동"
         ],
-        "zh-hant": [
-          "背部訓練"
-        ],
         "es": [
           "Ejercicios de espalda"
+        ],
+        "fr": [
+          "Exercices dos"
         ],
         "de": [
           "Rückenübungen"
@@ -192,13 +192,13 @@
           "등 운동",
           "광배근"
         ],
-        "zh-hant": [
-          "背部訓練",
-          "闊背肌"
-        ],
         "es": [
           "Ejercicios de espalda",
           "Dorsal ancho"
+        ],
+        "fr": [
+          "Entraînement du dos",
+          "Grand dorsal"
         ],
         "de": [
           "Rückentraining",
@@ -208,8 +208,8 @@
       "description": {
         "ja": "ローイング、プル系、ヒンジ系の比較",
         "ko": "로우, 풀, 힌지 계열 운동 비교",
-        "zh-hant": "划船、下拉與髖鉸鏈類動作比較",
         "es": "Comparativas de remos, jalones y bisagras de cadera",
+        "fr": "Comparaisons des tirages, rowings et mouvements de charnière",
         "de": "Vergleiche für Rudern, Zugübungen und Hüftstreckbewegungen"
       },
       "defaultTags": {
@@ -221,13 +221,13 @@
           "등",
           "풀"
         ],
-        "zh-hant": [
-          "背部",
-          "拉"
-        ],
         "es": [
           "Espalda",
           "Tirón"
+        ],
+        "fr": [
+          "Dos",
+          "Tirage"
         ],
         "de": [
           "Rücken",
@@ -240,8 +240,8 @@
       "label": {
         "ja": "肩",
         "ko": "어깨",
-        "zh-hant": "肩部",
         "es": "Hombros",
+        "fr": "Épaules",
         "de": "Schultern"
       },
       "legacyTitles": {
@@ -251,11 +251,11 @@
         "ko": [
           "어깨 운동"
         ],
-        "zh-hant": [
-          "肩部訓練"
-        ],
         "es": [
           "Ejercicios de hombro"
+        ],
+        "fr": [
+          "Exercices épaules"
         ],
         "de": [
           "Schulterübungen"
@@ -270,13 +270,13 @@
           "어깨 운동",
           "삼각근"
         ],
-        "zh-hant": [
-          "肩部訓練",
-          "三角肌"
-        ],
         "es": [
           "Ejercicios de hombro",
           "Deltoides"
+        ],
+        "fr": [
+          "Entraînement des épaules",
+          "Deltoïdes"
         ],
         "de": [
           "Schultertraining",
@@ -286,8 +286,8 @@
       "description": {
         "ja": "プレス、レイズ、安定性の種目一覧",
         "ko": "프레스, 레이즈, 안정성 운동 목록",
-        "zh-hant": "肩推、平舉與穩定性訓練動作列表",
         "es": "Ejercicios de press, elevaciones y estabilidad del hombro",
+        "fr": "Exercices de développé, d'élévation et de stabilité des épaules",
         "de": "Schulterdrücken, Seitheben und Stabilitätsübungen"
       },
       "defaultTags": {
@@ -299,13 +299,13 @@
           "어깨",
           "프레스"
         ],
-        "zh-hant": [
-          "肩部",
-          "推舉"
-        ],
         "es": [
           "Hombros",
           "Press"
+        ],
+        "fr": [
+          "Épaules",
+          "Développé"
         ],
         "de": [
           "Schultern",
@@ -318,8 +318,8 @@
       "label": {
         "ja": "腕",
         "ko": "팔",
-        "zh-hant": "手臂",
         "es": "Brazos",
+        "fr": "Bras",
         "de": "Arme"
       },
       "legacyTitles": {
@@ -329,11 +329,11 @@
         "ko": [
           "팔 운동"
         ],
-        "zh-hant": [
-          "手臂訓練"
-        ],
         "es": [
           "Ejercicios de brazos"
+        ],
+        "fr": [
+          "Exercices bras"
         ],
         "de": [
           "Armübungen"
@@ -350,15 +350,15 @@
           "이두",
           "삼두"
         ],
-        "zh-hant": [
-          "手臂訓練",
-          "二頭肌",
-          "三頭肌"
-        ],
         "es": [
           "Ejercicios de brazos",
           "Bíceps",
           "Tríceps"
+        ],
+        "fr": [
+          "Entraînement des bras",
+          "Biceps",
+          "Triceps"
         ],
         "de": [
           "Armtraining",
@@ -369,8 +369,8 @@
       "description": {
         "ja": "カール、トライセプス、前腕の種目",
         "ko": "컬, 삼두, 전완 운동",
-        "zh-hant": "彎舉、三頭肌與前臂訓練動作",
         "es": "Curls, tríceps y ejercicios de antebrazo",
+        "fr": "Curls, triceps et exercices d'avant-bras",
         "de": "Curls, Trizeps- und Unterarmübungen"
       },
       "defaultTags": {
@@ -382,12 +382,12 @@
           "팔",
           "컬"
         ],
-        "zh-hant": [
-          "手臂",
-          "彎舉"
-        ],
         "es": [
           "Brazos",
+          "Curl"
+        ],
+        "fr": [
+          "Bras",
           "Curl"
         ],
         "de": [
@@ -401,8 +401,8 @@
       "label": {
         "ja": "脚",
         "ko": "하체",
-        "zh-hant": "腿部",
         "es": "Piernas",
+        "fr": "Jambes",
         "de": "Beine"
       },
       "legacyTitles": {
@@ -412,11 +412,11 @@
         "ko": [
           "하체 운동"
         ],
-        "zh-hant": [
-          "腿部訓練"
-        ],
         "es": [
           "Ejercicios de piernas"
+        ],
+        "fr": [
+          "Exercices jambes"
         ],
         "de": [
           "Beinübungen"
@@ -431,13 +431,13 @@
           "하체 운동",
           "다리"
         ],
-        "zh-hant": [
-          "腿部訓練",
-          "下半身"
-        ],
         "es": [
           "Ejercicios de piernas",
           "Tren inferior"
+        ],
+        "fr": [
+          "Entraînement des jambes",
+          "Bas du corps"
         ],
         "de": [
           "Beintraining",
@@ -447,8 +447,8 @@
       "description": {
         "ja": "スクワット、ランジ、ヒップ主導の種目",
         "ko": "스쿼트, 런지, 힙 중심 운동",
-        "zh-hant": "深蹲、弓箭步與臀腿主導動作",
         "es": "Sentadillas, zancadas y ejercicios dominantes de cadera",
+        "fr": "Squats, fentes et exercices dominants hanche",
         "de": "Kniebeugen, Ausfallschritte und hüftdominante Übungen"
       },
       "defaultTags": {
@@ -460,13 +460,13 @@
           "하체",
           "스쿼트"
         ],
-        "zh-hant": [
-          "腿部",
-          "深蹲"
-        ],
         "es": [
           "Piernas",
           "Sentadilla"
+        ],
+        "fr": [
+          "Jambes",
+          "Squat"
         ],
         "de": [
           "Beine",
@@ -479,8 +479,8 @@
       "label": {
         "ja": "体幹",
         "ko": "코어",
-        "zh-hant": "核心",
         "es": "Core",
+        "fr": "Tronc",
         "de": "Rumpf"
       },
       "legacyTitles": {
@@ -490,11 +490,11 @@
         "ko": [
           "코어 운동"
         ],
-        "zh-hant": [
-          "核心訓練"
-        ],
         "es": [
           "Ejercicios de core"
+        ],
+        "fr": [
+          "Exercices de gainage"
         ],
         "de": [
           "Rumpfübungen"
@@ -509,13 +509,13 @@
           "코어 운동",
           "복근"
         ],
-        "zh-hant": [
-          "核心訓練",
-          "腹肌"
-        ],
         "es": [
           "Ejercicios de core",
           "Abdominales"
+        ],
+        "fr": [
+          "Entraînement du tronc",
+          "Abdominaux"
         ],
         "de": [
           "Core-Training",
@@ -525,8 +525,8 @@
       "description": {
         "ja": "腹筋、回旋、体幹安定の種目",
         "ko": "복근, 회전, 코어 안정화 운동",
-        "zh-hant": "腹肌、旋轉與核心穩定訓練動作",
         "es": "Abdominales, rotación y estabilidad del core",
+        "fr": "Abdominaux, rotation et stabilité du tronc",
         "de": "Bauchübungen, Rotation und Rumpfstabilität"
       },
       "defaultTags": {
@@ -538,13 +538,13 @@
           "코어",
           "복근"
         ],
-        "zh-hant": [
-          "核心",
-          "腹肌"
-        ],
         "es": [
           "Core",
           "Abdominales"
+        ],
+        "fr": [
+          "Tronc",
+          "Abdominaux"
         ],
         "de": [
           "Rumpf",
