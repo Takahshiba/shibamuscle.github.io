@@ -60,6 +60,33 @@
         }
       ]
     },
+    "zh-hant": {
+      "title": "聯絡我們 | Shiba Muscle",
+      "description": "Shiba Muscle 的聯絡頁面。關於服務、訓練資料或刊載內容的問題與合作需求，請從這裡確認聯絡方式。",
+      "heading": "聯絡我們",
+      "intro": [
+        "關於服務內容、刊載資料、合作或其他問題，請寄信至下方電子郵件地址。"
+      ],
+      "sections": [
+        {
+          "className": "content-card contact-card",
+          "blocks": [
+            {
+              "type": "email",
+              "label": "Email",
+              "value": "info@shibamuscle.com"
+            }
+          ]
+        },
+        {
+          "className": "content-card note",
+          "paragraphs": [
+            "我們會依序確認訊息並回覆。依詢問內容不同，可能需要一些時間才能回覆。",
+            "請盡量具體描述你的狀況與需求，這樣我們可以更準確地協助你。涉及個人資料的詢問，可能會需要確認本人身分。"
+          ]
+        }
+      ]
+    },
     "es": {
       "title": "Contacto | Shiba Muscle",
       "description": "Página de contacto de Shiba Muscle. Para preguntas sobre el servicio, los datos o el contenido publicado, consulta aquí cómo escribirnos.",
@@ -83,6 +110,33 @@
           "paragraphs": [
             "Revisamos los mensajes y respondemos por orden. Según el contenido de la consulta, la respuesta puede tardar un poco.",
             "Si describes tu situación y lo que necesitas con el mayor detalle posible, podremos orientarte mejor. En consultas relacionadas con datos personales, puede que pidamos verificar tu identidad."
+          ]
+        }
+      ]
+    },
+    "de": {
+      "title": "Kontakt | Shiba Muscle",
+      "description": "Kontaktseite von Shiba Muscle. Fragen zum Service, zu Trainingsdaten oder veröffentlichten Inhalten kannst du hier an uns senden.",
+      "heading": "Kontakt",
+      "intro": [
+        "Für Fragen zum Service, zu veröffentlichten Trainingsdaten, Kooperationen oder anderen Anliegen schreibe bitte an die unten stehende E-Mail-Adresse."
+      ],
+      "sections": [
+        {
+          "className": "content-card contact-card",
+          "blocks": [
+            {
+              "type": "email",
+              "label": "Email",
+              "value": "info@shibamuscle.com"
+            }
+          ]
+        },
+        {
+          "className": "content-card note",
+          "paragraphs": [
+            "Wir prüfen Nachrichten der Reihe nach und antworten so schnell wie möglich. Je nach Inhalt der Anfrage kann die Antwort etwas Zeit benötigen.",
+            "Wenn du deine Situation und dein Anliegen möglichst konkret beschreibst, können wir dir genauer weiterhelfen. Bei Anfragen zu personenbezogenen Daten kann eine Identitätsprüfung erforderlich sein."
           ]
         }
       ]

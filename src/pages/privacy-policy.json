@@ -172,6 +172,89 @@
         }
       ]
     },
+    "zh-hant": {
+      "title": "隱私權政策 | Shiba Muscle",
+      "description": "整理 Shiba Muscle 的隱私權政策、Cookie 政策、廣告政策與使用條款。",
+      "heading": "隱私權政策",
+      "intro": [
+        "Shiba Muscle 只會在提供服務所需的範圍內處理資訊，並重視使用者的隱私保護。以下說明本站如何處理資訊，以及使用本站時適用的條款。"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "使用條款",
+          "blocks": [
+            {
+              "type": "subheading",
+              "text": "內容使用"
+            },
+            {
+              "type": "paragraph",
+              "text": "本站資訊可在合理範圍內參考或引用。但不得以容易造成誤解的方式轉載、惡意使用，或以任何方式損害第三方權益。引用或再利用內容時，請標明本站名稱作為來源。"
+            },
+            {
+              "type": "subheading",
+              "text": "禁止事項"
+            },
+            {
+              "type": "list",
+              "items": [
+                "未經許可修改本站內容，並以可能造成誤認的形式重新發布",
+                "對其他使用者或第三方造成困擾、不利益或損害",
+                "透過未授權存取、伺服器攻擊或類似行為妨礙服務營運"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "免責聲明"
+            },
+            {
+              "type": "paragraph",
+              "text": "本站會盡力維持刊載資訊的正確性與即時性，但不保證內容完全無誤或完整。因使用本站刊載資訊而產生的任何損害，本站不承擔責任。"
+            },
+            {
+              "type": "subheading",
+              "text": "服務變更"
+            },
+            {
+              "type": "paragraph",
+              "text": "本站內容、結構與提供的服務可能在未事先通知的情況下變更、暫停或終止。對於因此產生的損害，本站不承擔責任。"
+            },
+            {
+              "type": "subheading",
+              "text": "外部連結"
+            },
+            {
+              "type": "paragraph",
+              "text": "透過本站連結或橫幅前往的外部網站，其提供的資訊、服務或其他內容，本站不承擔責任。"
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "著作權",
+          "paragraphs": [
+            "本站刊載的文字、圖片、資料與其他內容，其著作權屬於營運者或合法權利人。引用或再利用內容時，請標明來源並在合理範圍內使用。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Cookie 政策",
+          "paragraphs": [
+            "本站可能使用 Cookie 與類似技術，用於流量分析、廣告投放與改善使用體驗。這些資訊有助於了解使用趨勢、改善網站，並顯示更相關的廣告。",
+            "若不希望允許 Cookie，可在瀏覽器設定中停用。你也可以透過 Google 廣告設定管理廣告個人化。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "廣告投放",
+          "paragraphs": [
+            "本站使用第三方廣告服務 Google AdSense。Google 等廣告服務供應商可能會根據使用者過去的瀏覽資訊等資料顯示廣告。",
+            "關於廣告內容、投放方式與個人化設定的詳細資訊，請確認 Google 及各廣告服務供應商的政策。"
+          ]
+        }
+      ]
+    },
     "es": {
       "title": "Política de privacidad | Shiba Muscle",
       "description": "Página que resume la política de privacidad, la política de cookies, la publicidad y las condiciones de uso de Shiba Muscle.",
@@ -251,6 +334,89 @@
           "paragraphs": [
             "El sitio utiliza Google AdSense, un servicio de publicidad de terceros. Google y otros proveedores de publicidad pueden mostrar anuncios basados en información de acceso anterior u otros datos similares.",
             "Para más información sobre el contenido de los anuncios, la forma de distribución y la personalización, consulta las políticas de Google y de cada proveedor publicitario."
+          ]
+        }
+      ]
+    },
+    "de": {
+      "title": "Datenschutzerklärung | Shiba Muscle",
+      "description": "Überblick über Datenschutzerklärung, Cookie-Richtlinie, Werbung und Nutzungsbedingungen von Shiba Muscle.",
+      "heading": "Datenschutzerklärung",
+      "intro": [
+        "Shiba Muscle verarbeitet Informationen nur im notwendigen Umfang für den Betrieb des Angebots und legt Wert auf den Schutz deiner Privatsphäre. Im Folgenden erklären wir, wie Informationen auf dieser Website verarbeitet werden und welche Nutzungsbedingungen gelten."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Nutzungsbedingungen",
+          "blocks": [
+            {
+              "type": "subheading",
+              "text": "Nutzung der Inhalte"
+            },
+            {
+              "type": "paragraph",
+              "text": "Die Informationen auf dieser Website dürfen in angemessenem Umfang eingesehen und zitiert werden. Eine irreführende Weiterveröffentlichung, missbräuchliche Nutzung oder Nutzung zum Nachteil Dritter ist untersagt. Bitte nenne bei Zitaten oder Wiederverwendung den Websitenamen als Quelle."
+            },
+            {
+              "type": "subheading",
+              "text": "Verbotene Handlungen"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Inhalte der Website ohne Erlaubnis verändern und in einer irreführenden Form weiterverbreiten",
+                "Andere Nutzerinnen, Nutzer oder Dritte belästigen, benachteiligen oder schädigen",
+                "Den Betrieb der Website durch unbefugten Zugriff, Serverangriffe oder ähnliche Handlungen stören"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Haftungsausschluss"
+            },
+            {
+              "type": "paragraph",
+              "text": "Wir bemühen uns, veröffentlichte Informationen möglichst korrekt und aktuell zu halten, übernehmen jedoch keine Gewähr für Vollständigkeit oder Richtigkeit. Für Schäden, die aus der Nutzung der veröffentlichten Informationen entstehen, übernimmt die Website keine Haftung."
+            },
+            {
+              "type": "subheading",
+              "text": "Änderungen am Angebot"
+            },
+            {
+              "type": "paragraph",
+              "text": "Inhalte, Struktur und angebotene Services der Website können ohne vorherige Ankündigung geändert, ausgesetzt oder beendet werden. Für daraus entstehende Schäden übernimmt die Website keine Haftung."
+            },
+            {
+              "type": "subheading",
+              "text": "Externe Links"
+            },
+            {
+              "type": "paragraph",
+              "text": "Für Informationen, Services oder sonstige Inhalte externer Websites, die über Links, Banner oder ähnliche Elemente von dieser Website aus erreichbar sind, übernehmen wir keine Verantwortung."
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Urheberrecht",
+          "paragraphs": [
+            "Die Urheberrechte an Texten, Bildern, Daten und sonstigen Inhalten auf dieser Website liegen beim Betreiber oder den jeweiligen rechtmäßigen Rechteinhabern. Bei Zitaten oder Wiederverwendung ist die Quelle zu nennen und ein angemessener Umfang einzuhalten."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Cookie-Richtlinie",
+          "paragraphs": [
+            "Diese Website kann Cookies und ähnliche Technologien für Zugriffsauswertung, Werbeausspielung und die Verbesserung der Nutzungserfahrung verwenden. Diese Informationen helfen uns, Nutzungstendenzen zu verstehen, die Website zu verbessern und relevantere Anzeigen anzuzeigen.",
+            "Wenn du Cookies nicht zulassen möchtest, kannst du sie in den Einstellungen deines Browsers deaktivieren. Die Personalisierung von Anzeigen kannst du außerdem über die Google-Anzeigeneinstellungen verwalten."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Werbung",
+          "paragraphs": [
+            "Diese Website nutzt Google AdSense, einen Werbedienst eines Drittanbieters. Google und andere Werbeanbieter können Anzeigen auf Grundlage früherer Zugriffs- oder Nutzungsinformationen ausspielen.",
+            "Weitere Informationen zu Anzeigeninhalten, Ausspielung und Personalisierung findest du in den Richtlinien von Google und den jeweiligen Werbeanbietern."
           ]
         }
       ]

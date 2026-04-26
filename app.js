@@ -6,10 +6,11 @@ const CATEGORY_LINKS = [
         id: "whole-body-section",
         key: "wholeBody",
         icon: "power-clean-white-icon.webp",
-        labels: { ja: "全身", ko: "전신", es: "Cuerpo completo", fr: "Corps entier", de: "Ganzkörper" },
+        labels: { ja: "全身", ko: "전신", "zh-hant": "全身", es: "Cuerpo completo", fr: "Corps entier", de: "Ganzkörper" },
         descriptions: {
             ja: "デッドリフト、クリーン、スナッチなど全身連動の基準ページ",
             ko: "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지",
+            "zh-hant": "硬舉、翻站、抓舉等全身協調動作的標準頁面",
             es: "Ejercicios globales como peso muerto, clean y snatch",
             fr: "Exercices globaux comme soulevé de terre, clean et snatch",
             de: "Referenzseiten für Ganzkörperübungen wie Kreuzheben, Clean und Snatch"
@@ -19,10 +20,11 @@ const CATEGORY_LINKS = [
         id: "chest-section",
         key: "chest",
         icon: "bench-press-white-icon.webp",
-        labels: { ja: "胸", ko: "가슴", es: "Pecho", fr: "Pectoraux", de: "Brust" },
+        labels: { ja: "胸", ko: "가슴", "zh-hant": "胸部", es: "Pecho", fr: "Pectoraux", de: "Brust" },
         descriptions: {
             ja: "プレス系の平均重量と押す種目の比較",
             ko: "프레스 계열 평균 중량과 미는 운동 비교",
+            "zh-hant": "推類動作的平均重量與訓練標準比較",
             es: "Pesos medios y comparativas de empuje",
             fr: "Charges moyennes et comparaisons des mouvements de poussée",
             de: "Durchschnittsgewichte und Vergleiche für Druckübungen"
@@ -32,10 +34,11 @@ const CATEGORY_LINKS = [
         id: "back-section",
         key: "back",
         icon: "deadlift-white-icon.webp",
-        labels: { ja: "背中", ko: "등", es: "Espalda", fr: "Dos", de: "Rücken" },
+        labels: { ja: "背中", ko: "등", "zh-hant": "背部", es: "Espalda", fr: "Dos", de: "Rücken" },
         descriptions: {
             ja: "ローイング、プル系、ヒンジ系の比較",
             ko: "로우, 풀, 힌지 계열 운동 비교",
+            "zh-hant": "划船、下拉與髖鉸鏈類動作比較",
             es: "Remos, jalones y bisagras de cadera",
             fr: "Rowings, tirages et mouvements de charnière",
             de: "Rudern, Zugübungen und Hüftstreckbewegungen im Vergleich"
@@ -45,10 +48,11 @@ const CATEGORY_LINKS = [
         id: "shoulder-section",
         key: "shoulder",
         icon: "shoulder-press-white-icon.webp",
-        labels: { ja: "肩", ko: "어깨", es: "Hombros", fr: "Épaules", de: "Schultern" },
+        labels: { ja: "肩", ko: "어깨", "zh-hant": "肩部", es: "Hombros", fr: "Épaules", de: "Schultern" },
         descriptions: {
             ja: "プレス、レイズ、安定性の種目一覧",
             ko: "프레스, 레이즈, 안정성 운동 목록",
+            "zh-hant": "肩推、平舉與穩定性訓練動作列表",
             es: "Presses, elevaciones y estabilidad del hombro",
             fr: "Développés, élévations et stabilité des épaules",
             de: "Schulterdrücken, Seitheben und Stabilitätsübungen"
@@ -58,10 +62,11 @@ const CATEGORY_LINKS = [
         id: "arm-section",
         key: "arm",
         icon: "hammer-curl-white-icon.webp",
-        labels: { ja: "腕", ko: "팔", es: "Brazos", fr: "Bras", de: "Arme" },
+        labels: { ja: "腕", ko: "팔", "zh-hant": "手臂", es: "Brazos", fr: "Bras", de: "Arme" },
         descriptions: {
             ja: "カール、トライセプス、前腕の種目",
             ko: "컬, 삼두, 전완 운동",
+            "zh-hant": "彎舉、三頭肌與前臂訓練動作",
             es: "Curls, tríceps y antebrazos",
             fr: "Curls, triceps et avant-bras",
             de: "Curls, Trizeps- und Unterarmübungen"
@@ -71,10 +76,11 @@ const CATEGORY_LINKS = [
         id: "leg-section",
         key: "leg",
         icon: "squat-white-icon.webp",
-        labels: { ja: "脚", ko: "하체", es: "Piernas", fr: "Jambes", de: "Beine" },
+        labels: { ja: "脚", ko: "하체", "zh-hant": "腿部", es: "Piernas", fr: "Jambes", de: "Beine" },
         descriptions: {
             ja: "スクワット、ランジ、ヒップ主導の種目",
             ko: "스쿼트, 런지, 힙 중심 운동",
+            "zh-hant": "深蹲、弓箭步與臀腿主導動作",
             es: "Sentadillas, zancadas y ejercicios dominantes de cadera",
             fr: "Squats, fentes et mouvements dominants hanche",
             de: "Kniebeugen, Ausfallschritte und hüftdominante Übungen"
@@ -84,10 +90,11 @@ const CATEGORY_LINKS = [
         id: "core-section",
         key: "core",
         icon: "sit-ups-white-icon.webp",
-        labels: { ja: "体幹", ko: "코어", es: "Core", fr: "Tronc", de: "Rumpf" },
+        labels: { ja: "体幹", ko: "코어", "zh-hant": "核心", es: "Core", fr: "Tronc", de: "Rumpf" },
         descriptions: {
             ja: "腹筋、回旋、体幹安定の種目",
             ko: "복근, 회전, 코어 안정화 운동",
+            "zh-hant": "腹肌、旋轉與核心穩定訓練動作",
             es: "Abdominales, rotación y estabilidad del core",
             fr: "Abdominaux, rotation et stabilité du tronc",
             de: "Bauchübungen, Rotation und Rumpfstabilität"
@@ -117,6 +124,18 @@ const HOME_ENTRY_ROUTES = [
                 eyebrow: "Quick Compare",
                 title: "대표 운동 비교 시작",
                 copy: "자주 비교되는 대표 운동부터 가장 빠르게 데이터를 확인할 수 있는 시작점입니다."
+            },
+            "zh-hant": {
+                label: "熱門比較",
+                eyebrow: "Quick Compare",
+                title: "從熱門動作開始比較",
+                copy: "從最常被比較的訓練動作快速進入資料頁，直接查看關鍵數據。"
+            },
+            "zh-hans": {
+                label: "热门比较",
+                eyebrow: "快速比较",
+                title: "从热门动作开始比较",
+                copy: "从最常被比较的训练动作快速进入数据页，直接查看关键数据。"
             },
             es: {
                 label: "Comparativas clave",
@@ -154,6 +173,18 @@ const HOME_ENTRY_ROUTES = [
                 title: "Big 3 기준",
                 copy: "중량 비교의 기준으로 자주 보는 세 가지 운동을 먼저 모았습니다."
             },
+            "zh-hant": {
+                label: "Big 3",
+                eyebrow: "Performance Baselines",
+                title: "Big 3 基準",
+                copy: "先整理最常作為力量比較基準的三個主要訓練動作。"
+            },
+            "zh-hans": {
+                label: "Big 3",
+                eyebrow: "表现基准",
+                title: "Big 3 基准",
+                copy: "先整理最常作为力量比较基准的三个主要训练动作。"
+            },
             es: {
                 label: "Big 3",
                 eyebrow: "Referencias de fuerza",
@@ -189,6 +220,18 @@ const HOME_ENTRY_ROUTES = [
                 eyebrow: "Starter Paths",
                 title: "시작하기 쉬운 비교 루트",
                 copy: "먼저 다루기 쉬운 운동부터 비교하고 싶을 때의 출발점입니다."
+            },
+            "zh-hant": {
+                label: "入門路線",
+                eyebrow: "Starter Paths",
+                title: "好上手的比較起點",
+                copy: "想先從容易安排進訓練的動作開始比較時，可以從這裡進入。"
+            },
+            "zh-hans": {
+                label: "入门路线",
+                eyebrow: "入门路径",
+                title: "好上手的比较起点",
+                copy: "想先从容易安排进训练的动作开始比较时，可以从这里进入。"
             },
             es: {
                 label: "Para empezar",
@@ -246,7 +289,7 @@ const UI_TEXT = {
         languageEnglish: "English",
         languageJapanese: "日本語",
         languageKorean: "한국어",
-        languageChinese: "中文",
+        languageChinese: "繁體中文",
         languageSpanish: "Español",
         languageFrench: "Français",
         languageGerman: "Deutsch",
@@ -339,7 +382,7 @@ const UI_TEXT = {
         languageEnglish: "English",
         languageJapanese: "日本語",
         languageKorean: "한국어",
-        languageChinese: "中文",
+        languageChinese: "繁體中文",
         languageSpanish: "Español",
         languageFrench: "Français",
         languageGerman: "Deutsch",
@@ -399,6 +442,98 @@ const UI_TEXT = {
         weightPage: "중량 기준 비교 페이지",
         worldRecord: "세계 기록"
     },
+    "zh-hant": {
+        ad: "廣告",
+        adAfterQuickStart: "推薦入口之後",
+        adBeforeFooter: "頁尾之前",
+        adAfterRelated: "相關動作之後",
+        adAfterStandards: "標準表之後",
+        average: "平均重量",
+        averageEyebrow: "Average",
+        averageReps: "平均次數",
+        breadcrumb: "導覽路徑",
+        category: "分類",
+        categoryDashboard: "部位分類總覽",
+        categoryDashboardCopy: "可快速查看各部位的動作數量、代表動作與比較方向。",
+        categoryDashboardEyebrow: "Category Dashboard",
+        compareDestination: "比較方向",
+        compareFlow: "比較動線",
+        compareMode: "比較模式",
+        contentLibraryCopy: "可直接前往相關訓練動作頁面。",
+        contentLibraryTitle: "動作資料庫",
+        dataAvailable: "已有資料",
+        databaseLibraryTitle: "全動作資料庫",
+        databaseLibraryIntro: "從部位分類進入，直接前往需要的訓練比較頁面。",
+        detailByTabs: "使用分頁切換詳細比較",
+        exerciseLibraryTitle: "動作資料庫",
+        exercisesListed: (count) => `收錄 ${count} 個動作`,
+        female: "女性",
+        home: "首頁",
+        homeHeroActionLabel: "快速操作",
+        homeHeroDescription: "可依訓練動作快速比較平均重量、力量標準與目標肌群的重量訓練資料庫。",
+        homeHeroTitle: "更快比較訓練數據",
+        languageEnglish: "English",
+        languageJapanese: "日本語",
+        languageKorean: "한국어",
+        languageChinese: "繁體中文",
+        languageSpanish: "Español",
+        languageFrench: "Français",
+        levelAverageAvailable: "收錄平均資料",
+        libraryExplorerCopy: "依部位瀏覽所有訓練動作的比較頁面。",
+        libraryExplorerTitle: "Performance Library",
+        libraryMore: (count) => `查看更多 (${count})`,
+        libraryLess: "收合",
+        majorCategoryDashboard: "主要部位總覽",
+        male: "男性",
+        muscleGroups: "肌群",
+        muscles: "肌群",
+        musclesCopy: "可分別查看主動肌、輔助肌群與穩定肌群。",
+        musclesEyebrow: "Muscles",
+        musclesHeading: "目標肌群",
+        page: "頁面",
+        pages: (count) => `${count} 個頁面`,
+        performanceDashboard: "Performance Dashboard",
+        performanceLibraryCount: "收錄動作",
+        performanceSnapshot: "表現摘要",
+        performanceSnapshotCopy: "在查看表格前，先整理最重要的基準線與比較重點。",
+        primaryMuscle: "主動肌",
+        primaryMuscleFallback: "收錄主動肌資料",
+        quickCompare: "Quick Compare",
+        quickStart: "開始比較",
+        quickStartCopy: "不知道從哪裡開始時，可以先看這些最常被比較的路線。",
+        quickStartLabel: "推薦入口",
+        relatedExercises: "相關動作",
+        relatedExercisesCopy: "整理同分類動作，方便連續比較。",
+        relatedExplorerCopy: "直接前往相關訓練動作頁面，延伸比較流程。",
+        relatedExplorerTitle: "Compare More Exercises",
+        relatedNone: "目前沒有可顯示的同部位相關動作。",
+        relatedSameCategory: "僅列出同部位的訓練動作。",
+        reps: "次數",
+        repsComparison: "次數比較",
+        repsPage: "次數基準比較頁",
+        resultsAvailable: "收錄比較資料",
+        snapshot: "Snapshot",
+        snapshotDashboard: "比較總覽",
+        standards: "力量標準",
+        standardsEyebrow: "Standards",
+        standardsReps: "標準次數",
+        standardsWeightCopy: "可切換性別與比較軸查看標準。",
+        standardsRepsCopy: "可切換體重別與年齡別分頁查看次數標準。",
+        support: "支援",
+        contact: "聯絡我們",
+        privacy: "隱私權政策",
+        tableGuide: "標準表說明",
+        tableGuideCopy: "各等級的分布與訓練年資參考。",
+        tableGuideEyebrow: "Notes",
+        totalCategories: "收錄分類",
+        totalExercisesCopy: "可橫向比較的動作數",
+        unitSwitchCopy: "所有頁面支援單位切換",
+        viewRelatedCategories: "同分類相關比較",
+        weight: "重量",
+        weightComparison: "重量比較",
+        weightPage: "重量基準比較頁",
+        worldRecord: "世界紀錄"
+    },
     es: {
         ad: "Anuncio",
         adAfterQuickStart: "Después de accesos recomendados",
@@ -432,7 +567,7 @@ const UI_TEXT = {
         languageEnglish: "English",
         languageJapanese: "日本語",
         languageKorean: "한국어",
-        languageChinese: "中文",
+        languageChinese: "繁體中文",
         languageSpanish: "Español",
         languageFrench: "Français",
         languageGerman: "Deutsch",
@@ -679,6 +814,108 @@ const UI_TEXT = {
     }
 };
 
+UI_TEXT["zh-hans"] = {
+    ad: "广告",
+    adAfterQuickStart: "推荐入口之后",
+    adBeforeFooter: "页脚之前",
+    adAfterRelated: "相关动作之后",
+    adAfterStandards: "标准表之后",
+    average: "平均重量",
+    averageEyebrow: "平均",
+    averageReps: "平均次数",
+    breadcrumb: "导航路径",
+    category: "分类",
+    categoryDashboard: "部位分类总览",
+    categoryDashboardCopy: "快速查看各部位的动作数量、代表动作和比较方向。",
+    categoryDashboardEyebrow: "分类总览",
+    compareDestination: "比较方向",
+    compareFlow: "比较路径",
+    compareMode: "比较模式",
+    contentLibraryCopy: "可直接前往相关训练动作页面。",
+    contentLibraryTitle: "动作数据库",
+    dataAvailable: "已有数据",
+    databaseLibraryTitle: "全动作数据库",
+    databaseLibraryIntro: "从部位分类进入，直接前往需要的训练比较页面。",
+    detailByTabs: "用标签页切换详细比较",
+    exerciseLibraryTitle: "动作数据库",
+    exercisesListed: (count) => `收录 ${count} 个动作`,
+    female: "女性",
+    home: "首页",
+    homeHeroActionLabel: "快速操作",
+    homeHeroDescription: "按训练动作快速比较平均重量、力量标准和目标肌群的重量训练数据库。",
+    homeHeroTitle: "更快比较训练数据",
+    languageEnglish: "English",
+    languageJapanese: "日本語",
+    languageKorean: "한국어",
+    languageChinese: "繁体中文",
+    languageSimplifiedChinese: "简体中文",
+    languageSpanish: "Español",
+    languageFrench: "Français",
+    levelAverageAvailable: "收录平均数据",
+    libraryExplorerCopy: "按部位浏览所有训练动作的比较页面。",
+    libraryExplorerTitle: "训练动作库",
+    libraryMore: (count) => `查看更多 (${count})`,
+    libraryLess: "收起",
+    majorCategoryDashboard: "主要部位总览",
+    male: "男性",
+    muscleGroups: "肌群",
+    muscles: "肌群",
+    musclesCopy: "可分别查看主动肌、辅助肌群和稳定肌群。",
+    musclesEyebrow: "肌群",
+    musclesHeading: "目标肌群",
+    page: "页面",
+    pages: (count) => `${count} 个页面`,
+    performanceDashboard: "表现总览",
+    performanceLibraryCount: "收录动作",
+    performanceSnapshot: "表现摘要",
+    performanceSnapshotCopy: "查看表格前，先整理最重要的基准线和比较重点。",
+    primaryMuscle: "主动肌",
+    primaryMuscleFallback: "收录主动肌数据",
+    quickCompare: "快速比较",
+    quickStart: "开始比较",
+    quickStartCopy: "不知道从哪里开始时，可以先看这些最常被比较的路线。",
+    quickStartLabel: "推荐入口",
+    relatedExercises: "相关动作",
+    relatedExercisesCopy: "整理同分类动作，方便连续比较。",
+    relatedExplorerCopy: "直接前往相关训练动作页面，延伸比较流程。",
+    relatedExplorerTitle: "查看更多动作",
+    relatedNone: "目前没有可显示的同部位相关动作。",
+    relatedSameCategory: "仅列出同部位的训练动作。",
+    reps: "次数",
+    repsComparison: "次数比较",
+    repsPage: "次数基准比较页",
+    resultsAvailable: "收录比较数据",
+    snapshot: "概览",
+    snapshotDashboard: "比较总览",
+    standards: "力量标准",
+    standardsEyebrow: "标准",
+    standardsReps: "标准次数",
+    standardsWeightCopy: "可切换性别和比较维度查看标准。",
+    standardsRepsCopy: "可切换按体重和按年龄的标签页查看次数标准。",
+    support: "支持",
+    contact: "联系我们",
+    privacy: "隐私政策",
+    tableGuide: "标准表说明",
+    tableGuideCopy: "各等级的分布和训练年限参考。",
+    tableGuideEyebrow: "说明",
+    totalCategories: "收录分类",
+    totalExercisesCopy: "可横向比较的动作数",
+    unitSwitchCopy: "所有页面支持单位切换",
+    viewRelatedCategories: "同分类相关比较",
+    weight: "重量",
+    weightComparison: "重量比较",
+    weightPage: "重量基准比较页",
+    worldRecord: "世界纪录"
+};
+
+UI_TEXT.ja.languageSimplifiedChinese = "简体中文";
+UI_TEXT.ko.languageSimplifiedChinese = "간체 중국어";
+UI_TEXT["zh-hant"].languageSimplifiedChinese = "簡體中文";
+UI_TEXT.es.languageSimplifiedChinese = "Chino simplificado";
+UI_TEXT.fr.languageSimplifiedChinese = "Chinois simplifié";
+UI_TEXT.de.languageSimplifiedChinese = "Chinesisch (vereinfacht)";
+UI_TEXT["zh-hans"].languageGerman = "Deutsch";
+
 const LIBRARY_INITIAL_CARD_LIMIT = 8;
 
 normalizeAdSenseMarkup();
@@ -774,7 +1011,15 @@ function t(key, ...args) {
 
 function localeText(values) {
     const locale = detectLocale();
-    return values[locale] ?? values.ja ?? "";
+    if (Object.prototype.hasOwnProperty.call(values, locale)) {
+        return values[locale];
+    }
+
+    if (locale === "zh-hans" && Object.prototype.hasOwnProperty.call(values, "zh-hant")) {
+        return simplifyChineseCopy(values["zh-hant"]);
+    }
+
+    return values.ja ?? "";
 }
 
 function getCategoryLinks() {
@@ -783,8 +1028,8 @@ function getCategoryLinks() {
         id: item.id,
         key: item.key,
         icon: assetPath(item.icon),
-        label: item.labels[locale] || item.labels.ja,
-        description: item.descriptions[locale] || item.descriptions.ja
+        label: localizedRecordValue(item.labels, locale),
+        description: localizedRecordValue(item.descriptions, locale)
     }));
 }
 
@@ -793,7 +1038,7 @@ function getHomeEntryRouteDefinitions() {
     return HOME_ENTRY_ROUTES.map((route) => ({
         id: route.id,
         slugs: route.slugs,
-        ...(route.locales[locale] || route.locales.ja)
+        ...localizedRecordValue(route.locales, locale)
     }));
 }
 
@@ -865,6 +1110,8 @@ function buildFooter() {
     const languageLinks = [
         { href: localizedDomainHref("https://en.shibamuscle.com"), label: t("languageEnglish"), lang: "en" },
         { href: localizedDomainHref("https://shibamuscle.com"), label: t("languageJapanese"), lang: "ja" },
+        { href: localizedDomainHref("https://shibamuscle.com/zh-hant"), label: t("languageChinese"), lang: "zh-hant" },
+        { href: localizedDomainHref("https://shibamuscle.com/zh-hans"), label: t("languageSimplifiedChinese"), lang: "zh-hans" },
         { href: localizedDomainHref("https://shibamuscle.com/ko"), label: t("languageKorean"), lang: "ko" },
         { href: localizedDomainHref("https://shibamuscle.com/es"), label: t("languageSpanish"), lang: "es" },
         { href: localizedDomainHref("https://shibamuscle.com/fr"), label: t("languageFrench"), lang: "fr" },
@@ -1002,23 +1249,23 @@ function enhanceHomePage(main) {
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("standards"))}</span>
-                                <strong class="metric-value">${escapeHtml(localeText({ ja: "体重 / 年齢", ko: "체중 / 나이", es: "Peso / edad", fr: "Poids / âge", de: "Körpergewicht / Alter" }))}</strong>
+                                <strong class="metric-value">${escapeHtml(localeText({ ja: "体重 / 年齢", ko: "체중 / 나이", "zh-hant": "體重 / 年齡", "zh-hans": "体重 / 年龄", es: "Peso / edad", fr: "Poids / âge", de: "Körpergewicht / Alter" }))}</strong>
                                 <span class="metric-subvalue">${escapeHtml(t("detailByTabs"))}</span>
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("muscleGroups"))}</span>
                                 <strong class="metric-value">${escapeHtml(t("primaryMuscle"))}</strong>
-                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "種目ごとの効き方を把握", ko: "운동별 자극 부위 확인", es: "Estímulo por ejercicio", fr: "Travail musculaire par exercice", de: "Zielmuskulatur je Übung prüfen" }))}</span>
+                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "種目ごとの効き方を把握", ko: "운동별 자극 부위 확인", "zh-hant": "查看每個動作的刺激部位", "zh-hans": "查看每个动作的刺激部位", es: "Estímulo por ejercicio", fr: "Travail musculaire par exercice", de: "Zielmuskulatur je Übung prüfen" }))}</span>
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("compareFlow"))}</span>
                                 <strong class="metric-value">${escapeHtml(t("relatedExercises"))}</strong>
-                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "同カテゴリを続けて閲覧", ko: "같은 카테고리 이어보기", es: "Seguir en la misma categoría", fr: "Continuer dans la même catégorie", de: "In derselben Kategorie weitersehen" }))}</span>
+                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "同カテゴリを続けて閲覧", ko: "같은 카테고리 이어보기", "zh-hant": "連續查看同分類動作", "zh-hans": "连续查看同分类动作", es: "Seguir en la misma categoría", fr: "Continuer dans la même catégorie", de: "In derselben Kategorie weitersehen" }))}</span>
                             </article>
                         </div>
                         <div class="dashboard-spotlight-list">
                             <div class="dashboard-spotlight-heading">
-                                <span class="metric-label">${escapeHtml(localeText({ ja: "今すぐ見比べる", ko: "바로 비교하기", es: "Comparar ahora", fr: "Comparer maintenant", de: "Jetzt vergleichen" }))}</span>
+                                <span class="metric-label">${escapeHtml(localeText({ ja: "今すぐ見比べる", ko: "바로 비교하기", "zh-hant": "立即比較", "zh-hans": "立即比较", es: "Comparar ahora", fr: "Comparer maintenant", de: "Jetzt vergleichen" }))}</span>
                             </div>
                             ${popularPreviewCards.map((card) => {
                                 return `
@@ -1051,7 +1298,7 @@ function enhanceHomePage(main) {
             <div class="category-overview-grid">
                 ${libraryData.sections.map((section) => {
                     const categoryMeta = getCategoryLinks().find((item) => item.id === section.id);
-                    const description = categoryMeta?.description || localeText({ ja: "関連種目をまとめて確認", ko: "관련 운동을 한 번에 확인", es: "Revisar ejercicios relacionados", fr: "Voir les exercices liés", de: "Verwandte Übungen gesammelt prüfen" });
+                    const description = categoryMeta?.description || localeText({ ja: "関連種目をまとめて確認", ko: "관련 운동을 한 번에 확인", "zh-hant": "集中查看相關訓練動作", "zh-hans": "集中查看相关训练动作", es: "Revisar ejercicios relacionados", fr: "Voir les exercices liés", de: "Verwandte Übungen gesammelt prüfen" });
                     const sampleNames = section.cards.slice(0, 3).map((card) => card.name).join(" / ");
                     return `
                         <a class="category-tile" href="#${section.id}">
@@ -1213,8 +1460,8 @@ function enhanceExercisePage(main) {
         t("averageEyebrow"),
         averageLabel,
         measurementKind === "reps"
-            ? localeText({ ja: "レベル別の平均レップ数を先に確認できます。", ko: "레벨별 평균 반복 횟수를 먼저 확인할 수 있습니다.", es: "Consulta primero las repeticiones medias por nivel.", fr: "Consulte d'abord les répétitions moyennes par niveau.", de: "Prüfe zuerst die durchschnittlichen Wiederholungen je Level." })
-            : localeText({ ja: "レベル別の1RM目安を先に確認できます。", ko: "레벨별 1RM 기준을 먼저 확인할 수 있습니다.", es: "Consulta primero la referencia de 1RM por nivel.", fr: "Consulte d'abord la référence 1RM par niveau.", de: "Prüfe zuerst die 1RM-Referenz je Level." })
+            ? localeText({ ja: "レベル別の平均レップ数を先に確認できます。", ko: "레벨별 평균 반복 횟수를 먼저 확인할 수 있습니다.", "zh-hant": "可先查看各等級的平均次數。", "zh-hans": "可先查看各等级的平均次数。", es: "Consulta primero las repeticiones medias por nivel.", fr: "Consulte d'abord les répétitions moyennes par niveau.", de: "Prüfe zuerst die durchschnittlichen Wiederholungen je Level." })
+            : localeText({ ja: "レベル別の1RM目安を先に確認できます。", ko: "레벨별 1RM 기준을 먼저 확인할 수 있습니다.", "zh-hant": "可先查看各等級的 1RM 參考。", "zh-hans": "可先查看各等级的 1RM 参考。", es: "Consulta primero la referencia de 1RM por nivel.", fr: "Consulte d'abord la référence 1RM par niveau.", de: "Prüfe zuerst die 1RM-Referenz je Level." })
     );
     decorateTableShell(averageContainer.querySelector(".average-section-table"));
 
@@ -1259,7 +1506,8 @@ function enhanceExercisePage(main) {
         <p class="section-intro">
             ${escapeHtml(localeText({
                 ja: "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。",
-                ko: "같은 카테고리와 다른 부위의 운동을 비교하면서 다음 페이지로 이동할 수 있습니다.",
+                "zh-hant": "可比較同分類與其他部位的訓練動作，再前往下一個頁面。",
+                "zh-hans": "可比较同分类与其他部位的训练动作，再前往下一个页面。",
                 es: "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página.",
                 fr: "Compare des exercices de la même catégorie et d'autres zones avant de passer à la page suivante.",
                 de: "Vergleiche Übungen aus derselben Kategorie und anderen Muskelbereichen, bevor du zur nächsten Vergleichsseite wechselst."
@@ -1272,7 +1520,8 @@ function enhanceExercisePage(main) {
     } else {
         libraryIntro.textContent = localeText({
             ja: "同カテゴリや他部位の種目を見比べながら、次の比較先へ移動できます。",
-            ko: "같은 카테고리와 다른 부위의 운동을 비교하면서 다음 페이지로 이동할 수 있습니다.",
+            "zh-hant": "可比較同分類與其他部位的訓練動作，再前往下一個頁面。",
+            "zh-hans": "可比较同分类与其他部位的训练动作，再前往下一个页面。",
             es: "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página.",
             fr: "Compare des exercices de la même catégorie et d'autres zones avant de passer à la page suivante.",
             de: "Vergleiche Übungen aus derselben Kategorie und anderen Muskelbereichen, bevor du zur nächsten Vergleichsseite wechselst."
@@ -1345,7 +1594,7 @@ function enhanceContentPage(main) {
 
     libraryContainer.classList.add("section-band", "library-band");
     libraryTitle.classList.add("section-title--database");
-    libraryTitle.textContent = libraryTitle.textContent || localeText({ ja: "データベースから続けて探す", ko: "데이터베이스에서 계속 찾기", es: "Seguir explorando la base de datos", fr: "Continuer dans la base de données", de: "In der Datenbank weiterstöbern" });
+    libraryTitle.textContent = libraryTitle.textContent || localeText({ ja: "データベースから続けて探す", ko: "데이터베이스에서 계속 찾기", "zh-hant": "從資料庫繼續探索", "zh-hans": "从数据库继续探索", es: "Seguir explorando la base de datos", fr: "Continuer dans la base de données", de: "In der Datenbank weiterstöbern" });
 
     libraryData.sections.forEach((section) => {
         section.heading = replaceHeadingTag(section.heading, "h3");
@@ -1874,13 +2123,13 @@ function buildExercisePerformanceSnapshot({ averageHighlights, primaryMuscles, s
             </div>
             <div class="performance-signal-grid">
                 ${renderPerformanceSignalCard(
-                    baselineLine?.label || localeText({ ja: "基礎ライン", ko: "입문 기준", es: "Referencia principiante", fr: "Repère débutant", de: "Anfänger-Referenz" }),
+                    baselineLine?.label || localeText({ ja: "基礎ライン", ko: "입문 기준", "zh-hant": "初學者基準", "zh-hans": "初学者基准", es: "Referencia principiante", fr: "Repère débutant", de: "Anfänger-Referenz" }),
                     baselineLine?.primary || t("dataAvailable"),
                     baselineLine?.secondary || t("levelAverageAvailable"),
                     true
                 )}
                 ${renderPerformanceSignalCard(
-                    intermediateLine?.label || localeText({ ja: "中級ライン", ko: "중급 기준", es: "Referencia intermedia", fr: "Repère intermédiaire", de: "Fortgeschrittenen-Referenz" }),
+                    intermediateLine?.label || localeText({ ja: "中級ライン", ko: "중급 기준", "zh-hant": "中級者基準", "zh-hans": "中级者基准", es: "Referencia intermedia", fr: "Repère intermédiaire", de: "Fortgeschrittenen-Referenz" }),
                     intermediateLine?.primary || standardsLabel,
                     intermediateLine?.secondary || t("resultsAvailable")
                 )}
@@ -1890,7 +2139,7 @@ function buildExercisePerformanceSnapshot({ averageHighlights, primaryMuscles, s
                     primaryMuscles.slice(0, 3).join(" / ") || t("primaryMuscleFallback")
                 )}
                 ${renderPerformanceSignalCard(
-                    localeText({ ja: "比較ビュー", ko: "비교 보기", es: "Vista comparativa", fr: "Vue comparative", de: "Vergleichsansicht" }),
+                    localeText({ ja: "比較ビュー", ko: "비교 보기", "zh-hant": "比較視圖", "zh-hans": "比较视图", es: "Vista comparativa", fr: "Vue comparative", de: "Vergleichsansicht" }),
                     formatExerciseCount(sameSectionCount),
                     `${sectionLabel} / ${measurementKind === "reps" ? t("repsComparison") : t("weightComparison")}`
                 )}
@@ -1925,8 +2174,8 @@ function extractAverageHighlights(table) {
     });
 
     return {
-        baseline: parsedRows.find((row) => row.label.includes("基礎") || row.label.includes("입문") || row.label.includes("Principiante") || row.label.includes("Débutant")) || parsedRows[0],
-        intermediate: parsedRows.find((row) => row.label.includes("中級") || row.label.includes("중급") || row.label.includes("Intermedio") || row.label.includes("Intermédiaire")) || parsedRows[Math.min(2, parsedRows.length - 1)]
+        baseline: parsedRows.find((row) => row.label.includes("基礎") || row.label.includes("初學") || row.label.includes("입문") || row.label.includes("Principiante")) || parsedRows[0],
+        intermediate: parsedRows.find((row) => row.label.includes("中級") || row.label.includes("중급") || row.label.includes("Intermedio")) || parsedRows[Math.min(2, parsedRows.length - 1)]
     };
 }
 
@@ -1972,23 +2221,40 @@ function getPrimaryMuscles(muscles, main) {
     }
 
     const primary = muscles.find((item) => {
-        return item.label.includes("主働") || item.label.includes("主動") || item.label.includes("주동") || item.label.toLowerCase().includes("principal");
+        const label = item.label || "";
+        const normalizedLabel = label.toLowerCase();
+        return label.includes("主働")
+            || label.includes("主動")
+            || label.includes("主动")
+            || label.includes("主要")
+            || label.includes("주동")
+            || normalizedLabel.includes("principal")
+            || normalizedLabel.includes("haupt")
+            || normalizedLabel.includes("ziel");
     });
 
     return primary?.items || muscles[0]?.items || [];
 }
 
 function formatExerciseCount(count) {
-    return localeText({ ja: `${count}種目`, ko: `${count}개 운동`, es: `${count} ejercicios`, fr: `${count} exercices`, de: `${count} Übungen` });
+    return localeText({ ja: `${count}種目`, ko: `${count}개 운동`, "zh-hant": `${count} 個動作`, "zh-hans": `${count} 个动作`, es: `${count} ejercicios`, fr: `${count} exercices`, de: `${count} Übungen` });
 }
 
 function formatMuscleCount(count) {
-    return localeText({ ja: `${count}筋群`, ko: `${count}개 근육`, es: `${count} músculos`, fr: `${count} muscles`, de: `${count} Muskeln` });
+    return localeText({ ja: `${count}筋群`, ko: `${count}개 근육`, "zh-hant": `${count} 個肌群`, "zh-hans": `${count} 个肌群`, es: `${count} músculos`, fr: `${count} muscles`, de: `${count} Muskeln` });
 }
 
 function formatStandardsCaption(standardsLabel) {
     if (detectLocale() === "ko") {
         return `${standardsLabel}과 평균 데이터를 같은 흐름에서 확인할 수 있습니다.`;
+    }
+
+    if (detectLocale() === "zh-hant") {
+        return `可在同一流程中查看${standardsLabel}與平均資料。`;
+    }
+
+    if (detectLocale() === "zh-hans") {
+        return `可在同一流程中查看${standardsLabel}与平均数据。`;
     }
 
     if (detectLocale() === "es") {
@@ -2009,6 +2275,14 @@ function formatStandardsCaption(standardsLabel) {
 function formatRelatedHeading(sectionLabel) {
     if (detectLocale() === "ko") {
         return `${sectionLabel} 관련 운동`;
+    }
+
+    if (detectLocale() === "zh-hant") {
+        return `${sectionLabel}相關動作`;
+    }
+
+    if (detectLocale() === "zh-hans") {
+        return `${sectionLabel}相关动作`;
     }
 
     if (detectLocale() === "es") {
@@ -2032,6 +2306,14 @@ function currentPath() {
 
 function detectLocale() {
     const lang = document.documentElement.lang || "";
+    if (lang.toLowerCase().startsWith("zh-hans") || window.location.pathname.split("/").includes("zh-hans")) {
+        return "zh-hans";
+    }
+
+    if (lang.toLowerCase().startsWith("zh-hant") || window.location.pathname.split("/").includes("zh-hant")) {
+        return "zh-hant";
+    }
+
     if (lang.toLowerCase().startsWith("de") || window.location.pathname.split("/").includes("de")) {
         return "de";
     }
@@ -2078,6 +2360,14 @@ function cleanSectionLabel(text) {
         return normalized.replace(/\s*ejercicios?/gi, "").trim();
     }
 
+    if (detectLocale() === "zh-hant") {
+        return normalized.replace(/\s*訓練/g, "").trim();
+    }
+
+    if (detectLocale() === "zh-hans") {
+        return normalized.replace(/\s*训练/g, "").trim();
+    }
+
     if (detectLocale() === "fr") {
         return normalized.replace(/\s*exercices?/gi, "").trim();
     }
@@ -2087,6 +2377,167 @@ function cleanSectionLabel(text) {
     }
 
     return normalized.replace("トレーニング", "").replace("トレ", "");
+}
+
+function localizedRecordValue(values, locale) {
+    if (Object.prototype.hasOwnProperty.call(values, locale)) {
+        return values[locale];
+    }
+
+    if (locale === "zh-hans" && Object.prototype.hasOwnProperty.call(values, "zh-hant")) {
+        return simplifyChineseCopy(values["zh-hant"]);
+    }
+
+    return values.ja ?? "";
+}
+
+function simplifyChineseCopy(value) {
+    if (typeof value === "function") {
+        return (...args) => simplifyChineseCopy(value(...args));
+    }
+
+    if (Array.isArray(value)) {
+        return value.map((item) => simplifyChineseCopy(item));
+    }
+
+    if (value && typeof value === "object") {
+        return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, simplifyChineseCopy(item)]));
+    }
+
+    if (typeof value !== "string") {
+        return value;
+    }
+
+    return [
+        ["查詢", "查询"],
+        ["詢問", "咨询"],
+        ["支援", "支持"],
+        ["切換", "切换"],
+        ["回覆", "回复"],
+        ["身分", "身份"],
+        ["刊載", "刊载"],
+        ["資訊", "信息"],
+        ["使用者", "用户"],
+        ["個人化", "个性化"],
+        ["電子郵件", "电子邮件"],
+        ["伺服器", "服务器"],
+        ["透過", "通过"],
+        ["設定", "设置"],
+        ["重量訓練資料庫", "力量训练数据库"],
+        ["訓練動作", "训练动作"],
+        ["硬舉", "硬拉"],
+        ["抓舉", "抓举"],
+        ["平舉", "平举"],
+        ["彎舉", "弯举"],
+        ["髖鉸鏈", "髋铰链"],
+        ["協調", "协调"],
+        ["主導", "主导"],
+        ["旋轉", "旋转"],
+        ["年齡", "年龄"],
+        ["連續", "连续"],
+        ["三頭肌", "三头肌"],
+        ["推類", "推类"],
+        ["弓箭步", "弓步"],
+        ["資料庫", "数据库"],
+        ["資料", "数据"],
+        ["訓練", "训练"],
+        ["標準", "标准"],
+        ["比較", "比较"],
+        ["動作", "动作"],
+        ["體重", "体重"],
+        ["體幹", "核心"],
+        ["體", "体"],
+        ["頁面", "页面"],
+        ["首頁", "首页"],
+        ["導覽路徑", "导航路径"],
+        ["分類", "分类"],
+        ["總覽", "总览"],
+        ["數量", "数量"],
+        ["數據", "数据"],
+        ["數", "数"],
+        ["目標", "目标"],
+        ["肌群", "肌群"],
+        ["主動肌", "主动肌"],
+        ["輔助肌群", "辅助肌群"],
+        ["穩定肌群", "稳定肌群"],
+        ["相關", "相关"],
+        ["紀錄", "纪录"],
+        ["聯絡我們", "联系我们"],
+        ["隱私權政策", "隐私政策"],
+        ["隱私", "隐私"],
+        ["說明", "说明"],
+        ["等級", "等级"],
+        ["年資", "年限"],
+        ["個", "个"],
+        ["廣", "广"],
+        ["後", "后"],
+        ["頁", "页"],
+        ["與", "与"],
+        ["錄", "录"],
+        ["點", "点"],
+        ["據", "据"],
+        ["語", "语"],
+        ["練", "练"],
+        ["標", "标"],
+        ["準", "准"],
+        ["體", "体"],
+        ["權", "权"],
+        ["說", "说"],
+        ["視", "视"],
+        ["參", "参"],
+        ["註", "注"],
+        ["別", "别"],
+        ["規", "规"],
+        ["飛", "飞"],
+        ["級", "级"],
+        ["紀", "纪"],
+        ["錄", "录"],
+        ["資", "资"],
+        ["詢", "询"],
+        ["換", "换"],
+        ["載", "载"],
+        ["設", "设"],
+        ["無", "无"],
+        ["覆", "复"],
+        ["類", "类"],
+        ["齡", "龄"],
+        ["連", "连"],
+        ["舉", "举"],
+        ["協", "协"],
+        ["調", "调"],
+        ["髖", "髋"],
+        ["鉸", "铰"],
+        ["鏈", "链"],
+        ["導", "导"],
+        ["轉", "转"],
+        ["頭", "头"],
+        ["彎", "弯"],
+        ["臥", "卧"],
+        ["鈴", "铃"],
+        ["槓", "杠"],
+        ["繩", "绳"],
+        ["纜", "缆"],
+        ["機", "机"],
+        ["區", "区"],
+        ["塊", "块"],
+        ["學", "学"],
+        ["從", "从"],
+        ["啟", "启"],
+        ["雙", "双"],
+        ["單", "单"],
+        ["過", "过"],
+        ["側", "侧"],
+        ["壓", "压"],
+        ["輔", "辅"],
+        ["穩", "稳"],
+        ["聯", "联"],
+        ["關", "关"],
+        ["續", "续"],
+        ["選", "选"],
+        ["橫", "横"],
+        ["開", "开"],
+        ["臺", "台"]
+    ].reduce((next, [from, to]) => next.replaceAll(from, to), value);
 }
 
 function splitList(text) {

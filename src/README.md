@@ -14,7 +14,7 @@
 - `pages/*.json`
   Source content for shared static pages like the homepage, contact page, and privacy policy.
 - `locales.json`
-  Locale routing and SEO configuration. Japanese is generated at `/`; Korean, Spanish, and French are generated under `/ko/`, `/es/`, and `/fr/`.
+  Locale routing and SEO configuration. Japanese is generated at `/`; Korean, Traditional Chinese, Simplified Chinese, Spanish, and French are generated under `/ko/`, `/zh-hant/`, `/zh-hans/`, `/es/`, and `/fr/`.
 
 Build flow:
 
@@ -34,7 +34,7 @@ Bootstrap / re-extract source from the current generated HTML:
 node scripts/extract-exercise-source.mjs
 ```
 
-The generated root HTML files and locale HTML files under `/ko/`, `/es/`, and `/fr/` are build outputs. Edit `src/` instead of editing the generated exercise pages directly.
+The generated root HTML files and locale HTML files under `/ko/`, `/zh-hant/`, `/zh-hans/`, `/es/`, and `/fr/` are build outputs. Edit `src/` instead of editing the generated exercise pages directly.
 
 Today this covers the homepage, contact page, privacy policy, and all exercise pages. `Shift2ics.html` is still hand-maintained because it is a standalone PDF tool with its own inline runtime.
 
@@ -43,4 +43,5 @@ Localization notes:
 - Japanese exercise numeric data, standards, and section structure are canonical.
 - Localized pages reuse the same filenames and slugs under their locale directory.
 - Localized copy should use natural local gym terminology and must not visibly fall back to Japanese.
+- Simplified Chinese copy must use Simplified Chinese terminology and must not visibly fall back to Japanese, Traditional Chinese, or old Chinese subdomain URLs.
 - SEO normalization owns canonical, hreflang, OG/Twitter tags, footer language URLs, and sitemap entries for generated locales.

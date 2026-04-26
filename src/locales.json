@@ -26,6 +26,30 @@
       "generated": true
     },
     {
+      "code": "zh-hant",
+      "routePrefix": "/zh-hant/",
+      "outputDir": "zh-hant",
+      "displayName": "繁體中文",
+      "hreflang": "zh-Hant",
+      "dir": "ltr",
+      "defaultUnit": "kg",
+      "origin": "https://shibamuscle.com",
+      "ogLocale": "zh_TW",
+      "generated": true
+    },
+    {
+      "code": "zh-hans",
+      "routePrefix": "/zh-hans/",
+      "outputDir": "zh-hans",
+      "displayName": "简体中文",
+      "hreflang": "zh-Hans",
+      "dir": "ltr",
+      "defaultUnit": "kg",
+      "origin": "https://shibamuscle.com",
+      "ogLocale": "zh_CN",
+      "generated": true
+    },
+    {
       "code": "es",
       "routePrefix": "/es/",
       "outputDir": "es",
