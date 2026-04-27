@@ -3,7 +3,41 @@
   "kind": "home",
   "title": "Shiba Muscle | ワークアウトデータベース",
   "description": "部位別・種目別に平均重量、基準重量、鍛えられる筋肉を探せるShiba Muscleのトレーニングデータベースです。kgとlbの切り替えにも対応しています。",
+  "heroHeading": "ワークアウトデータを、迷わず比較する",
   "heading": "ワークアウトを見つける",
+  "intro": [
+    "Shiba Muscleは、トレーニング種目ごとの平均重量、基準重量、主働筋をまとめた比較データベースです。ベンチプレス、スクワット、デッドリフトのような定番種目から、ダンベル種目、自重種目、ケーブル種目まで、体重別・年齢別の目安をすばやく確認できます。",
+    "数値はあくまでトレーニング計画を立てるための参考値です。無理な重量設定を避け、自分のフォーム、可動域、経験年数、体調に合わせて活用できるよう、各ページに筋肉情報と表の見方を併記しています。"
+  ],
+  "overview": {
+    "eyebrow": "Workout data",
+    "sectionEyebrow": "Data guide",
+    "title": "比較しやすくするための編集方針",
+    "copy": "サイトの目的、独自の整理方針、数値の使い方が伝わるよう、主要な使い方を最初にまとめています。",
+    "items": [
+      {
+        "eyebrow": "Purpose",
+        "heading": "種目選びの入口を作る",
+        "paragraphs": [
+          "部位、器具、主働筋を手がかりに、似た種目同士を比較しやすい構成にしています。"
+        ]
+      },
+      {
+        "eyebrow": "Data",
+        "heading": "平均値と基準表を分けて表示",
+        "paragraphs": [
+          "平均重量だけで判断せず、体重別・年齢別の基準も合わせて見られるようにしています。"
+        ]
+      },
+      {
+        "eyebrow": "Safety",
+        "heading": "医療・競技指導ではなく参考情報",
+        "paragraphs": [
+          "痛みや既往歴がある場合は専門家に相談し、数値よりフォームと安全性を優先する前提で掲載しています。"
+        ]
+      }
+    ]
+  },
   "unit": "kg",
   "stylesheets": [
     "styles.css"
@@ -12,37 +46,80 @@
     "ko": {
       "title": "Shiba Muscle | 운동 데이터베이스",
       "description": "부위별, 운동별로 평균 중량, 기준 중량, 자극되는 근육을 빠르게 찾아볼 수 있는 Shiba Muscle 운동 데이터베이스입니다. kg와 lb 단위 전환도 지원합니다.",
-      "heading": "운동 찾기"
-    },
-    "zh-hant": {
-      "title": "Shiba Muscle | 重量訓練資料庫",
-      "description": "Shiba Muscle 的重量訓練資料庫，可依部位與動作查詢平均重量、力量標準與目標肌群，並支援 kg 與 lb 切換。",
-      "heading": "尋找訓練動作"
-    },
-    "zh-hans": {
-      "title": "Shiba Muscle | 力量训练数据库",
-      "description": "Shiba Muscle 的力量训练数据库，可按部位和动作查询平均重量、力量标准与目标肌群，并支持 kg 与 lb 切换。",
-      "heading": "查找训练动作"
+      "heroHeading": "운동 데이터를 쉽게 비교하기",
+      "heading": "운동 찾기",
+      "intro": [
+        "Shiba Muscle은 운동별 평균 중량, 기준 중량, 주동근을 정리한 트레이닝 데이터베이스입니다. 벤치프레스, 스쿼트, 데드리프트 같은 대표 운동부터 덤벨, 맨몸, 케이블 운동까지 체중별, 나이별 기준을 빠르게 확인할 수 있습니다.",
+        "수치는 운동 계획을 세우기 위한 참고값입니다. 무리한 중량 설정을 피하고 자세, 가동 범위, 운동 경력, 컨디션에 맞춰 활용할 수 있도록 각 페이지에 근육 정보와 표 읽는 법을 함께 제공합니다."
+      ],
+      "overview": {
+        "eyebrow": "Workout data",
+        "sectionEyebrow": "Data guide",
+        "title": "비교하기 쉽게 정리하는 기준",
+        "copy": "사이트의 목적, 독자적인 구성, 운영 방침이 첫 화면에서 드러나도록 핵심 사용법을 먼저 안내합니다.",
+        "items": [
+          {
+            "eyebrow": "Purpose",
+            "heading": "운동 선택의 출발점",
+            "paragraphs": [
+              "부위, 장비, 주동근을 기준으로 비슷한 운동을 자연스럽게 비교할 수 있게 구성했습니다."
+            ]
+          },
+          {
+            "eyebrow": "Data",
+            "heading": "평균과 기준표를 나누어 표시",
+            "paragraphs": [
+              "평균 중량만 보지 않고 체중별, 나이별 기준도 함께 확인할 수 있습니다."
+            ]
+          },
+          {
+            "eyebrow": "Safety",
+            "heading": "의학적 조언이 아닌 참고 정보",
+            "paragraphs": [
+              "통증이나 병력이 있다면 전문가와 상담하고, 숫자보다 자세와 안전을 우선하도록 안내합니다."
+            ]
+          }
+        ]
+      }
     },
     "es": {
       "title": "Shiba Muscle | Base de datos de ejercicios",
       "description": "Base de datos de entrenamiento de Shiba Muscle para consultar pesos medios, estándares de fuerza y músculos trabajados por zona y ejercicio. Incluye cambio entre kg y lb.",
-      "heading": "Encuentra ejercicios"
-    },
-    "de": {
-      "title": "Shiba Muscle | Übungsdatenbank",
-      "description": "Trainingsdatenbank von Shiba Muscle zum Nachschlagen von Durchschnittsgewichten, Kraftstandards und Zielmuskulatur nach Muskelbereich und Übung. Inklusive Wechsel zwischen kg und lb.",
-      "heading": "Übungen finden"
-    },
-    "fr": {
-      "title": "Shiba Muscle | Base de données de musculation",
-      "description": "Base de données Shiba Muscle pour consulter les charges moyennes, les standards de force et les muscles ciblés par groupe musculaire et par exercice. Compatible kg et lb.",
-      "heading": "Trouver un exercice"
-    },
-    "de": {
-      "title": "Shiba Muscle | Übungsdatenbank",
-      "description": "Trainingsdatenbank von Shiba Muscle zum Nachschlagen von Durchschnittsgewichten, Kraftstandards und Zielmuskulatur nach Muskelbereich und Übung. Inklusive Wechsel zwischen kg und lb.",
-      "heading": "Übungen finden"
+      "heroHeading": "Compara datos de entrenamiento sin perderte",
+      "heading": "Encuentra ejercicios",
+      "intro": [
+        "Shiba Muscle es una base de datos para comparar peso medio, estándares de fuerza y músculos principales por ejercicio. Incluye movimientos clásicos como press de banca, sentadilla y peso muerto, además de ejercicios con mancuernas, peso corporal y cable.",
+        "Los valores son referencias para planificar el entrenamiento, no objetivos obligatorios. Cada página combina tablas por peso corporal y edad con información muscular para que puedas priorizar técnica, rango de movimiento y seguridad."
+      ],
+      "overview": {
+        "eyebrow": "Workout data",
+        "sectionEyebrow": "Data guide",
+        "title": "Criterios editoriales para comparar mejor",
+        "copy": "La portada explica el propósito del sitio, su valor propio y cómo se debe usar la información antes de navegar por todas las tablas.",
+        "items": [
+          {
+            "eyebrow": "Purpose",
+            "heading": "Crear una entrada clara por ejercicio",
+            "paragraphs": [
+              "Organizamos las páginas por zona, equipo y músculos principales para comparar ejercicios parecidos con menos fricción."
+            ]
+          },
+          {
+            "eyebrow": "Data",
+            "heading": "Separar media y estándares",
+            "paragraphs": [
+              "El peso medio se muestra junto a tablas por peso corporal y edad para dar más contexto."
+            ]
+          },
+          {
+            "eyebrow": "Safety",
+            "heading": "Referencia, no consejo médico",
+            "paragraphs": [
+              "Ante dolor o antecedentes médicos, recomendamos consultar a un profesional y priorizar técnica y seguridad."
+            ]
+          }
+        ]
+      }
     }
   }
 }

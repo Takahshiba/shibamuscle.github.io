@@ -1,0 +1,160 @@
+{
+  "file": "methodology.html",
+  "kind": "content",
+  "title": "データの見方 | Shiba Muscle",
+  "description": "Shiba Muscleに掲載している平均重量、基準重量、筋肉情報、単位切替の見方を説明します。",
+  "heading": "データの見方",
+  "shellClass": "policy-shell",
+  "stylesheets": [
+    "sanitize.css",
+    "styles.css",
+    "privacy-policy.css"
+  ],
+  "intro": [
+    "Shiba Muscleの数値は、トレーニング計画や種目比較のための目安です。重量やレップ数だけで優劣を決めるのではなく、フォーム、可動域、経験年数、体調とあわせて確認してください。"
+  ],
+  "sections": [
+    {
+      "className": "content-card policy-section",
+      "heading": "平均重量と平均レップ数",
+      "paragraphs": [
+        "重量種目では平均重量を、主に自重や反復回数で比較しやすい種目では平均レップ数を表示しています。どちらも、個人差をならした参考値として扱ってください。",
+        "kgページとlbページは同じ種目の単位違いです。日本語ページではkgを初期単位にしています。"
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "基準表のレベル",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "基礎: フォームを身につけ、継続を始めた段階の目安",
+            "初級: 半年以上、継続的にトレーニングしている段階の目安",
+            "中級: 2年以上の継続経験がある人の目安",
+            "上級: 5年以上、計画的に鍛えている人の目安",
+            "プロ: その種目を専門的に鍛えている高い水準の目安"
+          ]
+        }
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "安全に使うために",
+      "paragraphs": [
+        "表の数値に届かせるために、痛みを我慢したり、フォームを崩して重量を上げたりしないでください。特に高重量種目では補助者、セーフティバー、適切なウォームアップを優先してください。",
+        "掲載情報は一般的なフィットネス情報です。けが、痛み、病歴、妊娠中の運動、リハビリに関する判断は、医師、理学療法士、資格を持つトレーナーなどの専門家に相談してください。"
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "更新と品質管理",
+      "paragraphs": [
+        "ページ生成時には、タイトル、説明文、H1、canonical、hreflang、サイトマップ、内部リンク、ローカライズの欠落をスクリプトで確認しています。",
+        "誤字、リンク切れ、数値の不自然さ、翻訳の違和感に気づいた場合は、お問い合わせページからご連絡ください。"
+      ]
+    }
+  ],
+  "locales": {
+    "ko": {
+      "title": "데이터 읽는 법 | Shiba Muscle",
+      "description": "Shiba Muscle에 표시되는 평균 중량, 기준 중량, 근육 정보, 단위 전환을 읽는 방법을 설명합니다.",
+      "heading": "데이터 읽는 법",
+      "intro": [
+        "Shiba Muscle의 수치는 운동 계획과 운동 비교를 위한 참고값입니다. 중량이나 반복 횟수만으로 판단하지 말고 자세, 가동 범위, 운동 경력, 컨디션과 함께 확인해 주세요."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "평균 중량과 평균 반복 횟수",
+          "paragraphs": [
+            "중량 운동은 평균 중량을, 맨몸 운동처럼 반복 횟수로 비교하기 쉬운 운동은 평균 반복 횟수를 표시합니다. 두 값 모두 개인차를 고려한 참고값으로 봐 주세요.",
+            "kg 페이지와 lb 페이지는 같은 운동의 단위만 다른 페이지입니다. 한국어 페이지의 기본 단위는 kg입니다."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "기준표 레벨",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "기초: 자세를 익히고 꾸준히 시작한 단계의 기준",
+                "초급: 6개월 이상 지속적으로 운동한 단계의 기준",
+                "중급: 2년 이상 운동 경험이 있는 사람의 기준",
+                "상급: 5년 이상 계획적으로 훈련한 사람의 기준",
+                "프로: 해당 운동을 전문적으로 훈련하는 높은 수준의 기준"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "안전하게 활용하기",
+          "paragraphs": [
+            "표의 수치에 맞추기 위해 통증을 참고 운동하거나 자세를 무너뜨려 중량을 올리지 마세요. 고중량 운동에서는 보조자, 세이프티 바, 충분한 워밍업을 우선해 주세요.",
+            "이 사이트의 정보는 일반적인 피트니스 참고 정보입니다. 부상, 통증, 병력, 임신 중 운동, 재활과 관련된 판단은 의사, 물리치료사, 자격을 갖춘 트레이너와 상담해 주세요."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "업데이트와 품질 관리",
+          "paragraphs": [
+            "페이지 생성 시 제목, 설명문, H1, canonical, hreflang, 사이트맵, 내부 링크, 번역 누락을 스크립트로 확인합니다.",
+            "오타, 깨진 링크, 부자연스러운 수치나 번역을 발견하면 문의 페이지로 알려 주세요."
+          ]
+        }
+      ]
+    },
+    "es": {
+      "title": "Cómo leer los datos | Shiba Muscle",
+      "description": "Explicación de los pesos medios, estándares de fuerza, músculos trabajados y cambio de unidades en Shiba Muscle.",
+      "heading": "Cómo leer los datos",
+      "intro": [
+        "Los valores de Shiba Muscle son referencias para planificar entrenamientos y comparar ejercicios. No conviene juzgar el progreso solo por peso o repeticiones; considera también técnica, rango de movimiento, experiencia y estado físico."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Peso medio y repeticiones medias",
+          "paragraphs": [
+            "En ejercicios de carga mostramos peso medio. En ejercicios donde tiene más sentido comparar repeticiones, como muchos movimientos de peso corporal, mostramos repeticiones medias. Ambos valores deben leerse como referencias con variación individual.",
+            "Las páginas kg y lb muestran el mismo ejercicio con distinta unidad. La unidad predeterminada del sitio es kg."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Niveles de las tablas",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Base: referencia para quien está aprendiendo técnica y empezando a entrenar con constancia",
+                "Principiante: referencia tras al menos seis meses de entrenamiento regular",
+                "Intermedio: referencia para personas con más de dos años de práctica",
+                "Avanzado: referencia para quienes entrenan de forma planificada durante años",
+                "Pro: referencia alta para quienes especializan ese ejercicio"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Uso seguro",
+          "paragraphs": [
+            "No persigas una cifra de la tabla si aparece dolor o si la técnica se rompe. En ejercicios pesados, prioriza calentamiento, seguridad y ayuda cuando sea necesario.",
+            "La información publicada es contenido general de fitness. Para lesiones, dolor, antecedentes médicos, embarazo o rehabilitación, consulta con profesionales de salud o entrenamiento cualificados."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Actualización y control de calidad",
+          "paragraphs": [
+            "Durante la generación del sitio comprobamos títulos, descripciones, H1, canonical, hreflang, sitemap, enlaces internos y posibles ausencias de localización.",
+            "Si detectas errores, enlaces rotos, datos extraños o traducciones poco naturales, puedes escribirnos desde la página de contacto."
+          ]
+        }
+      ]
+    }
+  }
+}

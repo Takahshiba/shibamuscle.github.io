@@ -26,30 +26,6 @@
       "generated": true
     },
     {
-      "code": "zh-hant",
-      "routePrefix": "/zh-hant/",
-      "outputDir": "zh-hant",
-      "displayName": "繁體中文",
-      "hreflang": "zh-Hant",
-      "dir": "ltr",
-      "defaultUnit": "kg",
-      "origin": "https://shibamuscle.com",
-      "ogLocale": "zh_TW",
-      "generated": true
-    },
-    {
-      "code": "zh-hans",
-      "routePrefix": "/zh-hans/",
-      "outputDir": "zh-hans",
-      "displayName": "简体中文",
-      "hreflang": "zh-Hans",
-      "dir": "ltr",
-      "defaultUnit": "kg",
-      "origin": "https://shibamuscle.com",
-      "ogLocale": "zh_CN",
-      "generated": true
-    },
-    {
       "code": "es",
       "routePrefix": "/es/",
       "outputDir": "es",
@@ -60,42 +36,6 @@
       "origin": "https://shibamuscle.com",
       "ogLocale": "es_ES",
       "generated": true
-    },
-    {
-      "code": "fr",
-      "routePrefix": "/fr/",
-      "outputDir": "fr",
-      "displayName": "Français",
-      "hreflang": "fr",
-      "dir": "ltr",
-      "defaultUnit": "kg",
-      "origin": "https://shibamuscle.com",
-      "ogLocale": "fr_FR",
-      "generated": true
-    },
-    {
-      "code": "de",
-      "routePrefix": "/de/",
-      "outputDir": "de",
-      "displayName": "Deutsch",
-      "hreflang": "de",
-      "dir": "ltr",
-      "defaultUnit": "kg",
-      "origin": "https://shibamuscle.com",
-      "ogLocale": "de_DE",
-      "generated": true
-    },
-    {
-      "code": "en",
-      "routePrefix": "/",
-      "outputDir": "",
-      "displayName": "English",
-      "hreflang": "en",
-      "dir": "ltr",
-      "defaultUnit": "kg",
-      "origin": "https://en.shibamuscle.com",
-      "ogLocale": "en_US",
-      "generated": false
     }
   ]
 }

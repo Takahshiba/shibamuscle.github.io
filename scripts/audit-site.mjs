@@ -7,7 +7,6 @@ import {
     JAPANESE_LEFTOVER_PATTERNS,
     absoluteUrlForFile,
     getGeneratedLocales,
-    getLocaleConfigs,
     getLocaleConfig,
     stripIntentionalLanguageSwitchText
 } from "./localization.mjs";
@@ -19,31 +18,45 @@ const availableHtml = new Set(htmlEntries.map((entry) => entry.relativePath));
 const sitemap = readFileSync(join(ROOT, "sitemap.xml"), "utf8");
 const sitemapUrls = new Set(Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)).map((match) => match[1]));
 const errors = [];
-const auditLocales = getLocaleConfigs();
 
 for (const entry of htmlEntries) {
     const html = readFileSync(entry.path, "utf8");
     const isExercisePage = /^(kg|lb)_/.test(entry.file);
+    const isSecondaryUnitPage = entry.file.startsWith("lb_");
     const isHomePage = entry.file === "index.html";
     const isToolPage = entry.file === "Shift2ics.html";
     const localeConfig = getLocaleConfig(entry.locale);
-    const canonicalUrl = absoluteUrlForFile(entry.file, entry.locale);
+    const canonicalFile = isSecondaryUnitPage ? entry.file.replace(/^lb_/, "kg_") : entry.file;
+    const canonicalUrl = absoluteUrlForFile(canonicalFile, entry.locale);
+    const pageUrl = absoluteUrlForFile(entry.file, entry.locale);
 
     assert(!html.includes("precaonnect"), `${entry.relativePath}: precaonnect typo is still present`);
     assert(!html.includes("G-ZPM6B2KLSV"), `${entry.relativePath}: legacy GA id is still present`);
     assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${entry.relativePath}: current GA script is missing`);
     assert(html.includes(`<html lang="${localeConfig.hreflang}"`), `${entry.relativePath}: html lang is incorrect`);
-    assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === auditLocales.length + 1, `${entry.relativePath}: hreflang set is incomplete`);
+    const expectedAlternates = isToolPage || isSecondaryUnitPage ? 0 : getGeneratedLocales().length + 1;
+    assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === expectedAlternates, `${entry.relativePath}: hreflang set is incomplete`);
     assert(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${entry.relativePath}: canonical is missing or malformed`);
     assert(/<title>[^<]+<\/title>/.test(html), `${entry.relativePath}: title is missing`);
     assert(/<meta name="description" content="[^"]+">/.test(html), `${entry.relativePath}: meta description is missing`);
     assert(/<h1[\s>]/i.test(html) || isToolPage, `${entry.relativePath}: H1 is missing`);
-    assert(sitemapUrls.has(canonicalUrl), `${entry.relativePath}: sitemap is missing ${canonicalUrl}`);
+    if (!isToolPage && !isSecondaryUnitPage) {
+        assert(sitemapUrls.has(canonicalUrl), `${entry.relativePath}: sitemap is missing ${canonicalUrl}`);
+    } else if (isSecondaryUnitPage) {
+        assert(!sitemapUrls.has(pageUrl), `${entry.relativePath}: secondary lb page should not be in sitemap`);
+        assert(html.includes('<meta name="robots" content="noindex,follow,noarchive">'), `${entry.relativePath}: secondary lb page should be noindex`);
+        assert(!html.includes("pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"), `${entry.relativePath}: secondary lb page should not load AdSense script`);
+        assert(!html.includes("ins class=\"adsbygoogle\""), `${entry.relativePath}: secondary lb page should not render ad slots`);
+    } else {
+        assert(!sitemapUrls.has(canonicalUrl), `${entry.relativePath}: noindex tool page should not be in sitemap`);
+    }
 
-    auditLocales.forEach((locale) => {
-        assert(html.includes(`<link rel="alternate" hreflang="${locale.hreflang}" href="${absoluteUrlForFile(entry.file, locale.code)}">`), `${entry.relativePath}: ${locale.code} hreflang target is incorrect`);
+    if (!isToolPage && !isSecondaryUnitPage) getGeneratedLocales().forEach((locale) => {
+        assert(html.includes(`<link rel="alternate" hreflang="${locale.hreflang}" href="${absoluteUrlForFile(canonicalFile, locale.code)}">`), `${entry.relativePath}: ${locale.code} hreflang target is incorrect`);
     });
-    assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(entry.file, "ja")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
+    if (!isToolPage && !isSecondaryUnitPage) {
+        assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "ja")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
+    }
 
     auditInternalLinks(entry, html);
 
@@ -51,24 +64,8 @@ for (const entry of htmlEntries) {
         auditKoreanHtml(entry, html);
     }
 
-    if (entry.locale === "zh-hant") {
-        auditTraditionalChineseHtml(entry, html);
-    }
-
-    if (entry.locale === "zh-hans") {
-        auditSimplifiedChineseHtml(entry, html);
-    }
-
     if (entry.locale === "es") {
         auditSpanishHtml(entry, html);
-    }
-
-    if (entry.locale === "fr") {
-        auditFrenchHtml(entry, html);
-    }
-
-    if (entry.locale === "de") {
-        auditGermanHtml(entry, html);
     }
 
     if (entry.locale !== "ja") {
@@ -84,16 +81,8 @@ for (const entry of htmlEntries) {
 
         if (entry.locale === "ko") {
             assert(/<meta name="description" content="[^"]+(kg 기준표|lb 기준표)[^"]*주동근[^"]+">/.test(html), `${entry.relativePath}: Korean exercise description is not specific enough`);
-        } else if (entry.locale === "zh-hant") {
-            assert(/<meta name="description" content="[^"]+(kg 表|lb 表)[^"]*(主要肌群|相關訓練動作)[^"]+">/.test(html), `${entry.relativePath}: Traditional Chinese exercise description is not specific enough`);
-        } else if (entry.locale === "zh-hans") {
-            assert(/<meta name="description" content="[^"]+(kg 表|lb 表)[^"]*(主要肌群|相关训练动作)[^"]+">/.test(html), `${entry.relativePath}: Simplified Chinese exercise description is not specific enough`);
         } else if (entry.locale === "es") {
             assert(/<meta name="description" content="[^"]+(tabla en kg|tabla en lb)[^"]*(músculos principales|estándares)[^"]+">/i.test(html), `${entry.relativePath}: Spanish exercise description is not specific enough`);
-        } else if (entry.locale === "fr") {
-            assert(/<meta name="description" content="[^"]+(tableau en kg|tableau en lb)[^"]*(muscles principaux|standards)[^"]+">/i.test(html), `${entry.relativePath}: French exercise description is not specific enough`);
-        } else if (entry.locale === "de") {
-            assert(/<meta name="description" content="[^"]+(kg Tabelle|lb Tabelle)[^"]*(Zielmuskulatur|Kraftstandards|Wiederholungsstandards)[^"]+">/i.test(html), `${entry.relativePath}: German exercise description is not specific enough`);
         } else {
             assert(/<meta name="description" content="[^"]+(kg表|lb表)[^"]*(主働筋は|主な筋肉は)[^"]+">/.test(html), `${entry.relativePath}: exercise description is not specific enough`);
         }
@@ -153,42 +142,6 @@ function auditKoreanHtml(entry, html) {
     assert(!/中文/.test(normalized), `${entry.relativePath}: Chinese language text remains outside the language switch`);
 }
 
-function auditTraditionalChineseHtml(entry, html) {
-    const normalized = stripIntentionalLanguageSwitchText(html)
-        .replace(/<!--[\s\S]*?-->/g, "")
-        .replace(/<script[\s\S]*?<\/script>/gi, "");
-    const japaneseOnlyPatterns = [
-        /[\u3040-\u30ff]/,
-        /ワークアウト|テーブル|カテゴリ|サポート|お問い合わせ|プライバシーポリシー|その他のワークアウト|もっと見る|正しいフォーム|継続|当該メニュー|主働筋|副働筋|安定筋|種目|公式記録|世界記録|基準レップ数|平均レップ数|レップ数|年齢別|体重別|基準重量|男性・|女性・/
-    ];
-
-    japaneseOnlyPatterns.forEach((pattern) => {
-        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in Traditional Chinese output`);
-    });
-
-    assert(!/[体级练训数据关门类联络隐项标准录图则国]/.test(normalized), `${entry.relativePath}: Simplified Chinese characters appear in Traditional Chinese output`);
-    assert(!/cn\.shibamuscle\.com/.test(html), `${entry.relativePath}: legacy Chinese subdomain remains`);
-}
-
-function auditSimplifiedChineseHtml(entry, html) {
-    const normalized = stripIntentionalLanguageSwitchText(html)
-        .replace(/<!--[\s\S]*?-->/g, "")
-        .replace(/<script[\s\S]*?<\/script>/gi, "");
-    const japaneseOnlyPatterns = [
-        /[\u3040-\u30ff]/,
-        /ワークアウト|テーブル|カテゴリ|サポート|お問い合わせ|プライバシーポリシー|その他のワークアウト|もっと見る|正しいフォーム|継続|当該メニュー|主働筋|副働筋|安定筋|種目|公式記録|基準レップ数|平均レップ数|レップ数|男性・|女性・/
-    ];
-
-    japaneseOnlyPatterns.forEach((pattern) => {
-        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in Simplified Chinese output`);
-    });
-
-    assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in Simplified Chinese output`);
-    assert(!/[體國與為個動練訓數據資標準頁語關聯絡隱項錄圖則廣導覽徑髖鉸鏈協調穩輔後內轉義寫發復聲權條務變經許擾損礙營運責會盡維誤產瀏覽資訊趨勢網顯應確認齡連結臉藥拋懸圓鎖腳較庫選擇繼續歸類進階級學從開啟統總簡雙單區塊裡這舉臥鈴槓繩纜機彎鍵頸歐過頭側滾輪嚴澤茲醫麼視參註別規飛點詢換載設無覆]/.test(normalized), `${entry.relativePath}: Traditional Chinese characters appear in Simplified Chinese output`);
-    assert(!/查詢|詢問|支援|切換|回覆|身分|刊載|資訊|使用者|個人化|電子郵件|伺服器|透過|設定/.test(normalized), `${entry.relativePath}: Traditional Chinese phrasing appears in Simplified Chinese output`);
-    assert(!/cn\.shibamuscle\.com/.test(html), `${entry.relativePath}: legacy Chinese subdomain remains`);
-}
-
 function auditSpanishHtml(entry, html) {
     const normalized = stripIntentionalLanguageSwitchText(html)
         .replace(/<!--[\s\S]*?-->/g, "")
@@ -199,32 +152,6 @@ function auditSpanishHtml(entry, html) {
     });
 
     assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in Spanish output`);
-}
-
-function auditFrenchHtml(entry, html) {
-    const normalized = stripIntentionalLanguageSwitchText(html)
-        .replace(/<!--[\s\S]*?-->/g, "")
-        .replace(/<script[\s\S]*?<\/script>/gi, "");
-
-    JAPANESE_LEFTOVER_PATTERNS.forEach((pattern) => {
-        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in French output`);
-    });
-
-    assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in French output`);
-}
-
-
-function auditGermanHtml(entry, html) {
-    const normalized = stripIntentionalLanguageSwitchText(html)
-        .replace(/<!--[\s\S]*?-->/g, "")
-        .replace(/<script[\s\S]*?<\/script>/gi, "");
-
-    JAPANESE_LEFTOVER_PATTERNS.forEach((pattern) => {
-        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in German output`);
-    });
-
-    assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in German output`);
-    assert(!/kr\.shibamuscle\.com|cn\.shibamuscle\.com|de\.shibamuscle\.com/.test(html), `${entry.relativePath}: legacy locale subdomain remains`);
 }
 
 function auditSectionDrift(entry, localizedHtml) {

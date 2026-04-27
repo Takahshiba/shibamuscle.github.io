@@ -1,0 +1,133 @@
+{
+  "file": "about.html",
+  "kind": "content",
+  "title": "Shiba Muscleについて | Shiba Muscle",
+  "description": "Shiba Muscleの目的、掲載データの使い方、運営方針をまとめたページです。",
+  "heading": "Shiba Muscleについて",
+  "shellClass": "policy-shell",
+  "stylesheets": [
+    "sanitize.css",
+    "styles.css",
+    "privacy-policy.css"
+  ],
+  "intro": [
+    "Shiba Muscleは、筋力トレーニングの種目ごとに平均重量、基準重量、鍛えられる筋肉を整理し、比較しやすくするためのワークアウトデータベースです。"
+  ],
+  "sections": [
+    {
+      "className": "content-card policy-section",
+      "heading": "サイトの目的",
+      "paragraphs": [
+        "トレーニングでは、同じ「胸」「背中」「脚」の種目でも、使う器具、主働筋、扱う重量の傾向が大きく異なります。Shiba Muscleでは、種目ごとのデータを部位別に並べ、目的に合うワークアウトを探しやすくしています。",
+        "平均重量や基準表は、現在地を大まかに把握したり、次に比較したい種目を見つけたりするための参考情報です。競技成績や医療的な判断を保証するものではありません。"
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "掲載している情報",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "種目ごとの平均重量または平均レップ数",
+            "男性・女性別の体重別、年齢別の基準表",
+            "主働筋、副働筋、安定筋などの筋肉情報",
+            "同じ部位や似た目的で比較しやすい関連種目"
+          ]
+        }
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "運営方針",
+      "paragraphs": [
+        "ページの構成、タイトル、説明文、言語リンク、サイトマップは、利用者が必要な情報へ迷わず移動できることを優先して整備しています。",
+        "問い合わせ、プライバシー、データの見方を明示し、広告やアクセス解析を利用する場合も、利用者が情報の扱いを確認できる導線を用意しています。"
+      ]
+    }
+  ],
+  "locales": {
+    "ko": {
+      "title": "Shiba Muscle 소개 | Shiba Muscle",
+      "description": "Shiba Muscle의 목적, 데이터 활용법, 운영 방침을 정리한 페이지입니다.",
+      "heading": "Shiba Muscle 소개",
+      "intro": [
+        "Shiba Muscle은 운동별 평균 중량, 기준 중량, 자극되는 근육을 정리해 비교하기 쉽게 만든 운동 데이터베이스입니다."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "사이트 목적",
+          "paragraphs": [
+            "같은 가슴, 등, 하체 운동이라도 장비, 주동근, 중량 경향은 크게 다릅니다. Shiba Muscle은 운동 데이터를 부위별로 정리해 목적에 맞는 운동을 찾기 쉽게 합니다.",
+            "평균 중량과 기준표는 현재 수준을 대략 파악하고 다음에 비교할 운동을 찾기 위한 참고 정보입니다. 경기 기록이나 의학적 판단을 보증하지 않습니다."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "제공하는 정보",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "운동별 평균 중량 또는 평균 반복 횟수",
+                "남성, 여성별 체중별 및 나이별 기준표",
+                "주동근, 보조근, 안정근 등 근육 정보",
+                "같은 부위나 비슷한 목적의 관련 운동"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "운영 방침",
+          "paragraphs": [
+            "페이지 구조, 제목, 설명문, 언어 링크, 사이트맵은 이용자가 필요한 정보로 쉽게 이동할 수 있도록 관리합니다.",
+            "문의, 개인정보 처리방침, 데이터 읽는 법을 명확히 제공하고, 광고나 접속 분석을 사용할 때도 정보 처리 방식을 확인할 수 있게 합니다."
+          ]
+        }
+      ]
+    },
+    "es": {
+      "title": "Acerca de Shiba Muscle | Shiba Muscle",
+      "description": "Página sobre el propósito de Shiba Muscle, cómo usar sus datos y sus criterios de operación.",
+      "heading": "Acerca de Shiba Muscle",
+      "intro": [
+        "Shiba Muscle es una base de datos de entrenamiento que organiza peso medio, estándares de fuerza y músculos trabajados por ejercicio para facilitar la comparación."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Propósito del sitio",
+          "paragraphs": [
+            "Incluso dentro de una misma zona, como pecho, espalda o piernas, cada ejercicio cambia según el equipo, los músculos principales y la carga habitual. Shiba Muscle organiza los datos por grupos para que sea más fácil encontrar ejercicios útiles.",
+            "Los pesos medios y las tablas de estándares sirven como referencia para orientarte y descubrir ejercicios relacionados. No sustituyen el criterio de un entrenador, una evaluación médica ni el rendimiento de competición."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Información incluida",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Peso medio o repeticiones medias por ejercicio",
+                "Tablas por peso corporal y edad para hombres y mujeres",
+                "Músculos principales, secundarios y estabilizadores",
+                "Ejercicios relacionados para comparar dentro de la misma zona"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Criterios de operación",
+          "paragraphs": [
+            "La estructura de páginas, títulos, descripciones, enlaces de idioma y sitemap se mantienen para que la navegación sea clara.",
+            "Incluimos páginas de contacto, privacidad y explicación de datos para que las personas puedan entender cómo se presenta la información y cómo se tratan los datos del sitio."
+          ]
+        }
+      ]
+    }
+  }
+}
