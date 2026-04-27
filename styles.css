@@ -1619,11 +1619,74 @@ table tbody tr:hover {
         grid-template-columns: 1fr;
     }
 
+    .main-image-title h1 {
+        margin: 0 0 10px;
+        font-size: 1.7rem;
+        line-height: 1.16;
+    }
+
+    .hero-description,
+    .section-intro,
+    .related-cluster-copy p,
+    .library-copy p {
+        font-size: 0.88rem;
+        line-height: 1.55;
+    }
+
+    .section-heading h2,
+    .section-title {
+        font-size: 1.18rem;
+        line-height: 1.32;
+    }
+
+    .container > .section-title {
+        margin-bottom: 14px;
+    }
+
+    .muscle-chip,
+    .category-chip,
+    .exercise-badge {
+        min-height: 28px;
+        padding-inline: 9px;
+        font-size: 0.74rem;
+    }
+
+    .tabs {
+        margin-bottom: 12px;
+    }
+
+    .tabs ul {
+        gap: 6px;
+        max-width: 100%;
+    }
+
+    .tabs ul li a {
+        min-height: 34px;
+        padding: 0 10px;
+        font-size: 0.76rem;
+        line-height: 1.2;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .subtitle-standards {
+        margin-bottom: 12px;
+        font-size: 0.82rem;
+        line-height: 1.4;
+    }
+
+    .average-section-note,
+    .update-info {
+        margin-top: 12px;
+        font-size: 0.78rem;
+        line-height: 1.5;
+    }
+
     .table-shell,
     .table-container {
-        box-shadow:
-            inset 18px 0 18px -18px rgba(31, 41, 36, 0.28),
-            inset -18px 0 18px -18px rgba(31, 41, 36, 0.28);
+        overflow-x: clip;
+        overflow-y: visible;
+        box-shadow: none;
     }
 
     table,
@@ -1631,39 +1694,144 @@ table tbody tr:hover {
     .average-section-table,
     .muscle-activated-table,
     .calorie-burn-table {
-        min-width: max(100%, 560px);
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        table-layout: fixed;
     }
 
     #average-data .table-shell,
     #standards-data .table-shell,
     #standards-data .table-container {
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: clip;
+        overflow-y: visible;
     }
 
     #average-data .average-section-table,
     #standards-data .table {
-        min-width: 680px;
+        min-width: 0;
     }
 
     main.page-main[data-exercise-slug] + main.page-main .average-section-table {
-        display: block;
         width: 100%;
         max-width: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        min-width: 680px;
+        overflow-x: clip;
+        overflow-y: visible;
+        min-width: 0;
     }
 
     main.page-main[data-exercise-slug] + main.page-main .table-container {
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: clip;
+        overflow-y: visible;
     }
 
     main.page-main[data-exercise-slug] + main.page-main .table-container .table {
-        min-width: 680px;
+        min-width: 0;
+    }
+
+    table th,
+    table td,
+    .table th,
+    .table td,
+    .average-section-table th,
+    .average-section-table td,
+    .calorie-burn-table th,
+    .calorie-burn-table td {
+        padding: 8px 5px;
+        overflow-wrap: anywhere;
+        word-break: normal;
+        hyphens: auto;
+    }
+
+    table th,
+    .table th,
+    .average-section-table th,
+    .calorie-burn-table th {
+        font-size: 0.66rem;
+        line-height: 1.25;
+        white-space: normal;
+    }
+
+    table td,
+    .table td,
+    .average-section-table td,
+    .calorie-burn-table td {
+        font-size: 0.72rem;
+        line-height: 1.35;
+    }
+
+    .tabs-container.block[data-tab-group="Standards Exercise"] .table th,
+    .tabs-container.block[data-tab-group="Standards Exercise"] .table td,
+    #standards-data .table th,
+    #standards-data .table td {
+        padding-inline: 3px;
+    }
+
+    .tabs-container.block[data-tab-group="Standards Exercise"] .table th,
+    #standards-data .table th {
+        font-size: 0.58rem;
+        line-height: 1.18;
+    }
+
+    .tabs-container.block[data-tab-group="Standards Exercise"] .table td,
+    #standards-data .table td {
+        font-size: 0.68rem;
+    }
+
+    .gender-icon,
+    .standards-gender-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    .container {
+        width: min(var(--max-content), calc(100% - 12px));
+        margin-bottom: 34px;
+    }
+
+    .main-image-title h1 {
+        font-size: 1.55rem;
+    }
+
+    .section-heading h2,
+    .section-title {
+        font-size: 1.08rem;
+    }
+
+    table th,
+    table td,
+    .table th,
+    .table td,
+    .average-section-table th,
+    .average-section-table td,
+    .calorie-burn-table th,
+    .calorie-burn-table td {
+        padding: 7px 3px;
+    }
+
+    table th,
+    .table th,
+    .average-section-table th,
+    .calorie-burn-table th {
+        font-size: 0.61rem;
+    }
+
+    table td,
+    .table td,
+    .average-section-table td,
+    .calorie-burn-table td {
+        font-size: 0.68rem;
+    }
+
+    .tabs-container.block[data-tab-group="Standards Exercise"] .table th,
+    #standards-data .table th {
+        font-size: 0.52rem;
+    }
+
+    .tabs-container.block[data-tab-group="Standards Exercise"] .table td,
+    #standards-data .table td {
+        font-size: 0.64rem;
     }
 }
