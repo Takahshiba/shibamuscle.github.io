@@ -177,7 +177,6 @@ const UI_TEXT = {
         categoryDashboard: "部位別ダッシュボード",
         categoryDashboardCopy: "部位ごとの件数、代表種目、比較の切り口をまとめて見渡せる入口です。",
         categoryDashboardEyebrow: "Category Dashboard",
-        compareDestination: "比較先",
         compareFlow: "比較導線",
         compareMode: "比較モード",
         contentLibraryCopy: "関連する種目ページへそのまま移動できます。",
@@ -214,8 +213,6 @@ const UI_TEXT = {
         pages: (count) => `${count}ページ`,
         performanceDashboard: "Performance Dashboard",
         performanceLibraryCount: "掲載種目",
-        performanceSnapshot: "パフォーマンススナップショット",
-        performanceSnapshotCopy: "最初に押さえたい基準ラインと比較の切り口を、表より先にまとめています。",
         primaryMuscle: "主働筋",
         primaryMuscleFallback: "主働筋データを掲載",
         quickCompare: "Quick Compare",
@@ -224,13 +221,10 @@ const UI_TEXT = {
         quickStartLabel: "おすすめの入口",
         relatedExercises: "関連種目",
         relatedExercisesCopy: "同じカテゴリの種目を続けて見比べられるように並べています。",
-        relatedExplorerCopy: "関連する種目ページへそのまま移動して、比較の流れを広げられます。",
-        relatedExplorerTitle: "Compare More Exercises",
         relatedNone: "現在表示できる同部位の関連種目はありません。",
         relatedSameCategory: "同じ部位の種目だけを並べています。",
         reps: "回数",
         repsComparison: "回数比較",
-        repsPage: "回数ベースの比較ページ",
         resultsAvailable: "比較データを掲載",
         snapshot: "Snapshot",
         snapshotDashboard: "比較ダッシュボード",
@@ -250,10 +244,8 @@ const UI_TEXT = {
         totalCategories: "掲載カテゴリ",
         totalExercisesCopy: "横断比較できる種目数",
         unitSwitchCopy: "全ページで単位切替",
-        viewRelatedCategories: "同カテゴリの関連比較あり",
         weight: "重量",
         weightComparison: "重量比較",
-        weightPage: "重量ベースの比較ページ",
         worldRecord: "世界記録"
     },
     ko: {
@@ -270,7 +262,6 @@ const UI_TEXT = {
         categoryDashboard: "부위별 대시보드",
         categoryDashboardCopy: "부위별 운동 수, 대표 운동, 비교 기준을 한눈에 볼 수 있는 시작점입니다.",
         categoryDashboardEyebrow: "Category Dashboard",
-        compareDestination: "비교 대상",
         compareFlow: "비교 동선",
         compareMode: "비교 모드",
         contentLibraryCopy: "관련 운동 페이지로 바로 이동할 수 있습니다.",
@@ -307,8 +298,6 @@ const UI_TEXT = {
         pages: (count) => `${count}페이지`,
         performanceDashboard: "Performance Dashboard",
         performanceLibraryCount: "수록 운동",
-        performanceSnapshot: "퍼포먼스 스냅샷",
-        performanceSnapshotCopy: "표를 보기 전에 먼저 확인할 기준선과 비교 포인트를 정리했습니다.",
         primaryMuscle: "주동근",
         primaryMuscleFallback: "주동근 데이터 수록",
         quickCompare: "Quick Compare",
@@ -317,13 +306,10 @@ const UI_TEXT = {
         quickStartLabel: "추천 시작점",
         relatedExercises: "관련 운동",
         relatedExercisesCopy: "같은 카테고리의 운동을 이어서 비교할 수 있도록 정리했습니다.",
-        relatedExplorerCopy: "관련 운동 페이지로 바로 이동해 비교 흐름을 이어갈 수 있습니다.",
-        relatedExplorerTitle: "Compare More Exercises",
         relatedNone: "현재 표시할 수 있는 같은 부위의 관련 운동이 없습니다.",
         relatedSameCategory: "같은 부위의 운동만 모았습니다.",
         reps: "반복",
         repsComparison: "반복 비교",
-        repsPage: "반복 횟수 기준 비교 페이지",
         resultsAvailable: "비교 데이터 수록",
         snapshot: "Snapshot",
         snapshotDashboard: "비교 대시보드",
@@ -343,10 +329,8 @@ const UI_TEXT = {
         totalCategories: "수록 카테고리",
         totalExercisesCopy: "비교 가능한 운동 수",
         unitSwitchCopy: "모든 페이지에서 단위 전환",
-        viewRelatedCategories: "같은 카테고리 관련 비교 있음",
         weight: "중량",
         weightComparison: "중량 비교",
-        weightPage: "중량 기준 비교 페이지",
         worldRecord: "세계 기록"
     },
     es: {
@@ -363,7 +347,6 @@ const UI_TEXT = {
         categoryDashboard: "Panel por zonas",
         categoryDashboardCopy: "Una entrada para revisar cantidad de ejercicios, movimientos destacados y criterios de comparación por zona.",
         categoryDashboardEyebrow: "Panel por categoría",
-        compareDestination: "Comparar con",
         compareFlow: "Flujo de comparación",
         compareMode: "Modo de comparación",
         contentLibraryCopy: "Puedes ir directamente a páginas de ejercicios relacionados.",
@@ -400,8 +383,6 @@ const UI_TEXT = {
         pages: (count) => `${count} páginas`,
         performanceDashboard: "Panel de rendimiento",
         performanceLibraryCount: "Ejercicios publicados",
-        performanceSnapshot: "Resumen de rendimiento",
-        performanceSnapshotCopy: "Las referencias y puntos de comparación clave aparecen antes de la tabla.",
         primaryMuscle: "Músculo principal",
         primaryMuscleFallback: "Datos de músculos principales publicados",
         quickCompare: "Comparación rápida",
@@ -410,13 +391,10 @@ const UI_TEXT = {
         quickStartLabel: "Accesos recomendados",
         relatedExercises: "Ejercicios relacionados",
         relatedExercisesCopy: "Organizados para seguir comparando ejercicios de la misma categoría.",
-        relatedExplorerCopy: "Pasa directamente a ejercicios relacionados y amplía la comparación.",
-        relatedExplorerTitle: "Comparar más ejercicios",
         relatedNone: "No hay ejercicios relacionados de la misma zona para mostrar ahora.",
         relatedSameCategory: "Solo ejercicios de la misma zona.",
         reps: "Reps",
         repsComparison: "Comparativa de repeticiones",
-        repsPage: "Página basada en repeticiones",
         resultsAvailable: "Datos de comparación publicados",
         snapshot: "Resumen",
         snapshotDashboard: "Panel de comparación",
@@ -436,10 +414,8 @@ const UI_TEXT = {
         totalCategories: "Categorías publicadas",
         totalExercisesCopy: "Ejercicios comparables",
         unitSwitchCopy: "Cambio de unidades en todas las páginas",
-        viewRelatedCategories: "Comparativas relacionadas de la misma categoría",
         weight: "Peso",
         weightComparison: "Comparativa de peso",
-        weightPage: "Página basada en peso",
         worldRecord: "Récord mundial"
     }
 };
@@ -914,16 +890,6 @@ function enhanceExercisePage(main) {
     ]);
 
     const primaryMuscles = getPrimaryMuscles(muscles, main);
-    const averageHighlights = extractAverageHighlights(averageContainer.querySelector(".average-section-table"));
-    const performanceSnapshot = buildExercisePerformanceSnapshot({
-        averageHighlights,
-        primaryMuscles,
-        sectionLabel,
-        standardsLabel,
-        measurementKind,
-        sameSectionCount: sameSectionCards.length + 1
-    });
-
     heroContainer.classList.add("hero-band");
     heroContainer.innerHTML = `
         <div class="exercise-hero">
@@ -935,27 +901,9 @@ function enhanceExercisePage(main) {
                     ${primaryMuscles.map((muscle) => `<span class="muscle-chip">${escapeHtml(muscle)}</span>`).join("")}
                     ${relatedTags.slice(0, 3).map((tag) => `<span class="muscle-chip">${escapeHtml(tag)}</span>`).join("")}
                 </div>
-                <div class="hero-glance-grid">
-                    <article class="hero-glance-card">
-                        <span class="metric-label">${escapeHtml(t("category"))}</span>
-                        <strong>${escapeHtml(sectionLabel)}</strong>
-                        <span class="metric-subvalue">${escapeHtml(measurementKind === "reps" ? t("repsPage") : t("weightPage"))}</span>
-                    </article>
-                    <article class="hero-glance-card">
-                        <span class="metric-label">${escapeHtml(t("primaryMuscle"))}</span>
-                        <strong>${escapeHtml(formatMuscleCount(primaryMuscles.length || 0))}</strong>
-                        <span class="metric-subvalue">${escapeHtml(primaryMuscles.slice(0, 3).join(" / ") || t("primaryMuscleFallback"))}</span>
-                    </article>
-                    <article class="hero-glance-card">
-                        <span class="metric-label">${escapeHtml(t("compareDestination"))}</span>
-                        <strong>${escapeHtml(formatExerciseCount(sameSectionCards.length + 1))}</strong>
-                        <span class="metric-subvalue">${escapeHtml(t("viewRelatedCategories"))}</span>
-                    </article>
-                </div>
             </div>
             <div class="exercise-hero-media">
                 <img src="${escapeAttribute(heroImage?.getAttribute("src") || "")}" alt="${escapeAttribute(heroImage?.getAttribute("alt") || heroTitle)}" class="workout-main-image">
-                <p class="exercise-media-caption">${escapeHtml(formatStandardsCaption(standardsLabel))}</p>
             </div>
         </div>
     `;
@@ -1056,8 +1004,7 @@ function enhanceExercisePage(main) {
         root: libraryContainer,
         sections: libraryData.sections,
         allCards,
-        explorerTitle: t("relatedExplorerTitle"),
-        explorerCopy: t("relatedExplorerCopy")
+        showToolbar: false
     });
 
     const postStandardsAd = prepareAdContainer(adContainers[0], t("adAfterStandards"));
@@ -1069,7 +1016,6 @@ function enhanceExercisePage(main) {
     const orderedNodes = [
         breadcrumb,
         heroContainer,
-        performanceSnapshot,
         muscleContainer,
         averageContainer,
         recordContainer,
@@ -1321,7 +1267,7 @@ function initializeAds() {
     });
 }
 
-function decorateLibraryExplorer({ root, sections, allCards, explorerTitle = "", explorerCopy = "" }) {
+function decorateLibraryExplorer({ root, sections, allCards, explorerTitle = "", explorerCopy = "", showToolbar = true }) {
     root.classList.add("section-band", "library-band");
 
     sections.forEach((section) => {
@@ -1342,20 +1288,25 @@ function decorateLibraryExplorer({ root, sections, allCards, explorerTitle = "",
         }
     });
 
-    const firstSection = sections[0]?.heading;
-    const anchor = firstSection;
+    let resultsNode = null;
 
-    const toolbar = htmlToElement(`
-        <div class="library-toolbar">
-            ${explorerTitle ? `<div class="library-copy"><h3>${escapeHtml(explorerTitle)}</h3><p>${escapeHtml(explorerCopy)}</p></div>` : ""}
-            <p class="results-status" aria-live="polite">${escapeHtml(t("exercisesListed", allCards.length))}</p>
-        </div>
-    `);
+    if (showToolbar) {
+        const firstSection = sections[0]?.heading;
+        const anchor = firstSection;
+        const toolbar = htmlToElement(`
+            <div class="library-toolbar">
+                ${explorerTitle ? `<div class="library-copy"><h3>${escapeHtml(explorerTitle)}</h3><p>${escapeHtml(explorerCopy)}</p></div>` : ""}
+                <p class="results-status" aria-live="polite">${escapeHtml(t("exercisesListed", allCards.length))}</p>
+            </div>
+        `);
 
-    if (anchor) {
-        anchor.parentNode.insertBefore(toolbar, anchor);
-    } else {
-        root.append(toolbar);
+        if (anchor) {
+            anchor.parentNode.insertBefore(toolbar, anchor);
+        } else {
+            root.append(toolbar);
+        }
+
+        resultsNode = toolbar.querySelector(".results-status");
     }
 
     sections.forEach((section) => {
@@ -1370,7 +1321,7 @@ function decorateLibraryExplorer({ root, sections, allCards, explorerTitle = "",
     return {
         sections,
         allCards,
-        resultsNode: toolbar.querySelector(".results-status")
+        resultsNode
     };
 
     function applySectionVisibility(section) {
@@ -1630,85 +1581,6 @@ function initHomeDashboardInteractions() {
     });
 }
 
-function buildExercisePerformanceSnapshot({ averageHighlights, primaryMuscles, sectionLabel, standardsLabel, measurementKind, sameSectionCount }) {
-    const baselineLine = averageHighlights.baseline;
-    const intermediateLine = averageHighlights.intermediate;
-
-    return htmlToElement(`
-        <section class="container section-band performance-snapshot-band">
-            <div class="section-heading">
-                <p class="eyebrow">${escapeHtml(t("snapshot"))}</p>
-                <h2>${escapeHtml(t("performanceSnapshot"))}</h2>
-                <p>${escapeHtml(t("performanceSnapshotCopy"))}</p>
-            </div>
-            <div class="performance-signal-grid">
-                ${renderPerformanceSignalCard(
-                    baselineLine?.label || localeText({ ja: "基礎ライン", ko: "입문 기준", es: "Referencia principiante" }),
-                    baselineLine?.primary || t("dataAvailable"),
-                    baselineLine?.secondary || t("levelAverageAvailable"),
-                    true
-                )}
-                ${renderPerformanceSignalCard(
-                    intermediateLine?.label || localeText({ ja: "中級ライン", ko: "중급 기준", es: "Referencia intermedia" }),
-                    intermediateLine?.primary || standardsLabel,
-                    intermediateLine?.secondary || t("resultsAvailable")
-                )}
-                ${renderPerformanceSignalCard(
-                    t("primaryMuscle"),
-                    formatMuscleCount(primaryMuscles.length || 0),
-                    primaryMuscles.slice(0, 3).join(" / ") || t("primaryMuscleFallback")
-                )}
-                ${renderPerformanceSignalCard(
-                    localeText({ ja: "比較ビュー", ko: "비교 보기", es: "Vista comparativa" }),
-                    formatExerciseCount(sameSectionCount),
-                    `${sectionLabel} / ${measurementKind === "reps" ? t("repsComparison") : t("weightComparison")}`
-                )}
-            </div>
-        </section>
-    `);
-}
-
-function renderPerformanceSignalCard(label, value, copy, accent = false) {
-    return `
-        <article class="performance-signal-card${accent ? " performance-signal-card--accent" : ""}">
-            <span class="metric-label">${escapeHtml(label)}</span>
-            <strong class="signal-value">${escapeHtml(value)}</strong>
-            <span class="signal-subvalue">${escapeHtml(copy)}</span>
-        </article>
-    `;
-}
-
-function extractAverageHighlights(table) {
-    const rows = Array.from(table?.querySelectorAll("tbody tr") || []);
-    if (!rows.length) {
-        return {};
-    }
-
-    const parsedRows = rows.map((row) => {
-        const cells = Array.from(row.children);
-        return {
-            label: normalizeText(cells[0]?.textContent || ""),
-            primary: formatAverageMetric(cells[1]),
-            secondary: formatSecondaryMetric(cells[2])
-        };
-    });
-
-    return {
-        baseline: parsedRows.find((row) => row.label.includes("基礎") || row.label.includes("입문") || row.label.includes("Principiante")) || parsedRows[0],
-        intermediate: parsedRows.find((row) => row.label.includes("中級") || row.label.includes("중급") || row.label.includes("Intermedio")) || parsedRows[Math.min(2, parsedRows.length - 1)]
-    };
-}
-
-function formatAverageMetric(cell) {
-    const value = normalizeText(cell?.innerText || cell?.textContent || "");
-    return value ? `${t("male")} ${value}` : t("dataAvailable");
-}
-
-function formatSecondaryMetric(cell) {
-    const value = normalizeText(cell?.innerText || cell?.textContent || "");
-    return value ? `${t("female")} ${value}` : t("resultsAvailable");
-}
-
 function replaceHeadingTag(heading, nextTag) {
     if (!heading) {
         return null;
@@ -1749,22 +1621,6 @@ function getPrimaryMuscles(muscles, main) {
 
 function formatExerciseCount(count) {
     return localeText({ ja: `${count}種目`, ko: `${count}개 운동`, es: `${count} ejercicios` });
-}
-
-function formatMuscleCount(count) {
-    return localeText({ ja: `${count}筋群`, ko: `${count}개 근육`, es: `${count} músculos` });
-}
-
-function formatStandardsCaption(standardsLabel) {
-    if (detectLocale() === "ko") {
-        return `${standardsLabel}과 평균 데이터를 같은 흐름에서 확인할 수 있습니다.`;
-    }
-
-    if (detectLocale() === "es") {
-        return `Puedes revisar ${standardsLabel.toLowerCase()} y datos medios en el mismo flujo.`;
-    }
-
-    return `${standardsLabel}と平均データを同じ流れで確認できます。`;
 }
 
 function formatRelatedHeading(sectionLabel) {

@@ -340,8 +340,7 @@ ol {
 }
 
 .dashboard-panel,
-.quick-start-band,
-.performance-snapshot-band {
+.quick-start-band {
     border: 1px solid var(--line);
     border-radius: 18px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 248, 245, 0.96));
@@ -396,9 +395,7 @@ ol {
     gap: 12px;
 }
 
-.dashboard-mini-card,
-.hero-glance-card,
-.performance-signal-card {
+.dashboard-mini-card {
     padding: 16px;
     border: 1px solid var(--line);
     border-radius: 14px;
@@ -740,13 +737,6 @@ ol {
     margin: 0 auto;
 }
 
-.exercise-media-caption {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.9rem;
-    text-align: center;
-}
-
 .muscle-chip-row,
 .category-chip-row,
 .footer-link-list,
@@ -786,39 +776,6 @@ ol {
     border-color: var(--accent);
     color: var(--accent);
     background: var(--accent-soft);
-}
-
-.hero-glance-grid,
-.performance-signal-grid {
-    display: grid;
-    gap: 14px;
-}
-
-.hero-glance-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.performance-snapshot-band {
-    padding: 24px;
-}
-
-.performance-signal-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.performance-signal-card--accent {
-    border-color: rgba(20, 138, 106, 0.4);
-    background: linear-gradient(180deg, rgba(231, 245, 240, 0.88), rgba(255, 255, 255, 0.96));
-}
-
-.signal-value {
-    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
-    line-height: 1.2;
-}
-
-.signal-subvalue {
-    color: var(--muted);
-    font-size: 0.88rem;
 }
 
 .muscle-grid {
@@ -1439,9 +1396,7 @@ table tbody tr:hover {
         grid-template-columns: 1fr;
     }
 
-    .dashboard-panel-grid,
-    .hero-glance-grid,
-    .performance-signal-grid {
+    .dashboard-panel-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -1474,17 +1429,12 @@ table tbody tr:hover {
     .discovery-grid,
     .category-overview-grid,
     .record-cards,
-    .dashboard-panel-grid,
-    .hero-glance-grid {
+    .dashboard-panel-grid {
         grid-template-columns: 1fr;
     }
 
     .muscle-grid {
         grid-template-columns: 1fr;
-    }
-
-    .performance-signal-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .exercise-cards-container,
@@ -1512,8 +1462,7 @@ table tbody tr:hover {
     }
 
     .dashboard-panel,
-    .quick-start-band,
-    .performance-snapshot-band {
+    .quick-start-band {
         padding: 20px;
     }
 }
@@ -1567,8 +1516,7 @@ table tbody tr:hover {
     }
 
     .dashboard-panel,
-    .quick-start-band,
-    .performance-snapshot-band {
+    .quick-start-band {
         padding: 16px;
     }
 
@@ -1612,8 +1560,6 @@ table tbody tr:hover {
     }
 
     .dashboard-panel-grid,
-    .performance-signal-grid,
-    .hero-glance-grid,
     .discovery-grid,
     .discovery-stat-grid {
         grid-template-columns: 1fr;
