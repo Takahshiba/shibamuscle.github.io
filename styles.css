@@ -1774,19 +1774,19 @@ table tbody tr:hover {
 
     #about-table + table th:first-child,
     #about-table + table td:first-child {
-        width: 22%;
+        width: 17%;
         white-space: normal;
     }
 
     #about-table + table th:nth-child(2),
     #about-table + table td:nth-child(2) {
-        width: 58%;
+        width: 68%;
         text-align: left;
     }
 
     #about-table + table th:nth-child(3),
     #about-table + table td:nth-child(3) {
-        width: 20%;
+        width: 15%;
         white-space: normal;
     }
 
@@ -1866,17 +1866,17 @@ table tbody tr:hover {
 
     #about-table + table th:first-child,
     #about-table + table td:first-child {
-        width: 21%;
+        width: 15%;
     }
 
     #about-table + table th:nth-child(2),
     #about-table + table td:nth-child(2) {
-        width: 60%;
+        width: 72%;
     }
 
     #about-table + table th:nth-child(3),
     #about-table + table td:nth-child(3) {
-        width: 19%;
+        width: 13%;
     }
 
     #about-table + table tbody th,
