@@ -491,6 +491,14 @@ function ensureAdSenseScript() {
     }
 
     const adScripts = Array.from(document.querySelectorAll('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]'));
+    const robots = document.querySelector('meta[name="robots"]')?.content || "";
+    const shouldLoadAds = !robots.includes("noindex") && Boolean(document.querySelector("ins.adsbygoogle"));
+
+    if (!shouldLoadAds) {
+        adScripts.forEach((script) => script.remove());
+        return;
+    }
+
     const hasCurrentScript = adScripts.some((script) => script.src === ADSENSE_SCRIPT_SRC);
 
     adScripts.forEach((script) => {
