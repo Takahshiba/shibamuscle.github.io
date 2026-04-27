@@ -1057,15 +1057,15 @@ table tbody tr:hover {
 }
 
 .exercise-card .name {
-    font-size: 0.96rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.32;
     overflow-wrap: anywhere;
 }
 
 .exercise-card .category {
     color: var(--muted);
-    font-size: 0.84rem;
+    font-size: 0.78rem;
 }
 
 .exercise-badges {
@@ -1082,7 +1082,7 @@ table tbody tr:hover {
     border-radius: 999px;
     background: var(--surface-tint);
     color: var(--accent-strong);
-    font-size: 0.77rem;
+    font-size: 0.7rem;
     font-weight: 600;
 }
 
@@ -1651,6 +1651,18 @@ table tbody tr:hover {
         font-size: 0.74rem;
     }
 
+    .exercise-card .name {
+        font-size: 0.82rem;
+    }
+
+    .exercise-card .category {
+        font-size: 0.72rem;
+    }
+
+    .exercise-card .exercise-badge {
+        font-size: 0.66rem;
+    }
+
     .tabs {
         margin-bottom: 12px;
     }
@@ -1760,6 +1772,33 @@ table tbody tr:hover {
         line-height: 1.35;
     }
 
+    #about-table + table th:first-child,
+    #about-table + table td:first-child {
+        width: 22%;
+        white-space: normal;
+    }
+
+    #about-table + table th:nth-child(2),
+    #about-table + table td:nth-child(2) {
+        width: 58%;
+        text-align: left;
+    }
+
+    #about-table + table th:nth-child(3),
+    #about-table + table td:nth-child(3) {
+        width: 20%;
+        white-space: normal;
+    }
+
+    #about-table + table tbody th {
+        font-size: 0.68rem;
+    }
+
+    #about-table + table td {
+        font-size: 0.68rem;
+        line-height: 1.42;
+    }
+
     .tabs-container.block[data-tab-group="Standards Exercise"] .table th,
     .tabs-container.block[data-tab-group="Standards Exercise"] .table td,
     #standards-data .table th,
@@ -1823,6 +1862,38 @@ table tbody tr:hover {
     .average-section-table td,
     .calorie-burn-table td {
         font-size: 0.68rem;
+    }
+
+    #about-table + table th:first-child,
+    #about-table + table td:first-child {
+        width: 21%;
+    }
+
+    #about-table + table th:nth-child(2),
+    #about-table + table td:nth-child(2) {
+        width: 60%;
+    }
+
+    #about-table + table th:nth-child(3),
+    #about-table + table td:nth-child(3) {
+        width: 19%;
+    }
+
+    #about-table + table tbody th,
+    #about-table + table td {
+        font-size: 0.62rem;
+    }
+
+    .exercise-card .name {
+        font-size: 0.78rem;
+    }
+
+    .exercise-card .category {
+        font-size: 0.69rem;
+    }
+
+    .exercise-card .exercise-badge {
+        font-size: 0.62rem;
     }
 
     .tabs-container.block[data-tab-group="Standards Exercise"] .table th,
