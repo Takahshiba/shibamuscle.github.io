@@ -120,6 +120,162 @@
           }
         ]
       }
+    },
+    "zh-hant": {
+      "title": "Shiba Muscle | 訓練資料庫",
+      "description": "Shiba Muscle 訓練資料庫可依部位與動作查看平均重量、力量標準與目標肌群，並支援 kg 與 lb 切換。",
+      "heroHeading": "清楚比較訓練資料",
+      "heading": "尋找訓練動作",
+      "intro": [
+        "Shiba Muscle 是整理各訓練動作平均重量、力量標準與主動肌的資料庫。從臥推、深蹲、硬舉等經典動作，到啞鈴、自重與滑輪動作，都能快速查看體重別與年齡別參考值。",
+        "所有數值都是規劃訓練時的參考，不是必須達成的目標。請依照姿勢、活動範圍、訓練年資與當天狀態安全使用。"
+      ],
+      "overview": {
+        "eyebrow": "Workout data",
+        "sectionEyebrow": "資料指南",
+        "title": "為了更容易比較的編輯方針",
+        "copy": "首頁先整理網站目的、資料整理方式與安全使用重點，讓使用者能理解各表格的定位。",
+        "items": [
+          {
+            "eyebrow": "Purpose",
+            "heading": "建立選擇動作的入口",
+            "paragraphs": [
+              "依部位、器材與主動肌整理頁面，讓相近動作更容易互相比較。"
+            ]
+          },
+          {
+            "eyebrow": "Data",
+            "heading": "分開呈現平均值與標準表",
+            "paragraphs": [
+              "不只看平均重量，也能搭配體重別與年齡別標準確認背景。"
+            ]
+          },
+          {
+            "eyebrow": "Safety",
+            "heading": "作為參考資訊使用",
+            "paragraphs": [
+              "若有疼痛或病史，請諮詢專業人士，並優先考慮姿勢與安全。"
+            ]
+          }
+        ]
+      }
+    },
+    "zh-hans": {
+      "title": "Shiba Muscle | 训练数据库",
+      "description": "Shiba Muscle 训练数据库可按部位和动作查看平均重量、力量标准与目标肌群，并支持 kg 与 lb 切换。",
+      "heroHeading": "清楚比较训练数据",
+      "heading": "寻找训练动作",
+      "intro": [
+        "Shiba Muscle 是整理各训练动作平均重量、力量标准与主动肌的数据资料库。从卧推、深蹲、硬拉等经典动作，到哑铃、自重和绳索动作，都能快速查看按体重和年龄划分的参考值。",
+        "所有数值都是规划训练时的参考，不是必须达成的目标。请结合动作姿势、活动范围、训练年限和当天状态安全使用。"
+      ],
+      "overview": {
+        "eyebrow": "Workout data",
+        "sectionEyebrow": "数据指南",
+        "title": "为了更容易比较的编辑方针",
+        "copy": "首页先整理网站目的、数据整理方式与安全使用重点，帮助理解各表格的定位。",
+        "items": [
+          {
+            "eyebrow": "Purpose",
+            "heading": "建立选择动作的入口",
+            "paragraphs": [
+              "按部位、器械和主动肌整理页面，让相近动作更容易互相比较。"
+            ]
+          },
+          {
+            "eyebrow": "Data",
+            "heading": "分开呈现平均值与标准表",
+            "paragraphs": [
+              "不只看平均重量，也能结合按体重和年龄划分的标准查看背景。"
+            ]
+          },
+          {
+            "eyebrow": "Safety",
+            "heading": "作为参考信息使用",
+            "paragraphs": [
+              "如有疼痛或病史，请咨询专业人士，并优先考虑动作姿势与安全。"
+            ]
+          }
+        ]
+      }
+    },
+    "fr": {
+      "title": "Shiba Muscle | Base de données d’exercices",
+      "description": "Base de données Shiba Muscle pour consulter charges moyennes, standards de force et muscles travaillés par zone et par exercice, avec bascule kg/lb.",
+      "heroHeading": "Comparer les données d’entraînement clairement",
+      "heading": "Trouver un exercice",
+      "intro": [
+        "Shiba Muscle organise les charges moyennes, les standards de force et les muscles principaux par exercice. Les mouvements classiques comme le développé couché, le squat et le soulevé de terre côtoient les exercices avec haltères, poids du corps et câble.",
+        "Les valeurs sont des repères pour planifier l’entraînement, pas des objectifs obligatoires. Utilisez-les avec la technique, l’amplitude, l’expérience et l’état du jour en tête."
+      ],
+      "overview": {
+        "eyebrow": "Workout data",
+        "sectionEyebrow": "Guide des données",
+        "title": "Principes éditoriaux pour mieux comparer",
+        "copy": "La page d’accueil présente le but du site, la façon dont les données sont organisées et les précautions d’utilisation.",
+        "items": [
+          {
+            "eyebrow": "Purpose",
+            "heading": "Créer une entrée claire par exercice",
+            "paragraphs": [
+              "Les pages sont organisées par zone, matériel et muscles principaux afin de comparer plus facilement les exercices proches."
+            ]
+          },
+          {
+            "eyebrow": "Data",
+            "heading": "Séparer moyenne et standards",
+            "paragraphs": [
+              "La charge moyenne est accompagnée de tableaux par poids corporel et par âge pour donner plus de contexte."
+            ]
+          },
+          {
+            "eyebrow": "Safety",
+            "heading": "Une référence, pas un avis médical",
+            "paragraphs": [
+              "En cas de douleur ou d’antécédents, consultez un professionnel et privilégiez la technique et la sécurité."
+            ]
+          }
+        ]
+      }
+    },
+    "de": {
+      "title": "Shiba Muscle | Trainingsdatenbank",
+      "description": "Shiba Muscle zeigt Durchschnittsgewichte, Kraftstandards und Zielmuskulatur nach Muskelbereich und Übung, inklusive Wechsel zwischen kg und lb.",
+      "heroHeading": "Trainingsdaten klar vergleichen",
+      "heading": "Übungen finden",
+      "intro": [
+        "Shiba Muscle bündelt Durchschnittsgewicht, Kraftstandards und Hauptmuskeln pro Übung. Klassische Übungen wie Bankdrücken, Kniebeuge und Kreuzheben stehen neben Kurzhantel-, Körpergewichts- und Kabelübungen.",
+        "Die Werte sind Orientierungspunkte für die Trainingsplanung, keine Pflichtziele. Nutze sie zusammen mit Technik, Bewegungsumfang, Erfahrung und Tagesform."
+      ],
+      "overview": {
+        "eyebrow": "Workout data",
+        "sectionEyebrow": "Datenleitfaden",
+        "title": "Redaktionelle Grundsätze für bessere Vergleiche",
+        "copy": "Die Startseite erklärt Zweck, Struktur und sichere Nutzung der Trainingsdaten, bevor die Tabellen geöffnet werden.",
+        "items": [
+          {
+            "eyebrow": "Purpose",
+            "heading": "Einen Einstieg pro Übung schaffen",
+            "paragraphs": [
+              "Die Seiten sind nach Muskelbereich, Gerät und Hauptmuskeln geordnet, damit ähnliche Übungen leichter vergleichbar sind."
+            ]
+          },
+          {
+            "eyebrow": "Data",
+            "heading": "Durchschnitt und Standards trennen",
+            "paragraphs": [
+              "Durchschnittswerte werden zusammen mit Tabellen nach Körpergewicht und Alter gezeigt, damit der Kontext klar bleibt."
+            ]
+          },
+          {
+            "eyebrow": "Safety",
+            "heading": "Referenz, keine medizinische Beratung",
+            "paragraphs": [
+              "Bei Schmerzen oder Vorerkrankungen sollte Fachpersonal einbezogen werden; Technik und Sicherheit haben Vorrang."
+            ]
+          }
+        ]
+      }
     }
   }
 }

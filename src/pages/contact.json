@@ -168,12 +168,12 @@
         }
       ]
     },
-    "de": {
-      "title": "Kontakt | Shiba Muscle",
-      "description": "Kontaktseite von Shiba Muscle. Fragen zum Service, zu Trainingsdaten oder veröffentlichten Inhalten kannst du hier an uns senden.",
-      "heading": "Kontakt",
+    "zh-hans": {
+      "title": "联系我们 | Shiba Muscle",
+      "description": "Shiba Muscle 的联系页面。关于服务、训练数据或刊载内容的问题与合作需求，请在这里确认联系方式。",
+      "heading": "联系我们",
       "intro": [
-        "Für Fragen zum Service, zu veröffentlichten Trainingsdaten, Kooperationen oder anderen Anliegen schreibe bitte an die unten stehende E-Mail-Adresse."
+        "关于服务内容、刊载数据、合作或其他问题，请发送邮件到下方电子邮件地址。"
       ],
       "sections": [
         {
@@ -189,8 +189,8 @@
         {
           "className": "content-card note",
           "paragraphs": [
-            "Wir prüfen Nachrichten der Reihe nach und antworten so schnell wie möglich. Je nach Inhalt der Anfrage kann die Antwort etwas Zeit benötigen.",
-            "Wenn du deine Situation und dein Anliegen möglichst konkret beschreibst, können wir dir genauer weiterhelfen. Bei Anfragen zu personenbezogenen Daten kann eine Identitätsprüfung erforderlich sein."
+            "我们会按顺序确认并回复信息。根据咨询内容，回复可能需要一些时间。",
+            "请尽量具体描述你的情况和需求，这样我们可以更准确地协助你。涉及个人信息的咨询，可能需要确认本人身份。"
           ]
         }
       ]

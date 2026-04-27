@@ -21,7 +21,15 @@ const SITE_ORIGIN = "https://shibamuscle.com";
 const THEME_COLOR = "#148a6a";
 
 function buildFontBlock(locale = "ja") {
-    const family = locale === "ko" ? "Noto+Sans+KR" : locale === "ja" ? "Noto+Sans+JP" : "Noto+Sans";
+    const family = locale === "ko"
+        ? "Noto+Sans+KR"
+        : locale === "zh-hant"
+            ? "Noto+Sans+TC"
+            : locale === "zh-hans"
+                ? "Noto+Sans+SC"
+                : locale === "ja"
+                    ? "Noto+Sans+JP"
+                    : "Noto+Sans";
     return `
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -200,18 +208,25 @@ function renderLegacyCategoryNav(pageType, locale = "ja") {
 function renderStaticFooter(file, locale = "ja") {
     const alternates = languageAlternates(file);
     const flagAlt = {
-        en: locale === "ko" ? "영국 국기" : locale === "es" ? "Bandera del Reino Unido" : "UK",
-        ja: locale === "ko" ? "일본 국기" : locale === "es" ? "Bandera de Japón" : "Japan",
-        zh: locale === "ko" ? "중국 국기" : locale === "es" ? "Bandera de China" : "China",
-        ko: locale === "ko" ? "한국 국기" : locale === "es" ? "Bandera de Corea" : "Korea",
-        es: locale === "ko" ? "스페인 국기" : locale === "es" ? "Bandera de España" : "Spain"
+        en: locale === "ko" ? "영국 국기" : locale === "zh-hant" ? "英國國旗" : locale === "zh-hans" ? "英国国旗" : locale === "es" ? "Bandera del Reino Unido" : "UK",
+        ja: locale === "ko" ? "일본 국기" : locale === "zh-hant" ? "日本國旗" : locale === "zh-hans" ? "日本国旗" : locale === "es" ? "Bandera de Japón" : "Japan",
+        "zh-hant": locale === "ko" ? "번체 중국어" : locale === "zh-hant" ? "繁體中文" : locale === "zh-hans" ? "繁体中文" : locale === "es" ? "Chino tradicional" : "Traditional Chinese",
+        "zh-hans": locale === "ko" ? "간체 중국어" : locale === "zh-hant" ? "簡體中文" : locale === "zh-hans" ? "简体中文" : locale === "es" ? "Chino simplificado" : "Simplified Chinese",
+        ko: locale === "ko" ? "한국 국기" : locale === "zh-hant" ? "韓國國旗" : locale === "zh-hans" ? "韩国国旗" : locale === "es" ? "Bandera de Corea" : "Korea",
+        es: locale === "ko" ? "스페인 국기" : locale === "zh-hant" ? "西班牙國旗" : locale === "zh-hans" ? "西班牙国旗" : locale === "es" ? "Bandera de España" : locale === "de" ? "Spanien" : "Spain",
+        zh: locale === "ko" ? "중국 국기" : locale === "zh-hant" ? "中國國旗" : locale === "zh-hans" ? "中国国旗" : locale === "es" ? "Bandera de China" : locale === "fr" ? "Drapeau de la Chine" : locale === "de" ? "China" : "China",
+        fr: locale === "ko" ? "프랑스 국기" : locale === "es" ? "Bandera de Francia" : locale === "fr" ? "Drapeau de la France" : locale === "de" ? "Frankreich" : "France",
+        de: locale === "ko" ? "독일 국기" : locale === "es" ? "Bandera de Alemania" : locale === "fr" ? "Drapeau de l'Allemagne" : locale === "de" ? "Deutschland" : "Germany"
     };
     const flagIcon = {
         en: "uk-flag.webp",
         ja: "japan-flag.webp",
-        zh: "china-flag.webp",
+        "zh-hant": "china-flag.webp",
+        "zh-hans": "china-flag.webp",
         ko: "korea-flag.webp",
-        es: "spain-flag.svg"
+        es: "spain-flag.svg",
+        fr: "france-flag.svg",
+        de: "germany-flag.svg"
     };
 
     return `
@@ -237,7 +252,11 @@ function renderStaticFooter(file, locale = "ja") {
             <div class="footer-section languages">
                 <h4>${escapeHtml(getUiText(locale, "language"))}</h4>
                 <ul>
-${alternates.map((item) => `                    <li><img src="${assetHref(flagIcon[item.code], locale)}" alt="${escapeAttribute(flagAlt[item.code])}" class="flag-icon"> <a href="${escapeAttribute(item.href)}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a></li>`).join("\n")}
+${alternates.map((item) => {
+                    const icon = flagIcon[item.code] || "dumbbell-logo.png";
+                    const alt = flagAlt[item.code] || item.displayName;
+                    return `                    <li><img src="${assetHref(icon, locale)}" alt="${escapeAttribute(alt)}" class="flag-icon"> <a href="${escapeAttribute(item.href)}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a></li>`;
+                }).join("\n")}
                 </ul>
             </div>
         </div>
@@ -326,10 +345,10 @@ function renderDiscoveryGrid(section, pages, locale = "ja") {
         <div class="discovery-grid">
 ${pages.map((page) => {
         return `            <a class="discovery-card" href="${escapeAttribute(page.file)}">
-                <span class="discovery-type">${escapeHtml(locale === "es" ? (page.type === "comparison" ? "Comparativa" : "Objetivo") : page.type === "comparison" ? "Comparison" : "Intent")}</span>
+                <span class="discovery-type">${escapeHtml(locale === "zh-hant" ? (page.type === "comparison" ? "比較" : "目標") : locale === "zh-hans" ? (page.type === "comparison" ? "比较" : "目标") : locale === "de" ? (page.type === "comparison" ? "Vergleich" : "Ziel") : locale === "fr" ? (page.type === "comparison" ? "Comparatif" : "Objectif") : locale === "es" ? (page.type === "comparison" ? "Comparativa" : "Objetivo") : page.type === "comparison" ? "Comparison" : "Intent")}</span>
                 <h3>${escapeHtml(page.heading)}</h3>
                 <p>${escapeHtml((page.intro || [])[0] || page.description || "")}</p>
-                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "es" ? "Ver página" : "ページを見る"}</span>
+                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "zh-hant" ? "查看頁面" : locale === "zh-hans" ? "查看页面" : locale === "es" ? "Ver página" : locale === "fr" ? "Voir la page" : locale === "de" ? "Seite ansehen" : "ページを見る"}</span>
             </a>`;
     }).join("\n")}
         </div>

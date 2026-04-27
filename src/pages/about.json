@@ -128,6 +128,170 @@
           ]
         }
       ]
+    },
+    "zh-hant": {
+      "title": "關於 Shiba Muscle | Shiba Muscle",
+      "description": "介紹 Shiba Muscle 的目的、資料使用方式與營運方針。",
+      "heading": "關於 Shiba Muscle",
+      "intro": [
+        "Shiba Muscle 是整理各訓練動作平均重量、力量標準與目標肌群，方便比較的訓練資料庫。"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "網站目的",
+          "paragraphs": [
+            "即使同屬胸部、背部或腿部訓練，不同器材、主動肌與重量傾向也會不同。Shiba Muscle 依部位整理動作資料，讓使用者更容易找到符合目的的訓練。",
+            "平均重量與標準表是用來掌握大致位置、尋找下一個比較動作的參考資訊，不保證競技成績或醫療判斷。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "刊載資訊",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "各動作的平均重量或平均次數",
+                "男性與女性的體重別、年齡別標準表",
+                "主動肌、輔助肌群與穩定肌群資訊",
+                "同部位或相近目的的相關動作"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "營運方針",
+          "paragraphs": [
+            "頁面結構、標題、說明文、語言連結與網站地圖都以清楚導覽為優先。",
+            "我們提供聯絡、隱私權政策與資料說明頁面，讓使用者能確認資訊呈現與資料處理方式。"
+          ]
+        }
+      ]
+    },
+    "zh-hans": {
+      "title": "关于 Shiba Muscle | Shiba Muscle",
+      "description": "介绍 Shiba Muscle 的目的、数据使用方式与运营方针。",
+      "heading": "关于 Shiba Muscle",
+      "intro": [
+        "Shiba Muscle 是整理各训练动作平均重量、力量标准与目标肌群，方便比较的训练数据库。"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "网站目的",
+          "paragraphs": [
+            "即使同属胸部、背部或腿部训练，不同器械、主动肌和重量倾向也会不同。Shiba Muscle 按部位整理动作数据，帮助用户更容易找到符合目的的训练。",
+            "平均重量与标准表用于大致了解当前位置、寻找下一个比较动作，不保证竞技成绩或医学判断。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "刊载信息",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "各动作的平均重量或平均次数",
+                "男性与女性按体重和年龄划分的标准表",
+                "主动肌、辅助肌群与稳定肌群信息",
+                "同部位或相近目的的相关动作"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "运营方针",
+          "paragraphs": [
+            "页面结构、标题、说明文字、语言链接和网站地图都以清晰导航为优先。",
+            "我们提供联系、隐私政策和数据说明页面，方便用户确认信息呈现与数据处理方式。"
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "title": "À propos de Shiba Muscle | Shiba Muscle",
+      "description": "Présentation du but de Shiba Muscle, de l’utilisation des données et des principes d’exploitation.",
+      "heading": "À propos de Shiba Muscle",
+      "intro": [
+        "Shiba Muscle est une base de données d’entraînement qui organise charges moyennes, standards de force et muscles travaillés par exercice pour faciliter la comparaison."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "But du site",
+          "paragraphs": [
+            "Même dans une même zone comme les pectoraux, le dos ou les jambes, le matériel, les muscles principaux et les charges habituelles changent beaucoup. Shiba Muscle classe les données par zone pour faciliter le choix d’exercices adaptés.",
+            "Les moyennes et standards servent à se situer et à trouver des exercices à comparer. Ils ne remplacent ni un avis médical ni l’analyse d’un entraîneur."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Informations publiées",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Charge moyenne ou répétitions moyennes par exercice",
+                "Tableaux par poids corporel et par âge pour femmes et hommes",
+                "Muscles principaux, secondaires et stabilisateurs",
+                "Exercices liés dans la même zone ou le même objectif"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Principes d’exploitation",
+          "paragraphs": [
+            "La structure, les titres, les descriptions, les liens de langue et le sitemap sont maintenus pour rendre la navigation claire.",
+            "Les pages contact, confidentialité et méthodologie expliquent comment les informations sont présentées et comment les données du site sont traitées."
+          ]
+        }
+      ]
+    },
+    "de": {
+      "title": "Über Shiba Muscle | Shiba Muscle",
+      "description": "Informationen zum Zweck von Shiba Muscle, zur Nutzung der Daten und zu den Betriebsgrundsätzen.",
+      "heading": "Über Shiba Muscle",
+      "intro": [
+        "Shiba Muscle ist eine Trainingsdatenbank, die Durchschnittsgewicht, Kraftstandards und Zielmuskeln pro Übung vergleichbar macht."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Zweck der Website",
+          "paragraphs": [
+            "Auch innerhalb von Brust-, Rücken- oder Beinübungen unterscheiden sich Gerät, Hauptmuskeln und typische Lasten deutlich. Shiba Muscle ordnet Übungsdaten nach Bereichen, damit passende Workouts leichter zu finden sind.",
+            "Durchschnittswerte und Standards helfen bei der groben Einordnung und beim Finden verwandter Übungen. Sie ersetzen keine medizinische Einschätzung und keine individuelle Trainingsberatung."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Veröffentlichte Informationen",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Durchschnittsgewicht oder durchschnittliche Wiederholungen pro Übung",
+                "Tabellen nach Körpergewicht und Alter für Frauen und Männer",
+                "Haupt-, Neben- und Stabilisationsmuskeln",
+                "Verwandte Übungen aus demselben Bereich oder Ziel"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Betriebsgrundsätze",
+          "paragraphs": [
+            "Seitenstruktur, Titel, Beschreibungen, Sprachlinks und Sitemap werden so gepflegt, dass die Navigation klar bleibt.",
+            "Kontakt-, Datenschutz- und Methodikseiten machen sichtbar, wie Informationen dargestellt und Daten behandelt werden."
+          ]
+        }
+      ]
     }
   }
 }

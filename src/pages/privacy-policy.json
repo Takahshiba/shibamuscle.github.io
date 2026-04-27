@@ -284,6 +284,306 @@
           ]
         }
       ]
+    },
+    "zh-hant": {
+      "title": "隱私權政策 | Shiba Muscle",
+      "description": "Shiba Muscle 的隱私權政策、Cookie 政策、廣告政策與使用條件。",
+      "heading": "隱私權政策",
+      "intro": [
+        "Shiba Muscle 只在提供服務所需範圍內處理資訊，並重視使用者隱私。以下說明本站的資訊處理方式與使用條件。",
+        "最後更新日: 2026年4月27日"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "使用條件",
+          "blocks": [
+            {
+              "type": "subheading",
+              "text": "內容使用"
+            },
+            {
+              "type": "paragraph",
+              "text": "本網站資訊可在合理範圍內參考與引用，但禁止以造成誤解的方式轉載、惡意使用或損害第三方。引用時請標明網站名稱。"
+            },
+            {
+              "type": "subheading",
+              "text": "禁止事項"
+            },
+            {
+              "type": "list",
+              "items": [
+                "未經允許改寫內容並以造成誤認的方式再發布",
+                "對其他使用者或第三方造成困擾、不利益或損害",
+                "不正當存取或攻擊伺服器等妨礙營運的行為"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "免責事項"
+            },
+            {
+              "type": "paragraph",
+              "text": "我們會盡力維持資訊正確與更新，但不保證完整性或準確性。使用刊載資訊所造成的損害，網站不承擔責任。"
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "著作權",
+          "paragraphs": [
+            "網站中的文章、圖片與資料等著作權屬於營運者或合法權利人。引用或再利用時請標明來源並控制在適當範圍內。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Cookie 政策",
+          "paragraphs": [
+            "本網站可能為存取分析、廣告投放與改善便利性使用 Cookie 或類似技術。",
+            "不希望使用 Cookie 時，可從瀏覽器設定停用，也可透過 Google 廣告設定管理個人化廣告。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "存取分析",
+          "paragraphs": [
+            "本網站可能使用 Google Analytics 改善網站品質。收集資訊不以直接識別個人為目的。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "廣告投放",
+          "paragraphs": [
+            "本網站可能使用 Google AdSense 等第三方廣告服務。Google 等廣告業者可能依過去的存取資訊顯示廣告。",
+            "個人化廣告可透過 Google 廣告設定或瀏覽器設定管理。"
+          ]
+        }
+      ]
+    },
+    "zh-hans": {
+      "title": "隐私政策 | Shiba Muscle",
+      "description": "Shiba Muscle 的隐私政策、Cookie 政策、广告政策与使用条件。",
+      "heading": "隐私政策",
+      "intro": [
+        "Shiba Muscle 只在提供服务所需范围内处理信息，并重视用户隐私。以下说明本站的信息处理方式与使用条件。",
+        "最后更新日: 2026年4月27日"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "使用条件",
+          "blocks": [
+            {
+              "type": "subheading",
+              "text": "内容使用"
+            },
+            {
+              "type": "paragraph",
+              "text": "本网站信息可在合理范围内参考与引用，但禁止以造成误解的方式转载、恶意使用或损害第三方。引用时请标明网站名称。"
+            },
+            {
+              "type": "subheading",
+              "text": "禁止事项"
+            },
+            {
+              "type": "list",
+              "items": [
+                "未经允许改写内容并以造成误认的方式再发布",
+                "对其他用户或第三方造成困扰、不利或损害",
+                "不正当访问或攻击服务器等妨碍运营的行为"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "免责声明"
+            },
+            {
+              "type": "paragraph",
+              "text": "我们会尽力保持信息准确和更新，但不保证完整性或准确性。使用刊载信息造成的损害，网站不承担责任。"
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "著作权",
+          "paragraphs": [
+            "网站中的文章、图片和数据等著作权属于运营者或合法权利人。引用或再利用时请标明来源并控制在适当范围内。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Cookie 政策",
+          "paragraphs": [
+            "本网站可能为访问分析、广告投放和改善便利性使用 Cookie 或类似技术。",
+            "不希望使用 Cookie 时，可在浏览器设置中停用，也可通过 Google 广告设置管理个性化广告。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "访问分析",
+          "paragraphs": [
+            "本网站可能使用 Google Analytics 改善网站质量。收集的信息不用于直接识别个人。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "广告投放",
+          "paragraphs": [
+            "本网站可能使用 Google AdSense 等第三方广告服务。Google 等广告商可能根据过去的访问量信息显示广告。",
+            "个性化广告可通过 Google 广告设置或浏览器设置管理。"
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "title": "Politique de confidentialité | Shiba Muscle",
+      "description": "Politique de confidentialité, cookies, publicité et conditions d’utilisation de Shiba Muscle.",
+      "heading": "Politique de confidentialité",
+      "intro": [
+        "Shiba Muscle traite les informations uniquement dans la mesure nécessaire au service et cherche à protéger la confidentialité des utilisateurs.",
+        "Dernière mise à jour: 27 avril 2026"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Conditions d’utilisation",
+          "blocks": [
+            {
+              "type": "subheading",
+              "text": "Utilisation du contenu"
+            },
+            {
+              "type": "paragraph",
+              "text": "Les informations du site peuvent être consultées ou citées dans un cadre raisonnable. Toute republication trompeuse, utilisation malveillante ou utilisation portant préjudice à un tiers est interdite."
+            },
+            {
+              "type": "subheading",
+              "text": "Conduites interdites"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Modifier le contenu sans autorisation et le redistribuer de manière trompeuse",
+                "Causer un préjudice à d’autres personnes ou à des tiers",
+                "Perturber le service par accès non autorisé ou attaque serveur"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Responsabilité"
+            },
+            {
+              "type": "paragraph",
+              "text": "Nous faisons de notre mieux pour maintenir les informations exactes et à jour, sans garantir leur exhaustivité. Le site n’est pas responsable des dommages liés à l’utilisation des informations publiées."
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Droits d’auteur",
+          "paragraphs": [
+            "Les textes, images et données appartiennent à l’exploitant du site ou à leurs titulaires légitimes. Toute citation ou réutilisation doit mentionner la source."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Politique de cookies",
+          "paragraphs": [
+            "Le site peut utiliser des cookies ou technologies similaires pour l’analyse, la publicité et l’amélioration de l’expérience.",
+            "Vous pouvez désactiver les cookies dans votre navigateur et gérer la personnalisation des annonces via les paramètres Google."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Analyse d’audience",
+          "paragraphs": [
+            "Le site peut utiliser Google Analytics pour améliorer la qualité, la vitesse et la navigation. Les données collectées ne visent pas à identifier directement une personne."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Publicité",
+          "paragraphs": [
+            "Le site peut utiliser Google AdSense. Google et d’autres fournisseurs peuvent afficher des annonces selon les informations de navigation passées.",
+            "Les annonces personnalisées peuvent être gérées via les paramètres Google ou le navigateur."
+          ]
+        }
+      ]
+    },
+    "de": {
+      "title": "Datenschutzerklärung | Shiba Muscle",
+      "description": "Datenschutz, Cookies, Werbung und Nutzungsbedingungen von Shiba Muscle.",
+      "heading": "Datenschutzerklärung",
+      "intro": [
+        "Shiba Muscle verarbeitet Informationen nur im für den Service notwendigen Umfang und achtet auf den Schutz der Privatsphäre.",
+        "Letzte Aktualisierung: 27. April 2026"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Nutzungsbedingungen",
+          "blocks": [
+            {
+              "type": "subheading",
+              "text": "Nutzung der Inhalte"
+            },
+            {
+              "type": "paragraph",
+              "text": "Die Informationen der Website dürfen in angemessenem Umfang angesehen und zitiert werden. Irreführende Wiederveröffentlichung, böswillige Nutzung oder Nutzung zum Nachteil Dritter ist untersagt."
+            },
+            {
+              "type": "subheading",
+              "text": "Verbotene Handlungen"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Inhalte ohne Erlaubnis verändern und irreführend weiterverbreiten",
+                "Anderen Nutzern oder Dritten Nachteile oder Schäden zufügen",
+                "Den Betrieb durch unbefugten Zugriff oder Serverangriffe stören"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Haftungsausschluss"
+            },
+            {
+              "type": "paragraph",
+              "text": "Wir bemühen uns um korrekte und aktuelle Informationen, garantieren aber keine Vollständigkeit oder Genauigkeit. Für Schäden durch Nutzung der veröffentlichten Informationen übernimmt die Website keine Verantwortung."
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Urheberrecht",
+          "paragraphs": [
+            "Texte, Bilder und Daten gehören dem Betreiber oder den jeweiligen Rechteinhabern. Bei Zitaten oder Wiederverwendung ist die Quelle anzugeben."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Cookie-Richtlinie",
+          "paragraphs": [
+            "Die Website kann Cookies oder ähnliche Technologien für Analyse, Werbung und Verbesserung der Nutzerfreundlichkeit verwenden.",
+            "Cookies können im Browser deaktiviert werden; personalisierte Werbung lässt sich über die Google-Anzeigeneinstellungen verwalten."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Analyse",
+          "paragraphs": [
+            "Die Website kann Google Analytics nutzen, um Qualität, Geschwindigkeit und Navigation zu verbessern. Die Daten dienen nicht der direkten Identifikation einzelner Personen."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Werbung",
+          "paragraphs": [
+            "Die Website kann Google AdSense verwenden. Google und andere Anbieter können Anzeigen anhand früherer Zugriffsinformationen anzeigen.",
+            "Personalisierte Werbung kann über Google-Einstellungen oder den Browser verwaltet werden."
+          ]
+        }
+      ]
     }
   }
 }

@@ -56,11 +56,11 @@ console.log(`Generated ${generatedPages} localized static pages from src/pages/.
 
 function assertExpectedLocales(locales) {
     const localeCodes = locales.map((locale) => locale.code);
-    const inactiveLocales = ["de", "fr", "zh-hans", "zh-hant"];
-    const activeInactiveLocales = inactiveLocales.filter((locale) => localeCodes.includes(locale));
+    const requiredLocales = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de"];
+    const missingLocales = requiredLocales.filter((locale) => !localeCodes.includes(locale));
 
-    if (activeInactiveLocales.length) {
-        throw new Error(`${activeInactiveLocales.join(", ")} locale(s) are inactive and must not be generated. Active locales: ${localeCodes.join(", ")}`);
+    if (missingLocales.length) {
+        throw new Error(`${missingLocales.join(", ")} locale(s) are required for this build. Active locales: ${localeCodes.join(", ")}`);
     }
 }
 

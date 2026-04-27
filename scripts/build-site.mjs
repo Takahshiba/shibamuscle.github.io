@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { spawn } from "node:child_process";
-import { existsSync, readdirSync, rmSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import { getGeneratedLocales } from "./localization.mjs";
@@ -10,18 +10,11 @@ const NORMALIZE_SCRIPT = "scripts/normalize-site.mjs";
 const NORMALIZE_CHUNK_SIZE = Number.parseInt(process.env.SHIBA_NORMALIZE_CHUNK_SIZE || "1000", 10);
 const NORMALIZE_HTML = process.env.SHIBA_NORMALIZE_HTML === "1";
 const generatedLocaleCodes = getGeneratedLocales().map((locale) => locale.code);
-const INACTIVE_OUTPUT_DIRS = ["de", "fr", "zh-hans", "zh-hant"];
+const REQUIRED_GENERATED_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de"];
 
-const activeInactiveLocales = INACTIVE_OUTPUT_DIRS.filter((locale) => generatedLocaleCodes.includes(locale));
-if (activeInactiveLocales.length) {
-    throw new Error(`${activeInactiveLocales.join(", ")} locale(s) are inactive and must not be generated. Active locales: ${generatedLocaleCodes.join(", ")}`);
-}
-
-for (const inactiveOutputDir of INACTIVE_OUTPUT_DIRS) {
-    const inactiveDir = join(process.cwd(), inactiveOutputDir);
-    if (existsSync(inactiveDir)) {
-        rmSync(inactiveDir, { recursive: true, force: true });
-    }
+const missingLocales = REQUIRED_GENERATED_LOCALE_CODES.filter((locale) => !generatedLocaleCodes.includes(locale));
+if (missingLocales.length) {
+    throw new Error(`${missingLocales.join(", ")} locale(s) are required for this build. Active locales: ${generatedLocaleCodes.join(", ")}`);
 }
 
 const steps = [

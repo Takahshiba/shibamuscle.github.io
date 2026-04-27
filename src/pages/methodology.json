@@ -155,6 +155,206 @@
           ]
         }
       ]
+    },
+    "zh-hant": {
+      "title": "資料說明 | Shiba Muscle",
+      "description": "說明 Shiba Muscle 的平均重量、力量標準、肌群資訊與單位切換方式。",
+      "heading": "資料說明",
+      "intro": [
+        "Shiba Muscle 的數值是訓練規劃與動作比較的參考。請不要只用重量或次數判斷優劣，也要一起確認姿勢、活動範圍、訓練年資與身體狀態。"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "平均重量與平均次數",
+          "paragraphs": [
+            "重量動作顯示平均重量；較適合用反覆次數比較的自重動作則顯示平均次數。兩者都應視為有個體差異的參考值。",
+            "kg 頁面與 lb 頁面是同一動作的不同單位版本。預設單位為 kg。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "標準表等級",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "基礎: 正在學習姿勢並開始穩定訓練的參考",
+                "初級: 持續訓練半年以上的參考",
+                "中級: 有兩年以上訓練經驗的參考",
+                "上級: 多年有計畫訓練者的參考",
+                "Pro: 專項訓練該動作的高水準參考"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "安全使用",
+          "paragraphs": [
+            "不要為了達到表格數值而忍痛訓練或破壞姿勢。高重量訓練請優先安排保護、保險槓與充分暖身。",
+            "本網站資訊屬一般健身參考。受傷、疼痛、病史、孕期運動或復健相關判斷，請諮詢合格專業人士。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "更新與品質管理",
+          "paragraphs": [
+            "生成頁面時會檢查標題、說明文、H1、canonical、hreflang、網站地圖、內部連結與本地化缺漏。",
+            "若發現錯字、連結失效、不自然數值或翻譯問題，請透過聯絡頁面告訴我們。"
+          ]
+        }
+      ]
+    },
+    "zh-hans": {
+      "title": "数据说明 | Shiba Muscle",
+      "description": "说明 Shiba Muscle 的平均重量、力量标准、肌群信息与单位切换方式。",
+      "heading": "数据说明",
+      "intro": [
+        "Shiba Muscle 的数值是训练规划与动作比较的参考。请不要只用重量或次数判断优劣，也要结合姿势、活动范围、训练年限与身体状态。"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "平均重量与平均次数",
+          "paragraphs": [
+            "重量动作显示平均重量；更适合用反复次数比较的自重动作则显示平均次数。两者都应视为存在个体差异的参考值。",
+            "kg 页面与 lb 页面是同一动作的不同单位版本。默认单位为 kg。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "标准表等级",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "基础: 正在学习姿势并开始稳定训练的参考",
+                "初级: 持续训练半年以上的参考",
+                "中级: 有两年以上训练经验的参考",
+                "高级: 多年有计划训练者的参考",
+                "Pro: 专项训练该动作的高水平参考"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "安全使用",
+          "paragraphs": [
+            "不要为了达到表格数值而忍痛训练或破坏动作姿势。高重量训练请优先安排保护、保险杆和充分热身。",
+            "本网站信息属于一般健身参考。受伤、疼痛、病史、孕期运动或康复相关判断，请咨询合格专业人士。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "更新与质量管理",
+          "paragraphs": [
+            "生成页面时会检查标题、说明文字、H1、canonical、hreflang、网站地图、内部链接与本地化缺漏。",
+            "如果发现错字、失效链接、不自然数据或翻译问题，请通过联系页面告诉我们。"
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "title": "Lire les données | Shiba Muscle",
+      "description": "Explication des charges moyennes, standards de force, muscles travaillés et unités dans Shiba Muscle.",
+      "heading": "Lire les données",
+      "intro": [
+        "Les valeurs de Shiba Muscle sont des repères pour planifier l’entraînement et comparer les exercices. Ne jugez pas uniquement par la charge ou les répétitions; tenez compte de la technique, de l’amplitude, de l’expérience et de l’état physique."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Charge moyenne et répétitions moyennes",
+          "paragraphs": [
+            "Les exercices avec charge affichent une charge moyenne. Les mouvements où les répétitions sont plus pertinentes affichent des répétitions moyennes. Ces valeurs restent des repères avec variation individuelle.",
+            "Les pages kg et lb montrent le même exercice avec une unité différente. L’unité par défaut du site est le kg."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Niveaux des tableaux",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Base: repère pour apprendre la technique et commencer régulièrement",
+                "Débutant: repère après au moins six mois d’entraînement",
+                "Intermédiaire: repère pour plus de deux ans de pratique",
+                "Avancé: repère pour un entraînement planifié sur plusieurs années",
+                "Pro: repère élevé pour une spécialisation sur l’exercice"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Utilisation sûre",
+          "paragraphs": [
+            "Ne poursuivez pas une valeur si la douleur apparaît ou si la technique se dégrade. Sur les charges lourdes, privilégiez l’échauffement, la sécurité et l’aide si nécessaire.",
+            "Les informations sont des contenus généraux de fitness. Pour blessure, douleur, antécédents, grossesse ou rééducation, consultez des professionnels qualifiés."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Mises à jour et qualité",
+          "paragraphs": [
+            "La génération vérifie titres, descriptions, H1, canonical, hreflang, sitemap, liens internes et localisations manquantes.",
+            "Si vous repérez une erreur, un lien cassé, une donnée étrange ou une traduction peu naturelle, écrivez-nous via la page contact."
+          ]
+        }
+      ]
+    },
+    "de": {
+      "title": "Daten verstehen | Shiba Muscle",
+      "description": "Erklärung zu Durchschnittsgewicht, Kraftstandards, Zielmuskulatur und Einheiten bei Shiba Muscle.",
+      "heading": "Daten verstehen",
+      "intro": [
+        "Die Werte bei Shiba Muscle sind Orientierungspunkte für Trainingsplanung und Übungsvergleiche. Bewerte Fortschritt nicht nur über Gewicht oder Wiederholungen, sondern auch über Technik, Bewegungsumfang, Erfahrung und Tagesform."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Durchschnittsgewicht und Wiederholungen",
+          "paragraphs": [
+            "Bei Lastübungen zeigen wir Durchschnittsgewicht; bei Übungen, die sinnvoller über Wiederholungen verglichen werden, zeigen wir durchschnittliche Wiederholungen. Beide Werte sind Referenzen mit individueller Streuung.",
+            "kg- und lb-Seiten zeigen dieselbe Übung in unterschiedlichen Einheiten. Die Standard­einheit ist kg."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Level der Tabellen",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Basis: Orientierung beim Erlernen der Technik und Einstieg ins regelmäßige Training",
+                "Anfänger: Orientierung nach mindestens sechs Monaten Training",
+                "Mittelstufe: Orientierung bei mehr als zwei Jahren Erfahrung",
+                "Fortgeschritten: Orientierung bei mehrjährig geplantem Training",
+                "Pro: hoher Referenzwert bei Spezialisierung auf die Übung"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Sichere Nutzung",
+          "paragraphs": [
+            "Verfolge keinen Tabellenwert, wenn Schmerzen auftreten oder die Technik zerfällt. Bei schweren Übungen sind Aufwärmen, Absicherung und Hilfe wichtiger als die Zahl.",
+            "Die Informationen sind allgemeine Fitnessinhalte. Bei Verletzungen, Schmerzen, Vorerkrankungen, Schwangerschaft oder Reha sollten qualifizierte Fachleute einbezogen werden."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Aktualisierung und Qualität",
+          "paragraphs": [
+            "Beim Generieren prüfen Skripte Titel, Beschreibung, H1, canonical, hreflang, Sitemap, interne Links und fehlende Lokalisierungen.",
+            "Wenn du Fehler, defekte Links, ungewöhnliche Daten oder unnatürliche Übersetzungen findest, melde dich bitte über die Kontaktseite."
+          ]
+        }
+      ]
     }
   }
 }
