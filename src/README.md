@@ -14,7 +14,7 @@
 - `pages/*.json`
   Source content for shared static pages like the homepage, contact page, and privacy policy.
 - `locales.json`
-  Locale routing and SEO configuration. Japanese is generated at `/`; Korean, Traditional Chinese, Simplified Chinese, Spanish, and French are generated under `/ko/`, `/zh-hant/`, `/zh-hans/`, `/es/`, and `/fr/`.
+  Locale routing and SEO configuration. Japanese is generated at `/`; Korean, Traditional Chinese, Simplified Chinese, Spanish, French, German, and Indonesian are generated under `/ko/`, `/zh-hant/`, `/zh-hans/`, `/es/`, `/fr/`, `/de/`, and `/id/`.
 
 Build flow:
 
@@ -34,7 +34,7 @@ Bootstrap / re-extract source from the current generated HTML:
 node scripts/extract-exercise-source.mjs
 ```
 
-The generated root HTML files and locale HTML files under `/ko/`, `/zh-hant/`, `/zh-hans/`, `/es/`, and `/fr/` are build outputs. Edit `src/` instead of editing the generated exercise pages directly.
+The generated root HTML files and locale HTML files under `/ko/`, `/zh-hant/`, `/zh-hans/`, `/es/`, `/fr/`, `/de/`, and `/id/` are build outputs. Edit `src/` instead of editing the generated exercise pages directly.
 
 Today this covers the homepage, contact page, privacy policy, and all exercise pages. `Shift2ics.html` is still hand-maintained because it is a standalone PDF tool with its own inline runtime.
 

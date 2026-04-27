@@ -355,6 +355,56 @@
           ]
         }
       ]
+    },
+    "id": {
+      "title": "Cara Membaca Data | Shiba Muscle",
+      "description": "Penjelasan tentang berat rata-rata, standar kekuatan, informasi otot, dan perpindahan satuan di Shiba Muscle.",
+      "heading": "Cara Membaca Data",
+      "intro": [
+        "Angka di Shiba Muscle adalah referensi untuk menyusun program latihan dan membandingkan gerakan. Jangan menilai progres hanya dari beban atau repetisi; perhatikan juga teknik, rentang gerak, pengalaman latihan, dan kondisi tubuh."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Berat rata-rata dan repetisi rata-rata",
+          "paragraphs": [
+            "Untuk latihan berbeban, kami menampilkan berat rata-rata. Untuk latihan yang lebih cocok dibandingkan lewat repetisi, seperti banyak gerakan bodyweight, kami menampilkan repetisi rata-rata. Keduanya perlu dibaca sebagai patokan umum dengan variasi individual.",
+            "Halaman kg dan lb menampilkan latihan yang sama dengan satuan berbeda. Unit bawaan untuk halaman Bahasa Indonesia adalah kg."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Level pada tabel standar",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Dasar: patokan untuk orang yang sedang mempelajari teknik dan mulai latihan konsisten",
+                "Pemula: patokan setelah setidaknya enam bulan latihan rutin",
+                "Menengah: patokan untuk orang dengan pengalaman latihan lebih dari dua tahun",
+                "Mahir: patokan untuk orang yang berlatih terencana selama bertahun-tahun",
+                "Pro: patokan tinggi untuk orang yang menekuni latihan tersebut secara khusus"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Menggunakan data dengan aman",
+          "paragraphs": [
+            "Jangan memaksakan angka di tabel jika muncul nyeri atau teknik mulai rusak. Untuk latihan berat, prioritaskan pemanasan, alat pengaman, dan bantuan spotter bila perlu.",
+            "Informasi di situs ini adalah informasi fitness umum. Untuk cedera, nyeri, riwayat medis, olahraga saat hamil, atau rehabilitasi, konsultasikan dengan dokter, fisioterapis, atau pelatih bersertifikat."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Pembaruan dan kontrol kualitas",
+          "paragraphs": [
+            "Saat situs dibuat, skrip memeriksa judul, deskripsi, H1, canonical, hreflang, sitemap, tautan internal, dan kelengkapan lokalisasi.",
+            "Jika menemukan salah ketik, tautan rusak, angka yang terasa janggal, atau terjemahan yang kurang natural, silakan hubungi kami melalui halaman kontak."
+          ]
+        }
+      ]
     }
   }
 }

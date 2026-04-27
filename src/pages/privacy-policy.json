@@ -584,6 +584,99 @@
           ]
         }
       ]
+    },
+    "id": {
+      "title": "Kebijakan Privasi | Shiba Muscle",
+      "description": "Halaman yang merangkum kebijakan privasi, kebijakan cookie, iklan, dan ketentuan penggunaan Shiba Muscle.",
+      "heading": "Kebijakan Privasi",
+      "intro": [
+        "Di Shiba Muscle, kami menangani informasi hanya sejauh yang diperlukan untuk menyediakan layanan dan berupaya melindungi privasi pengguna. Di bawah ini dijelaskan bagaimana informasi dikelola dan ketentuan penggunaan situs.",
+        "Terakhir diperbarui: 27 April 2026"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Ketentuan penggunaan",
+          "blocks": [
+            {
+              "type": "subheading",
+              "text": "Penggunaan konten"
+            },
+            {
+              "type": "paragraph",
+              "text": "Informasi di situs ini dapat dirujuk atau dikutip dalam batas wajar. Namun, publikasi ulang yang menyesatkan, penggunaan dengan niat buruk, atau penggunaan yang merugikan pihak ketiga tidak diperbolehkan. Saat mengutip atau memakai ulang konten, cantumkan nama situs sebagai sumber."
+            },
+            {
+              "type": "subheading",
+              "text": "Hal yang dilarang"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Mengubah isi situs tanpa izin lalu mendistribusikannya dengan cara yang dapat menimbulkan salah paham",
+                "Mengganggu, merugikan, atau menyebabkan kerusakan bagi pengguna lain atau pihak ketiga",
+                "Menghambat operasional layanan melalui akses tidak sah, serangan ke server, atau tindakan serupa"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Penafian"
+            },
+            {
+              "type": "paragraph",
+              "text": "Kami berupaya menjaga informasi yang dipublikasikan agar akurat dan mutakhir, tetapi tidak menjamin kelengkapan atau keakuratannya. Situs ini tidak bertanggung jawab atas kerugian yang timbul dari penggunaan informasi yang dipublikasikan."
+            },
+            {
+              "type": "subheading",
+              "text": "Perubahan layanan"
+            },
+            {
+              "type": "paragraph",
+              "text": "Konten, struktur, dan layanan yang tersedia di situs dapat berubah, dihentikan sementara, atau diakhiri tanpa pemberitahuan sebelumnya. Situs ini tidak bertanggung jawab atas kerugian akibat perubahan tersebut."
+            },
+            {
+              "type": "subheading",
+              "text": "Tautan eksternal"
+            },
+            {
+              "type": "paragraph",
+              "text": "Kami tidak bertanggung jawab atas informasi, layanan, atau konten lain yang disediakan oleh situs eksternal yang diakses melalui tautan, banner, atau elemen lain dari situs ini."
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Hak cipta",
+          "paragraphs": [
+            "Hak cipta atas teks, gambar, data, dan konten lain di situs ini dimiliki oleh pengelola situs atau pemegang hak yang sah. Saat mengutip atau memakai ulang konten, cantumkan sumber dan gunakan dalam batas yang sesuai."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Kebijakan cookie",
+          "paragraphs": [
+            "Situs ini dapat menggunakan cookie dan teknologi serupa untuk analitik akses, penayangan iklan, dan peningkatan pengalaman pengguna. Informasi tersebut membantu kami memahami pola penggunaan, memperbaiki situs, dan menampilkan iklan yang lebih relevan.",
+            "Jika tidak ingin mengizinkan cookie, kamu dapat menonaktifkannya melalui pengaturan browser. Personalisasi iklan juga dapat dikelola melalui pengaturan iklan Google."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Analitik",
+          "paragraphs": [
+            "Kami dapat menggunakan Google Analytics untuk meningkatkan situs. Google Analytics memakai cookie dan teknologi serupa untuk mengumpulkan informasi seperti halaman yang dilihat, lingkungan penggunaan, dan sumber kunjungan.",
+            "Informasi yang dikumpulkan tidak digunakan untuk mengidentifikasi seseorang secara langsung, tetapi untuk meningkatkan kualitas situs, kecepatan tampilan, navigasi, dan pemahaman pola penggunaan."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Iklan",
+          "paragraphs": [
+            "Situs ini menggunakan Google AdSense, layanan iklan pihak ketiga. Google dan penyedia iklan lain dapat menampilkan iklan berdasarkan informasi kunjungan sebelumnya atau data serupa.",
+            "Google dapat menggunakan cookie iklan untuk menampilkan iklan berdasarkan kunjungan ke situs ini atau situs lain. Jika tidak menginginkan iklan yang dipersonalisasi, kamu dapat mengelolanya melalui pengaturan iklan Google atau pengaturan browser.",
+            "Untuk informasi lebih lanjut tentang isi iklan, cara penayangan, dan personalisasi, silakan lihat kebijakan Google dan masing-masing penyedia iklan."
+          ]
+        }
+      ]
     }
   }
 }

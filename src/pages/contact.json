@@ -194,6 +194,33 @@
           ]
         }
       ]
+    },
+    "id": {
+      "title": "Kontak | Shiba Muscle",
+      "description": "Halaman kontak Shiba Muscle. Untuk pertanyaan tentang layanan, data, atau konten yang dipublikasikan, kirim pesan melalui alamat di halaman ini.",
+      "heading": "Kontak",
+      "intro": [
+        "Untuk pertanyaan tentang layanan, data yang dipublikasikan, kerja sama, atau hal lain, silakan kirim email ke alamat di bawah ini."
+      ],
+      "sections": [
+        {
+          "className": "content-card contact-card",
+          "blocks": [
+            {
+              "type": "email",
+              "label": "Email",
+              "value": "info@shibamuscle.com"
+            }
+          ]
+        },
+        {
+          "className": "content-card note",
+          "paragraphs": [
+            "Kami meninjau pesan dan membalas secara berurutan. Tergantung isi pertanyaan, balasan mungkin membutuhkan waktu.",
+            "Agar kami bisa membantu lebih tepat, jelaskan situasi dan kebutuhan kamu sedetail mungkin. Untuk pertanyaan terkait data pribadi, kami mungkin meminta verifikasi identitas."
+          ]
+        }
+      ]
     }
   }
 }

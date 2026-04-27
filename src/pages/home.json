@@ -276,6 +276,45 @@
           }
         ]
       }
+    },
+    "id": {
+      "title": "Shiba Muscle | Database Latihan",
+      "description": "Database latihan Shiba Muscle untuk mengecek berat rata-rata, standar kekuatan, dan otot yang dilatih berdasarkan area tubuh dan jenis latihan. Mendukung satuan kg dan lb.",
+      "heroHeading": "Bandingkan data latihan dengan jelas",
+      "heading": "Temukan latihan",
+      "intro": [
+        "Shiba Muscle adalah database latihan untuk membandingkan berat rata-rata, standar kekuatan, dan otot utama pada setiap gerakan. Dari bench press, squat, deadlift, latihan dumbbell, bodyweight, sampai cable, kamu bisa mengecek patokan berdasarkan berat badan dan usia dengan cepat.",
+        "Angka di situs ini adalah referensi untuk menyusun latihan, bukan target wajib. Setiap halaman menyertakan informasi otot dan cara membaca tabel agar kamu bisa memprioritaskan teknik, rentang gerak, pengalaman latihan, dan keamanan."
+      ],
+      "overview": {
+        "eyebrow": "Workout data",
+        "sectionEyebrow": "Panduan data",
+        "title": "Prinsip penyajian agar mudah dibandingkan",
+        "copy": "Bagian awal merangkum tujuan situs, cara kami menyusun data, dan cara memakai angka sebelum kamu menjelajahi semua tabel.",
+        "items": [
+          {
+            "eyebrow": "Purpose",
+            "heading": "Membuat pintu masuk pemilihan latihan",
+            "paragraphs": [
+              "Latihan disusun berdasarkan area tubuh, alat, dan otot utama supaya gerakan yang mirip lebih mudah dibandingkan."
+            ]
+          },
+          {
+            "eyebrow": "Data",
+            "heading": "Memisahkan rata-rata dan tabel standar",
+            "paragraphs": [
+              "Berat rata-rata tidak berdiri sendiri; tabel berdasarkan berat badan dan usia juga disediakan sebagai konteks tambahan."
+            ]
+          },
+          {
+            "eyebrow": "Safety",
+            "heading": "Referensi, bukan saran medis atau kepelatihan",
+            "paragraphs": [
+              "Jika ada nyeri atau riwayat cedera, konsultasikan dengan profesional dan prioritaskan teknik serta keamanan dibanding angka."
+            ]
+          }
+        ]
+      }
     }
   }
 }

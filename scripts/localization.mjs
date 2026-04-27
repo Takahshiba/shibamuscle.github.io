@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ROOT, loadLocales } from "./source-data.mjs";
 
 const SITE_ORIGIN = "https://shibamuscle.com";
-const ACTIVE_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "en"];
+const ACTIVE_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "id", "en"];
 const INACTIVE_LOCALE_CODES = new Set([]);
 let cachedLocaleConfigs = null;
 const SIMPLIFIED_CHINESE_LOCALE_CONFIG = {
@@ -168,6 +168,31 @@ const UI_TEXT = {
         shoulder: "Schultern",
         support: "Support",
         wholeBody: "Ganzkörper"
+    },
+    id: {
+        ad: "Iklan",
+        arm: "Lengan",
+        back: "Punggung",
+        breadcrumb: "Breadcrumb",
+        categories: "Kategori",
+        chest: "Dada",
+        contact: "Kontak",
+        core: "Core",
+        data: "Data",
+        female: "Wanita",
+        group: "Grup",
+        home: "Beranda",
+        language: "Bahasa",
+        leg: "Kaki",
+        links: "Tautan",
+        male: "Pria",
+        moreWorkouts: "Latihan lainnya",
+        muscles: "Otot",
+        musclesHeading: "Otot yang dilatih",
+        privacy: "Kebijakan Privasi",
+        shoulder: "Bahu",
+        support: "Dukungan",
+        wholeBody: "Seluruh tubuh"
     }
 };
 
@@ -213,6 +238,10 @@ Object.assign(UI_TEXT.de, {
     about: "Über Shiba Muscle",
     methodology: "Daten verstehen"
 });
+Object.assign(UI_TEXT.id, {
+    about: "Tentang Shiba Muscle",
+    methodology: "Cara membaca data"
+});
 
 const CATEGORY_NAV = [
     {
@@ -225,7 +254,8 @@ const CATEGORY_NAV = [
             "zh-hant": "硬舉、翻站、抓舉等全身協調動作的標準頁面",
             es: "Páginas de referencia para ejercicios globales como peso muerto, clean y snatch",
             fr: "Pages de référence pour les exercices globaux comme le soulevé de terre, le clean et le snatch",
-            de: "Referenzseiten für Ganzkörperübungen wie Kreuzheben, Clean und Snatch"
+            de: "Referenzseiten für Ganzkörperübungen wie Kreuzheben, Clean und Snatch",
+            id: "Halaman referensi untuk deadlift, clean, snatch, dan gerakan seluruh tubuh"
         }
     },
     {
@@ -238,7 +268,8 @@ const CATEGORY_NAV = [
             "zh-hant": "推類動作的平均重量與訓練標準比較",
             es: "Pesos medios y comparativas de ejercicios de empuje",
             fr: "Charges moyennes et comparaisons des exercices de poussée",
-            de: "Durchschnittsgewichte und Vergleiche für Druckübungen"
+            de: "Durchschnittsgewichte und Vergleiche für Druckübungen",
+            id: "Berat rata-rata dan perbandingan latihan dorong"
         }
     },
     {
@@ -251,7 +282,8 @@ const CATEGORY_NAV = [
             "zh-hant": "划船、下拉與髖鉸鏈類動作比較",
             es: "Comparativas de remos, jalones y bisagras de cadera",
             fr: "Comparaisons des tirages, rowings et mouvements de charnière",
-            de: "Vergleiche für Rudern, Zugübungen und Hüftstreckbewegungen"
+            de: "Vergleiche für Rudern, Zugübungen und Hüftstreckbewegungen",
+            id: "Perbandingan row, pull, dan gerakan hip hinge"
         }
     },
     {
@@ -264,7 +296,8 @@ const CATEGORY_NAV = [
             "zh-hant": "肩推、平舉與穩定性訓練動作列表",
             es: "Ejercicios de press, elevaciones y estabilidad del hombro",
             fr: "Exercices de développé, d'élévation et de stabilité des épaules",
-            de: "Schulterdrücken, Seitheben und Stabilitätsübungen"
+            de: "Schulterdrücken, Seitheben und Stabilitätsübungen",
+            id: "Daftar press, raise, dan latihan stabilitas bahu"
         }
     },
     {
@@ -277,7 +310,8 @@ const CATEGORY_NAV = [
             "zh-hant": "彎舉、三頭肌與前臂訓練動作",
             es: "Curls, tríceps y ejercicios de antebrazo",
             fr: "Curls, triceps et exercices d'avant-bras",
-            de: "Curls, Trizeps- und Unterarmübungen"
+            de: "Curls, Trizeps- und Unterarmübungen",
+            id: "Curl, triseps, dan latihan lengan bawah"
         }
     },
     {
@@ -290,7 +324,8 @@ const CATEGORY_NAV = [
             "zh-hant": "深蹲、弓箭步與臀腿主導動作",
             es: "Sentadillas, zancadas y ejercicios dominantes de cadera",
             fr: "Squats, fentes et exercices dominants hanche",
-            de: "Kniebeugen, Ausfallschritte und hüftdominante Übungen"
+            de: "Kniebeugen, Ausfallschritte und hüftdominante Übungen",
+            id: "Squat, lunge, dan latihan dominan pinggul"
         }
     },
     {
@@ -303,7 +338,8 @@ const CATEGORY_NAV = [
             "zh-hant": "腹肌、旋轉與核心穩定訓練動作",
             es: "Abdominales, rotación y estabilidad del core",
             fr: "Abdominaux, rotation et stabilité du tronc",
-            de: "Bauchübungen, Rotation und Rumpfstabilität"
+            de: "Bauchübungen, Rotation und Rumpfstabilität",
+            id: "Abs, rotasi, dan stabilitas core"
         }
     }
 ];
@@ -456,6 +492,36 @@ const CATEGORY_DEFAULT_TAGS_FR = {
     "arm-section": ["Bras", "Curl"],
     "leg-section": ["Jambes", "Squat"],
     "core-section": ["Tronc", "Abdominaux"]
+};
+
+const CATEGORY_LABELS_ID = {
+    "whole-body-section": "Seluruh tubuh",
+    "chest-section": "Dada",
+    "back-section": "Punggung",
+    "shoulder-section": "Bahu",
+    "arm-section": "Lengan",
+    "leg-section": "Kaki",
+    "core-section": "Core"
+};
+
+const CATEGORY_ALIASES_ID = {
+    "whole-body-section": ["Latihan seluruh tubuh", "BIG3 / seluruh tubuh"],
+    "chest-section": ["Latihan dada", "Pektoral"],
+    "back-section": ["Latihan punggung", "Latissimus dorsi"],
+    "shoulder-section": ["Latihan bahu", "Deltoid"],
+    "arm-section": ["Latihan lengan", "Biseps", "Triseps"],
+    "leg-section": ["Latihan kaki", "Tubuh bawah"],
+    "core-section": ["Latihan core", "Perut"]
+};
+
+const CATEGORY_DEFAULT_TAGS_ID = {
+    "whole-body-section": ["Seluruh tubuh", "Koordinasi tubuh penuh"],
+    "chest-section": ["Dada", "Press"],
+    "back-section": ["Punggung", "Pull"],
+    "shoulder-section": ["Bahu", "Press"],
+    "arm-section": ["Lengan", "Curl"],
+    "leg-section": ["Kaki", "Squat"],
+    "core-section": ["Core", "Perut"]
 };
 
 const MUSCLE_GROUPS_KO = {
@@ -638,6 +704,42 @@ const MUSCLES_FR = {
     "腹直筋": "Grand droit"
 };
 
+const MUSCLE_GROUPS_ID = {
+    "グリップ": "Grip",
+    "主働筋": "Otot utama",
+    "主動筋": "Otot utama",
+    "副働筋": "Otot pendukung",
+    "副動筋": "Otot pendukung",
+    "安定筋": "Otot stabilisator"
+};
+
+const MUSCLES_ID = {
+    "なし": "Tidak ada",
+    "ハムストリングス": "Hamstring",
+    "三角筋": "Deltoid",
+    "上腕三頭筋": "Triseps brachii",
+    "上腕二頭筋": "Biseps brachii",
+    "下腿三頭筋": "Otot betis",
+    "僧帽筋": "Trapezius",
+    "内転筋群": "Adductor",
+    "前脛骨筋": "Tibialis anterior",
+    "前腕伸筋群": "Ekstensor lengan bawah",
+    "前腕屈筋群": "Fleksor lengan bawah",
+    "外腹斜筋": "Oblique eksternal",
+    "大円筋": "Teres major",
+    "大胸筋": "Pectoralis major",
+    "大胸筋上部": "Pectoralis atas",
+    "大胸筋下部": "Pectoralis bawah",
+    "大腿四頭筋": "Quadriceps",
+    "大臀筋": "Gluteus maximus",
+    "広背筋": "Latissimus dorsi",
+    "棘上筋": "Supraspinatus",
+    "棘下筋": "Infraspinatus",
+    "胸鎖乳突筋": "Sternocleidomastoid",
+    "脊柱起立筋": "Erector spinae",
+    "腹直筋": "Rectus abdominis"
+};
+
 const EQUIPMENT_TAGS_KO = {
     BIG3: "BIG3",
     "ケーブル": "케이블",
@@ -686,6 +788,16 @@ const EQUIPMENT_TAGS_FR = {
     "バーベル": "Barre",
     "マシン": "Machine",
     "自重": "Poids du corps"
+};
+
+const EQUIPMENT_TAGS_ID = {
+    BIG3: "BIG3",
+    "ケーブル": "Cable",
+    "スミスマシン": "Smith machine",
+    "ダンベル": "Dumbbell",
+    "バーベル": "Barbell",
+    "マシン": "Machine",
+    "自重": "Bodyweight"
 };
 
 const EXACT_EXERCISE_NAMES_KO = {
@@ -1799,6 +1911,201 @@ const FRENCH_POST_MODIFIERS = new Set([
     "une jambe"
 ]);
 
+const EXACT_EXERCISE_NAMES_ID = {
+    "ab-wheel-roller": "Ab wheel rollout",
+    "bench-press": "Bench press",
+    "bodyweight-squat": "Bodyweight squat",
+    "burpees": "Burpee",
+    "chin-ups": "Chin-up",
+    "clean": "Clean",
+    "clean-and-jerk": "Clean and jerk",
+    "clean-and-press": "Clean and press",
+    "crunches": "Crunch",
+    "deadlift": "Deadlift",
+    "dips": "Dip",
+    "front-squat": "Front squat",
+    "glute-bridge": "Glute bridge",
+    "good-morning": "Good morning",
+    "hammer-curl": "Hammer curl",
+    "hip-thrust": "Hip thrust",
+    "jumping-jack": "Jumping jack",
+    "lat-pulldown": "Lat pulldown",
+    "lunge": "Lunge",
+    "military-press": "Military press",
+    "mountain-climbers": "Mountain climber",
+    "muscle-ups": "Muscle-up",
+    "pull-ups": "Pull-up",
+    "push-ups": "Push-up",
+    "romanian-deadlift": "Romanian deadlift",
+    "russian-twist": "Russian twist",
+    "sit-ups": "Sit-up",
+    "snatch": "Snatch",
+    "squat": "Squat",
+    "sumo-deadlift": "Sumo deadlift",
+    "sumo-squat": "Sumo squat",
+    "superman": "Superman",
+    "toes-to-bar": "Toes-to-bar",
+    "wall-ball": "Wall ball"
+};
+
+const PHRASE_NAME_PARTS_ID = {
+    "ab-wheel": "ab wheel",
+    "back-extension": "back extension",
+    "bench-dips": "bench dip",
+    "bench-press": "bench press",
+    "bent-arm": "bent-arm",
+    "bent-over": "bent-over",
+    "behind-the-back": "behind-the-back",
+    "behind-the-neck": "behind-the-neck",
+    "bicep-curl": "bicep curl",
+    "bodyweight": "bodyweight",
+    "bulgarian-split-squat": "Bulgarian split squat",
+    "calf-raise": "calf raise",
+    "chest-fly": "chest fly",
+    "chest-press": "chest press",
+    "chest-supported": "chest-supported",
+    "clean-and-jerk": "clean and jerk",
+    "clean-and-press": "clean and press",
+    "clean-high-pull": "clean high pull",
+    "clean-pull": "clean pull",
+    "close-grip": "close-grip",
+    "concentration-curl": "concentration curl",
+    "external-rotation": "external rotation",
+    "ez-bar": "EZ bar",
+    "face-pull": "face pull",
+    "front-raise": "front raise",
+    "front-squat": "front squat",
+    "glute-bridge": "glute bridge",
+    "glute-ham-raise": "glute ham raise",
+    "glute-kickback": "glute kickback",
+    "goblet-squat": "goblet squat",
+    "hack-squat": "hack squat",
+    "hammer-curl": "hammer curl",
+    "hang-clean": "hang clean",
+    "hang-power-clean": "hang power clean",
+    "hang-snatch": "hang snatch",
+    "hex-bar": "hex bar",
+    "hanging-knee-raise": "hanging knee raise",
+    "hanging-leg-raise": "hanging leg raise",
+    "high-pulley": "high pulley",
+    "hip-abduction": "hip abduction",
+    "hip-adduction": "hip adduction",
+    "hip-extension": "hip extension",
+    "hip-thrust": "hip thrust",
+    "incline-bench-press": "incline bench press",
+    "incline-push-ups": "incline push-up",
+    "inverted-row": "inverted row",
+    "lat-pulldown": "lat pulldown",
+    "lateral-raise": "lateral raise",
+    "leg-curl": "leg curl",
+    "leg-extension": "leg extension",
+    "leg-press": "leg press",
+    "leg-raise": "leg raise",
+    "muscle-snatch": "muscle snatch",
+    "muscle-ups": "muscle-up",
+    "neck-curl": "neck curl",
+    "neck-extension": "neck extension",
+    "neutral-grip": "neutral-grip",
+    "nordic-hamstring-curl": "Nordic hamstring curl",
+    "one-arm": "one-arm",
+    "overhead-squat": "overhead squat",
+    "pin-press": "pin press",
+    "pull-through": "pull-through",
+    "pull-ups": "pull-up",
+    "push-jerk": "push jerk",
+    "push-press": "push press",
+    "push-ups": "push-up",
+    "rack-pull": "rack pull",
+    "reverse-fly": "reverse fly",
+    "reverse-grip": "reverse-grip",
+    "reverse-hyperextension": "reverse hyperextension",
+    "reverse-wrist-curl": "reverse wrist curl",
+    "romanchair": "Roman chair",
+    "romanian-deadlift": "Romanian deadlift",
+    "safety-bar": "safety bar",
+    "scissor-kicks": "scissor kick",
+    "seated-cable-row": "seated cable row",
+    "shoulder-press": "shoulder press",
+    "side-bend": "side bend",
+    "side-crunches": "side crunch",
+    "side-leg-raise": "side leg raise",
+    "single-leg": "single-leg",
+    "sit-ups": "sit-up",
+    "smith-machine": "Smith machine",
+    "split-jerk": "split jerk",
+    "split-squat": "split squat",
+    "squat-jump": "squat jump",
+    "squat-thrust": "squat thrust",
+    "stiff-leg-deadlift": "stiff-leg deadlift",
+    "straight-arm": "straight-arm",
+    "t-bar": "T-bar",
+    "tricep-extension": "tricep extension",
+    "tricep-pushdown": "tricep pushdown",
+    "tricep-rope": "tricep rope",
+    "upright-row": "upright row",
+    "wide-grip": "wide-grip",
+    "wrist-curl": "wrist curl",
+    "y-raise": "Y raise"
+};
+
+const TOKEN_NAME_PARTS_ID = {
+    abduction: "abduction",
+    adduction: "adduction",
+    archer: "archer",
+    arnold: "Arnold",
+    back: "back",
+    bar: "bar",
+    barbell: "barbell",
+    bench: "bench",
+    bicycle: "bicycle",
+    bicep: "bicep",
+    box: "box",
+    cable: "cable",
+    calf: "calf",
+    clean: "clean",
+    curl: "curl",
+    deadlift: "deadlift",
+    decline: "decline",
+    deficit: "deficit",
+    diamond: "diamond",
+    dumbbell: "dumbbell",
+    extension: "extension",
+    fly: "fly",
+    floor: "floor",
+    front: "front",
+    glute: "glute",
+    hamstring: "hamstring",
+    handstand: "handstand",
+    incline: "incline",
+    kickback: "kickback",
+    landmine: "landmine",
+    lateral: "lateral",
+    lying: "lying",
+    machine: "machine",
+    overhead: "overhead",
+    paused: "paused",
+    pike: "pike",
+    pistol: "pistol",
+    press: "press",
+    pull: "pull",
+    pulldown: "pulldown",
+    pullover: "pullover",
+    push: "push",
+    row: "row",
+    seated: "seated",
+    shoulder: "shoulder",
+    shrug: "shrug",
+    squat: "squat",
+    standing: "standing",
+    sumo: "sumo",
+    tricep: "tricep",
+    upright: "upright",
+    walking: "walking",
+    wrist: "wrist",
+    zercher: "Zercher",
+    zottman: "Zottman"
+};
+
 const JAPANESE_TO_KOREAN_TEXT = [
     ["その他のワークアウト", "다른 운동"],
     ["ワークアウトデータベース", "운동 데이터베이스"],
@@ -1966,6 +2273,54 @@ const JAPANESE_TO_SPANISH_TEXT = [
     ["5年以上継続的にトレーニングに励む。", "Entrena de forma constante durante más de 5 años."],
     ["5年以上当該メニューを専門にトレーニング。", "Entrena este ejercicio de forma especializada durante más de 5 años."],
     ["注：", "Nota: "]
+].sort((left, right) => right[0].length - left[0].length);
+
+const JAPANESE_TO_INDONESIAN_TEXT = [
+    ["その他のワークアウト", "Latihan lainnya"],
+    ["ワークアウトデータベース", "Database latihan"],
+    ["鍛えられる筋肉", "Otot yang dilatih"],
+    ["テーブルの見方", "Cara membaca tabel"],
+    ["世界記録", "Rekor dunia"],
+    ["公式記録", "Rekor resmi"],
+    ["プライバシーポリシー", "Kebijakan Privasi"],
+    ["お問い合わせ", "Kontak"],
+    ["リンク", "Tautan"],
+    ["言語", "Bahasa"],
+    ["男性・体重別", "Pria berdasarkan berat badan"],
+    ["女性・体重別", "Wanita berdasarkan berat badan"],
+    ["男性・年齢別", "Pria berdasarkan usia"],
+    ["女性・年齢別", "Wanita berdasarkan usia"],
+    ["平均レップ数", "Repetisi rata-rata"],
+    ["基準レップ数", "Standar repetisi"],
+    ["平均重量", "Berat rata-rata"],
+    ["基準重量", "Standar kekuatan"],
+    ["レップ数", "Repetisi"],
+    ["体重別", "Berdasarkan berat badan"],
+    ["年齢別", "Berdasarkan usia"],
+    ["レベル", "Level"],
+    ["グループ", "Grup"],
+    ["データ", "Data"],
+    ["説明", "Deskripsi"],
+    ["分布", "Distribusi"],
+    ["体重", "Berat badan"],
+    ["年齢", "Usia"],
+    ["男性", "Pria"],
+    ["女性", "Wanita"],
+    ["筋肉", "Otot"],
+    ["重量", "Berat"],
+    ["基礎", "Dasar"],
+    ["初級", "Pemula"],
+    ["中級", "Menengah"],
+    ["上級", "Mahir"],
+    ["プロ", "Pro"],
+    ["上位", "Atas"],
+    ["下位", "Bawah"],
+    ["正しいフォームを身につけ、1か月以上継続してトレーニングに励む。", "Menguasai teknik yang benar dan berlatih konsisten minimal 1 bulan."],
+    ["6か月以上継続的にトレーニングに励む。", "Berlatih konsisten minimal 6 bulan."],
+    ["２年以上継続的にトレーニングに励む。", "Berlatih konsisten lebih dari 2 tahun."],
+    ["5年以上継続的にトレーニングに励む。", "Berlatih terencana lebih dari 5 tahun."],
+    ["5年以上当該メニューを専門にトレーニング。", "Menekuni latihan ini secara khusus lebih dari 5 tahun."],
+    ["注：", "Catatan: "]
 ].sort((left, right) => right[0].length - left[0].length);
 
 const JAPANESE_TO_FRENCH_TEXT = [
@@ -2768,6 +3123,7 @@ function getCategoryLabels(localeCode) {
     if (localeCode === "es") return CATEGORY_LABELS_ES;
     if (localeCode === "fr") return CATEGORY_LABELS_FR;
     if (localeCode === "de") return CATEGORY_LABELS_DE;
+    if (localeCode === "id") return CATEGORY_LABELS_ID;
     return null;
 }
 
@@ -2778,6 +3134,7 @@ function getCategoryAliases(localeCode) {
     if (localeCode === "es") return CATEGORY_ALIASES_ES;
     if (localeCode === "fr") return CATEGORY_ALIASES_FR;
     if (localeCode === "de") return CATEGORY_ALIASES_DE;
+    if (localeCode === "id") return CATEGORY_ALIASES_ID;
     return {};
 }
 
@@ -2788,6 +3145,7 @@ function getCategoryDefaultTags(localeCode) {
     if (localeCode === "es") return CATEGORY_DEFAULT_TAGS_ES;
     if (localeCode === "fr") return CATEGORY_DEFAULT_TAGS_FR;
     if (localeCode === "de") return CATEGORY_DEFAULT_TAGS_DE;
+    if (localeCode === "id") return CATEGORY_DEFAULT_TAGS_ID;
     return {};
 }
 
@@ -2798,6 +3156,7 @@ function getEquipmentTags(localeCode) {
     if (localeCode === "es") return EQUIPMENT_TAGS_ES;
     if (localeCode === "fr") return EQUIPMENT_TAGS_FR;
     if (localeCode === "de") return EQUIPMENT_TAGS_DE;
+    if (localeCode === "id") return EQUIPMENT_TAGS_ID;
     return {};
 }
 
@@ -2937,6 +3296,26 @@ function getMeasurementCopy(kind = "weight", localeCode = "ja") {
             };
         }
 
+    if (localeCode === "id") {
+        if (kind === "reps") {
+            return {
+                averageLabel: "Repetisi rata-rata",
+                standardsLabel: "Standar repetisi",
+                detailLabel: "Repetisi",
+                pageTerm: "Repetisi",
+                note: "Nilai pada tabel adalah referensi jumlah repetisi yang dapat dilakukan dalam satu set."
+            };
+        }
+
+        return {
+            averageLabel: "Berat rata-rata",
+            standardsLabel: "Standar kekuatan",
+            detailLabel: "1RM",
+            pageTerm: "Berat",
+            note: "Nilai pada tabel adalah estimasi berdasarkan 1RM."
+        };
+    }
+
     if (localeCode === "ko") {
         if (kind === "reps") {
             return {
@@ -3003,6 +3382,11 @@ function getExerciseName(exerciseOrCard, localeCode = "ja") {
             return exerciseOrCard.names?.de || EXACT_EXERCISE_NAMES_DE[slug] || inferGermanExerciseName(slug);
         }
 
+    if (localeCode === "id") {
+        const slug = exerciseOrCard.slug || "";
+        return exerciseOrCard.names?.id || EXACT_EXERCISE_NAMES_ID[slug] || inferIndonesianExerciseName(slug);
+    }
+
     if (localeCode === "ko") {
         const slug = exerciseOrCard.slug || "";
         return exerciseOrCard.names?.ko || EXACT_EXERCISE_NAMES_KO[slug] || inferKoreanExerciseName(slug);
@@ -3033,6 +3417,10 @@ function getMuscleGroupLabel(label, localeCode = "ja") {
             return MUSCLE_GROUPS_DE[label] || label;
         }
 
+    if (localeCode === "id") {
+        return MUSCLE_GROUPS_ID[label] || label;
+    }
+
     return localeCode === "ko" ? MUSCLE_GROUPS_KO[label] || label : label;
 }
 
@@ -3057,6 +3445,10 @@ function getMuscleName(name, localeCode = "ja") {
     if (localeCode === "de") {
             return MUSCLES_DE[name] || name;
         }
+
+    if (localeCode === "id") {
+        return MUSCLES_ID[name] || name;
+    }
 
     return localeCode === "ko" ? MUSCLES_KO[name] || name : name;
 }
@@ -3164,6 +3556,18 @@ function buildExerciseSummary(exercise, section, measurementKind, localeCode = "
             return `Für ${name} kannst du Durchschnittsgewicht und Kraftstandards als Referenz für den Bereich ${category} vergleichen. Die Zielmuskulatur ist ${muscles}.`;
         }
 
+    if (localeCode === "id") {
+        const name = getExerciseName(exercise, localeCode);
+        const category = getCategoryLabel(section || exercise.categoryId, localeCode);
+        const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "otot utama";
+
+        if (measurementKind === "reps") {
+            return `${name} adalah latihan ${category.toLowerCase()} yang berfokus pada ${muscles}. Repetisi rata-rata dan standar repetisi dapat dilihat dalam satu halaman.`;
+        }
+
+        return `${name} menampilkan berat rata-rata dan standar kekuatan sebagai referensi untuk kategori ${category.toLowerCase()}. Otot utama: ${muscles}.`;
+    }
+
     const name = getExerciseName(exercise, localeCode);
     const category = getCategoryLabel(section || exercise.categoryId, localeCode);
     const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "주요 근육";
@@ -3248,6 +3652,18 @@ function buildExerciseDescription(exercise, section, measurementKind, localeCode
 
             return `${name} ist eine typische Übung für den Bereich ${category}. Sie beansprucht vor allem ${muscles} und hilft beim Vergleich von Durchschnittsgewicht, Kraftstandards und verwandten Übungen.`;
         }
+
+    if (localeCode === "id") {
+        const name = getExerciseName(exercise, localeCode);
+        const category = getCategoryLabel(section || exercise.categoryId, localeCode);
+        const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "otot utama";
+
+        if (measurementKind === "reps") {
+            return `${name} cocok untuk latihan ${category.toLowerCase()}, terutama pada latihan bodyweight atau beban ringan. Bandingkan repetisi rata-rata, standar repetisi, dan stimulasi pada ${muscles}.`;
+        }
+
+        return `${name} adalah latihan representatif untuk ${category.toLowerCase()}. Latihan ini terutama melibatkan ${muscles} dan membantu membandingkan berat rata-rata, standar kekuatan, dan latihan terkait.`;
+    }
 
     const name = getExerciseName(exercise, localeCode);
     const category = getCategoryLabel(section || exercise.categoryId, localeCode);
@@ -3337,6 +3753,17 @@ function buildExerciseSeo(exercise, measurementKind, unit, localeCode = "ja") {
             };
         }
 
+    if (localeCode === "id") {
+        const copy = getMeasurementCopy(measurementKind, "id");
+        const name = getExerciseName(exercise, "id");
+        const unitLabel = unit === "lb" ? "tabel lb" : "tabel kg";
+
+        return {
+            title: `${name}: ${copy.averageLabel} dan ${copy.standardsLabel} | Shiba Muscle`,
+            descriptionPrefix: `Halaman untuk melihat ${copy.averageLabel.toLowerCase()} dan ${copy.standardsLabel.toLowerCase()} ${name} dengan ${unitLabel}.`
+        };
+    }
+
     const copy = getMeasurementCopy(measurementKind, "ko");
     const name = getExerciseName(exercise, "ko");
     const unitLabel = unit === "lb" ? "lb 기준표" : "kg 기준표";
@@ -3425,6 +3852,17 @@ function buildExerciseSeoDescription(exercise, section, measurementKind, unit, l
             const muscleDescription = primaryMuscles.length ? `Zielmuskulatur: ${primaryMuscles.join(", ")}. ` : "";
             return `${seo.descriptionPrefix} Diese Seite ist eine Referenz für den Bereich ${category}. ${muscleDescription}${metricSummary}`;
         }
+
+    if (localeCode === "id") {
+        const seo = buildExerciseSeo(exercise, measurementKind, unit, "id");
+        const category = getCategoryLabel(section || exercise.categoryId, "id");
+        const primaryMuscles = getLocalizedMuscleGroups(exercise, "id")[0]?.items || [];
+        const metricSummary = measurementKind === "reps"
+            ? "Latihan terkait juga tersedia untuk dibandingkan."
+            : "Mencakup tabel berdasarkan berat badan, tabel berdasarkan usia, dan latihan terkait.";
+        const muscleDescription = primaryMuscles.length ? `Otot utama: ${primaryMuscles.join(", ")}. ` : "";
+        return `${seo.descriptionPrefix} Ini adalah referensi latihan untuk kategori ${category.toLowerCase()}. ${muscleDescription}${metricSummary}`;
+    }
 
     const seo = buildExerciseSeo(exercise, measurementKind, unit, "ko");
     const category = getCategoryLabel(section || exercise.categoryId, "ko");
@@ -3524,6 +3962,7 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
     const suffix = measurementKind === "weight" ? " [1RM]" : "";
     const isSpanish = locale === "es";
     const isGerman = locale === "de";
+    const isIndonesian = locale === "id";
     const isTraditionalChinese = locale === "zh-hant";
     const isSimplifiedChinese = locale === "zh-hans";
     const isChinese = isTraditionalChinese || isSimplifiedChinese;
@@ -3536,7 +3975,9 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
             ? `${copy.averageLabel} de ${name}${suffix}`
             : isGerman
                 ? `${name}: ${copy.averageLabel}${suffix}`
-                : isChinese
+                : isIndonesian
+                    ? `${copy.averageLabel} ${name}${suffix}`
+                    : isChinese
                     ? `${name}${copy.averageLabel}${suffix}`
                     : `${name} ${copy.averageLabel}${suffix}`;
         next = next.replace(/<h2 class="section-title">[\s\S]*?<\/h2>/i, `<h2 class="section-title">
@@ -3553,12 +3994,14 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
             ? `${copy.standardsLabel} de ${name}${unitLabel ? ` ${unitLabel}` : ""}`
             : isGerman
                 ? `${name}: ${copy.standardsLabel}${unitLabel}`
-                : isChinese
+                : isIndonesian
+                    ? `${copy.standardsLabel} ${name}${unitLabel ? ` ${unitLabel}` : ""}`
+                    : isChinese
                     ? `${name}${copy.standardsLabel}${unitLabel}`
                     : `${name} ${copy.standardsLabel}${unitLabel}`;
         next = next.replace(/<h2 class="section-title">[\s\S]*?<\/h2>/i, `<h2 class="section-title">${escapeHtml(heading)}</h2>`);
 
-        if (isChinese || isSpanish || isFrench || isGerman) {
+        if (isChinese || isSpanish || isFrench || isGerman || isIndonesian) {
             const standardsTableLabels = isChinese
                 ? {
                     maleByWeight: `${isTraditionalChinese ? "男性按體重" : "男性按体重"}(${unit})${isTraditionalChinese ? "資料" : "数据"} [${detailLabel}]`,
@@ -3579,6 +4022,13 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
                         femaleByWeight: `Frauen nach Körpergewicht (${unit}) [${detailLabel}]`,
                         maleByAge: `Männer nach Alter [${detailLabel}]`,
                         femaleByAge: `Frauen nach Alter [${detailLabel}]`
+                    }
+                    : isIndonesian
+                    ? {
+                        maleByWeight: `Pria berdasarkan berat badan (${unit}) [${detailLabel}]`,
+                        femaleByWeight: `Wanita berdasarkan berat badan (${unit}) [${detailLabel}]`,
+                        maleByAge: `Pria berdasarkan usia [${detailLabel}]`,
+                        femaleByAge: `Wanita berdasarkan usia [${detailLabel}]`
                     }
                     : {
                         maleByWeight: `Hombres por peso corporal (${unit}) [${detailLabel}]`,
@@ -3656,6 +4106,21 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
             .replace(/Heaviest/g, isTraditionalChinese ? "最重" : "最重")
             .replace(/Overall/g, isTraditionalChinese ? "總排名" : "总排名")
             .replace(/Official Record/g, isTraditionalChinese ? "官方紀錄" : "官方记录");
+    } else if (isIndonesian) {
+        next = next
+            .replace(/alt="male"/g, 'alt="Pria"')
+            .replace(/alt="female"/g, 'alt="Wanita"')
+            .replace(/alt="Male"/g, 'alt="Pria"')
+            .replace(/alt="Female"/g, 'alt="Wanita"')
+            .replace(/alt="Official Record"/g, 'alt="Rekor resmi"')
+            .replace(/Last Updated:/g, "Diperbarui:")
+            .replace(/Men's Raw/g, "Pria Raw")
+            .replace(/Men's Equipped/g, "Pria Equipped")
+            .replace(/Women's Raw/g, "Wanita Raw")
+            .replace(/Women's Equipped/g, "Wanita Equipped")
+            .replace(/Heaviest/g, "Terberat")
+            .replace(/Overall/g, "Keseluruhan")
+            .replace(/Official Record/g, "Rekor resmi");
     } else {
         next = next
             .replace(/alt="male"/g, 'alt="남성"')
@@ -3704,6 +4169,10 @@ function cleanSectionLabel(text, localeCode = "ja") {
 
     if (localeCode === "fr") {
         return String(text || "").replace(/\s*exercices?/gi, "").trim();
+    }
+
+    if (localeCode === "id") {
+        return String(text || "").replace(/\s*latihan/gi, "").trim();
     }
 
     if (localeCode === "de") {
@@ -3957,6 +4426,43 @@ function inferGermanExerciseName(slug) {
         .trim());
 }
 
+function inferIndonesianExerciseName(slug) {
+    const tokens = slug.split("-");
+    const parts = [];
+    let index = 0;
+
+    while (index < tokens.length) {
+        let matched = false;
+        for (let size = Math.min(5, tokens.length - index); size > 0; size -= 1) {
+            const phrase = tokens.slice(index, index + size).join("-");
+            const value = PHRASE_NAME_PARTS_ID[phrase] || TOKEN_NAME_PARTS_ID[phrase];
+            if (value) {
+                parts.push(value);
+                index += size;
+                matched = true;
+                break;
+            }
+        }
+
+        if (!matched) {
+            const token = tokens[index];
+            parts.push(TOKEN_NAME_PARTS_ID[token] || token);
+            index += 1;
+        }
+    }
+
+    return capitalizeIndonesian(parts.join(" ")
+        .replace(/bench press press/g, "bench press")
+        .replace(/deadlift deadlift/g, "deadlift")
+        .replace(/squat squat/g, "squat")
+        .replace(/curl curl/g, "curl")
+        .replace(/row row/g, "row")
+        .replace(/push up/g, "push-up")
+        .replace(/pull up/g, "pull-up")
+        .replace(/\s+/g, " ")
+        .trim());
+}
+
 function formatCardCategory(sectionId, slug, measurementKind, tags, localeCode = "ko") {
     const sectionLabel = getCategoryLabel(sectionId, localeCode);
     if (isBig3(slug)) {
@@ -4017,6 +4523,14 @@ function buildCardDescription(card, section, localeCode) {
         }
 
         return `Consulte la charge moyenne et les standards de force de ${name} pour ${sectionLabel.toLowerCase()}.${primaryMuscles ? ` Muscles principaux : ${primaryMuscles}.` : ""}`;
+    }
+
+    if (localeCode === "id") {
+        if (measurementKind === "reps") {
+            return `Lihat repetisi rata-rata dan standar repetisi ${name} untuk kategori ${sectionLabel.toLowerCase()}.`;
+        }
+
+        return `Lihat berat rata-rata dan standar kekuatan ${name} untuk kategori ${sectionLabel.toLowerCase()}.${primaryMuscles ? ` Otot utama: ${primaryMuscles}.` : ""}`;
     }
 
     if (localeCode === "de") {
@@ -4107,6 +4621,12 @@ function buildAverageNote(measurementKind, localeCode = "ko") {
                 ? "Hinweis: Diese Werte sind Schätzungen für durchschnittliche Wiederholungen in einem Satz. Körpergewicht, Bewegungsumfang, Tempo und andere persönliche Faktoren können die Leistung beeinflussen. Die detaillierten Daten stehen in der Tabelle unten."
                 : "Hinweis: Diese Standards sind 1RM-Schätzwerte auf Basis durchschnittlicher Kraftsportlerinnen und Kraftsportler. Körpergewicht, Alter und andere persönliche Faktoren können die Werte beeinflussen. Die detaillierten Daten stehen in der Tabelle unten.";
         }
+
+    if (localeCode === "id") {
+        return measurementKind === "reps"
+            ? "Catatan: nilai ini adalah estimasi repetisi rata-rata yang bisa dilakukan dalam satu set. Berat badan, rentang gerak, tempo, dan faktor pribadi lain dapat memengaruhi hasil. Lihat data detail pada tabel di bawah."
+            : "Catatan: standar ini adalah estimasi 1RM berdasarkan lifter rata-rata. Berat badan, usia, dan faktor pribadi lain dapat memengaruhi hasil. Lihat data detail pada tabel di bawah.";
+    }
 
     if (measurementKind === "reps") {
         return "참고: 이 기준은 한 세트에서 수행할 수 있는 평균 반복 횟수의 추정치입니다. 체중, 가동 범위, 템포 같은 개인 요인에 따라 달라질 수 있습니다. 자세한 데이터는 아래 표에서 확인하세요.";
@@ -4202,6 +4722,23 @@ function buildStandardsNote(exercise, unit, measurementKind, localeCode = "ko") 
             return `Hinweis: Eine Standard-Langhantel im Fitnessstudio wiegt meist ${unit === "lb" ? "44 lb" : "20 kg"}.`;
         }
 
+    if (localeCode === "id") {
+        if (measurementKind === "reps") {
+            return "Catatan: nilai pada tabel adalah referensi repetisi yang dapat dilakukan dalam satu set. Data berdasarkan berat badan membantu memperkirakan beban relatif, sedangkan data berdasarkan usia membantu melihat perbedaan tren.";
+        }
+
+        const tags = inferEquipmentTags(exercise.slug, localeCode);
+        if (tags.includes("Dumbbell")) {
+            return "Catatan: berat dumbbell pada tabel dihitung untuk satu dumbbell.";
+        }
+
+        if (tags.some((tag) => ["Machine", "Cable", "Smith machine"].includes(tag))) {
+            return "Catatan: beban yang tertera pada machine dan cable dapat berbeda menurut merek dan mekanisme alat. Gunakan sebagai referensi untuk kondisi alat yang sebanding.";
+        }
+
+        return `Catatan: barbell standar di gym umumnya berbobot ${unit === "lb" ? "44 lb" : "20 kg"}.`;
+    }
+
     if (measurementKind === "reps") {
         return "참고: 표의 수치는 한 세트에서 수행할 수 있는 반복 횟수의 기준입니다. 체중별 데이터는 상대적 부담을, 나이별 데이터는 경향 차이를 보는 데 활용하세요.";
     }
@@ -4226,6 +4763,8 @@ function replaceJapaneseText(html, localeCode = "ko") {
             ? MUSCLE_GROUPS_ES
             : localeCode === "de"
                 ? MUSCLE_GROUPS_DE
+                : localeCode === "id"
+                    ? MUSCLE_GROUPS_ID
                 : localeCode === "zh-hant"
                     ? MUSCLE_GROUPS_ZH_HANT
                     : localeCode === "zh-hans"
@@ -4237,6 +4776,8 @@ function replaceJapaneseText(html, localeCode = "ko") {
             ? MUSCLES_ES
             : localeCode === "de"
                 ? MUSCLES_DE
+                : localeCode === "id"
+                    ? MUSCLES_ID
                 : localeCode === "zh-hant"
                     ? MUSCLES_ZH_HANT
                     : localeCode === "zh-hans"
@@ -4248,6 +4789,8 @@ function replaceJapaneseText(html, localeCode = "ko") {
             ? JAPANESE_TO_SPANISH_TEXT
             : localeCode === "de"
                 ? JAPANESE_TO_GERMAN_TEXT
+                : localeCode === "id"
+                    ? JAPANESE_TO_INDONESIAN_TEXT
                 : localeCode === "zh-hant"
                     ? JAPANESE_TO_ZH_HANT_TEXT
                     : localeCode === "zh-hans"
@@ -4343,6 +4886,10 @@ function capitalizeFrench(value) {
     return text ? `${text.charAt(0).toUpperCase()}${text.slice(1)}` : "";
 }
 
+function capitalizeIndonesian(value) {
+    const text = String(value || "").trim();
+    return text ? `${text.charAt(0).toUpperCase()}${text.slice(1)}` : "";
+}
 
 function toGermanTitle(value) {
     const text = String(value || "").trim();

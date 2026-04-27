@@ -208,15 +208,16 @@ function renderLegacyCategoryNav(pageType, locale = "ja") {
 function renderStaticFooter(file, locale = "ja") {
     const alternates = languageAlternates(file);
     const flagAlt = {
-        en: locale === "ko" ? "영국 국기" : locale === "zh-hant" ? "英國國旗" : locale === "zh-hans" ? "英国国旗" : locale === "es" ? "Bandera del Reino Unido" : "UK",
-        ja: locale === "ko" ? "일본 국기" : locale === "zh-hant" ? "日本國旗" : locale === "zh-hans" ? "日本国旗" : locale === "es" ? "Bandera de Japón" : "Japan",
-        "zh-hant": locale === "ko" ? "번체 중국어" : locale === "zh-hant" ? "繁體中文" : locale === "zh-hans" ? "繁体中文" : locale === "es" ? "Chino tradicional" : "Traditional Chinese",
-        "zh-hans": locale === "ko" ? "간체 중국어" : locale === "zh-hant" ? "簡體中文" : locale === "zh-hans" ? "简体中文" : locale === "es" ? "Chino simplificado" : "Simplified Chinese",
-        ko: locale === "ko" ? "한국 국기" : locale === "zh-hant" ? "韓國國旗" : locale === "zh-hans" ? "韩国国旗" : locale === "es" ? "Bandera de Corea" : "Korea",
-        es: locale === "ko" ? "스페인 국기" : locale === "zh-hant" ? "西班牙國旗" : locale === "zh-hans" ? "西班牙国旗" : locale === "es" ? "Bandera de España" : locale === "de" ? "Spanien" : "Spain",
-        zh: locale === "ko" ? "중국 국기" : locale === "zh-hant" ? "中國國旗" : locale === "zh-hans" ? "中国国旗" : locale === "es" ? "Bandera de China" : locale === "fr" ? "Drapeau de la Chine" : locale === "de" ? "China" : "China",
-        fr: locale === "ko" ? "프랑스 국기" : locale === "es" ? "Bandera de Francia" : locale === "fr" ? "Drapeau de la France" : locale === "de" ? "Frankreich" : "France",
-        de: locale === "ko" ? "독일 국기" : locale === "es" ? "Bandera de Alemania" : locale === "fr" ? "Drapeau de l'Allemagne" : locale === "de" ? "Deutschland" : "Germany"
+        en: locale === "ko" ? "영국 국기" : locale === "zh-hant" ? "英國國旗" : locale === "zh-hans" ? "英国国旗" : locale === "es" ? "Bandera del Reino Unido" : locale === "id" ? "Bendera Britania Raya" : "UK",
+        ja: locale === "ko" ? "일본 국기" : locale === "zh-hant" ? "日本國旗" : locale === "zh-hans" ? "日本国旗" : locale === "es" ? "Bandera de Japón" : locale === "id" ? "Bendera Jepang" : "Japan",
+        "zh-hant": locale === "ko" ? "번체 중국어" : locale === "zh-hant" ? "繁體中文" : locale === "zh-hans" ? "繁体中文" : locale === "es" ? "Chino tradicional" : locale === "id" ? "Bahasa Tionghoa tradisional" : "Traditional Chinese",
+        "zh-hans": locale === "ko" ? "간체 중국어" : locale === "zh-hant" ? "簡體中文" : locale === "zh-hans" ? "简体中文" : locale === "es" ? "Chino simplificado" : locale === "id" ? "Bahasa Tionghoa sederhana" : "Simplified Chinese",
+        ko: locale === "ko" ? "한국 국기" : locale === "zh-hant" ? "韓國國旗" : locale === "zh-hans" ? "韩国国旗" : locale === "es" ? "Bandera de Corea" : locale === "id" ? "Bendera Korea" : "Korea",
+        es: locale === "ko" ? "스페인 국기" : locale === "zh-hant" ? "西班牙國旗" : locale === "zh-hans" ? "西班牙国旗" : locale === "es" ? "Bandera de España" : locale === "de" ? "Spanien" : locale === "id" ? "Bendera Spanyol" : "Spain",
+        zh: locale === "ko" ? "중국 국기" : locale === "zh-hant" ? "中國國旗" : locale === "zh-hans" ? "中国国旗" : locale === "es" ? "Bandera de China" : locale === "fr" ? "Drapeau de la Chine" : locale === "de" ? "China" : locale === "id" ? "Bendera Tiongkok" : "China",
+        fr: locale === "ko" ? "프랑스 국기" : locale === "es" ? "Bandera de Francia" : locale === "fr" ? "Drapeau de la France" : locale === "de" ? "Frankreich" : locale === "id" ? "Bendera Prancis" : "France",
+        de: locale === "ko" ? "독일 국기" : locale === "es" ? "Bandera de Alemania" : locale === "fr" ? "Drapeau de l'Allemagne" : locale === "de" ? "Deutschland" : locale === "id" ? "Bendera Jerman" : "Germany",
+        id: locale === "id" ? "Bendera Indonesia" : "Indonesia"
     };
     const flagIcon = {
         en: "uk-flag.webp",
@@ -226,7 +227,8 @@ function renderStaticFooter(file, locale = "ja") {
         ko: "korea-flag.webp",
         es: "spain-flag.svg",
         fr: "france-flag.svg",
-        de: "germany-flag.svg"
+        de: "germany-flag.svg",
+        id: "indonesia-flag.svg"
     };
 
     return `
@@ -345,10 +347,10 @@ function renderDiscoveryGrid(section, pages, locale = "ja") {
         <div class="discovery-grid">
 ${pages.map((page) => {
         return `            <a class="discovery-card" href="${escapeAttribute(page.file)}">
-                <span class="discovery-type">${escapeHtml(locale === "zh-hant" ? (page.type === "comparison" ? "比較" : "目標") : locale === "zh-hans" ? (page.type === "comparison" ? "比较" : "目标") : locale === "de" ? (page.type === "comparison" ? "Vergleich" : "Ziel") : locale === "fr" ? (page.type === "comparison" ? "Comparatif" : "Objectif") : locale === "es" ? (page.type === "comparison" ? "Comparativa" : "Objetivo") : page.type === "comparison" ? "Comparison" : "Intent")}</span>
+                <span class="discovery-type">${escapeHtml(locale === "zh-hant" ? (page.type === "comparison" ? "比較" : "目標") : locale === "zh-hans" ? (page.type === "comparison" ? "比较" : "目标") : locale === "de" ? (page.type === "comparison" ? "Vergleich" : "Ziel") : locale === "fr" ? (page.type === "comparison" ? "Comparatif" : "Objectif") : locale === "id" ? (page.type === "comparison" ? "Perbandingan" : "Tujuan") : locale === "es" ? (page.type === "comparison" ? "Comparativa" : "Objetivo") : page.type === "comparison" ? "Comparison" : "Intent")}</span>
                 <h3>${escapeHtml(page.heading)}</h3>
                 <p>${escapeHtml((page.intro || [])[0] || page.description || "")}</p>
-                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "zh-hant" ? "查看頁面" : locale === "zh-hans" ? "查看页面" : locale === "es" ? "Ver página" : locale === "fr" ? "Voir la page" : locale === "de" ? "Seite ansehen" : "ページを見る"}</span>
+                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "zh-hant" ? "查看頁面" : locale === "zh-hans" ? "查看页面" : locale === "es" ? "Ver página" : locale === "fr" ? "Voir la page" : locale === "de" ? "Seite ansehen" : locale === "id" ? "Lihat halaman" : "ページを見る"}</span>
             </a>`;
     }).join("\n")}
         </div>

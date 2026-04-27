@@ -9,7 +9,8 @@
         "zh-hant": "全身",
         "es": "Cuerpo completo",
         "de": "Ganzkörper",
-        "fr": "Corps entier"
+        "fr": "Corps entier",
+        "id": "Seluruh tubuh"
       },
       "legacyTitles": {
         "ja": [
@@ -29,6 +30,9 @@
         ],
         "fr": [
           "Exercices corps entier"
+        ],
+        "id": [
+          "Latihan seluruh tubuh"
         ]
       },
       "aliases": {
@@ -55,6 +59,10 @@
         "fr": [
           "Musculation corps entier",
           "BIG3 / corps entier"
+        ],
+        "id": [
+          "Latihan seluruh tubuh",
+          "BIG3 / seluruh tubuh"
         ]
       },
       "description": {
@@ -63,7 +71,8 @@
         "zh-hant": "硬舉、翻站、抓舉等全身協調動作的標準頁面",
         "es": "Páginas de referencia para ejercicios globales como peso muerto, clean y snatch",
         "de": "Referenzseiten für Ganzkörperübungen wie Kreuzheben, Clean und Snatch",
-        "fr": "Pages de référence pour les exercices globaux comme le soulevé de terre, le clean et le snatch"
+        "fr": "Pages de référence pour les exercices globaux comme le soulevé de terre, le clean et le snatch",
+        "id": "Halaman referensi untuk gerakan seluruh tubuh seperti deadlift, clean, dan snatch"
       },
       "defaultTags": {
         "ja": [
@@ -89,6 +98,10 @@
         "fr": [
           "Corps entier",
           "Coordination globale"
+        ],
+        "id": [
+          "Seluruh tubuh",
+          "Koordinasi tubuh penuh"
         ]
       }
     },
@@ -100,7 +113,8 @@
         "zh-hant": "胸部",
         "es": "Pecho",
         "de": "Brust",
-        "fr": "Pectoraux"
+        "fr": "Pectoraux",
+        "id": "Dada"
       },
       "legacyTitles": {
         "ja": [
@@ -120,6 +134,9 @@
         ],
         "fr": [
           "Exercices pectoraux"
+        ],
+        "id": [
+          "Latihan dada"
         ]
       },
       "aliases": {
@@ -146,6 +163,10 @@
         "fr": [
           "Entraînement des pectoraux",
           "Pectoral"
+        ],
+        "id": [
+          "Latihan dada",
+          "Pektoral"
         ]
       },
       "description": {
@@ -154,7 +175,8 @@
         "zh-hant": "推類動作的平均重量與訓練標準比較",
         "es": "Pesos medios y comparativas de ejercicios de empuje",
         "de": "Durchschnittsgewichte und Vergleiche für Druckübungen",
-        "fr": "Charges moyennes et comparaisons des exercices de poussée"
+        "fr": "Charges moyennes et comparaisons des exercices de poussée",
+        "id": "Berat rata-rata dan perbandingan latihan dorong"
       },
       "defaultTags": {
         "ja": [
@@ -180,6 +202,10 @@
         "fr": [
           "Pectoraux",
           "Développé"
+        ],
+        "id": [
+          "Dada",
+          "Press"
         ]
       }
     },
@@ -191,7 +217,8 @@
         "zh-hant": "背部",
         "es": "Espalda",
         "de": "Rücken",
-        "fr": "Dos"
+        "fr": "Dos",
+        "id": "Punggung"
       },
       "legacyTitles": {
         "ja": [
@@ -211,6 +238,9 @@
         ],
         "fr": [
           "Exercices dos"
+        ],
+        "id": [
+          "Latihan punggung"
         ]
       },
       "aliases": {
@@ -237,6 +267,10 @@
         "fr": [
           "Entraînement du dos",
           "Grand dorsal"
+        ],
+        "id": [
+          "Latihan punggung",
+          "Latissimus dorsi"
         ]
       },
       "description": {
@@ -245,7 +279,8 @@
         "zh-hant": "划船、下拉與髖鉸鏈類動作比較",
         "es": "Comparativas de remos, jalones y bisagras de cadera",
         "de": "Vergleiche für Rudern, Zugübungen und Hüftstreckbewegungen",
-        "fr": "Comparaisons des tirages, rowings et mouvements de charnière"
+        "fr": "Comparaisons des tirages, rowings et mouvements de charnière",
+        "id": "Perbandingan row, pull, dan gerakan hip hinge"
       },
       "defaultTags": {
         "ja": [
@@ -271,6 +306,10 @@
         "fr": [
           "Dos",
           "Tirage"
+        ],
+        "id": [
+          "Punggung",
+          "Pull"
         ]
       }
     },
@@ -282,7 +321,8 @@
         "zh-hant": "肩部",
         "es": "Hombros",
         "de": "Schultern",
-        "fr": "Épaules"
+        "fr": "Épaules",
+        "id": "Bahu"
       },
       "legacyTitles": {
         "ja": [
@@ -302,6 +342,9 @@
         ],
         "fr": [
           "Exercices épaules"
+        ],
+        "id": [
+          "Latihan bahu"
         ]
       },
       "aliases": {
@@ -328,6 +371,10 @@
         "fr": [
           "Entraînement des épaules",
           "Deltoïdes"
+        ],
+        "id": [
+          "Latihan bahu",
+          "Deltoid"
         ]
       },
       "description": {
@@ -336,7 +383,8 @@
         "zh-hant": "肩推、平舉與穩定性訓練動作列表",
         "es": "Ejercicios de press, elevaciones y estabilidad del hombro",
         "de": "Schulterdrücken, Seitheben und Stabilitätsübungen",
-        "fr": "Exercices de développé, d'élévation et de stabilité des épaules"
+        "fr": "Exercices de développé, d'élévation et de stabilité des épaules",
+        "id": "Daftar press, raise, dan latihan stabilitas bahu"
       },
       "defaultTags": {
         "ja": [
@@ -362,6 +410,10 @@
         "fr": [
           "Épaules",
           "Développé"
+        ],
+        "id": [
+          "Bahu",
+          "Press"
         ]
       }
     },
@@ -373,7 +425,8 @@
         "zh-hant": "手臂",
         "es": "Brazos",
         "de": "Arme",
-        "fr": "Bras"
+        "fr": "Bras",
+        "id": "Lengan"
       },
       "legacyTitles": {
         "ja": [
@@ -393,6 +446,9 @@
         ],
         "fr": [
           "Exercices bras"
+        ],
+        "id": [
+          "Latihan lengan"
         ]
       },
       "aliases": {
@@ -425,6 +481,11 @@
           "Entraînement des bras",
           "Biceps",
           "Triceps"
+        ],
+        "id": [
+          "Latihan lengan",
+          "Biseps",
+          "Triseps"
         ]
       },
       "description": {
@@ -433,7 +494,8 @@
         "zh-hant": "彎舉、三頭肌與前臂訓練動作",
         "es": "Curls, tríceps y ejercicios de antebrazo",
         "de": "Curls, Trizeps- und Unterarmübungen",
-        "fr": "Curls, triceps et exercices d'avant-bras"
+        "fr": "Curls, triceps et exercices d'avant-bras",
+        "id": "Curl, triseps, dan latihan lengan bawah"
       },
       "defaultTags": {
         "ja": [
@@ -459,6 +521,10 @@
         "fr": [
           "Bras",
           "Curl"
+        ],
+        "id": [
+          "Lengan",
+          "Curl"
         ]
       }
     },
@@ -470,7 +536,8 @@
         "zh-hant": "腿部",
         "es": "Piernas",
         "de": "Beine",
-        "fr": "Jambes"
+        "fr": "Jambes",
+        "id": "Kaki"
       },
       "legacyTitles": {
         "ja": [
@@ -490,6 +557,9 @@
         ],
         "fr": [
           "Exercices jambes"
+        ],
+        "id": [
+          "Latihan kaki"
         ]
       },
       "aliases": {
@@ -516,6 +586,10 @@
         "fr": [
           "Entraînement des jambes",
           "Bas du corps"
+        ],
+        "id": [
+          "Latihan kaki",
+          "Tubuh bawah"
         ]
       },
       "description": {
@@ -524,7 +598,8 @@
         "zh-hant": "深蹲、弓箭步與臀腿主導動作",
         "es": "Sentadillas, zancadas y ejercicios dominantes de cadera",
         "de": "Kniebeugen, Ausfallschritte und hüftdominante Übungen",
-        "fr": "Squats, fentes et exercices dominants hanche"
+        "fr": "Squats, fentes et exercices dominants hanche",
+        "id": "Squat, lunge, dan latihan dominan pinggul"
       },
       "defaultTags": {
         "ja": [
@@ -550,6 +625,10 @@
         "fr": [
           "Jambes",
           "Squat"
+        ],
+        "id": [
+          "Kaki",
+          "Squat"
         ]
       }
     },
@@ -561,7 +640,8 @@
         "zh-hant": "核心",
         "es": "Core",
         "de": "Rumpf",
-        "fr": "Tronc"
+        "fr": "Tronc",
+        "id": "Core"
       },
       "legacyTitles": {
         "ja": [
@@ -581,6 +661,9 @@
         ],
         "fr": [
           "Exercices de gainage"
+        ],
+        "id": [
+          "Latihan core"
         ]
       },
       "aliases": {
@@ -607,6 +690,10 @@
         "fr": [
           "Entraînement du tronc",
           "Abdominaux"
+        ],
+        "id": [
+          "Latihan core",
+          "Perut"
         ]
       },
       "description": {
@@ -615,7 +702,8 @@
         "zh-hant": "腹肌、旋轉與核心穩定訓練動作",
         "es": "Abdominales, rotación y estabilidad del core",
         "de": "Bauchübungen, Rotation und Rumpfstabilität",
-        "fr": "Abdominaux, rotation et stabilité du tronc"
+        "fr": "Abdominaux, rotation et stabilité du tronc",
+        "id": "Latihan perut, rotasi, dan stabilitas core"
       },
       "defaultTags": {
         "ja": [
@@ -641,6 +729,10 @@
         "fr": [
           "Tronc",
           "Abdominaux"
+        ],
+        "id": [
+          "Core",
+          "Perut"
         ]
       }
     }

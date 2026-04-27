@@ -292,6 +292,47 @@
           ]
         }
       ]
+    },
+    "id": {
+      "title": "Tentang Shiba Muscle | Shiba Muscle",
+      "description": "Halaman tentang tujuan Shiba Muscle, cara memakai data latihan, dan prinsip pengelolaan situs.",
+      "heading": "Tentang Shiba Muscle",
+      "intro": [
+        "Shiba Muscle adalah database latihan yang menyusun berat rata-rata, standar kekuatan, dan otot yang dilatih per gerakan agar mudah dibandingkan."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Tujuan situs",
+          "paragraphs": [
+            "Walaupun sama-sama masuk kategori dada, punggung, atau kaki, setiap latihan bisa berbeda dari sisi alat, otot utama, dan pola beban. Shiba Muscle menyusun data per area tubuh agar kamu lebih mudah menemukan latihan yang sesuai tujuan.",
+            "Berat rata-rata dan tabel standar adalah referensi untuk memahami posisi latihan secara umum dan menemukan gerakan lain yang layak dibandingkan. Informasi ini tidak menjamin performa kompetisi atau keputusan medis."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Informasi yang tersedia",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Berat rata-rata atau repetisi rata-rata untuk setiap latihan",
+                "Tabel standar berdasarkan berat badan dan usia untuk pria dan wanita",
+                "Informasi otot utama, otot pendukung, dan otot stabilisator",
+                "Latihan terkait yang mudah dibandingkan dalam area atau tujuan yang sama"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Prinsip pengelolaan",
+          "paragraphs": [
+            "Struktur halaman, judul, deskripsi, tautan bahasa, dan sitemap dikelola agar pengguna bisa berpindah ke informasi yang dibutuhkan tanpa tersesat.",
+            "Kami menyediakan halaman kontak, privasi, dan cara membaca data supaya pengguna dapat memahami bagaimana informasi ditampilkan dan bagaimana data situs ditangani."
+          ]
+        }
+      ]
     }
   }
 }
