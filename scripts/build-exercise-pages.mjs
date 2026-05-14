@@ -127,7 +127,7 @@ ${preFooterAdSlotHtml}
 
 ${renderStaticFooter(currentFile, locale)}
 
-    <script src="${stylesheetHref("app.js", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=adsense-slots-20260514", locale)}"></script>
 `;
 
     return renderDocument({

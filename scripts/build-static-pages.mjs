@@ -81,7 +81,7 @@ ${renderAdSlot("after-library")}
 
 ${renderStaticFooter(page.file, locale)}
 
-    <script src="${stylesheetHref("app.js", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=adsense-slots-20260514", locale)}"></script>
 `;
 
     return renderDocument({
@@ -159,7 +159,7 @@ ${(page.sections || []).map((section) => renderContentSection(section)).join("\n
 
 ${renderStaticFooter(page.file, locale)}
 
-    <script src="${stylesheetHref("app.js", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=adsense-slots-20260514", locale)}"></script>
 `;
 
     return renderDocument({
