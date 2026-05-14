@@ -76,7 +76,7 @@ ${renderExerciseLibrary(catalogData, {
         titleTag: "h2",
         titleText: page.heading
     })}
-${renderAdSlot()}
+${renderAdSlot("after-library")}
     </main>
 
 ${renderStaticFooter(page.file, locale)}

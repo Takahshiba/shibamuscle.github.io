@@ -357,9 +357,11 @@ ${pages.map((page) => {
     </section>`;
 }
 
-function renderAdSlot() {
+function renderAdSlot(placement = "") {
+    const placementAttribute = placement ? ` data-ad-placement-key="${escapeAttribute(placement)}"` : "";
+
     return `
-    <div class="container">
+    <div class="container ad-slot-container"${placementAttribute}>
         <!-- shiba-horizontal -->
         <ins class="adsbygoogle"
              style="display:block"
@@ -367,6 +369,9 @@ function renderAdSlot() {
              data-ad-slot="4208884570"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
+        <script>
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>`;
 }
 

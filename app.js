@@ -284,6 +284,9 @@ const UI_TEXT = {
     ja: {
         ad: "広告",
         adAfterQuickStart: "おすすめ入口のあと",
+        adAfterMuscles: "筋肉セクションのあと",
+        adAfterDetails: "データ表のあと",
+        adAfterLibrary: "ライブラリのあと",
         adBeforeFooter: "フッター直前",
         adAfterRelated: "関連種目のあと",
         adAfterStandards: "基準表のあと",
@@ -369,6 +372,9 @@ const UI_TEXT = {
     ko: {
         ad: "광고",
         adAfterQuickStart: "추천 시작점 뒤",
+        adAfterMuscles: "근육 섹션 뒤",
+        adAfterDetails: "데이터 표 뒤",
+        adAfterLibrary: "라이브러리 뒤",
         adBeforeFooter: "푸터 직전",
         adAfterRelated: "관련 운동 뒤",
         adAfterStandards: "기준표 뒤",
@@ -454,6 +460,9 @@ const UI_TEXT = {
     "zh-hant": {
         ad: "廣告",
         adAfterQuickStart: "推薦入口之後",
+        adAfterMuscles: "肌群區塊之後",
+        adAfterDetails: "資料表之後",
+        adAfterLibrary: "動作資料庫之後",
         adBeforeFooter: "頁尾之前",
         adAfterRelated: "相關動作之後",
         adAfterStandards: "標準表之後",
@@ -538,6 +547,9 @@ const UI_TEXT = {
     es: {
         ad: "Anuncio",
         adAfterQuickStart: "Después de accesos recomendados",
+        adAfterMuscles: "Después de músculos",
+        adAfterDetails: "Después de tablas de datos",
+        adAfterLibrary: "Después de la biblioteca",
         adBeforeFooter: "Antes del pie",
         adAfterRelated: "Después de ejercicios relacionados",
         adAfterStandards: "Después de estándares",
@@ -623,6 +635,9 @@ const UI_TEXT = {
     fr: {
         ad: "Annonce",
         adAfterQuickStart: "Après les accès recommandés",
+        adAfterMuscles: "Après les muscles",
+        adAfterDetails: "Après les tableaux de données",
+        adAfterLibrary: "Après la bibliothèque",
         adBeforeFooter: "Avant le pied de page",
         adAfterRelated: "Après les exercices liés",
         adAfterStandards: "Après les standards",
@@ -708,6 +723,9 @@ const UI_TEXT = {
     de: {
         ad: "Anzeige",
         adAfterQuickStart: "Nach den empfohlenen Einstiegen",
+        adAfterMuscles: "Nach den Muskeln",
+        adAfterDetails: "Nach den Datentabellen",
+        adAfterLibrary: "Nach der Bibliothek",
         adBeforeFooter: "Vor dem Footer",
         adAfterRelated: "Nach den verwandten Übungen",
         adAfterStandards: "Nach den Kraftstandards",
@@ -794,6 +812,9 @@ const UI_TEXT = {
 UI_TEXT["zh-hans"] = {
     ad: "广告",
     adAfterQuickStart: "推荐入口之后",
+    adAfterMuscles: "肌群区块之后",
+    adAfterDetails: "数据表之后",
+    adAfterLibrary: "动作数据库之后",
     adBeforeFooter: "页脚之前",
     adAfterRelated: "相关动作之后",
     adAfterStandards: "标准表之后",
@@ -880,6 +901,9 @@ UI_TEXT["zh-hans"] = {
 UI_TEXT.id = {
     ad: "Iklan",
     adAfterQuickStart: "Setelah pintu masuk rekomendasi",
+    adAfterMuscles: "Setelah bagian otot",
+    adAfterDetails: "Setelah tabel data",
+    adAfterLibrary: "Setelah pustaka",
     adBeforeFooter: "Sebelum footer",
     adAfterRelated: "Setelah latihan terkait",
     adAfterStandards: "Setelah standar",
@@ -1389,7 +1413,8 @@ function enhanceHomePage(main) {
     `);
 
     const quickStartSection = buildQuickStartSection(homeEntryRoutes);
-    const postQuickStartAd = prepareAdContainer(adContainers[0], t("adAfterQuickStart"));
+    prepareAdContainer(adContainers[0], t("adAfterLibrary"));
+    adContainers.slice(1).forEach((container) => container.remove());
 
     const categoryOverview = htmlToElement(`
         <section class="container section-band">
@@ -1423,7 +1448,7 @@ function enhanceHomePage(main) {
 
     main.querySelectorAll(":scope > .home-hero-static, :scope > .home-overview-static").forEach((node) => node.remove());
     main.prepend(hero);
-    hero.after(...[quickStartSection, postQuickStartAd, categoryOverview].filter(Boolean));
+    hero.after(...[quickStartSection, categoryOverview].filter(Boolean));
     initQuickStartSection(quickStartSection, homeEntryRoutes);
 
     titleHeading.textContent = t("databaseLibraryTitle");
@@ -1618,8 +1643,8 @@ function enhanceExercisePage(main) {
         showToolbar: false
     });
 
-    const postStandardsAd = prepareAdContainer(adContainers[0], t("adAfterStandards"));
-    const postRelatedAd = prepareAdContainer(adContainers[1], t("adAfterRelated"));
+    const postMusclesAd = prepareAdContainer(adContainers[0], t("adAfterMuscles"));
+    const postDetailsAd = prepareAdContainer(adContainers[1], t("adAfterDetails"));
     const preFooterAd = prepareAdContainer(adContainers[2], t("adBeforeFooter"));
 
     adContainers.slice(3).forEach((container) => container.remove());
@@ -1628,13 +1653,13 @@ function enhanceExercisePage(main) {
         breadcrumb,
         heroContainer,
         muscleContainer,
+        postMusclesAd,
         averageContainer,
         recordContainer,
         standardsContainer,
         aboutContainer,
-        postStandardsAd,
+        postDetailsAd,
         relatedContainer,
-        postRelatedAd,
         libraryContainer,
         preFooterAd
     ].filter(Boolean);
@@ -1665,6 +1690,10 @@ function enhanceContentPage(main) {
     if (!libraryContainer) {
         return null;
     }
+
+    const adContainers = Array.from(main.children).filter((child) => child.classList.contains("container") && child.querySelector("ins.adsbygoogle"));
+    prepareAdContainer(adContainers[0], t("adAfterLibrary"));
+    adContainers.slice(1).forEach((container) => container.remove());
 
     const libraryData = collectLibrarySections(libraryContainer);
     const libraryTitle = replaceHeadingTag(libraryContainer.querySelector("#other-workouts"), "h2");

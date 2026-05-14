@@ -86,7 +86,9 @@ function renderExercisePage(exercise, catalogData, unit, variant, locale) {
     const description = buildExerciseDescription(exercise, currentCategory, measurementKind, locale);
     const seoDescription = buildExerciseSeoDescription(exercise, currentCategory, measurementKind, unit, locale);
     const relatedTags = getRelatedTags(exercise, exercise.categoryId, locale);
-    const adSlotHtml = isIndexableUnit ? renderAdSlot() : "";
+    const postMusclesAdSlotHtml = isIndexableUnit ? renderAdSlot("after-muscles") : "";
+    const postDetailsAdSlotHtml = isIndexableUnit ? renderAdSlot("after-details") : "";
+    const preFooterAdSlotHtml = isIndexableUnit ? renderAdSlot("before-footer") : "";
     const unitSwitchHtml = `<div class="toggle-buttons">
                 <a href="kg_${exercise.slug}.html"${unit === "kg" ? ' class="active"' : ""}>kg</a>
                 <a href="lb_${exercise.slug}.html"${unit === "lb" ? ' class="active"' : ""}>lb</a>
@@ -113,14 +115,14 @@ ${renderBreadcrumb([
     ], locale)}
         ${renderHero(exercise, measurementCopy, locale)}
         ${renderMuscles(exercise, locale)}
-${adSlotHtml}
+${postMusclesAdSlotHtml}
         ${localizeExerciseHtml(variant.averageBlock, { exercise, unit, locale, block: "average" }).trim()}
         ${localizeExerciseHtml(variant.standardsBlock, { exercise, unit, locale, block: "standards" }).trim()}
         ${exercise.sharedBlocks.records ? localizeExerciseHtml(exercise.sharedBlocks.records, { exercise, unit, locale, block: "records" }).trim() : ""}
         ${exercise.sharedBlocks.about ? localizeExerciseHtml(exercise.sharedBlocks.about, { exercise, unit, locale, block: "about" }).trim() : ""}
-${adSlotHtml}
+${postDetailsAdSlotHtml}
 ${renderExerciseLibrary(catalogData, { unit, locale })}
-${adSlotHtml}
+${preFooterAdSlotHtml}
     </main>
 
 ${renderStaticFooter(currentFile, locale)}

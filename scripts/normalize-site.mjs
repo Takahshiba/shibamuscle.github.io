@@ -363,8 +363,7 @@ function removeBodyAdsenseScripts(html) {
 
     const head = html.slice(0, bodyIndex);
     const body = html.slice(bodyIndex)
-        .replace(/\s*<script async src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-2819086765117537"\s*crossorigin="anonymous"><\/script>/gi, "")
-        .replace(/\s*<script>\s*\(adsbygoogle = window\.adsbygoogle \|\| \[\]\)\.push\(\{\}\);\s*<\/script>/gi, "");
+        .replace(/\s*<script async src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-2819086765117537"\s*crossorigin="anonymous"><\/script>/gi, "");
 
     return head + body;
 }
