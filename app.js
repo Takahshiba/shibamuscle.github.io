@@ -1878,15 +1878,7 @@ function prepareAdContainer(container, placementLabel) {
     container.dataset.adPlacement = placementLabel;
 
     container.querySelectorAll("script").forEach((script) => script.remove());
-
-    if (!container.querySelector(".ad-slot-label")) {
-        container.prepend(htmlToElement(`
-            <p class="ad-slot-label">
-                <span>${escapeHtml(t("ad"))}</span>
-                <span>${escapeHtml(placementLabel)}</span>
-            </p>
-        `));
-    }
+    container.querySelectorAll(".ad-slot-label").forEach((label) => label.remove());
 
     return container;
 }

@@ -1132,29 +1132,8 @@ table tbody tr:hover {
 }
 
 .standalone-ad-band {
-    padding: 20px;
+    padding: 0;
     margin-top: 0;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    background: var(--surface);
-    box-shadow: var(--shadow-soft);
-}
-
-.ad-slot-label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin: 0 0 12px;
-    color: var(--muted);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-}
-
-.ad-slot-label span:last-child {
-    letter-spacing: 0;
-    font-weight: 600;
 }
 
 .standalone-ad-band .adsbygoogle {
