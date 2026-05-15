@@ -366,7 +366,7 @@ function renderAdSlot(placement = "") {
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="${ADSENSE_CLIENT_ID}"
-             data-ad-slot="4208884570"
+             data-ad-slot="3763544828"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
