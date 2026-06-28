@@ -1,40 +1,41 @@
 {
   "file": "index.html",
   "kind": "home",
-  "title": "Shiba | 筋トレ記録アプリ",
-  "description": "Shibaは、今日のワークアウト開始、セット記録、Strength Percentile、筋肉ヒートマップまでをひとつにつなぐ筋トレ記録アプリです。",
+  "title": "Shiba | Strength Training Tracker",
+  "description": "Shiba brings today's workout, set logging, Strength Percentile, and muscle heatmaps into one focused strength training app.",
   "ogImage": "https://shibamuscle.com/assets/app/today-screen-current.png",
-  "heroHeading": "今日の筋トレを、迷わず始める。",
-  "heading": "種目データベースを見る",
+  "htmlLang": "en",
+  "heroHeading": "Start today's workout without friction.",
+  "heading": "Explore Shiba",
   "intro": [
-    "Shibaは、今日やるメニューを開いて、セットを記録し、伸びている部位と強みをあとから見返せる筋トレ記録アプリです。",
-    "平均重量や基準表を探せる既存のワークアウトデータベースは、アプリ紹介の下に導線として残しています。"
+    "Shiba helps you open today's plan, log each set quickly, and review which lifts and muscle groups are moving forward.",
+    "It is built for lifters who want fast workout logging, clear progress analytics, and a calmer way to choose the next exercise."
   ],
   "overview": {
     "eyebrow": "Shiba App",
     "sectionEyebrow": "App overview",
-    "title": "記録、分析、種目探索をひとつの流れに",
-    "copy": "ホームではアプリの体験を主役にし、必要な人だけデータベースへ進める構成にします。",
+    "title": "Logging, analytics, and exercise discovery in one flow",
+    "copy": "The home page now focuses on the app experience, from starting a workout to understanding progress after the session.",
     "items": [
       {
         "eyebrow": "Today",
-        "heading": "今日のメニューをすぐ始める",
+        "heading": "Start today's plan fast",
         "paragraphs": [
-          "次にやるワークアウト、進行中のセット、開始CTAがひと目でわかる画面を中心に据えます。"
+          "Your next workout, active sets, and primary start action stay visible on one clear screen."
         ]
       },
       {
         "eyebrow": "Analytics",
-        "heading": "強みと伸びを見える化",
+        "heading": "See strength and progress clearly",
         "paragraphs": [
-          "Strength Percentile、成長チャート、筋肉ヒートマップで、記録の意味が後からわかります。"
+          "Strength Percentile, progress charts, and muscle heatmaps turn raw workout logs into useful feedback."
         ]
       },
       {
         "eyebrow": "Library",
-        "heading": "種目とデータベースに戻れる",
+        "heading": "Find the next exercise naturally",
         "paragraphs": [
-          "アプリ紹介の後に、既存の種目データベースへの入口を残します。"
+          "Exercise context stays close to the logging flow so planning the next session feels simple."
         ]
       }
     ]

@@ -103,7 +103,7 @@ export {
     renderStaticHeader
 };
 
-function renderDocument({ title, stylesheets = ["styles.css"], body, generatedComment, locale = "ja", seo = null, ads = true, enableAds = ads, bodyClass = "" }) {
+function renderDocument({ title, stylesheets = ["styles.css"], body, generatedComment, locale = "ja", seo = null, ads = true, enableAds = ads, bodyClass = "", htmlLang = null, fontLocale = null }) {
     const localeConfig = getLocaleConfig(locale);
     const comment = generatedComment ? `${generatedComment}\n` : "";
     const stylesheetLinks = stylesheets.map((href) => `    <link rel="stylesheet" href="${escapeAttribute(stylesheetHref(href, locale))}">`).join("\n");
@@ -113,16 +113,17 @@ function renderDocument({ title, stylesheets = ["styles.css"], body, generatedCo
      crossorigin="anonymous"></script>
 ` : "";
     const bodyClassAttribute = bodyClass ? ` class="${escapeAttribute(bodyClass)}"` : "";
+    const documentLang = htmlLang || localeConfig.hreflang;
 
     return `<!DOCTYPE html>
-${comment}<html lang="${escapeAttribute(localeConfig.hreflang)}" dir="${escapeAttribute(localeConfig.dir || "ltr")}">
+${comment}<html lang="${escapeAttribute(documentLang)}" dir="${escapeAttribute(localeConfig.dir || "ltr")}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${escapeHtml(title)}</title>
 ${adsenseScript}
-${buildFontBlock(locale)}
+${buildFontBlock(fontLocale || locale)}
 ${buildFaviconBlock(locale)}
 ${stylesheetLinks}
 ${seoBlock}
@@ -223,7 +224,7 @@ ${navItems.map(([href, label]) => `                <a href="${escapeAttribute(hr
 
 function getAppHeaderText(locale, key) {
     const text = {
-        ja: { comingSoon: "近日公開" },
+        ja: { comingSoon: "Coming Soon" },
         ko: { comingSoon: "출시 예정" },
         "zh-hant": { comingSoon: "即將推出" },
         "zh-hans": { comingSoon: "即将推出" },
@@ -233,7 +234,7 @@ function getAppHeaderText(locale, key) {
         id: { comingSoon: "Segera hadir" }
     };
 
-    return text[locale]?.[key] || text.ja[key] || key;
+    return text.ja[key] || key;
 }
 
 function renderLegacyCategoryNav(pageType, locale = "ja") {

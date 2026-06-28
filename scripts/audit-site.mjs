@@ -25,7 +25,11 @@ for (const entry of htmlEntries) {
     const isSecondaryUnitPage = entry.file.startsWith("lb_");
     const isHomePage = entry.file === "index.html";
     const isToolPage = entry.file === "Shift2ics.html";
+    const isAppHomePage = isHomePage && html.includes("app-home-shell");
+    const isAppShellPage = html.includes("app-policy-shell");
+    const isAppPage = isAppHomePage || isAppShellPage;
     const localeConfig = getLocaleConfig(entry.locale);
+    const expectedHtmlLang = isAppPage ? "en" : localeConfig.hreflang;
     const canonicalFile = isSecondaryUnitPage ? entry.file.replace(/^lb_/, "kg_") : entry.file;
     const canonicalUrl = absoluteUrlForFile(canonicalFile, entry.locale);
     const pageUrl = absoluteUrlForFile(entry.file, entry.locale);
@@ -34,7 +38,7 @@ for (const entry of htmlEntries) {
     assert(!html.includes("precaonnect"), `${entry.relativePath}: precaonnect typo is still present`);
     assert(!html.includes("G-ZPM6B2KLSV"), `${entry.relativePath}: legacy GA id is still present`);
     assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${entry.relativePath}: current GA script is missing`);
-    assert(html.includes(`<html lang="${localeConfig.hreflang}"`), `${entry.relativePath}: html lang is incorrect`);
+    assert(html.includes(`<html lang="${expectedHtmlLang}"`), `${entry.relativePath}: html lang is incorrect`);
     const expectedAlternates = isToolPage || isSecondaryUnitPage ? 0 : getGeneratedLocales().length + 1;
     assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === expectedAlternates, `${entry.relativePath}: hreflang set is incomplete`);
     assert(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${entry.relativePath}: canonical is missing or malformed`);
@@ -57,9 +61,11 @@ for (const entry of htmlEntries) {
     });
     if (!isToolPage && !isSecondaryUnitPage) {
         assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "ja")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
-        getGeneratedLocales().forEach((locale) => {
-            assert(html.includes(`href="${absoluteUrlForFile(canonicalFile, locale.code)}" data-lang="${locale.code}"`), `${entry.relativePath}: footer language link for ${locale.code} is incorrect`);
-        });
+        if (!isAppPage) {
+            getGeneratedLocales().forEach((locale) => {
+                assert(html.includes(`href="${absoluteUrlForFile(canonicalFile, locale.code)}" data-lang="${locale.code}"`), `${entry.relativePath}: footer language link for ${locale.code} is incorrect`);
+            });
+        }
     }
 
     auditInternalLinks(entry, html);
@@ -106,11 +112,11 @@ for (const entry of htmlEntries) {
         }
     }
 
-    if (isHomePage) {
+    if (isHomePage && !isAppHomePage) {
         assert((html.match(/<h2 id="[^"]+-section" class="section-title">/g) || []).length === 7, `${entry.relativePath}: homepage category sections are incomplete`);
     }
 
-    if (!isHomePage && !isToolPage) {
+    if (!isHomePage && !isToolPage && !isAppShellPage) {
         assert(/<nav class="breadcrumb" aria-label="/.test(html), `${entry.relativePath}: breadcrumb is missing`);
     }
 }
