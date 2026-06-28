@@ -1034,22 +1034,29 @@ Object.assign(UI_TEXT.id, {
 
 const LIBRARY_INITIAL_CARD_LIMIT = 8;
 
-normalizeAdSenseMarkup();
-ensureAdSenseScript();
-
 document.addEventListener("DOMContentLoaded", () => {
     const pageType = detectPageType();
     const locale = detectLocale();
     document.body.dataset.pageType = pageType;
     document.body.dataset.locale = locale;
+    const hasStaticAppHome = pageType === "home" && Boolean(document.querySelector(".app-home-shell"));
 
-    rebuildSharedChrome(pageType);
+    if (pageType !== "home") {
+        normalizeAdSenseMarkup();
+        ensureAdSenseScript();
+    }
+
+    if (!hasStaticAppHome) {
+        rebuildSharedChrome(pageType);
+    }
 
     const main = ensureMainShell();
     let libraryContext = null;
 
-    if (pageType === "home") {
-        libraryContext = enhanceHomePage(main);
+    const canEnhanceStaticHome = !hasStaticAppHome || ["ja", "ko", "es", "id"].includes(locale);
+
+    if (pageType === "home" && canEnhanceStaticHome) {
+        libraryContext = enhanceHomePage(main, { preserveStaticLanding: hasStaticAppHome });
     } else if (pageType === "exercise") {
         libraryContext = enhanceExercisePage(main);
     } else {
@@ -1063,9 +1070,11 @@ document.addEventListener("DOMContentLoaded", () => {
         initHomeDashboardInteractions();
     }
 
-    window.requestAnimationFrame(() => {
-        initializeAds();
-    });
+    if (pageType !== "home") {
+        window.requestAnimationFrame(() => {
+            initializeAds();
+        });
+    }
 });
 
 window.toggleMenu = function () {
@@ -1185,6 +1194,29 @@ function rebuildSharedChrome(pageType) {
 }
 
 function buildHeader(pageType, unitSwitch) {
+    if (pageType === "home") {
+        const navItems = [
+            { href: "#today", label: "Today" },
+            { href: "#analytics", label: "Analytics" },
+            { href: "#library", label: "Library" }
+        ].map((item) => `<a href="${item.href}" class="app-local-nav-link">${item.label}</a>`).join("");
+
+        return htmlToElement(`
+            <header class="site-header app-local-header">
+                <nav class="site-topbar app-local-topbar" aria-label="Shiba">
+                    <a href="index.html" class="app-local-brand">
+                        <img src="${assetPath("app/shiba-mascot.png")}" alt="Shiba" class="app-local-brand-icon">
+                        <span>Shiba</span>
+                    </a>
+                    <div class="app-local-nav">
+                        ${navItems}
+                        <a href="#app-store" class="app-local-cta" aria-disabled="true">${escapeHtml(localeText({ ja: "近日公開", ko: "출시 예정", es: "Próximamente", id: "Segera hadir" }))}</a>
+                    </div>
+                </nav>
+            </header>
+        `);
+    }
+
     const categoryLinks = getCategoryLinks().map((item) => {
         const href = pageType === "home" ? `#${item.id}` : `index.html#${item.id}`;
         return `
@@ -1311,7 +1343,7 @@ function ensureMainShell() {
     return main;
 }
 
-function enhanceHomePage(main) {
+function enhanceHomePageLegacy(main) {
     document.body.classList.add("home-page");
 
     const containers = Array.from(main.children).filter((child) => child.classList.contains("container"));
@@ -1473,6 +1505,398 @@ function enhanceHomePage(main) {
         explorerTitle: t("libraryExplorerTitle"),
         explorerCopy: t("libraryExplorerCopy")
     });
+}
+
+function enhanceHomePage(main, { preserveStaticLanding = false } = {}) {
+    document.body.classList.add("home-page");
+    suppressHomeAds(main);
+
+    const containers = Array.from(main.children).filter((child) => child.classList.contains("container"));
+    const libraryContainer = containers.find((child) => child.querySelector("#other-workouts, #database")) || containers[0];
+    if (!libraryContainer) {
+        return null;
+    }
+
+    const titleHeading = replaceHeadingTag(libraryContainer.querySelector(".section-title"), "h2");
+    const libraryData = collectLibrarySections(libraryContainer);
+    const allCards = libraryData.allCards;
+
+    main.querySelectorAll(":scope > .home-hero-static, :scope > .home-overview-static").forEach((node) => node.remove());
+
+    if (!preserveStaticLanding) {
+        const homeEntryRoutes = buildHomeEntryRoutes(allCards);
+        const popularPreviewCards = homeEntryRoutes[0]?.cards.slice(0, 6) || allCards.slice(0, 6);
+        const appLanding = buildAppLanding({
+            sectionCount: libraryData.sections.length,
+            exerciseCount: allCards.length,
+            previewCards: popularPreviewCards
+        });
+        main.prepend(appLanding);
+    }
+
+    libraryContainer.classList.add("app-database-library");
+    if (titleHeading) {
+        if (!preserveStaticLanding) {
+            titleHeading.textContent = localeText({
+                ja: "種目データベース",
+                ko: "운동 데이터베이스",
+                es: "Base de datos de ejercicios",
+                id: "Database latihan"
+            });
+        }
+        titleHeading.id = "database";
+        titleHeading.classList.add("section-title--database");
+    }
+
+    const databaseIntro = localeText({
+        ja: "平均重量、基準表、鍛えられる筋肉を確認したいときは、ここから既存のワークアウトデータベースへ進めます。",
+        ko: "평균 중량, 기준표, 자극되는 근육을 확인하고 싶다면 기존 운동 데이터베이스로 이동할 수 있습니다.",
+        es: "Cuando quieras revisar pesos medios, estándares y músculos trabajados, entra en la base de datos existente.",
+        id: "Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada."
+    });
+    const homeIntro = libraryContainer.querySelector(".section-intro") || htmlToElement(`
+        <p class="section-intro">${escapeHtml(databaseIntro)}</p>
+    `);
+
+    if (homeIntro.parentNode && !preserveStaticLanding) {
+        homeIntro.textContent = databaseIntro;
+    } else if (!homeIntro.parentNode && titleHeading) {
+        titleHeading.after(homeIntro);
+    }
+
+    libraryData.sections.forEach((section) => {
+        section.heading = replaceHeadingTag(section.heading, "h3");
+    });
+
+    return decorateLibraryExplorer({
+        root: libraryContainer,
+        sections: libraryData.sections,
+        allCards,
+        explorerTitle: "Exercise Library",
+        explorerCopy: localeText({
+            ja: "部位別に種目ページを横断し、アプリで使うメニューの候補を探せます。",
+            ko: "부위별 운동 페이지를 둘러보며 앱에서 사용할 루틴 후보를 찾을 수 있습니다.",
+            es: "Explora ejercicios por zona y encuentra opciones para tus rutinas en la app.",
+            id: "Jelajahi latihan per area dan cari kandidat menu untuk digunakan di aplikasi."
+        })
+    });
+}
+
+function suppressHomeAds(main) {
+    document.querySelectorAll('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]').forEach((script) => script.remove());
+    main.querySelectorAll("ins.adsbygoogle").forEach((slot) => {
+        const container = slot.closest(".container");
+        if (container) {
+            container.remove();
+        } else {
+            slot.remove();
+        }
+    });
+}
+
+function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
+    const ctaLabel = localeText({ ja: "近日公開", ko: "출시 예정", es: "Próximamente", id: "Segera hadir" });
+    const learnMoreLabel = localeText({ ja: "機能を見る", ko: "기능 보기", es: "Ver funciones", id: "Lihat fitur" });
+    const databaseLabel = localeText({ ja: "データベースを見る", ko: "데이터베ース 보기", es: "Ver base de datos", id: "Lihat database" });
+    const phoneAlt = localeText({ ja: "ShibaアプリのToday画面", ko: "Shiba 앱 Today 화면", es: "Pantalla Today de la app Shiba", id: "Layar Today aplikasi Shiba" });
+    const strengthAlt = localeText({ ja: "Strength Percentile画面", ko: "Strength Percentile 화면", es: "Pantalla Strength Percentile", id: "Layar Strength Percentile" });
+    const heatmapAlt = localeText({ ja: "筋肉ヒートマップ画面", ko: "근육 히트맵 화면", es: "Pantalla de mapa muscular", id: "Layar heatmap otot" });
+
+    const stats = [
+        {
+            label: "Start",
+            value: "Today",
+            copy: localeText({ ja: "次のワークアウトをすぐ開始", ko: "다음 운동을 바로 시작", es: "Rutina lista para empezar", id: "Mulai latihan berikutnya" })
+        },
+        {
+            label: "Track",
+            value: "Sets",
+            copy: localeText({ ja: "重量、回数、メモを記録", ko: "중량, 반복, 메모 기록", es: "Peso, reps y notas", id: "Catat berat, repetisi, catatan" })
+        },
+        {
+            label: "Review",
+            value: "Heatmap",
+            copy: localeText({ ja: "鍛えた部位を見返す", ko: "훈련한 부위 확인", es: "Zonas trabajadas visibles", id: "Lihat area yang dilatih" })
+        }
+    ];
+
+    const todayFeatures = localeText({
+        ja: ["今日やるメニューをひと目で確認", "開始ボタンを迷わない位置に固定", "進行中のセットへすぐ戻れる"],
+        ko: ["오늘 할 루틴을 한눈에 확인", "시작 버튼을 명확하게 배치", "진행 중인 세트로 바로 복귀"],
+        es: ["Rutina de hoy visible al instante", "Acción principal siempre clara", "Vuelta rápida a series activas"],
+        id: ["Menu hari ini langsung terlihat", "Tombol mulai berada di posisi jelas", "Kembali cepat ke set aktif"]
+    });
+    const loggingFeatures = localeText({
+        ja: ["前回重量を見ながら入力", "セットごとの達成感が残る", "記録が分析画面に自然につながる"],
+        ko: ["이전 중량을 보며 입력", "세트별 달성감을 남김", "기록이 분석 화면으로 이어짐"],
+        es: ["Registra junto al peso anterior", "Cada serie deja una señal clara", "Los datos alimentan el análisis"],
+        id: ["Input sambil melihat berat sebelumnya", "Setiap set terasa selesai", "Catatan mengalir ke analitik"]
+    });
+    const analyticsFeatures = localeText({
+        ja: ["Strength Percentileで現在地を把握", "1RM推移とボリュームの変化を確認", "伸びている種目を次の計画に反映"],
+        ko: ["Strength Percentile로 현재 위치 확인", "1RM 추이와 볼륨 변화 확인", "성장한 운동을 다음 계획에 반영"],
+        es: ["Strength Percentile muestra tu posición", "Revisa tendencia de 1RM y volumen", "Convierte el progreso en el siguiente plan"],
+        id: ["Strength Percentile menunjukkan posisi", "Lihat tren 1RM dan volume", "Masukkan progres ke rencana berikutnya"]
+    });
+    const heatmapFeatures = localeText({
+        ja: ["鍛えた部位を全身で俯瞰", "偏りを見つけて次のメニューを調整", "数字だけでは見えない実感を補う"],
+        ko: ["훈련한 부위를 전신으로 확인", "편향을 찾아 다음 루틴 조정", "숫자만으로 부족한 감각 보완"],
+        es: ["Vista global de músculos trabajados", "Detecta sesgos y ajusta la rutina", "Añade contexto más allá de los números"],
+        id: ["Lihat area terlatih seluruh tubuh", "Temukan ketimpangan dan sesuaikan menu", "Lengkapi angka dengan konteks visual"]
+    });
+
+    return htmlToElement(`
+        <div class="app-home-shell">
+            <section class="app-hero" id="today">
+                <div class="app-hero-inner">
+                    <div class="app-hero-copy">
+                        <p class="app-kicker">Shiba App</p>
+                        <h1 class="app-hero-title">${escapeHtml(localeText({
+                            ja: "今日の筋トレを、迷わず始める。",
+                            ko: "오늘의 운동을 망설이지 않고 시작하세요.",
+                            es: "Empieza el entrenamiento de hoy sin dudar.",
+                            id: "Mulai latihan hari ini tanpa ragu."
+                        }))}</h1>
+                        <p class="app-hero-lead">${escapeHtml(localeText({
+                            ja: "メニューを開く。セットを残す。強みと伸びを見返す。Shibaは、筋トレの一日を最短距離でつなぐ記録アプリです。",
+                            ko: "루틴을 열고, 세트를 남기고, 강점과 성장을 다시 봅니다. Shiba는 근력 운동의 하루를 가장 짧은 흐름으로 연결합니다.",
+                            es: "Abre la rutina, registra series y revisa fuerza y progreso. Shiba conecta el día de entrenamiento con menos fricción.",
+                            id: "Buka menu, catat set, lalu lihat kekuatan dan progres. Shiba menghubungkan hari latihan dengan alur yang ringkas."
+                        }))}</p>
+                        <div class="app-hero-actions">
+                            <a href="#app-store" class="app-pill app-pill--primary" aria-disabled="true">${escapeHtml(ctaLabel)}</a>
+                            <a href="#analytics" class="app-pill app-pill--secondary">${escapeHtml(learnMoreLabel)}</a>
+                        </div>
+                        <div class="app-hero-stats" aria-label="Shiba highlights">
+                            ${stats.map((stat) => `
+                                <div class="app-stat">
+                                    <span>${escapeHtml(stat.label)}</span>
+                                    <strong>${escapeHtml(stat.value)}</strong>
+                                    <small>${escapeHtml(stat.copy)}</small>
+                                </div>
+                            `).join("")}
+                        </div>
+                    </div>
+                    <div class="app-device-stage">
+                        <div class="app-phone app-phone--hero">
+                            <img src="${escapeAttribute(assetPath("app/today-screen-current.png"))}" alt="${escapeAttribute(phoneAlt)}" fetchpriority="high">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Today</p>
+                        <h2>${escapeHtml(localeText({
+                            ja: "開いた瞬間、やることだけが見える。",
+                            ko: "열자마자 할 일만 보입니다.",
+                            es: "Al abrirla, solo ves lo que toca.",
+                            id: "Saat dibuka, yang terlihat hanya latihan berikutnya."
+                        }))}</h2>
+                        <p>${escapeHtml(localeText({
+                            ja: "ワークアウト開始の判断を減らし、今日の一歩に集中できる画面です。",
+                            ko: "운동 시작 전 망설임을 줄이고 오늘의 첫 동작에 집중하게 해 줍니다.",
+                            es: "Reduce decisiones antes de entrenar y centra la pantalla en el primer paso.",
+                            id: "Mengurangi keputusan sebelum latihan dan membuat fokus pada langkah pertama."
+                        }))}</p>
+                        ${renderAppFeatureList(todayFeatures)}
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone">
+                            <img src="${escapeAttribute(assetPath("app/today-screen-current.png"))}" alt="${escapeAttribute(phoneAlt)}" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--dark" id="logging">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Logging</p>
+                        <h2>${escapeHtml(localeText({
+                            ja: "セット入力は、勢いを止めない。",
+                            ko: "세트 입력은 흐름을 끊지 않습니다.",
+                            es: "Registrar series no corta el ritmo.",
+                            id: "Input set tidak memutus ritme."
+                        }))}</h2>
+                        <p>${escapeHtml(localeText({
+                            ja: "重量と回数を淡々と残せるUIで、記録すること自体がトレーニングの邪魔になりません。",
+                            ko: "중량과 반복을 차분히 남기는 UI로 기록 자체가 운동을 방해하지 않습니다.",
+                            es: "Una interfaz directa para peso y repeticiones mantiene el entrenamiento en marcha.",
+                            id: "UI yang lugas untuk berat dan repetisi menjaga latihan tetap berjalan."
+                        }))}</p>
+                        ${renderAppFeatureList(loggingFeatures)}
+                    </div>
+                    <div class="app-scene-media">
+                        ${buildLoggingMock()}
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="analytics">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Analytics</p>
+                        <h2>${escapeHtml(localeText({
+                            ja: "伸びている感覚を、数字で確かめる。",
+                            ko: "성장하는 감각을 숫자로 확인합니다.",
+                            es: "Comprueba con datos lo que sientes al progresar.",
+                            id: "Pastikan rasa progres dengan angka."
+                        }))}</h2>
+                        <p>${escapeHtml(localeText({
+                            ja: "Strength Percentile、成長チャート、ボリューム推移で、次の重量設定に根拠を持てます。",
+                            ko: "Strength Percentile, 성장 차트, 볼륨 추이로 다음 중량 설정의 근거를 얻습니다.",
+                            es: "Strength Percentile, gráficos y volumen dan criterio para el siguiente peso.",
+                            id: "Strength Percentile, grafik, dan volume memberi dasar untuk beban berikutnya."
+                        }))}</p>
+                        ${renderAppFeatureList(analyticsFeatures)}
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone app-phone--analytics">
+                            <img src="${escapeAttribute(assetPath("app/strength-percentile.jpg"))}" alt="${escapeAttribute(strengthAlt)}" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--dark" id="muscle-heatmap">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Muscle Heatmap</p>
+                        <h2>${escapeHtml(localeText({
+                            ja: "どこを鍛えたか、一目でわかる。",
+                            ko: "어디를 훈련했는지 한눈에 보입니다.",
+                            es: "Ve de un vistazo qué zonas entrenaste.",
+                            id: "Lihat area yang dilatih dalam sekali pandang."
+                        }))}</h2>
+                        <p>${escapeHtml(localeText({
+                            ja: "筋肉ヒートマップは、種目名の羅列では見えにくい偏りや不足を、身体の形で見せてくれます。",
+                            ko: "근육 히트맵은 운동 이름만으로 놓치기 쉬운 편향과 부족을 몸의 형태로 보여 줍니다.",
+                            es: "El mapa muscular revela sesgos y vacíos que una lista de ejercicios no muestra.",
+                            id: "Heatmap otot menunjukkan bias dan kekurangan yang tidak terlihat dari daftar latihan."
+                        }))}</p>
+                        ${renderAppFeatureList(heatmapFeatures)}
+                    </div>
+                    <div class="app-scene-media app-scene-media--wide">
+                        <img src="${escapeAttribute(assetPath("app/muscle-heatmap.png"))}" alt="${escapeAttribute(heatmapAlt)}" loading="lazy" class="app-heatmap-image">
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="library">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Library</p>
+                        <h2>${escapeHtml(localeText({
+                            ja: "次にやる種目を、自然に探せる。",
+                            ko: "다음 운동을 자연스럽게 찾습니다.",
+                            es: "Encuentra el siguiente ejercicio con naturalidad.",
+                            id: "Temukan latihan berikutnya dengan alami."
+                        }))}</h2>
+                        <p>${escapeHtml(localeText({
+                            ja: "部位別のデータベースは下部に残し、アプリで使うメニューや種目選びへつながる入口にします。",
+                            ko: "부위별 데이터베ース는 아래에 남겨 앱에서 사용할 루틴과 운동 선택으로 이어지게 합니다.",
+                            es: "La base por zonas queda debajo y sirve como puente hacia rutinas y ejercicios.",
+                            id: "Database per area tetap di bawah sebagai jembatan menuju menu dan pilihan latihan."
+                        }))}</p>
+                        <div class="app-library-meta">
+                            <span>${escapeHtml(formatExerciseCount(exerciseCount))}</span>
+                            <span>${escapeHtml(localeText({
+                                ja: `${sectionCount}カテゴリ`,
+                                ko: `${sectionCount}개 카테고리`,
+                                es: `${sectionCount} categorías`,
+                                id: `${sectionCount} kategori`
+                            }))}</span>
+                        </div>
+                        <a href="#database" class="app-pill app-pill--dark">${escapeHtml(databaseLabel)}</a>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-library-preview">
+                            ${renderAppLibraryPreview(previewCards)}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-cta-band" id="app-store">
+                <div class="app-cta-copy">
+                    <img src="${escapeAttribute(assetPath("app/shiba-mascot.png"))}" alt="" class="app-cta-mascot" loading="lazy">
+                    <p class="app-kicker">Shiba</p>
+                    <h2>${escapeHtml(localeText({
+                        ja: "App Store公開に向けて準備中です。",
+                        ko: "App Store 공개를 준비 중입니다.",
+                        es: "Preparando el lanzamiento en App Store.",
+                        id: "Sedang disiapkan untuk App Store."
+                    }))}</h2>
+                    <p>${escapeHtml(localeText({
+                        ja: "正式URLが決まり次第、このCTAをApp Storeリンクへ差し替えます。",
+                        ko: "공식 URL이 정해지면 이 CTA를 App Store 링크로 교체합니다.",
+                        es: "Cuando exista la URL oficial, esta CTA apuntará a App Store.",
+                        id: "Saat URL resmi siap, CTA ini akan diarahkan ke App Store."
+                    }))}</p>
+                </div>
+            </section>
+        </div>
+    `);
+}
+
+function renderAppFeatureList(items) {
+    return `
+        <ul class="app-feature-list">
+            ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ul>
+    `;
+}
+
+function buildLoggingMock() {
+    const labels = localeText({
+        ja: { title: "Bench Press", set: "Set", weight: "重量", reps: "回数", done: "完了" },
+        ko: { title: "Bench Press", set: "Set", weight: "중량", reps: "반복", done: "완료" },
+        es: { title: "Bench Press", set: "Set", weight: "Peso", reps: "Reps", done: "Listo" },
+        id: { title: "Bench Press", set: "Set", weight: "Berat", reps: "Reps", done: "Selesai" }
+    });
+
+    return `
+        <div class="app-logging-mock" aria-label="Workout logging preview">
+            <div class="app-logging-header">
+                <span>${escapeHtml(labels.title)}</span>
+                <strong>4 / 5</strong>
+            </div>
+            <div class="app-logging-table">
+                ${[
+                    ["1", "80kg", "8", labels.done],
+                    ["2", "85kg", "6", labels.done],
+                    ["3", "87.5kg", "5", labels.done],
+                    ["4", "90kg", "3", "Live"]
+                ].map((row) => `
+                    <div class="app-logging-row">
+                        <span>${escapeHtml(labels.set)} ${escapeHtml(row[0])}</span>
+                        <strong>${escapeHtml(row[1])}</strong>
+                        <strong>${escapeHtml(row[2])}</strong>
+                        <small>${escapeHtml(row[3])}</small>
+                    </div>
+                `).join("")}
+            </div>
+            <div class="app-logging-footer">
+                <span>${escapeHtml(labels.weight)}</span>
+                <span>${escapeHtml(labels.reps)}</span>
+            </div>
+        </div>
+    `;
+}
+
+function renderAppLibraryPreview(cards) {
+    return cards.map((card) => `
+        <a class="app-library-preview-card" href="${escapeAttribute(card.href)}">
+            <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy">
+            <span>
+                <strong>${escapeHtml(card.name)}</strong>
+                <small>${escapeHtml(card.category || cleanSectionLabel(card.sectionTitle))}</small>
+            </span>
+        </a>
+    `).join("");
 }
 
 function enhanceExercisePage(main) {
@@ -2306,31 +2730,33 @@ function currentPath() {
 
 function detectLocale() {
     const lang = document.documentElement.lang || "";
-    if (lang.toLowerCase().startsWith("zh-hans") || window.location.pathname.split("/").includes("zh-hans")) {
+    const pathParts = window.location.pathname.split("/");
+
+    if (lang.toLowerCase().startsWith("zh-hans") || pathParts.includes("zh-hans")) {
         return "zh-hans";
     }
 
-    if (lang.toLowerCase().startsWith("zh-hant") || window.location.pathname.split("/").includes("zh-hant")) {
+    if (lang.toLowerCase().startsWith("zh-hant") || pathParts.includes("zh-hant")) {
         return "zh-hant";
     }
 
-    if (lang.toLowerCase().startsWith("de") || window.location.pathname.split("/").includes("de")) {
+    if (lang.toLowerCase().startsWith("de") || pathParts.includes("de")) {
         return "de";
     }
 
-    if (lang.toLowerCase().startsWith("fr") || window.location.pathname.split("/").includes("fr")) {
+    if (lang.toLowerCase().startsWith("fr") || pathParts.includes("fr")) {
         return "fr";
     }
 
-    if (lang.toLowerCase().startsWith("es") || window.location.pathname.split("/").includes("es")) {
+    if (lang.toLowerCase().startsWith("es") || pathParts.includes("es")) {
         return "es";
     }
 
-    if (lang.toLowerCase().startsWith("id") || window.location.pathname.split("/").includes("id")) {
+    if (lang.toLowerCase().startsWith("id") || pathParts.includes("id")) {
         return "id";
     }
 
-    if (lang.toLowerCase().startsWith("ko") || window.location.pathname.split("/").includes("ko")) {
+    if (lang.toLowerCase().startsWith("ko") || pathParts.includes("ko")) {
         return "ko";
     }
 

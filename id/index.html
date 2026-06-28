@@ -5,10 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shiba Muscle | Database Latihan</title>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2819086765117537"
-     crossorigin="anonymous"></script>
+    <title>Shiba | Aplikasi catatan latihan</title>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +61,7 @@
 
     <link rel="stylesheet" href="../styles.css">
 
-    <meta name="description" content="Database latihan Shiba Muscle untuk mengecek berat rata-rata, standar kekuatan, dan otot yang dilatih berdasarkan area tubuh dan jenis latihan. Mendukung satuan kg dan lb.">
+    <meta name="description" content="Shiba menghubungkan latihan hari ini, catatan set, Strength Percentile, dan heatmap otot dalam satu aplikasi latihan.">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#148a6a">
     <link rel="canonical" href="https://shibamuscle.com/id/">
@@ -80,14 +77,14 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Shiba Muscle">
     <meta property="og:locale" content="id_ID">
-    <meta property="og:title" content="Shiba Muscle | Database Latihan">
-    <meta property="og:description" content="Database latihan Shiba Muscle untuk mengecek berat rata-rata, standar kekuatan, dan otot yang dilatih berdasarkan area tubuh dan jenis latihan. Mendukung satuan kg dan lb.">
+    <meta property="og:title" content="Shiba | Aplikasi catatan latihan">
+    <meta property="og:description" content="Shiba menghubungkan latihan hari ini, catatan set, Strength Percentile, dan heatmap otot dalam satu aplikasi latihan.">
     <meta property="og:url" content="https://shibamuscle.com/id/">
-    <meta property="og:image" content="https://shibamuscle.com/assets/dumbbell-logo.png">
+    <meta property="og:image" content="https://shibamuscle.com/assets/app/today-screen-current.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Shiba Muscle | Database Latihan">
-    <meta name="twitter:description" content="Database latihan Shiba Muscle untuk mengecek berat rata-rata, standar kekuatan, dan otot yang dilatih berdasarkan area tubuh dan jenis latihan. Mendukung satuan kg dan lb.">
-    <meta name="twitter:image" content="https://shibamuscle.com/assets/dumbbell-logo.png">
+    <meta name="twitter:title" content="Shiba | Aplikasi catatan latihan">
+    <meta name="twitter:description" content="Shiba menghubungkan latihan hari ini, catatan set, Strength Percentile, dan heatmap otot dalam satu aplikasi latihan.">
+    <meta name="twitter:image" content="https://shibamuscle.com/assets/app/today-screen-current.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9K58THBFM"></script>
     <script>
@@ -98,86 +95,250 @@
     </script>
 
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="header-logo">
-                <a href="index.html" class="header-link">
-                    <img src="../assets/dumbbell-logo.png" alt="Shiba Muscle" class="header-dumbbell-logo">
-                    <span class="header-text">Shiba Muscle</span>
-                </a>
+<body class="home-page">
+    <header class="site-header app-local-header">
+        <nav class="site-topbar app-local-topbar" aria-label="Shiba">
+            <a href="index.html" class="app-local-brand">
+                <img src="../assets/app/shiba-mascot.png" alt="Shiba" class="app-local-brand-icon">
+                <span>Shiba</span>
+            </a>
+            <div class="app-local-nav">
+                <a href="#today" class="app-local-nav-link">Today</a>
+                <a href="#analytics" class="app-local-nav-link">Analytics</a>
+                <a href="#library" class="app-local-nav-link">Library</a>
+                <a href="#app-store" class="app-local-cta" aria-disabled="true">Segera hadir</a>
             </div>
         </nav>
-
-        <div class="sub-nav">
-            <a href="#whole-body-section">
-                <img src="../assets/power-clean-white-icon.webp" alt="Seluruh tubuh" class="exercise-icon"> Seluruh tubuh
-            </a>
-            <div class="divider">|</div>
-            <a href="#chest-section">
-                <img src="../assets/bench-press-white-icon.webp" alt="Dada" class="exercise-icon"> Dada
-            </a>
-            <div class="divider">|</div>
-            <a href="#back-section">
-                <img src="../assets/deadlift-white-icon.webp" alt="Punggung" class="exercise-icon"> Punggung
-            </a>
-            <div class="divider">|</div>
-            <a href="#shoulder-section">
-                <img src="../assets/shoulder-press-white-icon.webp" alt="Bahu" class="exercise-icon"> Bahu
-            </a>
-            <div class="divider">|</div>
-            <a href="#arm-section">
-                <img src="../assets/hammer-curl-white-icon.webp" alt="Lengan" class="exercise-icon"> Lengan
-            </a>
-            <div class="divider">|</div>
-            <a href="#leg-section">
-                <img src="../assets/squat-white-icon.webp" alt="Kaki" class="exercise-icon"> Kaki
-            </a>
-            <div class="divider">|</div>
-            <a href="#core-section">
-                <img src="../assets/sit-ups-white-icon.webp" alt="Core" class="exercise-icon"> Core
-            </a>
-        </div>
     </header>
 
     <hr class="top-divider">
     <main class="page-main">
-        <section class="container home-hero home-hero-static" id="database-top">
-            <div class="home-hero-copy">
-                <p class="eyebrow">Workout data</p>
-                <h1>Bandingkan data latihan dengan jelas</h1>
-                <p class="hero-description">Shiba Muscle adalah database latihan untuk membandingkan berat rata-rata, standar kekuatan, dan otot utama pada setiap gerakan. Dari bench press, squat, deadlift, latihan dumbbell, bodyweight, sampai cable, kamu bisa mengecek patokan berdasarkan berat badan dan usia dengan cepat.</p>
-                <p class="hero-description">Angka di situs ini adalah referensi untuk menyusun latihan, bukan target wajib. Setiap halaman menyertakan informasi otot dan cara membaca tabel agar kamu bisa memprioritaskan teknik, rentang gerak, pengalaman latihan, dan keamanan.</p>
-            </div>
-        </section>
+        <div class="app-home-shell">
+            <section class="app-hero" id="today">
+                <div class="app-hero-inner">
+                    <div class="app-hero-copy">
+                        <p class="app-kicker">Shiba App</p>
+                        <h1 class="app-hero-title">Shiba</h1>
+                        <p class="app-hero-subtitle">Mulai latihan hari ini tanpa ragu.</p>
+                        <p class="app-hero-lead">Shiba membantu membuka menu latihan hari ini, mencatat set, lalu melihat kembali area dan kekuatan yang berkembang.</p>
+                        <div class="app-hero-actions">
+                            <a href="#app-store" class="app-pill app-pill--primary" aria-disabled="true">Segera hadir</a>
+                            <a href="#analytics" class="app-pill app-pill--secondary">Lihat fitur</a>
+                            <a href="shiba-privacy-policy.html" class="app-pill app-pill--secondary">Privacy Policy</a>
+                        </div>
+                        <div class="app-hero-stats" aria-label="Shiba highlights">
+                            <div class="app-stat">
+                                <span>Start</span>
+                                <strong>Today</strong>
+                                <small>Mulai latihan berikutnya</small>
+                            </div>
+                            <div class="app-stat">
+                                <span>Track</span>
+                                <strong>Sets</strong>
+                                <small>Catat berat, repetisi, catatan</small>
+                            </div>
+                            <div class="app-stat">
+                                <span>Review</span>
+                                <strong>Heatmap</strong>
+                                <small>Lihat area yang dilatih</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-device-stage">
+                        <div class="app-phone app-phone--hero">
+                            <img src="../assets/app/today-screen-current.png" alt="Layar Today aplikasi Shiba" fetchpriority="high">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section class="container section-band home-overview-static">
-            <div class="section-heading">
-                <p class="eyebrow">Panduan data</p>
-                <h2>Prinsip penyajian agar mudah dibandingkan</h2>
-                <p>Bagian awal merangkum tujuan situs, cara kami menyusun data, dan cara memakai angka sebelum kamu menjelajahi semua tabel.</p>
-            </div>
-            <div class="summary-grid">
-                <article class="summary-card">
-                    <span class="metric-label">Purpose</span>
-                    <h3>Membuat pintu masuk pemilihan latihan</h3>
-                <p>Latihan disusun berdasarkan area tubuh, alat, dan otot utama supaya gerakan yang mirip lebih mudah dibandingkan.</p>
-                </article>
-                <article class="summary-card">
-                    <span class="metric-label">Data</span>
-                    <h3>Memisahkan rata-rata dan tabel standar</h3>
-                <p>Berat rata-rata tidak berdiri sendiri; tabel berdasarkan berat badan dan usia juga disediakan sebagai konteks tambahan.</p>
-                </article>
-                <article class="summary-card">
-                    <span class="metric-label">Safety</span>
-                    <h3>Referensi, bukan saran medis atau kepelatihan</h3>
-                <p>Jika ada nyeri atau riwayat cedera, konsultasikan dengan profesional dan prioritaskan teknik serta keamanan dibanding angka.</p>
-                </article>
-            </div>
-        </section>
+            <section class="app-scene app-scene--light">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Today</p>
+                        <h2>Mulai menu latihan hari ini</h2>
+                        <p>Latihan berikutnya, set yang sedang berjalan, dan CTA utama terlihat jelas dalam satu layar.</p>
+                        <ul class="app-feature-list">
+                            <li>Menu hari ini langsung terlihat</li>
+                            <li>Tombol mulai berada di posisi jelas</li>
+                            <li>Kembali cepat ke set aktif</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone">
+                            <img src="../assets/app/today-screen-current.png" alt="Layar Today aplikasi Shiba" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <div class="container">
-        <h2 class="section-title" id="other-workouts">Temukan latihan</h2>
+            <section class="app-scene app-scene--dark" id="logging">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Logging</p>
+                        <h2>Input set tidak memutus ritme.</h2>
+                        <p>UI yang lugas untuk berat dan repetisi menjaga latihan tetap berjalan.</p>
+                        <ul class="app-feature-list">
+                            <li>Input sambil melihat berat sebelumnya</li>
+                            <li>Setiap set terasa selesai</li>
+                            <li>Catatan mengalir ke analitik</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-logging-mock" aria-label="Workout logging preview">
+                            <div class="app-logging-header">
+                                <span>Bench Press</span>
+                                <strong>4 / 5</strong>
+                            </div>
+                            <div class="app-logging-table">
+                                <div class="app-logging-row">
+                                    <span>Set 1</span>
+                                    <strong>80kg</strong>
+                                    <strong>8</strong>
+                                    <small>Selesai</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 2</span>
+                                    <strong>85kg</strong>
+                                    <strong>6</strong>
+                                    <small>Selesai</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 3</span>
+                                    <strong>87.5kg</strong>
+                                    <strong>5</strong>
+                                    <small>Selesai</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 4</span>
+                                    <strong>90kg</strong>
+                                    <strong>3</strong>
+                                    <small>Live</small>
+                                </div>
+                            </div>
+                            <div class="app-logging-footer">
+                                <span>Berat</span>
+                                <span>Reps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="analytics">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Analytics</p>
+                        <h2>Lihat kekuatan dan progres</h2>
+                        <p>Strength Percentile, grafik perkembangan, dan heatmap otot membantu memahami catatan latihan.</p>
+                        <ul class="app-feature-list">
+                            <li>Strength Percentile menunjukkan posisi</li>
+                            <li>Lihat tren 1RM dan volume</li>
+                            <li>Masukkan progres ke rencana berikutnya</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone app-phone--analytics">
+                            <img src="../assets/app/strength-percentile.jpg" alt="Layar Strength Percentile" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--dark" id="muscle-heatmap">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Muscle Heatmap</p>
+                        <h2>Lihat area yang dilatih dalam sekali pandang.</h2>
+                        <p>Heatmap otot menunjukkan bias dan kekurangan yang tidak terlihat dari daftar latihan.</p>
+                        <ul class="app-feature-list">
+                            <li>Lihat area terlatih seluruh tubuh</li>
+                            <li>Temukan ketimpangan dan sesuaikan menu</li>
+                            <li>Lengkapi angka dengan konteks visual</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media app-scene-media--wide">
+                            <img src="../assets/app/muscle-heatmap.png" alt="Layar heatmap otot" loading="lazy" class="app-heatmap-image">
+                        </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="library">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Library</p>
+                        <h2>Kembali ke latihan dan data</h2>
+                        <p>Akses ke database latihan lama tetap tersedia di bawah pengenalan aplikasi.</p>
+                        <div class="app-library-meta">
+                            <span>290 latihan</span>
+                            <span>7 kategori</span>
+                        </div>
+                        <a href="#database" class="app-pill app-pill--dark">Lihat database</a>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-library-preview">
+                            <a class="app-library-preview-card" href="kg_bench-press.html">
+                                <img src="../assets/bench-press.webp" alt="Bench press" loading="lazy">
+                                <span>
+                                    <strong>Bench press</strong>
+                                    <small>Dada / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_squat.html">
+                                <img src="../assets/squat.webp" alt="Squat" loading="lazy">
+                                <span>
+                                    <strong>Squat</strong>
+                                    <small>Kaki / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_deadlift.html">
+                                <img src="../assets/deadlift.webp" alt="Deadlift" loading="lazy">
+                                <span>
+                                    <strong>Deadlift</strong>
+                                    <small>Punggung / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_lat-pulldown.html">
+                                <img src="../assets/lat-pulldown.webp" alt="Lat pulldown" loading="lazy">
+                                <span>
+                                    <strong>Lat pulldown</strong>
+                                    <small>Punggung</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_dumbbell-curl.html">
+                                <img src="../assets/dumbbell-curl.webp" alt="Dumbbell curl" loading="lazy">
+                                <span>
+                                    <strong>Dumbbell curl</strong>
+                                    <small>Lengan / Dumbbell</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_deadlift.html">
+                                <img src="../assets/deadlift.webp" alt="Deadlift" loading="lazy">
+                                <span>
+                                    <strong>Deadlift</strong>
+                                    <small>Seluruh tubuh / BIG3</small>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-cta-band" id="app-store">
+                <div class="app-cta-copy">
+                    <img src="../assets/app/shiba-mascot.png" alt="" class="app-cta-mascot" loading="lazy">
+                    <p class="app-kicker">Shiba</p>
+                    <h2>Sedang disiapkan untuk App Store.</h2>
+                    <p>Saat URL resmi siap, CTA ini akan diarahkan ke App Store.</p>
+                    <a href="shiba-privacy-policy.html" class="app-pill app-pill--dark">Privacy Policy</a>
+                </div>
+            </section>
+        </div>
+
+    <div class="container app-database-library">
+        <h2 class="section-title" id="database">Lihat database latihan</h2>
+        <p class="section-intro">Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada.</p>
+
 
         <h2 id="whole-body-section" class="section-title">Seluruh tubuh</h2>
         <div class="exercise-cards-container">
@@ -4552,18 +4713,6 @@
         </div>
     </div>
 
-    <div class="container ad-slot-container" data-ad-placement-key="after-library">
-        <!-- shiba-horizontal -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2819086765117537"
-             data-ad-slot="3763544828"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
     </main>
 
 

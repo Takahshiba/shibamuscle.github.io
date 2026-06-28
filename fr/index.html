@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shiba Muscle | Base de données d’exercices</title>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2819086765117537"
-     crossorigin="anonymous"></script>
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,11 +80,11 @@
     <meta property="og:title" content="Shiba Muscle | Base de données d’exercices">
     <meta property="og:description" content="Base de données Shiba Muscle pour consulter charges moyennes, standards de force et muscles travaillés par zone et par exercice, avec bascule kg/lb.">
     <meta property="og:url" content="https://shibamuscle.com/fr/">
-    <meta property="og:image" content="https://shibamuscle.com/assets/dumbbell-logo.png">
+    <meta property="og:image" content="https://shibamuscle.com/assets/app/today-screen-current.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Shiba Muscle | Base de données d’exercices">
     <meta name="twitter:description" content="Base de données Shiba Muscle pour consulter charges moyennes, standards de force et muscles travaillés par zone et par exercice, avec bascule kg/lb.">
-    <meta name="twitter:image" content="https://shibamuscle.com/assets/dumbbell-logo.png">
+    <meta name="twitter:image" content="https://shibamuscle.com/assets/app/today-screen-current.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9K58THBFM"></script>
     <script>
@@ -98,86 +95,250 @@
     </script>
 
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="header-logo">
-                <a href="index.html" class="header-link">
-                    <img src="../assets/dumbbell-logo.png" alt="Shiba Muscle" class="header-dumbbell-logo">
-                    <span class="header-text">Shiba Muscle</span>
-                </a>
+<body class="home-page">
+    <header class="site-header app-local-header">
+        <nav class="site-topbar app-local-topbar" aria-label="Shiba">
+            <a href="index.html" class="app-local-brand">
+                <img src="../assets/app/shiba-mascot.png" alt="Shiba" class="app-local-brand-icon">
+                <span>Shiba</span>
+            </a>
+            <div class="app-local-nav">
+                <a href="#today" class="app-local-nav-link">Today</a>
+                <a href="#analytics" class="app-local-nav-link">Analytics</a>
+                <a href="#library" class="app-local-nav-link">Library</a>
+                <a href="#app-store" class="app-local-cta" aria-disabled="true">Bientôt</a>
             </div>
         </nav>
-
-        <div class="sub-nav">
-            <a href="#whole-body-section">
-                <img src="../assets/power-clean-white-icon.webp" alt="Corps entier" class="exercise-icon"> Corps entier
-            </a>
-            <div class="divider">|</div>
-            <a href="#chest-section">
-                <img src="../assets/bench-press-white-icon.webp" alt="Pectoraux" class="exercise-icon"> Pectoraux
-            </a>
-            <div class="divider">|</div>
-            <a href="#back-section">
-                <img src="../assets/deadlift-white-icon.webp" alt="Dos" class="exercise-icon"> Dos
-            </a>
-            <div class="divider">|</div>
-            <a href="#shoulder-section">
-                <img src="../assets/shoulder-press-white-icon.webp" alt="Épaules" class="exercise-icon"> Épaules
-            </a>
-            <div class="divider">|</div>
-            <a href="#arm-section">
-                <img src="../assets/hammer-curl-white-icon.webp" alt="Bras" class="exercise-icon"> Bras
-            </a>
-            <div class="divider">|</div>
-            <a href="#leg-section">
-                <img src="../assets/squat-white-icon.webp" alt="Jambes" class="exercise-icon"> Jambes
-            </a>
-            <div class="divider">|</div>
-            <a href="#core-section">
-                <img src="../assets/sit-ups-white-icon.webp" alt="Tronc" class="exercise-icon"> Tronc
-            </a>
-        </div>
     </header>
 
     <hr class="top-divider">
     <main class="page-main">
-        <section class="container home-hero home-hero-static" id="database-top">
-            <div class="home-hero-copy">
-                <p class="eyebrow">Workout data</p>
-                <h1>Comparer les données d’entraînement clairement</h1>
-                <p class="hero-description">Shiba Muscle organise les charges moyennes, les standards de force et les muscles principaux par exercice. Les mouvements classiques comme le développé couché, le squat et le soulevé de terre côtoient les exercices avec haltères, poids du corps et câble.</p>
-                <p class="hero-description">Les valeurs sont des repères pour planifier l’entraînement, pas des objectifs obligatoires. Utilisez-les avec la technique, l’amplitude, l’expérience et l’état du jour en tête.</p>
-            </div>
-        </section>
+        <div class="app-home-shell">
+            <section class="app-hero" id="today">
+                <div class="app-hero-inner">
+                    <div class="app-hero-copy">
+                        <p class="app-kicker">Workout data</p>
+                        <h1 class="app-hero-title">Shiba</h1>
+                        <p class="app-hero-subtitle">Comparer les données d’entraînement clairement</p>
+                        <p class="app-hero-lead">Shiba Muscle organise les charges moyennes, les standards de force et les muscles principaux par exercice. Les mouvements classiques comme le développé couché, le squat et le soulevé de terre côtoient les exercices avec haltères, poids du corps et câble.</p>
+                        <div class="app-hero-actions">
+                            <a href="#app-store" class="app-pill app-pill--primary" aria-disabled="true">Bientôt</a>
+                            <a href="#analytics" class="app-pill app-pill--secondary">Voir les fonctions</a>
+                            <a href="shiba-privacy-policy.html" class="app-pill app-pill--secondary">Privacy Policy</a>
+                        </div>
+                        <div class="app-hero-stats" aria-label="Shiba highlights">
+                            <div class="app-stat">
+                                <span>Start</span>
+                                <strong>Today</strong>
+                                <small>Séance prête à lancer</small>
+                            </div>
+                            <div class="app-stat">
+                                <span>Track</span>
+                                <strong>Sets</strong>
+                                <small>Poids, reps et notes</small>
+                            </div>
+                            <div class="app-stat">
+                                <span>Review</span>
+                                <strong>Heatmap</strong>
+                                <small>Zones travaillées visibles</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-device-stage">
+                        <div class="app-phone app-phone--hero">
+                            <img src="../assets/app/today-screen-current.png" alt="Écran Today de l&#39;app Shiba" fetchpriority="high">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section class="container section-band home-overview-static">
-            <div class="section-heading">
-                <p class="eyebrow">Guide des données</p>
-                <h2>Principes éditoriaux pour mieux comparer</h2>
-                <p>La page d’accueil présente le but du site, la façon dont les données sont organisées et les précautions d’utilisation.</p>
-            </div>
-            <div class="summary-grid">
-                <article class="summary-card">
-                    <span class="metric-label">Purpose</span>
-                    <h3>Créer une entrée claire par exercice</h3>
-                <p>Les pages sont organisées par zone, matériel et muscles principaux afin de comparer plus facilement les exercices proches.</p>
-                </article>
-                <article class="summary-card">
-                    <span class="metric-label">Data</span>
-                    <h3>Séparer moyenne et standards</h3>
-                <p>La charge moyenne est accompagnée de tableaux par poids corporel et par âge pour donner plus de contexte.</p>
-                </article>
-                <article class="summary-card">
-                    <span class="metric-label">Safety</span>
-                    <h3>Une référence, pas un avis médical</h3>
-                <p>En cas de douleur ou d’antécédents, consultez un professionnel et privilégiez la technique et la sécurité.</p>
-                </article>
-            </div>
-        </section>
+            <section class="app-scene app-scene--light">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Today</p>
+                        <h2>Créer une entrée claire par exercice</h2>
+                        <p>Les pages sont organisées par zone, matériel et muscles principaux afin de comparer plus facilement les exercices proches.</p>
+                        <ul class="app-feature-list">
+                            <li>Séance du jour visible tout de suite</li>
+                            <li>Action principale claire</li>
+                            <li>Retour rapide aux séries en cours</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone">
+                            <img src="../assets/app/today-screen-current.png" alt="Écran Today de l&#39;app Shiba" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <div class="container">
-        <h2 class="section-title" id="other-workouts">Trouver un exercice</h2>
+            <section class="app-scene app-scene--dark" id="logging">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Logging</p>
+                        <h2>Noter les séries sans casser le rythme.</h2>
+                        <p>Une saisie directe du poids et des répétitions garde l&#39;entraînement fluide.</p>
+                        <ul class="app-feature-list">
+                            <li>Saisie avec le poids précédent</li>
+                            <li>Chaque série laisse un repère clair</li>
+                            <li>Les données nourrissent l&#39;analyse</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-logging-mock" aria-label="Workout logging preview">
+                            <div class="app-logging-header">
+                                <span>Bench Press</span>
+                                <strong>4 / 5</strong>
+                            </div>
+                            <div class="app-logging-table">
+                                <div class="app-logging-row">
+                                    <span>Set 1</span>
+                                    <strong>80kg</strong>
+                                    <strong>8</strong>
+                                    <small>Fait</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 2</span>
+                                    <strong>85kg</strong>
+                                    <strong>6</strong>
+                                    <small>Fait</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 3</span>
+                                    <strong>87.5kg</strong>
+                                    <strong>5</strong>
+                                    <small>Fait</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 4</span>
+                                    <strong>90kg</strong>
+                                    <strong>3</strong>
+                                    <small>Live</small>
+                                </div>
+                            </div>
+                            <div class="app-logging-footer">
+                                <span>Poids</span>
+                                <span>Reps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="analytics">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Analytics</p>
+                        <h2>Séparer moyenne et standards</h2>
+                        <p>La charge moyenne est accompagnée de tableaux par poids corporel et par âge pour donner plus de contexte.</p>
+                        <ul class="app-feature-list">
+                            <li>Strength Percentile situe ton niveau</li>
+                            <li>Suivi du 1RM et du volume</li>
+                            <li>Le progrès guide le prochain plan</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone app-phone--analytics">
+                            <img src="../assets/app/strength-percentile.jpg" alt="Écran Strength Percentile" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--dark" id="muscle-heatmap">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Muscle Heatmap</p>
+                        <h2>Voir d&#39;un coup les zones entraînées.</h2>
+                        <p>La carte musculaire montre les déséquilibres qu&#39;une simple liste d&#39;exercices masque.</p>
+                        <ul class="app-feature-list">
+                            <li>Vue globale des muscles travaillés</li>
+                            <li>Repérer les biais et ajuster</li>
+                            <li>Ajouter du contexte aux chiffres</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media app-scene-media--wide">
+                            <img src="../assets/app/muscle-heatmap.png" alt="Écran de carte musculaire" loading="lazy" class="app-heatmap-image">
+                        </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="library">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Library</p>
+                        <h2>Une référence, pas un avis médical</h2>
+                        <p>En cas de douleur ou d’antécédents, consultez un professionnel et privilégiez la technique et la sécurité.</p>
+                        <div class="app-library-meta">
+                            <span>290 exercices</span>
+                            <span>7 catégories</span>
+                        </div>
+                        <a href="#database" class="app-pill app-pill--dark">Voir la base</a>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-library-preview">
+                            <a class="app-library-preview-card" href="kg_bench-press.html">
+                                <img src="../assets/bench-press.webp" alt="Développé couché" loading="lazy">
+                                <span>
+                                    <strong>Développé couché</strong>
+                                    <small>Pectoraux / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_squat.html">
+                                <img src="../assets/squat.webp" alt="Squat" loading="lazy">
+                                <span>
+                                    <strong>Squat</strong>
+                                    <small>Jambes / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_deadlift.html">
+                                <img src="../assets/deadlift.webp" alt="Soulevé de terre" loading="lazy">
+                                <span>
+                                    <strong>Soulevé de terre</strong>
+                                    <small>Dos / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_lat-pulldown.html">
+                                <img src="../assets/lat-pulldown.webp" alt="Tirage vertical" loading="lazy">
+                                <span>
+                                    <strong>Tirage vertical</strong>
+                                    <small>Dos</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_dumbbell-curl.html">
+                                <img src="../assets/dumbbell-curl.webp" alt="Curl aux haltères" loading="lazy">
+                                <span>
+                                    <strong>Curl aux haltères</strong>
+                                    <small>Bras / Haltères</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_deadlift.html">
+                                <img src="../assets/deadlift.webp" alt="Soulevé de terre" loading="lazy">
+                                <span>
+                                    <strong>Soulevé de terre</strong>
+                                    <small>Corps entier / BIG3</small>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-cta-band" id="app-store">
+                <div class="app-cta-copy">
+                    <img src="../assets/app/shiba-mascot.png" alt="" class="app-cta-mascot" loading="lazy">
+                    <p class="app-kicker">Shiba</p>
+                    <h2>Lancement App Store en préparation.</h2>
+                    <p>Quand l&#39;URL officielle sera prête, ce CTA pointera vers l&#39;App Store.</p>
+                    <a href="shiba-privacy-policy.html" class="app-pill app-pill--dark">Privacy Policy</a>
+                </div>
+            </section>
+        </div>
+
+    <div class="container app-database-library">
+        <h2 class="section-title" id="database">Trouver un exercice</h2>
+        <p class="section-intro">Pour consulter les poids moyens, standards et muscles sollicités, continue vers la base d&#39;exercices existante.</p>
+
 
         <h2 id="whole-body-section" class="section-title">Corps entier</h2>
         <div class="exercise-cards-container">
@@ -4552,18 +4713,6 @@
         </div>
     </div>
 
-    <div class="container ad-slot-container" data-ad-placement-key="after-library">
-        <!-- shiba-horizontal -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2819086765117537"
-             data-ad-slot="3763544828"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
     </main>
 
 

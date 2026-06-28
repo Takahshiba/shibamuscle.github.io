@@ -5,10 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shiba Muscle | 운동 데이터베이스</title>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2819086765117537"
-     crossorigin="anonymous"></script>
+    <title>Shiba | 근력 운동 기록 앱</title>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +61,7 @@
 
     <link rel="stylesheet" href="../styles.css">
 
-    <meta name="description" content="부위별, 운동별로 평균 중량, 기준 중량, 자극되는 근육을 빠르게 찾아볼 수 있는 Shiba Muscle 운동 데이터베이스입니다. kg와 lb 단위 전환도 지원합니다.">
+    <meta name="description" content="Shiba는 오늘의 운동 시작, 세트 기록, Strength Percentile, 근육 히트맵까지 하나의 흐름으로 이어 주는 근력 운동 기록 앱입니다.">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#148a6a">
     <link rel="canonical" href="https://shibamuscle.com/ko/">
@@ -80,14 +77,14 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Shiba Muscle">
     <meta property="og:locale" content="ko_KR">
-    <meta property="og:title" content="Shiba Muscle | 운동 데이터베이스">
-    <meta property="og:description" content="부위별, 운동별로 평균 중량, 기준 중량, 자극되는 근육을 빠르게 찾아볼 수 있는 Shiba Muscle 운동 데이터베이스입니다. kg와 lb 단위 전환도 지원합니다.">
+    <meta property="og:title" content="Shiba | 근력 운동 기록 앱">
+    <meta property="og:description" content="Shiba는 오늘의 운동 시작, 세트 기록, Strength Percentile, 근육 히트맵까지 하나의 흐름으로 이어 주는 근력 운동 기록 앱입니다.">
     <meta property="og:url" content="https://shibamuscle.com/ko/">
-    <meta property="og:image" content="https://shibamuscle.com/assets/dumbbell-logo.png">
+    <meta property="og:image" content="https://shibamuscle.com/assets/app/today-screen-current.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Shiba Muscle | 운동 데이터베이스">
-    <meta name="twitter:description" content="부위별, 운동별로 평균 중량, 기준 중량, 자극되는 근육을 빠르게 찾아볼 수 있는 Shiba Muscle 운동 데이터베이스입니다. kg와 lb 단위 전환도 지원합니다.">
-    <meta name="twitter:image" content="https://shibamuscle.com/assets/dumbbell-logo.png">
+    <meta name="twitter:title" content="Shiba | 근력 운동 기록 앱">
+    <meta name="twitter:description" content="Shiba는 오늘의 운동 시작, 세트 기록, Strength Percentile, 근육 히트맵까지 하나의 흐름으로 이어 주는 근력 운동 기록 앱입니다.">
+    <meta name="twitter:image" content="https://shibamuscle.com/assets/app/today-screen-current.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9K58THBFM"></script>
     <script>
@@ -98,86 +95,250 @@
     </script>
 
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="header-logo">
-                <a href="index.html" class="header-link">
-                    <img src="../assets/dumbbell-logo.png" alt="Shiba Muscle" class="header-dumbbell-logo">
-                    <span class="header-text">Shiba Muscle</span>
-                </a>
+<body class="home-page">
+    <header class="site-header app-local-header">
+        <nav class="site-topbar app-local-topbar" aria-label="Shiba">
+            <a href="index.html" class="app-local-brand">
+                <img src="../assets/app/shiba-mascot.png" alt="Shiba" class="app-local-brand-icon">
+                <span>Shiba</span>
+            </a>
+            <div class="app-local-nav">
+                <a href="#today" class="app-local-nav-link">Today</a>
+                <a href="#analytics" class="app-local-nav-link">Analytics</a>
+                <a href="#library" class="app-local-nav-link">Library</a>
+                <a href="#app-store" class="app-local-cta" aria-disabled="true">출시 예정</a>
             </div>
         </nav>
-
-        <div class="sub-nav">
-            <a href="#whole-body-section">
-                <img src="../assets/power-clean-white-icon.webp" alt="전신" class="exercise-icon"> 전신
-            </a>
-            <div class="divider">|</div>
-            <a href="#chest-section">
-                <img src="../assets/bench-press-white-icon.webp" alt="가슴" class="exercise-icon"> 가슴
-            </a>
-            <div class="divider">|</div>
-            <a href="#back-section">
-                <img src="../assets/deadlift-white-icon.webp" alt="등" class="exercise-icon"> 등
-            </a>
-            <div class="divider">|</div>
-            <a href="#shoulder-section">
-                <img src="../assets/shoulder-press-white-icon.webp" alt="어깨" class="exercise-icon"> 어깨
-            </a>
-            <div class="divider">|</div>
-            <a href="#arm-section">
-                <img src="../assets/hammer-curl-white-icon.webp" alt="팔" class="exercise-icon"> 팔
-            </a>
-            <div class="divider">|</div>
-            <a href="#leg-section">
-                <img src="../assets/squat-white-icon.webp" alt="하체" class="exercise-icon"> 하체
-            </a>
-            <div class="divider">|</div>
-            <a href="#core-section">
-                <img src="../assets/sit-ups-white-icon.webp" alt="코어" class="exercise-icon"> 코어
-            </a>
-        </div>
     </header>
 
     <hr class="top-divider">
     <main class="page-main">
-        <section class="container home-hero home-hero-static" id="database-top">
-            <div class="home-hero-copy">
-                <p class="eyebrow">Workout data</p>
-                <h1>운동 데이터를 쉽게 비교하기</h1>
-                <p class="hero-description">Shiba Muscle은 운동별 평균 중량, 기준 중량, 주동근을 정리한 트레이닝 데이터베이스입니다. 벤치프레스, 스쿼트, 데드리프트 같은 대표 운동부터 덤벨, 맨몸, 케이블 운동까지 체중별, 나이별 기준을 빠르게 확인할 수 있습니다.</p>
-                <p class="hero-description">수치는 운동 계획을 세우기 위한 참고값입니다. 무리한 중량 설정을 피하고 자세, 가동 범위, 운동 경력, 컨디션에 맞춰 활용할 수 있도록 각 페이지에 근육 정보와 표 읽는 법을 함께 제공합니다.</p>
-            </div>
-        </section>
+        <div class="app-home-shell">
+            <section class="app-hero" id="today">
+                <div class="app-hero-inner">
+                    <div class="app-hero-copy">
+                        <p class="app-kicker">Shiba App</p>
+                        <h1 class="app-hero-title">Shiba</h1>
+                        <p class="app-hero-subtitle">오늘의 운동을 망설이지 않고 시작하세요.</p>
+                        <p class="app-hero-lead">Shiba는 오늘 할 루틴을 열고, 세트를 기록하고, 성장한 부위와 강점을 나중에 다시 볼 수 있는 근력 운동 기록 앱입니다.</p>
+                        <div class="app-hero-actions">
+                            <a href="#app-store" class="app-pill app-pill--primary" aria-disabled="true">출시 예정</a>
+                            <a href="#analytics" class="app-pill app-pill--secondary">기능 보기</a>
+                            <a href="shiba-privacy-policy.html" class="app-pill app-pill--secondary">Privacy Policy</a>
+                        </div>
+                        <div class="app-hero-stats" aria-label="Shiba highlights">
+                            <div class="app-stat">
+                                <span>Start</span>
+                                <strong>Today</strong>
+                                <small>다음 운동을 바로 시작</small>
+                            </div>
+                            <div class="app-stat">
+                                <span>Track</span>
+                                <strong>Sets</strong>
+                                <small>중량, 반복, 메모 기록</small>
+                            </div>
+                            <div class="app-stat">
+                                <span>Review</span>
+                                <strong>Heatmap</strong>
+                                <small>훈련한 부위 확인</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-device-stage">
+                        <div class="app-phone app-phone--hero">
+                            <img src="../assets/app/today-screen-current.png" alt="Shiba 앱 Today 화면" fetchpriority="high">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section class="container section-band home-overview-static">
-            <div class="section-heading">
-                <p class="eyebrow">Data guide</p>
-                <h2>비교하기 쉽게 정리하는 기준</h2>
-                <p>사이트의 목적, 독자적인 구성, 운영 방침이 첫 화면에서 드러나도록 핵심 사용법을 먼저 안내합니다.</p>
-            </div>
-            <div class="summary-grid">
-                <article class="summary-card">
-                    <span class="metric-label">Purpose</span>
-                    <h3>운동 선택의 출발점</h3>
-                <p>부위, 장비, 주동근을 기준으로 비슷한 운동을 자연스럽게 비교할 수 있게 구성했습니다.</p>
-                </article>
-                <article class="summary-card">
-                    <span class="metric-label">Data</span>
-                    <h3>평균과 기준표를 나누어 표시</h3>
-                <p>평균 중량만 보지 않고 체중별, 나이별 기준도 함께 확인할 수 있습니다.</p>
-                </article>
-                <article class="summary-card">
-                    <span class="metric-label">Safety</span>
-                    <h3>의학적 조언이 아닌 참고 정보</h3>
-                <p>통증이나 병력이 있다면 전문가와 상담하고, 숫자보다 자세와 안전을 우선하도록 안내합니다.</p>
-                </article>
-            </div>
-        </section>
+            <section class="app-scene app-scene--light">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Today</p>
+                        <h2>오늘의 루틴을 바로 시작</h2>
+                        <p>다음 운동, 진행 중인 세트, 시작 CTA가 한눈에 보이는 화면을 중심으로 보여 줍니다.</p>
+                        <ul class="app-feature-list">
+                            <li>오늘 할 루틴을 한눈에 확인</li>
+                            <li>시작 버튼을 명확하게 배치</li>
+                            <li>진행 중인 세트로 바로 복귀</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone">
+                            <img src="../assets/app/today-screen-current.png" alt="Shiba 앱 Today 화면" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <div class="container">
-        <h2 class="section-title" id="other-workouts">운동 찾기</h2>
+            <section class="app-scene app-scene--dark" id="logging">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Logging</p>
+                        <h2>세트 입력은 흐름을 끊지 않습니다.</h2>
+                        <p>중량과 반복을 차분히 남기는 UI로 기록 자체가 운동을 방해하지 않습니다.</p>
+                        <ul class="app-feature-list">
+                            <li>이전 중량을 보며 입력</li>
+                            <li>세트별 달성감을 남김</li>
+                            <li>기록이 분석 화면으로 이어짐</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-logging-mock" aria-label="Workout logging preview">
+                            <div class="app-logging-header">
+                                <span>Bench Press</span>
+                                <strong>4 / 5</strong>
+                            </div>
+                            <div class="app-logging-table">
+                                <div class="app-logging-row">
+                                    <span>Set 1</span>
+                                    <strong>80kg</strong>
+                                    <strong>8</strong>
+                                    <small>완료</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 2</span>
+                                    <strong>85kg</strong>
+                                    <strong>6</strong>
+                                    <small>완료</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 3</span>
+                                    <strong>87.5kg</strong>
+                                    <strong>5</strong>
+                                    <small>완료</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 4</span>
+                                    <strong>90kg</strong>
+                                    <strong>3</strong>
+                                    <small>Live</small>
+                                </div>
+                            </div>
+                            <div class="app-logging-footer">
+                                <span>중량</span>
+                                <span>반복</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="analytics">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Analytics</p>
+                        <h2>강점과 성장을 시각화</h2>
+                        <p>Strength Percentile, 성장 차트, 근육 히트맵으로 기록의 의미를 나중에 확인할 수 있습니다.</p>
+                        <ul class="app-feature-list">
+                            <li>Strength Percentile로 현재 위치 확인</li>
+                            <li>1RM 추이와 볼륨 변화 확인</li>
+                            <li>성장한 운동을 다음 계획에 반영</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone app-phone--analytics">
+                            <img src="../assets/app/strength-percentile.jpg" alt="Strength Percentile 화면" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--dark" id="muscle-heatmap">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Muscle Heatmap</p>
+                        <h2>어디를 훈련했는지 한눈에 보입니다.</h2>
+                        <p>근육 히트맵은 운동 이름만으로 놓치기 쉬운 편향과 부족을 몸의 형태로 보여 줍니다.</p>
+                        <ul class="app-feature-list">
+                            <li>훈련한 부위를 전신으로 확인</li>
+                            <li>편향을 찾아 다음 루틴 조정</li>
+                            <li>숫자만으로 부족한 감각 보완</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media app-scene-media--wide">
+                            <img src="../assets/app/muscle-heatmap.png" alt="근육 히트맵 화면" loading="lazy" class="app-heatmap-image">
+                        </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="library">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Library</p>
+                        <h2>운동과 데이터베이스로 연결</h2>
+                        <p>앱 소개 아래에 기존 운동 데이터베이스로 가는 입구를 남깁니다.</p>
+                        <div class="app-library-meta">
+                            <span>290개 운동</span>
+                            <span>7개 카테고리</span>
+                        </div>
+                        <a href="#database" class="app-pill app-pill--dark">데이터베이스 보기</a>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-library-preview">
+                            <a class="app-library-preview-card" href="kg_bench-press.html">
+                                <img src="../assets/bench-press.webp" alt="벤치프레스" loading="lazy">
+                                <span>
+                                    <strong>벤치프레스</strong>
+                                    <small>가슴 / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_squat.html">
+                                <img src="../assets/squat.webp" alt="스쿼트" loading="lazy">
+                                <span>
+                                    <strong>스쿼트</strong>
+                                    <small>하체 / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_deadlift.html">
+                                <img src="../assets/deadlift.webp" alt="데드리프트" loading="lazy">
+                                <span>
+                                    <strong>데드리프트</strong>
+                                    <small>등 / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_lat-pulldown.html">
+                                <img src="../assets/lat-pulldown.webp" alt="랫풀다운" loading="lazy">
+                                <span>
+                                    <strong>랫풀다운</strong>
+                                    <small>등</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_dumbbell-curl.html">
+                                <img src="../assets/dumbbell-curl.webp" alt="덤벨 컬" loading="lazy">
+                                <span>
+                                    <strong>덤벨 컬</strong>
+                                    <small>팔 / 덤벨</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_deadlift.html">
+                                <img src="../assets/deadlift.webp" alt="데드리프트" loading="lazy">
+                                <span>
+                                    <strong>데드리프트</strong>
+                                    <small>전신 / BIG3</small>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-cta-band" id="app-store">
+                <div class="app-cta-copy">
+                    <img src="../assets/app/shiba-mascot.png" alt="" class="app-cta-mascot" loading="lazy">
+                    <p class="app-kicker">Shiba</p>
+                    <h2>App Store 공개를 준비 중입니다.</h2>
+                    <p>공식 URL이 정해지면 이 CTA를 App Store 링크로 교체합니다.</p>
+                    <a href="shiba-privacy-policy.html" class="app-pill app-pill--dark">Privacy Policy</a>
+                </div>
+            </section>
+        </div>
+
+    <div class="container app-database-library">
+        <h2 class="section-title" id="database">운동 데이터베이스 보기</h2>
+        <p class="section-intro">평균 중량, 기준표, 자극되는 근육을 확인하고 싶다면 기존 운동 데이터베이스로 이동할 수 있습니다.</p>
+
 
         <h2 id="whole-body-section" class="section-title">전신</h2>
         <div class="exercise-cards-container">
@@ -4552,18 +4713,6 @@
         </div>
     </div>
 
-    <div class="container ad-slot-container" data-ad-placement-key="after-library">
-        <!-- shiba-horizontal -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2819086765117537"
-             data-ad-slot="3763544828"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
     </main>
 
 

@@ -103,15 +103,16 @@ export {
     renderStaticHeader
 };
 
-function renderDocument({ title, stylesheets = ["styles.css"], body, generatedComment, locale = "ja", seo = null, ads = true }) {
+function renderDocument({ title, stylesheets = ["styles.css"], body, generatedComment, locale = "ja", seo = null, ads = true, enableAds = ads, bodyClass = "" }) {
     const localeConfig = getLocaleConfig(locale);
     const comment = generatedComment ? `${generatedComment}\n` : "";
     const stylesheetLinks = stylesheets.map((href) => `    <link rel="stylesheet" href="${escapeAttribute(stylesheetHref(href, locale))}">`).join("\n");
     const seoBlock = seo ? buildSeoBlock({ ...seo, title, locale }) : "";
-    const adsenseScript = ads ? `
+    const adsenseScript = enableAds ? `
     <script async src="${ADSENSE_SCRIPT_SRC}"
      crossorigin="anonymous"></script>
 ` : "";
+    const bodyClassAttribute = bodyClass ? ` class="${escapeAttribute(bodyClass)}"` : "";
 
     return `<!DOCTYPE html>
 ${comment}<html lang="${escapeAttribute(localeConfig.hreflang)}" dir="${escapeAttribute(localeConfig.dir || "ltr")}">
@@ -126,7 +127,7 @@ ${buildFaviconBlock(locale)}
 ${stylesheetLinks}
 ${seoBlock}
 </head>
-<body>
+<body${bodyClassAttribute}>
 ${body}
 </body>
 
@@ -176,6 +177,10 @@ ${alternateLinks}${xDefaultLink}
 }
 
 function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja" } = {}) {
+    if (pageType === "home") {
+        return renderAppHeader(locale);
+    }
+
     const categoryNav = renderLegacyCategoryNav(pageType, locale);
 
     return `    <header>
@@ -192,6 +197,43 @@ ${unitSwitchHtml ? `            ${unitSwitchHtml}\n` : ""}        </nav>
 ${categoryNav}
         </div>
     </header>`;
+}
+
+function renderAppHeader(locale = "ja") {
+    const ctaLabel = getAppHeaderText(locale, "comingSoon");
+    const navItems = [
+        ["#today", "Today"],
+        ["#analytics", "Analytics"],
+        ["#library", "Library"]
+    ];
+
+    return `    <header class="site-header app-local-header">
+        <nav class="site-topbar app-local-topbar" aria-label="Shiba">
+            <a href="index.html" class="app-local-brand">
+                <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="Shiba" class="app-local-brand-icon">
+                <span>Shiba</span>
+            </a>
+            <div class="app-local-nav">
+${navItems.map(([href, label]) => `                <a href="${escapeAttribute(href)}" class="app-local-nav-link">${escapeHtml(label)}</a>`).join("\n")}
+                <a href="#app-store" class="app-local-cta" aria-disabled="true">${escapeHtml(ctaLabel)}</a>
+            </div>
+        </nav>
+    </header>`;
+}
+
+function getAppHeaderText(locale, key) {
+    const text = {
+        ja: { comingSoon: "近日公開" },
+        ko: { comingSoon: "출시 예정" },
+        "zh-hant": { comingSoon: "即將推出" },
+        "zh-hans": { comingSoon: "即将推出" },
+        es: { comingSoon: "Próximamente" },
+        fr: { comingSoon: "Bientôt" },
+        de: { comingSoon: "Demnächst" },
+        id: { comingSoon: "Segera hadir" }
+    };
+
+    return text[locale]?.[key] || text.ja[key] || key;
 }
 
 function renderLegacyCategoryNav(pageType, locale = "ja") {
@@ -286,12 +328,13 @@ function renderBreadcrumb(items, locale = "ja") {
     </div>`;
 }
 
-function renderExerciseLibrary(catalogData, { unit = "kg", titleTag = "h2", titleText = "", titleId = "other-workouts", locale = "ja" } = {}) {
+function renderExerciseLibrary(catalogData, { unit = "kg", titleTag = "h2", titleText = "", titleId = "other-workouts", locale = "ja", containerClass = "container", introText = "" } = {}) {
     const heading = titleText || getUiText(locale, "moreWorkouts");
+    const introBlock = introText ? `        <p class="section-intro">${escapeHtml(introText)}</p>\n\n` : "";
     return `
-    <div class="container">
+    <div class="${escapeAttribute(containerClass)}">
         <${titleTag} class="section-title" id="${escapeAttribute(titleId)}">${escapeHtml(heading)}</${titleTag}>
-
+${introBlock}
 ${catalogData.sections.map((section) => {
         const localizedTitle = locale === "ja" ? section.titles.ja : getCategoryLabel(section, locale);
         return `        <h2 id="${escapeAttribute(section.id)}" class="section-title">${escapeHtml(localizedTitle)}</h2>

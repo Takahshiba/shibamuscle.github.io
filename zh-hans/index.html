@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shiba Muscle | 训练数据库</title>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2819086765117537"
-     crossorigin="anonymous"></script>
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,11 +80,11 @@
     <meta property="og:title" content="Shiba Muscle | 训练数据库">
     <meta property="og:description" content="Shiba Muscle 训练数据库可按部位和动作查看平均重量、力量标准与目标肌群，并支持 kg 与 lb 切换。">
     <meta property="og:url" content="https://shibamuscle.com/zh-hans/">
-    <meta property="og:image" content="https://shibamuscle.com/assets/dumbbell-logo.png">
+    <meta property="og:image" content="https://shibamuscle.com/assets/app/today-screen-current.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Shiba Muscle | 训练数据库">
     <meta name="twitter:description" content="Shiba Muscle 训练数据库可按部位和动作查看平均重量、力量标准与目标肌群，并支持 kg 与 lb 切换。">
-    <meta name="twitter:image" content="https://shibamuscle.com/assets/dumbbell-logo.png">
+    <meta name="twitter:image" content="https://shibamuscle.com/assets/app/today-screen-current.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9K58THBFM"></script>
     <script>
@@ -98,86 +95,250 @@
     </script>
 
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="header-logo">
-                <a href="index.html" class="header-link">
-                    <img src="../assets/dumbbell-logo.png" alt="Shiba Muscle" class="header-dumbbell-logo">
-                    <span class="header-text">Shiba Muscle</span>
-                </a>
+<body class="home-page">
+    <header class="site-header app-local-header">
+        <nav class="site-topbar app-local-topbar" aria-label="Shiba">
+            <a href="index.html" class="app-local-brand">
+                <img src="../assets/app/shiba-mascot.png" alt="Shiba" class="app-local-brand-icon">
+                <span>Shiba</span>
+            </a>
+            <div class="app-local-nav">
+                <a href="#today" class="app-local-nav-link">Today</a>
+                <a href="#analytics" class="app-local-nav-link">Analytics</a>
+                <a href="#library" class="app-local-nav-link">Library</a>
+                <a href="#app-store" class="app-local-cta" aria-disabled="true">即将推出</a>
             </div>
         </nav>
-
-        <div class="sub-nav">
-            <a href="#whole-body-section">
-                <img src="../assets/power-clean-white-icon.webp" alt="全身" class="exercise-icon"> 全身
-            </a>
-            <div class="divider">|</div>
-            <a href="#chest-section">
-                <img src="../assets/bench-press-white-icon.webp" alt="胸部" class="exercise-icon"> 胸部
-            </a>
-            <div class="divider">|</div>
-            <a href="#back-section">
-                <img src="../assets/deadlift-white-icon.webp" alt="背部" class="exercise-icon"> 背部
-            </a>
-            <div class="divider">|</div>
-            <a href="#shoulder-section">
-                <img src="../assets/shoulder-press-white-icon.webp" alt="肩部" class="exercise-icon"> 肩部
-            </a>
-            <div class="divider">|</div>
-            <a href="#arm-section">
-                <img src="../assets/hammer-curl-white-icon.webp" alt="手臂" class="exercise-icon"> 手臂
-            </a>
-            <div class="divider">|</div>
-            <a href="#leg-section">
-                <img src="../assets/squat-white-icon.webp" alt="腿部" class="exercise-icon"> 腿部
-            </a>
-            <div class="divider">|</div>
-            <a href="#core-section">
-                <img src="../assets/sit-ups-white-icon.webp" alt="核心" class="exercise-icon"> 核心
-            </a>
-        </div>
     </header>
 
     <hr class="top-divider">
     <main class="page-main">
-        <section class="container home-hero home-hero-static" id="database-top">
-            <div class="home-hero-copy">
-                <p class="eyebrow">Workout data</p>
-                <h1>清楚比较训练数据</h1>
-                <p class="hero-description">Shiba Muscle 是整理各训练动作平均重量、力量标准与主动肌的数据资料库。从卧推、深蹲、硬拉等经典动作，到哑铃、自重和绳索动作，都能快速查看按体重和年龄划分的参考值。</p>
-                <p class="hero-description">所有数值都是规划训练时的参考，不是必须达成的目标。请结合动作姿势、活动范围、训练年限和当天状态安全使用。</p>
-            </div>
-        </section>
+        <div class="app-home-shell">
+            <section class="app-hero" id="today">
+                <div class="app-hero-inner">
+                    <div class="app-hero-copy">
+                        <p class="app-kicker">Workout data</p>
+                        <h1 class="app-hero-title">Shiba</h1>
+                        <p class="app-hero-subtitle">清楚比较训练数据</p>
+                        <p class="app-hero-lead">Shiba Muscle 是整理各训练动作平均重量、力量标准与主动肌的数据资料库。从卧推、深蹲、硬拉等经典动作，到哑铃、自重和绳索动作，都能快速查看按体重和年龄划分的参考值。</p>
+                        <div class="app-hero-actions">
+                            <a href="#app-store" class="app-pill app-pill--primary" aria-disabled="true">即将推出</a>
+                            <a href="#analytics" class="app-pill app-pill--secondary">查看功能</a>
+                            <a href="shiba-privacy-policy.html" class="app-pill app-pill--secondary">Privacy Policy</a>
+                        </div>
+                        <div class="app-hero-stats" aria-label="Shiba highlights">
+                            <div class="app-stat">
+                                <span>Start</span>
+                                <strong>Today</strong>
+                                <small>快速开始下一次训练</small>
+                            </div>
+                            <div class="app-stat">
+                                <span>Track</span>
+                                <strong>Sets</strong>
+                                <small>记录重量、次数和笔记</small>
+                            </div>
+                            <div class="app-stat">
+                                <span>Review</span>
+                                <strong>Heatmap</strong>
+                                <small>回顾训练过的部位</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-device-stage">
+                        <div class="app-phone app-phone--hero">
+                            <img src="../assets/app/today-screen-current.png" alt="Shiba App 的 Today 画面" fetchpriority="high">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section class="container section-band home-overview-static">
-            <div class="section-heading">
-                <p class="eyebrow">数据指南</p>
-                <h2>为了更容易比较的编辑方针</h2>
-                <p>首页先整理网站目的、数据整理方式与安全使用重点，帮助理解各表格的定位。</p>
-            </div>
-            <div class="summary-grid">
-                <article class="summary-card">
-                    <span class="metric-label">Purpose</span>
-                    <h3>建立选择动作的入口</h3>
-                <p>按部位、器械和主动肌整理页面，让相近动作更容易互相比较。</p>
-                </article>
-                <article class="summary-card">
-                    <span class="metric-label">Data</span>
-                    <h3>分开呈现平均值与标准表</h3>
-                <p>不只看平均重量，也能结合按体重和年龄划分的标准查看背景。</p>
-                </article>
-                <article class="summary-card">
-                    <span class="metric-label">Safety</span>
-                    <h3>作为参考信息使用</h3>
-                <p>如有疼痛或病史，请咨询专业人士，并优先考虑动作姿势与安全。</p>
-                </article>
-            </div>
-        </section>
+            <section class="app-scene app-scene--light">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Today</p>
+                        <h2>建立选择动作的入口</h2>
+                        <p>按部位、器械和主动肌整理页面，让相近动作更容易互相比较。</p>
+                        <ul class="app-feature-list">
+                            <li>一眼确认今天的计划</li>
+                            <li>开始按钮放在清楚位置</li>
+                            <li>快速回到进行中的组数</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone">
+                            <img src="../assets/app/today-screen-current.png" alt="Shiba App 的 Today 画面" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <div class="container">
-        <h2 class="section-title" id="other-workouts">寻找训练动作</h2>
+            <section class="app-scene app-scene--dark" id="logging">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Logging</p>
+                        <h2>记录组数，不打断节奏。</h2>
+                        <p>重量和次数可以直接留下，记录本身不会干扰训练。</p>
+                        <ul class="app-feature-list">
+                            <li>一边看上次重量一边输入</li>
+                            <li>每一组都有完成感</li>
+                            <li>记录自然衔接到分析</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-logging-mock" aria-label="Workout logging preview">
+                            <div class="app-logging-header">
+                                <span>Bench Press</span>
+                                <strong>4 / 5</strong>
+                            </div>
+                            <div class="app-logging-table">
+                                <div class="app-logging-row">
+                                    <span>Set 1</span>
+                                    <strong>80kg</strong>
+                                    <strong>8</strong>
+                                    <small>完成</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 2</span>
+                                    <strong>85kg</strong>
+                                    <strong>6</strong>
+                                    <small>完成</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 3</span>
+                                    <strong>87.5kg</strong>
+                                    <strong>5</strong>
+                                    <small>完成</small>
+                                </div>
+                                <div class="app-logging-row">
+                                    <span>Set 4</span>
+                                    <strong>90kg</strong>
+                                    <strong>3</strong>
+                                    <small>Live</small>
+                                </div>
+                            </div>
+                            <div class="app-logging-footer">
+                                <span>重量</span>
+                                <span>次数</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="analytics">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Analytics</p>
+                        <h2>分开呈现平均值与标准表</h2>
+                        <p>不只看平均重量，也能结合按体重和年龄划分的标准查看背景。</p>
+                        <ul class="app-feature-list">
+                            <li>用 Strength Percentile 掌握位置</li>
+                            <li>查看 1RM 和训练量变化</li>
+                            <li>把进步反映到下一计划</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-phone app-phone--analytics">
+                            <img src="../assets/app/strength-percentile.jpg" alt="Strength Percentile 画面" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--dark" id="muscle-heatmap">
+                <div class="app-scene-sticky">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Muscle Heatmap</p>
+                        <h2>哪里练到了，一眼就懂。</h2>
+                        <p>肌肉热力图用身体图像呈现，只看动作名称时不容易察觉的偏重和不足。</p>
+                        <ul class="app-feature-list">
+                            <li>用全身视角回顾训练部位</li>
+                            <li>找出偏重并调整计划</li>
+                            <li>补足数字以外的感受</li>
+                        </ul>
+                    </div>
+                    <div class="app-scene-media app-scene-media--wide">
+                            <img src="../assets/app/muscle-heatmap.png" alt="肌肉热力图画面" loading="lazy" class="app-heatmap-image">
+                        </div>
+                </div>
+            </section>
+
+            <section class="app-scene app-scene--light" id="library">
+                <div class="app-scene-sticky app-scene-sticky--reverse">
+                    <div class="app-scene-copy">
+                        <p class="app-kicker">Library</p>
+                        <h2>作为参考信息使用</h2>
+                        <p>如有疼痛或病史，请咨询专业人士，并优先考虑动作姿势与安全。</p>
+                        <div class="app-library-meta">
+                            <span>290 个动作</span>
+                            <span>7 个分类</span>
+                        </div>
+                        <a href="#database" class="app-pill app-pill--dark">查看数据库</a>
+                    </div>
+                    <div class="app-scene-media">
+                        <div class="app-library-preview">
+                            <a class="app-library-preview-card" href="kg_bench-press.html">
+                                <img src="../assets/bench-press.webp" alt="卧推" loading="lazy">
+                                <span>
+                                    <strong>卧推</strong>
+                                    <small>胸部 / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_squat.html">
+                                <img src="../assets/squat.webp" alt="深蹲" loading="lazy">
+                                <span>
+                                    <strong>深蹲</strong>
+                                    <small>腿部 / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_deadlift.html">
+                                <img src="../assets/deadlift.webp" alt="硬拉" loading="lazy">
+                                <span>
+                                    <strong>硬拉</strong>
+                                    <small>背部 / BIG3</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_lat-pulldown.html">
+                                <img src="../assets/lat-pulldown.webp" alt="高位下拉" loading="lazy">
+                                <span>
+                                    <strong>高位下拉</strong>
+                                    <small>背部</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_dumbbell-curl.html">
+                                <img src="../assets/dumbbell-curl.webp" alt="哑铃弯举" loading="lazy">
+                                <span>
+                                    <strong>哑铃弯举</strong>
+                                    <small>手臂 / 哑铃</small>
+                                </span>
+                            </a>
+                            <a class="app-library-preview-card" href="kg_deadlift.html">
+                                <img src="../assets/deadlift.webp" alt="硬拉" loading="lazy">
+                                <span>
+                                    <strong>硬拉</strong>
+                                    <small>全身 / BIG3</small>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="app-cta-band" id="app-store">
+                <div class="app-cta-copy">
+                    <img src="../assets/app/shiba-mascot.png" alt="" class="app-cta-mascot" loading="lazy">
+                    <p class="app-kicker">Shiba</p>
+                    <h2>正在准备于 App Store 推出。</h2>
+                    <p>正式 URL 确定后，这个 CTA 会改为 App Store 链接。</p>
+                    <a href="shiba-privacy-policy.html" class="app-pill app-pill--dark">Privacy Policy</a>
+                </div>
+            </section>
+        </div>
+
+    <div class="container app-database-library">
+        <h2 class="section-title" id="database">寻找训练动作</h2>
+        <p class="section-intro">想查看平均重量、标准表和训练肌群时，可以从这里进入原有训练数据库。</p>
+
 
         <h2 id="whole-body-section" class="section-title">全身</h2>
         <div class="exercise-cards-container">
@@ -4552,18 +4713,6 @@
         </div>
     </div>
 
-    <div class="container ad-slot-container" data-ad-placement-key="after-library">
-        <!-- shiba-horizontal -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2819086765117537"
-             data-ad-slot="3763544828"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
     </main>
 
 

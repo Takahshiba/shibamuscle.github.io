@@ -1831,3 +1831,746 @@ table tbody tr:hover {
         font-size: 0.64rem;
     }
 }
+
+body.home-page {
+    --bg: #050505;
+    --surface: #161616;
+    --surface-muted: #202020;
+    --surface-strong: #2a2a2a;
+    --surface-tint: rgba(255, 122, 0, 0.12);
+    --line: rgba(255, 255, 255, 0.15);
+    --line-strong: rgba(255, 255, 255, 0.24);
+    --text: #f5f5f7;
+    --muted: #a7a7ad;
+    --accent: #ff7a00;
+    --accent-strong: #ff9a2e;
+    --accent-soft: rgba(255, 122, 0, 0.16);
+    background: #050505;
+    color: var(--text);
+    padding-top: 56px;
+}
+
+.home-page .page-main {
+    padding-bottom: 0;
+}
+
+.home-page .site-header.app-local-header {
+    background: rgba(5, 5, 5, 0.78);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text);
+}
+
+.home-page .app-local-topbar {
+    height: 56px;
+}
+
+.app-local-brand,
+.app-local-nav,
+.app-local-nav-link,
+.app-local-cta {
+    display: inline-flex;
+    align-items: center;
+}
+
+.app-local-brand {
+    gap: 10px;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.app-local-brand-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.app-local-nav {
+    gap: 6px;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.app-local-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.app-local-nav-link {
+    min-height: 34px;
+    padding: 0 12px;
+    color: rgba(245, 245, 247, 0.78);
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.app-local-nav-link:hover,
+.app-local-nav-link:focus-visible {
+    color: #ffffff;
+}
+
+.app-local-cta {
+    justify-content: center;
+    min-height: 32px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #111111;
+    font-size: 0.82rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.app-home-shell {
+    background: #050505;
+    color: var(--text);
+}
+
+.app-hero,
+.app-scene,
+.app-cta-band {
+    position: relative;
+    overflow: clip;
+    scroll-margin-top: 56px;
+}
+
+.app-hero {
+    min-height: calc(100svh - 96px);
+    display: grid;
+    align-items: center;
+    background: #050505;
+}
+
+.app-hero-inner,
+.app-scene-sticky,
+.app-cta-copy {
+    width: min(1240px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.app-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+    gap: 54px;
+    align-items: center;
+    padding: 48px 0;
+}
+
+.app-hero-copy,
+.app-scene-copy,
+.app-cta-copy {
+    display: grid;
+    gap: 18px;
+}
+
+.app-kicker {
+    margin: 0;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.app-hero-title {
+    margin: 0;
+    max-width: 760px;
+    color: #ffffff;
+    font-size: 6.1rem;
+    line-height: 0.95;
+    letter-spacing: 0;
+}
+
+.app-hero-subtitle {
+    margin: -6px 0 0;
+    max-width: 760px;
+    color: #ffffff;
+    font-size: clamp(1.55rem, 3vw, 2.7rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: 0;
+}
+
+.app-hero-lead {
+    margin: 0;
+    max-width: 680px;
+    color: rgba(245, 245, 247, 0.74);
+    font-size: 1.12rem;
+    line-height: 1.8;
+}
+
+.app-hero-actions,
+.app-library-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.app-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 22px;
+    border-radius: 999px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.app-pill--primary {
+    background: var(--accent);
+    color: #111111;
+}
+
+.app-pill--secondary {
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    color: #ffffff;
+}
+
+.app-pill--dark {
+    background: #111111;
+    color: #ffffff;
+}
+
+.app-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 720px;
+}
+
+.app-stat {
+    min-height: 112px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    display: grid;
+    gap: 6px;
+    align-content: start;
+}
+
+.app-stat span,
+.app-stat small {
+    color: rgba(245, 245, 247, 0.62);
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.app-stat strong {
+    color: #ffffff;
+    font-size: 1.3rem;
+    line-height: 1.1;
+}
+
+.app-device-stage,
+.app-scene-media {
+    display: grid;
+    place-items: center;
+    min-width: 0;
+}
+
+.app-phone {
+    width: min(350px, 100%);
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 42px;
+    background: #101010;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
+}
+
+.app-phone img {
+    width: 100%;
+    max-height: 680px;
+    object-fit: contain;
+    border-radius: 32px;
+}
+
+.app-phone--hero {
+    width: min(420px, 100%);
+}
+
+.app-phone--analytics {
+    width: min(330px, 100%);
+}
+
+.app-scene {
+    min-height: 132svh;
+}
+
+.app-scene-sticky {
+    position: sticky;
+    top: 56px;
+    min-height: calc(100svh - 56px);
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1fr);
+    gap: 58px;
+    align-items: center;
+    padding: 72px 0;
+}
+
+.app-scene-sticky--reverse {
+    grid-template-columns: minmax(320px, 1fr) minmax(0, 0.92fr);
+}
+
+.app-scene-sticky--reverse .app-scene-copy {
+    order: 2;
+}
+
+.app-scene-sticky--reverse .app-scene-media {
+    order: 1;
+}
+
+.app-scene--dark {
+    background: #050505;
+    color: #f5f5f7;
+}
+
+.app-scene--light {
+    --text: #111111;
+    --muted: #5f5f66;
+    --surface: #ffffff;
+    --line: #dddddf;
+    background: #f5f5f7;
+    color: var(--text);
+}
+
+.app-scene-copy h2,
+.app-cta-copy h2 {
+    margin: 0;
+    color: currentColor;
+    font-size: 4.35rem;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.app-scene-copy p,
+.app-cta-copy p {
+    margin: 0;
+    max-width: 620px;
+    color: var(--muted);
+    font-size: 1.03rem;
+    line-height: 1.75;
+}
+
+.app-scene--dark .app-scene-copy p {
+    color: rgba(245, 245, 247, 0.72);
+}
+
+.app-feature-list {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    color: currentColor;
+}
+
+.app-feature-list li {
+    position: relative;
+    padding-left: 22px;
+    color: currentColor;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.app-feature-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.app-logging-mock {
+    width: min(430px, 100%);
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.35);
+    display: grid;
+    gap: 14px;
+}
+
+.app-logging-header,
+.app-logging-footer,
+.app-logging-row {
+    display: grid;
+    align-items: center;
+    gap: 10px;
+}
+
+.app-logging-header {
+    grid-template-columns: 1fr auto;
+    color: #ffffff;
+    font-weight: 800;
+}
+
+.app-logging-table {
+    display: grid;
+    gap: 8px;
+}
+
+.app-logging-row {
+    grid-template-columns: 1fr 74px 44px 52px;
+    min-height: 48px;
+    padding: 0 12px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #161616;
+}
+
+.app-logging-row span,
+.app-logging-row small {
+    color: #6b6b70;
+    font-size: 0.8rem;
+}
+
+.app-logging-row strong {
+    font-size: 0.92rem;
+}
+
+.app-logging-footer {
+    grid-template-columns: 1fr 1fr;
+    color: rgba(245, 245, 247, 0.62);
+    font-size: 0.78rem;
+}
+
+.app-scene-media--wide {
+    width: 100%;
+}
+
+.app-heatmap-image {
+    width: min(720px, 100%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    background: #111111;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.38);
+}
+
+.app-library-meta span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.84rem;
+    font-weight: 700;
+}
+
+.app-library-preview {
+    width: min(520px, 100%);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.app-library-preview-card {
+    min-height: 112px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #ffffff;
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    color: #111111;
+}
+
+.app-library-preview-card img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.app-library-preview-card strong,
+.app-library-preview-card small {
+    display: block;
+    overflow-wrap: anywhere;
+}
+
+.app-library-preview-card strong {
+    font-size: 0.9rem;
+    line-height: 1.35;
+}
+
+.app-library-preview-card small {
+    margin-top: 4px;
+    color: #6b6b70;
+    font-size: 0.78rem;
+}
+
+.app-cta-band {
+    padding: 92px 0;
+    background: #ffffff;
+    color: #111111;
+}
+
+.app-cta-copy {
+    justify-items: center;
+    text-align: center;
+}
+
+.app-cta-copy p {
+    color: #5f5f66;
+}
+
+.app-cta-mascot {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+}
+
+.home-page .app-database-library {
+    margin-bottom: 0;
+    padding: 86px 0 98px;
+}
+
+.home-page .app-database-library #database {
+    scroll-margin-top: 78px;
+}
+
+.home-page .app-database-library .section-title,
+.home-page .app-database-library h3,
+.home-page .app-database-library .library-copy h3 {
+    color: #ffffff;
+}
+
+.home-page .app-database-library .section-intro,
+.home-page .app-database-library .library-copy p,
+.home-page .app-database-library .results-status {
+    color: rgba(245, 245, 247, 0.68);
+}
+
+.home-page .app-database-library .library-toolbar,
+.home-page .app-database-library .exercise-card,
+.home-page .app-database-library .library-more-button {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: #151515;
+    color: #f5f5f7;
+}
+
+.home-page .app-database-library .exercise-card .category,
+.home-page .app-database-library .metric-subvalue {
+    color: rgba(245, 245, 247, 0.62);
+}
+
+.home-page .site-footer {
+    border-top-color: rgba(255, 255, 255, 0.12);
+    background: #050505;
+}
+
+.home-page .site-footer h4,
+.home-page .footer-brand h4,
+.home-page .footer-category-link .category-nav-label {
+    color: #f5f5f7;
+}
+
+.home-page .footer-category-link,
+.home-page .footer-link-list--support a {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: #151515;
+}
+
+.home-page .footer-meta {
+    border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 1100px) {
+    .app-hero-title {
+        font-size: 4.1rem;
+    }
+
+    .app-scene-copy h2,
+    .app-cta-copy h2 {
+        font-size: 3.35rem;
+    }
+
+    .app-scene-sticky,
+    .app-scene-sticky--reverse {
+        grid-template-columns: 1fr;
+    }
+
+    .app-hero-inner {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+        gap: 30px;
+    }
+
+    .app-phone--hero {
+        width: min(300px, 100%);
+    }
+
+    .app-scene-sticky--reverse .app-scene-copy,
+    .app-scene-sticky--reverse .app-scene-media {
+        order: initial;
+    }
+}
+
+@media (max-width: 760px) {
+    body.home-page {
+        padding-top: 52px;
+    }
+
+    .home-page .app-local-topbar {
+        width: calc(100% - 20px);
+        height: 52px;
+        gap: 10px;
+    }
+
+    .app-local-brand span {
+        display: none;
+    }
+
+    .app-local-nav-link {
+        min-height: 32px;
+        padding: 0 8px;
+        font-size: 0.76rem;
+    }
+
+    .app-local-cta {
+        min-height: 30px;
+        padding: 0 10px;
+        font-size: 0.76rem;
+    }
+
+    .app-hero {
+        min-height: calc(100svh - 84px);
+    }
+
+    .app-hero-inner,
+    .app-scene-sticky,
+    .app-cta-copy {
+        width: calc(100% - 24px);
+    }
+
+    .app-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 26px 0;
+    }
+
+    .app-hero-title {
+        font-size: 3rem;
+        line-height: 1;
+    }
+
+    .app-hero-subtitle {
+        font-size: 1.52rem;
+        line-height: 1.14;
+    }
+
+    .app-hero-lead,
+    .app-scene-copy p,
+    .app-cta-copy p {
+        font-size: 0.94rem;
+        line-height: 1.68;
+    }
+
+    .app-hero-stats {
+        display: none;
+    }
+
+    .app-hero-stats::-webkit-scrollbar {
+        display: none;
+    }
+
+    .app-stat {
+        min-width: 180px;
+        min-height: 92px;
+    }
+
+    .app-phone {
+        width: min(300px, 88%);
+        padding: 8px;
+        border-radius: 34px;
+    }
+
+    .app-phone img {
+        max-height: 320px;
+        border-radius: 26px;
+    }
+
+    .app-phone--hero {
+        width: min(270px, 78%);
+    }
+
+    .app-scene {
+        min-height: auto;
+        padding: 66px 0;
+    }
+
+    .app-scene-sticky {
+        position: relative;
+        top: auto;
+        min-height: auto;
+        gap: 28px;
+        padding: 0;
+    }
+
+    .app-scene-copy h2,
+    .app-cta-copy h2 {
+        font-size: 2.35rem;
+        line-height: 1.06;
+    }
+
+    .app-feature-list li {
+        font-size: 0.92rem;
+    }
+
+    .app-logging-mock {
+        width: min(360px, 100%);
+        padding: 14px;
+    }
+
+    .app-logging-row {
+        grid-template-columns: 1fr 64px 36px 48px;
+        padding: 0 9px;
+    }
+
+    .app-library-preview {
+        grid-template-columns: 1fr;
+    }
+
+    .app-cta-band {
+        padding: 72px 0;
+    }
+
+    .home-page .app-database-library {
+        padding: 66px 0 82px;
+    }
+}
+
+@media (max-width: 420px) {
+    .app-hero-title {
+        font-size: 2.62rem;
+    }
+
+    .app-hero-subtitle {
+        font-size: 1.34rem;
+    }
+
+    .app-logging-row {
+        grid-template-columns: 1fr 58px 32px 42px;
+        gap: 6px;
+    }
+
+    .app-logging-row span,
+    .app-logging-row small {
+        font-size: 0.72rem;
+    }
+
+    .app-logging-row strong {
+        font-size: 0.82rem;
+    }
+}

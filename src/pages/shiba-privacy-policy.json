@@ -1,0 +1,118 @@
+{
+  "file": "shiba-privacy-policy.html",
+  "kind": "content",
+  "title": "Shiba Privacy Policy | Shiba",
+  "description": "Privacy Policy for the Shiba strength training app, including local workout data, photos, purchases, analytics, tracking, retention, and contact information.",
+  "heading": "Shiba Privacy Policy",
+  "shellClass": "policy-shell app-policy-shell",
+  "ads": false,
+  "scripts": false,
+  "stylesheets": [
+    "sanitize.css",
+    "styles.css",
+    "privacy-policy.css"
+  ],
+  "intro": [
+    "Effective date: June 26, 2026",
+    "Shiba is a strength training app. This Privacy Policy explains how Shiba handles information when you use the app.",
+    "Policy URL: https://shibamuscle.com/shiba-privacy-policy.html"
+  ],
+  "sections": [
+    {
+      "className": "content-card policy-section",
+      "heading": "Summary",
+      "paragraphs": [
+        "Shiba does not operate its own account system or backend server. Your profile, workout plans, workout history, drafts, favorites, notes, and app preferences are stored on your device.",
+        "Shiba does not sell personal information, does not show third-party ads, and does not track you across apps or websites."
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "Information Stored on Your Device",
+      "paragraphs": [
+        "Shiba may store the following information locally on your device:"
+      ],
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Profile details you enter, such as display name, age, gender, height, weight, training level, and unit preferences.",
+            "Workout data, such as routines, exercises, sets, reps, weights, effort ratings, rest times, personal records, timestamps, and notes.",
+            "App preferences, such as weight units, haptic feedback settings, analytics view preferences, favorites, and draft workouts."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "This information is used to provide app features such as workout logging, recommendations, progress analytics, personal record tracking, and Your Standing comparisons."
+        }
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "Data Collection",
+      "paragraphs": [
+        "Shiba does not send your profile or workout data to the developer. The app processes this information on your device.",
+        "If you contact Shiba for support, you may choose to provide information such as your email address, name, screenshots, or details about your request. That information is used only to respond to and manage your support request."
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "Photos and Sharing",
+      "paragraphs": [
+        "Shiba can generate a workout share image. If you choose to save the image, Shiba asks for permission to add the image to your photo library. Shiba does not read your photo library.",
+        "If you choose to share a generated image to Instagram Stories, Shiba passes the image to Instagram through the iOS sharing flow. Your use of Instagram is governed by Instagram's own terms and privacy policy."
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "Purchases",
+      "paragraphs": [
+        "Shiba may offer optional subscriptions or in-app purchases through Apple's StoreKit. Purchases are processed by Apple. Shiba uses StoreKit on the device to determine whether premium features are active. Apple may provide purchase and subscription information according to Apple's own policies."
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "Analytics, Advertising, and Tracking",
+      "paragraphs": [
+        "Shiba does not include third-party advertising SDKs, third-party analytics SDKs, or tracking for advertising. Shiba does not request permission to track you across apps and websites.",
+        "Apple may provide developers with App Store, crash, or performance information under Apple's own policies and developer tools."
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "Data Retention and Deletion",
+      "paragraphs": [
+        "Local app data remains on your device until you delete it, uninstall the app, or use Shiba's data management features. You can delete Shiba's local app data from the app's Settings > Data & Privacy > Manage Data flow.",
+        "Support communications are retained only as long as reasonably needed to respond to your request, maintain records, and comply with legal obligations."
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "Children",
+      "paragraphs": [
+        "Shiba is not intended for children under 13. The app's profile setup is designed for users age 13 and older."
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "Changes to This Policy",
+      "paragraphs": [
+        "Shiba may update this Privacy Policy from time to time. If changes are made, the effective date above will be updated."
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "Contact",
+      "paragraphs": [
+        "If you have questions about this Privacy Policy, contact:"
+      ],
+      "blocks": [
+        {
+          "type": "email",
+          "label": "Email",
+          "value": "info@shibamuscle.com"
+        }
+      ]
+    }
+  ]
+}
