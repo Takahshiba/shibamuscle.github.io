@@ -68,7 +68,7 @@ function assertExpectedLocales(locales) {
 }
 
 function isEnglishOnlyAppPage(page) {
-    return page.kind === "home" || page.appShell === true;
+    return page.appShell === true;
 }
 
 function englishOnlyPage(page) {
@@ -133,8 +133,8 @@ function renderAppLanding(page, catalogData, locale) {
                     <div class="app-hero-copy">
                         <p class="app-kicker">${escapeHtml(overview.eyebrow || "Shiba App")}</p>
                         <h1 class="app-hero-title">Shiba</h1>
-                        <p class="app-hero-subtitle">${escapeHtml(page.heroHeading || "")}</p>
-                        <p class="app-hero-lead">${escapeHtml(intro[0] || page.description || "")}</p>
+                        <p class="app-hero-subtitle">${renderMultilineText(page.heroHeading || "")}</p>
+                        <p class="app-hero-lead">${renderMultilineText(intro[0] || page.description || "")}</p>
                         <div class="app-hero-actions">
                             <a href="#app-store" class="app-pill app-pill--primary" aria-disabled="true">${escapeHtml(getHomeText(locale, "comingSoon"))}</a>
                             <a href="#analytics" class="app-pill app-pill--secondary">${escapeHtml(getHomeText(locale, "features"))}</a>
@@ -144,11 +144,7 @@ function renderAppLanding(page, catalogData, locale) {
 ${renderAppStats(locale)}
                         </div>
                     </div>
-                    <div class="app-device-stage">
-                        <div class="app-phone app-phone--hero">
-                            <img src="${escapeAttribute(assetHref(images.today, locale))}" alt="${escapeAttribute(getHomeText(locale, "todayAlt"))}" fetchpriority="high">
-                        </div>
-                    </div>
+                    ${renderHeroShowcase(images, locale)}
                 </div>
             </section>
 
@@ -227,7 +223,7 @@ ${previewCards.map((card) => renderAppLibraryPreviewCard(card)).join("\n")}
         </div>`;
 }
 
-function renderAppFooter(locale) {
+function renderAppFooter(locale, textLocale = locale) {
     return `    <footer class="app-footer">
         <div class="app-footer-inner">
             <a href="index.html" class="app-footer-brand">
@@ -235,10 +231,10 @@ function renderAppFooter(locale) {
                 <span>Shiba</span>
             </a>
             <nav class="app-footer-links" aria-label="Shiba footer">
-                <a href="index.html">Home</a>
-                <a href="index.html#analytics">Features</a>
-                <a href="shiba-privacy-policy.html">Privacy Policy</a>
-                <a href="contact.html">Contact</a>
+                <a href="index.html">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
+                <a href="index.html#analytics">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
+                <a href="shiba-privacy-policy.html">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
+                <a href="contact.html">${escapeHtml(getHomeText(textLocale, "footerContact"))}</a>
             </nav>
             <p>© Shiba</p>
         </div>
@@ -273,10 +269,29 @@ ${renderAppFeatureList(features)}
 }
 
 function renderPhoneImage(image, alt, locale, className = "") {
-    const classes = ["app-phone", className].filter(Boolean).join(" ");
+    const classes = ["app-phone", "app-phone--screen", className].filter(Boolean).join(" ");
     return `<div class="app-scene-media">
                         <div class="${escapeAttribute(classes)}">
                             <img src="${escapeAttribute(assetHref(image, locale))}" alt="${escapeAttribute(alt)}" loading="lazy">
+                        </div>
+                    </div>`;
+}
+
+function renderHeroShowcase(images, locale) {
+    return `<div class="app-device-stage" aria-label="${escapeAttribute(getHomeText(locale, "heroShowcaseAria"))}">
+                        <div class="app-product-stack">
+                            <div class="app-phone app-phone--screen app-phone--hero">
+                                <img src="${escapeAttribute(assetHref(images.today, locale))}" alt="${escapeAttribute(getHomeText(locale, "todayAlt"))}" fetchpriority="high">
+                            </div>
+                            <div class="app-insight-card app-insight-card--percentile" aria-hidden="true">
+                                <span>Strength Percentile</span>
+                                <strong>Top 41%</strong>
+                                <small>${escapeHtml(getHomeText(locale, "heroPercentileCopy"))}</small>
+                            </div>
+                            <div class="app-insight-card app-insight-card--heatmap" aria-hidden="true">
+                                <img src="${escapeAttribute(assetHref(images.heatmap, locale))}" alt="" loading="lazy">
+                                <span>Muscle Heatmap</span>
+                            </div>
                         </div>
                     </div>`;
 }
@@ -287,12 +302,12 @@ ${items.map((item) => `                            <li>${escapeHtml(item)}</li>`
                         </ul>`;
 }
 
+function renderMultilineText(text) {
+    return String(text).split("\n").map((line) => `<span>${escapeHtml(line)}</span>`).join("");
+}
+
 function renderAppStats(locale) {
-    return [
-        ["Start", "Today", getHomeText(locale, "statStart")],
-        ["Track", "Sets", getHomeText(locale, "statTrack")],
-        ["Review", "Heatmap", getHomeText(locale, "statReview")]
-    ].map(([label, value, copy]) => `                            <div class="app-stat">
+    return getHomeText(locale, "stats").map(({ label, value, copy }) => `                            <div class="app-stat">
                                 <span>${escapeHtml(label)}</span>
                                 <strong>${escapeHtml(value)}</strong>
                                 <small>${escapeHtml(copy)}</small>
@@ -305,7 +320,7 @@ function renderLoggingMock(locale) {
         ["1", "80kg", "8", labels.done],
         ["2", "85kg", "6", labels.done],
         ["3", "87.5kg", "5", labels.done],
-        ["4", "90kg", "3", "Live"]
+        ["4", "90kg", "3", labels.live]
     ];
 
     return `<div class="app-scene-media">
@@ -345,8 +360,10 @@ function buildHomePreviewCards(catalogData, locale, unit) {
         return {
             href: `${unit}_${card.slug}.html`,
             image: assetHref(card.image, locale),
-            name: titleFromSlug(card.slug) || localizedCard.names?.[locale] || localizedCard.names?.ja || "",
-            category: englishCategoryLabel(section.id) || localizedCard.categories?.[locale] || localizedCard.categories?.ja || sectionTitle
+            name: localizedCard.names?.[locale] || localizedCard.names?.ja || titleFromSlug(card.slug) || "",
+            category: locale === "en"
+                ? englishCategoryLabel(section.id)
+                : localizedCard.categories?.[locale] || localizedCard.categories?.ja || sectionTitle || englishCategoryLabel(section.id)
         };
     });
 }
@@ -386,24 +403,86 @@ function renderAppLibraryPreviewCard(card) {
 }
 
 function formatExerciseCount(count, locale) {
+    if (locale === "ja") return `${count}種目`;
+    if (locale === "ko") return `${count}개 운동`;
+    if (locale === "zh-hant") return `${count} 個動作`;
+    if (locale === "zh-hans") return `${count} 个动作`;
+    if (locale === "fr") return `${count} exercices`;
+    if (locale === "de") return `${count} Übungen`;
+    if (locale === "id") return `${count} latihan`;
     return `${count} exercises`;
 }
 
 function formatCategoryCount(count, locale) {
+    if (locale === "ja") return `${count}カテゴリ`;
+    if (locale === "ko") return `${count}개 카테고리`;
+    if (locale === "zh-hant") return `${count} 個分類`;
+    if (locale === "zh-hans") return `${count} 个分类`;
+    if (locale === "fr") return `${count} catégories`;
+    if (locale === "de") return `${count} Kategorien`;
+    if (locale === "id") return `${count} kategori`;
     return `${count} categories`;
 }
 
 function getHomeText(locale, key) {
     const text = {
         ja: {
+            comingSoon: "App Store準備中",
+            features: "分析を見る",
+            privacy: "プライバシー",
+            database: "Explore Library",
+            databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
+            todayAlt: "ShibaアプリのToday画面",
+            strengthAlt: "Strength Percentileの分析画面",
+            heatmapAlt: "筋肉ヒートマップ画面",
+            heroShowcaseAria: "ShibaのToday画面、Strength Percentile、筋肉ヒートマップのプレビュー",
+            heroPercentileCopy: "近い条件のリフターと比較",
+            stats: [
+                { label: "開始", value: "Today", copy: "今日のメニューをすぐ開始" },
+                { label: "分析", value: "Percentile", copy: "強みと現在地を可視化" },
+                { label: "可視化", value: "Heatmap", copy: "鍛えた部位を全身で確認" }
+            ],
+            statStart: "今日のメニューをすぐ開始",
+            statTrack: "重量・回数・メモを記録",
+            statReview: "鍛えた部位を確認",
+            todayHeading: "今日のメニューをすぐ始める",
+            todayCopy: "Shibaは、トレーニング前の迷いを減らし、最初の1セットへ自然に入れる画面設計です。",
+            todayFeatures: ["今日のメニューをひと目で確認", "開始ボタンを迷わない位置に配置", "進行中のセットへすぐ戻れる"],
+            loggingHeading: "セット記録は、トレーニングの流れを止めない。",
+            loggingCopy: "重量、回数、メモを前回記録と一緒に見ながら入力できるので、記録が作業ではなくトレーニングの一部になります。",
+            loggingFeatures: ["前回重量を見ながら入力", "各セットの結果をすぐ確認", "入力した記録がそのまま分析へつながる"],
+            analyticsHeading: "強みと成長をきれいに可視化",
+            analyticsCopy: "Strength Percentile、1RM推移、ボリュームの変化から、次に狙う重量の根拠を見つけられます。",
+            analyticsFeatures: ["Strength Percentileで現在地を把握", "1RMとボリュームの推移を確認", "伸びた種目を次の計画に反映"],
+            heatmapHeading: "どこを鍛えたか、体で見える。",
+            heatmapCopy: "筋肉ヒートマップは、種目名だけでは見落としやすい偏りや不足を、全身の視点で見せます。",
+            heatmapFeatures: ["鍛えた部位を全身で確認", "偏りを見つけて次のメニューを調整", "数字だけでは足りない感覚を補う"],
+            libraryHeading: "次の種目選びまで自然につながる。",
+            libraryCopy: "部位別の種目データベースは下部に残し、平均重量、基準表、主働筋を確認する入口として使えます。",
+            appStoreHeading: "App Store公開に向けて準備中です。",
+            appStoreCopy: "正式なApp Store URLが用意でき次第、このCTAをストアへのリンクに切り替えます。",
+            footerHome: "ホーム",
+            footerFeatures: "機能",
+            footerPrivacy: "プライバシーポリシー",
+            footerContact: "お問い合わせ",
+            loggingMock: { aria: "ワークアウト記録プレビュー", title: "ベンチプレス", set: "Set", weight: "重量", reps: "回数", done: "完了", live: "入力中" }
+        },
+        en: {
             comingSoon: "Coming Soon",
-            features: "See Features",
+            features: "See Analytics",
             privacy: "Privacy Policy",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
             todayAlt: "Shiba app Today screen",
             strengthAlt: "Strength Percentile screen",
             heatmapAlt: "Muscle heatmap screen",
+            heroShowcaseAria: "Preview of Shiba Today, Strength Percentile, and muscle heatmap screens",
+            heroPercentileCopy: "Compared with similar lifters",
+            stats: [
+                { label: "Start", value: "Today", copy: "Open the next workout instantly" },
+                { label: "Analyze", value: "Percentile", copy: "See strength in context" },
+                { label: "Review", value: "Heatmap", copy: "Review trained muscle groups" }
+            ],
             statStart: "Open the next workout instantly",
             statTrack: "Log weight, reps, and notes",
             statReview: "Review trained muscle groups",
@@ -423,17 +502,28 @@ function getHomeText(locale, key) {
             libraryCopy: "Exercise context sits inside the app story so choosing the next movement feels connected to your training log.",
             appStoreHeading: "Preparing for App Store release.",
             appStoreCopy: "When the official App Store URL is ready, this call to action will point there.",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Weight", reps: "Reps", done: "Done" }
+            footerHome: "Home",
+            footerFeatures: "Features",
+            footerPrivacy: "Privacy Policy",
+            footerContact: "Contact",
+            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Weight", reps: "Reps", done: "Done", live: "Live" }
         },
         ko: {
             comingSoon: "출시 예정",
-            features: "기능 보기",
+            features: "분석 보기",
             privacy: "Privacy Policy",
             database: "데이터베이스 보기",
             databaseIntro: "평균 중량, 기준표, 자극되는 근육을 확인하고 싶다면 기존 운동 데이터베이스로 이동할 수 있습니다.",
             todayAlt: "Shiba 앱 Today 화면",
             strengthAlt: "Strength Percentile 화면",
             heatmapAlt: "근육 히트맵 화면",
+            heroShowcaseAria: "Shiba Today, Strength Percentile, 근육 히트맵 화면 미리보기",
+            heroPercentileCopy: "비슷한 리프터와 비교",
+            stats: [
+                { label: "Start", value: "Today", copy: "다음 운동을 바로 시작" },
+                { label: "Analyze", value: "Percentile", copy: "강점과 현재 위치 확인" },
+                { label: "Review", value: "Heatmap", copy: "훈련한 부위 확인" }
+            ],
             statStart: "다음 운동을 바로 시작",
             statTrack: "중량, 반복, 메모 기록",
             statReview: "훈련한 부위 확인",
@@ -453,17 +543,28 @@ function getHomeText(locale, key) {
             libraryCopy: "부위별 데이터베이스는 아래에 남겨 앱에서 사용할 루틴과 운동 선택으로 이어지게 합니다.",
             appStoreHeading: "App Store 공개를 준비 중입니다.",
             appStoreCopy: "공식 URL이 정해지면 이 CTA를 App Store 링크로 교체합니다.",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "중량", reps: "반복", done: "완료" }
+            footerHome: "홈",
+            footerFeatures: "기능",
+            footerPrivacy: "Privacy Policy",
+            footerContact: "문의하기",
+            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "중량", reps: "반복", done: "완료", live: "진행 중" }
         },
         "zh-hant": {
             comingSoon: "即將推出",
-            features: "查看功能",
+            features: "查看分析",
             privacy: "Privacy Policy",
             database: "查看資料庫",
             databaseIntro: "想查看平均重量、標準表與訓練肌群時，可以從這裡進入既有訓練資料庫。",
             todayAlt: "Shiba App 的 Today 畫面",
             strengthAlt: "Strength Percentile 畫面",
             heatmapAlt: "肌肉熱力圖畫面",
+            heroShowcaseAria: "Shiba Today、Strength Percentile 與肌肉熱力圖畫面預覽",
+            heroPercentileCopy: "與相近條件的訓練者比較",
+            stats: [
+                { label: "Start", value: "Today", copy: "快速開始下一次訓練" },
+                { label: "Analyze", value: "Percentile", copy: "看見強項與位置" },
+                { label: "Review", value: "Heatmap", copy: "回顧訓練過的部位" }
+            ],
             statStart: "快速開始下一次訓練",
             statTrack: "記錄重量、次數與筆記",
             statReview: "回顧訓練過的部位",
@@ -483,17 +584,28 @@ function getHomeText(locale, key) {
             libraryCopy: "下方保留部位別資料庫，連到 App 中的課表與動作選擇。",
             appStoreHeading: "正在準備於 App Store 推出。",
             appStoreCopy: "正式 URL 確定後，這個 CTA 會改為 App Store 連結。",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "重量", reps: "次數", done: "完成" }
+            footerHome: "首頁",
+            footerFeatures: "功能",
+            footerPrivacy: "Privacy Policy",
+            footerContact: "聯絡",
+            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "重量", reps: "次數", done: "完成", live: "進行中" }
         },
         "zh-hans": {
             comingSoon: "即将推出",
-            features: "查看功能",
+            features: "查看分析",
             privacy: "Privacy Policy",
             database: "查看数据库",
             databaseIntro: "想查看平均重量、标准表和训练肌群时，可以从这里进入原有训练数据库。",
             todayAlt: "Shiba App 的 Today 画面",
             strengthAlt: "Strength Percentile 画面",
             heatmapAlt: "肌肉热力图画面",
+            heroShowcaseAria: "Shiba Today、Strength Percentile 和肌肉热力图画面预览",
+            heroPercentileCopy: "与相近条件的训练者比较",
+            stats: [
+                { label: "Start", value: "Today", copy: "快速开始下一次训练" },
+                { label: "Analyze", value: "Percentile", copy: "看见强项和位置" },
+                { label: "Review", value: "Heatmap", copy: "回顾训练过的部位" }
+            ],
             statStart: "快速开始下一次训练",
             statTrack: "记录重量、次数和笔记",
             statReview: "回顾训练过的部位",
@@ -513,17 +625,28 @@ function getHomeText(locale, key) {
             libraryCopy: "下方保留按部位分类的数据库，连接到 App 中的计划和动作选择。",
             appStoreHeading: "正在准备于 App Store 推出。",
             appStoreCopy: "正式 URL 确定后，这个 CTA 会改为 App Store 链接。",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "重量", reps: "次数", done: "完成" }
+            footerHome: "首页",
+            footerFeatures: "功能",
+            footerPrivacy: "Privacy Policy",
+            footerContact: "联系",
+            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "重量", reps: "次数", done: "完成", live: "进行中" }
         },
         es: {
             comingSoon: "Próximamente",
-            features: "Ver funciones",
+            features: "Ver análisis",
             privacy: "Privacy Policy",
             database: "Ver base de datos",
             databaseIntro: "Cuando quieras revisar pesos medios, estándares y músculos trabajados, entra en la base de datos existente.",
             todayAlt: "Pantalla Today de la app Shiba",
             strengthAlt: "Pantalla Strength Percentile",
             heatmapAlt: "Pantalla de mapa muscular",
+            heroShowcaseAria: "Vista previa de Today, Strength Percentile y mapa muscular de Shiba",
+            heroPercentileCopy: "Comparado con atletas similares",
+            stats: [
+                { label: "Start", value: "Today", copy: "Rutina lista para empezar" },
+                { label: "Analyze", value: "Percentile", copy: "Fuerza en contexto" },
+                { label: "Review", value: "Heatmap", copy: "Zonas trabajadas visibles" }
+            ],
             statStart: "Rutina lista para empezar",
             statTrack: "Peso, reps y notas",
             statReview: "Zonas trabajadas visibles",
@@ -543,17 +666,28 @@ function getHomeText(locale, key) {
             libraryCopy: "La base por zonas queda debajo y sirve como puente hacia rutinas y ejercicios.",
             appStoreHeading: "Preparando el lanzamiento en App Store.",
             appStoreCopy: "Cuando exista la URL oficial, esta CTA apuntará a App Store.",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Peso", reps: "Reps", done: "Listo" }
+            footerHome: "Inicio",
+            footerFeatures: "Funciones",
+            footerPrivacy: "Privacy Policy",
+            footerContact: "Contacto",
+            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Peso", reps: "Reps", done: "Listo", live: "En vivo" }
         },
         fr: {
             comingSoon: "Bientôt",
-            features: "Voir les fonctions",
+            features: "Voir l'analyse",
             privacy: "Privacy Policy",
             database: "Voir la base",
             databaseIntro: "Pour consulter les poids moyens, standards et muscles sollicités, continue vers la base d'exercices existante.",
             todayAlt: "Écran Today de l'app Shiba",
             strengthAlt: "Écran Strength Percentile",
             heatmapAlt: "Écran de carte musculaire",
+            heroShowcaseAria: "Aperçu des écrans Today, Strength Percentile et carte musculaire de Shiba",
+            heroPercentileCopy: "Comparé à des profils proches",
+            stats: [
+                { label: "Start", value: "Today", copy: "Séance prête à lancer" },
+                { label: "Analyze", value: "Percentile", copy: "Force mise en contexte" },
+                { label: "Review", value: "Heatmap", copy: "Zones travaillées visibles" }
+            ],
             statStart: "Séance prête à lancer",
             statTrack: "Poids, reps et notes",
             statReview: "Zones travaillées visibles",
@@ -573,17 +707,28 @@ function getHomeText(locale, key) {
             libraryCopy: "La base par zone reste dessous comme passerelle vers les routines et exercices.",
             appStoreHeading: "Lancement App Store en préparation.",
             appStoreCopy: "Quand l'URL officielle sera prête, ce CTA pointera vers l'App Store.",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Poids", reps: "Reps", done: "Fait" }
+            footerHome: "Accueil",
+            footerFeatures: "Fonctions",
+            footerPrivacy: "Privacy Policy",
+            footerContact: "Contact",
+            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Poids", reps: "Reps", done: "Fait", live: "Live" }
         },
         de: {
             comingSoon: "Demnächst",
-            features: "Funktionen ansehen",
+            features: "Analyse ansehen",
             privacy: "Privacy Policy",
             database: "Datenbank ansehen",
             databaseIntro: "Wenn du Durchschnittsgewichte, Standards und trainierte Muskeln prüfen möchtest, nutze die bestehende Trainingsdatenbank.",
             todayAlt: "Today-Screen der Shiba App",
             strengthAlt: "Strength Percentile Screen",
             heatmapAlt: "Muskel-Heatmap Screen",
+            heroShowcaseAria: "Vorschau der Today-, Strength-Percentile- und Muskel-Heatmap-Screens von Shiba",
+            heroPercentileCopy: "Verglichen mit ähnlichen Trainierenden",
+            stats: [
+                { label: "Start", value: "Today", copy: "Workout sofort starten" },
+                { label: "Analyze", value: "Percentile", copy: "Stärke im Kontext sehen" },
+                { label: "Review", value: "Heatmap", copy: "Trainierte Bereiche prüfen" }
+            ],
             statStart: "Workout sofort starten",
             statTrack: "Gewicht, Wdh. und Notizen",
             statReview: "Trainierte Bereiche prüfen",
@@ -603,17 +748,28 @@ function getHomeText(locale, key) {
             libraryCopy: "Die Datenbank nach Körperbereich bleibt darunter als Einstieg in Routinen und Übungen.",
             appStoreHeading: "App Store Launch in Vorbereitung.",
             appStoreCopy: "Sobald die offizielle URL feststeht, verweist dieser CTA auf den App Store.",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Gewicht", reps: "Wdh.", done: "Fertig" }
+            footerHome: "Start",
+            footerFeatures: "Funktionen",
+            footerPrivacy: "Privacy Policy",
+            footerContact: "Kontakt",
+            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Gewicht", reps: "Wdh.", done: "Fertig", live: "Live" }
         },
         id: {
             comingSoon: "Segera hadir",
-            features: "Lihat fitur",
+            features: "Lihat analitik",
             privacy: "Privacy Policy",
             database: "Lihat database",
             databaseIntro: "Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada.",
             todayAlt: "Layar Today aplikasi Shiba",
             strengthAlt: "Layar Strength Percentile",
             heatmapAlt: "Layar heatmap otot",
+            heroShowcaseAria: "Pratinjau layar Today, Strength Percentile, dan heatmap otot Shiba",
+            heroPercentileCopy: "Dibandingkan dengan lifter serupa",
+            stats: [
+                { label: "Start", value: "Today", copy: "Mulai latihan berikutnya" },
+                { label: "Analyze", value: "Percentile", copy: "Kekuatan dalam konteks" },
+                { label: "Review", value: "Heatmap", copy: "Lihat area yang dilatih" }
+            ],
             statStart: "Mulai latihan berikutnya",
             statTrack: "Catat berat, repetisi, catatan",
             statReview: "Lihat area yang dilatih",
@@ -633,11 +789,15 @@ function getHomeText(locale, key) {
             libraryCopy: "Database per area tetap di bawah sebagai jembatan menuju menu dan pilihan latihan.",
             appStoreHeading: "Sedang disiapkan untuk App Store.",
             appStoreCopy: "Saat URL resmi siap, CTA ini akan diarahkan ke App Store.",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Berat", reps: "Reps", done: "Selesai" }
+            footerHome: "Beranda",
+            footerFeatures: "Fitur",
+            footerPrivacy: "Privacy Policy",
+            footerContact: "Kontak",
+            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Berat", reps: "Reps", done: "Selesai", live: "Live" }
         }
     };
 
-    return text.ja[key] || "";
+    return text[locale]?.[key] || text.ja[key] || "";
 }
 
 function renderContentPage(page, locale) {
@@ -656,7 +816,7 @@ ${(page.sections || []).map((section) => renderContentSection(section)).join("\n
 ${content}
     </main>
 
-${renderAppFooter(locale)}
+${renderAppFooter(locale, "en")}
 ` : `${renderStaticHeader({ pageType: "content", locale })}
 
     <hr class="top-divider">

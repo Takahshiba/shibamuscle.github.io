@@ -29,7 +29,7 @@ for (const entry of htmlEntries) {
     const isAppShellPage = html.includes("app-policy-shell");
     const isAppPage = isAppHomePage || isAppShellPage;
     const localeConfig = getLocaleConfig(entry.locale);
-    const expectedHtmlLang = isAppPage ? "en" : localeConfig.hreflang;
+    const expectedHtmlLang = isAppShellPage ? "en" : localeConfig.hreflang;
     const canonicalFile = isSecondaryUnitPage ? entry.file.replace(/^lb_/, "kg_") : entry.file;
     const canonicalUrl = absoluteUrlForFile(canonicalFile, entry.locale);
     const pageUrl = absoluteUrlForFile(entry.file, entry.locale);

@@ -203,9 +203,9 @@ ${categoryNav}
 function renderAppHeader(locale = "ja") {
     const ctaLabel = getAppHeaderText(locale, "comingSoon");
     const navItems = [
-        ["#today", "Today"],
-        ["#analytics", "Analytics"],
-        ["#library", "Library"]
+        ["#today", getAppHeaderText(locale, "today")],
+        ["#analytics", getAppHeaderText(locale, "analytics")],
+        ["#library", getAppHeaderText(locale, "library")]
     ];
 
     return `    <header class="site-header app-local-header">
@@ -224,17 +224,18 @@ ${navItems.map(([href, label]) => `                <a href="${escapeAttribute(hr
 
 function getAppHeaderText(locale, key) {
     const text = {
-        ja: { comingSoon: "Coming Soon" },
-        ko: { comingSoon: "출시 예정" },
-        "zh-hant": { comingSoon: "即將推出" },
-        "zh-hans": { comingSoon: "即将推出" },
-        es: { comingSoon: "Próximamente" },
-        fr: { comingSoon: "Bientôt" },
-        de: { comingSoon: "Demnächst" },
-        id: { comingSoon: "Segera hadir" }
+        ja: { today: "今日", analytics: "分析", library: "種目", comingSoon: "App Store準備中" },
+        ko: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "출시 예정" },
+        "zh-hant": { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "即將推出" },
+        "zh-hans": { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "即将推出" },
+        es: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Próximamente" },
+        fr: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Bientôt" },
+        de: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Demnächst" },
+        id: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Segera hadir" },
+        en: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Coming Soon" }
     };
 
-    return text.ja[key] || key;
+    return text[locale]?.[key] || text.ja[key] || key;
 }
 
 function renderLegacyCategoryNav(pageType, locale = "ja") {

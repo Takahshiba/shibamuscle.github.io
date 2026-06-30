@@ -1,41 +1,40 @@
 {
   "file": "index.html",
   "kind": "home",
-  "title": "Shiba | Strength Training Tracker",
-  "description": "Shiba brings today's workout, set logging, Strength Percentile, and muscle heatmaps into one focused strength training app.",
+  "title": "Shiba | 分析に強い筋トレ記録アプリ",
+  "description": "Shibaは、今日のメニュー、セット記録、Strength Percentile、筋肉ヒートマップを美しいUIでつなぐ筋トレ記録アプリです。記録した瞬間から成長を分析できます。",
   "ogImage": "https://shibamuscle.com/assets/app/today-screen-current.png",
-  "htmlLang": "en",
-  "heroHeading": "Start today's workout without friction.",
-  "heading": "Explore Shiba",
+  "heroHeading": "記録した瞬間から、\nトレーニングが分析に変わる。",
+  "heading": "Shibaを知る",
   "intro": [
-    "Shiba helps you open today's plan, log each set quickly, and review which lifts and muscle groups are moving forward.",
-    "It is built for lifters who want fast workout logging, clear progress analytics, and a calmer way to choose the next exercise."
+    "Shibaは、今日やるメニューを開いて\nセットを素早く記録し、\nあとから強み・伸びている種目・\n鍛えた部位まで見返せる筋トレ記録アプリです。",
+    "美しいダークUI、Strength Percentile、筋肉ヒートマップ、進捗チャートをひとつの流れにつなげ、ジムで迷わず、あとで深く振り返れる体験を目指しています。"
   ],
   "overview": {
     "eyebrow": "Shiba App",
-    "sectionEyebrow": "App overview",
-    "title": "Logging, analytics, and exercise discovery in one flow",
-    "copy": "The home page now focuses on the app experience, from starting a workout to understanding progress after the session.",
+    "sectionEyebrow": "アプリ紹介",
+    "title": "記録、分析、次の種目選びまで一気通貫",
+    "copy": "トップページでは、Shibaの強みである美しいUIと分析体験を前面に出し、必要な人が下部のトレーニングデータベースへ進める構成にします。",
     "items": [
       {
         "eyebrow": "Today",
-        "heading": "Start today's plan fast",
+        "heading": "今日のメニューをすぐ始める",
         "paragraphs": [
-          "Your next workout, active sets, and primary start action stay visible on one clear screen."
+          "ホームを開けば、今日のメニュー、進行中のセット、開始アクションが一画面にまとまり、最初の1セットまでの迷いを減らします。"
         ]
       },
       {
         "eyebrow": "Analytics",
-        "heading": "See strength and progress clearly",
+        "heading": "強みと成長をきれいに可視化",
         "paragraphs": [
-          "Strength Percentile, progress charts, and muscle heatmaps turn raw workout logs into useful feedback."
+          "Strength Percentile、進捗チャート、筋肉ヒートマップが、ただの記録を次の重量設定に使えるフィードバックへ変えます。"
         ]
       },
       {
         "eyebrow": "Library",
-        "heading": "Find the next exercise naturally",
+        "heading": "次の種目選びにつながる",
         "paragraphs": [
-          "Exercise context stays close to the logging flow so planning the next session feels simple."
+          "アプリ紹介の下には既存の種目データベースを残し、平均重量、基準表、主働筋を確認できる入口として使えます。"
         ]
       }
     ]
@@ -52,18 +51,57 @@
     "styles.css"
   ],
   "locales": {
-    "ko": {
-      "title": "Shiba | 근력 운동 기록 앱",
-      "description": "Shiba는 오늘의 운동 시작, 세트 기록, Strength Percentile, 근육 히트맵까지 하나의 흐름으로 이어 주는 근력 운동 기록 앱입니다.",
-      "heroHeading": "오늘의 운동을 망설이지 않고 시작하세요.",
-      "heading": "운동 데이터베이스 보기",
+    "en": {
+      "title": "Shiba | Strength Training Tracker",
+      "description": "Shiba connects today's workout, fast set logging, Strength Percentile, progress charts, and muscle heatmaps in a polished strength training app.",
+      "heroHeading": "Turn every logged set into training insight.",
+      "heading": "Explore Shiba",
       "intro": [
-        "Shiba는 오늘 할 루틴을 열고, 세트를 기록하고, 성장한 부위와 강점을 나중에 다시 볼 수 있는 근력 운동 기록 앱입니다.",
-        "평균 중량과 기준표를 찾을 수 있는 기존 운동 데이터베이스는 앱 소개 아래에 남겨 둡니다."
+        "Shiba helps you open today's plan, log each set quickly, and review which lifts and muscle groups are moving forward.",
+        "It is built for lifters who want a beautiful workout log, clear progress analytics, and a calmer way to choose the next exercise."
       ],
       "overview": {
         "eyebrow": "Shiba App",
         "sectionEyebrow": "App overview",
+        "title": "Logging, analytics, and exercise discovery in one flow",
+        "copy": "The home page focuses on the app experience first, then keeps the training database available as a deeper reference.",
+        "items": [
+          {
+            "eyebrow": "Today",
+            "heading": "Start today's plan fast",
+            "paragraphs": [
+              "Your next workout, active sets, and primary start action stay visible on one clear screen."
+            ]
+          },
+          {
+            "eyebrow": "Analytics",
+            "heading": "See strength and progress clearly",
+            "paragraphs": [
+              "Strength Percentile, progress charts, and muscle heatmaps turn raw workout logs into useful feedback."
+            ]
+          },
+          {
+            "eyebrow": "Library",
+            "heading": "Find the next exercise naturally",
+            "paragraphs": [
+              "The existing exercise database remains below the app introduction for average weights, standards, and target muscles."
+            ]
+          }
+        ]
+      }
+    },
+    "ko": {
+      "title": "Shiba | 분석이 강한 근력 운동 기록 앱",
+      "description": "Shiba는 오늘의 운동, 빠른 세트 기록, Strength Percentile, 성장 차트, 근육 히트맵을 아름다운 UI로 이어 주는 근력 운동 기록 앱입니다.",
+      "heroHeading": "기록하는 순간, 운동이 분석으로 바뀝니다.",
+      "heading": "Shiba 살펴보기",
+      "intro": [
+        "Shiba는 오늘 할 루틴을 열고 세트를 빠르게 기록한 뒤, 어떤 운동과 부위가 성장하는지 다시 볼 수 있는 근력 운동 기록 앱입니다.",
+        "아름다운 다크 UI, Strength Percentile, 근육 히트맵, 진행 차트를 하나의 흐름으로 연결합니다."
+      ],
+      "overview": {
+        "eyebrow": "Shiba App",
+        "sectionEyebrow": "앱 소개",
         "title": "기록, 분석, 운동 탐색을 하나의 흐름으로",
         "copy": "홈에서는 앱 경험을 중심에 두고, 필요한 사용자가 데이터베이스로 이동할 수 있게 구성합니다.",
         "items": [
@@ -92,17 +130,17 @@
       }
     },
     "zh-hant": {
-      "title": "Shiba | 重訓紀錄 App",
-      "description": "Shiba 是把今日訓練、組數紀錄、Strength Percentile 與肌肉熱力圖串在一起的重訓紀錄 App。",
-      "heroHeading": "今天的訓練，立刻開始。",
-      "heading": "查看訓練資料庫",
+      "title": "Shiba | 分析強大的重訓紀錄 App",
+      "description": "Shiba 以漂亮的 UI 串起今日訓練、快速組數紀錄、Strength Percentile、成長圖表與肌肉熱力圖。",
+      "heroHeading": "每一次紀錄，都變成下一次訓練的線索。",
+      "heading": "認識 Shiba",
       "intro": [
-        "Shiba 讓你打開今天的課表、記錄每一組，並在之後回顧成長部位與力量優勢。",
-        "既有的平均重量與標準表資料庫，會保留在 App 介紹下方。"
+        "Shiba 讓你打開今天的課表、快速記錄每一組，並在之後回顧成長的動作與訓練部位。",
+        "漂亮的深色 UI、Strength Percentile、肌肉熱力圖與進度圖表會串成一個完整流程。"
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "App overview",
+        "sectionEyebrow": "App 介紹",
         "title": "紀錄、分析與動作探索串成一條流程",
         "copy": "首頁以 App 體驗為主，需要時再前往訓練資料庫。",
         "items": [
@@ -131,17 +169,17 @@
       }
     },
     "zh-hans": {
-      "title": "Shiba | 力量训练记录 App",
-      "description": "Shiba 是把今日训练、组数记录、Strength Percentile 和肌肉热力图连接起来的力量训练记录 App。",
-      "heroHeading": "今天的训练，马上开始。",
-      "heading": "查看训练数据库",
+      "title": "Shiba | 分析强大的力量训练记录 App",
+      "description": "Shiba 用漂亮的 UI 连接今日训练、快速组数记录、Strength Percentile、成长图表和肌肉热力图。",
+      "heroHeading": "每一次记录，都会变成下一次训练的线索。",
+      "heading": "了解 Shiba",
       "intro": [
-        "Shiba 让你打开今天的计划、记录每一组，并在之后回顾成长部位和力量优势。",
-        "原有的平均重量与标准表数据库，会保留在 App 介绍下方。"
+        "Shiba 让你打开今天的计划、快速记录每一组，并在之后回顾成长的动作和训练部位。",
+        "漂亮的深色 UI、Strength Percentile、肌肉热力图和进度图表会连成一个完整流程。"
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "App overview",
+        "sectionEyebrow": "App 介绍",
         "title": "记录、分析和动作探索串成一个流程",
         "copy": "首页以 App 体验为主，需要时再前往训练数据库。",
         "items": [
@@ -170,13 +208,13 @@
       }
     },
     "es": {
-      "title": "Shiba | App para registrar entrenamientos",
-      "description": "Shiba conecta el inicio del entrenamiento de hoy, el registro de series, Strength Percentile y el mapa muscular en una sola experiencia.",
-      "heroHeading": "Empieza el entrenamiento de hoy sin dudar.",
-      "heading": "Ver base de datos de ejercicios",
+      "title": "Shiba | App de entrenamiento con analítica clara",
+      "description": "Shiba conecta la rutina de hoy, el registro rápido de series, Strength Percentile, gráficos de progreso y mapa muscular en una app de entrenamiento cuidada.",
+      "heroHeading": "Convierte cada serie registrada en una señal útil.",
+      "heading": "Explora Shiba",
       "intro": [
-        "Shiba es una app para abrir la rutina de hoy, registrar series y revisar después qué zonas y marcas están creciendo.",
-        "La base de datos existente con pesos medios y estándares se mantiene como acceso bajo la presentación de la app."
+        "Shiba te ayuda a abrir la rutina de hoy, registrar series rápido y revisar después qué ejercicios y zonas están creciendo.",
+        "Una interfaz oscura cuidada, Strength Percentile, mapa muscular y gráficos de progreso se integran en un solo flujo."
       ],
       "overview": {
         "eyebrow": "Shiba App",
@@ -209,17 +247,17 @@
       }
     },
     "fr": {
-      "title": "Shiba | App de suivi musculation",
-      "description": "Shiba relie la séance du jour, le suivi des séries, Strength Percentile et la carte musculaire dans une seule app de musculation.",
-      "heroHeading": "Commencer l'entraînement du jour, sans hésiter.",
-      "heading": "Voir la base d'exercices",
+      "title": "Shiba | App musculation avec analyse claire",
+      "description": "Shiba relie la séance du jour, la saisie rapide des séries, Strength Percentile, les graphiques de progression et la carte musculaire dans une app soignée.",
+      "heroHeading": "Chaque série notée devient un repère pour progresser.",
+      "heading": "Découvrir Shiba",
       "intro": [
-        "Shiba permet d'ouvrir la séance du jour, de noter les séries et de revoir ensuite les zones et les performances qui progressent.",
-        "La base existante avec poids moyens et standards reste accessible sous la présentation de l'app."
+        "Shiba permet d'ouvrir la séance du jour, de noter les séries rapidement et de revoir ensuite les exercices et zones qui progressent.",
+        "Une interface sombre soignée, Strength Percentile, la carte musculaire et les graphiques de progression forment un même flux."
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "App overview",
+        "sectionEyebrow": "Présentation de l'app",
         "title": "Suivi, analyse et exploration dans un même flux",
         "copy": "La page d'accueil met l'expérience app au premier plan et garde la base de données comme accès secondaire.",
         "items": [
@@ -248,13 +286,13 @@
       }
     },
     "de": {
-      "title": "Shiba | App fürs Krafttraining",
-      "description": "Shiba verbindet das heutige Workout, Satzprotokoll, Strength Percentile und Muskel-Heatmap in einer Krafttraining-App.",
-      "heroHeading": "Das heutige Training ohne Umwege starten.",
-      "heading": "Trainingsdatenbank ansehen",
+      "title": "Shiba | Krafttraining-App mit klarer Analyse",
+      "description": "Shiba verbindet das heutige Workout, schnelle Satzerfassung, Strength Percentile, Fortschrittscharts und Muskel-Heatmap in einer sorgfältig gestalteten App.",
+      "heroHeading": "Jeder protokollierte Satz wird zu einem Trainingssignal.",
+      "heading": "Shiba entdecken",
       "intro": [
-        "Shiba öffnet dein heutiges Workout, hält Sätze fest und zeigt später, welche Bereiche und Leistungen wachsen.",
-        "Die bestehende Datenbank mit Durchschnittsgewichten und Standards bleibt unter der App-Vorstellung erreichbar."
+        "Shiba öffnet dein heutiges Workout, hält Sätze schnell fest und zeigt später, welche Übungen und Bereiche wachsen.",
+        "Eine ruhige Dark UI, Strength Percentile, Muskel-Heatmap und Fortschrittscharts greifen in einem Ablauf ineinander."
       ],
       "overview": {
         "eyebrow": "Shiba App",
@@ -286,170 +324,14 @@
         ]
       }
     },
-    "zh-hant": {
-      "title": "Shiba Muscle | 訓練資料庫",
-      "description": "Shiba Muscle 訓練資料庫可依部位與動作查看平均重量、力量標準與目標肌群，並支援 kg 與 lb 切換。",
-      "heroHeading": "清楚比較訓練資料",
-      "heading": "尋找訓練動作",
-      "intro": [
-        "Shiba Muscle 是整理各訓練動作平均重量、力量標準與主動肌的資料庫。從臥推、深蹲、硬舉等經典動作，到啞鈴、自重與滑輪動作，都能快速查看體重別與年齡別參考值。",
-        "所有數值都是規劃訓練時的參考，不是必須達成的目標。請依照姿勢、活動範圍、訓練年資與當天狀態安全使用。"
-      ],
-      "overview": {
-        "eyebrow": "Workout data",
-        "sectionEyebrow": "資料指南",
-        "title": "為了更容易比較的編輯方針",
-        "copy": "首頁先整理網站目的、資料整理方式與安全使用重點，讓使用者能理解各表格的定位。",
-        "items": [
-          {
-            "eyebrow": "Purpose",
-            "heading": "建立選擇動作的入口",
-            "paragraphs": [
-              "依部位、器材與主動肌整理頁面，讓相近動作更容易互相比較。"
-            ]
-          },
-          {
-            "eyebrow": "Data",
-            "heading": "分開呈現平均值與標準表",
-            "paragraphs": [
-              "不只看平均重量，也能搭配體重別與年齡別標準確認背景。"
-            ]
-          },
-          {
-            "eyebrow": "Safety",
-            "heading": "作為參考資訊使用",
-            "paragraphs": [
-              "若有疼痛或病史，請諮詢專業人士，並優先考慮姿勢與安全。"
-            ]
-          }
-        ]
-      }
-    },
-    "zh-hans": {
-      "title": "Shiba Muscle | 训练数据库",
-      "description": "Shiba Muscle 训练数据库可按部位和动作查看平均重量、力量标准与目标肌群，并支持 kg 与 lb 切换。",
-      "heroHeading": "清楚比较训练数据",
-      "heading": "寻找训练动作",
-      "intro": [
-        "Shiba Muscle 是整理各训练动作平均重量、力量标准与主动肌的数据资料库。从卧推、深蹲、硬拉等经典动作，到哑铃、自重和绳索动作，都能快速查看按体重和年龄划分的参考值。",
-        "所有数值都是规划训练时的参考，不是必须达成的目标。请结合动作姿势、活动范围、训练年限和当天状态安全使用。"
-      ],
-      "overview": {
-        "eyebrow": "Workout data",
-        "sectionEyebrow": "数据指南",
-        "title": "为了更容易比较的编辑方针",
-        "copy": "首页先整理网站目的、数据整理方式与安全使用重点，帮助理解各表格的定位。",
-        "items": [
-          {
-            "eyebrow": "Purpose",
-            "heading": "建立选择动作的入口",
-            "paragraphs": [
-              "按部位、器械和主动肌整理页面，让相近动作更容易互相比较。"
-            ]
-          },
-          {
-            "eyebrow": "Data",
-            "heading": "分开呈现平均值与标准表",
-            "paragraphs": [
-              "不只看平均重量，也能结合按体重和年龄划分的标准查看背景。"
-            ]
-          },
-          {
-            "eyebrow": "Safety",
-            "heading": "作为参考信息使用",
-            "paragraphs": [
-              "如有疼痛或病史，请咨询专业人士，并优先考虑动作姿势与安全。"
-            ]
-          }
-        ]
-      }
-    },
-    "fr": {
-      "title": "Shiba Muscle | Base de données d’exercices",
-      "description": "Base de données Shiba Muscle pour consulter charges moyennes, standards de force et muscles travaillés par zone et par exercice, avec bascule kg/lb.",
-      "heroHeading": "Comparer les données d’entraînement clairement",
-      "heading": "Trouver un exercice",
-      "intro": [
-        "Shiba Muscle organise les charges moyennes, les standards de force et les muscles principaux par exercice. Les mouvements classiques comme le développé couché, le squat et le soulevé de terre côtoient les exercices avec haltères, poids du corps et câble.",
-        "Les valeurs sont des repères pour planifier l’entraînement, pas des objectifs obligatoires. Utilisez-les avec la technique, l’amplitude, l’expérience et l’état du jour en tête."
-      ],
-      "overview": {
-        "eyebrow": "Workout data",
-        "sectionEyebrow": "Guide des données",
-        "title": "Principes éditoriaux pour mieux comparer",
-        "copy": "La page d’accueil présente le but du site, la façon dont les données sont organisées et les précautions d’utilisation.",
-        "items": [
-          {
-            "eyebrow": "Purpose",
-            "heading": "Créer une entrée claire par exercice",
-            "paragraphs": [
-              "Les pages sont organisées par zone, matériel et muscles principaux afin de comparer plus facilement les exercices proches."
-            ]
-          },
-          {
-            "eyebrow": "Data",
-            "heading": "Séparer moyenne et standards",
-            "paragraphs": [
-              "La charge moyenne est accompagnée de tableaux par poids corporel et par âge pour donner plus de contexte."
-            ]
-          },
-          {
-            "eyebrow": "Safety",
-            "heading": "Une référence, pas un avis médical",
-            "paragraphs": [
-              "En cas de douleur ou d’antécédents, consultez un professionnel et privilégiez la technique et la sécurité."
-            ]
-          }
-        ]
-      }
-    },
-    "de": {
-      "title": "Shiba Muscle | Trainingsdatenbank",
-      "description": "Shiba Muscle zeigt Durchschnittsgewichte, Kraftstandards und Zielmuskulatur nach Muskelbereich und Übung, inklusive Wechsel zwischen kg und lb.",
-      "heroHeading": "Trainingsdaten klar vergleichen",
-      "heading": "Übungen finden",
-      "intro": [
-        "Shiba Muscle bündelt Durchschnittsgewicht, Kraftstandards und Hauptmuskeln pro Übung. Klassische Übungen wie Bankdrücken, Kniebeuge und Kreuzheben stehen neben Kurzhantel-, Körpergewichts- und Kabelübungen.",
-        "Die Werte sind Orientierungspunkte für die Trainingsplanung, keine Pflichtziele. Nutze sie zusammen mit Technik, Bewegungsumfang, Erfahrung und Tagesform."
-      ],
-      "overview": {
-        "eyebrow": "Workout data",
-        "sectionEyebrow": "Datenleitfaden",
-        "title": "Redaktionelle Grundsätze für bessere Vergleiche",
-        "copy": "Die Startseite erklärt Zweck, Struktur und sichere Nutzung der Trainingsdaten, bevor die Tabellen geöffnet werden.",
-        "items": [
-          {
-            "eyebrow": "Purpose",
-            "heading": "Einen Einstieg pro Übung schaffen",
-            "paragraphs": [
-              "Die Seiten sind nach Muskelbereich, Gerät und Hauptmuskeln geordnet, damit ähnliche Übungen leichter vergleichbar sind."
-            ]
-          },
-          {
-            "eyebrow": "Data",
-            "heading": "Durchschnitt und Standards trennen",
-            "paragraphs": [
-              "Durchschnittswerte werden zusammen mit Tabellen nach Körpergewicht und Alter gezeigt, damit der Kontext klar bleibt."
-            ]
-          },
-          {
-            "eyebrow": "Safety",
-            "heading": "Referenz, keine medizinische Beratung",
-            "paragraphs": [
-              "Bei Schmerzen oder Vorerkrankungen sollte Fachpersonal einbezogen werden; Technik und Sicherheit haben Vorrang."
-            ]
-          }
-        ]
-      }
-    },
     "id": {
-      "title": "Shiba | Aplikasi catatan latihan",
-      "description": "Shiba menghubungkan latihan hari ini, catatan set, Strength Percentile, dan heatmap otot dalam satu aplikasi latihan.",
-      "heroHeading": "Mulai latihan hari ini tanpa ragu.",
-      "heading": "Lihat database latihan",
+      "title": "Shiba | Aplikasi latihan dengan analitik kuat",
+      "description": "Shiba menghubungkan latihan hari ini, input set cepat, Strength Percentile, grafik progres, dan heatmap otot dalam satu aplikasi latihan yang rapi.",
+      "heroHeading": "Setiap set yang dicatat berubah menjadi insight latihan.",
+      "heading": "Jelajahi Shiba",
       "intro": [
-        "Shiba membantu membuka menu latihan hari ini, mencatat set, lalu melihat kembali area dan kekuatan yang berkembang.",
-        "Database latihan yang berisi berat rata-rata dan standar tetap tersedia sebagai akses di bawah pengenalan aplikasi."
+        "Shiba membantu membuka menu latihan hari ini, mencatat set dengan cepat, lalu melihat kembali latihan dan area yang berkembang.",
+        "UI gelap yang rapi, Strength Percentile, heatmap otot, dan grafik progres terhubung dalam satu alur."
       ],
       "overview": {
         "eyebrow": "Shiba App",
