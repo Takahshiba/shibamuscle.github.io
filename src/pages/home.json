@@ -1,40 +1,41 @@
 {
   "file": "index.html",
   "kind": "home",
-  "title": "Shiba | 分析に強い筋トレ記録アプリ",
-  "description": "Shibaは、今日のメニュー、セット記録、Strength Percentile、筋肉ヒートマップを美しいUIでつなぐ筋トレ記録アプリです。記録した瞬間から成長を分析できます。",
+  "title": "Shiba | Strength Training Tracker",
+  "description": "Shiba connects today's workout, fast set logging, Strength Percentile, progress charts, and muscle heatmaps in a polished strength training app.",
   "ogImage": "https://shibamuscle.com/assets/app/today-screen-current.png",
-  "heroHeading": "記録した瞬間から、\nトレーニングが分析に変わる。",
-  "heading": "Shibaを知る",
+  "textLocale": "en",
+  "heroHeading": "Turn every logged set into training insight.",
+  "heading": "Explore Shiba",
   "intro": [
-    "Shibaは、今日やるメニューを開いて\nセットを素早く記録し、\nあとから強み・伸びている種目・\n鍛えた部位まで見返せる筋トレ記録アプリです。",
-    "美しいダークUI、Strength Percentile、筋肉ヒートマップ、進捗チャートをひとつの流れにつなげ、ジムで迷わず、あとで深く振り返れる体験を目指しています。"
+    "Shiba helps you open today's plan, log each set quickly, and review which lifts and muscle groups are moving forward.",
+    "It is built for lifters who want a beautiful workout log, clear progress analytics, and a calmer way to choose the next exercise."
   ],
   "overview": {
     "eyebrow": "Shiba App",
-    "sectionEyebrow": "アプリ紹介",
-    "title": "記録、分析、次の種目選びまで一気通貫",
-    "copy": "トップページでは、Shibaの強みである美しいUIと分析体験を前面に出し、必要な人が下部のトレーニングデータベースへ進める構成にします。",
+    "sectionEyebrow": "App overview",
+    "title": "Logging, analytics, and exercise discovery in one flow",
+    "copy": "The home page focuses on the app experience first, then keeps the training database available as a deeper reference.",
     "items": [
       {
         "eyebrow": "Today",
-        "heading": "今日のメニューを\nすぐ始める",
+        "heading": "Start today's plan fast",
         "paragraphs": [
-          "ホームを開けば、今日のメニュー、進行中のセット、開始アクションが一画面にまとまり、最初の1セットまでの迷いを減らします。"
+          "Your next workout, active sets, and primary start action stay visible on one clear screen."
         ]
       },
       {
         "eyebrow": "Analytics",
-        "heading": "強みと成長を\nきれいに可視化",
+        "heading": "See strength and progress clearly",
         "paragraphs": [
-          "Strength Percentile、進捗チャート、筋肉ヒートマップが、ただの記録を次の重量設定に使えるフィードバックへ変えます。"
+          "Strength Percentile, progress charts, and muscle heatmaps turn raw workout logs into useful feedback."
         ]
       },
       {
         "eyebrow": "Library",
-        "heading": "次の種目選びに\nつながる",
+        "heading": "Find the next exercise naturally",
         "paragraphs": [
-          "アプリ紹介の下には既存の種目データベースを残し、平均重量、基準表、主働筋を確認できる入口として使えます。"
+          "The existing exercise database remains below the app introduction for average weights, standards, and target muscles."
         ]
       }
     ]
@@ -44,7 +45,8 @@
   "appImages": {
     "today": "app/today-screen-current.png",
     "strength": "app/strength-percentile.jpg",
-    "heatmap": "app/muscle-heatmap.png",
+    "heatmap": "app/completion-heatmap.png",
+    "heatmapDetail": "app/muscle-heatmap.png",
     "mascot": "app/shiba-mascot.png"
   },
   "stylesheets": [

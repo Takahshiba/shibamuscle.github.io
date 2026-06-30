@@ -177,9 +177,9 @@ ${alternateLinks}${xDefaultLink}
 `;
 }
 
-function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja" } = {}) {
+function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja", textLocale = locale } = {}) {
     if (pageType === "home") {
-        return renderAppHeader(locale);
+        return renderAppHeader(locale, textLocale);
     }
 
     const categoryNav = renderLegacyCategoryNav(pageType, locale);
@@ -200,12 +200,12 @@ ${categoryNav}
     </header>`;
 }
 
-function renderAppHeader(locale = "ja") {
-    const ctaLabel = getAppHeaderText(locale, "comingSoon");
+function renderAppHeader(locale = "ja", textLocale = locale) {
+    const ctaLabel = getAppHeaderText(textLocale, "comingSoon");
     const navItems = [
-        ["#today", getAppHeaderText(locale, "today")],
-        ["#analytics", getAppHeaderText(locale, "analytics")],
-        ["#library", getAppHeaderText(locale, "library")]
+        ["#today", getAppHeaderText(textLocale, "today")],
+        ["#analytics", getAppHeaderText(textLocale, "analytics")],
+        ["#library", getAppHeaderText(textLocale, "library")]
     ];
 
     return `    <header class="site-header app-local-header">
