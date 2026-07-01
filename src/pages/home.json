@@ -2,14 +2,14 @@
   "file": "index.html",
   "kind": "home",
   "title": "Shiba | Strength Training Tracker",
-  "description": "Shiba connects today's workout, fast set logging, Strength Percentile, progress charts, and muscle heatmaps in a polished strength training app.",
+  "description": "Shiba connects today's workout, fast set logging, Strength Percentile, progress charts, and muscle heatmaps in a dark strength training app.",
   "ogImage": "https://shibamuscle.com/assets/app/today-screen-current.png",
   "textLocale": "en",
   "heroHeading": "Turn every logged set into training insight.",
   "heading": "Explore Shiba",
   "intro": [
     "Shiba helps you open today's plan, log each set quickly, and review which lifts and muscle groups are moving forward.",
-    "It is built for lifters who want a beautiful workout log, clear progress analytics, and a calmer way to choose the next exercise."
+    "It is built for lifters who want a black-and-orange workout log, clear progress analytics, and a calmer way to choose the next exercise."
   ],
   "overview": {
     "eyebrow": "Shiba App",
@@ -55,12 +55,12 @@
   "locales": {
     "en": {
       "title": "Shiba | Strength Training Tracker",
-      "description": "Shiba connects today's workout, fast set logging, Strength Percentile, progress charts, and muscle heatmaps in a polished strength training app.",
+      "description": "Shiba connects today's workout, fast set logging, Strength Percentile, progress charts, and muscle heatmaps in a dark strength training app.",
       "heroHeading": "Turn every logged set into training insight.",
       "heading": "Explore Shiba",
       "intro": [
         "Shiba helps you open today's plan, log each set quickly, and review which lifts and muscle groups are moving forward.",
-        "It is built for lifters who want a beautiful workout log, clear progress analytics, and a calmer way to choose the next exercise."
+        "It is built for lifters who want a black-and-orange workout log, clear progress analytics, and a calmer way to choose the next exercise."
       ],
       "overview": {
         "eyebrow": "Shiba App",

@@ -23,6 +23,8 @@ import { buildExerciseFileIndex, loadDiscovery, loadExercises, loadPages, loadTa
 const ROOT = process.cwd();
 const SITE_ORIGIN = "https://shibamuscle.com";
 const ANALYTICS_ID = "G-D9K58THBFM";
+const SITE_THEME_COLOR = "#148a6a";
+const APP_THEME_COLOR = "#ff7a00";
 const ANALYTICS_BLOCK = `
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}"></script>
@@ -171,7 +173,8 @@ function buildPageContext(entry, html) {
             locale,
             isExercisePage: false,
             isToolPage: false,
-            isHomePage: true
+            isHomePage: true,
+            isAppPage: true
         };
     }
 
@@ -228,7 +231,8 @@ function buildPageContext(entry, html) {
             locale,
             isExercisePage: false,
             isToolPage: false,
-            isHomePage: false
+            isHomePage: false,
+            isAppPage: staticPage.appShell === true
         };
     }
 
@@ -338,7 +342,7 @@ function buildSeoBlock(context) {
     return `
     <meta name="description" content="${escapeAttribute(context.description)}">
     <meta name="robots" content="${escapeAttribute(robots)}">
-    <meta name="theme-color" content="#148a6a">
+    <meta name="theme-color" content="${context.isAppPage ? APP_THEME_COLOR : SITE_THEME_COLOR}">
     <link rel="canonical" href="${context.canonicalUrl}">
 ${alternateLinks}${xDefaultLink}
     <meta property="og:type" content="${context.type}">

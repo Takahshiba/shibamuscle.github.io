@@ -27,6 +27,7 @@ const catalog = loadCatalog();
 const discovery = loadDiscovery();
 const pages = loadPages();
 const locales = getGeneratedLocales();
+const APP_THEME_COLOR = "#ff7a00";
 assertExpectedLocales(locales);
 
 let generatedPages = 0;
@@ -100,7 +101,8 @@ ${renderAppFooter(locale, textLocale)}
             description: page.description,
             ogImage: page.ogImage,
             type: "website",
-            twitterCard: "summary_large_image"
+            twitterCard: "summary_large_image",
+            themeColor: APP_THEME_COLOR
         },
         enableAds: page.ads !== false,
         bodyClass: "home-page",
@@ -877,7 +879,8 @@ ${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=ads
             description: page.description || (page.intro || []).join(" "),
             ogImage: page.ogImage,
             type: "article",
-            twitterCard: "summary"
+            twitterCard: "summary",
+            themeColor: appShell ? APP_THEME_COLOR : undefined
         },
         enableAds: page.ads !== false,
         bodyClass: appShell ? "content-page app-content-page" : "content-page",
