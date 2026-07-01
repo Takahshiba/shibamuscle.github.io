@@ -1844,21 +1844,22 @@ table tbody tr:hover {
 
 body.exercise-page {
     --bg: #030303;
-    --surface: #0a0a0a;
-    --surface-muted: #111111;
+    --surface: #080807;
+    --surface-muted: #11100f;
     --surface-strong: #19110b;
-    --surface-tint: rgba(255, 106, 0, 0.14);
-    --line: rgba(255, 106, 0, 0.3);
-    --line-strong: rgba(255, 149, 31, 0.5);
+    --surface-tint: rgba(255, 106, 0, 0.16);
+    --line: rgba(255, 106, 0, 0.34);
+    --line-strong: rgba(255, 149, 31, 0.56);
     --text: #f7f7f7;
-    --muted: rgba(247, 247, 247, 0.68);
+    --muted: rgba(247, 247, 247, 0.7);
     --accent: #ff6a00;
     --accent-strong: #ff9a24;
     --accent-soft: rgba(255, 106, 0, 0.16);
     --shadow-soft: 0 18px 36px rgba(0, 0, 0, 0.28);
     --shadow-panel: 0 28px 64px rgba(0, 0, 0, 0.36);
+    color-scheme: dark;
     background:
-        linear-gradient(118deg, rgba(255, 106, 0, 0.14) 0%, rgba(255, 106, 0, 0.04) 34%, transparent 62%),
+        linear-gradient(118deg, rgba(255, 106, 0, 0.18) 0%, rgba(255, 106, 0, 0.05) 34%, transparent 62%),
         linear-gradient(180deg, #030303 0%, #080604 440px, #030303 100%);
     color: var(--text);
 }
@@ -1934,7 +1935,9 @@ body.exercise-page {
     padding: 24px;
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
-    background: var(--surface);
+    background:
+        linear-gradient(180deg, rgba(255, 106, 0, 0.07), rgba(255, 255, 255, 0.018)),
+        var(--surface);
     box-shadow: var(--shadow-soft);
 }
 
@@ -2022,8 +2025,7 @@ body.exercise-page {
     border: 1px solid rgba(255, 106, 0, 0.36);
     border-radius: var(--radius-md);
     background:
-        radial-gradient(circle at 50% 20%, rgba(255, 106, 0, 0.18), transparent 54%),
-        linear-gradient(180deg, rgba(255, 106, 0, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%),
+        linear-gradient(145deg, rgba(255, 106, 0, 0.24) 0%, rgba(255, 106, 0, 0.08) 42%, rgba(255, 255, 255, 0.035) 100%),
         #121212;
     display: grid;
     place-items: center;
@@ -2308,18 +2310,19 @@ body.exercise-page {
 body.home-page,
 body.app-content-page {
     --bg: #030303;
-    --surface: #0a0a0a;
-    --surface-muted: #111111;
+    --surface: #080807;
+    --surface-muted: #11100f;
     --surface-strong: #19110b;
-    --surface-tint: rgba(255, 106, 0, 0.14);
-    --line: rgba(255, 106, 0, 0.3);
-    --line-strong: rgba(255, 149, 31, 0.5);
+    --surface-tint: rgba(255, 106, 0, 0.16);
+    --line: rgba(255, 106, 0, 0.34);
+    --line-strong: rgba(255, 149, 31, 0.56);
     --text: #f7f7f7;
-    --muted: rgba(247, 247, 247, 0.68);
+    --muted: rgba(247, 247, 247, 0.7);
     --accent: #ff6a00;
     --accent-strong: #ff9a24;
     --accent-soft: rgba(255, 106, 0, 0.16);
-    background: #030303;
+    color-scheme: dark;
+    background: linear-gradient(180deg, #050505 0%, #030303 100%);
     color: var(--text);
     padding-top: 56px;
     font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
@@ -2406,9 +2409,10 @@ body.app-content-page {
 .app-home-shell {
     --accent: #ff6a00;
     --accent-strong: #ff9a24;
-    --app-orange-soft: rgba(255, 106, 0, 0.18);
-    --app-panel: #0a0a0a;
-    background: #030303;
+    --app-black: #030303;
+    --app-panel: #080807;
+    --app-orange-soft: rgba(255, 106, 0, 0.2);
+    background: var(--app-black);
     color: var(--text);
 }
 
@@ -2425,8 +2429,8 @@ body.app-content-page {
     display: grid;
     align-items: center;
     background:
-        linear-gradient(112deg, rgba(255, 106, 0, 0.34) 0%, rgba(255, 106, 0, 0.12) 36%, rgba(3, 3, 3, 0) 68%),
-        linear-gradient(180deg, #030303 0%, #080604 56%, #030303 100%);
+        linear-gradient(102deg, rgba(255, 106, 0, 0.28) 0%, rgba(255, 106, 0, 0.11) 34%, rgba(3, 3, 3, 0) 66%),
+        linear-gradient(180deg, #050505 0%, #080604 56%, #030303 100%);
 }
 
 .app-hero::before {
@@ -2457,6 +2461,11 @@ body.app-content-page {
 .app-cta-copy {
     display: grid;
     gap: 18px;
+}
+
+.app-hero-copy {
+    padding-left: 22px;
+    border-left: 2px solid rgba(255, 106, 0, 0.72);
 }
 
 .app-kicker {
@@ -2560,11 +2569,11 @@ body.app-content-page {
 .app-stat {
     min-height: 112px;
     padding: 16px;
-    border: 1px solid rgba(255, 106, 0, 0.32);
+    border: 1px solid rgba(255, 106, 0, 0.42);
     border-radius: 8px;
     background:
-        linear-gradient(180deg, rgba(255, 106, 0, 0.16), rgba(255, 255, 255, 0.03)),
-        #0d0b09;
+        linear-gradient(180deg, rgba(255, 106, 0, 0.2), rgba(255, 255, 255, 0.035)),
+        #0b0907;
     display: grid;
     gap: 6px;
     align-content: start;
@@ -2603,7 +2612,7 @@ body.app-content-page {
     width: min(350px, 100%);
     aspect-ratio: 414 / 900;
     padding: 8px;
-    border: 1px solid rgba(255, 106, 0, 0.44);
+    border: 1px solid rgba(255, 106, 0, 0.64);
     border-radius: 42px;
     background: linear-gradient(160deg, #241005 0%, #050505 38%, #14100c 100%);
     box-shadow:
@@ -2632,9 +2641,9 @@ body.app-content-page {
     right: 8px;
     left: 8px;
     z-index: 1;
-    height: 46px;
+    height: 52px;
     border-radius: 34px 34px 0 0;
-    background: linear-gradient(180deg, #030303 0%, #030303 58%, rgba(3, 3, 3, 0) 100%);
+    background: linear-gradient(180deg, #030303 0%, #030303 62%, rgba(3, 3, 3, 0) 100%);
     pointer-events: none;
 }
 
@@ -2669,9 +2678,9 @@ body.app-content-page {
     z-index: 3;
     display: grid;
     gap: 6px;
-    border: 1px solid rgba(255, 106, 0, 0.38);
+    border: 1px solid rgba(255, 106, 0, 0.48);
     border-radius: 8px;
-    background: rgba(10, 8, 6, 0.94);
+    background: rgba(8, 8, 7, 0.95);
     color: #ffffff;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.44);
     backdrop-filter: blur(18px);
@@ -2822,11 +2831,11 @@ body.app-content-page {
 .app-logging-mock {
     width: min(430px, 100%);
     padding: 18px;
-    border: 1px solid rgba(255, 106, 0, 0.34);
+    border: 1px solid rgba(255, 106, 0, 0.44);
     border-radius: 8px;
     background:
-        linear-gradient(180deg, rgba(255, 106, 0, 0.16), rgba(255, 255, 255, 0.03)),
-        #0d0b09;
+        linear-gradient(180deg, rgba(255, 106, 0, 0.2), rgba(255, 255, 255, 0.035)),
+        #0b0907;
     box-shadow: 0 26px 60px rgba(0, 0, 0, 0.35);
     display: grid;
     gap: 14px;
@@ -2912,11 +2921,11 @@ body.app-content-page {
 .app-library-preview-card {
     min-height: 112px;
     padding: 12px;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(255, 106, 0, 0.34);
     border-radius: 8px;
     background:
-        linear-gradient(180deg, rgba(255, 106, 0, 0.13), rgba(255, 255, 255, 0.03)),
-        #0d0b09;
+        linear-gradient(180deg, rgba(255, 106, 0, 0.18), rgba(255, 255, 255, 0.03)),
+        #0b0907;
     display: grid;
     grid-template-columns: 64px minmax(0, 1fr);
     gap: 12px;
@@ -3237,6 +3246,8 @@ body.app-content-page {
     .app-hero-copy {
         width: 100%;
         min-width: 0;
+        padding-left: 0;
+        border-left: 0;
     }
 
     .app-hero-title {
