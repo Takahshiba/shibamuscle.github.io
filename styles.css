@@ -1848,10 +1848,10 @@ body.exercise-page {
     --surface-muted: #14110f;
     --surface-strong: #211208;
     --surface-tint: rgba(255, 106, 0, 0.14);
-    --line: rgba(255, 255, 255, 0.14);
-    --line-strong: rgba(255, 255, 255, 0.24);
+    --line: rgba(255, 106, 0, 0.24);
+    --line-strong: rgba(255, 149, 31, 0.44);
     --text: #f8f4ee;
-    --muted: #a7a7ad;
+    --muted: rgba(248, 244, 238, 0.68);
     --accent: #ff6a00;
     --accent-strong: #ff9a24;
     --accent-soft: rgba(255, 106, 0, 0.16);
@@ -1863,7 +1863,7 @@ body.exercise-page {
 
 .exercise-page .site-header {
     background: rgba(3, 3, 3, 0.92);
-    border-bottom-color: var(--line);
+    border-bottom-color: rgba(255, 106, 0, 0.34);
 }
 
 .exercise-page .header-link,
@@ -1874,7 +1874,7 @@ body.exercise-page {
 .exercise-page .sub-nav a,
 .exercise-page .toggle-buttons {
     border-color: var(--line);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 106, 0, 0.08);
 }
 
 .exercise-page .sub-nav a {
@@ -2002,14 +2002,16 @@ body.exercise-page {
     justify-content: center;
     min-height: 44px;
     padding: 0 18px;
-    border-radius: 999px;
+    border-radius: 8px;
     font-weight: 800;
     line-height: 1;
 }
 
 .exercise-hero-cta {
-    background: var(--accent);
-    color: #111111;
+    border: 1px solid rgba(255, 168, 74, 0.54);
+    background: linear-gradient(180deg, #ff9a24 0%, #ff6a00 100%);
+    color: #130800;
+    box-shadow: 0 16px 34px rgba(255, 106, 0, 0.22);
 }
 
 .exercise-hero-media {
@@ -2096,10 +2098,10 @@ body.exercise-page {
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    border-color: rgba(255, 106, 0, 0.38);
+    border-color: rgba(255, 106, 0, 0.44);
     background:
-        linear-gradient(112deg, rgba(255, 106, 0, 0.24) 0%, rgba(255, 106, 0, 0.08) 46%, rgba(255, 106, 0, 0) 100%),
-        #090807;
+        linear-gradient(112deg, rgba(255, 106, 0, 0.28) 0%, rgba(255, 106, 0, 0.1) 46%, rgba(3, 3, 3, 0) 100%),
+        #050403;
     color: #ffffff;
 }
 
@@ -2122,11 +2124,13 @@ body.exercise-page {
     flex-shrink: 0;
     min-height: 44px;
     padding: 0 18px;
-    border-radius: 999px;
-    background: var(--accent);
-    color: #111111;
+    border: 1px solid rgba(255, 168, 74, 0.54);
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ff9a24 0%, #ff6a00 100%);
+    color: #130800;
     font-weight: 800;
     line-height: 1;
+    box-shadow: 0 14px 30px rgba(255, 106, 0, 0.22);
 }
 
 .exercise-page .muscle-chip,
@@ -2212,8 +2216,8 @@ body.exercise-page {
 
 .exercise-page .footer-category-link,
 .exercise-page .footer-link-list--support a {
-    border-color: rgba(255, 255, 255, 0.14);
-    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 106, 0, 0.2);
+    background: #0c0b0a;
 }
 
 .exercise-page .footer-meta {
