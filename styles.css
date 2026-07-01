@@ -1969,17 +1969,8 @@ body.exercise-page {
 
 .exercise-hero-copy {
     display: grid;
-    gap: 18px;
+    gap: 22px;
     min-width: 0;
-}
-
-.exercise-eyebrow {
-    margin: 0;
-    color: var(--accent);
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0;
-    text-transform: uppercase;
 }
 
 .exercise-hero h1 {
@@ -1999,55 +1990,13 @@ body.exercise-page {
     line-height: 1.75;
 }
 
-.exercise-hero-meta {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-}
-
-.exercise-hero-meta div {
-    min-width: 0;
-    padding: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.exercise-hero-meta span {
-    display: block;
-    color: rgba(245, 245, 247, 0.58);
-    font-size: 0.72rem;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-.exercise-hero-meta strong {
-    display: block;
-    margin-top: 5px;
-    color: #ffffff;
-    font-size: 0.95rem;
-    line-height: 1.35;
-    overflow-wrap: anywhere;
-}
-
-.exercise-hero .muscle-chip-row {
-    gap: 8px;
-}
-
-.exercise-hero .muscle-chip {
-    border-color: rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.82);
-}
-
 .exercise-hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
 }
 
-.exercise-hero-cta,
-.exercise-hero-link {
+.exercise-hero-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -2061,11 +2010,6 @@ body.exercise-page {
 .exercise-hero-cta {
     background: var(--accent);
     color: #111111;
-}
-
-.exercise-hero-link {
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    color: #ffffff;
 }
 
 .exercise-hero-media {
@@ -2096,12 +2040,6 @@ body.exercise-page {
     border-color: rgba(255, 138, 0, 0.24);
     background: var(--accent-soft);
     color: #8b3f00;
-}
-
-.exercise-page .exercise-hero .muscle-chip {
-    border-color: rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.82);
 }
 
 .exercise-page .table-shell,
@@ -2229,21 +2167,12 @@ body.exercise-page {
         line-height: 1.62;
     }
 
-    .exercise-hero-meta {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .exercise-hero-meta div {
-        padding: 12px;
-    }
-
     .exercise-hero-actions {
         display: grid;
         grid-template-columns: 1fr;
     }
 
-    .exercise-hero-cta,
-    .exercise-hero-link {
+    .exercise-hero-cta {
         width: 100%;
     }
 
