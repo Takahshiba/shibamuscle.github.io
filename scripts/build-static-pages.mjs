@@ -27,7 +27,7 @@ const catalog = loadCatalog();
 const discovery = loadDiscovery();
 const pages = loadPages();
 const locales = getGeneratedLocales();
-const APP_THEME_COLOR = "#ff7a00";
+const APP_THEME_COLOR = "#ff6a00";
 assertExpectedLocales(locales);
 
 let generatedPages = 0;

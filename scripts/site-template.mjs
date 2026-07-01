@@ -19,7 +19,7 @@ const ADSENSE_SCRIPT_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsb
 const ANALYTICS_ID = "G-D9K58THBFM";
 const SITE_ORIGIN = "https://shibamuscle.com";
 const THEME_COLOR = "#148a6a";
-const APP_THEME_COLOR = "#ff7a00";
+const APP_THEME_COLOR = "#ff6a00";
 
 function buildFontBlock(locale = "ja") {
     const family = locale === "ko"
