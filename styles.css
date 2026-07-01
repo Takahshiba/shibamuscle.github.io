@@ -1843,60 +1843,61 @@ table tbody tr:hover {
 }
 
 body.exercise-page {
-    --bg: #f4f4f2;
+    --bg: #f5f5f2;
     --surface: #ffffff;
-    --surface-muted: #f6f6f4;
-    --surface-strong: #ecece8;
-    --surface-tint: #fff4e6;
-    --line: #deded8;
-    --line-strong: #c9c9c0;
+    --surface-muted: #f7f7f4;
+    --surface-strong: #ecece6;
+    --surface-tint: #fff6e8;
+    --line: #dfdfd7;
+    --line-strong: #c9c9bf;
     --text: #111111;
-    --muted: #636360;
+    --muted: #62625e;
     --accent: #ff8a00;
     --accent-strong: #ff5a1f;
     --accent-soft: #fff1df;
-    --shadow-soft: 0 10px 28px rgba(17, 17, 17, 0.05);
-    --shadow-panel: 0 20px 46px rgba(17, 17, 17, 0.1);
+    --shadow-soft: 0 10px 24px rgba(17, 17, 17, 0.04);
+    --shadow-panel: 0 18px 42px rgba(17, 17, 17, 0.08);
     background:
-        radial-gradient(circle at 72% 120px, rgba(255, 138, 0, 0.2), transparent 28%),
-        linear-gradient(180deg, #050505 0 700px, #f4f4f2 700px 100%);
+        radial-gradient(circle at 84% 120px, rgba(255, 138, 0, 0.1), transparent 26%),
+        linear-gradient(180deg, #fffaf3 0 360px, #f5f5f2 360px 100%);
+    color: var(--text);
 }
 
 .exercise-page .site-header {
-    background: rgba(5, 5, 5, 0.92);
-    border-bottom-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.94);
+    border-bottom-color: var(--line);
 }
 
 .exercise-page .header-link,
 .exercise-page .category-nav-label {
-    color: #ffffff;
+    color: var(--text);
 }
 
 .exercise-page .sub-nav a,
 .exercise-page .toggle-buttons {
-    border-color: rgba(255, 255, 255, 0.16);
-    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--line);
+    background: rgba(255, 255, 255, 0.82);
 }
 
 .exercise-page .sub-nav a {
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--muted);
 }
 
 .exercise-page .sub-nav a:hover,
 .exercise-page .sub-nav a:focus-visible {
-    border-color: rgba(255, 138, 0, 0.72);
-    background: rgba(255, 138, 0, 0.14);
-    color: #ffffff;
+    border-color: rgba(255, 138, 0, 0.6);
+    background: #ffffff;
+    color: var(--text);
 }
 
 .exercise-page .toggle-buttons a {
-    color: rgba(255, 255, 255, 0.74);
+    color: var(--muted);
 }
 
 .exercise-page .toggle-buttons a:hover,
 .exercise-page .toggle-buttons a:focus-visible {
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
+    background: var(--surface-tint);
+    color: var(--text);
 }
 
 .exercise-page .toggle-buttons a.active {
@@ -1906,27 +1907,27 @@ body.exercise-page {
 
 .exercise-page .category-nav-icon img,
 .exercise-page .sub-nav .exercise-icon {
-    filter: brightness(0) invert(1);
-    opacity: 0.82;
+    filter: brightness(0) saturate(100%);
+    opacity: 0.72;
 }
 
 .exercise-page .breadcrumb-container {
     margin-top: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .exercise-page .breadcrumb,
 .exercise-page .breadcrumb a {
-    color: rgba(255, 255, 255, 0.68);
+    color: var(--muted);
 }
 
 .exercise-page .breadcrumb a:hover,
 .exercise-page .breadcrumb a:focus-visible {
-    color: #ffffff;
+    color: var(--text);
 }
 
 .exercise-page .breadcrumb-separator {
-    color: rgba(255, 255, 255, 0.28);
+    color: var(--line-strong);
 }
 
 .exercise-page .page-main > .container:not(.breadcrumb-container):not(.exercise-hero):not(.ad-slot-container) {
@@ -1963,30 +1964,31 @@ body.exercise-page {
     grid-template-columns: minmax(0, 1.1fr) minmax(300px, 390px);
     gap: 32px;
     align-items: center;
-    margin-bottom: 56px;
-    color: #ffffff;
+    margin-bottom: 30px;
+    padding-top: 12px;
+    color: var(--text);
 }
 
 .exercise-hero-copy {
     display: grid;
-    gap: 22px;
+    gap: 20px;
     min-width: 0;
 }
 
 .exercise-hero h1 {
     margin: 0;
     max-width: 760px;
-    color: #ffffff;
-    font-size: clamp(2.9rem, 5.6vw, 5.8rem);
-    line-height: 0.98;
+    color: var(--text);
+    font-size: clamp(2.6rem, 5.2vw, 5.2rem);
+    line-height: 1;
     letter-spacing: 0;
 }
 
 .exercise-hero .hero-description {
     margin: 0;
     max-width: 720px;
-    color: rgba(245, 245, 247, 0.76);
-    font-size: 1.04rem;
+    color: var(--muted);
+    font-size: 1rem;
     line-height: 1.75;
 }
 
@@ -2013,9 +2015,9 @@ body.exercise-page {
 }
 
 .exercise-hero-media {
-    min-height: 390px;
+    min-height: 360px;
     padding: 26px;
-    border: 1px solid rgba(255, 255, 255, 0.72);
+    border: 1px solid #e6dfd2;
     border-radius: var(--radius-md);
     background:
         radial-gradient(circle at 50% 34%, rgba(255, 138, 0, 0.12), transparent 42%),
@@ -2024,7 +2026,7 @@ body.exercise-page {
     place-items: center;
     overflow: hidden;
     box-shadow:
-        0 28px 70px rgba(0, 0, 0, 0.34),
+        0 22px 50px rgba(17, 17, 17, 0.12),
         inset 0 1px 0 rgba(255, 255, 255, 0.86);
 }
 
@@ -2032,6 +2034,97 @@ body.exercise-page {
     width: min(100%, 330px);
     max-height: 340px;
     filter: drop-shadow(0 14px 18px rgba(17, 17, 17, 0.2));
+}
+
+.exercise-average-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    gap: 22px;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.exercise-average-summary-copy {
+    display: grid;
+    gap: 8px;
+}
+
+.exercise-average-summary h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(1.45rem, 2vw, 2rem);
+    line-height: 1.2;
+}
+
+.exercise-average-summary p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.exercise-average-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.exercise-stat-card {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid rgba(255, 138, 0, 0.22);
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg, #fffaf3, #ffffff);
+}
+
+.exercise-stat-label {
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.exercise-stat-value {
+    color: var(--text);
+    font-size: clamp(1.8rem, 3.6vw, 3rem);
+    font-weight: 850;
+    line-height: 1.04;
+    overflow-wrap: anywhere;
+}
+
+.exercise-app-cta-band {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-color: #111111;
+    background: #111111;
+    color: #ffffff;
+}
+
+.exercise-app-cta-band h2 {
+    margin: 0 0 6px;
+    color: #ffffff;
+    font-size: clamp(1.35rem, 2vw, 1.85rem);
+    line-height: 1.2;
+}
+
+.exercise-app-cta-band p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.exercise-app-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #111111;
+    font-weight: 800;
+    line-height: 1;
 }
 
 .exercise-page .muscle-chip,
@@ -2128,11 +2221,15 @@ body.exercise-page {
 @media (max-width: 1100px) {
     body.exercise-page {
         background:
-            radial-gradient(circle at 78% 96px, rgba(255, 138, 0, 0.16), transparent 32%),
-            linear-gradient(180deg, #050505 0 980px, #f4f4f2 980px 100%);
+            radial-gradient(circle at 84% 96px, rgba(255, 138, 0, 0.09), transparent 30%),
+            linear-gradient(180deg, #fffaf3 0 520px, #f5f5f2 520px 100%);
     }
 
     .exercise-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .exercise-average-summary {
         grid-template-columns: 1fr;
     }
 
@@ -2144,8 +2241,8 @@ body.exercise-page {
 @media (max-width: 760px) {
     body.exercise-page {
         background:
-            radial-gradient(circle at 78% 96px, rgba(255, 138, 0, 0.16), transparent 32%),
-            linear-gradient(180deg, #050505 0 1180px, #f4f4f2 1180px 100%);
+            radial-gradient(circle at 82% 88px, rgba(255, 138, 0, 0.08), transparent 34%),
+            linear-gradient(180deg, #fffaf3 0 560px, #f5f5f2 560px 100%);
     }
 
     .exercise-page .page-main > .container:not(.breadcrumb-container):not(.exercise-hero):not(.ad-slot-container) {
@@ -2183,6 +2280,23 @@ body.exercise-page {
 
     .exercise-page .workout-main-image {
         max-height: 250px;
+    }
+
+    .exercise-average-summary-grid,
+    .exercise-app-cta-band {
+        grid-template-columns: 1fr;
+    }
+
+    .exercise-average-summary-grid {
+        display: grid;
+    }
+
+    .exercise-app-cta-band {
+        display: grid;
+    }
+
+    .exercise-app-cta-button {
+        width: 100%;
     }
 }
 

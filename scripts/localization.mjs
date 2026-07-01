@@ -3268,11 +3268,11 @@ function getMeasurementCopy(kind = "weight", localeCode = "ja") {
         }
 
         return {
-            averageLabel: "Durchschnittsgewicht",
-            standardsLabel: "Kraftstandards",
+            averageLabel: "Poids moyen",
+            standardsLabel: "Standards de force",
             detailLabel: "1RM",
-            pageTerm: "Gewicht",
-            note: "Die Tabellenwerte sind Schätzwerte auf Basis des 1RM."
+            pageTerm: "Poids",
+            note: "Les valeurs du tableau sont des estimations basées sur le 1RM."
         };
     }
 

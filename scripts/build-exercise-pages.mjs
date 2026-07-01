@@ -113,13 +113,15 @@ ${renderBreadcrumb([
         { label: cleanSectionLabel(categoryLabel, locale), href: `index.html#${exercise.categoryId || "whole-body-section"}` },
         { label: name }
     ], locale)}
-        ${renderHero(exercise, locale)}
-        ${renderMuscles(exercise, locale)}
+${renderHero(exercise, locale)}
+${renderAverageSummary(exercise, variant, measurementKind, locale)}
+${renderLocalizedExerciseBlock(variant.averageBlock, { exercise, unit, locale, block: "average" })}
+${renderLocalizedExerciseBlock(variant.standardsBlock, { exercise, unit, locale, block: "standards" })}
+${renderMuscles(exercise, locale)}
 ${postMusclesAdSlotHtml}
-        ${localizeExerciseHtml(variant.averageBlock, { exercise, unit, locale, block: "average" }).trim()}
-        ${localizeExerciseHtml(variant.standardsBlock, { exercise, unit, locale, block: "standards" }).trim()}
-        ${exercise.sharedBlocks.records ? localizeExerciseHtml(exercise.sharedBlocks.records, { exercise, unit, locale, block: "records" }).trim() : ""}
-        ${exercise.sharedBlocks.about ? localizeExerciseHtml(exercise.sharedBlocks.about, { exercise, unit, locale, block: "about" }).trim() : ""}
+${renderAppAnalysisCta(locale)}
+${exercise.sharedBlocks.records ? renderLocalizedExerciseBlock(exercise.sharedBlocks.records, { exercise, unit, locale, block: "records" }) : ""}
+${exercise.sharedBlocks.about ? renderLocalizedExerciseBlock(exercise.sharedBlocks.about, { exercise, unit, locale, block: "about" }) : ""}
 ${postDetailsAdSlotHtml}
 ${renderExerciseLibrary(catalogData, { unit, locale })}
 ${preFooterAdSlotHtml}
@@ -151,6 +153,10 @@ ${renderStaticFooter(currentFile, locale)}
     });
 }
 
+function renderLocalizedExerciseBlock(html, options) {
+    return localizeExerciseHtml(html, options).trim().replace(/[ \t]+$/gm, "");
+}
+
 function renderHero(exercise, locale) {
     const name = getExerciseName(exercise, locale);
     const summary = buildExerciseSummary(exercise, null, exercise.metadata?.measurementKind || "weight", locale);
@@ -172,8 +178,64 @@ function renderHero(exercise, locale) {
 `;
 }
 
+function renderAverageSummary(exercise, variant, measurementKind, locale) {
+    const snapshot = extractAverageSnapshot(variant.averageBlock);
+    if (!snapshot) {
+        return "";
+    }
+
+    const measurementCopy = getMeasurementCopy(measurementKind, locale);
+    const copy = getAverageSummaryCopy(locale, measurementCopy);
+    const maleLabel = getUiText(locale, "male");
+    const femaleLabel = getUiText(locale, "female");
+    const statCards = [
+        renderAverageStatCard(maleLabel, snapshot.male),
+        renderAverageStatCard(femaleLabel, snapshot.female)
+    ].join("\n");
+
+    return `
+    <section class="container exercise-average-summary" aria-labelledby="average-summary-title">
+        <div class="exercise-average-summary-copy">
+            <h2 id="average-summary-title">${escapeHtml(copy.title)}</h2>
+            <p>${escapeHtml(copy.note)}</p>
+        </div>
+        <div class="exercise-average-summary-grid">
+${statCards}
+        </div>
+    </section>
+`;
+}
+
+function renderAverageStatCard(label, value) {
+    return `            <div class="exercise-stat-card">
+                <span class="exercise-stat-label">${escapeHtml(label)}</span>
+                <strong class="exercise-stat-value">${escapeHtml(value)}</strong>
+            </div>`;
+}
+
+function renderAppAnalysisCta(locale) {
+    const copy = getAppAnalysisCtaCopy(locale);
+
+    return `
+    <section class="container exercise-app-cta-band">
+        <div>
+            <h2>${escapeHtml(copy.title)}</h2>
+            <p>${escapeHtml(copy.description)}</p>
+        </div>
+        <a href="index.html#app-store" class="exercise-app-cta-button">${escapeHtml(copy.cta)}</a>
+    </section>
+`;
+}
+
 function renderMuscles(exercise, locale) {
     const groups = getLocalizedMuscleGroups(exercise, locale);
+    const rows = groups.map((group) => {
+        return `                <tr>
+                    <th>${escapeHtml(group.label)}</th>
+                    <td>${escapeHtml(group.items.join(", "))}</td>
+                </tr>`;
+    }).join("\n");
+
     return `
     <div class="container">
         <h2 class="section-title">${escapeHtml(getUiText(locale, "musclesHeading"))}</h2>
@@ -185,14 +247,7 @@ function renderMuscles(exercise, locale) {
                 </tr>
             </thead>
             <tbody>
-                ${groups.map((group) => {
-                    return `
-                <tr>
-                    <th>${escapeHtml(group.label)}</th>
-                    <td>${escapeHtml(group.items.join(", "))}</td>
-                </tr>
-`;
-                }).join("")}
+${rows}
             </tbody>
         </table>
     </div>
@@ -201,6 +256,167 @@ function renderMuscles(exercise, locale) {
 
 function getLocalizedPrimaryMuscles(exercise, locale) {
     return getLocalizedMuscleGroups(exercise, locale)[0]?.items || [];
+}
+
+function extractAverageSnapshot(averageBlock) {
+    const rows = extractTableRows(averageBlock);
+    const row = rows.find((current) => current[0] === "中級") || rows[0];
+    if (!row?.[1] || !row?.[2]) {
+        return null;
+    }
+
+    return {
+        label: row[0],
+        male: row[1],
+        female: row[2]
+    };
+}
+
+function extractTableRows(tableHtml) {
+    const body = (tableHtml.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i) || [])[1] || "";
+
+    return Array.from(body.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)).map((match) => {
+        return Array.from(match[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)).map((cell) => {
+            return normalizeTableCell(cell[1]);
+        });
+    });
+}
+
+function normalizeTableCell(html) {
+    return decodeHtml(stripTags(html.replace(/<br\s*\/?>/gi, " "))).replace(/\s+/g, " ").trim();
+}
+
+function stripTags(html) {
+    return html.replace(/<[^>]+>/g, "");
+}
+
+function decodeHtml(text) {
+    const named = {
+        amp: "&",
+        lt: "<",
+        gt: ">",
+        quot: "\"",
+        apos: "'",
+        nbsp: " "
+    };
+
+    return text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (match, entity) => {
+        if (entity[0] === "#") {
+            const codePoint = entity[1].toLowerCase() === "x" ? Number.parseInt(entity.slice(2), 16) : Number.parseInt(entity.slice(1), 10);
+            return Number.isFinite(codePoint) ? String.fromCodePoint(codePoint) : match;
+        }
+
+        return named[entity.toLowerCase()] || match;
+    });
+}
+
+function getAverageSummaryCopy(locale, measurementCopy) {
+    const level = getIntermediateLabel(locale);
+    const copy = {
+        ja: {
+            title: `${level}の${measurementCopy.averageLabel}`,
+            note: "平均的な中級者の目安です。"
+        },
+        ko: {
+            title: `${level} ${measurementCopy.averageLabel}`,
+            note: "평균적인 중급자의 기준입니다."
+        },
+        "zh-hant": {
+            title: `${level}${measurementCopy.averageLabel}`,
+            note: "一般中級訓練者的參考值。"
+        },
+        "zh-hans": {
+            title: `${level}${measurementCopy.averageLabel}`,
+            note: "一般中级训练者的参考值。"
+        },
+        es: {
+            title: `${measurementCopy.averageLabel}: ${level}`,
+            note: "Referencia para una persona de nivel intermedio."
+        },
+        fr: {
+            title: `${measurementCopy.averageLabel} : ${level}`,
+            note: "Repère pour une personne de niveau intermédiaire."
+        },
+        de: {
+            title: `${measurementCopy.averageLabel}: ${level}`,
+            note: "Richtwert für eine Person auf mittlerem Niveau."
+        },
+        id: {
+            title: `${measurementCopy.averageLabel}: ${level}`,
+            note: "Acuan untuk level menengah."
+        }
+    };
+
+    return copy[locale] || {
+        title: `${measurementCopy.averageLabel}: ${level}`,
+        note: "Reference for an intermediate lifter."
+    };
+}
+
+function getIntermediateLabel(locale) {
+    const labels = {
+        ja: "中級",
+        ko: "중급",
+        "zh-hant": "中級",
+        "zh-hans": "中级",
+        es: "Intermedio",
+        fr: "Intermédiaire",
+        de: "Mittelstufe",
+        id: "Menengah"
+    };
+
+    return labels[locale] || "Intermediate";
+}
+
+function getAppAnalysisCtaCopy(locale) {
+    const copy = {
+        ja: {
+            title: "記録と分析はShibaアプリで",
+            description: "重量、回数、成長の変化をまとめて確認できます。",
+            cta: "アプリを見る"
+        },
+        ko: {
+            title: "기록과 분석은 Shiba 앱에서",
+            description: "중량, 반복 횟수, 성장 변화를 한곳에서 확인할 수 있습니다.",
+            cta: "앱 보기"
+        },
+        "zh-hant": {
+            title: "用 Shiba App 記錄與分析",
+            description: "集中查看重量、次數與進步變化。",
+            cta: "查看 App"
+        },
+        "zh-hans": {
+            title: "用 Shiba App 记录与分析",
+            description: "集中查看重量、次数与进步变化。",
+            cta: "查看 App"
+        },
+        es: {
+            title: "Registra y analiza en la app Shiba",
+            description: "Consulta pesos, repeticiones y progreso en un solo lugar.",
+            cta: "Ver la app"
+        },
+        fr: {
+            title: "Suivi et analyse dans l'app Shiba",
+            description: "Consultez poids, répétitions et progression au même endroit.",
+            cta: "Voir l'app"
+        },
+        de: {
+            title: "Tracking und Analyse in der Shiba App",
+            description: "Gewichte, Wiederholungen und Fortschritt an einem Ort.",
+            cta: "App ansehen"
+        },
+        id: {
+            title: "Catat dan analisis di aplikasi Shiba",
+            description: "Lihat beban, repetisi, dan perkembangan di satu tempat.",
+            cta: "Lihat aplikasi"
+        }
+    };
+
+    return copy[locale] || {
+        title: "Track and analyze in the Shiba app",
+        description: "Review weight, reps, and progress in one place.",
+        cta: "View app"
+    };
 }
 
 function getExerciseHeroCtaText(locale) {
