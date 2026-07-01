@@ -142,60 +142,60 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
                         <div class="app-hero-actions">
                             <a href="#app-store" class="app-pill app-pill--primary">${escapeHtml(getHomeText(textLocale, "comingSoon"))}</a>
                             <a href="#analytics" class="app-pill app-pill--secondary">${escapeHtml(getHomeText(textLocale, "features"))}</a>
-                            <a href="shiba-privacy-policy.html" class="app-pill app-pill--secondary">${escapeHtml(getHomeText(textLocale, "privacy"))}</a>
-                        </div>
-                        <div class="app-hero-stats" aria-label="Shiba highlights">
-${renderAppStats(textLocale)}
                         </div>
                     </div>
                     ${renderHeroShowcase(images, locale, textLocale)}
                 </div>
             </section>
 
-${renderAppScene({
-        id: "",
-        theme: "light",
-        kicker: "Today",
-        heading: todayItem.heading || getHomeText(textLocale, "todayHeading"),
-        copy: (todayItem.paragraphs || [getHomeText(textLocale, "todayCopy")])[0],
-        features: getHomeText(textLocale, "todayFeatures"),
-        media: renderPhoneImage(images.today, getHomeText(textLocale, "todayAlt"), locale)
-    })}
+            <section class="app-feature-panel" id="analytics">
+                <div class="app-section-copy">
+                    <p class="app-kicker">${escapeHtml(overview.sectionEyebrow || "App overview")}</p>
+                    <h2>${renderMultilineText(overview.title || page.heading || "Shiba")}</h2>
+                    <p>${escapeHtml(overview.copy || intro[1] || page.description || "")}</p>
+                </div>
+                <div class="app-feature-grid">
+${renderAppFeatureCards([
+        {
+            kicker: "Today",
+            heading: todayItem.heading || getHomeText(textLocale, "todayHeading"),
+            copy: (todayItem.paragraphs || [getHomeText(textLocale, "todayCopy")])[0]
+        },
+        {
+            kicker: "Logging",
+            heading: getHomeText(textLocale, "loggingHeading"),
+            copy: getHomeText(textLocale, "loggingCopy")
+        },
+        {
+            kicker: "Analytics",
+            heading: analyticsItem.heading || getHomeText(textLocale, "analyticsHeading"),
+            copy: (analyticsItem.paragraphs || [getHomeText(textLocale, "analyticsCopy")])[0]
+        },
+        {
+            kicker: "Heatmap",
+            heading: getHomeText(textLocale, "heatmapHeading"),
+            copy: getHomeText(textLocale, "heatmapCopy")
+        }
+    ])}
+                </div>
+            </section>
 
-${renderAppScene({
-        id: "logging",
-        theme: "dark",
-        kicker: "Logging",
-        heading: getHomeText(textLocale, "loggingHeading"),
-        copy: getHomeText(textLocale, "loggingCopy"),
-        features: getHomeText(textLocale, "loggingFeatures"),
-        media: renderLoggingMock(textLocale)
-    })}
+            <section class="app-showcase">
+                <div class="app-showcase-copy">
+                    <p class="app-kicker">Black &amp; Orange UI</p>
+                    <h2>${renderMultilineText(getHomeText(textLocale, "showcaseHeading"))}</h2>
+                    <p>${escapeHtml(getHomeText(textLocale, "showcaseCopy"))}</p>
+                </div>
+                <div class="app-showcase-phones" aria-label="${escapeAttribute(getHomeText(textLocale, "heroShowcaseAria"))}">
+${renderShowcasePhone(images.today, getHomeText(textLocale, "todayAlt"), getHomeText(textLocale, "todayLabel"), locale)}
+${renderShowcasePhone(images.strength, getHomeText(textLocale, "strengthAlt"), getHomeText(textLocale, "analyticsLabel"), locale)}
+${renderShowcasePhone(images.heatmap, getHomeText(textLocale, "heatmapAlt"), getHomeText(textLocale, "heatmapLabel"), locale)}
+                </div>
+            </section>
 
-${renderAppScene({
-        id: "analytics",
-        theme: "light",
-        reverse: true,
-        kicker: "Analytics",
-        heading: analyticsItem.heading || getHomeText(textLocale, "analyticsHeading"),
-        copy: (analyticsItem.paragraphs || [getHomeText(textLocale, "analyticsCopy")])[0],
-        features: getHomeText(textLocale, "analyticsFeatures"),
-        media: renderPhoneImage(images.strength, getHomeText(textLocale, "strengthAlt"), locale, "app-phone--analytics")
-    })}
-
-${renderAppScene({
-        id: "muscle-heatmap",
-        theme: "dark",
-        kicker: "Muscle Heatmap",
-        heading: getHomeText(textLocale, "heatmapHeading"),
-        copy: getHomeText(textLocale, "heatmapCopy"),
-        features: getHomeText(textLocale, "heatmapFeatures"),
-        media: renderPhoneImage(images.heatmap, getHomeText(textLocale, "heatmapAlt"), locale, "app-phone--heatmap")
-    })}
-
-            <section class="app-scene app-scene--light" id="library">
-                <div class="app-scene-sticky app-scene-sticky--reverse">
-                    <div class="app-scene-copy">
+            <section class="app-library-section" id="library">
+                <div class="app-library-inner">
+                    <div class="app-section-copy">
                         <p class="app-kicker">Library</p>
                         <h2>${renderMultilineText(libraryItem.heading || getHomeText(textLocale, "libraryHeading"))}</h2>
                         <p>${escapeHtml((libraryItem.paragraphs || [getHomeText(textLocale, "libraryCopy")])[0])}</p>
@@ -205,11 +205,9 @@ ${renderAppScene({
                         </div>
                         <a href="#app-store" class="app-pill app-pill--dark">${escapeHtml(getHomeText(textLocale, "comingSoon"))}</a>
                     </div>
-                    <div class="app-scene-media">
-                        <div class="app-library-preview">
-${previewCards.map((card) => renderAppLibraryPreviewCard(card)).join("\n")}
+                    <div class="app-library-preview">
+${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join("\n")}
                         </div>
-                    </div>
                 </div>
             </section>
 
@@ -306,6 +304,23 @@ function renderAppFeatureList(items) {
     return `                        <ul class="app-feature-list">
 ${items.map((item) => `                            <li>${escapeHtml(item)}</li>`).join("\n")}
                         </ul>`;
+}
+
+function renderAppFeatureCards(items) {
+    return items.map((item) => `                    <article class="app-feature-card">
+                        <p class="app-kicker">${escapeHtml(item.kicker)}</p>
+                        <h3>${renderMultilineText(item.heading)}</h3>
+                        <p>${escapeHtml(item.copy)}</p>
+                    </article>`).join("\n");
+}
+
+function renderShowcasePhone(image, alt, label, locale) {
+    return `                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
+                            <img src="${escapeAttribute(assetHref(image, locale))}" alt="${escapeAttribute(alt)}" loading="lazy">
+                        </div>
+                        <figcaption>${escapeHtml(label)}</figcaption>
+                    </figure>`;
 }
 
 function renderMultilineText(text) {
@@ -470,6 +485,11 @@ function getHomeText(locale, key) {
             heatmapAlt: "筋肉ヒートマップ画面",
             heroShowcaseAria: "ShibaのToday画面、Strength Percentile、筋肉ヒートマップのプレビュー",
             heroPercentileCopy: "近い条件のリフターと比較",
+            showcaseHeading: "黒とオレンジで、\nトレーニングに集中。",
+            showcaseCopy: "暗い背景、強いオレンジ、読みやすいカードで、記録と分析がひとつのアプリ体験として見えるようにします。",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
             stats: [
                 { label: "開始", value: "Today", copy: "今日のメニューをすぐ開始" },
                 { label: "分析", value: "Percentile", copy: "強みと現在地を可視化" },
@@ -511,6 +531,11 @@ function getHomeText(locale, key) {
             heatmapAlt: "Muscle heatmap screen",
             heroShowcaseAria: "Preview of Shiba Today, Strength Percentile, and muscle heatmap screens",
             heroPercentileCopy: "Compared with similar lifters",
+            showcaseHeading: "Black and orange,\nbuilt for focus.",
+            showcaseCopy: "Dark surfaces, strong orange actions, and readable cards make logging and analytics feel like one calm training flow.",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
             stats: [
                 { label: "Start", value: "Today", copy: "Open the next workout instantly" },
                 { label: "Analyze", value: "Percentile", copy: "See strength in context" },
@@ -552,6 +577,11 @@ function getHomeText(locale, key) {
             heatmapAlt: "근육 히트맵 화면",
             heroShowcaseAria: "Shiba Today, Strength Percentile, 근육 히트맵 화면 미리보기",
             heroPercentileCopy: "비슷한 리프터와 비교",
+            showcaseHeading: "블랙과 오렌지로\n훈련에 집중.",
+            showcaseCopy: "어두운 화면, 강한 오렌지 액션, 읽기 쉬운 카드가 기록과 분석을 하나의 흐름으로 보여 줍니다.",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
             stats: [
                 { label: "Start", value: "Today", copy: "다음 운동을 바로 시작" },
                 { label: "Analyze", value: "Percentile", copy: "강점과 현재 위치 확인" },
@@ -593,6 +623,11 @@ function getHomeText(locale, key) {
             heatmapAlt: "肌肉熱力圖畫面",
             heroShowcaseAria: "Shiba Today、Strength Percentile 與肌肉熱力圖畫面預覽",
             heroPercentileCopy: "與相近條件的訓練者比較",
+            showcaseHeading: "黑色與橘色，\n專注於訓練。",
+            showcaseCopy: "深色介面、醒目的橘色操作與清楚卡片，讓紀錄與分析連成一個安定的訓練流程。",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
             stats: [
                 { label: "Start", value: "Today", copy: "快速開始下一次訓練" },
                 { label: "Analyze", value: "Percentile", copy: "看見強項與位置" },
@@ -634,6 +669,11 @@ function getHomeText(locale, key) {
             heatmapAlt: "肌肉热力图画面",
             heroShowcaseAria: "Shiba Today、Strength Percentile 和肌肉热力图画面预览",
             heroPercentileCopy: "与相近条件的训练者比较",
+            showcaseHeading: "黑色与橙色，\n专注于训练。",
+            showcaseCopy: "深色界面、醒目的橙色操作和清楚卡片，让记录与分析连成一个稳定的训练流程。",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
             stats: [
                 { label: "Start", value: "Today", copy: "快速开始下一次训练" },
                 { label: "Analyze", value: "Percentile", copy: "看见强项和位置" },
@@ -675,6 +715,11 @@ function getHomeText(locale, key) {
             heatmapAlt: "Pantalla de mapa muscular",
             heroShowcaseAria: "Vista previa de Today, Strength Percentile y mapa muscular de Shiba",
             heroPercentileCopy: "Comparado con atletas similares",
+            showcaseHeading: "Negro y naranja,\nhecho para concentrarte.",
+            showcaseCopy: "Superficies oscuras, acciones naranjas claras y tarjetas legibles unen registro y análisis en un flujo tranquilo.",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
             stats: [
                 { label: "Start", value: "Today", copy: "Rutina lista para empezar" },
                 { label: "Analyze", value: "Percentile", copy: "Fuerza en contexto" },
@@ -716,6 +761,11 @@ function getHomeText(locale, key) {
             heatmapAlt: "Écran de carte musculaire",
             heroShowcaseAria: "Aperçu des écrans Today, Strength Percentile et carte musculaire de Shiba",
             heroPercentileCopy: "Comparé à des profils proches",
+            showcaseHeading: "Noir et orange,\npour rester concentré.",
+            showcaseCopy: "Surfaces sombres, actions orange nettes et cartes lisibles relient la saisie et l'analyse dans un flux calme.",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
             stats: [
                 { label: "Start", value: "Today", copy: "Séance prête à lancer" },
                 { label: "Analyze", value: "Percentile", copy: "Force mise en contexte" },
@@ -757,6 +807,11 @@ function getHomeText(locale, key) {
             heatmapAlt: "Muskel-Heatmap Screen",
             heroShowcaseAria: "Vorschau der Today-, Strength-Percentile- und Muskel-Heatmap-Screens von Shiba",
             heroPercentileCopy: "Verglichen mit ähnlichen Trainierenden",
+            showcaseHeading: "Schwarz und Orange,\ngebaut für Fokus.",
+            showcaseCopy: "Dunkle Flächen, klare orange Aktionen und lesbare Karten verbinden Logging und Analyse zu einem ruhigen Trainingsfluss.",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
             stats: [
                 { label: "Start", value: "Today", copy: "Workout sofort starten" },
                 { label: "Analyze", value: "Percentile", copy: "Stärke im Kontext sehen" },
@@ -798,6 +853,11 @@ function getHomeText(locale, key) {
             heatmapAlt: "Layar heatmap otot",
             heroShowcaseAria: "Pratinjau layar Today, Strength Percentile, dan heatmap otot Shiba",
             heroPercentileCopy: "Dibandingkan dengan lifter serupa",
+            showcaseHeading: "Hitam dan oranye,\ndibuat untuk fokus.",
+            showcaseCopy: "Permukaan gelap, aksi oranye yang jelas, dan kartu yang mudah dibaca menyatukan catatan dan analitik.",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
             stats: [
                 { label: "Start", value: "Today", copy: "Mulai latihan berikutnya" },
                 { label: "Analyze", value: "Percentile", copy: "Kekuatan dalam konteks" },

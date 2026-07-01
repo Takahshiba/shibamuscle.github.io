@@ -124,24 +124,6 @@
                         <div class="app-hero-actions">
                             <a href="#app-store" class="app-pill app-pill--primary">Segera hadir</a>
                             <a href="#analytics" class="app-pill app-pill--secondary">Lihat analitik</a>
-                            <a href="shiba-privacy-policy.html" class="app-pill app-pill--secondary">Privasi</a>
-                        </div>
-                        <div class="app-hero-stats" aria-label="Shiba highlights">
-                            <div class="app-stat">
-                                <span>Start</span>
-                                <strong>Today</strong>
-                                <small>Mulai latihan berikutnya</small>
-                            </div>
-                            <div class="app-stat">
-                                <span>Analyze</span>
-                                <strong>Percentile</strong>
-                                <small>Kekuatan dalam konteks</small>
-                            </div>
-                            <div class="app-stat">
-                                <span>Review</span>
-                                <strong>Heatmap</strong>
-                                <small>Lihat area yang dilatih</small>
-                            </div>
                         </div>
                     </div>
                     <div class="app-device-stage" aria-label="Pratinjau layar Today, Strength Percentile, dan heatmap otot Shiba">
@@ -163,122 +145,67 @@
                 </div>
             </section>
 
-            <section class="app-scene app-scene--light">
-                <div class="app-scene-sticky">
-                    <div class="app-scene-copy">
+            <section class="app-feature-panel" id="analytics">
+                <div class="app-section-copy">
+                    <p class="app-kicker">App overview</p>
+                    <h2><span>Catatan, analitik, dan eksplorasi latihan dalam satu alur</span></h2>
+                    <p>Home menonjolkan pengalaman aplikasi dan tetap memberi jalur ke database latihan saat dibutuhkan.</p>
+                </div>
+                <div class="app-feature-grid">
+                    <article class="app-feature-card">
                         <p class="app-kicker">Today</p>
-                        <h2><span>Mulai menu latihan hari ini</span></h2>
+                        <h3><span>Mulai menu latihan hari ini</span></h3>
                         <p>Latihan berikutnya, set yang sedang berjalan, dan CTA utama terlihat jelas dalam satu layar.</p>
-                        <ul class="app-feature-list">
-                            <li>Menu hari ini langsung terlihat</li>
-                            <li>Tombol mulai berada di posisi jelas</li>
-                            <li>Kembali cepat ke set aktif</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-phone app-phone--screen">
+                    </article>
+                    <article class="app-feature-card">
+                        <p class="app-kicker">Logging</p>
+                        <h3><span>Input set tidak memutus ritme.</span></h3>
+                        <p>UI yang lugas untuk berat dan repetisi menjaga latihan tetap berjalan.</p>
+                    </article>
+                    <article class="app-feature-card">
+                        <p class="app-kicker">Analytics</p>
+                        <h3><span>Lihat kekuatan dan progres</span></h3>
+                        <p>Strength Percentile, grafik perkembangan, dan heatmap otot membantu memahami catatan latihan.</p>
+                    </article>
+                    <article class="app-feature-card">
+                        <p class="app-kicker">Heatmap</p>
+                        <h3><span>Lihat area yang dilatih dalam sekali pandang.</span></h3>
+                        <p>Heatmap otot menunjukkan bias dan kekurangan yang tidak terlihat dari daftar latihan.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="app-showcase">
+                <div class="app-showcase-copy">
+                    <p class="app-kicker">Black &amp; Orange UI</p>
+                    <h2><span>Hitam dan oranye,</span><span>dibuat untuk fokus.</span></h2>
+                    <p>Permukaan gelap, aksi oranye yang jelas, dan kartu yang mudah dibaca menyatukan catatan dan analitik.</p>
+                </div>
+                <div class="app-showcase-phones" aria-label="Pratinjau layar Today, Strength Percentile, dan heatmap otot Shiba">
+                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
                             <img src="../assets/app/today-screen-current.png" alt="Layar Today aplikasi Shiba" loading="lazy">
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="app-scene app-scene--dark" id="logging">
-                <div class="app-scene-sticky">
-                    <div class="app-scene-copy">
-                        <p class="app-kicker">Logging</p>
-                        <h2><span>Input set tidak memutus ritme.</span></h2>
-                        <p>UI yang lugas untuk berat dan repetisi menjaga latihan tetap berjalan.</p>
-                        <ul class="app-feature-list">
-                            <li>Input sambil melihat berat sebelumnya</li>
-                            <li>Setiap set terasa selesai</li>
-                            <li>Catatan mengalir ke analitik</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-logging-mock" aria-label="Workout logging preview">
-                            <div class="app-logging-header">
-                                <span>Bench Press</span>
-                                <strong>4 / 5</strong>
-                            </div>
-                            <div class="app-logging-table">
-                                <div class="app-logging-row">
-                                    <span>Set 1</span>
-                                    <strong>80kg</strong>
-                                    <strong>8</strong>
-                                    <small>Selesai</small>
-                                </div>
-                                <div class="app-logging-row">
-                                    <span>Set 2</span>
-                                    <strong>85kg</strong>
-                                    <strong>6</strong>
-                                    <small>Selesai</small>
-                                </div>
-                                <div class="app-logging-row">
-                                    <span>Set 3</span>
-                                    <strong>87.5kg</strong>
-                                    <strong>5</strong>
-                                    <small>Selesai</small>
-                                </div>
-                                <div class="app-logging-row">
-                                    <span>Set 4</span>
-                                    <strong>90kg</strong>
-                                    <strong>3</strong>
-                                    <small>Live</small>
-                                </div>
-                            </div>
-                            <div class="app-logging-footer">
-                                <span>Berat</span>
-                                <span>Reps</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="app-scene app-scene--light" id="analytics">
-                <div class="app-scene-sticky app-scene-sticky--reverse">
-                    <div class="app-scene-copy">
-                        <p class="app-kicker">Analytics</p>
-                        <h2><span>Lihat kekuatan dan progres</span></h2>
-                        <p>Strength Percentile, grafik perkembangan, dan heatmap otot membantu memahami catatan latihan.</p>
-                        <ul class="app-feature-list">
-                            <li>Strength Percentile menunjukkan posisi</li>
-                            <li>Lihat tren 1RM dan volume</li>
-                            <li>Masukkan progres ke rencana berikutnya</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-phone app-phone--screen app-phone--analytics">
+                        <figcaption>Today</figcaption>
+                    </figure>
+                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
                             <img src="../assets/app/strength-percentile.jpg" alt="Layar Strength Percentile" loading="lazy">
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="app-scene app-scene--dark" id="muscle-heatmap">
-                <div class="app-scene-sticky">
-                    <div class="app-scene-copy">
-                        <p class="app-kicker">Muscle Heatmap</p>
-                        <h2><span>Lihat area yang dilatih dalam sekali pandang.</span></h2>
-                        <p>Heatmap otot menunjukkan bias dan kekurangan yang tidak terlihat dari daftar latihan.</p>
-                        <ul class="app-feature-list">
-                            <li>Lihat area terlatih seluruh tubuh</li>
-                            <li>Temukan ketimpangan dan sesuaikan menu</li>
-                            <li>Lengkapi angka dengan konteks visual</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-phone app-phone--screen app-phone--heatmap">
+                        <figcaption>Analytics</figcaption>
+                    </figure>
+                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
                             <img src="../assets/app/completion-heatmap.png" alt="Layar heatmap otot" loading="lazy">
                         </div>
-                    </div>
+                        <figcaption>Heatmap</figcaption>
+                    </figure>
                 </div>
             </section>
 
-            <section class="app-scene app-scene--light" id="library">
-                <div class="app-scene-sticky app-scene-sticky--reverse">
-                    <div class="app-scene-copy">
+            <section class="app-library-section" id="library">
+                <div class="app-library-inner">
+                    <div class="app-section-copy">
                         <p class="app-kicker">Library</p>
                         <h2><span>Kembali ke latihan dan data</span></h2>
                         <p>Akses ke database latihan lama tetap tersedia di bawah pengenalan aplikasi.</p>
@@ -288,8 +215,7 @@
                         </div>
                         <a href="#app-store" class="app-pill app-pill--dark">Segera hadir</a>
                     </div>
-                    <div class="app-scene-media">
-                        <div class="app-library-preview">
+                    <div class="app-library-preview">
                             <a class="app-library-preview-card" href="kg_bench-press.html">
                                 <img src="../assets/bench-press.webp" alt="Bench press" loading="lazy">
                                 <span>
@@ -318,22 +244,7 @@
                                     <small>Punggung</small>
                                 </span>
                             </a>
-                            <a class="app-library-preview-card" href="kg_dumbbell-curl.html">
-                                <img src="../assets/dumbbell-curl.webp" alt="Dumbbell curl" loading="lazy">
-                                <span>
-                                    <strong>Dumbbell curl</strong>
-                                    <small>Lengan / Dumbbell</small>
-                                </span>
-                            </a>
-                            <a class="app-library-preview-card" href="kg_hex-bar-deadlift.html">
-                                <img src="../assets/hex-bar-deadlift.webp" alt="Hex bar deadlift" loading="lazy">
-                                <span>
-                                    <strong>Hex bar deadlift</strong>
-                                    <small>Seluruh tubuh</small>
-                                </span>
-                            </a>
                         </div>
-                    </div>
                 </div>
             </section>
 

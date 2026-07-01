@@ -124,24 +124,6 @@
                         <div class="app-hero-actions">
                             <a href="#app-store" class="app-pill app-pill--primary">출시 예정</a>
                             <a href="#analytics" class="app-pill app-pill--secondary">분석 보기</a>
-                            <a href="shiba-privacy-policy.html" class="app-pill app-pill--secondary">개인정보</a>
-                        </div>
-                        <div class="app-hero-stats" aria-label="Shiba highlights">
-                            <div class="app-stat">
-                                <span>Start</span>
-                                <strong>Today</strong>
-                                <small>다음 운동을 바로 시작</small>
-                            </div>
-                            <div class="app-stat">
-                                <span>Analyze</span>
-                                <strong>Percentile</strong>
-                                <small>강점과 현재 위치 확인</small>
-                            </div>
-                            <div class="app-stat">
-                                <span>Review</span>
-                                <strong>Heatmap</strong>
-                                <small>훈련한 부위 확인</small>
-                            </div>
                         </div>
                     </div>
                     <div class="app-device-stage" aria-label="Shiba Today, Strength Percentile, 근육 히트맵 화면 미리보기">
@@ -163,122 +145,67 @@
                 </div>
             </section>
 
-            <section class="app-scene app-scene--light">
-                <div class="app-scene-sticky">
-                    <div class="app-scene-copy">
+            <section class="app-feature-panel" id="analytics">
+                <div class="app-section-copy">
+                    <p class="app-kicker">앱 소개</p>
+                    <h2><span>기록, 분석, 운동 탐색을 하나의 흐름으로</span></h2>
+                    <p>홈에서는 앱 경험을 중심에 두고, 필요한 사용자가 데이터베이스로 이동할 수 있게 구성합니다.</p>
+                </div>
+                <div class="app-feature-grid">
+                    <article class="app-feature-card">
                         <p class="app-kicker">Today</p>
-                        <h2><span>오늘의 루틴을 바로 시작</span></h2>
+                        <h3><span>오늘의 루틴을 바로 시작</span></h3>
                         <p>다음 운동, 진행 중인 세트, 시작 CTA가 한눈에 보이는 화면을 중심으로 보여 줍니다.</p>
-                        <ul class="app-feature-list">
-                            <li>오늘 할 루틴을 한눈에 확인</li>
-                            <li>시작 버튼을 명확하게 배치</li>
-                            <li>진행 중인 세트로 바로 복귀</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-phone app-phone--screen">
+                    </article>
+                    <article class="app-feature-card">
+                        <p class="app-kicker">Logging</p>
+                        <h3><span>세트 입력은 흐름을 끊지 않습니다.</span></h3>
+                        <p>중량과 반복을 차분히 남기는 UI로 기록 자체가 운동을 방해하지 않습니다.</p>
+                    </article>
+                    <article class="app-feature-card">
+                        <p class="app-kicker">Analytics</p>
+                        <h3><span>강점과 성장을 시각화</span></h3>
+                        <p>Strength Percentile, 성장 차트, 근육 히트맵으로 기록의 의미를 나중에 확인할 수 있습니다.</p>
+                    </article>
+                    <article class="app-feature-card">
+                        <p class="app-kicker">Heatmap</p>
+                        <h3><span>어디를 훈련했는지 한눈에 보입니다.</span></h3>
+                        <p>근육 히트맵은 운동 이름만으로 놓치기 쉬운 편향과 부족을 몸의 형태로 보여 줍니다.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="app-showcase">
+                <div class="app-showcase-copy">
+                    <p class="app-kicker">Black &amp; Orange UI</p>
+                    <h2><span>블랙과 오렌지로</span><span>훈련에 집중.</span></h2>
+                    <p>어두운 화면, 강한 오렌지 액션, 읽기 쉬운 카드가 기록과 분석을 하나의 흐름으로 보여 줍니다.</p>
+                </div>
+                <div class="app-showcase-phones" aria-label="Shiba Today, Strength Percentile, 근육 히트맵 화면 미리보기">
+                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
                             <img src="../assets/app/today-screen-current.png" alt="Shiba 앱 Today 화면" loading="lazy">
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="app-scene app-scene--dark" id="logging">
-                <div class="app-scene-sticky">
-                    <div class="app-scene-copy">
-                        <p class="app-kicker">Logging</p>
-                        <h2><span>세트 입력은 흐름을 끊지 않습니다.</span></h2>
-                        <p>중량과 반복을 차분히 남기는 UI로 기록 자체가 운동을 방해하지 않습니다.</p>
-                        <ul class="app-feature-list">
-                            <li>이전 중량을 보며 입력</li>
-                            <li>세트별 달성감을 남김</li>
-                            <li>기록이 분석 화면으로 이어짐</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-logging-mock" aria-label="Workout logging preview">
-                            <div class="app-logging-header">
-                                <span>Bench Press</span>
-                                <strong>4 / 5</strong>
-                            </div>
-                            <div class="app-logging-table">
-                                <div class="app-logging-row">
-                                    <span>Set 1</span>
-                                    <strong>80kg</strong>
-                                    <strong>8</strong>
-                                    <small>완료</small>
-                                </div>
-                                <div class="app-logging-row">
-                                    <span>Set 2</span>
-                                    <strong>85kg</strong>
-                                    <strong>6</strong>
-                                    <small>완료</small>
-                                </div>
-                                <div class="app-logging-row">
-                                    <span>Set 3</span>
-                                    <strong>87.5kg</strong>
-                                    <strong>5</strong>
-                                    <small>완료</small>
-                                </div>
-                                <div class="app-logging-row">
-                                    <span>Set 4</span>
-                                    <strong>90kg</strong>
-                                    <strong>3</strong>
-                                    <small>진행 중</small>
-                                </div>
-                            </div>
-                            <div class="app-logging-footer">
-                                <span>중량</span>
-                                <span>반복</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="app-scene app-scene--light" id="analytics">
-                <div class="app-scene-sticky app-scene-sticky--reverse">
-                    <div class="app-scene-copy">
-                        <p class="app-kicker">Analytics</p>
-                        <h2><span>강점과 성장을 시각화</span></h2>
-                        <p>Strength Percentile, 성장 차트, 근육 히트맵으로 기록의 의미를 나중에 확인할 수 있습니다.</p>
-                        <ul class="app-feature-list">
-                            <li>Strength Percentile로 현재 위치 확인</li>
-                            <li>1RM 추이와 볼륨 변화 확인</li>
-                            <li>성장한 운동을 다음 계획에 반영</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-phone app-phone--screen app-phone--analytics">
+                        <figcaption>Today</figcaption>
+                    </figure>
+                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
                             <img src="../assets/app/strength-percentile.jpg" alt="Strength Percentile 화면" loading="lazy">
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="app-scene app-scene--dark" id="muscle-heatmap">
-                <div class="app-scene-sticky">
-                    <div class="app-scene-copy">
-                        <p class="app-kicker">Muscle Heatmap</p>
-                        <h2><span>어디를 훈련했는지 한눈에 보입니다.</span></h2>
-                        <p>근육 히트맵은 운동 이름만으로 놓치기 쉬운 편향과 부족을 몸의 형태로 보여 줍니다.</p>
-                        <ul class="app-feature-list">
-                            <li>훈련한 부위를 전신으로 확인</li>
-                            <li>편향을 찾아 다음 루틴 조정</li>
-                            <li>숫자만으로 부족한 감각 보완</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-phone app-phone--screen app-phone--heatmap">
+                        <figcaption>Analytics</figcaption>
+                    </figure>
+                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
                             <img src="../assets/app/completion-heatmap.png" alt="근육 히트맵 화면" loading="lazy">
                         </div>
-                    </div>
+                        <figcaption>Heatmap</figcaption>
+                    </figure>
                 </div>
             </section>
 
-            <section class="app-scene app-scene--light" id="library">
-                <div class="app-scene-sticky app-scene-sticky--reverse">
-                    <div class="app-scene-copy">
+            <section class="app-library-section" id="library">
+                <div class="app-library-inner">
+                    <div class="app-section-copy">
                         <p class="app-kicker">Library</p>
                         <h2><span>운동과 데이터베이스로 연결</span></h2>
                         <p>앱 소개 아래에 기존 운동 데이터베이스로 가는 입구를 남깁니다.</p>
@@ -288,8 +215,7 @@
                         </div>
                         <a href="#app-store" class="app-pill app-pill--dark">출시 예정</a>
                     </div>
-                    <div class="app-scene-media">
-                        <div class="app-library-preview">
+                    <div class="app-library-preview">
                             <a class="app-library-preview-card" href="kg_bench-press.html">
                                 <img src="../assets/bench-press.webp" alt="벤치프레스" loading="lazy">
                                 <span>
@@ -318,22 +244,7 @@
                                     <small>등</small>
                                 </span>
                             </a>
-                            <a class="app-library-preview-card" href="kg_dumbbell-curl.html">
-                                <img src="../assets/dumbbell-curl.webp" alt="덤벨 컬" loading="lazy">
-                                <span>
-                                    <strong>덤벨 컬</strong>
-                                    <small>팔 / 덤벨</small>
-                                </span>
-                            </a>
-                            <a class="app-library-preview-card" href="kg_hex-bar-deadlift.html">
-                                <img src="../assets/hex-bar-deadlift.webp" alt="헥스바 데드리프트" loading="lazy">
-                                <span>
-                                    <strong>헥스바 데드리프트</strong>
-                                    <small>전신</small>
-                                </span>
-                            </a>
                         </div>
-                    </div>
                 </div>
             </section>
 

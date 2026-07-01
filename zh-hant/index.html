@@ -124,24 +124,6 @@
                         <div class="app-hero-actions">
                             <a href="#app-store" class="app-pill app-pill--primary">即將推出</a>
                             <a href="#analytics" class="app-pill app-pill--secondary">查看分析</a>
-                            <a href="shiba-privacy-policy.html" class="app-pill app-pill--secondary">隱私權</a>
-                        </div>
-                        <div class="app-hero-stats" aria-label="Shiba highlights">
-                            <div class="app-stat">
-                                <span>Start</span>
-                                <strong>Today</strong>
-                                <small>快速開始下一次訓練</small>
-                            </div>
-                            <div class="app-stat">
-                                <span>Analyze</span>
-                                <strong>Percentile</strong>
-                                <small>看見強項與位置</small>
-                            </div>
-                            <div class="app-stat">
-                                <span>Review</span>
-                                <strong>Heatmap</strong>
-                                <small>回顧訓練過的部位</small>
-                            </div>
                         </div>
                     </div>
                     <div class="app-device-stage" aria-label="Shiba Today、Strength Percentile 與肌肉熱力圖畫面預覽">
@@ -163,122 +145,67 @@
                 </div>
             </section>
 
-            <section class="app-scene app-scene--light">
-                <div class="app-scene-sticky">
-                    <div class="app-scene-copy">
+            <section class="app-feature-panel" id="analytics">
+                <div class="app-section-copy">
+                    <p class="app-kicker">App 介紹</p>
+                    <h2><span>紀錄、分析與動作探索串成一條流程</span></h2>
+                    <p>首頁以 App 體驗為主，需要時再前往訓練資料庫。</p>
+                </div>
+                <div class="app-feature-grid">
+                    <article class="app-feature-card">
                         <p class="app-kicker">Today</p>
-                        <h2><span>快速開始今天的課表</span></h2>
+                        <h3><span>快速開始今天的課表</span></h3>
                         <p>下一個訓練、進行中的組數與開始按鈕會集中在同一個畫面。</p>
-                        <ul class="app-feature-list">
-                            <li>一眼確認今天的課表</li>
-                            <li>開始按鈕放在清楚位置</li>
-                            <li>快速回到進行中的組數</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-phone app-phone--screen">
+                    </article>
+                    <article class="app-feature-card">
+                        <p class="app-kicker">Logging</p>
+                        <h3><span>記錄組數，不打斷節奏。</span></h3>
+                        <p>重量與次數可以直接留下，記錄本身不會干擾訓練。</p>
+                    </article>
+                    <article class="app-feature-card">
+                        <p class="app-kicker">Analytics</p>
+                        <h3><span>看見強項與成長</span></h3>
+                        <p>透過 Strength Percentile、成長圖表與肌肉熱力圖理解訓練紀錄。</p>
+                    </article>
+                    <article class="app-feature-card">
+                        <p class="app-kicker">Heatmap</p>
+                        <h3><span>哪裡練到了，一眼就懂。</span></h3>
+                        <p>肌肉熱力圖用身體圖像呈現，只看動作名稱時不容易察覺的偏重與不足。</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="app-showcase">
+                <div class="app-showcase-copy">
+                    <p class="app-kicker">Black &amp; Orange UI</p>
+                    <h2><span>黑色與橘色，</span><span>專注於訓練。</span></h2>
+                    <p>深色介面、醒目的橘色操作與清楚卡片，讓紀錄與分析連成一個安定的訓練流程。</p>
+                </div>
+                <div class="app-showcase-phones" aria-label="Shiba Today、Strength Percentile 與肌肉熱力圖畫面預覽">
+                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
                             <img src="../assets/app/today-screen-current.png" alt="Shiba App 的 Today 畫面" loading="lazy">
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="app-scene app-scene--dark" id="logging">
-                <div class="app-scene-sticky">
-                    <div class="app-scene-copy">
-                        <p class="app-kicker">Logging</p>
-                        <h2><span>記錄組數，不打斷節奏。</span></h2>
-                        <p>重量與次數可以直接留下，記錄本身不會干擾訓練。</p>
-                        <ul class="app-feature-list">
-                            <li>一邊看前次重量一邊輸入</li>
-                            <li>每一組都有完成感</li>
-                            <li>紀錄自然銜接到分析</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-logging-mock" aria-label="Workout logging preview">
-                            <div class="app-logging-header">
-                                <span>Bench Press</span>
-                                <strong>4 / 5</strong>
-                            </div>
-                            <div class="app-logging-table">
-                                <div class="app-logging-row">
-                                    <span>Set 1</span>
-                                    <strong>80kg</strong>
-                                    <strong>8</strong>
-                                    <small>完成</small>
-                                </div>
-                                <div class="app-logging-row">
-                                    <span>Set 2</span>
-                                    <strong>85kg</strong>
-                                    <strong>6</strong>
-                                    <small>完成</small>
-                                </div>
-                                <div class="app-logging-row">
-                                    <span>Set 3</span>
-                                    <strong>87.5kg</strong>
-                                    <strong>5</strong>
-                                    <small>完成</small>
-                                </div>
-                                <div class="app-logging-row">
-                                    <span>Set 4</span>
-                                    <strong>90kg</strong>
-                                    <strong>3</strong>
-                                    <small>進行中</small>
-                                </div>
-                            </div>
-                            <div class="app-logging-footer">
-                                <span>重量</span>
-                                <span>次數</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="app-scene app-scene--light" id="analytics">
-                <div class="app-scene-sticky app-scene-sticky--reverse">
-                    <div class="app-scene-copy">
-                        <p class="app-kicker">Analytics</p>
-                        <h2><span>看見強項與成長</span></h2>
-                        <p>透過 Strength Percentile、成長圖表與肌肉熱力圖理解訓練紀錄。</p>
-                        <ul class="app-feature-list">
-                            <li>用 Strength Percentile 掌握位置</li>
-                            <li>查看 1RM 與訓練量變化</li>
-                            <li>把進步反映到下一個計畫</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-phone app-phone--screen app-phone--analytics">
+                        <figcaption>Today</figcaption>
+                    </figure>
+                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
                             <img src="../assets/app/strength-percentile.jpg" alt="Strength Percentile 畫面" loading="lazy">
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="app-scene app-scene--dark" id="muscle-heatmap">
-                <div class="app-scene-sticky">
-                    <div class="app-scene-copy">
-                        <p class="app-kicker">Muscle Heatmap</p>
-                        <h2><span>哪裡練到了，一眼就懂。</span></h2>
-                        <p>肌肉熱力圖用身體圖像呈現，只看動作名稱時不容易察覺的偏重與不足。</p>
-                        <ul class="app-feature-list">
-                            <li>用全身視角回顧訓練部位</li>
-                            <li>找出偏重並調整課表</li>
-                            <li>補足數字以外的感受</li>
-                        </ul>
-                    </div>
-                    <div class="app-scene-media">
-                        <div class="app-phone app-phone--screen app-phone--heatmap">
+                        <figcaption>Analytics</figcaption>
+                    </figure>
+                    <figure class="app-showcase-item">
+                        <div class="app-phone app-phone--screen app-phone--compact">
                             <img src="../assets/app/completion-heatmap.png" alt="肌肉熱力圖畫面" loading="lazy">
                         </div>
-                    </div>
+                        <figcaption>Heatmap</figcaption>
+                    </figure>
                 </div>
             </section>
 
-            <section class="app-scene app-scene--light" id="library">
-                <div class="app-scene-sticky app-scene-sticky--reverse">
-                    <div class="app-scene-copy">
+            <section class="app-library-section" id="library">
+                <div class="app-library-inner">
+                    <div class="app-section-copy">
                         <p class="app-kicker">Library</p>
                         <h2><span>回到動作與資料庫</span></h2>
                         <p>App 介紹下方保留既有訓練資料庫入口。</p>
@@ -288,8 +215,7 @@
                         </div>
                         <a href="#app-store" class="app-pill app-pill--dark">即將推出</a>
                     </div>
-                    <div class="app-scene-media">
-                        <div class="app-library-preview">
+                    <div class="app-library-preview">
                             <a class="app-library-preview-card" href="kg_bench-press.html">
                                 <img src="../assets/bench-press.webp" alt="臥推" loading="lazy">
                                 <span>
@@ -318,22 +244,7 @@
                                     <small>背部</small>
                                 </span>
                             </a>
-                            <a class="app-library-preview-card" href="kg_dumbbell-curl.html">
-                                <img src="../assets/dumbbell-curl.webp" alt="啞鈴彎舉" loading="lazy">
-                                <span>
-                                    <strong>啞鈴彎舉</strong>
-                                    <small>手臂 / 啞鈴</small>
-                                </span>
-                            </a>
-                            <a class="app-library-preview-card" href="kg_hex-bar-deadlift.html">
-                                <img src="../assets/hex-bar-deadlift.webp" alt="六角槓硬舉" loading="lazy">
-                                <span>
-                                    <strong>六角槓硬舉</strong>
-                                    <small>全身</small>
-                                </span>
-                            </a>
                         </div>
-                    </div>
                 </div>
             </section>
 

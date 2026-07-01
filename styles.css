@@ -3399,10 +3399,13 @@ body.app-content-page {
         grid-template-columns: 1fr;
         gap: 20px;
         padding: 22px 0 30px;
+        max-width: calc(100vw - 24px);
+        overflow: hidden;
     }
 
     .app-hero-copy {
         width: 100%;
+        max-width: min(100%, 366px);
         min-width: 0;
         padding-left: 0;
         border-left: 0;
@@ -3416,21 +3419,22 @@ body.app-content-page {
     .app-hero-subtitle {
         font-size: 1.42rem;
         line-height: 1.14;
-        max-width: calc(100vw - 24px);
+        width: 100%;
+        max-width: min(100%, 366px);
         overflow-wrap: anywhere;
         word-break: break-word;
         line-break: strict;
     }
 
     .app-hero-subtitle span {
-        display: block;
+        display: inline;
         max-width: 100%;
         overflow-wrap: anywhere;
         word-break: break-word;
     }
 
     .app-hero-lead span {
-        display: block;
+        display: inline;
     }
 
     .app-hero-lead,
@@ -3443,11 +3447,20 @@ body.app-content-page {
         line-break: strict;
     }
 
+    .app-hero-lead {
+        max-width: min(100%, 366px);
+    }
+
     .app-hero-actions {
         display: grid;
         grid-template-columns: 1fr;
         align-items: stretch;
         width: 100%;
+        max-width: min(100%, 366px);
+    }
+
+    .app-device-stage {
+        width: min(100%, 366px);
     }
 
     .app-pill {
@@ -3496,7 +3509,7 @@ body.app-content-page {
 
     .app-insight-card--percentile {
         top: 18px;
-        right: 0;
+        right: 16px;
         width: min(142px, 43%);
         padding: 11px;
     }
