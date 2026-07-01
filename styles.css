@@ -2025,8 +2025,8 @@ body.exercise-page {
     border: 1px solid rgba(255, 106, 0, 0.36);
     border-radius: var(--radius-md);
     background:
-        linear-gradient(145deg, rgba(255, 106, 0, 0.24) 0%, rgba(255, 106, 0, 0.08) 42%, rgba(255, 255, 255, 0.035) 100%),
-        #121212;
+        linear-gradient(145deg, rgba(255, 122, 0, 0.26) 0%, rgba(255, 106, 0, 0.1) 42%, rgba(255, 255, 255, 0.04) 100%),
+        #17110c;
     display: grid;
     place-items: center;
     overflow: hidden;
@@ -2323,8 +2323,8 @@ body.app-content-page {
     --accent-soft: rgba(255, 122, 0, 0.16);
     color-scheme: dark;
     background:
-        linear-gradient(112deg, rgba(255, 106, 0, 0.2) 0%, rgba(3, 3, 3, 0) 46%),
-        linear-gradient(180deg, #020202 0%, #070504 420px, #030303 100%);
+        linear-gradient(112deg, rgba(255, 106, 0, 0.22) 0%, rgba(3, 3, 3, 0) 42%),
+        linear-gradient(180deg, #020202 0%, #060403 420px, #030303 100%);
     color: var(--text);
     padding-top: 56px;
     font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
@@ -2400,7 +2400,7 @@ body.app-content-page {
     padding: 0 14px;
     border: 1px solid rgba(255, 183, 96, 0.58);
     border-radius: 8px;
-    background: linear-gradient(180deg, #ffa338 0%, #ff6a00 100%);
+    background: linear-gradient(180deg, #ffb13d 0%, #ff6a00 100%);
     color: #130800;
     font-size: 0.82rem;
     font-weight: 800;
@@ -2410,11 +2410,11 @@ body.app-content-page {
 
 .app-home-shell {
     --accent: #ff6a00;
-    --accent-strong: #ffa338;
+    --accent-strong: #ffb13d;
     --app-black: #020202;
-    --app-panel: #0b0907;
-    --app-panel-raised: #14100c;
-    --app-orange-soft: rgba(255, 122, 0, 0.2);
+    --app-panel: #0a0705;
+    --app-panel-raised: #15100b;
+    --app-orange-soft: rgba(255, 122, 0, 0.18);
     background: var(--app-black);
     color: var(--text);
 }
@@ -2432,8 +2432,8 @@ body.app-content-page {
     display: grid;
     align-items: center;
     background:
-        linear-gradient(102deg, rgba(255, 106, 0, 0.36) 0%, rgba(255, 122, 0, 0.16) 35%, rgba(3, 3, 3, 0) 66%),
-        linear-gradient(180deg, #020202 0%, #090604 56%, #020202 100%);
+        linear-gradient(102deg, rgba(255, 106, 0, 0.34) 0%, rgba(255, 122, 0, 0.14) 34%, rgba(3, 3, 3, 0) 64%),
+        linear-gradient(180deg, #020202 0%, #060403 56%, #020202 100%);
 }
 
 .app-hero::before {
@@ -2535,7 +2535,7 @@ body.app-content-page {
 
 .app-pill--primary {
     border: 1px solid rgba(255, 183, 96, 0.56);
-    background: linear-gradient(180deg, #ffa338 0%, #ff6a00 100%);
+    background: linear-gradient(180deg, #ffb13d 0%, #ff6a00 100%);
     color: #130800;
     box-shadow: 0 16px 34px rgba(255, 106, 0, 0.34);
 }
@@ -2548,7 +2548,7 @@ body.app-content-page {
 
 .app-pill--dark {
     border: 1px solid rgba(255, 183, 96, 0.5);
-    background: linear-gradient(180deg, #ffa338 0%, #ff6a00 100%);
+    background: linear-gradient(180deg, #ffb13d 0%, #ff6a00 100%);
     color: #130800;
 }
 
@@ -2617,11 +2617,11 @@ body.app-content-page {
     padding: 8px;
     border: 1px solid rgba(255, 122, 0, 0.68);
     border-radius: 42px;
-    background: linear-gradient(160deg, #2b1406 0%, #050505 38%, #17110c 100%);
+    background: linear-gradient(160deg, #ff7a00 0%, #2b1406 9%, #050505 42%, #17110c 100%);
     box-shadow:
         0 28px 70px rgba(0, 0, 0, 0.48),
-        0 0 0 1px rgba(255, 122, 0, 0.16),
-        0 0 52px rgba(255, 106, 0, 0.2);
+        0 0 0 1px rgba(255, 122, 0, 0.22),
+        0 0 56px rgba(255, 106, 0, 0.24);
     overflow: hidden;
     display: grid;
     position: relative;
@@ -2644,9 +2644,9 @@ body.app-content-page {
     right: 8px;
     left: 8px;
     z-index: 1;
-    height: 52px;
+    height: 58px;
     border-radius: 34px 34px 0 0;
-    background: linear-gradient(180deg, #030303 0%, #030303 62%, rgba(3, 3, 3, 0) 100%);
+    background: linear-gradient(180deg, #030303 0%, #030303 64%, rgba(3, 3, 3, 0) 100%);
     pointer-events: none;
 }
 
@@ -2656,7 +2656,7 @@ body.app-content-page {
     object-fit: cover;
     object-position: 50% 50%;
     border-radius: 32px;
-    background: #030303;
+    background: #050505;
 }
 
 .app-phone--hero {
@@ -2683,7 +2683,7 @@ body.app-content-page {
     gap: 6px;
     border: 1px solid rgba(255, 122, 0, 0.52);
     border-radius: 8px;
-    background: rgba(13, 9, 6, 0.96);
+    background: rgba(10, 7, 5, 0.96);
     color: #ffffff;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.44);
     backdrop-filter: blur(18px);
@@ -2696,7 +2696,7 @@ body.app-content-page {
 }
 
 .app-insight-card strong {
-    color: #ffa338;
+    color: var(--accent-strong);
     font-size: 1.85rem;
     line-height: 1;
 }
@@ -2774,7 +2774,7 @@ body.app-content-page {
     --surface: #0b0907;
     --line: rgba(255, 122, 0, 0.28);
     background:
-        linear-gradient(180deg, #090604 0%, #020202 100%);
+        linear-gradient(180deg, #070504 0%, #020202 100%);
     color: var(--text);
 }
 
@@ -2930,7 +2930,7 @@ body.app-content-page {
     border: 1px solid rgba(255, 122, 0, 0.38);
     border-radius: 8px;
     background:
-        linear-gradient(180deg, rgba(255, 122, 0, 0.2), rgba(255, 255, 255, 0.03)),
+        linear-gradient(180deg, rgba(255, 122, 0, 0.18), rgba(255, 255, 255, 0.03)),
         var(--app-panel);
     display: grid;
     grid-template-columns: 64px minmax(0, 1fr);
@@ -2970,7 +2970,7 @@ body.app-content-page {
     border-top: 1px solid rgba(255, 122, 0, 0.36);
     border-bottom: 1px solid rgba(255, 122, 0, 0.36);
     background:
-        linear-gradient(140deg, rgba(255, 106, 0, 0.36) 0%, rgba(255, 122, 0, 0.1) 42%, rgba(3, 3, 3, 0) 72%),
+        linear-gradient(140deg, rgba(255, 106, 0, 0.34) 0%, rgba(255, 122, 0, 0.1) 42%, rgba(3, 3, 3, 0) 72%),
         #030201;
     color: #f8f4ee;
 }
