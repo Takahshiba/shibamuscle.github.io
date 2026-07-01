@@ -1843,28 +1843,28 @@ table tbody tr:hover {
 }
 
 body.exercise-page {
-    --bg: #f5f5f2;
-    --surface: #ffffff;
-    --surface-muted: #f7f7f4;
-    --surface-strong: #ecece6;
-    --surface-tint: #fff6e8;
-    --line: #dfdfd7;
-    --line-strong: #c9c9bf;
-    --text: #111111;
-    --muted: #62625e;
+    --bg: #050505;
+    --surface: #131313;
+    --surface-muted: #1b1b1b;
+    --surface-strong: #242424;
+    --surface-tint: rgba(255, 138, 0, 0.12);
+    --line: rgba(255, 255, 255, 0.14);
+    --line-strong: rgba(255, 255, 255, 0.24);
+    --text: #f5f5f7;
+    --muted: #a7a7ad;
     --accent: #ff8a00;
-    --accent-strong: #ff5a1f;
-    --accent-soft: #fff1df;
-    --shadow-soft: 0 10px 24px rgba(17, 17, 17, 0.04);
-    --shadow-panel: 0 18px 42px rgba(17, 17, 17, 0.08);
+    --accent-strong: #ffb13d;
+    --accent-soft: rgba(255, 138, 0, 0.16);
+    --shadow-soft: 0 18px 36px rgba(0, 0, 0, 0.28);
+    --shadow-panel: 0 28px 64px rgba(0, 0, 0, 0.36);
     background:
-        radial-gradient(circle at 84% 120px, rgba(255, 138, 0, 0.1), transparent 26%),
-        linear-gradient(180deg, #fffaf3 0 360px, #f5f5f2 360px 100%);
+        radial-gradient(circle at 82% 120px, rgba(255, 138, 0, 0.22), transparent 28%),
+        linear-gradient(180deg, #050505 0%, #0d0d0d 440px, #050505 100%);
     color: var(--text);
 }
 
 .exercise-page .site-header {
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(5, 5, 5, 0.92);
     border-bottom-color: var(--line);
 }
 
@@ -1876,7 +1876,7 @@ body.exercise-page {
 .exercise-page .sub-nav a,
 .exercise-page .toggle-buttons {
     border-color: var(--line);
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .exercise-page .sub-nav a {
@@ -1885,8 +1885,8 @@ body.exercise-page {
 
 .exercise-page .sub-nav a:hover,
 .exercise-page .sub-nav a:focus-visible {
-    border-color: rgba(255, 138, 0, 0.6);
-    background: #ffffff;
+    border-color: rgba(255, 138, 0, 0.72);
+    background: rgba(255, 138, 0, 0.14);
     color: var(--text);
 }
 
@@ -1907,8 +1907,8 @@ body.exercise-page {
 
 .exercise-page .category-nav-icon img,
 .exercise-page .sub-nav .exercise-icon {
-    filter: brightness(0) saturate(100%);
-    opacity: 0.72;
+    filter: brightness(0) invert(1);
+    opacity: 0.82;
 }
 
 .exercise-page .breadcrumb-container {
@@ -2026,7 +2026,7 @@ body.exercise-page {
     place-items: center;
     overflow: hidden;
     box-shadow:
-        0 22px 50px rgba(17, 17, 17, 0.12),
+        0 26px 58px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.86);
 }
 
@@ -2072,9 +2072,11 @@ body.exercise-page {
     gap: 8px;
     min-width: 0;
     padding: 18px;
-    border: 1px solid rgba(255, 138, 0, 0.22);
+    border: 1px solid rgba(255, 138, 0, 0.28);
     border-radius: var(--radius-md);
-    background: linear-gradient(180deg, #fffaf3, #ffffff);
+    background:
+        linear-gradient(180deg, rgba(255, 138, 0, 0.12), rgba(255, 138, 0, 0.04)),
+        #181818;
 }
 
 .exercise-stat-label {
@@ -2096,8 +2098,10 @@ body.exercise-page {
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    border-color: #111111;
-    background: #111111;
+    border-color: rgba(255, 138, 0, 0.32);
+    background:
+        radial-gradient(circle at 100% 0, rgba(255, 138, 0, 0.26), transparent 34%),
+        #111111;
     color: #ffffff;
 }
 
@@ -2130,9 +2134,9 @@ body.exercise-page {
 .exercise-page .muscle-chip,
 .exercise-page .category-chip,
 .exercise-page .exercise-badge {
-    border-color: rgba(255, 138, 0, 0.24);
+    border-color: rgba(255, 138, 0, 0.28);
     background: var(--accent-soft);
-    color: #8b3f00;
+    color: var(--accent-strong);
 }
 
 .exercise-page .table-shell,
@@ -2149,21 +2153,21 @@ body.exercise-page {
 .exercise-page .average-section-table th,
 .exercise-page .calorie-burn-table th {
     background: #111111;
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.84);
 }
 
 .exercise-page table td,
 .exercise-page .table td,
 .exercise-page .average-section-table td,
 .exercise-page .calorie-burn-table td {
-    color: #222222;
+    color: rgba(245, 245, 247, 0.88);
 }
 
 .exercise-page .table tbody tr:nth-child(odd),
 .exercise-page .average-section-table tbody tr:nth-child(odd),
 .exercise-page .calorie-burn-table tbody tr:nth-child(odd),
 .exercise-page table tbody tr:nth-child(odd) {
-    background: #fbfaf8;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .exercise-page .table tbody tr:hover,
@@ -2175,7 +2179,7 @@ body.exercise-page {
 
 .exercise-page .tabs ul li a {
     border-color: var(--line);
-    background: #ffffff;
+    background: var(--surface-muted);
 }
 
 .exercise-page .tabs.is-toggle ul li.is-active a,
@@ -2187,7 +2191,7 @@ body.exercise-page {
 
 .exercise-page .exercise-card {
     border-color: var(--line);
-    background: #ffffff;
+    background: var(--surface);
 }
 
 .exercise-page .exercise-card:hover,
@@ -2221,8 +2225,8 @@ body.exercise-page {
 @media (max-width: 1100px) {
     body.exercise-page {
         background:
-            radial-gradient(circle at 84% 96px, rgba(255, 138, 0, 0.09), transparent 30%),
-            linear-gradient(180deg, #fffaf3 0 520px, #f5f5f2 520px 100%);
+            radial-gradient(circle at 84% 96px, rgba(255, 138, 0, 0.2), transparent 32%),
+            linear-gradient(180deg, #050505 0%, #0d0d0d 640px, #050505 100%);
     }
 
     .exercise-hero {
@@ -2241,8 +2245,8 @@ body.exercise-page {
 @media (max-width: 760px) {
     body.exercise-page {
         background:
-            radial-gradient(circle at 82% 88px, rgba(255, 138, 0, 0.08), transparent 34%),
-            linear-gradient(180deg, #fffaf3 0 560px, #f5f5f2 560px 100%);
+            radial-gradient(circle at 82% 88px, rgba(255, 138, 0, 0.18), transparent 34%),
+            linear-gradient(180deg, #050505 0%, #0d0d0d 760px, #050505 100%);
     }
 
     .exercise-page .page-main > .container:not(.breadcrumb-container):not(.exercise-hero):not(.ad-slot-container) {
