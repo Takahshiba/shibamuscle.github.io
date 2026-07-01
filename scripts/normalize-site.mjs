@@ -24,7 +24,7 @@ const ROOT = process.cwd();
 const SITE_ORIGIN = "https://shibamuscle.com";
 const ANALYTICS_ID = "G-D9K58THBFM";
 const SITE_THEME_COLOR = "#148a6a";
-const APP_THEME_COLOR = "#ff7a00";
+const APP_THEME_COLOR = "#ff6a00";
 const ANALYTICS_BLOCK = `
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}"></script>
@@ -342,7 +342,7 @@ function buildSeoBlock(context) {
     return `
     <meta name="description" content="${escapeAttribute(context.description)}">
     <meta name="robots" content="${escapeAttribute(robots)}">
-    <meta name="theme-color" content="${context.isAppPage ? APP_THEME_COLOR : SITE_THEME_COLOR}">
+    <meta name="theme-color" content="${context.isAppPage || context.isExercisePage ? APP_THEME_COLOR : SITE_THEME_COLOR}">
     <link rel="canonical" href="${context.canonicalUrl}">
 ${alternateLinks}${xDefaultLink}
     <meta property="og:type" content="${context.type}">
@@ -463,8 +463,8 @@ function writeManifestFiles() {
         description: "平均重量、基準重量、鍛えられる筋肉を探せるワークアウトデータベース。",
         start_url: "/",
         scope: "/",
-        theme_color: "#148a6a",
-        background_color: "#fbfcfa",
+        theme_color: "#ff6a00",
+        background_color: "#030303",
         display: "standalone"
     };
 

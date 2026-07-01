@@ -1844,20 +1844,22 @@ table tbody tr:hover {
 
 body.exercise-page {
     --bg: #030303;
-    --surface: #0c0b0a;
-    --surface-muted: #14110f;
-    --surface-strong: #211208;
+    --surface: #0a0a0a;
+    --surface-muted: #111111;
+    --surface-strong: #19110b;
     --surface-tint: rgba(255, 106, 0, 0.14);
-    --line: rgba(255, 106, 0, 0.24);
-    --line-strong: rgba(255, 149, 31, 0.44);
-    --text: #f8f4ee;
-    --muted: rgba(248, 244, 238, 0.68);
+    --line: rgba(255, 106, 0, 0.3);
+    --line-strong: rgba(255, 149, 31, 0.5);
+    --text: #f7f7f7;
+    --muted: rgba(247, 247, 247, 0.68);
     --accent: #ff6a00;
     --accent-strong: #ff9a24;
     --accent-soft: rgba(255, 106, 0, 0.16);
     --shadow-soft: 0 18px 36px rgba(0, 0, 0, 0.28);
     --shadow-panel: 0 28px 64px rgba(0, 0, 0, 0.36);
-    background: linear-gradient(180deg, #030303 0%, #0b0805 440px, #030303 100%);
+    background:
+        linear-gradient(118deg, rgba(255, 106, 0, 0.14) 0%, rgba(255, 106, 0, 0.04) 34%, transparent 62%),
+        linear-gradient(180deg, #030303 0%, #080604 440px, #030303 100%);
     color: var(--text);
 }
 
@@ -2017,11 +2019,12 @@ body.exercise-page {
 .exercise-hero-media {
     min-height: 360px;
     padding: 26px;
-    border: 1px solid rgba(255, 106, 0, 0.28);
+    border: 1px solid rgba(255, 106, 0, 0.36);
     border-radius: var(--radius-md);
     background:
-        linear-gradient(180deg, rgba(255, 106, 0, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%),
-        #0f0d0b;
+        radial-gradient(circle at 50% 20%, rgba(255, 106, 0, 0.18), transparent 54%),
+        linear-gradient(180deg, rgba(255, 106, 0, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%),
+        #121212;
     display: grid;
     place-items: center;
     overflow: hidden;
@@ -2305,14 +2308,14 @@ body.exercise-page {
 body.home-page,
 body.app-content-page {
     --bg: #030303;
-    --surface: #0c0b0a;
-    --surface-muted: #14110f;
-    --surface-strong: #211208;
+    --surface: #0a0a0a;
+    --surface-muted: #111111;
+    --surface-strong: #19110b;
     --surface-tint: rgba(255, 106, 0, 0.14);
-    --line: rgba(255, 106, 0, 0.24);
-    --line-strong: rgba(255, 149, 31, 0.44);
-    --text: #f8f4ee;
-    --muted: rgba(248, 244, 238, 0.68);
+    --line: rgba(255, 106, 0, 0.3);
+    --line-strong: rgba(255, 149, 31, 0.5);
+    --text: #f7f7f7;
+    --muted: rgba(247, 247, 247, 0.68);
     --accent: #ff6a00;
     --accent-strong: #ff9a24;
     --accent-soft: rgba(255, 106, 0, 0.16);
@@ -2404,7 +2407,7 @@ body.app-content-page {
     --accent: #ff6a00;
     --accent-strong: #ff9a24;
     --app-orange-soft: rgba(255, 106, 0, 0.18);
-    --app-panel: #0c0b0a;
+    --app-panel: #0a0a0a;
     background: #030303;
     color: var(--text);
 }
@@ -2422,8 +2425,8 @@ body.app-content-page {
     display: grid;
     align-items: center;
     background:
-        linear-gradient(112deg, rgba(255, 106, 0, 0.32) 0%, rgba(255, 106, 0, 0.12) 36%, rgba(3, 3, 3, 0) 68%),
-        linear-gradient(180deg, #030303 0%, #0a0704 56%, #030303 100%);
+        linear-gradient(112deg, rgba(255, 106, 0, 0.34) 0%, rgba(255, 106, 0, 0.12) 36%, rgba(3, 3, 3, 0) 68%),
+        linear-gradient(180deg, #030303 0%, #080604 56%, #030303 100%);
 }
 
 .app-hero::before {
@@ -2602,7 +2605,7 @@ body.app-content-page {
     padding: 8px;
     border: 1px solid rgba(255, 106, 0, 0.44);
     border-radius: 42px;
-    background: linear-gradient(160deg, #2b1405 0%, #070605 38%, #17100a 100%);
+    background: linear-gradient(160deg, #241005 0%, #050505 38%, #14100c 100%);
     box-shadow:
         0 28px 70px rgba(0, 0, 0, 0.48),
         0 0 0 1px rgba(255, 106, 0, 0.14),
@@ -2641,7 +2644,7 @@ body.app-content-page {
     object-fit: cover;
     object-position: 50% 50%;
     border-radius: 32px;
-    background: #0b0805;
+    background: #030303;
 }
 
 .app-phone--hero {
@@ -2743,20 +2746,20 @@ body.app-content-page {
 }
 
 .app-scene--dark {
-    --text: #f8f4ee;
-    --muted: rgba(248, 244, 238, 0.72);
-    --surface: #0e0c0a;
-    --line: rgba(255, 106, 0, 0.26);
-    background: linear-gradient(180deg, #030303 0%, #0a0704 100%);
-    color: #f8f4ee;
+    --text: #f7f7f7;
+    --muted: rgba(247, 247, 247, 0.72);
+    --surface: #0a0a0a;
+    --line: rgba(255, 106, 0, 0.3);
+    background: linear-gradient(180deg, #030303 0%, #080604 100%);
+    color: #f7f7f7;
 }
 
 .app-scene--light {
-    --text: #f8f4ee;
-    --muted: rgba(248, 244, 238, 0.7);
-    --surface: #0c0b0a;
-    --line: rgba(255, 106, 0, 0.24);
-    background: linear-gradient(180deg, #0a0704 0%, #030303 100%);
+    --text: #f7f7f7;
+    --muted: rgba(247, 247, 247, 0.7);
+    --surface: #0a0a0a;
+    --line: rgba(255, 106, 0, 0.28);
+    background: linear-gradient(180deg, #080604 0%, #030303 100%);
     color: var(--text);
 }
 

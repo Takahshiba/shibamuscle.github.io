@@ -36,6 +36,7 @@ import { ensureDirectory, loadCatalog, loadExercises } from "./source-data.mjs";
 const catalog = loadCatalog();
 const exercises = loadExercises();
 const locales = getGeneratedLocales();
+const APP_THEME_COLOR = "#ff6a00";
 assertExpectedLocales(locales);
 
 let generatedPages = 0;
@@ -145,7 +146,8 @@ ${renderStaticFooter(currentFile, locale)}
             includeAlternates: isIndexableUnit,
             robots: isIndexableUnit ? "index,follow,max-image-preview:large" : "noindex,follow,noarchive",
             type: "article",
-            twitterCard: "summary_large_image"
+            twitterCard: "summary_large_image",
+            themeColor: APP_THEME_COLOR
         },
         ads: isIndexableUnit,
         bodyClass: "exercise-page",

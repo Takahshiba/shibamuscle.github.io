@@ -4,8 +4,8 @@
     "description": "平均重量、基準重量、鍛えられる筋肉を探せるワークアウトデータベース。",
     "start_url": "/",
     "scope": "/",
-    "theme_color": "#148a6a",
-    "background_color": "#fbfcfa",
+    "theme_color": "#ff6a00",
+    "background_color": "#030303",
     "display": "standalone",
     "icons": [
         {
