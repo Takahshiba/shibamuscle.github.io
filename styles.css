@@ -2022,17 +2022,15 @@ body.exercise-page {
 .exercise-hero-media {
     min-height: 360px;
     padding: 26px;
-    border: 1px solid rgba(255, 106, 0, 0.36);
+    border: 1px solid rgba(255, 106, 0, 0.22);
     border-radius: var(--radius-md);
-    background:
-        linear-gradient(145deg, rgba(255, 122, 0, 0.26) 0%, rgba(255, 106, 0, 0.1) 42%, rgba(255, 255, 255, 0.04) 100%),
-        #17110c;
+    background: #ffffff;
     display: grid;
     place-items: center;
     overflow: hidden;
     box-shadow:
-        0 26px 58px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        0 26px 58px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.88);
 }
 
 .exercise-page .workout-main-image {
