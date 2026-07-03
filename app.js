@@ -6,7 +6,7 @@ const CATEGORY_LINKS = [
         id: "whole-body-section",
         key: "wholeBody",
         icon: "power-clean-white-icon.webp",
-        labels: { ja: "全身", ko: "전신", "zh-hant": "全身", es: "Cuerpo completo", fr: "Corps entier", de: "Ganzkörper", id: "Seluruh tubuh" },
+        labels: { ja: "全身", ko: "전신", "zh-hant": "全身", es: "Cuerpo completo", fr: "Corps entier", de: "Ganzkörper", id: "Seluruh tubuh", en: "Full body" },
         descriptions: {
             ja: "デッドリフト、クリーン、スナッチなど全身連動の基準ページ",
             ko: "데드리프트, 클린, 스내치처럼 전신을 함께 쓰는 운동의 기준 페이지",
@@ -14,14 +14,15 @@ const CATEGORY_LINKS = [
             es: "Ejercicios globales como peso muerto, clean y snatch",
             fr: "Exercices globaux comme soulevé de terre, clean et snatch",
             de: "Referenzseiten für Ganzkörperübungen wie Kreuzheben, Clean und Snatch",
-            id: "Halaman referensi untuk deadlift, clean, snatch, dan gerakan seluruh tubuh"
+            id: "Halaman referensi untuk deadlift, clean, snatch, dan gerakan seluruh tubuh",
+            en: "Reference pages for full-body lifts like deadlifts, cleans, and snatches"
         }
     },
     {
         id: "chest-section",
         key: "chest",
         icon: "bench-press-white-icon.webp",
-        labels: { ja: "胸", ko: "가슴", "zh-hant": "胸部", es: "Pecho", fr: "Pectoraux", de: "Brust", id: "Dada" },
+        labels: { ja: "胸", ko: "가슴", "zh-hant": "胸部", es: "Pecho", fr: "Pectoraux", de: "Brust", id: "Dada", en: "Chest" },
         descriptions: {
             ja: "プレス系の平均重量と押す種目の比較",
             ko: "프레스 계열 평균 중량과 미는 운동 비교",
@@ -29,14 +30,15 @@ const CATEGORY_LINKS = [
             es: "Pesos medios y comparativas de empuje",
             fr: "Charges moyennes et comparaisons des mouvements de poussée",
             de: "Durchschnittsgewichte und Vergleiche für Druckübungen",
-            id: "Berat rata-rata dan perbandingan latihan dorong"
+            id: "Berat rata-rata dan perbandingan latihan dorong",
+            en: "Average weights and comparisons for pressing exercises"
         }
     },
     {
         id: "back-section",
         key: "back",
         icon: "deadlift-white-icon.webp",
-        labels: { ja: "背中", ko: "등", "zh-hant": "背部", es: "Espalda", fr: "Dos", de: "Rücken", id: "Punggung" },
+        labels: { ja: "背中", ko: "등", "zh-hant": "背部", es: "Espalda", fr: "Dos", de: "Rücken", id: "Punggung", en: "Back" },
         descriptions: {
             ja: "ローイング、プル系、ヒンジ系の比較",
             ko: "로우, 풀, 힌지 계열 운동 비교",
@@ -44,14 +46,15 @@ const CATEGORY_LINKS = [
             es: "Remos, jalones y bisagras de cadera",
             fr: "Rowings, tirages et mouvements de charnière",
             de: "Rudern, Zugübungen und Hüftstreckbewegungen im Vergleich",
-            id: "Perbandingan row, pull, dan gerakan hip hinge"
+            id: "Perbandingan row, pull, dan gerakan hip hinge",
+            en: "Comparisons for rows, pulls, and hip-hinge movements"
         }
     },
     {
         id: "shoulder-section",
         key: "shoulder",
         icon: "shoulder-press-white-icon.webp",
-        labels: { ja: "肩", ko: "어깨", "zh-hant": "肩部", es: "Hombros", fr: "Épaules", de: "Schultern", id: "Bahu" },
+        labels: { ja: "肩", ko: "어깨", "zh-hant": "肩部", es: "Hombros", fr: "Épaules", de: "Schultern", id: "Bahu", en: "Shoulders" },
         descriptions: {
             ja: "プレス、レイズ、安定性の種目一覧",
             ko: "프레스, 레이즈, 안정성 운동 목록",
@@ -59,14 +62,15 @@ const CATEGORY_LINKS = [
             es: "Presses, elevaciones y estabilidad del hombro",
             fr: "Développés, élévations et stabilité des épaules",
             de: "Schulterdrücken, Seitheben und Stabilitätsübungen",
-            id: "Daftar press, raise, dan latihan stabilitas bahu"
+            id: "Daftar press, raise, dan latihan stabilitas bahu",
+            en: "Presses, raises, and shoulder stability exercises"
         }
     },
     {
         id: "arm-section",
         key: "arm",
         icon: "hammer-curl-white-icon.webp",
-        labels: { ja: "腕", ko: "팔", "zh-hant": "手臂", es: "Brazos", fr: "Bras", de: "Arme", id: "Lengan" },
+        labels: { ja: "腕", ko: "팔", "zh-hant": "手臂", es: "Brazos", fr: "Bras", de: "Arme", id: "Lengan", en: "Arms" },
         descriptions: {
             ja: "カール、トライセプス、前腕の種目",
             ko: "컬, 삼두, 전완 운동",
@@ -74,14 +78,15 @@ const CATEGORY_LINKS = [
             es: "Curls, tríceps y antebrazos",
             fr: "Curls, triceps et avant-bras",
             de: "Curls, Trizeps- und Unterarmübungen",
-            id: "Curl, triseps, dan latihan lengan bawah"
+            id: "Curl, triseps, dan latihan lengan bawah",
+            en: "Curls, triceps, and forearm exercises"
         }
     },
     {
         id: "leg-section",
         key: "leg",
         icon: "squat-white-icon.webp",
-        labels: { ja: "脚", ko: "하체", "zh-hant": "腿部", es: "Piernas", fr: "Jambes", de: "Beine", id: "Kaki" },
+        labels: { ja: "脚", ko: "하체", "zh-hant": "腿部", es: "Piernas", fr: "Jambes", de: "Beine", id: "Kaki", en: "Legs" },
         descriptions: {
             ja: "スクワット、ランジ、ヒップ主導の種目",
             ko: "스쿼트, 런지, 힙 중심 운동",
@@ -89,14 +94,15 @@ const CATEGORY_LINKS = [
             es: "Sentadillas, zancadas y ejercicios dominantes de cadera",
             fr: "Squats, fentes et mouvements dominants hanche",
             de: "Kniebeugen, Ausfallschritte und hüftdominante Übungen",
-            id: "Squat, lunge, dan latihan dominan pinggul"
+            id: "Squat, lunge, dan latihan dominan pinggul",
+            en: "Squats, lunges, and hip-dominant exercises"
         }
     },
     {
         id: "core-section",
         key: "core",
         icon: "sit-ups-white-icon.webp",
-        labels: { ja: "体幹", ko: "코어", "zh-hant": "核心", es: "Core", fr: "Tronc", de: "Rumpf", id: "Core" },
+        labels: { ja: "体幹", ko: "코어", "zh-hant": "核心", es: "Core", fr: "Tronc", de: "Rumpf", id: "Core", en: "Core" },
         descriptions: {
             ja: "腹筋、回旋、体幹安定の種目",
             ko: "복근, 회전, 코어 안정화 운동",
@@ -104,7 +110,8 @@ const CATEGORY_LINKS = [
             es: "Abdominales, rotación y estabilidad del core",
             fr: "Abdominaux, rotation et stabilité du tronc",
             de: "Bauchübungen, Rotation und Rumpfstabilität",
-            id: "Abs, rotasi, dan stabilitas core"
+            id: "Abs, rotasi, dan stabilitas core",
+            en: "Abs, rotation, and core stability exercises"
         }
     }
 ];
@@ -167,6 +174,12 @@ const HOME_ENTRY_ROUTES = [
                 eyebrow: "Perbandingan cepat",
                 title: "Mulai dari latihan yang paling sering dicari",
                 copy: "Pintu masuk cepat ke latihan yang sering dibandingkan agar data utama langsung terlihat."
+            },
+            en: {
+                label: "Popular comparisons",
+                eyebrow: "Quick Compare",
+                title: "Start with the most viewed exercises",
+                copy: "A quick entry point for commonly compared exercises so the key data is easy to scan."
             }
         }
     },
@@ -221,6 +234,12 @@ const HOME_ENTRY_ROUTES = [
                 eyebrow: "Standar kekuatan",
                 title: "Baseline Big 3",
                 copy: "Tiga lift utama yang paling sering dipakai sebagai acuan perbandingan kekuatan."
+            },
+            en: {
+                label: "Big 3",
+                eyebrow: "Performance Baselines",
+                title: "Big 3 baselines",
+                copy: "The three classic lifts most often used as strength comparison references."
             }
         }
     },
@@ -275,6 +294,12 @@ const HOME_ENTRY_ROUTES = [
                 eyebrow: "Jalur awal",
                 title: "Rute perbandingan yang mudah dimulai",
                 copy: "Titik awal saat ingin membandingkan latihan yang relatif mudah diakses terlebih dahulu."
+            },
+            en: {
+                label: "Beginner paths",
+                eyebrow: "Starter Paths",
+                title: "Easy comparison routes to start",
+                copy: "A starting point when you want to compare approachable exercises before going deeper."
             }
         }
     }
@@ -989,6 +1014,97 @@ UI_TEXT.id = {
     worldRecord: "Rekor dunia"
 };
 
+UI_TEXT.en = {
+    ad: "Ad",
+    adAfterQuickStart: "After recommended entry points",
+    adAfterMuscles: "After muscles section",
+    adAfterDetails: "After data tables",
+    adAfterLibrary: "After library",
+    adBeforeFooter: "Before footer",
+    adAfterRelated: "After related exercises",
+    adAfterStandards: "After standards",
+    average: "Average weight",
+    averageEyebrow: "Average",
+    averageReps: "Average reps",
+    breadcrumb: "Breadcrumb",
+    category: "Category",
+    categoryDashboard: "Body Area Dashboard",
+    categoryDashboardCopy: "A quick overview of exercise counts, key movements, and comparison angles by body area.",
+    categoryDashboardEyebrow: "Category Dashboard",
+    compareFlow: "Comparison flow",
+    compareMode: "Comparison mode",
+    contentLibraryCopy: "Continue directly to related exercise pages.",
+    contentLibraryTitle: "Exercise library",
+    dataAvailable: "Data available",
+    databaseLibraryTitle: "Full exercise library",
+    databaseLibraryIntro: "Move from body-area groups straight to the comparison pages you need.",
+    detailByTabs: "Detailed comparison with tabs",
+    exerciseLibraryTitle: "Exercise library",
+    exercisesListed: (count) => `${count} exercises listed`,
+    female: "Women",
+    home: "Home",
+    homeHeroActionLabel: "Quick actions",
+    homeHeroDescription: "A fitness database for quickly comparing average weight, strength standards, and muscles worked by exercise.",
+    homeHeroTitle: "Compare workout data faster",
+    languageEnglish: "English",
+    languageJapanese: "日本語",
+    languageKorean: "한국어",
+    languageChinese: "繁體中文",
+    languageSimplifiedChinese: "简体中文",
+    languageSpanish: "Español",
+    languageFrench: "Français",
+    languageGerman: "Deutsch",
+    languageIndonesian: "Bahasa Indonesia",
+    levelAverageAvailable: "Average data available",
+    libraryExplorerCopy: "Browse comparison pages for every exercise by body area.",
+    libraryExplorerTitle: "Performance Library",
+    libraryMore: (count) => `Show more (${count})`,
+    libraryLess: "Show less",
+    majorCategoryDashboard: "Major body areas",
+    male: "Men",
+    muscleGroups: "Muscle groups",
+    muscles: "Muscles",
+    musclesCopy: "View primary, secondary, and stabilizing muscles separately.",
+    musclesEyebrow: "Muscles",
+    musclesHeading: "Muscles worked",
+    page: "Page",
+    pages: (count) => `${count} pages`,
+    performanceDashboard: "Performance Dashboard",
+    performanceLibraryCount: "Exercises listed",
+    primaryMuscle: "Primary muscle",
+    primaryMuscleFallback: "Primary muscle data available",
+    quickCompare: "Quick Compare",
+    quickStart: "Start comparing",
+    quickStartCopy: "Start here when you are not sure where to go. These are the most common comparison paths.",
+    quickStartLabel: "Recommended entry points",
+    relatedExercises: "Related exercises",
+    relatedExercisesCopy: "Exercises in the same category are arranged so they are easy to compare in sequence.",
+    relatedNone: "No related exercises from the same body area are available right now.",
+    relatedSameCategory: "Only exercises from the same body area are shown.",
+    reps: "Reps",
+    repsComparison: "Rep comparison",
+    resultsAvailable: "Comparison data available",
+    snapshot: "Snapshot",
+    snapshotDashboard: "Comparison dashboard",
+    standards: "Strength standards",
+    standardsEyebrow: "Standards",
+    standardsReps: "Rep standards",
+    standardsWeightCopy: "Switch gender and comparison axis to review standards.",
+    standardsRepsCopy: "Use the tabs to review rep standards by bodyweight and age.",
+    support: "Support",
+    contact: "Contact",
+    privacy: "Privacy Policy",
+    tableGuide: "How to read the table",
+    tableGuideCopy: "A reference for level distribution and typical training history.",
+    tableGuideEyebrow: "Notes",
+    totalCategories: "Categories listed",
+    totalExercisesCopy: "Exercises available for cross-comparison",
+    unitSwitchCopy: "Unit switching on every page",
+    weight: "Weight",
+    weightComparison: "Weight comparison",
+    worldRecord: "World record"
+};
+
 UI_TEXT.ja.languageSimplifiedChinese = "简体中文";
 UI_TEXT.ko.languageSimplifiedChinese = "간체 중국어";
 UI_TEXT["zh-hant"].languageSimplifiedChinese = "簡體中文";
@@ -1030,6 +1146,10 @@ Object.assign(UI_TEXT.de, {
 Object.assign(UI_TEXT.id, {
     about: "Tentang Shiba Muscle",
     methodology: "Cara membaca data"
+});
+Object.assign(UI_TEXT.en, {
+    about: "About Shiba Muscle",
+    methodology: "How to read the data"
 });
 
 const LIBRARY_INITIAL_CARD_LIMIT = 8;
@@ -1210,7 +1330,7 @@ function buildHeader(pageType, unitSwitch) {
                     </a>
                     <div class="app-local-nav">
                         ${navItems}
-                        <a href="#app-store" class="app-local-cta" aria-disabled="true">${escapeHtml(localeText({ ja: "近日公開", ko: "출시 예정", es: "Próximamente", id: "Segera hadir" }))}</a>
+                        <a href="#app-store" class="app-local-cta" aria-disabled="true">${escapeHtml(localeText({ ja: "近日公開", ko: "출시 예정", es: "Próximamente", id: "Segera hadir", en: "Coming Soon" }))}</a>
                     </div>
                 </nav>
             </header>
@@ -1264,7 +1384,7 @@ function buildFooter() {
     }).join("");
 
     const languageLinks = [
-        { href: localizedDomainHref("https://en.shibamuscle.com"), label: t("languageEnglish"), lang: "en" },
+        { href: localizedDomainHref("https://shibamuscle.com/en"), label: t("languageEnglish"), lang: "en" },
         { href: localizedDomainHref("https://shibamuscle.com"), label: t("languageJapanese"), lang: "ja" },
         { href: localizedDomainHref("https://shibamuscle.com/zh-hant"), label: t("languageChinese"), lang: "zh-hant" },
         { href: localizedDomainHref("https://shibamuscle.com/zh-hans"), label: t("languageSimplifiedChinese"), lang: "zh-hans" },
@@ -1408,23 +1528,23 @@ function enhanceHomePageLegacy(main) {
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("standards"))}</span>
-                                <strong class="metric-value">${escapeHtml(localeText({ ja: "体重 / 年齢", ko: "체중 / 나이", "zh-hant": "體重 / 年齡", "zh-hans": "体重 / 年龄", es: "Peso / edad", fr: "Poids / âge", de: "Körpergewicht / Alter", id: "Berat badan / usia" }))}</strong>
+                                <strong class="metric-value">${escapeHtml(localeText({ ja: "体重 / 年齢", ko: "체중 / 나이", "zh-hant": "體重 / 年齡", "zh-hans": "体重 / 年龄", es: "Peso / edad", fr: "Poids / âge", de: "Körpergewicht / Alter", id: "Berat badan / usia", en: "Bodyweight / age" }))}</strong>
                                 <span class="metric-subvalue">${escapeHtml(t("detailByTabs"))}</span>
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("muscleGroups"))}</span>
                                 <strong class="metric-value">${escapeHtml(t("primaryMuscle"))}</strong>
-                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "種目ごとの効き方を把握", ko: "운동별 자극 부위 확인", "zh-hant": "查看每個動作的刺激部位", "zh-hans": "查看每个动作的刺激部位", es: "Estímulo por ejercicio", fr: "Travail musculaire par exercice", de: "Zielmuskulatur je Übung prüfen", id: "Lihat stimulasi tiap latihan" }))}</span>
+                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "種目ごとの効き方を把握", ko: "운동별 자극 부위 확인", "zh-hant": "查看每個動作的刺激部位", "zh-hans": "查看每个动作的刺激部位", es: "Estímulo por ejercicio", fr: "Travail musculaire par exercice", de: "Zielmuskulatur je Übung prüfen", id: "Lihat stimulasi tiap latihan", en: "See stimulus by exercise" }))}</span>
                             </article>
                             <article class="dashboard-mini-card">
                                 <span class="metric-label">${escapeHtml(t("compareFlow"))}</span>
                                 <strong class="metric-value">${escapeHtml(t("relatedExercises"))}</strong>
-                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "同カテゴリを続けて閲覧", ko: "같은 카테고리 이어보기", "zh-hant": "連續查看同分類動作", "zh-hans": "连续查看同分类动作", es: "Seguir en la misma categoría", fr: "Continuer dans la même catégorie", de: "In derselben Kategorie weitersehen", id: "Lanjut di kategori yang sama" }))}</span>
+                                <span class="metric-subvalue">${escapeHtml(localeText({ ja: "同カテゴリを続けて閲覧", ko: "같은 카테고리 이어보기", "zh-hant": "連續查看同分類動作", "zh-hans": "连续查看同分类动作", es: "Seguir en la misma categoría", fr: "Continuer dans la même catégorie", de: "In derselben Kategorie weitersehen", id: "Lanjut di kategori yang sama", en: "Continue in the same category" }))}</span>
                             </article>
                         </div>
                         <div class="dashboard-spotlight-list">
                             <div class="dashboard-spotlight-heading">
-                                <span class="metric-label">${escapeHtml(localeText({ ja: "今すぐ見比べる", ko: "바로 비교하기", "zh-hant": "立即比較", "zh-hans": "立即比较", es: "Comparar ahora", fr: "Comparer maintenant", de: "Jetzt vergleichen", id: "Bandingkan sekarang" }))}</span>
+                                <span class="metric-label">${escapeHtml(localeText({ ja: "今すぐ見比べる", ko: "바로 비교하기", "zh-hant": "立即比較", "zh-hans": "立即比较", es: "Comparar ahora", fr: "Comparer maintenant", de: "Jetzt vergleichen", id: "Bandingkan sekarang", en: "Compare now" }))}</span>
                             </div>
                             ${popularPreviewCards.map((card) => {
                                 return `
@@ -1458,7 +1578,7 @@ function enhanceHomePageLegacy(main) {
             <div class="category-overview-grid">
                 ${libraryData.sections.map((section) => {
                     const categoryMeta = getCategoryLinks().find((item) => item.id === section.id);
-                    const description = categoryMeta?.description || localeText({ ja: "関連種目をまとめて確認", ko: "관련 운동을 한 번에 확인", "zh-hant": "集中查看相關訓練動作", "zh-hans": "集中查看相关训练动作", es: "Revisar ejercicios relacionados", fr: "Voir les exercices liés", de: "Verwandte Übungen gesammelt prüfen", id: "Lihat latihan terkait sekaligus" });
+                    const description = categoryMeta?.description || localeText({ ja: "関連種目をまとめて確認", ko: "관련 운동을 한 번에 확인", "zh-hant": "集中查看相關訓練動作", "zh-hans": "集中查看相关训练动作", es: "Revisar ejercicios relacionados", fr: "Voir les exercices liés", de: "Verwandte Übungen gesammelt prüfen", id: "Lihat latihan terkait sekaligus", en: "Review related exercises together" });
                     const sampleNames = section.cards.slice(0, 3).map((card) => card.name).join(" / ");
                     return `
                         <a class="category-tile" href="#${section.id}">
@@ -1541,7 +1661,8 @@ function enhanceHomePage(main, { preserveStaticLanding = false } = {}) {
                 ja: "種目データベース",
                 ko: "운동 데이터베이스",
                 es: "Base de datos de ejercicios",
-                id: "Database latihan"
+                id: "Database latihan",
+                en: "Exercise database"
             });
         }
         titleHeading.id = "database";
@@ -1552,7 +1673,8 @@ function enhanceHomePage(main, { preserveStaticLanding = false } = {}) {
         ja: "平均重量、基準表、鍛えられる筋肉を確認したいときは、ここから既存のワークアウトデータベースへ進めます。",
         ko: "평균 중량, 기준표, 자극되는 근육을 확인하고 싶다면 기존 운동 데이터베이스로 이동할 수 있습니다.",
         es: "Cuando quieras revisar pesos medios, estándares y músculos trabajados, entra en la base de datos existente.",
-        id: "Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada."
+        id: "Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada.",
+        en: "Use the workout database when you want to check average weights, standards, and muscles worked."
     });
     const homeIntro = libraryContainer.querySelector(".section-intro") || htmlToElement(`
         <p class="section-intro">${escapeHtml(databaseIntro)}</p>
@@ -1577,7 +1699,8 @@ function enhanceHomePage(main, { preserveStaticLanding = false } = {}) {
             ja: "部位別に種目ページを横断し、アプリで使うメニューの候補を探せます。",
             ko: "부위별 운동 페이지를 둘러보며 앱에서 사용할 루틴 후보를 찾을 수 있습니다.",
             es: "Explora ejercicios por zona y encuentra opciones para tus rutinas en la app.",
-            id: "Jelajahi latihan per area dan cari kandidat menu untuk digunakan di aplikasi."
+            id: "Jelajahi latihan per area dan cari kandidat menu untuk digunakan di aplikasi.",
+            en: "Browse exercise pages by body area and find candidates for your app routines."
         })
     });
 }
@@ -1595,28 +1718,28 @@ function suppressHomeAds(main) {
 }
 
 function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
-    const ctaLabel = localeText({ ja: "近日公開", ko: "출시 예정", es: "Próximamente", id: "Segera hadir" });
-    const learnMoreLabel = localeText({ ja: "機能を見る", ko: "기능 보기", es: "Ver funciones", id: "Lihat fitur" });
-    const databaseLabel = localeText({ ja: "データベースを見る", ko: "데이터베ース 보기", es: "Ver base de datos", id: "Lihat database" });
-    const phoneAlt = localeText({ ja: "ShibaアプリのToday画面", ko: "Shiba 앱 Today 화면", es: "Pantalla Today de la app Shiba", id: "Layar Today aplikasi Shiba" });
-    const strengthAlt = localeText({ ja: "Strength Percentile画面", ko: "Strength Percentile 화면", es: "Pantalla Strength Percentile", id: "Layar Strength Percentile" });
-    const heatmapAlt = localeText({ ja: "筋肉ヒートマップ画面", ko: "근육 히트맵 화면", es: "Pantalla de mapa muscular", id: "Layar heatmap otot" });
+    const ctaLabel = localeText({ ja: "近日公開", ko: "출시 예정", es: "Próximamente", id: "Segera hadir", en: "Coming Soon" });
+    const learnMoreLabel = localeText({ ja: "機能を見る", ko: "기능 보기", es: "Ver funciones", id: "Lihat fitur", en: "See features" });
+    const databaseLabel = localeText({ ja: "データベースを見る", ko: "데이터베이스 보기", es: "Ver base de datos", id: "Lihat database", en: "View database" });
+    const phoneAlt = localeText({ ja: "ShibaアプリのToday画面", ko: "Shiba 앱 Today 화면", es: "Pantalla Today de la app Shiba", id: "Layar Today aplikasi Shiba", en: "Shiba app Today screen" });
+    const strengthAlt = localeText({ ja: "Strength Percentile画面", ko: "Strength Percentile 화면", es: "Pantalla Strength Percentile", id: "Layar Strength Percentile", en: "Strength Percentile screen" });
+    const heatmapAlt = localeText({ ja: "筋肉ヒートマップ画面", ko: "근육 히트맵 화면", es: "Pantalla de mapa muscular", id: "Layar heatmap otot", en: "Muscle heatmap screen" });
 
     const stats = [
         {
             label: "Start",
             value: "Today",
-            copy: localeText({ ja: "次のワークアウトをすぐ開始", ko: "다음 운동을 바로 시작", es: "Rutina lista para empezar", id: "Mulai latihan berikutnya" })
+            copy: localeText({ ja: "次のワークアウトをすぐ開始", ko: "다음 운동을 바로 시작", es: "Rutina lista para empezar", id: "Mulai latihan berikutnya", en: "Start the next workout fast" })
         },
         {
             label: "Track",
             value: "Sets",
-            copy: localeText({ ja: "重量、回数、メモを記録", ko: "중량, 반복, 메모 기록", es: "Peso, reps y notas", id: "Catat berat, repetisi, catatan" })
+            copy: localeText({ ja: "重量、回数、メモを記録", ko: "중량, 반복, 메모 기록", es: "Peso, reps y notas", id: "Catat berat, repetisi, catatan", en: "Log weight, reps, and notes" })
         },
         {
             label: "Review",
             value: "Heatmap",
-            copy: localeText({ ja: "鍛えた部位を見返す", ko: "훈련한 부위 확인", es: "Zonas trabajadas visibles", id: "Lihat area yang dilatih" })
+            copy: localeText({ ja: "鍛えた部位を見返す", ko: "훈련한 부위 확인", es: "Zonas trabajadas visibles", id: "Lihat area yang dilatih", en: "Review trained body areas" })
         }
     ];
 
@@ -1624,25 +1747,29 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
         ja: ["今日やるメニューをひと目で確認", "開始ボタンを迷わない位置に固定", "進行中のセットへすぐ戻れる"],
         ko: ["오늘 할 루틴을 한눈에 확인", "시작 버튼을 명확하게 배치", "진행 중인 세트로 바로 복귀"],
         es: ["Rutina de hoy visible al instante", "Acción principal siempre clara", "Vuelta rápida a series activas"],
-        id: ["Menu hari ini langsung terlihat", "Tombol mulai berada di posisi jelas", "Kembali cepat ke set aktif"]
+        id: ["Menu hari ini langsung terlihat", "Tombol mulai berada di posisi jelas", "Kembali cepat ke set aktif"],
+        en: ["See today's plan at a glance", "Keep the start button easy to find", "Return to active sets quickly"]
     });
     const loggingFeatures = localeText({
         ja: ["前回重量を見ながら入力", "セットごとの達成感が残る", "記録が分析画面に自然につながる"],
         ko: ["이전 중량을 보며 입력", "세트별 달성감을 남김", "기록이 분석 화면으로 이어짐"],
         es: ["Registra junto al peso anterior", "Cada serie deja una señal clara", "Los datos alimentan el análisis"],
-        id: ["Input sambil melihat berat sebelumnya", "Setiap set terasa selesai", "Catatan mengalir ke analitik"]
+        id: ["Input sambil melihat berat sebelumnya", "Setiap set terasa selesai", "Catatan mengalir ke analitik"],
+        en: ["Log while seeing previous weights", "Make every set feel completed", "Let records flow into analytics"]
     });
     const analyticsFeatures = localeText({
         ja: ["Strength Percentileで現在地を把握", "1RM推移とボリュームの変化を確認", "伸びている種目を次の計画に反映"],
         ko: ["Strength Percentile로 현재 위치 확인", "1RM 추이와 볼륨 변화 확인", "성장한 운동을 다음 계획에 반영"],
         es: ["Strength Percentile muestra tu posición", "Revisa tendencia de 1RM y volumen", "Convierte el progreso en el siguiente plan"],
-        id: ["Strength Percentile menunjukkan posisi", "Lihat tren 1RM dan volume", "Masukkan progres ke rencana berikutnya"]
+        id: ["Strength Percentile menunjukkan posisi", "Lihat tren 1RM dan volume", "Masukkan progres ke rencana berikutnya"],
+        en: ["See your position with Strength Percentile", "Review 1RM and volume trends", "Turn progress into the next plan"]
     });
     const heatmapFeatures = localeText({
         ja: ["鍛えた部位を全身で俯瞰", "偏りを見つけて次のメニューを調整", "数字だけでは見えない実感を補う"],
         ko: ["훈련한 부위를 전신으로 확인", "편향을 찾아 다음 루틴 조정", "숫자만으로 부족한 감각 보완"],
         es: ["Vista global de músculos trabajados", "Detecta sesgos y ajusta la rutina", "Añade contexto más allá de los números"],
-        id: ["Lihat area terlatih seluruh tubuh", "Temukan ketimpangan dan sesuaikan menu", "Lengkapi angka dengan konteks visual"]
+        id: ["Lihat area terlatih seluruh tubuh", "Temukan ketimpangan dan sesuaikan menu", "Lengkapi angka dengan konteks visual"],
+        en: ["Scan trained areas across the body", "Find gaps and adjust the next routine", "Add visual context beyond numbers"]
     });
 
     return htmlToElement(`
@@ -1655,13 +1782,15 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                             ja: "今日の筋トレを、迷わず始める。",
                             ko: "오늘의 운동을 망설이지 않고 시작하세요.",
                             es: "Empieza el entrenamiento de hoy sin dudar.",
-                            id: "Mulai latihan hari ini tanpa ragu."
+                            id: "Mulai latihan hari ini tanpa ragu.",
+                            en: "Start today's workout without hesitation."
                         }))}</h1>
                         <p class="app-hero-lead">${escapeHtml(localeText({
                             ja: "メニューを開く。セットを残す。強みと伸びを見返す。Shibaは、筋トレの一日を最短距離でつなぐ記録アプリです。",
                             ko: "루틴을 열고, 세트를 남기고, 강점과 성장을 다시 봅니다. Shiba는 근력 운동의 하루를 가장 짧은 흐름으로 연결합니다.",
                             es: "Abre la rutina, registra series y revisa fuerza y progreso. Shiba conecta el día de entrenamiento con menos fricción.",
-                            id: "Buka menu, catat set, lalu lihat kekuatan dan progres. Shiba menghubungkan hari latihan dengan alur yang ringkas."
+                            id: "Buka menu, catat set, lalu lihat kekuatan dan progres. Shiba menghubungkan hari latihan dengan alur yang ringkas.",
+                            en: "Open your plan, log sets, and review strength and progress. Shiba connects your training day with less friction."
                         }))}</p>
                         <div class="app-hero-actions">
                             <a href="#app-store" class="app-pill app-pill--primary" aria-disabled="true">${escapeHtml(ctaLabel)}</a>
@@ -1693,13 +1822,15 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                             ja: "開いた瞬間、やることだけが見える。",
                             ko: "열자마자 할 일만 보입니다.",
                             es: "Al abrirla, solo ves lo que toca.",
-                            id: "Saat dibuka, yang terlihat hanya latihan berikutnya."
+                            id: "Saat dibuka, yang terlihat hanya latihan berikutnya.",
+                            en: "Open it and see only what needs doing."
                         }))}</h2>
                         <p>${escapeHtml(localeText({
                             ja: "ワークアウト開始の判断を減らし、今日の一歩に集中できる画面です。",
                             ko: "운동 시작 전 망설임을 줄이고 오늘의 첫 동작에 집중하게 해 줍니다.",
                             es: "Reduce decisiones antes de entrenar y centra la pantalla en el primer paso.",
-                            id: "Mengurangi keputusan sebelum latihan dan membuat fokus pada langkah pertama."
+                            id: "Mengurangi keputusan sebelum latihan dan membuat fokus pada langkah pertama.",
+                            en: "Reduce pre-workout decisions and focus the screen on the first step."
                         }))}</p>
                         ${renderAppFeatureList(todayFeatures)}
                     </div>
@@ -1719,13 +1850,15 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                             ja: "セット入力は、勢いを止めない。",
                             ko: "세트 입력은 흐름을 끊지 않습니다.",
                             es: "Registrar series no corta el ritmo.",
-                            id: "Input set tidak memutus ritme."
+                            id: "Input set tidak memutus ritme.",
+                            en: "Set logging keeps your rhythm."
                         }))}</h2>
                         <p>${escapeHtml(localeText({
                             ja: "重量と回数を淡々と残せるUIで、記録すること自体がトレーニングの邪魔になりません。",
                             ko: "중량과 반복을 차분히 남기는 UI로 기록 자체가 운동을 방해하지 않습니다.",
                             es: "Una interfaz directa para peso y repeticiones mantiene el entrenamiento en marcha.",
-                            id: "UI yang lugas untuk berat dan repetisi menjaga latihan tetap berjalan."
+                            id: "UI yang lugas untuk berat dan repetisi menjaga latihan tetap berjalan.",
+                            en: "A direct interface for weight and reps keeps logging out of the way."
                         }))}</p>
                         ${renderAppFeatureList(loggingFeatures)}
                     </div>
@@ -1743,13 +1876,15 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                             ja: "伸びている感覚を、数字で確かめる。",
                             ko: "성장하는 감각을 숫자로 확인합니다.",
                             es: "Comprueba con datos lo que sientes al progresar.",
-                            id: "Pastikan rasa progres dengan angka."
+                            id: "Pastikan rasa progres dengan angka.",
+                            en: "Confirm your progress with numbers."
                         }))}</h2>
                         <p>${escapeHtml(localeText({
                             ja: "Strength Percentile、成長チャート、ボリューム推移で、次の重量設定に根拠を持てます。",
                             ko: "Strength Percentile, 성장 차트, 볼륨 추이로 다음 중량 설정의 근거를 얻습니다.",
                             es: "Strength Percentile, gráficos y volumen dan criterio para el siguiente peso.",
-                            id: "Strength Percentile, grafik, dan volume memberi dasar untuk beban berikutnya."
+                            id: "Strength Percentile, grafik, dan volume memberi dasar untuk beban berikutnya.",
+                            en: "Strength Percentile, growth charts, and volume trends give you a basis for the next load."
                         }))}</p>
                         ${renderAppFeatureList(analyticsFeatures)}
                     </div>
@@ -1769,13 +1904,15 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                             ja: "どこを鍛えたか、一目でわかる。",
                             ko: "어디를 훈련했는지 한눈에 보입니다.",
                             es: "Ve de un vistazo qué zonas entrenaste.",
-                            id: "Lihat area yang dilatih dalam sekali pandang."
+                            id: "Lihat area yang dilatih dalam sekali pandang.",
+                            en: "See what you trained at a glance."
                         }))}</h2>
                         <p>${escapeHtml(localeText({
                             ja: "筋肉ヒートマップは、種目名の羅列では見えにくい偏りや不足を、身体の形で見せてくれます。",
                             ko: "근육 히트맵은 운동 이름만으로 놓치기 쉬운 편향과 부족을 몸의 형태로 보여 줍니다.",
                             es: "El mapa muscular revela sesgos y vacíos que una lista de ejercicios no muestra.",
-                            id: "Heatmap otot menunjukkan bias dan kekurangan yang tidak terlihat dari daftar latihan."
+                            id: "Heatmap otot menunjukkan bias dan kekurangan yang tidak terlihat dari daftar latihan.",
+                            en: "The muscle heatmap reveals bias and gaps that a list of exercise names can hide."
                         }))}</p>
                         ${renderAppFeatureList(heatmapFeatures)}
                     </div>
@@ -1793,13 +1930,15 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                             ja: "次にやる種目を、自然に探せる。",
                             ko: "다음 운동을 자연스럽게 찾습니다.",
                             es: "Encuentra el siguiente ejercicio con naturalidad.",
-                            id: "Temukan latihan berikutnya dengan alami."
+                            id: "Temukan latihan berikutnya dengan alami.",
+                            en: "Find your next exercise naturally."
                         }))}</h2>
                         <p>${escapeHtml(localeText({
                             ja: "部位別のデータベースは下部に残し、アプリで使うメニューや種目選びへつながる入口にします。",
                             ko: "부위별 데이터베ース는 아래에 남겨 앱에서 사용할 루틴과 운동 선택으로 이어지게 합니다.",
                             es: "La base por zonas queda debajo y sirve como puente hacia rutinas y ejercicios.",
-                            id: "Database per area tetap di bawah sebagai jembatan menuju menu dan pilihan latihan."
+                            id: "Database per area tetap di bawah sebagai jembatan menuju menu dan pilihan latihan.",
+                            en: "The body-area database stays below as a bridge into routine and exercise choices."
                         }))}</p>
                         <div class="app-library-meta">
                             <span>${escapeHtml(formatExerciseCount(exerciseCount))}</span>
@@ -1807,7 +1946,8 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                                 ja: `${sectionCount}カテゴリ`,
                                 ko: `${sectionCount}개 카테고리`,
                                 es: `${sectionCount} categorías`,
-                                id: `${sectionCount} kategori`
+                                id: `${sectionCount} kategori`,
+                                en: `${sectionCount} categories`
                             }))}</span>
                         </div>
                         <a href="#database" class="app-pill app-pill--dark">${escapeHtml(databaseLabel)}</a>
@@ -1828,13 +1968,15 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                         ja: "App Store公開に向けて準備中です。",
                         ko: "App Store 공개를 준비 중입니다.",
                         es: "Preparando el lanzamiento en App Store.",
-                        id: "Sedang disiapkan untuk App Store."
+                        id: "Sedang disiapkan untuk App Store.",
+                        en: "Preparing for the App Store launch."
                     }))}</h2>
                     <p>${escapeHtml(localeText({
                         ja: "正式URLが決まり次第、このCTAをApp Storeリンクへ差し替えます。",
                         ko: "공식 URL이 정해지면 이 CTA를 App Store 링크로 교체합니다.",
                         es: "Cuando exista la URL oficial, esta CTA apuntará a App Store.",
-                        id: "Saat URL resmi siap, CTA ini akan diarahkan ke App Store."
+                        id: "Saat URL resmi siap, CTA ini akan diarahkan ke App Store.",
+                        en: "When the official URL is ready, this CTA will point to the App Store."
                     }))}</p>
                 </div>
             </section>
@@ -1855,7 +1997,8 @@ function buildLoggingMock() {
         ja: { title: "Bench Press", set: "Set", weight: "重量", reps: "回数", done: "完了" },
         ko: { title: "Bench Press", set: "Set", weight: "중량", reps: "반복", done: "완료" },
         es: { title: "Bench Press", set: "Set", weight: "Peso", reps: "Reps", done: "Listo" },
-        id: { title: "Bench Press", set: "Set", weight: "Berat", reps: "Reps", done: "Selesai" }
+        id: { title: "Bench Press", set: "Set", weight: "Berat", reps: "Reps", done: "Selesai" },
+        en: { title: "Bench Press", set: "Set", weight: "Weight", reps: "Reps", done: "Done" }
     });
 
     return `
@@ -1986,8 +2129,8 @@ function enhanceExercisePage(main) {
         t("averageEyebrow"),
         averageLabel,
         measurementKind === "reps"
-            ? localeText({ ja: "レベル別の平均レップ数を先に確認できます。", ko: "레벨별 평균 반복 횟수를 먼저 확인할 수 있습니다.", "zh-hant": "可先查看各等級的平均次數。", "zh-hans": "可先查看各等级的平均次数。", es: "Consulta primero las repeticiones medias por nivel.", fr: "Consulte d'abord les répétitions moyennes par niveau.", de: "Prüfe zuerst die durchschnittlichen Wiederholungen je Level.", id: "Lihat repetisi rata-rata per level terlebih dahulu." })
-            : localeText({ ja: "レベル別の1RM目安を先に確認できます。", ko: "레벨별 1RM 기준을 먼저 확인할 수 있습니다.", "zh-hant": "可先查看各等級的 1RM 參考。", "zh-hans": "可先查看各等级的 1RM 参考。", es: "Consulta primero la referencia de 1RM por nivel.", fr: "Consulte d'abord la référence 1RM par niveau.", de: "Prüfe zuerst die 1RM-Referenz je Level.", id: "Lihat acuan 1RM per level terlebih dahulu." })
+            ? localeText({ ja: "レベル別の平均レップ数を先に確認できます。", ko: "레벨별 평균 반복 횟수를 먼저 확인할 수 있습니다.", "zh-hant": "可先查看各等級的平均次數。", "zh-hans": "可先查看各等级的平均次数。", es: "Consulta primero las repeticiones medias por nivel.", fr: "Consulte d'abord les répétitions moyennes par niveau.", de: "Prüfe zuerst die durchschnittlichen Wiederholungen je Level.", id: "Lihat repetisi rata-rata per level terlebih dahulu.", en: "Check average reps by level first." })
+            : localeText({ ja: "レベル別の1RM目安を先に確認できます。", ko: "레벨별 1RM 기준을 먼저 확인할 수 있습니다.", "zh-hant": "可先查看各等級的 1RM 參考。", "zh-hans": "可先查看各等级的 1RM 参考。", es: "Consulta primero la referencia de 1RM por nivel.", fr: "Consulte d'abord la référence 1RM par niveau.", de: "Prüfe zuerst die 1RM-Referenz je Level.", id: "Lihat acuan 1RM per level terlebih dahulu.", en: "Check the 1RM reference by level first." })
     );
     decorateTableShell(averageContainer.querySelector(".average-section-table"));
 
@@ -2037,7 +2180,8 @@ function enhanceExercisePage(main) {
                 es: "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página.",
                 fr: "Compare des exercices de la même catégorie et d'autres zones avant de passer à la page suivante.",
                 de: "Vergleiche Übungen aus derselben Kategorie und anderen Muskelbereichen, bevor du zur nächsten Vergleichsseite wechselst.",
-                id: "Bandingkan latihan dari kategori yang sama dan bagian tubuh lain sebelum lanjut ke halaman berikutnya."
+                id: "Bandingkan latihan dari kategori yang sama dan bagian tubuh lain sebelum lanjut ke halaman berikutnya.",
+                en: "Compare exercises from the same category and other body areas before moving to the next page."
             }))}
         </p>
     `);
@@ -2052,7 +2196,8 @@ function enhanceExercisePage(main) {
             es: "Compara ejercicios de la misma categoría y de otras zonas antes de pasar a la siguiente página.",
             fr: "Compare des exercices de la même catégorie et d'autres zones avant de passer à la page suivante.",
             de: "Vergleiche Übungen aus derselben Kategorie und anderen Muskelbereichen, bevor du zur nächsten Vergleichsseite wechselst.",
-            id: "Bandingkan latihan dari kategori yang sama dan bagian tubuh lain sebelum lanjut ke halaman berikutnya."
+            id: "Bandingkan latihan dari kategori yang sama dan bagian tubuh lain sebelum lanjut ke halaman berikutnya.",
+            en: "Compare exercises from the same category and other body areas before moving to the next page."
         });
     }
 
@@ -2124,7 +2269,7 @@ function enhanceContentPage(main) {
 
     libraryContainer.classList.add("section-band", "library-band");
     libraryTitle.classList.add("section-title--database");
-    libraryTitle.textContent = libraryTitle.textContent || localeText({ ja: "データベースから続けて探す", ko: "데이터베이스에서 계속 찾기", "zh-hant": "從資料庫繼續探索", "zh-hans": "从数据库继续探索", es: "Seguir explorando la base de datos", fr: "Continuer dans la base de données", de: "In der Datenbank weiterstöbern", id: "Lanjut menjelajah database" });
+    libraryTitle.textContent = libraryTitle.textContent || localeText({ ja: "データベースから続けて探す", ko: "데이터베이스에서 계속 찾기", "zh-hant": "從資料庫繼續探索", "zh-hans": "从数据库继续探索", es: "Seguir explorando la base de datos", fr: "Continuer dans la base de données", de: "In der Datenbank weiterstöbern", id: "Lanjut menjelajah database", en: "Keep exploring the database" });
 
     libraryData.sections.forEach((section) => {
         section.heading = replaceHeadingTag(section.heading, "h3");
@@ -2684,11 +2829,11 @@ function getPrimaryMuscles(muscles, main) {
 }
 
 function formatExerciseCount(count) {
-    return localeText({ ja: `${count}種目`, ko: `${count}개 운동`, "zh-hant": `${count} 個動作`, "zh-hans": `${count} 个动作`, es: `${count} ejercicios`, fr: `${count} exercices`, de: `${count} Übungen`, id: `${count} latihan` });
+    return localeText({ ja: `${count}種目`, ko: `${count}개 운동`, "zh-hant": `${count} 個動作`, "zh-hans": `${count} 个动作`, es: `${count} ejercicios`, fr: `${count} exercices`, de: `${count} Übungen`, id: `${count} latihan`, en: `${count} exercises` });
 }
 
 function formatMuscleCount(count) {
-    return localeText({ ja: `${count}筋群`, ko: `${count}개 근육`, "zh-hant": `${count} 個肌群`, "zh-hans": `${count} 个肌群`, es: `${count} músculos`, fr: `${count} muscles`, de: `${count} Muskeln`, id: `${count} otot` });
+    return localeText({ ja: `${count}筋群`, ko: `${count}개 근육`, "zh-hant": `${count} 個肌群`, "zh-hans": `${count} 个肌群`, es: `${count} músculos`, fr: `${count} muscles`, de: `${count} Muskeln`, id: `${count} otot`, en: `${count} muscles` });
 }
 
 function formatRelatedHeading(sectionLabel) {
@@ -2720,6 +2865,10 @@ function formatRelatedHeading(sectionLabel) {
         return `Latihan terkait untuk ${sectionLabel.toLowerCase()}`;
     }
 
+    if (detectLocale() === "en") {
+        return `Related ${sectionLabel.toLowerCase()} exercises`;
+    }
+
     return `${sectionLabel}の関連種目`;
 }
 
@@ -2730,6 +2879,10 @@ function currentPath() {
 function detectLocale() {
     const lang = document.documentElement.lang || "";
     const pathParts = window.location.pathname.split("/");
+
+    if (lang.toLowerCase().startsWith("en") || pathParts.includes("en")) {
+        return "en";
+    }
 
     if (lang.toLowerCase().startsWith("zh-hans") || pathParts.includes("zh-hans")) {
         return "zh-hans";
@@ -2807,6 +2960,10 @@ function cleanSectionLabel(text) {
 
     if (detectLocale() === "ko") {
         return normalized.replace(/\s*운동/g, "").trim();
+    }
+
+    if (detectLocale() === "en") {
+        return normalized.replace(/\s*exercises?/gi, "").trim();
     }
 
     return normalized.replace("トレーニング", "").replace("トレ", "");

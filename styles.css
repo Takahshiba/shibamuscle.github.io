@@ -1204,6 +1204,19 @@ table tbody tr:hover {
     vertical-align: middle;
 }
 
+.footer-section.links li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.link-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
 .official-icon {
     position: absolute;
     top: 16px;

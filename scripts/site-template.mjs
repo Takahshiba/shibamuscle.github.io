@@ -195,7 +195,7 @@ ${categoryNav}
         <nav>
             <div class="header-logo">
                 <a href="index.html" class="header-link">
-                    <img src="${assetHref("dumbbell-logo.png", locale)}" alt="Shiba Muscle" class="header-dumbbell-logo">
+                    <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="Shiba Muscle" class="header-dumbbell-logo">
                     <span class="header-text">Shiba Muscle</span>
                 </a>
             </div>
@@ -292,16 +292,16 @@ function renderStaticFooter(file, locale = "ja") {
             <div class="footer-section links">
                 <h4>${escapeHtml(getUiText(locale, "links"))}</h4>
                 <ul>
-                    <li><img src="${assetHref("contact-icon.webp", locale)}" alt="${escapeAttribute(getUiText(locale, "contact"))}" class="link-icon">
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="${escapeAttribute(getUiText(locale, "contact"))}" class="link-icon">
                         <a href="contact.html">${escapeHtml(getUiText(locale, "contact"))}</a>
                     </li>
-                    <li><img src="${assetHref("dumbbell-logo.png", locale)}" alt="${escapeAttribute(getUiText(locale, "about"))}" class="link-icon">
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="${escapeAttribute(getUiText(locale, "about"))}" class="link-icon">
                         <a href="about.html">${escapeHtml(getUiText(locale, "about"))}</a>
                     </li>
-                    <li><img src="${assetHref("official-icon.webp", locale)}" alt="${escapeAttribute(getUiText(locale, "methodology"))}" class="link-icon">
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="${escapeAttribute(getUiText(locale, "methodology"))}" class="link-icon">
                         <a href="methodology.html">${escapeHtml(getUiText(locale, "methodology"))}</a>
                     </li>
-                    <li><img src="${assetHref("privacy-policy-icon.webp", locale)}" alt="${escapeAttribute(getUiText(locale, "privacy"))}" class="link-icon">
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="${escapeAttribute(getUiText(locale, "privacy"))}" class="link-icon">
                         <a href="privacy-policy.html">${escapeHtml(getUiText(locale, "privacy"))}</a>
                     </li>
                 </ul>
@@ -310,7 +310,7 @@ function renderStaticFooter(file, locale = "ja") {
                 <h4>${escapeHtml(getUiText(locale, "language"))}</h4>
                 <ul>
 ${alternates.map((item) => {
-                    const icon = flagIcon[item.code] || "dumbbell-logo.png";
+                    const icon = flagIcon[item.code] || "app/shiba-mascot.png";
                     const alt = flagAlt[item.code] || item.displayName;
                     return `                    <li><img src="${assetHref(icon, locale)}" alt="${escapeAttribute(alt)}" class="flag-icon"> <a href="${escapeAttribute(item.href)}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a></li>`;
                 }).join("\n")}
@@ -406,7 +406,7 @@ ${pages.map((page) => {
                 <span class="discovery-type">${escapeHtml(locale === "zh-hant" ? (page.type === "comparison" ? "比較" : "目標") : locale === "zh-hans" ? (page.type === "comparison" ? "比较" : "目标") : locale === "de" ? (page.type === "comparison" ? "Vergleich" : "Ziel") : locale === "fr" ? (page.type === "comparison" ? "Comparatif" : "Objectif") : locale === "id" ? (page.type === "comparison" ? "Perbandingan" : "Tujuan") : locale === "es" ? (page.type === "comparison" ? "Comparativa" : "Objetivo") : page.type === "comparison" ? "Comparison" : "Intent")}</span>
                 <h3>${escapeHtml(page.heading)}</h3>
                 <p>${escapeHtml((page.intro || [])[0] || page.description || "")}</p>
-                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "zh-hant" ? "查看頁面" : locale === "zh-hans" ? "查看页面" : locale === "es" ? "Ver página" : locale === "fr" ? "Voir la page" : locale === "de" ? "Seite ansehen" : locale === "id" ? "Lihat halaman" : "ページを見る"}</span>
+                <span class="discovery-link">${locale === "ko" ? "페이지 보기" : locale === "zh-hant" ? "查看頁面" : locale === "zh-hans" ? "查看页面" : locale === "es" ? "Ver página" : locale === "fr" ? "Voir la page" : locale === "de" ? "Seite ansehen" : locale === "id" ? "Lihat halaman" : locale === "en" ? "View page" : "ページを見る"}</span>
             </a>`;
     }).join("\n")}
         </div>

@@ -65,7 +65,7 @@ console.log(`Generated ${generatedPages} localized exercise pages from src/.`);
 
 function assertExpectedLocales(locales) {
     const localeCodes = locales.map((locale) => locale.code);
-    const requiredLocales = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de"];
+    const requiredLocales = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "en"];
     const missingLocales = requiredLocales.filter((locale) => !localeCodes.includes(locale));
 
     if (missingLocales.length) {

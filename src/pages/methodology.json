@@ -56,6 +56,56 @@
     }
   ],
   "locales": {
+    "en": {
+      "title": "How to read the data | Shiba Muscle",
+      "description": "How to read average weight, strength standards, muscle information, and unit switching on Shiba Muscle.",
+      "heading": "How to read the data",
+      "intro": [
+        "The numbers on Shiba Muscle are reference points for workout planning and exercise comparison. Do not judge progress by weight or reps alone; read them together with form, range of motion, training experience, and how you feel."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Average weight and average reps",
+          "paragraphs": [
+            "For weighted exercises, we show average weight. For exercises that are easier to compare by repetitions, especially many bodyweight movements, we show average reps. Treat both as reference values that smooth over individual differences.",
+            "kg pages and lb pages are unit variants of the same exercise. The English pages default to kg."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Standard table levels",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Beginner: reference for someone learning form and starting consistent training",
+                "Novice: reference after at least six months of consistent training",
+                "Intermediate: reference for people with more than two years of practice",
+                "Advanced: reference for people who have trained with a plan for years",
+                "Elite: high reference level for people who specialize in that exercise"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Use the data safely",
+          "paragraphs": [
+            "Do not chase a table number through pain or broken form. For heavy lifts, prioritize spotters, safety bars, and proper warmups.",
+            "The published information is general fitness content. For injuries, pain, medical history, pregnancy, or rehabilitation decisions, consult qualified health or training professionals."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Updates and quality control",
+          "paragraphs": [
+            "During site generation, scripts check titles, descriptions, H1, canonical tags, hreflang links, the sitemap, internal links, and missing localization.",
+            "If you notice typos, broken links, unusual numbers, or awkward translation, please contact us through the contact page."
+          ]
+        }
+      ]
+    },
     "ko": {
       "title": "데이터 읽는 법 | Shiba Muscle",
       "description": "Shiba Muscle에 표시되는 평균 중량, 기준 중량, 근육 정보, 단위 전환을 읽는 방법을 설명합니다.",

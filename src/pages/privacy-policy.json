@@ -99,6 +99,99 @@
     }
   ],
   "locales": {
+    "en": {
+      "title": "Privacy Policy | Shiba Muscle",
+      "description": "Shiba Muscle's privacy policy, cookie policy, advertising policy, and terms of use.",
+      "heading": "Privacy Policy",
+      "intro": [
+        "Shiba Muscle handles information only as needed to provide and improve the site, and works to protect user privacy. This page explains how information is handled on this site and the terms for using it.",
+        "Last updated: April 27, 2026"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Terms of use",
+          "blocks": [
+            {
+              "type": "subheading",
+              "text": "Use of content"
+            },
+            {
+              "type": "paragraph",
+              "text": "Information on this site may be referenced or quoted within an appropriate scope. However, reposting in a misleading way, malicious use, or use that harms another party is prohibited. When quoting or reposting content, please clearly credit the site name as the source."
+            },
+            {
+              "type": "subheading",
+              "text": "Prohibited actions"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Modifying site content without permission and redistributing it in a misleading way",
+                "Causing nuisance, disadvantage, or damage to other users or third parties",
+                "Interfering with site operation, including unauthorized access or attacks on servers"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Disclaimer"
+            },
+            {
+              "type": "paragraph",
+              "text": "We try to keep information on this site as accurate and current as possible, but we do not guarantee completeness or accuracy. Shiba Muscle is not responsible for any damage arising from the use of published information."
+            },
+            {
+              "type": "subheading",
+              "text": "Changes to services"
+            },
+            {
+              "type": "paragraph",
+              "text": "Site content, structure, and provided services may be changed, suspended, or ended without prior notice. Shiba Muscle is not responsible for damage arising from those changes."
+            },
+            {
+              "type": "subheading",
+              "text": "External links"
+            },
+            {
+              "type": "paragraph",
+              "text": "Shiba Muscle is not responsible for information, services, or other content provided by external sites reached through links or banners from this site."
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Copyright",
+          "paragraphs": [
+            "Copyright for text, images, data, and other content on this site belongs to the operator or the rightful owners. When quoting or reposting content, credit the source and use it within an appropriate scope."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Cookie Policy",
+          "paragraphs": [
+            "This site may use cookies and similar technologies for access analytics, advertising delivery, and usability improvements. This helps us understand browsing behavior and usage trends, improve the site, and show more relevant ads.",
+            "If you do not want cookies to be used, you can disable them in your browser settings. You can also manage ad personalization through Google's ad settings."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Analytics",
+          "paragraphs": [
+            "This site may use Google Analytics to improve the site. Google Analytics uses cookies and similar technologies to collect information such as page views, usage environment, and referrers.",
+            "Collected information does not directly identify individuals and is used to improve site quality, page speed, navigation, and understanding of usage trends."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Advertising",
+          "paragraphs": [
+            "This site uses Google AdSense, a third-party advertising service. Google and other ad providers may show ads based on users' past access information.",
+            "Google may use advertising cookies to deliver ads based on visits to this site and other sites. If you do not want personalized ads, you can manage them through Google's ad settings or your browser settings.",
+            "For details about ad content, delivery methods, and personalization settings, please check the policies of Google and each ad provider."
+          ]
+        }
+      ]
+    },
     "ko": {
       "title": "개인정보 처리방침 | Shiba Muscle",
       "description": "Shiba Muscle의 개인정보 처리방침, 쿠키 정책, 광고 정책, 이용 조건을 정리한 페이지입니다.",

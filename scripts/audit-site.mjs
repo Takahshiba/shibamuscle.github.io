@@ -48,7 +48,7 @@ for (const entry of htmlEntries) {
     const canonicalUrl = absoluteUrlForFile(canonicalFile, entry.locale);
     const pageUrl = absoluteUrlForFile(entry.file, entry.locale);
 
-    assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id)\.shibamuscle\.com/i.test(html), `${entry.relativePath}: old locale subdomain link remains`);
+    assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|en)\.shibamuscle\.com/i.test(html), `${entry.relativePath}: old locale subdomain link remains`);
     assert(!html.includes("precaonnect"), `${entry.relativePath}: precaonnect typo is still present`);
     assert(!html.includes("G-ZPM6B2KLSV"), `${entry.relativePath}: legacy GA id is still present`);
     assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${entry.relativePath}: current GA script is missing`);
@@ -96,6 +96,10 @@ for (const entry of htmlEntries) {
         auditIndonesianHtml(entry, html);
     }
 
+    if (entry.locale === "en") {
+        auditEnglishHtml(entry, html);
+    }
+
     if (entry.locale !== "ja") {
         auditSectionDrift(entry, html);
     }
@@ -123,6 +127,8 @@ for (const entry of htmlEntries) {
             assert(/<meta name="description" content="[^"]+(kg Tabelle|lb Tabelle)[^"]*(Zielmuskulatur|Tabellen)[^"]+">/.test(html), `${entry.relativePath}: German exercise description is not specific enough`);
         } else if (entry.locale === "id") {
             assert(/<meta name="description" content="[^"]+(tabel kg|tabel lb)[^"]*(Otot utama|tabel berdasarkan|standar)[^"]+">/i.test(html), `${entry.relativePath}: Indonesian exercise description is not specific enough`);
+        } else if (entry.locale === "en") {
+            assert(/<meta name="description" content="[^"]+(kg table|lb table)[^"]*(Primary muscles|bodyweight tables|strength standards)[^"]+">/i.test(html), `${entry.relativePath}: English exercise description is not specific enough`);
         } else {
             assert(/<meta name="description" content="[^"]+(kg表|lb表)[^"]*(主働筋は|主な筋肉は)[^"]+">/.test(html), `${entry.relativePath}: exercise description is not specific enough`);
         }
@@ -267,6 +273,18 @@ function auditIndonesianHtml(entry, html) {
     });
 
     assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in Indonesian output`);
+}
+
+function auditEnglishHtml(entry, html) {
+    const normalized = stripIntentionalLanguageSwitchText(html)
+        .replace(/<!--[\s\S]*?-->/g, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "");
+
+    JAPANESE_LEFTOVER_PATTERNS.forEach((pattern) => {
+        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in English output`);
+    });
+
+    assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in English output`);
 }
 
 function auditSectionDrift(entry, localizedHtml) {

@@ -99,15 +99,15 @@
     },
     {
       "code": "en",
-      "routePrefix": "/",
-      "outputDir": "",
+      "routePrefix": "/en/",
+      "outputDir": "en",
       "displayName": "English",
       "hreflang": "en",
       "dir": "ltr",
       "defaultUnit": "kg",
-      "origin": "https://en.shibamuscle.com",
+      "origin": "https://shibamuscle.com",
       "ogLocale": "en_US",
-      "generated": false
+      "generated": true
     }
   ]
 }

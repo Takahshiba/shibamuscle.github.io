@@ -47,6 +47,47 @@
     }
   ],
   "locales": {
+    "en": {
+      "title": "About Shiba Muscle | Shiba Muscle",
+      "description": "Learn about Shiba Muscle, how to use the training data, and the site's operating principles.",
+      "heading": "About Shiba Muscle",
+      "intro": [
+        "Shiba Muscle is a workout database that organizes average weights, strength standards, and muscles worked by exercise so they are easier to compare."
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Purpose of the site",
+          "paragraphs": [
+            "Even within the same area, such as chest, back, or legs, exercises can differ widely by equipment, primary muscles, and typical loading. Shiba Muscle groups exercise data by body area so it is easier to find movements that fit your goal.",
+            "Average weights and standards are reference points for understanding where an exercise sits and finding related exercises to compare. They do not guarantee competition performance or replace medical or coaching advice."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Information we publish",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Average weight or average reps by exercise",
+                "Bodyweight and age standard tables for men and women",
+                "Primary, secondary, and stabilizing muscle information",
+                "Related exercises that are easier to compare within the same area or goal"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Operating principles",
+          "paragraphs": [
+            "Page structure, titles, descriptions, language links, and the sitemap are maintained so people can move to the information they need clearly.",
+            "Contact, privacy, and methodology pages are provided so users can understand how information is presented and how site data is handled."
+          ]
+        }
+      ]
+    },
     "ko": {
       "title": "Shiba Muscle 소개 | Shiba Muscle",
       "description": "Shiba Muscle의 목적, 데이터 활용법, 운영 방침을 정리한 페이지입니다.",
