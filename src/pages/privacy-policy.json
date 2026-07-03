@@ -4,7 +4,10 @@
   "title": "プライバシーポリシー | Shiba Muscle",
   "description": "Shiba Muscleのプライバシーポリシー、Cookieポリシー、広告ポリシー、利用条件をまとめたページです。",
   "heading": "プライバシーポリシー",
-  "shellClass": "policy-shell",
+  "appShell": true,
+  "shellClass": "policy-shell app-policy-shell",
+  "ads": false,
+  "scripts": false,
   "stylesheets": [
     "sanitize.css",
     "styles.css",

@@ -46,3 +46,28 @@
 .content-page .policy-section p {
     margin-bottom: 0;
 }
+
+.app-content-page .policy-section {
+    box-shadow: 0 18px 52px rgba(0, 0, 0, 0.44);
+}
+
+.app-content-page .policy-section h2 {
+    font-size: 1.22rem;
+    line-height: 1.25;
+}
+
+.app-content-page .policy-section h3 {
+    color: var(--accent-strong);
+}
+
+.app-content-page .policy-section ul {
+    padding-left: 20px;
+}
+
+.app-content-page .policy-section a {
+    color: var(--accent-strong);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}

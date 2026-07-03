@@ -20,6 +20,7 @@ const ANALYTICS_ID = "G-D9K58THBFM";
 const SITE_ORIGIN = "https://shibamuscle.com";
 const THEME_COLOR = "#148a6a";
 const APP_THEME_COLOR = "#ff6a00";
+const SITE_STYLESHEET = "styles.css?v=workout-cards-20260704";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const ICON_ASSET_VERSION = "shiba-20260704";
 
@@ -113,7 +114,7 @@ export {
 function renderDocument({ title, stylesheets = ["styles.css"], body, generatedComment, locale = "ja", seo = null, ads = true, enableAds = ads, bodyClass = "", htmlLang = null, fontLocale = null }) {
     const localeConfig = getLocaleConfig(locale);
     const comment = generatedComment ? `${generatedComment}\n` : "";
-    const stylesheetLinks = stylesheets.map((href) => `    <link rel="stylesheet" href="${escapeAttribute(stylesheetHref(href, locale))}">`).join("\n");
+    const stylesheetLinks = stylesheets.map((href) => `    <link rel="stylesheet" href="${escapeAttribute(stylesheetHref(resolveStylesheetHref(href), locale))}">`).join("\n");
     const seoBlock = seo ? buildSeoBlock({ ...seo, title, locale }) : "";
     const adsenseScript = enableAds ? `
     <script async src="${ADSENSE_SCRIPT_SRC}"
@@ -141,6 +142,12 @@ ${body}
 
 </html>
 `;
+}
+
+function resolveStylesheetHref(href) {
+    return href === "styles.css" || href.startsWith("styles.css?")
+        ? SITE_STYLESHEET
+        : href;
 }
 
 function buildSeoBlock({ file, title, description = "", locale = "ja", ogImage, ogLocale, type = "article", twitterCard = "summary", canonicalFile = file, includeAlternates = true, robots = "index,follow,max-image-preview:large", themeColor = THEME_COLOR }) {

@@ -993,6 +993,7 @@ table tbody tr:hover {
 
 .exercise-card {
     min-height: 100%;
+    min-width: 0;
     padding: 14px;
     display: flex;
     align-items: center;
@@ -1046,6 +1047,7 @@ table tbody tr:hover {
 .card-link {
     display: block;
     height: 100%;
+    min-width: 0;
 }
 
 .library-band .library-toolbar {
@@ -1446,11 +1448,11 @@ table tbody tr:hover {
 
     .library-band .exercise-cards-container,
     .library-band .exercise-cards-container--library {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     main.page-main[data-exercise-slug] + main.page-main h2.section-title[id$="-section"] + .exercise-cards-container {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .footer-grid,
@@ -1539,10 +1541,15 @@ table tbody tr:hover {
     }
 
     .exercise-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
         padding: 12px;
     }
 
     .exercise-card img {
+        align-self: auto;
         width: 72px;
         height: 72px;
     }

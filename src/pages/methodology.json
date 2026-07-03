@@ -4,7 +4,10 @@
   "title": "データの見方 | Shiba Muscle",
   "description": "Shiba Muscleに掲載している平均重量、基準重量、筋肉情報、単位切替の見方を説明します。",
   "heading": "データの見方",
-  "shellClass": "policy-shell",
+  "appShell": true,
+  "shellClass": "policy-shell app-policy-shell",
+  "ads": false,
+  "scripts": false,
   "stylesheets": [
     "sanitize.css",
     "styles.css",

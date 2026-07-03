@@ -1310,7 +1310,11 @@ function rebuildSharedChrome(pageType) {
     document.querySelector(".top-divider")?.remove();
 
     document.body.prepend(buildHeader(pageType, unitSwitch));
-    document.body.append(buildFooter());
+    document.body.append(buildFooter(pageType));
+}
+
+function categorySectionHref(sectionId, pageType) {
+    return pageType === "home" || pageType === "exercise" ? `#${sectionId}` : `index.html#${sectionId}`;
 }
 
 function buildHeader(pageType, unitSwitch) {
@@ -1338,9 +1342,9 @@ function buildHeader(pageType, unitSwitch) {
     }
 
     const categoryLinks = getCategoryLinks().map((item) => {
-        const href = pageType === "home" ? `#${item.id}` : `index.html#${item.id}`;
+        const href = categorySectionHref(item.id, pageType);
         return `
-            <a href="${href}" class="category-nav-link">
+            <a href="${escapeAttribute(href)}" class="category-nav-link">
                 <span class="category-nav-icon" aria-hidden="true">
                     <img src="${item.icon}" alt="">
                 </span>
@@ -1371,10 +1375,11 @@ function buildHeader(pageType, unitSwitch) {
     `);
 }
 
-function buildFooter() {
+function buildFooter(pageType) {
     const categoryLinks = getCategoryLinks().map((item) => {
+        const href = categorySectionHref(item.id, pageType);
         return `
-            <a href="index.html#${item.id}" class="footer-category-link">
+            <a href="${escapeAttribute(href)}" class="footer-category-link">
                 <span class="category-nav-icon" aria-hidden="true">
                     <img src="${item.icon}" alt="">
                 </span>
