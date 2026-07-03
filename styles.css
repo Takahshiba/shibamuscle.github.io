@@ -3429,8 +3429,11 @@ body.app-content-page {
         width: 100%;
         max-width: min(100%, 366px);
         min-width: 0;
+        margin: 0 auto;
         padding-left: 0;
         border-left: 0;
+        justify-items: center;
+        text-align: center;
     }
 
     .app-hero-title {
@@ -3479,10 +3482,12 @@ body.app-content-page {
         align-items: stretch;
         width: 100%;
         max-width: min(100%, 366px);
+        margin: 0 auto;
     }
 
     .app-device-stage {
         width: min(100%, 366px);
+        margin: 0 auto;
     }
 
     .app-pill {
@@ -3574,6 +3579,13 @@ body.app-content-page {
         width: calc(100% - 24px);
     }
 
+    .app-section-copy,
+    .app-showcase-copy,
+    .app-library-inner .app-section-copy {
+        justify-items: center;
+        text-align: center;
+    }
+
     .app-section-copy h2,
     .app-showcase-copy h2 {
         font-size: 2.35rem;
@@ -3594,6 +3606,11 @@ body.app-content-page {
         grid-template-columns: 1fr;
     }
 
+    .app-library-inner {
+        justify-items: center;
+        text-align: center;
+    }
+
     .app-feature-grid {
         margin-top: 24px;
     }
@@ -3601,6 +3618,8 @@ body.app-content-page {
     .app-feature-card {
         min-height: 0;
         padding: 18px;
+        justify-items: center;
+        text-align: center;
     }
 
     .app-showcase-phones {
@@ -3644,6 +3663,7 @@ body.app-content-page {
 
     .app-library-preview {
         grid-template-columns: 1fr;
+        margin: 0 auto;
     }
 
     .app-cta-band {

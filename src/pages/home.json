@@ -2,40 +2,40 @@
   "file": "index.html",
   "kind": "home",
   "title": "Shiba | Strength Training Tracker",
-  "description": "Shiba connects today's workout, fast set logging, Strength Percentile, progress charts, and muscle heatmaps in a dark strength training app.",
+  "description": "Shiba is a focused strength training tracker for logging workouts and seeing progress.",
   "ogImage": "https://shibamuscle.com/assets/app/today-screen-current.png",
   "textLocale": "en",
-  "heroHeading": "Turn every logged set into training insight.",
+  "heroHeading": "Log your workout. See your progress.",
   "heading": "Explore Shiba",
   "intro": [
-    "Shiba helps you open today's plan, log each set quickly, and review which lifts and muscle groups are moving forward.",
-    "It is built for lifters who want a black-and-orange workout log, clear progress analytics, and a calmer way to choose the next exercise."
+    "Start today's plan, record sets, and review progress in one focused app.",
+    "A simple dark interface for lifting, analytics, and exercise discovery."
   ],
   "overview": {
     "eyebrow": "Shiba App",
     "sectionEyebrow": "App overview",
-    "title": "Logging, analytics, and exercise discovery in one flow",
-    "copy": "The home page focuses on the app experience first, then keeps the training database available as a deeper reference.",
+    "title": "Simple tracking. Clear progress.",
+    "copy": "Log sets, review analytics, and find exercises without extra clutter.",
     "items": [
       {
         "eyebrow": "Today",
-        "heading": "Start today's plan fast",
+        "heading": "Start fast",
         "paragraphs": [
-          "Your next workout, active sets, and primary start action stay visible on one clear screen."
+          "Open today's workout and begin your first set."
         ]
       },
       {
         "eyebrow": "Analytics",
-        "heading": "See strength and progress clearly",
+        "heading": "See progress",
         "paragraphs": [
-          "Strength Percentile, progress charts, and muscle heatmaps turn raw workout logs into useful feedback."
+          "Review percentiles, charts, and muscle heatmaps."
         ]
       },
       {
         "eyebrow": "Library",
-        "heading": "Find the next exercise naturally",
+        "heading": "Find exercises",
         "paragraphs": [
-          "The existing exercise database remains below the app introduction for average weights, standards, and target muscles."
+          "Use the library when you need the next movement."
         ]
       }
     ]
@@ -50,43 +50,43 @@
     "mascot": "app/shiba-mascot.png"
   },
   "stylesheets": [
-    "styles.css"
+    "styles.css?v=mobile-simple-20260703-2"
   ],
   "locales": {
     "en": {
       "title": "Shiba | Strength Training Tracker",
-      "description": "Shiba connects today's workout, fast set logging, Strength Percentile, progress charts, and muscle heatmaps in a dark strength training app.",
-      "heroHeading": "Turn every logged set into training insight.",
+      "description": "Shiba is a focused strength training tracker for logging workouts and seeing progress.",
+      "heroHeading": "Log your workout. See your progress.",
       "heading": "Explore Shiba",
       "intro": [
-        "Shiba helps you open today's plan, log each set quickly, and review which lifts and muscle groups are moving forward.",
-        "It is built for lifters who want a black-and-orange workout log, clear progress analytics, and a calmer way to choose the next exercise."
+        "Start today's plan, record sets, and review progress in one focused app.",
+        "A simple dark interface for lifting, analytics, and exercise discovery."
       ],
       "overview": {
         "eyebrow": "Shiba App",
         "sectionEyebrow": "App overview",
-        "title": "Logging, analytics, and exercise discovery in one flow",
-        "copy": "The home page focuses on the app experience first, then keeps the training database available as a deeper reference.",
+        "title": "Simple tracking. Clear progress.",
+        "copy": "Log sets, review analytics, and find exercises without extra clutter.",
         "items": [
           {
             "eyebrow": "Today",
-            "heading": "Start today's plan fast",
+            "heading": "Start fast",
             "paragraphs": [
-              "Your next workout, active sets, and primary start action stay visible on one clear screen."
+              "Open today's workout and begin your first set."
             ]
           },
           {
             "eyebrow": "Analytics",
-            "heading": "See strength and progress clearly",
+            "heading": "See progress",
             "paragraphs": [
-              "Strength Percentile, progress charts, and muscle heatmaps turn raw workout logs into useful feedback."
+              "Review percentiles, charts, and muscle heatmaps."
             ]
           },
           {
             "eyebrow": "Library",
-            "heading": "Find the next exercise naturally",
+            "heading": "Find exercises",
             "paragraphs": [
-              "The existing exercise database remains below the app introduction for average weights, standards, and target muscles."
+              "Use the library when you need the next movement."
             ]
           }
         ]
