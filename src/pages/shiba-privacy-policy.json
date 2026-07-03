@@ -5,13 +5,15 @@
   "description": "Privacy Policy for the Shiba strength training app, including local workout data, photos, purchases, analytics, tracking, retention, and contact information.",
   "heading": "Shiba Privacy Policy",
   "htmlLang": "en",
+  "textLocale": "en",
   "appShell": true,
+  "englishOnly": true,
   "shellClass": "policy-shell app-policy-shell",
   "ads": false,
   "scripts": false,
   "stylesheets": [
     "sanitize.css",
-    "styles.css",
+    "styles.css?v=mobile-footer-20260703",
     "privacy-policy.css"
   ],
   "intro": [

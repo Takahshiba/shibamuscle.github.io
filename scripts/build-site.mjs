@@ -18,6 +18,7 @@ if (missingLocales.length) {
 }
 
 const steps = [
+    ["scripts/generate-site-icons.mjs", "Generating site icon assets"],
     ["scripts/sync-exercise-metadata.mjs", "Syncing exercise metadata into src/"],
     ["scripts/build-static-pages.mjs", "Generating shared static pages from src/pages/"],
     ["scripts/build-exercise-pages.mjs", "Generating exercise pages from src/"],

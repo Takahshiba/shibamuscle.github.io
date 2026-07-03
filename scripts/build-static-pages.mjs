@@ -69,7 +69,7 @@ function assertExpectedLocales(locales) {
 }
 
 function isEnglishOnlyAppPage(page) {
-    return page.appShell === true;
+    return page.englishOnly === true;
 }
 
 function englishOnlyPage(page) {
@@ -895,6 +895,7 @@ function getHomeText(locale, key) {
 
 function renderContentPage(page, locale) {
     const appShell = page.appShell === true;
+    const textLocale = page.textLocale || (appShell && page.htmlLang === "en" ? "en" : locale);
     const content = `        <section class="container content-shell ${escapeAttribute(page.shellClass || "")}">
             <div class="content-intro">
                 <h1>${escapeHtml(page.heading)}</h1>
@@ -903,13 +904,13 @@ ${(page.intro || []).map((paragraph) => `                <p>${escapeHtml(paragra
 
 ${(page.sections || []).map((section) => renderContentSection(section)).join("\n\n")}
         </section>`;
-    const body = appShell ? `${renderAppPolicyHeader(locale)}
+    const body = appShell ? `${renderAppPolicyHeader(locale, textLocale)}
 
     <main class="page-main app-policy-main">
 ${content}
     </main>
 
-${renderAppFooter(locale, "en")}
+${renderAppFooter(locale, textLocale)}
 ` : `${renderStaticHeader({ pageType: "content", locale })}
 
     <hr class="top-divider">
@@ -933,11 +934,12 @@ ${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=ads
         body,
         locale,
         htmlLang: appShell ? page.htmlLang || null : (locale === "ja" ? page.htmlLang : null),
-        fontLocale: appShell ? page.htmlLang || null : (locale === "ja" ? page.htmlLang : null),
+        fontLocale: appShell ? textLocale : (locale === "ja" ? page.htmlLang : null),
         seo: {
             file: page.file,
             description: page.description || (page.intro || []).join(" "),
             ogImage: page.ogImage,
+            ogLocale: appShell && page.htmlLang === "en" ? "en_US" : undefined,
             type: "article",
             twitterCard: "summary",
             themeColor: appShell ? APP_THEME_COLOR : undefined
@@ -948,7 +950,7 @@ ${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=ads
     });
 }
 
-function renderAppPolicyHeader(locale) {
+function renderAppPolicyHeader(locale, textLocale = "en") {
     return `    <header class="site-header app-local-header">
         <nav class="site-topbar app-local-topbar" aria-label="Shiba">
             <a href="index.html" class="app-local-brand">
@@ -956,9 +958,9 @@ function renderAppPolicyHeader(locale) {
                 <span>Shiba</span>
             </a>
             <div class="app-local-nav">
-                <a href="index.html" class="app-local-nav-link">Home</a>
-                <a href="index.html#analytics" class="app-local-nav-link">Features</a>
-                <a href="shiba-privacy-policy.html" class="app-local-cta">Privacy Policy</a>
+                <a href="index.html" class="app-local-nav-link">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
+                <a href="index.html#analytics" class="app-local-nav-link">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
+                <a href="shiba-privacy-policy.html" class="app-local-cta">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
             </div>
         </nav>
     </header>`;
@@ -994,6 +996,12 @@ ${block.items.map((item) => `                    <li>${escapeHtml(item)}</li>`).
         const mailto = block.mailto || block.value;
         return `                <p class="${escapeAttribute(block.className || "email")}">
                     ${escapeHtml(block.label || "Email")}: <a href="mailto:${escapeAttribute(mailto)}">${escapeHtml(block.value)}</a>
+                </p>`;
+    }
+
+    if (block.type === "link") {
+        return `                <p class="${escapeAttribute(block.className || "content-link")}">
+                    ${block.label ? `<span>${escapeHtml(block.label)}:</span> ` : ""}<a href="${escapeAttribute(block.href)}">${escapeHtml(block.text || block.href)}</a>
                 </p>`;
     }
 

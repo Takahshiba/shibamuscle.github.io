@@ -137,7 +137,7 @@ ${body}
 `;
 }
 
-function buildSeoBlock({ file, title, description = "", locale = "ja", ogImage, type = "article", twitterCard = "summary", canonicalFile = file, includeAlternates = true, robots = "index,follow,max-image-preview:large", themeColor = THEME_COLOR }) {
+function buildSeoBlock({ file, title, description = "", locale = "ja", ogImage, ogLocale, type = "article", twitterCard = "summary", canonicalFile = file, includeAlternates = true, robots = "index,follow,max-image-preview:large", themeColor = THEME_COLOR }) {
     if (!file) {
         return "";
     }
@@ -149,6 +149,7 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", ogImage, 
     const xDefaultLink = includeAlternates ? `\n    <link rel="alternate" hreflang="x-default" href="${escapeAttribute(alternates.ja)}">` : "";
     const canonicalUrl = absoluteUrlForFile(canonicalFile, locale);
     const resolvedOgImage = ogImage || `${SITE_ORIGIN}/assets/dumbbell-logo.png`;
+    const resolvedOgLocale = ogLocale || getOgLocale(locale);
 
     return `
     <meta name="description" content="${escapeAttribute(description)}">
@@ -158,7 +159,7 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", ogImage, 
 ${alternateLinks}${xDefaultLink}
     <meta property="og:type" content="${escapeAttribute(type)}">
     <meta property="og:site_name" content="Shiba Muscle">
-    <meta property="og:locale" content="${escapeAttribute(getOgLocale(locale))}">
+    <meta property="og:locale" content="${escapeAttribute(resolvedOgLocale)}">
     <meta property="og:title" content="${escapeAttribute(title)}">
     <meta property="og:description" content="${escapeAttribute(description)}">
     <meta property="og:url" content="${escapeAttribute(canonicalUrl)}">
@@ -178,12 +179,17 @@ ${alternateLinks}${xDefaultLink}
 `;
 }
 
-function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja", textLocale = locale } = {}) {
+function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja", textLocale = locale, showCategoryNav = pageType === "exercise" } = {}) {
     if (pageType === "home") {
         return renderAppHeader(locale, textLocale);
     }
 
-    const categoryNav = renderLegacyCategoryNav(pageType, locale);
+    const categoryNav = showCategoryNav ? renderLegacyCategoryNav(pageType, locale) : "";
+    const subNavHtml = categoryNav ? `
+
+        <div class="sub-nav">
+${categoryNav}
+        </div>` : "";
 
     return `    <header>
         <nav>
@@ -193,11 +199,7 @@ function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale 
                     <span class="header-text">Shiba Muscle</span>
                 </a>
             </div>
-${unitSwitchHtml ? `            ${unitSwitchHtml}\n` : ""}        </nav>
-
-        <div class="sub-nav">
-${categoryNav}
-        </div>
+${unitSwitchHtml ? `            ${unitSwitchHtml}\n` : ""}        </nav>${subNavHtml}
     </header>`;
 }
 
@@ -242,12 +244,20 @@ function getAppHeaderText(locale, key) {
 function renderLegacyCategoryNav(pageType, locale = "ja") {
     const categoryLinks = getCategoryNavItems(locale);
     return categoryLinks.map((item, index) => {
-        const href = pageType === "home" ? `#${item.id}` : `index.html#${item.id}`;
+        const href = categoryNavHref(item.id, pageType);
         const divider = index < categoryLinks.length - 1 ? '\n            <div class="divider">|</div>' : "";
         return `            <a href="${href}">
                 <img src="${item.icon}" alt="${item.alt}" class="exercise-icon"> ${item.label}
             </a>${divider}`;
     }).join("\n");
+}
+
+function categoryNavHref(sectionId, pageType) {
+    if (pageType === "home" || pageType === "exercise") {
+        return `#${sectionId}`;
+    }
+
+    return `index.html#${sectionId}`;
 }
 
 function renderStaticFooter(file, locale = "ja") {

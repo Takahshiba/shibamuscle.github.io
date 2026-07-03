@@ -3952,6 +3952,8 @@ function getSearchTerms(exercise, sectionId, localeCode = "ja") {
 
 function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" } = {}) {
     let next = localizeHtmlAssetPaths(html || "", locale);
+    next = keepCurrentUnitWeights(next, unit);
+
     if (locale === "ja") {
         return next;
     }
@@ -4132,6 +4134,16 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
     }
 
     return locale === "zh-hans" ? simplifyChineseText(next) : next;
+}
+
+function keepCurrentUnitWeights(html, unit) {
+    if (unit !== "kg" && unit !== "lb") {
+        return html;
+    }
+
+    return String(html || "").replace(/([0-9][0-9,.]*(?:\.[0-9]+)?)\s*kg\s*\(\s*([^)]*\blbs?[^)]*)\)/gi, (_match, kgValue, imperialValue) => {
+        return unit === "kg" ? `${kgValue} kg` : imperialValue.replace(/\blbs\b/gi, "lb").trim();
+    });
 }
 
 function localizeHtmlAssetPaths(html, localeCode = "ja") {

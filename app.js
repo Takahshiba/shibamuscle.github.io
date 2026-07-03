@@ -2134,8 +2134,7 @@ function enhanceContentPage(main) {
         root: libraryContainer,
         sections: libraryData.sections,
         allCards: libraryData.allCards,
-        explorerTitle: t("contentLibraryTitle"),
-        explorerCopy: t("contentLibraryCopy")
+        showToolbar: false
     });
 }
 

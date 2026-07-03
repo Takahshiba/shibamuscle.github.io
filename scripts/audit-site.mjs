@@ -8,19 +8,33 @@ import {
     absoluteUrlForFile,
     getGeneratedLocales,
     getLocaleConfig,
+    localizeStaticPage,
     stripIntentionalLanguageSwitchText
 } from "./localization.mjs";
+import { loadPages } from "./source-data.mjs";
 
 const ROOT = process.cwd();
 const ANALYTICS_ID = "G-D9K58THBFM";
+const CATEGORY_SECTION_IDS = [
+    "whole-body-section",
+    "chest-section",
+    "back-section",
+    "shoulder-section",
+    "arm-section",
+    "leg-section",
+    "core-section"
+];
 const htmlEntries = listHtmlEntries();
 const availableHtml = new Set(htmlEntries.map((entry) => entry.relativePath));
 const sitemap = readFileSync(join(ROOT, "sitemap.xml"), "utf8");
 const sitemapUrls = new Set(Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)).map((match) => match[1]));
+const staticPageByFile = new Map(loadPages().map((page) => [page.file, page]));
 const errors = [];
 
 for (const entry of htmlEntries) {
     const html = readFileSync(entry.path, "utf8");
+    const sourceStaticPage = staticPageByFile.get(entry.file);
+    const localizedStaticPage = sourceStaticPage ? localizeStaticPageForAudit(sourceStaticPage, entry.locale) : null;
     const isExercisePage = /^(kg|lb)_/.test(entry.file);
     const isSecondaryUnitPage = entry.file.startsWith("lb_");
     const isHomePage = entry.file === "index.html";
@@ -29,7 +43,7 @@ for (const entry of htmlEntries) {
     const isAppShellPage = html.includes("app-policy-shell");
     const isAppPage = isAppHomePage || isAppShellPage;
     const localeConfig = getLocaleConfig(entry.locale);
-    const expectedHtmlLang = isAppShellPage ? "en" : localeConfig.hreflang;
+    const expectedHtmlLang = localizedStaticPage?.htmlLang || localeConfig.hreflang;
     const canonicalFile = isSecondaryUnitPage ? entry.file.replace(/^lb_/, "kg_") : entry.file;
     const canonicalUrl = absoluteUrlForFile(canonicalFile, entry.locale);
     const pageUrl = absoluteUrlForFile(entry.file, entry.locale);
@@ -89,7 +103,9 @@ for (const entry of htmlEntries) {
     if (isExercisePage) {
         assert(/<main class="page-main"/.test(html), `${entry.relativePath}: static main wrapper is missing`);
         assert(/<nav class="breadcrumb" aria-label="/.test(html), `${entry.relativePath}: static breadcrumb is missing`);
-        assert(!/href="#whole-body-section"/.test(html), `${entry.relativePath}: broken in-page category link remains`);
+        assert(html.includes('id="other-workouts"'), `${entry.relativePath}: other workouts section is missing`);
+        auditExerciseCategoryLinks(entry, html);
+        auditExerciseUnitDisplay(entry, html);
         assert(!/<h1 class="section-title"/.test(html), `${entry.relativePath}: section heading is still h1`);
         assert(html.includes("/assets/og/exercises/"), `${entry.relativePath}: dedicated exercise OG image is missing`);
 
@@ -119,6 +135,10 @@ for (const entry of htmlEntries) {
     if (!isHomePage && !isToolPage && !isAppShellPage) {
         assert(/<nav class="breadcrumb" aria-label="/.test(html), `${entry.relativePath}: breadcrumb is missing`);
     }
+
+    if (!isExercisePage) {
+        auditNoCategorySubNav(entry, html);
+    }
 }
 
 if (errors.length) {
@@ -128,6 +148,65 @@ if (errors.length) {
 }
 
 console.log(`Site audit passed for ${htmlEntries.length} HTML files.`);
+
+function auditExerciseCategoryLinks(entry, html) {
+    CATEGORY_SECTION_IDS.forEach((sectionId) => {
+        assert(html.includes(`id="${sectionId}"`), `${entry.relativePath}: ${sectionId} target section is missing`);
+        assert(html.includes(`href="#${sectionId}"`), `${entry.relativePath}: ${sectionId} category link does not target this page`);
+        assert(!html.includes(`href="index.html#${sectionId}"`), `${entry.relativePath}: ${sectionId} category link still points to the homepage`);
+    });
+}
+
+function auditExerciseUnitDisplay(entry, html) {
+    const unit = entry.file.startsWith("lb_") ? "lb" : entry.file.startsWith("kg_") ? "kg" : null;
+    if (!unit) {
+        return;
+    }
+
+    const averageSummary = extractFirstMatch(html, /<section class="container exercise-average-summary"[\s\S]*?<\/section>/i);
+    const averageTable = extractFirstMatch(html, /<table class="average-section-table">[\s\S]*?<\/table>/i);
+    const recordWeights = Array.from(html.matchAll(/<p class="record-weight">([\s\S]*?)<\/p>/gi)).map((match) => match[1]).join("\n");
+    const oppositeUnit = unit === "kg" ? "lb" : "kg";
+
+    [
+        ["average summary", averageSummary],
+        ["average table", averageTable],
+        ["record weights", recordWeights]
+    ].forEach(([label, fragment]) => {
+        assert(!hasOppositeWeightUnit(fragment, unit), `${entry.relativePath}: ${label} contains ${oppositeUnit} on the ${unit} page`);
+    });
+}
+
+function extractFirstMatch(text, pattern) {
+    return text.match(pattern)?.[0] || "";
+}
+
+function hasOppositeWeightUnit(fragment, unit) {
+    if (unit === "kg") {
+        return /\b(?:lb|lbs|pounds?)\b/i.test(fragment);
+    }
+
+    return /\bkg\b/i.test(fragment);
+}
+
+function auditNoCategorySubNav(entry, html) {
+    const subNavMatch = html.match(/<div class="sub-nav">[\s\S]*?<\/div>\s*<\/header>/i);
+    if (!subNavMatch) {
+        return;
+    }
+
+    const hasCategoryLink = CATEGORY_SECTION_IDS.some((sectionId) => subNavMatch[0].includes(`#${sectionId}`));
+    assert(!hasCategoryLink, `${entry.relativePath}: category sub-nav should be hidden when other workouts are absent`);
+}
+
+function localizeStaticPageForAudit(page, locale) {
+    if (page.englishOnly === true) {
+        const { locales, ...basePage } = page;
+        return basePage;
+    }
+
+    return localizeStaticPage(page, locale);
+}
 
 function listHtmlEntries() {
     const entries = [];

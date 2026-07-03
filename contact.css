@@ -2,7 +2,7 @@
 
 .content-page .content-shell {
     display: grid;
-    gap: 24px;
+    gap: 18px;
 }
 
 .content-page .content-intro {
@@ -20,25 +20,91 @@
 
 .content-page .contact-card {
     display: grid;
-    gap: 10px;
+    gap: 14px;
+}
+
+.content-page .contact-card h2,
+.content-page .support-note h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: 1.22rem;
+    line-height: 1.25;
 }
 
 .content-page .email {
-    margin: 0;
-    color: var(--accent);
-    font-size: 1.08rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin: 2px 0 0;
+    color: var(--accent-strong);
+    font-size: 1.02rem;
     font-weight: 700;
+    overflow-wrap: anywhere;
 }
 
 .content-page .email a {
     color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
 }
 
-.content-page .note {
+.content-page .support-note {
     display: grid;
     gap: 14px;
 }
 
-.content-page .note p:last-child {
+.content-page .support-note ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.content-page .support-note li {
+    margin-bottom: 8px;
+}
+
+.content-page .contact-card p,
+.content-page .support-note p,
+.content-page .support-note li {
+    color: var(--muted);
+}
+
+.content-page .contact-card p:last-child,
+.content-page .support-note p:last-child,
+.content-page .support-note li:last-child {
     margin-bottom: 0;
+}
+
+.content-page .content-link {
+    margin: 0;
+    color: var(--muted);
+}
+
+.content-page .content-link span {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.content-page .content-link a {
+    color: var(--accent-strong);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    overflow-wrap: anywhere;
+}
+
+.app-content-page .contact-card,
+.app-content-page .support-note {
+    box-shadow: 0 18px 52px rgba(0, 0, 0, 0.44);
+}
+
+.app-content-page .email {
+    width: fit-content;
+    max-width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 183, 96, 0.44);
+    border-radius: 8px;
+    background: rgba(255, 122, 0, 0.12);
 }

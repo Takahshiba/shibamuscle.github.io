@@ -374,13 +374,6 @@ function removeBodyAdsenseScripts(html) {
 
 function normalizeExerciseMarkup(html) {
     return html
-        .replace(/href="#whole-body-section"/g, 'href="index.html#whole-body-section"')
-        .replace(/href="#chest-section"/g, 'href="index.html#chest-section"')
-        .replace(/href="#back-section"/g, 'href="index.html#back-section"')
-        .replace(/href="#shoulder-section"/g, 'href="index.html#shoulder-section"')
-        .replace(/href="#arm-section"/g, 'href="index.html#arm-section"')
-        .replace(/href="#leg-section"/g, 'href="index.html#leg-section"')
-        .replace(/href="#core-section"/g, 'href="index.html#core-section"')
         .replace(/<h1 class="section-title"([^>]*)>([\s\S]*?)<\/h1>/g, '<h2 class="section-title"$1>$2</h2>');
 }
 

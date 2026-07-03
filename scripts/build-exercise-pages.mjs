@@ -111,7 +111,7 @@ function renderExercisePage(exercise, catalogData, unit, variant, locale) {
         data-related-tags="${escapeAttribute(relatedTags.join(" | "))}">
 ${renderBreadcrumb([
         { label: getUiText(locale, "home"), href: "index.html" },
-        { label: cleanSectionLabel(categoryLabel, locale), href: `index.html#${exercise.categoryId || "whole-body-section"}` },
+        { label: cleanSectionLabel(categoryLabel, locale), href: `#${exercise.categoryId || "whole-body-section"}` },
         { label: name }
     ], locale)}
 ${renderHero(exercise, locale)}

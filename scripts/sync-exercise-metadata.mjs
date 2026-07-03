@@ -38,7 +38,7 @@ for (const file of exerciseFiles) {
     const equipmentTags = inferEquipmentTags(exercise);
 
     Object.entries(exercise.variants || {}).forEach(([unit, variant]) => {
-        variant.averageBlock = normalizeAverageBlock(exercise, variant.averageBlock, metadata.measurementKind);
+        variant.averageBlock = normalizeAverageBlock(exercise, variant.averageBlock, metadata.measurementKind, unit);
         variant.standardsBlock = normalizeStandardsBlock(exercise, variant.standardsBlock, unit, metadata.measurementKind, equipmentTags);
     });
 
@@ -104,7 +104,7 @@ writeJson(join(process.cwd(), "src", "catalog.json"), catalog);
 
 console.log(`Synced metadata for ${updatedExercises} exercise sources and normalized src/catalog.json.`);
 
-function normalizeAverageBlock(exercise, html, measurementKind) {
+function normalizeAverageBlock(exercise, html, measurementKind, unit) {
     const copy = getMeasurementCopy(measurementKind);
     const note = measurementKind === "reps"
         ? "注：これらの基準は1セットで行える平均レップ数の目安です。体重、可動域、テンポなどの個人的要因によって変わります。より詳細なデータは以下のとおりです。"
@@ -119,7 +119,46 @@ function normalizeAverageBlock(exercise, html, measurementKind) {
     next = next.replace(/<p class="average-section-note">[\s\S]*?<\/p>/i, `<p class="average-section-note">${note}
         </p>`);
 
-    return next;
+    return normalizeAverageUnitCells(next, unit);
+}
+
+function normalizeAverageUnitCells(html, unit) {
+    return String(html || "").replace(/<td>([\s\S]*?)<\/td>/g, (match, content) => {
+        const normalized = normalizeAverageUnitCell(content, unit);
+        return normalized === null ? match : `<td>${normalized}</td>`;
+    });
+}
+
+function normalizeAverageUnitCell(content, unit) {
+    const text = String(content || "");
+    const kgMatch = text.match(/([0-9][0-9,.]*(?:\.[0-9]+)?)\s*kg\b/i);
+    const lbMatch = text.match(/([0-9][0-9,.]*(?:\.[0-9]+)?)\s*lbs?\b/i);
+
+    if (unit === "kg") {
+        if (kgMatch) {
+            return `${kgMatch[1]} kg`;
+        }
+
+        if (lbMatch) {
+            return `${Math.round(parseWeightNumber(lbMatch[1]) / 2.20462262185)} kg`;
+        }
+    }
+
+    if (unit === "lb") {
+        if (lbMatch) {
+            return `${lbMatch[1]} lb`;
+        }
+
+        if (kgMatch) {
+            return `${Math.round(parseWeightNumber(kgMatch[1]) * 2.20462262185)} lb`;
+        }
+    }
+
+    return null;
+}
+
+function parseWeightNumber(value) {
+    return Number.parseFloat(String(value || "").replace(/,/g, ""));
 }
 
 function normalizeStandardsBlock(exercise, html, unit, measurementKind, equipmentTags) {
