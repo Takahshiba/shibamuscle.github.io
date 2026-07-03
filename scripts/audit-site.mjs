@@ -31,6 +31,8 @@ const sitemapUrls = new Set(Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g))
 const staticPageByFile = new Map(loadPages().map((page) => [page.file, page]));
 const errors = [];
 
+assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|en)\.shibamuscle\.com/i.test(sitemap), "sitemap.xml: old locale subdomain URL remains");
+
 for (const entry of htmlEntries) {
     const html = readFileSync(entry.path, "utf8");
     const sourceStaticPage = staticPageByFile.get(entry.file);
@@ -48,6 +50,7 @@ for (const entry of htmlEntries) {
     const canonicalUrl = absoluteUrlForFile(canonicalFile, entry.locale);
     const pageUrl = absoluteUrlForFile(entry.file, entry.locale);
 
+    assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|en)\.shibamuscle\.com/i.test(localeConfig.origin), `${entry.locale}: old locale subdomain origin remains`);
     assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|en)\.shibamuscle\.com/i.test(html), `${entry.relativePath}: old locale subdomain link remains`);
     assert(!html.includes("precaonnect"), `${entry.relativePath}: precaonnect typo is still present`);
     assert(!html.includes("G-ZPM6B2KLSV"), `${entry.relativePath}: legacy GA id is still present`);
