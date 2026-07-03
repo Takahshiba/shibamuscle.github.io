@@ -25,6 +25,7 @@ const SITE_ORIGIN = "https://shibamuscle.com";
 const ANALYTICS_ID = "G-D9K58THBFM";
 const SITE_THEME_COLOR = "#148a6a";
 const APP_THEME_COLOR = "#ff6a00";
+const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const ANALYTICS_BLOCK = `
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}"></script>
@@ -166,7 +167,7 @@ function buildPageContext(entry, html) {
             homeLabel,
             description: page?.description || "",
             canonicalUrl,
-            ogImage: page?.ogImage || `${SITE_ORIGIN}/assets/dumbbell-logo.png`,
+            ogImage: page?.ogImage || DEFAULT_OG_IMAGE,
             type: "website",
             twitterCard: "summary_large_image",
             alternates,
@@ -185,7 +186,7 @@ function buildPageContext(entry, html) {
             homeLabel,
             description: "シフト表のPDFから勤務日を抽出し、iPhoneカレンダーで使えるICSファイルを生成できるツールです。",
             canonicalUrl,
-            ogImage: `${SITE_ORIGIN}/assets/dumbbell-logo.png`,
+            ogImage: DEFAULT_OG_IMAGE,
             type: "website",
             twitterCard: "summary",
             alternates,
@@ -224,7 +225,7 @@ function buildPageContext(entry, html) {
             homeLabel,
             description: page.description || decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))),
             canonicalUrl,
-            ogImage: page.ogImage || `${SITE_ORIGIN}/assets/dumbbell-logo.png`,
+            ogImage: page.ogImage || DEFAULT_OG_IMAGE,
             type: "article",
             twitterCard: "summary",
             alternates,
@@ -269,7 +270,7 @@ function buildPageContext(entry, html) {
         homeLabel,
         description: decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))) || (locale === "ko" ? "Shiba Muscle 페이지입니다." : locale === "es" ? "Página de Shiba Muscle." : "Shiba Muscleのページです。"),
         canonicalUrl,
-        ogImage: `${SITE_ORIGIN}/assets/dumbbell-logo.png`,
+        ogImage: DEFAULT_OG_IMAGE,
         type: "article",
         twitterCard: "summary",
         alternates,

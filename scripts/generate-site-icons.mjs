@@ -36,6 +36,7 @@ if (!existsSync(SOURCE_ICON)) {
 }
 
 const targets = [
+    squareTarget("dumbbell-logo.png", 58),
     ...STANDARD_ICON_SIZES.map((size) => squareTarget(`icon-${size}x${size}.png`, size)),
     ...ANDROID_ICON_SIZES.map((size) => squareTarget(`android-chrome-${size}x${size}.png`, size)),
     ...APPLE_TOUCH_SIZES.flatMap((size) => [

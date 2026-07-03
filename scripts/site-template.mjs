@@ -20,6 +20,8 @@ const ANALYTICS_ID = "G-D9K58THBFM";
 const SITE_ORIGIN = "https://shibamuscle.com";
 const THEME_COLOR = "#148a6a";
 const APP_THEME_COLOR = "#ff6a00";
+const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
+const ICON_ASSET_VERSION = "shiba-20260704";
 
 function buildFontBlock(locale = "ja") {
     const family = locale === "ko"
@@ -41,51 +43,55 @@ function buildFontBlock(locale = "ja") {
 function buildFaviconBlock(locale = "ja") {
     return `
     <!-- Favicon -->
-    <meta name="msapplication-square70x70logo" content="${assetHref("site-tile-70x70.png", locale)}">
-    <meta name="msapplication-square150x150logo" content="${assetHref("site-tile-150x150.png", locale)}">
-    <meta name="msapplication-wide310x150logo" content="${assetHref("site-tile-310x150.png", locale)}">
-    <meta name="msapplication-square310x310logo" content="${assetHref("site-tile-310x310.png", locale)}">
+    <meta name="msapplication-square70x70logo" content="${iconAssetHref("site-tile-70x70.png", locale)}">
+    <meta name="msapplication-square150x150logo" content="${iconAssetHref("site-tile-150x150.png", locale)}">
+    <meta name="msapplication-wide310x150logo" content="${iconAssetHref("site-tile-310x150.png", locale)}">
+    <meta name="msapplication-square310x310logo" content="${iconAssetHref("site-tile-310x310.png", locale)}">
     <meta name="msapplication-TileColor" content="#0078d7">
-    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="${assetHref("favicon.ico", locale)}">
-    <link rel="icon" type="image/vnd.microsoft.icon" href="${assetHref("favicon.ico", locale)}">
-    <link rel="apple-touch-icon" sizes="57x57" href="${assetHref("apple-touch-icon-57x57.png", locale)}">
-    <link rel="apple-touch-icon" sizes="60x60" href="${assetHref("apple-touch-icon-60x60.png", locale)}">
-    <link rel="apple-touch-icon" sizes="72x72" href="${assetHref("apple-touch-icon-72x72.png", locale)}">
-    <link rel="apple-touch-icon" sizes="76x76" href="${assetHref("apple-touch-icon-76x76.png", locale)}">
-    <link rel="apple-touch-icon" sizes="114x114" href="${assetHref("apple-touch-icon-114x114.png", locale)}">
-    <link rel="apple-touch-icon" sizes="120x120" href="${assetHref("apple-touch-icon-120x120.png", locale)}">
-    <link rel="apple-touch-icon" sizes="144x144" href="${assetHref("apple-touch-icon-144x144.png", locale)}">
-    <link rel="apple-touch-icon" sizes="152x152" href="${assetHref("apple-touch-icon-152x152.png", locale)}">
-    <link rel="apple-touch-icon" sizes="180x180" href="${assetHref("apple-touch-icon-180x180.png", locale)}">
-    <link rel="icon" type="image/png" sizes="36x36" href="${assetHref("android-chrome-36x36.png", locale)}">
-    <link rel="icon" type="image/png" sizes="48x48" href="${assetHref("android-chrome-48x48.png", locale)}">
-    <link rel="icon" type="image/png" sizes="72x72" href="${assetHref("android-chrome-72x72.png", locale)}">
-    <link rel="icon" type="image/png" sizes="96x96" href="${assetHref("android-chrome-96x96.png", locale)}">
-    <link rel="icon" type="image/png" sizes="128x128" href="${assetHref("android-chrome-128x128.png", locale)}">
-    <link rel="icon" type="image/png" sizes="144x144" href="${assetHref("android-chrome-144x144.png", locale)}">
-    <link rel="icon" type="image/png" sizes="152x152" href="${assetHref("android-chrome-152x152.png", locale)}">
-    <link rel="icon" type="image/png" sizes="192x192" href="${assetHref("android-chrome-192x192.png", locale)}">
-    <link rel="icon" type="image/png" sizes="256x256" href="${assetHref("android-chrome-256x256.png", locale)}">
-    <link rel="icon" type="image/png" sizes="384x384" href="${assetHref("android-chrome-384x384.png", locale)}">
-    <link rel="icon" type="image/png" sizes="512x512" href="${assetHref("android-chrome-512x512.png", locale)}">
-    <link rel="icon" type="image/png" sizes="36x36" href="${assetHref("icon-36x36.png", locale)}">
-    <link rel="icon" type="image/png" sizes="48x48" href="${assetHref("icon-48x48.png", locale)}">
-    <link rel="icon" type="image/png" sizes="72x72" href="${assetHref("icon-72x72.png", locale)}">
-    <link rel="icon" type="image/png" sizes="96x96" href="${assetHref("icon-96x96.png", locale)}">
-    <link rel="icon" type="image/png" sizes="128x128" href="${assetHref("icon-128x128.png", locale)}">
-    <link rel="icon" type="image/png" sizes="144x144" href="${assetHref("icon-144x144.png", locale)}">
-    <link rel="icon" type="image/png" sizes="152x152" href="${assetHref("icon-152x152.png", locale)}">
-    <link rel="icon" type="image/png" sizes="160x160" href="${assetHref("icon-160x160.png", locale)}">
-    <link rel="icon" type="image/png" sizes="192x192" href="${assetHref("icon-192x192.png", locale)}">
-    <link rel="icon" type="image/png" sizes="196x196" href="${assetHref("icon-196x196.png", locale)}">
-    <link rel="icon" type="image/png" sizes="256x256" href="${assetHref("icon-256x256.png", locale)}">
-    <link rel="icon" type="image/png" sizes="384x384" href="${assetHref("icon-384x384.png", locale)}">
-    <link rel="icon" type="image/png" sizes="512x512" href="${assetHref("icon-512x512.png", locale)}">
-    <link rel="icon" type="image/png" sizes="16x16" href="${assetHref("icon-16x16.png", locale)}">
-    <link rel="icon" type="image/png" sizes="24x24" href="${assetHref("icon-24x24.png", locale)}">
-    <link rel="icon" type="image/png" sizes="32x32" href="${assetHref("icon-32x32.png", locale)}">
-    <link rel="manifest" href="${assetHref("manifest.json", locale)}">
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="${iconAssetHref("favicon.ico", locale)}">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="${iconAssetHref("favicon.ico", locale)}">
+    <link rel="apple-touch-icon" sizes="57x57" href="${iconAssetHref("apple-touch-icon-57x57.png", locale)}">
+    <link rel="apple-touch-icon" sizes="60x60" href="${iconAssetHref("apple-touch-icon-60x60.png", locale)}">
+    <link rel="apple-touch-icon" sizes="72x72" href="${iconAssetHref("apple-touch-icon-72x72.png", locale)}">
+    <link rel="apple-touch-icon" sizes="76x76" href="${iconAssetHref("apple-touch-icon-76x76.png", locale)}">
+    <link rel="apple-touch-icon" sizes="114x114" href="${iconAssetHref("apple-touch-icon-114x114.png", locale)}">
+    <link rel="apple-touch-icon" sizes="120x120" href="${iconAssetHref("apple-touch-icon-120x120.png", locale)}">
+    <link rel="apple-touch-icon" sizes="144x144" href="${iconAssetHref("apple-touch-icon-144x144.png", locale)}">
+    <link rel="apple-touch-icon" sizes="152x152" href="${iconAssetHref("apple-touch-icon-152x152.png", locale)}">
+    <link rel="apple-touch-icon" sizes="180x180" href="${iconAssetHref("apple-touch-icon-180x180.png", locale)}">
+    <link rel="icon" type="image/png" sizes="36x36" href="${iconAssetHref("android-chrome-36x36.png", locale)}">
+    <link rel="icon" type="image/png" sizes="48x48" href="${iconAssetHref("android-chrome-48x48.png", locale)}">
+    <link rel="icon" type="image/png" sizes="72x72" href="${iconAssetHref("android-chrome-72x72.png", locale)}">
+    <link rel="icon" type="image/png" sizes="96x96" href="${iconAssetHref("android-chrome-96x96.png", locale)}">
+    <link rel="icon" type="image/png" sizes="128x128" href="${iconAssetHref("android-chrome-128x128.png", locale)}">
+    <link rel="icon" type="image/png" sizes="144x144" href="${iconAssetHref("android-chrome-144x144.png", locale)}">
+    <link rel="icon" type="image/png" sizes="152x152" href="${iconAssetHref("android-chrome-152x152.png", locale)}">
+    <link rel="icon" type="image/png" sizes="192x192" href="${iconAssetHref("android-chrome-192x192.png", locale)}">
+    <link rel="icon" type="image/png" sizes="256x256" href="${iconAssetHref("android-chrome-256x256.png", locale)}">
+    <link rel="icon" type="image/png" sizes="384x384" href="${iconAssetHref("android-chrome-384x384.png", locale)}">
+    <link rel="icon" type="image/png" sizes="512x512" href="${iconAssetHref("android-chrome-512x512.png", locale)}">
+    <link rel="icon" type="image/png" sizes="36x36" href="${iconAssetHref("icon-36x36.png", locale)}">
+    <link rel="icon" type="image/png" sizes="48x48" href="${iconAssetHref("icon-48x48.png", locale)}">
+    <link rel="icon" type="image/png" sizes="72x72" href="${iconAssetHref("icon-72x72.png", locale)}">
+    <link rel="icon" type="image/png" sizes="96x96" href="${iconAssetHref("icon-96x96.png", locale)}">
+    <link rel="icon" type="image/png" sizes="128x128" href="${iconAssetHref("icon-128x128.png", locale)}">
+    <link rel="icon" type="image/png" sizes="144x144" href="${iconAssetHref("icon-144x144.png", locale)}">
+    <link rel="icon" type="image/png" sizes="152x152" href="${iconAssetHref("icon-152x152.png", locale)}">
+    <link rel="icon" type="image/png" sizes="160x160" href="${iconAssetHref("icon-160x160.png", locale)}">
+    <link rel="icon" type="image/png" sizes="192x192" href="${iconAssetHref("icon-192x192.png", locale)}">
+    <link rel="icon" type="image/png" sizes="196x196" href="${iconAssetHref("icon-196x196.png", locale)}">
+    <link rel="icon" type="image/png" sizes="256x256" href="${iconAssetHref("icon-256x256.png", locale)}">
+    <link rel="icon" type="image/png" sizes="384x384" href="${iconAssetHref("icon-384x384.png", locale)}">
+    <link rel="icon" type="image/png" sizes="512x512" href="${iconAssetHref("icon-512x512.png", locale)}">
+    <link rel="icon" type="image/png" sizes="16x16" href="${iconAssetHref("icon-16x16.png", locale)}">
+    <link rel="icon" type="image/png" sizes="24x24" href="${iconAssetHref("icon-24x24.png", locale)}">
+    <link rel="icon" type="image/png" sizes="32x32" href="${iconAssetHref("icon-32x32.png", locale)}">
+    <link rel="manifest" href="${iconAssetHref("manifest.json", locale)}">
 `;
+}
+
+function iconAssetHref(file, locale = "ja") {
+    return assetHref(`${file}?v=${ICON_ASSET_VERSION}`, locale);
 }
 
 export {
@@ -148,7 +154,7 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", ogImage, 
     }).join("\n") : "";
     const xDefaultLink = includeAlternates ? `\n    <link rel="alternate" hreflang="x-default" href="${escapeAttribute(alternates.ja)}">` : "";
     const canonicalUrl = absoluteUrlForFile(canonicalFile, locale);
-    const resolvedOgImage = ogImage || `${SITE_ORIGIN}/assets/dumbbell-logo.png`;
+    const resolvedOgImage = ogImage || DEFAULT_OG_IMAGE;
     const resolvedOgLocale = ogLocale || getOgLocale(locale);
 
     return `
