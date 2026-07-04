@@ -848,7 +848,28 @@ function auditIndexableMetadataQuality() {
         assert(titleLength >= 12 && titleLength <= 75, `${page.path}: title length should stay between 12 and 75 characters`);
         assert(descriptionLength >= 45 && descriptionLength <= 180, `${page.path}: description length should stay between 45 and 180 characters`);
         assert(page.title !== page.description, `${page.path}: title and description should not be identical`);
+        assert(hasBrandedTitleShape(page.title), `${page.path}: title should combine page-specific copy with Shiba or Shiba Muscle branding`);
+        assert(!containsRawUrl(page.title), `${page.path}: title should not contain a raw URL`);
+        assert(!containsRawUrl(page.description), `${page.path}: description should not contain a raw URL`);
+        assert(!containsImageFilename(page.title), `${page.path}: title should not contain an image filename`);
+        assert(!containsImageFilename(page.description), `${page.path}: description should not contain an image filename`);
     });
+}
+
+function hasBrandedTitleShape(title) {
+    const parts = String(title || "").split(/\s+\|\s+/).map((part) => part.trim());
+
+    return parts.length === 2
+        && parts.every(Boolean)
+        && parts.some((part) => part === "Shiba" || part === "Shiba Muscle");
+}
+
+function containsRawUrl(value) {
+    return /https?:\/\//i.test(value || "");
+}
+
+function containsImageFilename(value) {
+    return /(?:^|[\s/])[\w.-]+\.(?:png|jpe?g|webp|gif|svg)(?:$|[\s?#])/i.test(value || "");
 }
 
 function auditIndexableInternalReachability() {
