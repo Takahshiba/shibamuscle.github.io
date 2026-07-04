@@ -1534,6 +1534,7 @@ function auditBreadcrumbStructuredData(entry, html, breadcrumb, canonicalUrl) {
         assert(item.position === index + 1, `${entry.relativePath}: BreadcrumbList item ${index + 1} position is incorrect`);
         assert(item.name === visibleItem.label, `${entry.relativePath}: BreadcrumbList item ${index + 1} name should match visible breadcrumb`);
         assert(typeof item.item === "string" && item.item.startsWith(SITE_ORIGIN), `${entry.relativePath}: BreadcrumbList item ${index + 1} should use an absolute site URL`);
+        auditBreadcrumbStructuredDataTarget(entry, html, item, index + 1);
     });
 
     const firstItem = schemaItems[0];
@@ -1541,6 +1542,32 @@ function auditBreadcrumbStructuredData(entry, html, breadcrumb, canonicalUrl) {
     assert(firstItem?.item === absoluteUrlForFile("index.html", entry.locale), `${entry.relativePath}: BreadcrumbList first item should link to the localized home`);
     assert(lastItem?.item === canonicalUrl, `${entry.relativePath}: BreadcrumbList last item should link to the canonical URL`);
     assert(lastItem?.name === visibleItems[visibleItems.length - 1]?.label, `${entry.relativePath}: BreadcrumbList last item name should match the current page label`);
+}
+
+function auditBreadcrumbStructuredDataTarget(entry, html, item, position) {
+    const targetUrl = item?.item || "";
+    const targetPath = resolveLocalCrawlPath(entry.relativePath, targetUrl);
+
+    assert(Boolean(targetPath), `${entry.relativePath}: BreadcrumbList item ${position} URL cannot be resolved (${targetUrl})`);
+    if (!targetPath) {
+        return;
+    }
+
+    assert(availableHtml.has(targetPath), `${entry.relativePath}: BreadcrumbList item ${position} target is not generated (${targetUrl})`);
+    assert(!noindexHtmlTargets.has(targetPath), `${entry.relativePath}: BreadcrumbList item ${position} should not target a noindex page (${targetUrl})`);
+    if (!availableHtml.has(targetPath)) {
+        return;
+    }
+
+    const fragmentId = extractHrefFragmentId(targetUrl);
+    if (fragmentId) {
+        if (targetPath === entry.relativePath) {
+            assert(hasHtmlId(html, fragmentId), `${entry.relativePath}: BreadcrumbList item ${position} fragment target is missing (${targetUrl})`);
+            return;
+        }
+
+        assert(readHtmlIdsByRelativePath(targetPath).has(fragmentId), `${entry.relativePath}: BreadcrumbList item ${position} fragment target is missing (${targetUrl})`);
+    }
 }
 
 function extractVisibleBreadcrumbItems(html) {
