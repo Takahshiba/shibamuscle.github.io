@@ -86,6 +86,7 @@ assert(sitemapAlternateLinkCount === expectedSitemapAlternateLinkCount, "sitemap
 auditRobotsTxt();
 auditAssetStylesheetFiles();
 auditWebAppMetadataFiles();
+auditStaticPageSourceLocalization();
 auditOgSvgAssetReferences();
 auditImageSitemapMarkup();
 auditSitemapImageFiles();
@@ -224,6 +225,14 @@ for (const entry of htmlEntries) {
 
     if (entry.locale === "es") {
         auditSpanishHtml(entry, html);
+    }
+
+    if (entry.locale === "fr") {
+        auditFrenchHtml(entry, html);
+    }
+
+    if (entry.locale === "de") {
+        auditGermanHtml(entry, html);
     }
 
     if (entry.locale === "id") {
@@ -402,6 +411,29 @@ function auditWebAppMetadataFiles() {
             assertLocalFileExists(relativePath, resolveLocalCrawlPath(relativePath, asset), asset);
         });
         assert(xml.includes(`<TileColor>${THEME_COLOR}</TileColor>`), `${relativePath}: browserconfig TileColor is incorrect`);
+    });
+}
+
+function auditStaticPageSourceLocalization() {
+    const generatedLocales = getGeneratedLocales().filter((locale) => locale.code !== "ja");
+
+    staticPageByFile.forEach((page) => {
+        if (page.englishOnly === true) {
+            return;
+        }
+        const sourcePath = `src/pages/${page.file === "index.html" ? "home.json" : page.file.replace(/\.html$/, ".json")}`;
+
+        generatedLocales.forEach((locale) => {
+            const localizedPage = page.locales?.[locale.code];
+            assert(Boolean(localizedPage), `${sourcePath}: missing ${locale.code} localization`);
+            if (!localizedPage) {
+                return;
+            }
+
+            ["title", "description", "heading"].forEach((field) => {
+                assert(Boolean(String(localizedPage[field] || "").trim()), `${sourcePath}: missing ${locale.code} ${field}`);
+            });
+        });
     });
 }
 
@@ -1763,6 +1795,14 @@ function auditSpanishHtml(entry, html) {
     assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in Spanish output`);
 }
 
+function auditFrenchHtml(entry, html) {
+    auditLatinLocalizedHtml(entry, html, "French");
+}
+
+function auditGermanHtml(entry, html) {
+    auditLatinLocalizedHtml(entry, html, "German");
+}
+
 function auditIndonesianHtml(entry, html) {
     const normalized = stripIntentionalLanguageSwitchText(html)
         .replace(/<!--[\s\S]*?-->/g, "")
@@ -1785,6 +1825,18 @@ function auditEnglishHtml(entry, html) {
     });
 
     assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in English output`);
+}
+
+function auditLatinLocalizedHtml(entry, html, languageName) {
+    const normalized = stripIntentionalLanguageSwitchText(html)
+        .replace(/<!--[\s\S]*?-->/g, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "");
+
+    JAPANESE_LEFTOVER_PATTERNS.forEach((pattern) => {
+        assert(!pattern.test(normalized), `${entry.relativePath}: Japanese text remains in ${languageName} output`);
+    });
+
+    assert(!/[\u3040-\u30ff]/.test(normalized), `${entry.relativePath}: Japanese kana remains in ${languageName} output`);
 }
 
 function auditJapaneseStaticPageHtml(entry, html, isStaticPage) {
