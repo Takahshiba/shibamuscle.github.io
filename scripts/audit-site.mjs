@@ -227,6 +227,7 @@ for (const entry of htmlEntries) {
     auditDuplicateHtmlIds(entry, html);
     auditCanonicalHomeLinks(entry, html);
     auditTargetBlankLinks(entry, html);
+    auditExternalAnchorLinks(entry, html);
     auditLocalAssetReferences(entry, html);
     auditImageAltText(entry, html);
     auditImageDimensions(entry, html);
@@ -2687,6 +2688,33 @@ function auditTargetBlankLinks(entry, html) {
 
         assert(relTokens.has("noopener"), `${entry.relativePath}: target="_blank" link should include rel="noopener"`);
         assert(relTokens.has("noreferrer"), `${entry.relativePath}: target="_blank" link should include rel="noreferrer"`);
+    });
+}
+
+function auditExternalAnchorLinks(entry, html) {
+    Array.from(html.matchAll(/<a\b[^>]*>/gi)).forEach((match) => {
+        const tag = match[0];
+        const href = extractHtmlAttribute(tag, "href");
+        if (!/^https?:\/\//i.test(href || "")) {
+            return;
+        }
+
+        let parsed;
+        try {
+            parsed = new URL(href);
+        } catch {
+            assert(false, `${entry.relativePath}: external link URL is invalid (${href})`);
+            return;
+        }
+
+        if (parsed.origin === SITE_ORIGIN) {
+            return;
+        }
+
+        assert(parsed.protocol === "https:", `${entry.relativePath}: external link should use HTTPS (${href})`);
+        assert(/\btarget=(?:"_blank"|'_blank'|_blank)/i.test(tag), `${entry.relativePath}: external link should open in a new tab (${href})`);
+        assert(hasHtmlRelToken(tag, "noopener"), `${entry.relativePath}: external link should include rel=noopener (${href})`);
+        assert(hasHtmlRelToken(tag, "noreferrer"), `${entry.relativePath}: external link should include rel=noreferrer (${href})`);
     });
 }
 
