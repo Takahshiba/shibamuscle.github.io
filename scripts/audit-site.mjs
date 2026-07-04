@@ -2424,8 +2424,9 @@ function buildStructureSignature(html) {
 }
 
 function auditInternalLinks(entry, html, isIndexablePage) {
-    Array.from(html.matchAll(/<a\b[^>]*>/gi)).forEach((match) => {
-        const tag = match[0];
+    Array.from(html.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/gi)).forEach((match) => {
+        const anchor = match[0];
+        const tag = anchor.match(/^<a\b[^>]*>/i)?.[0] || "";
         const href = extractHtmlAttribute(tag, "href");
         const resolved = resolveLocalCrawlPath(entry.relativePath, href);
         if (!resolved?.endsWith(".html")) {
@@ -2433,11 +2434,36 @@ function auditInternalLinks(entry, html, isIndexablePage) {
         }
 
         assert(availableHtml.has(resolved), `${entry.relativePath}: broken internal link to ${href}`);
+        auditInternalLinkLabel(entry, anchor, tag, href);
 
         if (isIndexablePage && noindexHtmlTargets.has(resolved)) {
             assert(hasHtmlRelToken(tag, "nofollow"), `${entry.relativePath}: indexable page should not follow noindex page ${href}`);
         }
     });
+}
+
+function auditInternalLinkLabel(entry, anchor, tag, href) {
+    const label = extractAnchorAccessibleLabel(anchor, tag);
+
+    assert(Boolean(label), `${entry.relativePath}: internal link to ${href} should have accessible text`);
+    if (!label) {
+        return;
+    }
+
+    assert(!looksLikeImageFilename(label), `${entry.relativePath}: internal link to ${href} should not use an image filename as link text`);
+    assert(!/^https?:\/\//i.test(label), `${entry.relativePath}: internal link to ${href} should not use a raw URL as link text`);
+}
+
+function extractAnchorAccessibleLabel(anchor, tag) {
+    const body = anchor
+        .replace(/^<a\b[^>]*>/i, "")
+        .replace(/<\/a>\s*$/i, "")
+        .replace(/<img\b[^>]*>/gi, (imageTag) => ` ${extractHtmlAttribute(imageTag, "alt")} `);
+    const visibleText = normalizeAuditText(body.replace(/<[^>]+>/g, " "));
+
+    return visibleText
+        || normalizeAuditText(extractHtmlAttribute(tag, "aria-label"))
+        || normalizeAuditText(extractHtmlAttribute(tag, "title"));
 }
 
 function auditInternalFragmentLinks(entry, html) {
