@@ -2523,10 +2523,10 @@ body.app-content-page {
 
 .app-hero-lead {
     margin: 0;
-    max-width: 680px;
+    max-width: 560px;
     color: rgba(255, 247, 238, 0.72);
     font-size: 1.12rem;
-    line-height: 1.8;
+    line-height: 1.55;
 }
 
 .app-hero-availability {
@@ -2601,8 +2601,8 @@ body.app-content-page {
 }
 
 .app-stat {
-    min-height: 112px;
-    padding: 16px;
+    min-height: 82px;
+    padding: 14px 16px;
     border: 1px solid rgba(255, 122, 0, 0.46);
     border-radius: 8px;
     background:
@@ -2610,11 +2610,10 @@ body.app-content-page {
         var(--app-panel);
     display: grid;
     gap: 6px;
-    align-content: start;
+    align-content: center;
 }
 
-.app-stat span,
-.app-stat small {
+.app-stat span {
     color: rgba(255, 247, 238, 0.64);
     font-size: 0.78rem;
     line-height: 1.45;
@@ -2834,7 +2833,7 @@ body.app-content-page {
 }
 
 .app-feature-card {
-    min-height: 250px;
+    min-height: 188px;
     padding: 20px;
     border: 1px solid rgba(255, 122, 0, 0.46);
     border-radius: 8px;
@@ -2863,7 +2862,7 @@ body.app-content-page {
     margin: 0;
     color: rgba(255, 247, 238, 0.68);
     font-size: 0.94rem;
-    line-height: 1.65;
+    line-height: 1.5;
 }
 
 .app-showcase {
