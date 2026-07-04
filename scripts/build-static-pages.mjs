@@ -286,7 +286,7 @@ ${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join
 
             <section class="app-cta-band" id="app-store">
                 <div class="app-cta-copy">
-                    <img src="${escapeAttribute(assetHref(images.mascot, locale))}" alt="" class="app-cta-mascot" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.mascot, locale))}>
+                    <img src="${escapeAttribute(assetHref(images.mascot, locale))}" alt="" aria-hidden="true" class="app-cta-mascot" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.mascot, locale))}>
                     <p class="app-kicker">Shiba</p>
                     <h2>${renderMultilineText(getHomeText(textLocale, "appStoreHeading"))}</h2>
                     <p>${escapeHtml(getHomeText(textLocale, "appStoreCopy"))}</p>
@@ -323,7 +323,7 @@ function renderAppFooter(locale, textLocale = locale) {
     return `    <footer class="app-footer">
         <div class="app-footer-inner">
             <a href="${escapeAttribute(homeHref)}" class="app-footer-brand">
-                <img src="${escapeAttribute(assetHref("app/shiba-mascot.png", locale))}" alt="" class="app-footer-brand-icon" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
+                <img src="${escapeAttribute(assetHref("app/shiba-mascot.png", locale))}" alt="" aria-hidden="true" class="app-footer-brand-icon" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                 <span>Shiba</span>
             </a>
             <nav class="app-footer-links" aria-label="Shiba footer">
@@ -436,9 +436,9 @@ function renderHeroShowcase(images, locale, textLocale = locale) {
                                 <strong>Top 41%</strong>
                                 <small>${escapeHtml(getHomeText(textLocale, "heroPercentileCopy"))}</small>
                             </div>
-                            <div class="app-insight-card app-insight-card--heatmap" aria-hidden="true">
-                                <img src="${escapeAttribute(assetHref(heatmapDetail, locale))}" alt="" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(heatmapDetail, locale))}>
-                                <span>Muscle Heatmap</span>
+                            <div class="app-insight-card app-insight-card--heatmap">
+                                <img src="${escapeAttribute(assetHref(heatmapDetail, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "heatmapAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(heatmapDetail, locale))}>
+                                <span aria-hidden="true">Muscle Heatmap</span>
                             </div>
                         </div>
                     </div>`;

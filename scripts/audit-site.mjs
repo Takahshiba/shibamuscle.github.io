@@ -767,20 +767,36 @@ function auditImageAltText(entry, html) {
 
     Array.from(html.matchAll(/<img\b[^>]*>/gi)).forEach((match) => {
         const tag = match[0];
-        const altMatch = tag.match(/\salt="([^"]*)"/i);
+        const hasAltAttribute = /\salt=(?:"[^"]*"|'[^']*'|[^\s>]+)/i.test(tag);
+        const alt = decodeAuditHtml(extractHtmlAttribute(tag, "alt")).trim();
+        const src = decodeAuditHtml(extractHtmlAttribute(tag, "src")).trim();
 
-        assert(Boolean(altMatch), `${entry.relativePath}: image alt attribute is missing`);
+        assert(hasAltAttribute, `${entry.relativePath}: image alt attribute is missing`);
+        if (!hasAltAttribute) {
+            return;
+        }
+        if (!alt) {
+            assert(isDecorativeImageHidden(tag), `${entry.relativePath}: decorative image with empty alt should be hidden from assistive tech`);
+        } else {
+            assert(alt !== src, `${entry.relativePath}: image alt should not duplicate the image src`);
+            assert(!looksLikeImageFilename(alt), `${entry.relativePath}: image alt should describe the image, not a filename`);
+            assert(!/^https?:\/\//i.test(alt), `${entry.relativePath}: image alt should describe the image, not a URL`);
+        }
         if (/\blink-icon\b/.test(tag)) {
-            assert(altMatch?.[1] === "", `${entry.relativePath}: decorative footer link icon alt should be empty`);
+            assert(alt === "", `${entry.relativePath}: decorative footer link icon alt should be empty`);
             assert(/\saria-hidden="true"/i.test(tag), `${entry.relativePath}: decorative footer link icon should be aria-hidden`);
         }
-        if (/\bflag-icon\b/.test(tag) && altMatch) {
-            assert(!bareFlagAlts.has(altMatch[1].trim()), `${entry.relativePath}: flag image alt should describe the flag, not just "${altMatch[1]}"`);
+        if (/\bflag-icon\b/.test(tag)) {
+            assert(!bareFlagAlts.has(alt), `${entry.relativePath}: flag image alt should describe the flag, not just "${alt}"`);
             if (/countryflags\.com/i.test(tag)) {
-                assert(isDescriptiveFlagAlt(altMatch[1]), `${entry.relativePath}: external country flag image alt should describe the flag`);
+                assert(isDescriptiveFlagAlt(alt), `${entry.relativePath}: external country flag image alt should describe the flag`);
             }
         }
     });
+}
+
+function isDecorativeImageHidden(tag) {
+    return /\saria-hidden="true"/i.test(tag) || /\srole="(?:presentation|none)"/i.test(tag);
 }
 
 function auditImageDimensions(entry, html) {
