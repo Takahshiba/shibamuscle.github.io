@@ -1409,6 +1409,7 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
     const metaDescription = decodeAuditHtml(extractFirstGroup(html, /<meta name="description" content="([^"]+)">/i));
     assert(graph.length >= 4, `${entry.relativePath}: JSON-LD graph is too small`);
     auditStructuredDataGraphIdentity(entry, graph);
+    auditStructuredDataGraphReferences(entry, graph);
     auditNoFutureStructuredDataDates(entry, graph);
     const organization = graph.find((node) => node?.["@id"] === "https://shibamuscle.com/#organization" && hasType(node, "Organization"));
     const website = graph.find((node) => node?.["@id"] === "https://shibamuscle.com/#website" && hasType(node, "WebSite"));
@@ -1901,6 +1902,39 @@ function referencesStructuredDataNode(value, id) {
     }
 
     return (Array.isArray(value) ? value : [value]).some((item) => item?.["@id"] === id);
+}
+
+function auditStructuredDataGraphReferences(entry, graph) {
+    const ids = new Set(graph.map((node) => node?.["@id"]).filter(Boolean));
+
+    graph.forEach((node) => {
+        collectStructuredDataReferenceIds(node).forEach(({ id, path }) => {
+            assert(isCanonicalStructuredDataUrl(id), `${entry.relativePath}: JSON-LD reference ${path} should use the canonical site origin (${id})`);
+            assert(ids.has(id), `${entry.relativePath}: JSON-LD reference ${path} points to missing graph node ${id}`);
+        });
+    });
+}
+
+function collectStructuredDataReferenceIds(value, path = [], references = [], seen = new Set()) {
+    if (!value || typeof value !== "object" || seen.has(value)) {
+        return references;
+    }
+    seen.add(value);
+
+    if (!Array.isArray(value) && typeof value["@id"] === "string" && Object.keys(value).length === 1) {
+        references.push({ id: value["@id"], path: path.join(".") || "@graph" });
+        return references;
+    }
+
+    const entries = Array.isArray(value)
+        ? value.map((item, index) => [String(index), item])
+        : Object.entries(value).filter(([key]) => key !== "@id");
+
+    entries.forEach(([key, child]) => {
+        collectStructuredDataReferenceIds(child, path.concat(key), references, seen);
+    });
+
+    return references;
 }
 
 function hasType(node, type) {
