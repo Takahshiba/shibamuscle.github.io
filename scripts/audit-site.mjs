@@ -1488,8 +1488,13 @@ function auditHeadingStructure(entry, html, isIndexable, isToolPage) {
 
     const h1Count = (html.match(/<h1[\s>]/gi) || []).length;
     const h2Count = (html.match(/<h2[\s>]/gi) || []).length;
+    const h1 = decodeAuditHtml(htmlToText(extractFirstGroup(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i)));
+    const h1Length = countCharacters(h1);
 
     assert(h1Count === 1, `${entry.relativePath}: expected exactly one H1`);
+    assert(h1Length >= 2 && h1Length <= 70, `${entry.relativePath}: H1 length should stay between 2 and 70 characters`);
+    assert(!containsRawUrl(h1), `${entry.relativePath}: H1 should not contain a raw URL`);
+    assert(!containsImageFilename(h1), `${entry.relativePath}: H1 should not contain an image filename`);
     if (isIndexable) {
         assert(h2Count >= 1, `${entry.relativePath}: indexable page should include at least one H2 section`);
     }
