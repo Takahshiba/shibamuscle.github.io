@@ -261,6 +261,7 @@ for (const entry of htmlEntries) {
         assert(/<nav class="breadcrumb" aria-label="/.test(html), `${entry.relativePath}: static breadcrumb is missing`);
         assert(html.includes('id="other-workouts"'), `${entry.relativePath}: other workouts section is missing`);
         auditExerciseTitleLocalization(entry, html);
+        auditExercisePrimaryImageAlt(entry, html);
         auditRecordImageLoading(entry, html);
         auditExerciseCategoryLinks(entry, html);
         auditExerciseUnitDisplay(entry, html);
@@ -1857,6 +1858,29 @@ function auditExerciseTitleLocalization(entry, html) {
         assert(!title.includes(japaneseName), `${entry.relativePath}: exercise title uses Japanese fallback name ${japaneseName}`);
         assert(!h1.includes(japaneseName), `${entry.relativePath}: exercise H1 uses Japanese fallback name ${japaneseName}`);
     }
+}
+
+function auditExercisePrimaryImageAlt(entry, html) {
+    const h1 = decodeAuditHtml(htmlToText(extractFirstGroup(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i)));
+    const primaryImage = Array.from(html.matchAll(/<img\b[^>]*>/gi))
+        .map((match) => match[0])
+        .find((tag) => /\bworkout-main-image\b/.test(tag) && /\sfetchpriority="high"/i.test(tag));
+
+    assert(Boolean(primaryImage), `${entry.relativePath}: exercise primary image is missing`);
+    if (!primaryImage) {
+        return;
+    }
+
+    const alt = decodeAuditHtml(extractHtmlAttribute(primaryImage, "alt"));
+    const src = extractHtmlAttribute(primaryImage, "src");
+
+    assert(alt === h1, `${entry.relativePath}: exercise primary image alt should match the H1`);
+    assert(!looksLikeImageFilename(alt), `${entry.relativePath}: exercise primary image alt should not be a filename`);
+    assert(alt !== src, `${entry.relativePath}: exercise primary image alt should not duplicate the image src`);
+}
+
+function looksLikeImageFilename(value) {
+    return /(?:^|\/)[\w.-]+\.(?:png|jpe?g|webp|gif|svg)$/i.test(value || "");
 }
 
 function extractFirstMatch(text, pattern) {
