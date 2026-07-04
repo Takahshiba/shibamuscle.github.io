@@ -10,7 +10,7 @@ const NORMALIZE_SCRIPT = "scripts/normalize-site.mjs";
 const NORMALIZE_CHUNK_SIZE = Number.parseInt(process.env.SHIBA_NORMALIZE_CHUNK_SIZE || "1000", 10);
 const NORMALIZE_HTML = process.env.SHIBA_NORMALIZE_HTML === "1";
 const generatedLocaleCodes = getGeneratedLocales().map((locale) => locale.code);
-const REQUIRED_GENERATED_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "en"];
+const REQUIRED_GENERATED_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "id", "en"];
 
 const missingLocales = REQUIRED_GENERATED_LOCALE_CODES.filter((locale) => !generatedLocaleCodes.includes(locale));
 if (missingLocales.length) {
