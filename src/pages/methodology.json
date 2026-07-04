@@ -4,6 +4,7 @@
   "title": "データの見方 | Shiba Muscle",
   "description": "平均重量、平均レップ数、筋力基準表、主働筋情報、kg/lb単位切替を安全に読み解く方法を説明します。",
   "heading": "データの見方",
+  "ogImage": "https://shibamuscle.com/assets/app/strength-percentile.jpg",
   "appShell": true,
   "shellClass": "policy-shell app-policy-shell",
   "ads": false,

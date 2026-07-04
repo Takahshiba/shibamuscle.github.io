@@ -88,6 +88,7 @@ auditRobotsTxt();
 auditAssetStylesheetFiles();
 auditWebAppMetadataFiles();
 auditStaticPageSourceLocalization();
+auditStaticPageSourceSocialImages();
 auditOgSvgAssetReferences();
 auditImageSitemapMarkup();
 auditSitemapImageFiles();
@@ -441,6 +442,23 @@ function auditStaticPageSourceLocalization() {
                 assert(Boolean(String(localizedPage[field] || "").trim()), `${sourcePath}: missing ${locale.code} ${field}`);
             });
         });
+    });
+}
+
+function auditStaticPageSourceSocialImages() {
+    staticPageByFile.forEach((page) => {
+        if (page.noindex === true || !["home", "content"].includes(page.kind)) {
+            return;
+        }
+
+        const sourcePath = `src/pages/${page.file === "index.html" ? "home.json" : page.file.replace(/\.html$/, ".json")}`;
+        assert(Boolean(page.ogImage), `${sourcePath}: indexable static page should define a representative ogImage`);
+        assert(page.ogImage !== DEFAULT_OG_IMAGE, `${sourcePath}: indexable static page should not use the generic default ogImage`);
+        const resolved = resolveLocalCrawlPath(sourcePath, page.ogImage);
+        assert(Boolean(resolved), `${sourcePath}: ogImage should resolve to a local crawlable asset`);
+        if (resolved) {
+            assertLocalFileExists(sourcePath, resolved, page.ogImage);
+        }
     });
 }
 

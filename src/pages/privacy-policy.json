@@ -4,6 +4,7 @@
   "title": "プライバシーポリシー | Shiba Muscle",
   "description": "Shiba Muscleのプライバシーポリシー、Cookie、アクセス解析、広告配信、外部リンク、利用条件をまとめたページです。",
   "heading": "プライバシーポリシー",
+  "ogImage": "https://shibamuscle.com/assets/app/shiba-social-card.png",
   "appShell": true,
   "shellClass": "policy-shell app-policy-shell",
   "ads": false,

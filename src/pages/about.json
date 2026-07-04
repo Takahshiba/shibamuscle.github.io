@@ -4,6 +4,7 @@
   "title": "Shiba Muscleについて | Shiba Muscle",
   "description": "Shiba Muscleの目的、平均重量・筋力基準データの使い方、掲載情報、運営方針をまとめたページです。",
   "heading": "Shiba Muscleについて",
+  "ogImage": "https://shibamuscle.com/assets/app/muscle-heatmap.png",
   "appShell": true,
   "shellClass": "policy-shell app-policy-shell",
   "ads": false,
