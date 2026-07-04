@@ -1246,7 +1246,23 @@ function assertSocialImageMetadata(entry, html, isToolPage) {
     const resolved = resolveLocalCrawlPath(entry.relativePath, ogImage);
     if (resolved) {
         assertLocalFileExists(entry.relativePath, resolved, ogImage);
+        auditOpenGraphImageIntrinsicDimensions(entry, resolved, ogImage, imageWidth, imageHeight);
     }
+}
+
+function auditOpenGraphImageIntrinsicDimensions(entry, resolved, imageUrl, imageWidth, imageHeight) {
+    if (!isDimensionAuditableImage(resolved)) {
+        return;
+    }
+
+    const dimensions = readLocalImageDimensions(resolved);
+    assert(Boolean(dimensions), `${entry.relativePath}: og:image dimensions could not be read for ${imageUrl}`);
+    if (!dimensions) {
+        return;
+    }
+
+    assert(Number(imageWidth) === dimensions.width, `${entry.relativePath}: og:image:width ${imageWidth} does not match ${imageUrl} intrinsic width ${dimensions.width}`);
+    assert(Number(imageHeight) === dimensions.height, `${entry.relativePath}: og:image:height ${imageHeight} does not match ${imageUrl} intrinsic height ${dimensions.height}`);
 }
 
 function auditOpenGraphUpdatedTime(entry, html, isIndexable) {
@@ -1567,7 +1583,49 @@ function auditStructuredDataImages(entry, graph) {
                 assertLocalFileExists(entry.relativePath, resolved, url);
             }
         });
+
+        collectStructuredDataImageObjects(node).forEach((imageObject) => {
+            auditStructuredDataImageObjectDimensions(entry, node, imageObject);
+        });
     });
+}
+
+function collectStructuredDataImageObjects(value, seen = new Set()) {
+    if (!value || typeof value !== "object" || seen.has(value)) {
+        return [];
+    }
+    seen.add(value);
+
+    const current = !Array.isArray(value) && hasType(value, "ImageObject") && typeof value.url === "string"
+        ? [value]
+        : [];
+    const children = (Array.isArray(value) ? value : Object.values(value))
+        .flatMap((item) => collectStructuredDataImageObjects(item, seen));
+
+    return current.concat(children);
+}
+
+function auditStructuredDataImageObjectDimensions(entry, ownerNode, imageObject) {
+    const url = imageObject.url;
+    const resolved = resolveLocalCrawlPath(entry.relativePath, url);
+    if (!resolved || !isDimensionAuditableImage(resolved)) {
+        return;
+    }
+
+    const label = ownerNode?.["@id"] || ownerNode?.["@type"] || "JSON-LD";
+    const width = String(imageObject.width || "");
+    const height = String(imageObject.height || "");
+    assert(isPositiveIntegerString(width), `${entry.relativePath}: ${label} ImageObject width is missing or invalid`);
+    assert(isPositiveIntegerString(height), `${entry.relativePath}: ${label} ImageObject height is missing or invalid`);
+
+    const dimensions = readLocalImageDimensions(resolved);
+    assert(Boolean(dimensions), `${entry.relativePath}: ${label} ImageObject dimensions could not be read for ${url}`);
+    if (!dimensions) {
+        return;
+    }
+
+    assert(Number(width) === dimensions.width, `${entry.relativePath}: ${label} ImageObject width ${width} does not match ${url} intrinsic width ${dimensions.width}`);
+    assert(Number(height) === dimensions.height, `${entry.relativePath}: ${label} ImageObject height ${height} does not match ${url} intrinsic height ${dimensions.height}`);
 }
 
 function collectStructuredDataImageUrls(value) {
