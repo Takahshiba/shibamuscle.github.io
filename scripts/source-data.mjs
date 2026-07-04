@@ -92,9 +92,13 @@ function getSourceLastmodMs(filePath) {
         return sourceLastmodCache.get(filePath);
     }
 
-    const timestamp = hasUncommittedSourceChange(filePath)
+    const lastmodTimestamp = hasUncommittedSourceChange(filePath)
         ? getFilesystemLastmodMs(filePath)
         : getGitLastCommitMs(filePath) || getFilesystemLastmodMs(filePath);
+    const createdTimestamp = getSourceCreatedMs(filePath);
+    const timestamp = Number.isFinite(createdTimestamp) && Number.isFinite(lastmodTimestamp)
+        ? Math.max(createdTimestamp, lastmodTimestamp)
+        : lastmodTimestamp;
 
     sourceLastmodCache.set(filePath, timestamp);
     return timestamp;
@@ -126,7 +130,7 @@ function getGitFirstCommitMs(filePath) {
 
 function getGitLastCommitMs(filePath) {
     try {
-        const timestamp = execFileSync("git", ["log", "-1", "--format=%cI", "--", relativeToRoot(filePath)], {
+        const timestamp = execFileSync("git", ["log", "-1", "--format=%aI", "--", relativeToRoot(filePath)], {
             cwd: ROOT,
             encoding: "utf8"
         }).trim();
