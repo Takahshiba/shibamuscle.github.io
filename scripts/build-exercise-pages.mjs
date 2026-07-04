@@ -130,7 +130,7 @@ ${preFooterAdSlotHtml}
 
 ${renderStaticFooter(currentFile, locale)}
 
-    <script src="${stylesheetHref("app.js?v=adsense-clean-20260516", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=category-jump-20260704", locale)}"></script>
 `;
 
     return renderDocument({
