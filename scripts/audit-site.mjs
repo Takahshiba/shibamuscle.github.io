@@ -1256,6 +1256,8 @@ function assertSocialImageMetadata(entry, html, isToolPage) {
     }
     assert(Boolean(ogImageAlt), `${entry.relativePath}: og:image:alt is missing`);
     assert(Boolean(twitterImageAlt), `${entry.relativePath}: twitter:image:alt is missing`);
+    assert(isUsefulSocialImageAlt(ogImageAlt, ogImage), `${entry.relativePath}: og:image:alt should describe the image, not the asset URL or filename`);
+    assert(isUsefulSocialImageAlt(twitterImageAlt, twitterImage), `${entry.relativePath}: twitter:image:alt should describe the image, not the asset URL or filename`);
     if (ogImage.endsWith("/assets/app/shiba-social-card.png")) {
         assert(!/\bToday\b/i.test(ogImageAlt), `${entry.relativePath}: app social card alt should describe the composite preview, not only Today`);
         assert(!/\bToday\b/i.test(twitterImageAlt), `${entry.relativePath}: app social card Twitter alt should describe the composite preview, not only Today`);
@@ -1266,6 +1268,13 @@ function assertSocialImageMetadata(entry, html, isToolPage) {
         assertLocalFileExists(entry.relativePath, resolved, ogImage);
         auditOpenGraphImageIntrinsicDimensions(entry, resolved, ogImage, imageWidth, imageHeight);
     }
+}
+
+function isUsefulSocialImageAlt(value, imageUrl) {
+    const text = decodeAuditHtml(value).trim();
+    return countCharacters(text) >= 2
+        && text !== imageUrl
+        && !looksLikeImageFilename(text);
 }
 
 function auditOpenGraphImageIntrinsicDimensions(entry, resolved, imageUrl, imageWidth, imageHeight) {
