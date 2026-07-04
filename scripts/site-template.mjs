@@ -305,8 +305,8 @@ function buildStructuredDataBlock({ canonicalUrl, title, description, locale, do
             "@type": "ImageObject",
             "@id": primaryImageId,
             url: imageUrl,
-            ...(imageMetadata.width ? { width: imageMetadata.width } : {}),
-            ...(imageMetadata.height ? { height: imageMetadata.height } : {}),
+            ...(toPositiveInteger(imageMetadata.width) ? { width: toPositiveInteger(imageMetadata.width) } : {}),
+            ...(toPositiveInteger(imageMetadata.height) ? { height: toPositiveInteger(imageMetadata.height) } : {}),
             caption: imageAlt
         },
         {
@@ -416,6 +416,11 @@ function normalizeWebPageTypes(value) {
 
 function normalizeStructuredDataReferences(value) {
     return normalizeStructuredData(value).map((item) => typeof item === "string" ? { "@id": item } : item);
+}
+
+function toPositiveInteger(value) {
+    const number = Number(value);
+    return Number.isInteger(number) && number > 0 ? number : 0;
 }
 
 function renderOpenGraphUpdatedTime({ dateModified, robots = "" }) {

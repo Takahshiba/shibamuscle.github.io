@@ -1631,10 +1631,10 @@ function auditStructuredDataImageObjectDimensions(entry, ownerNode, imageObject)
     }
 
     const label = ownerNode?.["@id"] || ownerNode?.["@type"] || "JSON-LD";
-    const width = String(imageObject.width || "");
-    const height = String(imageObject.height || "");
-    assert(isPositiveIntegerString(width), `${entry.relativePath}: ${label} ImageObject width is missing or invalid`);
-    assert(isPositiveIntegerString(height), `${entry.relativePath}: ${label} ImageObject height is missing or invalid`);
+    const width = imageObject.width;
+    const height = imageObject.height;
+    assert(Number.isInteger(width) && width > 0, `${entry.relativePath}: ${label} ImageObject width should be a positive integer`);
+    assert(Number.isInteger(height) && height > 0, `${entry.relativePath}: ${label} ImageObject height should be a positive integer`);
 
     const dimensions = readLocalImageDimensions(resolved);
     assert(Boolean(dimensions), `${entry.relativePath}: ${label} ImageObject dimensions could not be read for ${url}`);
@@ -1642,8 +1642,8 @@ function auditStructuredDataImageObjectDimensions(entry, ownerNode, imageObject)
         return;
     }
 
-    assert(Number(width) === dimensions.width, `${entry.relativePath}: ${label} ImageObject width ${width} does not match ${url} intrinsic width ${dimensions.width}`);
-    assert(Number(height) === dimensions.height, `${entry.relativePath}: ${label} ImageObject height ${height} does not match ${url} intrinsic height ${dimensions.height}`);
+    assert(width === dimensions.width, `${entry.relativePath}: ${label} ImageObject width ${width} does not match ${url} intrinsic width ${dimensions.width}`);
+    assert(height === dimensions.height, `${entry.relativePath}: ${label} ImageObject height ${height} does not match ${url} intrinsic height ${dimensions.height}`);
 }
 
 function collectStructuredDataImageUrls(value) {
