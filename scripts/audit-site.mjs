@@ -255,6 +255,7 @@ for (const entry of htmlEntries) {
         assert(/<main class="page-main"/.test(html), `${entry.relativePath}: static main wrapper is missing`);
         assert(/<nav class="breadcrumb" aria-label="/.test(html), `${entry.relativePath}: static breadcrumb is missing`);
         assert(html.includes('id="other-workouts"'), `${entry.relativePath}: other workouts section is missing`);
+        auditExerciseTitleLocalization(entry, html);
         auditRecordImageLoading(entry, html);
         auditExerciseCategoryLinks(entry, html);
         auditExerciseUnitDisplay(entry, html);
@@ -1705,6 +1706,29 @@ function auditExerciseUnitDisplay(entry, html) {
     });
 }
 
+function auditExerciseTitleLocalization(entry, html) {
+    const exerciseMatch = exerciseFileIndex.byFile.get(entry.file);
+    const japaneseName = exerciseMatch?.exercise?.names?.ja || "";
+    const title = decodeAuditHtml(extractFirstGroup(html, /<title>([\s\S]*?)<\/title>/i));
+    const h1 = decodeAuditHtml(htmlToText(extractFirstGroup(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i)));
+
+    assert(Boolean(title), `${entry.relativePath}: exercise title should not be empty`);
+    assert(Boolean(h1), `${entry.relativePath}: exercise H1 should not be empty`);
+    assert(title.includes("Shiba Muscle"), `${entry.relativePath}: exercise title should include the site name`);
+    assert(title !== h1, `${entry.relativePath}: exercise title should be more specific than the H1`);
+
+    if (entry.locale === "ja") {
+        return;
+    }
+
+    assert(!/[\u3040-\u30ff]/.test(title), `${entry.relativePath}: exercise title contains Japanese kana`);
+    assert(!/[\u3040-\u30ff]/.test(h1), `${entry.relativePath}: exercise H1 contains Japanese kana`);
+    if (/[\u3040-\u30ff]/.test(japaneseName)) {
+        assert(!title.includes(japaneseName), `${entry.relativePath}: exercise title uses Japanese fallback name ${japaneseName}`);
+        assert(!h1.includes(japaneseName), `${entry.relativePath}: exercise H1 uses Japanese fallback name ${japaneseName}`);
+    }
+}
+
 function extractFirstMatch(text, pattern) {
     return text.match(pattern)?.[0] || "";
 }
@@ -1717,6 +1741,10 @@ function extractHtmlAttribute(tag, name) {
     const match = tag.match(new RegExp(`\\s${name}=(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i"));
 
     return match?.[1] || match?.[2] || match?.[3] || "";
+}
+
+function htmlToText(value) {
+    return String(value || "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 }
 
 function hasOppositeWeightUnit(fragment, unit) {
