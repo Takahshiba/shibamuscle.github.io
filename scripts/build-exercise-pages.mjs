@@ -7,6 +7,7 @@ import {
     cleanSectionLabel,
     escapeAttribute,
     escapeHtml,
+    imageSizeAttributes,
     renderAdSlot,
     renderBreadcrumb,
     renderDocument,
@@ -48,6 +49,7 @@ const exercises = loadExercises();
 const locales = getGeneratedLocales();
 const SITE_ORIGIN = "https://shibamuscle.com";
 const APP_THEME_COLOR = "#ff6a00";
+const INDEXABLE_ROBOTS = "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1";
 assertExpectedLocales(locales);
 
 let generatedPages = 0;
@@ -99,19 +101,23 @@ function renderExercisePage(exercise, catalogData, unit, variant, locale) {
     const seoDescription = buildExerciseSeoDescription(exercise, currentCategory, measurementKind, unit, locale);
     const datePublished = getExerciseDatePublished(exercise);
     const dateModified = getExerciseDateModified(exercise);
+    const canonicalUrl = absoluteUrlForFile(canonicalFile, locale);
     const relatedTags = getRelatedTags(exercise, exercise.categoryId, locale);
     const primaryMuscles = getLocalizedPrimaryMuscles(exercise, locale);
+    const homeUrl = absoluteUrlForFile("index.html", locale);
     const breadcrumbs = [
-        { label: getUiText(locale, "home"), href: "index.html" },
+        { label: getUiText(locale, "home"), href: homeUrl },
         { label: cleanSectionLabel(categoryLabel, locale), href: `#${exercise.categoryId || "whole-body-section"}` },
         { label: name }
     ];
     const postMusclesAdSlotHtml = isIndexableUnit ? renderAdSlot("after-muscles") : "";
     const postDetailsAdSlotHtml = isIndexableUnit ? renderAdSlot("after-details") : "";
     const preFooterAdSlotHtml = isIndexableUnit ? renderAdSlot("before-footer") : "";
+    const kgSwitchAttributes = unit === "kg" ? ' class="active" aria-current="page"' : "";
+    const lbSwitchAttributes = unit === "lb" ? ' class="active" aria-current="page"' : ' rel="nofollow"';
     const unitSwitchHtml = `<div class="toggle-buttons">
-                <a href="kg_${exercise.slug}.html"${unit === "kg" ? ' class="active"' : ""}>kg</a>
-                <a href="lb_${exercise.slug}.html"${unit === "lb" ? ' class="active"' : ""}>lb</a>
+                <a href="kg_${exercise.slug}.html"${kgSwitchAttributes}>kg</a>
+                <a href="lb_${exercise.slug}.html"${lbSwitchAttributes}>lb</a>
             </div>`;
     const body = `${renderStaticHeader({ pageType: "exercise", unitSwitchHtml, locale })}
 
@@ -139,7 +145,7 @@ ${renderAppAnalysisCta(locale)}
 ${exercise.sharedBlocks.records ? renderLocalizedExerciseBlock(exercise.sharedBlocks.records, { exercise, unit, locale, block: "records" }) : ""}
 ${exercise.sharedBlocks.about ? renderLocalizedExerciseBlock(exercise.sharedBlocks.about, { exercise, unit, locale, block: "about" }) : ""}
 ${postDetailsAdSlotHtml}
-${renderExerciseLibrary(catalogData, { unit, locale })}
+${renderExerciseLibrary(catalogData, { unit, locale, includeCardImages: false })}
 ${preFooterAdSlotHtml}
     </main>
 
@@ -160,11 +166,23 @@ ${renderStaticFooter(currentFile, locale)}
             ogImage: `https://shibamuscle.com/assets/og/exercises/${exercise.slug}.svg`,
             ogImageAlt: summary,
             includeAlternates: isIndexableUnit,
-            robots: isIndexableUnit ? "index,follow,max-image-preview:large" : "noindex,follow,noarchive",
+            robots: isIndexableUnit ? INDEXABLE_ROBOTS : "noindex,follow,noarchive",
             type: "article",
             twitterCard: "summary_large_image",
             themeColor: APP_THEME_COLOR,
+            webPageType: "ItemPage",
+            preloadImages: isIndexableUnit ? [assetHref(exercise.image.src, locale)] : [],
+            articlePublishedTime: isIndexableUnit ? datePublished : null,
+            articleModifiedTime: isIndexableUnit ? dateModified : null,
+            articleSection: isIndexableUnit ? categoryLabel : null,
+            articleTags: isIndexableUnit ? relatedTags : [],
             breadcrumbs,
+            mainEntity: isIndexableUnit ? [
+                { "@id": `${canonicalUrl}#article` },
+                { "@id": `${canonicalUrl}#dataset` },
+                { "@id": `${canonicalUrl}#exercise` }
+            ] : null,
+            datePublished: isIndexableUnit ? datePublished : null,
             dateModified,
             structuredData: buildExerciseStructuredData({
                 exercise,
@@ -203,7 +221,9 @@ function buildExerciseStructuredData({ exercise, unit, locale, canonicalFile, ti
     const imageUrl = absoluteAssetUrl(exercise.image.src);
     const ogImageUrl = `${SITE_ORIGIN}/assets/og/exercises/${exercise.slug}.svg`;
     const publisher = { "@id": `${SITE_ORIGIN}/#organization` };
+    const publishingPrinciplesUrl = absoluteUrlForFile("methodology.html", locale);
     const keywordText = relatedTags.join(", ");
+    const datasetId = `${canonicalUrl}#dataset`;
     const muscleMentions = primaryMuscles.map((muscle) => ({
         "@type": "AnatomicalStructure",
         name: muscle
@@ -228,6 +248,8 @@ function buildExerciseStructuredData({ exercise, unit, locale, canonicalFile, ti
             headline: title.replace(/\s*\|\s*Shiba Muscle$/, ""),
             name,
             description: seoDescription,
+            url: canonicalUrl,
+            inLanguage: getLocaleConfig(locale).hreflang,
             datePublished,
             dateModified,
             image: [ogImageUrl, imageUrl],
@@ -238,6 +260,7 @@ function buildExerciseStructuredData({ exercise, unit, locale, canonicalFile, ti
             mentions: muscleMentions,
             author: publisher,
             publisher,
+            publishingPrinciples: publishingPrinciplesUrl,
             isAccessibleForFree: true
         },
         {
@@ -247,21 +270,26 @@ function buildExerciseStructuredData({ exercise, unit, locale, canonicalFile, ti
             description: getExerciseDataCatalogDescription(locale),
             url: dataCatalogUrl,
             inLanguage: getLocaleConfig(locale).hreflang,
-            publisher
+            publisher,
+            dataset: { "@id": datasetId },
+            publishingPrinciples: publishingPrinciplesUrl
         },
         {
             "@type": "Dataset",
-            "@id": `${canonicalUrl}#dataset`,
-            identifier: `${canonicalUrl}#dataset`,
+            "@id": datasetId,
+            identifier: datasetId,
             name: `${name} ${measurementCopy.averageLabel} / ${measurementCopy.standardsLabel} (${unit})`,
             description: seoDescription,
             url: canonicalUrl,
+            inLanguage: getLocaleConfig(locale).hreflang,
+            datePublished,
             dateModified,
             image: ogImageUrl,
             keywords: relatedTags,
             about: { "@id": exerciseTermId },
             creator: publisher,
             publisher,
+            publishingPrinciples: publishingPrinciplesUrl,
             includedInDataCatalog: { "@id": dataCatalogId },
             isAccessibleForFree: true,
             variableMeasured: [
@@ -371,7 +399,7 @@ function absoluteAssetUrl(file) {
 }
 
 function renderLocalizedExerciseBlock(html, options) {
-    return normalizeContentImageLoading(normalizeRecordFlagAltText(localizeExerciseHtml(html, options), options.locale)).trim().replace(/[ \t]+$/gm, "");
+    return normalizeTargetBlankRel(normalizeContentImageLoading(normalizeRecordFlagAltText(localizeExerciseHtml(html, options), options.locale))).trim().replace(/[ \t]+$/gm, "");
 }
 
 function normalizeRecordFlagAltText(html, locale) {
@@ -437,7 +465,56 @@ function normalizeContentImageLoading(html) {
             next = next.replace(/>$/, ' decoding="async">');
         }
 
+        if (/\sloading="lazy"/i.test(next) && !/\sfetchpriority="/i.test(next)) {
+            next = next.replace(/>$/, ' fetchpriority="low">');
+        }
+
+        if (!/\swidth="/i.test(next) || !/\sheight="/i.test(next)) {
+            const sizeAttributes = getContentImageSizeAttributes(next);
+            if (sizeAttributes) {
+                next = next
+                    .replace(/\swidth=(?:"[^"]*"|'[^']*'|[^\s>]+)/i, "")
+                    .replace(/\sheight=(?:"[^"]*"|'[^']*'|[^\s>]+)/i, "")
+                    .replace(/>$/, `${sizeAttributes}>`);
+            }
+        }
+
         return next;
+    });
+}
+
+function getContentImageSizeAttributes(tag) {
+    const src = tag.match(/\ssrc="([^"]+)"/i)?.[1] || "";
+    if (!src) {
+        return "";
+    }
+
+    if (/countryflags\.com/i.test(src) || /\bclass="[^"]*\bflag-icon\b/i.test(tag)) {
+        return imageSizeAttributes(src, { fallbackWidth: "32", fallbackHeight: "20" });
+    }
+
+    if (/\bclass="[^"]*\bprofile-photo\b/i.test(tag)) {
+        return imageSizeAttributes(src, { fallbackWidth: "64", fallbackHeight: "64" });
+    }
+
+    return imageSizeAttributes(src);
+}
+
+function normalizeTargetBlankRel(html) {
+    return html.replace(/<a\b(?=[^>]*\btarget=(?:"_blank"|'_blank'|_blank))[^>]*>/gi, (tag) => {
+        const relAttributePattern = /\srel=(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i;
+        const relMatch = tag.match(relAttributePattern);
+        const tokens = new Set((relMatch?.[1] || relMatch?.[2] || relMatch?.[3] || "").split(/\s+/).filter(Boolean));
+
+        tokens.add("noopener");
+        tokens.add("noreferrer");
+
+        const relAttribute = ` rel="${escapeAttribute(Array.from(tokens).join(" "))}"`;
+        if (relMatch) {
+            return tag.replace(relAttributePattern, relAttribute);
+        }
+
+        return tag.replace(/>$/, `${relAttribute}>`);
     });
 }
 
@@ -452,11 +529,11 @@ function renderHero(exercise, locale) {
             <h1>${escapeHtml(name)}</h1>
             <p class="hero-description">${escapeHtml(summary)}</p>
             <div class="exercise-hero-actions">
-                <a href="index.html#app-store" class="exercise-hero-cta">${escapeHtml(appCta)}</a>
+                <a href="${escapeAttribute(`${absoluteUrlForFile("index.html", locale)}#app-store`)}" class="exercise-hero-cta">${escapeHtml(appCta)}</a>
             </div>
         </div>
         <div class="exercise-hero-media">
-            <img loading="eager" src="${escapeAttribute(assetHref(exercise.image.src, locale))}" alt="${escapeAttribute(name)}" class="workout-main-image">
+            <img loading="eager" fetchpriority="high" decoding="async" src="${escapeAttribute(assetHref(exercise.image.src, locale))}" alt="${escapeAttribute(name)}" class="workout-main-image"${imageSizeAttributes(assetHref(exercise.image.src, locale))}>
         </div>
     </section>
 `;
@@ -506,7 +583,7 @@ function renderAppAnalysisCta(locale) {
             <h2>${escapeHtml(copy.title)}</h2>
             <p>${escapeHtml(copy.description)}</p>
         </div>
-        <a href="index.html#app-store" class="exercise-app-cta-button">${escapeHtml(copy.cta)}</a>
+        <a href="${escapeAttribute(`${absoluteUrlForFile("index.html", locale)}#app-store`)}" class="exercise-app-cta-button">${escapeHtml(copy.cta)}</a>
     </section>
 `;
 }

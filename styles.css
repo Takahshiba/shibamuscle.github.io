@@ -991,6 +991,10 @@ table tbody tr:hover {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.exercise-cards-container--text {
+    gap: 10px;
+}
+
 .exercise-card {
     min-height: 100%;
     min-width: 0;
@@ -1006,6 +1010,15 @@ table tbody tr:hover {
     height: 84px;
     object-fit: contain;
     flex-shrink: 0;
+}
+
+.exercise-card--text-only {
+    align-items: flex-start;
+    padding: 12px 14px;
+}
+
+.exercise-card--text-only .exercise-details {
+    gap: 4px;
 }
 
 .exercise-details {
@@ -3202,9 +3215,11 @@ body.app-content-page {
     min-height: 96px;
     margin: 0 auto;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 18px;
+    padding: 18px 0;
 }
 
 .app-footer-brand,
@@ -3234,8 +3249,24 @@ body.app-content-page {
 }
 
 .app-footer-links a:hover,
-.app-footer-links a:focus-visible {
+.app-footer-links a:focus-visible,
+.app-footer-languages a:hover,
+.app-footer-languages a:focus-visible {
     color: #ffffff;
+}
+
+.app-footer-languages {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.app-footer-languages a {
+    color: rgba(255, 247, 238, 0.62);
 }
 
 .app-footer p {
@@ -3728,6 +3759,11 @@ body.app-content-page {
         width: min(100%, 300px);
         gap: 10px;
         justify-items: stretch;
+    }
+
+    .app-footer-languages {
+        width: min(100%, 320px);
+        gap: 8px 10px;
     }
 
     .app-footer-links a {

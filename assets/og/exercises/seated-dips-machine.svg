@@ -25,7 +25,7 @@
   <text x="92" y="474" fill="#ffffff" font-size="42" font-weight="800" font-family="'Noto Sans JP', sans-serif">男性 105 kg | 女性 56 kg</text>
   <text x="92" y="520" fill="#b8b8b8" font-size="22" font-family="'Noto Sans JP', sans-serif">腕 / 重量</text>
   <rect x="780" y="120" width="320" height="320" rx="36" fill="#111111" stroke="#ff6a00" stroke-opacity="0.34" />
-  <image href="../../seated-dips-machine-gif.webp" x="820" y="150" width="240" height="240" preserveAspectRatio="xMidYMid meet" />
+  <image href="https://shibamuscle.com/assets/seated-dips-machine-gif.webp" x="820" y="150" width="240" height="240" preserveAspectRatio="xMidYMid meet" />
   <rect x="780" y="468" width="320" height="82" rx="26" fill="url(#accent)" />
   <text x="820" y="518" fill="#130800" font-size="28" font-weight="800" font-family="'Noto Sans JP', sans-serif">腕 / 腕トレ</text>
 </svg>

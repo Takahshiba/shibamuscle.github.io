@@ -13,6 +13,7 @@ import { ASSETS_ROOT, ensureDirectory, loadExercises } from "./source-data.mjs";
 
 const OG_ROOT = join(ASSETS_ROOT, "og");
 const EXERCISE_OG_ROOT = join(OG_ROOT, "exercises");
+const SITE_ORIGIN = "https://shibamuscle.com";
 
 ensureDirectory(EXERCISE_OG_ROOT);
 
@@ -29,7 +30,7 @@ function renderExerciseOg(exercise) {
     const measurementCopy = getMeasurementCopy(exercise.metadata?.measurementKind || "weight");
     const snapshot = extractAverageSnapshot(exercise, "kg", "中級") || extractAverageSnapshot(exercise, "kg");
     const primaryMuscles = (exercise.metadata?.primaryMuscles?.ja || []).slice(0, 3).join(" / ");
-    const relativeImage = exercise.image.src.replace("./assets/", "../../");
+    const exerciseImageUrl = absoluteAssetUrl(exercise.image.src);
     const valueLabel = snapshot ? `${snapshot.label}の目安` : measurementCopy.averageLabel;
     const valueText = snapshot
         ? `男性 ${snapshot.male} | 女性 ${snapshot.female}`
@@ -62,9 +63,17 @@ function renderExerciseOg(exercise) {
   <text x="92" y="474" fill="#ffffff" font-size="42" font-weight="800" font-family="'Noto Sans JP', sans-serif">${escapeHtml(valueText)}</text>
   <text x="92" y="520" fill="#b8b8b8" font-size="22" font-family="'Noto Sans JP', sans-serif">${escapeHtml(exercise.metadata?.category?.label?.ja || "")} / ${escapeHtml(measurementCopy.pageTerm)}</text>
   <rect x="780" y="120" width="320" height="320" rx="36" fill="#111111" stroke="#ff6a00" stroke-opacity="0.34" />
-  <image href="${escapeAttribute(relativeImage)}" x="820" y="150" width="240" height="240" preserveAspectRatio="xMidYMid meet" />
+  <image href="${escapeAttribute(exerciseImageUrl)}" x="820" y="150" width="240" height="240" preserveAspectRatio="xMidYMid meet" />
   <rect x="780" y="468" width="320" height="82" rx="26" fill="url(#accent)" />
   <text x="820" y="518" fill="#130800" font-size="28" font-weight="800" font-family="'Noto Sans JP', sans-serif">${escapeHtml(exercise.metadata?.relatedTags?.ja?.slice(0, 2).join(" / ") || "")}</text>
 </svg>
 `;
+}
+
+function absoluteAssetUrl(file) {
+    if (/^https?:\/\//i.test(file || "")) {
+        return file;
+    }
+
+    return `${SITE_ORIGIN}/assets/${String(file || "").replace(/^\.?\/?assets\//, "")}`;
 }

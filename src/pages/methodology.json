@@ -2,7 +2,7 @@
   "file": "methodology.html",
   "kind": "content",
   "title": "データの見方 | Shiba Muscle",
-  "description": "Shiba Muscleに掲載している平均重量、基準重量、筋肉情報、単位切替の見方を説明します。",
+  "description": "平均重量、平均レップ数、筋力基準表、主働筋情報、kg/lb単位切替を安全に読み解く方法を説明します。",
   "heading": "データの見方",
   "appShell": true,
   "shellClass": "policy-shell app-policy-shell",
@@ -61,7 +61,7 @@
   "locales": {
     "en": {
       "title": "How to read the data | Shiba Muscle",
-      "description": "How to read average weight, strength standards, muscle information, and unit switching on Shiba Muscle.",
+      "description": "How to read average load, average reps, strength standards, muscle information, and kg/lb unit switching safely on Shiba Muscle.",
       "heading": "How to read the data",
       "intro": [
         "The numbers on Shiba Muscle are reference points for workout planning and exercise comparison. Do not judge progress by weight or reps alone; read them together with form, range of motion, training experience, and how you feel."
@@ -111,7 +111,7 @@
     },
     "ko": {
       "title": "데이터 읽는 법 | Shiba Muscle",
-      "description": "Shiba Muscle에 표시되는 평균 중량, 기준 중량, 근육 정보, 단위 전환을 읽는 방법을 설명합니다.",
+      "description": "평균 중량, 평균 반복 횟수, 근력 기준표, 주동근 정보, kg/lb 단위 전환을 안전하게 읽는 방법을 설명합니다.",
       "heading": "데이터 읽는 법",
       "intro": [
         "Shiba Muscle의 수치는 운동 계획과 운동 비교를 위한 참고값입니다. 중량이나 반복 횟수만으로 판단하지 말고 자세, 가동 범위, 운동 경력, 컨디션과 함께 확인해 주세요."
@@ -161,7 +161,7 @@
     },
     "es": {
       "title": "Cómo leer los datos | Shiba Muscle",
-      "description": "Explicación de los pesos medios, estándares de fuerza, músculos trabajados y cambio de unidades en Shiba Muscle.",
+      "description": "Explicación de peso medio, repeticiones medias, estándares de fuerza, músculos trabajados y cambio de unidades kg/lb en Shiba Muscle.",
       "heading": "Cómo leer los datos",
       "intro": [
         "Los valores de Shiba Muscle son referencias para planificar entrenamientos y comparar ejercicios. No conviene juzgar el progreso solo por peso o repeticiones; considera también técnica, rango de movimiento, experiencia y estado físico."
@@ -211,7 +211,7 @@
     },
     "zh-hant": {
       "title": "資料說明 | Shiba Muscle",
-      "description": "說明 Shiba Muscle 的平均重量、力量標準、肌群資訊與單位切換方式。",
+      "description": "說明如何安全解讀平均重量、平均次數、力量標準表、主動肌資訊，以及 kg/lb 單位切換方式。",
       "heading": "資料說明",
       "intro": [
         "Shiba Muscle 的數值是訓練規劃與動作比較的參考。請不要只用重量或次數判斷優劣，也要一起確認姿勢、活動範圍、訓練年資與身體狀態。"
@@ -261,7 +261,7 @@
     },
     "zh-hans": {
       "title": "数据说明 | Shiba Muscle",
-      "description": "说明 Shiba Muscle 的平均重量、力量标准、肌群信息与单位切换方式。",
+      "description": "说明如何安全解读平均重量、平均次数、力量标准表、主动肌信息，以及 kg/lb 单位切换方式。",
       "heading": "数据说明",
       "intro": [
         "Shiba Muscle 的数值是训练规划与动作比较的参考。请不要只用重量或次数判断优劣，也要结合姿势、活动范围、训练年限与身体状态。"
@@ -311,7 +311,7 @@
     },
     "fr": {
       "title": "Lire les données | Shiba Muscle",
-      "description": "Explication des charges moyennes, standards de force, muscles travaillés et unités dans Shiba Muscle.",
+      "description": "Explication des charges moyennes, répétitions moyennes, standards de force, muscles travaillés et unités kg/lb dans Shiba Muscle.",
       "heading": "Lire les données",
       "intro": [
         "Les valeurs de Shiba Muscle sont des repères pour planifier l’entraînement et comparer les exercices. Ne jugez pas uniquement par la charge ou les répétitions; tenez compte de la technique, de l’amplitude, de l’expérience et de l’état physique."
@@ -361,7 +361,7 @@
     },
     "de": {
       "title": "Daten verstehen | Shiba Muscle",
-      "description": "Erklärung zu Durchschnittsgewicht, Kraftstandards, Zielmuskulatur und Einheiten bei Shiba Muscle.",
+      "description": "Erklärung zu Durchschnittsgewicht, Wiederholungen, Kraftstandards, Zielmuskulatur und kg/lb-Einheiten bei Shiba Muscle.",
       "heading": "Daten verstehen",
       "intro": [
         "Die Werte bei Shiba Muscle sind Orientierungspunkte für Trainingsplanung und Übungsvergleiche. Bewerte Fortschritt nicht nur über Gewicht oder Wiederholungen, sondern auch über Technik, Bewegungsumfang, Erfahrung und Tagesform."
@@ -411,7 +411,7 @@
     },
     "id": {
       "title": "Cara Membaca Data | Shiba Muscle",
-      "description": "Penjelasan tentang berat rata-rata, standar kekuatan, informasi otot, dan perpindahan satuan di Shiba Muscle.",
+      "description": "Penjelasan tentang berat rata-rata, repetisi rata-rata, standar kekuatan, informasi otot, dan perpindahan satuan kg/lb di Shiba Muscle.",
       "heading": "Cara Membaca Data",
       "intro": [
         "Angka di Shiba Muscle adalah referensi untuk menyusun program latihan dan membandingkan gerakan. Jangan menilai progres hanya dari beban atau repetisi; perhatikan juga teknik, rentang gerak, pengalaman latihan, dan kondisi tubuh."

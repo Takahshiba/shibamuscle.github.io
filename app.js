@@ -1300,6 +1300,10 @@ function assetPath(file) {
     return `${detectLocale() === "ja" ? "./assets" : "../assets"}/${normalized}`;
 }
 
+function canonicalHomeHref(locale = detectLocale()) {
+    return locale === "ja" ? "https://shibamuscle.com/" : `https://shibamuscle.com/${locale}/`;
+}
+
 function rebuildSharedChrome(pageType) {
     const existingHeader = document.querySelector("header");
     const unitSwitch = existingHeader?.querySelector(".toggle-buttons")?.outerHTML || "";
@@ -1314,7 +1318,7 @@ function rebuildSharedChrome(pageType) {
 }
 
 function categorySectionHref(sectionId, pageType) {
-    return pageType === "home" || pageType === "exercise" ? `#${sectionId}` : `index.html#${sectionId}`;
+    return pageType === "home" || pageType === "exercise" ? `#${sectionId}` : `${canonicalHomeHref()}#${sectionId}`;
 }
 
 function buildHeader(pageType, unitSwitch) {
@@ -1328,8 +1332,8 @@ function buildHeader(pageType, unitSwitch) {
         return htmlToElement(`
             <header class="site-header app-local-header">
                 <nav class="site-topbar app-local-topbar" aria-label="Shiba">
-                    <a href="index.html" class="app-local-brand">
-                        <img src="${assetPath("app/shiba-mascot.png")}" alt="Shiba" class="app-local-brand-icon">
+                    <a href="${escapeAttribute(canonicalHomeHref())}" class="app-local-brand">
+                        <img src="${assetPath("app/shiba-mascot.png")}" alt="" aria-hidden="true" class="app-local-brand-icon">
                         <span>Shiba</span>
                     </a>
                     <div class="app-local-nav">
@@ -1357,8 +1361,8 @@ function buildHeader(pageType, unitSwitch) {
         <header class="site-header">
             <nav class="site-topbar">
                 <div class="header-brand">
-                    <a href="index.html" class="header-link">
-                        <img src="${assetPath("dumbbell-logo.png")}" alt="Shiba Muscle" class="header-dumbbell-logo">
+                    <a href="${escapeAttribute(canonicalHomeHref())}" class="header-link">
+                        <img src="${assetPath("dumbbell-logo.png")}" alt="" aria-hidden="true" class="header-dumbbell-logo">
                         <span class="header-text">Shiba Muscle</span>
                     </a>
                 </div>
@@ -1405,7 +1409,7 @@ function buildFooter(pageType) {
             <div class="footer-grid">
                 <div class="footer-column">
                     <div class="footer-brand">
-                        <img src="${assetPath("dumbbell-logo.png")}" alt="Shiba Muscle" class="footer-brand-logo">
+                        <img src="${assetPath("dumbbell-logo.png")}" alt="" aria-hidden="true" class="footer-brand-logo">
                         <h4>Shiba Muscle</h4>
                     </div>
                 </div>
@@ -1554,7 +1558,7 @@ function enhanceHomePageLegacy(main) {
                             ${popularPreviewCards.map((card) => {
                                 return `
                                     <a class="dashboard-spotlight-link" href="${escapeAttribute(card.href)}">
-                                        <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy">
+                                        <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy" decoding="async" fetchpriority="low">
                                         <span>
                                             <strong>${escapeHtml(card.name)}</strong>
                                             <small>${escapeHtml(card.category || cleanSectionLabel(card.sectionTitle))}</small>
@@ -1841,7 +1845,7 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                     </div>
                     <div class="app-scene-media">
                         <div class="app-phone">
-                            <img src="${escapeAttribute(assetPath("app/today-screen-current.png"))}" alt="${escapeAttribute(phoneAlt)}" loading="lazy">
+                            <img src="${escapeAttribute(assetPath("app/today-screen-current.png"))}" alt="${escapeAttribute(phoneAlt)}" loading="lazy" decoding="async" fetchpriority="low">
                         </div>
                     </div>
                 </div>
@@ -1895,7 +1899,7 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                     </div>
                     <div class="app-scene-media">
                         <div class="app-phone app-phone--analytics">
-                            <img src="${escapeAttribute(assetPath("app/strength-percentile.jpg"))}" alt="${escapeAttribute(strengthAlt)}" loading="lazy">
+                            <img src="${escapeAttribute(assetPath("app/strength-percentile.jpg"))}" alt="${escapeAttribute(strengthAlt)}" loading="lazy" decoding="async" fetchpriority="low">
                         </div>
                     </div>
                 </div>
@@ -1922,7 +1926,7 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                         ${renderAppFeatureList(heatmapFeatures)}
                     </div>
                     <div class="app-scene-media app-scene-media--wide">
-                        <img src="${escapeAttribute(assetPath("app/muscle-heatmap.png"))}" alt="${escapeAttribute(heatmapAlt)}" loading="lazy" class="app-heatmap-image">
+                        <img src="${escapeAttribute(assetPath("app/muscle-heatmap.png"))}" alt="${escapeAttribute(heatmapAlt)}" loading="lazy" decoding="async" fetchpriority="low" class="app-heatmap-image">
                     </div>
                 </div>
             </section>
@@ -1967,7 +1971,7 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
 
             <section class="app-cta-band" id="app-store">
                 <div class="app-cta-copy">
-                    <img src="${escapeAttribute(assetPath("app/shiba-mascot.png"))}" alt="" class="app-cta-mascot" loading="lazy">
+                    <img src="${escapeAttribute(assetPath("app/shiba-mascot.png"))}" alt="" class="app-cta-mascot" loading="lazy" decoding="async" fetchpriority="low">
                     <p class="app-kicker">Shiba</p>
                     <h2>${escapeHtml(localeText({
                         ja: "App Store公開に向けて準備中です。",
@@ -2038,7 +2042,7 @@ function buildLoggingMock() {
 function renderAppLibraryPreview(cards) {
     return cards.map((card) => `
         <a class="app-library-preview-card" href="${escapeAttribute(card.href)}">
-            <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy">
+            <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy" decoding="async" fetchpriority="low">
             <span>
                 <strong>${escapeHtml(card.name)}</strong>
                 <small>${escapeHtml(card.category || cleanSectionLabel(card.sectionTitle))}</small>
@@ -2083,8 +2087,8 @@ function enhanceExercisePage(main) {
     const sameSectionCards = libraryData.sections.find((section) => section.id === sectionId)?.cards.filter((card) => card.slug !== currentSlug) || [];
 
     const breadcrumb = buildBreadcrumb([
-        { label: t("home"), href: "index.html" },
-        { label: sectionLabel, href: `index.html#${sectionId}` },
+        { label: t("home"), href: canonicalHomeHref() },
+        { label: sectionLabel, href: `${canonicalHomeHref()}#${sectionId}` },
         { label: heroTitle }
     ]);
 
@@ -2253,7 +2257,7 @@ function enhanceContentPage(main) {
     if (!main.querySelector(":scope > .breadcrumb-container")) {
         const heading = firstContainer.querySelector("h1");
         const breadcrumb = buildBreadcrumb([
-            { label: t("home"), href: "index.html" },
+            { label: t("home"), href: canonicalHomeHref() },
             { label: normalizeText(heading?.textContent || t("page")) }
         ]);
 
@@ -2686,8 +2690,8 @@ function extractCards(container, heading) {
     return Array.from(container.querySelectorAll(":scope > a.card-link")).map((anchor) => {
         const name = normalizeText(anchor.querySelector(".name")?.textContent || "");
         const category = normalizeText(anchor.querySelector(".category")?.textContent || "");
-        const image = anchor.querySelector("img")?.getAttribute("src") || "";
         const card = anchor.querySelector(".exercise-card");
+        const image = anchor.querySelector("img")?.getAttribute("src") || card?.dataset.image || "";
         return {
             anchor,
             href: anchor.getAttribute("href") || "",
@@ -2739,10 +2743,13 @@ function renderExerciseCardGrid(cards, className = "exercise-cards-container") {
 
 function renderExerciseCard(card) {
     const badges = buildExerciseCardBadges(card);
+    const imageHtml = card.image
+        ? `<img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy" decoding="async" fetchpriority="low" width="84" height="84">`
+        : "";
     return `
         <a class="card-link" href="${escapeAttribute(card.href)}">
             <article class="exercise-card">
-                <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy">
+                ${imageHtml}
                 <div class="exercise-details">
                     <div class="name">${escapeHtml(card.name)}</div>
                     <div class="category">${escapeHtml(card.category || cleanSectionLabel(card.sectionTitle))}</div>

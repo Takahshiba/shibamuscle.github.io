@@ -17,6 +17,9 @@ import { deflateSync, inflateSync } from "node:zlib";
 const ROOT = process.cwd();
 const SOURCE_ICON = join(ROOT, "assets", "app", "shiba-mascot.png");
 const ASSETS_DIR = join(ROOT, "assets");
+const MANIFEST_DESCRIPTION = "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを一つの流れで管理できるiPhone向けワークアウトアプリです。";
+const THEME_COLOR = "#ff6a00";
+const BACKGROUND_COLOR = "#030303";
 
 const STANDARD_ICON_SIZES = [16, 24, 32, 36, 48, 72, 96, 128, 144, 152, 160, 192, 196, 256, 384, 512];
 const ANDROID_ICON_SIZES = [36, 48, 72, 96, 128, 144, 152, 192, 256, 384, 512];
@@ -65,10 +68,54 @@ try {
 
     writeFileSync(join(ASSETS_DIR, "favicon.ico"), favicon);
     writeFileSync(join(ROOT, "favicon.ico"), favicon);
+    writeSiteMetadataFiles();
 
-    console.log(`Generated ${targets.length} PNG icon assets and favicon.ico from ${relative(ROOT, SOURCE_ICON)}.`);
+    console.log(`Generated ${targets.length} PNG icon assets, favicon.ico, manifest, and browserconfig from ${relative(ROOT, SOURCE_ICON)}.`);
 } finally {
     rmSync(tempDir, { recursive: true, force: true });
+}
+
+function writeSiteMetadataFiles() {
+    const manifest = {
+        name: "Shiba",
+        short_name: "Shiba",
+        description: MANIFEST_DESCRIPTION,
+        id: "/",
+        start_url: "/",
+        scope: "/",
+        lang: "ja",
+        dir: "ltr",
+        theme_color: THEME_COLOR,
+        background_color: BACKGROUND_COLOR,
+        display: "standalone",
+        orientation: "any",
+        icons: ANDROID_ICON_SIZES.map((size) => ({
+            src: `/assets/android-chrome-${size}x${size}.png`,
+            sizes: `${size}x${size}`,
+            type: "image/png",
+            purpose: "any"
+        }))
+    };
+    const manifestJson = `${JSON.stringify(manifest, null, 4)}\n`;
+    const browserConfig = `<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square70x70logo src="/assets/site-tile-70x70.png"/>
+            <square150x150logo src="/assets/site-tile-150x150.png"/>
+            <wide310x150logo src="/assets/site-tile-310x150.png"/>
+            <square310x310logo src="/assets/site-tile-310x310.png"/>
+            <TileColor>${THEME_COLOR}</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>
+`;
+
+    writeFileSync(join(ASSETS_DIR, "manifest.json"), manifestJson);
+    writeFileSync(join(ASSETS_DIR, "site.webmanifest"), manifestJson);
+    writeFileSync(join(ROOT, "site.webmanifest"), manifestJson);
+    writeFileSync(join(ASSETS_DIR, "browserconfig.xml"), browserConfig);
+    writeFileSync(join(ROOT, "browserconfig.xml"), browserConfig);
 }
 
 function squareTarget(file, size) {

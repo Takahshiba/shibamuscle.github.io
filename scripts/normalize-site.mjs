@@ -10,10 +10,12 @@ import {
     buildAlternateUrls,
     buildExerciseSeo,
     buildExerciseSeoDescription,
+    getCategoryLabel,
     getExerciseName,
     getGeneratedLocales,
     getLocaleConfig,
     getOgLocale,
+    getRelatedTags,
     getUiText,
     languageAlternates,
     localizeStaticPage
@@ -24,6 +26,7 @@ import {
     EXERCISE_SRC_ROOT,
     PAGES_ROOT,
     buildExerciseFileIndex,
+    getSourceCreatedIso,
     getSourceLastmodIso,
     loadDiscovery,
     loadExercises,
@@ -37,6 +40,12 @@ const ANALYTICS_ID = "G-D9K58THBFM";
 const SITE_THEME_COLOR = "#148a6a";
 const APP_THEME_COLOR = "#ff6a00";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
+const INDEXABLE_ROBOTS = "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1";
+const ICON_ASSET_VERSION = "shiba-20260704";
+const MANIFEST_DESCRIPTION = "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを一つの流れで管理できるiPhone向けワークアウトアプリです。";
+const WEB_APP_BACKGROUND_COLOR = "#030303";
+const ANDROID_ICON_SIZES = [36, 48, 72, 96, 128, 144, 152, 192, 256, 384, 512];
+const imageMetadataCache = new Map();
 const ANALYTICS_BLOCK = `
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}"></script>
@@ -138,6 +147,8 @@ function normalizeHtml(entry, html) {
 
     if (!context.isToolPage) {
         next = ensureFontBlock(next, entry.locale);
+    } else {
+        next = ensureStandaloneIconMetadata(next, entry.locale);
     }
 
     next = next.replace("</head>", `${buildSeoBlock(context)}${ANALYTICS_BLOCK}\n</head>`);
@@ -169,6 +180,7 @@ function buildPageContext(entry, html) {
     const homeLabel = getUiText(locale, "home");
     const canonicalFile = file.startsWith("lb_") ? file.replace(/^lb_/, "kg_") : file;
     const resolvedCanonicalUrl = absoluteUrlForFile(canonicalFile, locale);
+    const dateModified = buildSitemapLastmod(entry);
 
     if (file === "index.html") {
         const page = localizeStaticPage(staticPageIndex.get("index.html"), locale);
@@ -179,8 +191,10 @@ function buildPageContext(entry, html) {
             description: page?.description || "",
             canonicalUrl,
             ogImage: page?.ogImage || DEFAULT_OG_IMAGE,
+            preloadImages: [assetHref(page?.appImages?.today || "app/today-screen-current.png", locale)],
             type: "website",
             twitterCard: "summary_large_image",
+            dateModified,
             alternates,
             locale,
             isExercisePage: false,
@@ -200,6 +214,7 @@ function buildPageContext(entry, html) {
             ogImage: DEFAULT_OG_IMAGE,
             type: "website",
             twitterCard: "summary",
+            dateModified,
             alternates,
             locale,
             robots: "noindex,nofollow,noarchive",
@@ -220,6 +235,10 @@ function buildPageContext(entry, html) {
             ogImage: `${SITE_ORIGIN}/assets/og/discovery/${discoveryPage.slug}.svg`,
             type: "article",
             twitterCard: "summary_large_image",
+            dateModified,
+            articlePublishedTime: getSourceCreatedIso(DISCOVERY_PATH),
+            articleModifiedTime: dateModified,
+            articleSection: discoveryPage.heading,
             alternates,
             locale,
             isExercisePage: false,
@@ -231,6 +250,8 @@ function buildPageContext(entry, html) {
     if (staticPage) {
         const page = localizeStaticPage(staticPage, locale);
         const englishOnly = staticPage.englishOnly === true;
+        const explicitNoindex = staticPage.noindex === true;
+        const isIndexablePage = !(englishOnly && locale !== "ja") && !explicitNoindex;
         return {
             title: page.title,
             pageLabel: page.heading,
@@ -240,10 +261,14 @@ function buildPageContext(entry, html) {
             ogImage: page.ogImage || DEFAULT_OG_IMAGE,
             type: "article",
             twitterCard: "summary",
+            dateModified,
+            articlePublishedTime: isIndexablePage ? getStaticPageDatePublished(file) : null,
+            articleModifiedTime: isIndexablePage ? dateModified : null,
+            articleSection: isIndexablePage ? page.heading : null,
             alternates,
             locale,
-            robots: englishOnly && locale !== "ja" ? "noindex,follow,noarchive" : undefined,
-            standalone: englishOnly,
+            robots: isIndexablePage ? undefined : "noindex,follow,noarchive",
+            standalone: englishOnly || explicitNoindex,
             isExercisePage: false,
             isToolPage: false,
             isHomePage: false,
@@ -257,6 +282,7 @@ function buildPageContext(entry, html) {
         const section = findSectionTaxonomy(taxonomy, exercise.categoryId);
         const seo = buildExerciseSeo(exercise, measurementKind, unit, locale);
         const isIndexableUnit = unit === "kg";
+        const categoryLabel = getCategoryLabel(section || exercise.categoryId, locale);
 
         return {
             title: seo.title,
@@ -265,10 +291,19 @@ function buildPageContext(entry, html) {
             description: buildExerciseSeoDescription(exercise, section, measurementKind, unit, locale),
             canonicalUrl: resolvedCanonicalUrl,
             ogImage: `${SITE_ORIGIN}/assets/og/exercises/${exercise.slug}.svg`,
+            preloadImages: isIndexableUnit ? [assetHref(exercise.image?.src || "", locale)] : [],
             type: "article",
             twitterCard: "summary_large_image",
+            dateModified,
+            articlePublishedTime: isIndexableUnit ? getSourceCreatedIso(join(EXERCISE_SRC_ROOT, `${exercise.slug}.json`)) : null,
+            articleModifiedTime: isIndexableUnit ? getSourceLastmodIso([
+                join(EXERCISE_SRC_ROOT, `${exercise.slug}.json`),
+                CATALOG_PATH
+            ]) : null,
+            articleSection: isIndexableUnit ? categoryLabel : null,
+            articleTags: isIndexableUnit ? getRelatedTags(exercise, exercise.categoryId, locale) : [],
             alternates: buildAlternateUrls(canonicalFile),
-            robots: isIndexableUnit ? "index,follow,max-image-preview:large" : "noindex,follow,noarchive",
+            robots: isIndexableUnit ? INDEXABLE_ROBOTS : "noindex,follow,noarchive",
             standalone: !isIndexableUnit,
             locale,
             isExercisePage: true,
@@ -287,6 +322,7 @@ function buildPageContext(entry, html) {
         ogImage: DEFAULT_OG_IMAGE,
         type: "article",
         twitterCard: "summary",
+        dateModified,
         alternates,
         locale,
         isExercisePage: false,
@@ -305,6 +341,7 @@ function stripSeoHeadTags(html) {
         .replace(/\n\s*<meta name="robots"[^>]*>/gi, "")
         .replace(/\n\s*<meta name="theme-color"[^>]*>/gi, "")
         .replace(/\n\s*<link rel="canonical"[^>]*>/gi, "")
+        .replace(/\n\s*<link rel="preload" as="image"[^>]*>/gi, "")
         .replace(/\n\s*<link rel="alternate" hreflang="[^"]+"[^>]*>/gi, "")
         .replace(/\n\s*<meta property="og:[^"]+"[^>]*>/gi, "")
         .replace(/\n\s*<meta name="twitter:[^"]+"[^>]*>/gi, "");
@@ -346,32 +383,321 @@ function ensureFontBlock(html, locale) {
     return stripped.replace("</head>", `${fontBlock}\n</head>`);
 }
 
+function ensureStandaloneIconMetadata(html, locale) {
+    const iconBlock = `
+    <!-- Favicon -->
+    <meta name="msapplication-TileColor" content="${APP_THEME_COLOR}">
+    <meta name="msapplication-config" content="${iconAssetHref("browserconfig.xml", locale)}">
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="${iconAssetHref("favicon.ico", locale)}">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="${iconAssetHref("favicon.ico", locale)}">
+    <link rel="manifest" href="${iconAssetHref("manifest.json", locale)}">
+`;
+    const stripped = html
+        .replace(/\s*<!-- Favicon -->\s*/gi, "\n")
+        .replace(/\n\s*<meta name="msapplication-TileColor"[^>]*>/gi, "")
+        .replace(/\n\s*<meta name="msapplication-config"[^>]*>/gi, "")
+        .replace(/\n\s*<link rel="shortcut icon"[^>]*>/gi, "")
+        .replace(/\n\s*<link rel="icon"[^>]*>/gi, "")
+        .replace(/\n\s*<link rel="manifest"[^>]*>/gi, "");
+
+    return stripped.replace("</head>", `${iconBlock}\n</head>`);
+}
+
+function iconAssetHref(file, locale = "ja") {
+    return assetHref(`${file}?v=${ICON_ASSET_VERSION}`, locale);
+}
+
 function buildSeoBlock(context) {
     const alternates = context.alternates;
     const alternateLinks = context.standalone ? "" : getGeneratedLocales().map((locale) => {
         return `    <link rel="alternate" hreflang="${locale.hreflang}" href="${alternates[locale.code]}">`;
     }).join("\n");
     const xDefaultLink = context.standalone ? "" : `\n    <link rel="alternate" hreflang="x-default" href="${alternates.ja}">`;
-    const robots = context.robots || "index,follow,max-image-preview:large";
+    const robots = context.robots || INDEXABLE_ROBOTS;
+    const ogImageAlt = context.ogImageAlt || context.pageLabel || context.title;
+    const ogImageMetadataBlock = renderOpenGraphImageMetadata(getOpenGraphImageMetadata(context.ogImage));
+    const updatedTimeBlock = renderOpenGraphUpdatedTime(context.dateModified, robots);
+    const imagePreloadBlock = renderImagePreloadLinks(context.preloadImages || [], robots);
+    const articleMetadataBlock = renderArticleMetadata(context);
 
     return `
     <meta name="description" content="${escapeAttribute(context.description)}">
     <meta name="robots" content="${escapeAttribute(robots)}">
     <meta name="theme-color" content="${context.isAppPage || context.isExercisePage ? APP_THEME_COLOR : SITE_THEME_COLOR}">
     <link rel="canonical" href="${context.canonicalUrl}">
+${imagePreloadBlock}
 ${alternateLinks}${xDefaultLink}
     <meta property="og:type" content="${context.type}">
+${updatedTimeBlock}
+${articleMetadataBlock}
     <meta property="og:site_name" content="Shiba Muscle">
     <meta property="og:locale" content="${getOgLocale(context.locale)}">
     <meta property="og:title" content="${escapeAttribute(context.title)}">
     <meta property="og:description" content="${escapeAttribute(context.description)}">
     <meta property="og:url" content="${context.canonicalUrl}">
     <meta property="og:image" content="${context.ogImage}">
+    <meta property="og:image:secure_url" content="${context.ogImage}">
+${ogImageMetadataBlock}
+    <meta property="og:image:alt" content="${escapeAttribute(ogImageAlt)}">
     <meta name="twitter:card" content="${context.twitterCard}">
     <meta name="twitter:title" content="${escapeAttribute(context.title)}">
     <meta name="twitter:description" content="${escapeAttribute(context.description)}">
     <meta name="twitter:image" content="${context.ogImage}">
+    <meta name="twitter:image:alt" content="${escapeAttribute(ogImageAlt)}">
 `;
+}
+
+function renderImagePreloadLinks(images, robots = "") {
+    if (/noindex/i.test(robots)) {
+        return "";
+    }
+
+    return normalizeStringList(images).slice(0, 2).map((href) => {
+        return `    <link rel="preload" as="image" href="${escapeAttribute(href)}" fetchpriority="high">`;
+    }).join("\n");
+}
+
+function renderOpenGraphUpdatedTime(dateModified, robots = "") {
+    if (!dateModified || /noindex/i.test(robots)) {
+        return "";
+    }
+
+    return `    <meta property="og:updated_time" content="${escapeAttribute(dateModified)}">`;
+}
+
+function renderArticleMetadata(context) {
+    if (context.type !== "article" || /noindex/i.test(context.robots || "")) {
+        return "";
+    }
+
+    const tags = [];
+    if (context.articlePublishedTime) {
+        tags.push(["article:published_time", context.articlePublishedTime]);
+    }
+    if (context.articleModifiedTime) {
+        tags.push(["article:modified_time", context.articleModifiedTime]);
+    }
+    if (context.articleSection) {
+        tags.push(["article:section", context.articleSection]);
+    }
+
+    normalizeStringList(context.articleTags).slice(0, 12).forEach((tag) => {
+        tags.push(["article:tag", tag]);
+    });
+
+    return tags.map(([property, content]) => {
+        return `    <meta property="${property}" content="${escapeAttribute(content)}">`;
+    }).join("\n");
+}
+
+function normalizeStringList(value) {
+    const values = Array.isArray(value) ? value : [value];
+    const seen = new Set();
+
+    return values.map((item) => String(item || "").trim())
+        .filter(Boolean)
+        .filter((item) => {
+            if (seen.has(item)) {
+                return false;
+            }
+            seen.add(item);
+            return true;
+        });
+}
+
+function renderOpenGraphImageMetadata(metadata) {
+    if (!metadata?.width || !metadata?.height || !metadata?.type) {
+        return "";
+    }
+
+    return `    <meta property="og:image:type" content="${escapeAttribute(metadata.type)}">
+    <meta property="og:image:width" content="${escapeAttribute(metadata.width)}">
+    <meta property="og:image:height" content="${escapeAttribute(metadata.height)}">`;
+}
+
+function getOpenGraphImageMetadata(url) {
+    return getImageMetadata(url);
+}
+
+function getImageMetadata(url) {
+    const cacheKey = String(url || "");
+    if (imageMetadataCache.has(cacheKey)) {
+        return imageMetadataCache.get(cacheKey);
+    }
+
+    const pathname = getLocalAssetPathname(url);
+    const type = getImageMimeType(pathname || url);
+    const filePath = pathname ? join(ROOT, pathname.replace(/^\//, "")) : null;
+    const dimensions = filePath && existsSync(filePath) ? readImageDimensions(filePath) : {};
+
+    const metadata = {
+        ...(type ? { type } : {}),
+        ...dimensions
+    };
+    imageMetadataCache.set(cacheKey, metadata);
+
+    return metadata;
+}
+
+function getLocalAssetPathname(url) {
+    if (!url) {
+        return null;
+    }
+
+    try {
+        const parsed = new URL(url);
+        return parsed.origin === SITE_ORIGIN ? parsed.pathname : null;
+    } catch {
+        const pathname = String(url).split("?")[0].replace(/^(\.\.\/|\.\/)+/, "");
+        return pathname.startsWith("assets/") ? `/${pathname}` : null;
+    }
+}
+
+function getImageMimeType(value) {
+    const pathname = String(value || "").split("?")[0].toLowerCase();
+    if (pathname.endsWith(".svg")) return "image/svg+xml";
+    if (pathname.endsWith(".png")) return "image/png";
+    if (pathname.endsWith(".jpg") || pathname.endsWith(".jpeg")) return "image/jpeg";
+    if (pathname.endsWith(".webp")) return "image/webp";
+    return "";
+}
+
+function readImageDimensions(filePath) {
+    if (filePath.endsWith(".svg")) {
+        return readSvgDimensions(filePath);
+    }
+
+    if (filePath.endsWith(".png")) {
+        return readPngDimensions(filePath);
+    }
+
+    if (filePath.endsWith(".webp")) {
+        return readWebpDimensions(filePath);
+    }
+
+    if (filePath.endsWith(".jpg") || filePath.endsWith(".jpeg")) {
+        return readJpegDimensions(filePath);
+    }
+
+    return {};
+}
+
+function readSvgDimensions(filePath) {
+    const svg = readFileSync(filePath, "utf8");
+    const rootTag = svg.match(/<svg\b[^>]*>/i)?.[0] || "";
+    const width = parseSvgLength(rootTag.match(/\bwidth="([^"]+)"/i)?.[1]);
+    const height = parseSvgLength(rootTag.match(/\bheight="([^"]+)"/i)?.[1]);
+    if (width && height) {
+        return { width, height };
+    }
+
+    const viewBox = rootTag.match(/\bviewBox="([^"]+)"/i)?.[1]?.trim().split(/\s+/).map(Number);
+    if (viewBox?.length === 4 && Number.isFinite(viewBox[2]) && Number.isFinite(viewBox[3])) {
+        return {
+            width: String(Math.round(viewBox[2])),
+            height: String(Math.round(viewBox[3]))
+        };
+    }
+
+    return {};
+}
+
+function parseSvgLength(value) {
+    const number = Number.parseFloat(value || "");
+    return Number.isFinite(number) && number > 0 ? String(Math.round(number)) : "";
+}
+
+function readPngDimensions(filePath) {
+    const buffer = readFileSync(filePath);
+    if (buffer.length < 24 || buffer.toString("ascii", 1, 4) !== "PNG") {
+        return {};
+    }
+
+    return {
+        width: String(buffer.readUInt32BE(16)),
+        height: String(buffer.readUInt32BE(20))
+    };
+}
+
+function readWebpDimensions(filePath) {
+    const buffer = readFileSync(filePath);
+    if (buffer.length < 30 || buffer.toString("ascii", 0, 4) !== "RIFF" || buffer.toString("ascii", 8, 12) !== "WEBP") {
+        return {};
+    }
+
+    const chunkType = buffer.toString("ascii", 12, 16);
+    const payloadOffset = 20;
+    if (chunkType === "VP8X" && buffer.length >= payloadOffset + 10) {
+        return {
+            width: String(1 + buffer.readUIntLE(payloadOffset + 4, 3)),
+            height: String(1 + buffer.readUIntLE(payloadOffset + 7, 3))
+        };
+    }
+
+    if (chunkType === "VP8L" && buffer.length >= payloadOffset + 5 && buffer[payloadOffset] === 0x2f) {
+        const b1 = buffer[payloadOffset + 1];
+        const b2 = buffer[payloadOffset + 2];
+        const b3 = buffer[payloadOffset + 3];
+        const b4 = buffer[payloadOffset + 4];
+        return {
+            width: String(1 + (((b2 & 0x3f) << 8) | b1)),
+            height: String(1 + (((b4 & 0x0f) << 10) | (b3 << 2) | ((b2 & 0xc0) >> 6)))
+        };
+    }
+
+    if (chunkType === "VP8 " && buffer.length >= payloadOffset + 10 && buffer[payloadOffset + 3] === 0x9d && buffer[payloadOffset + 4] === 0x01 && buffer[payloadOffset + 5] === 0x2a) {
+        return {
+            width: String(buffer.readUInt16LE(payloadOffset + 6) & 0x3fff),
+            height: String(buffer.readUInt16LE(payloadOffset + 8) & 0x3fff)
+        };
+    }
+
+    return {};
+}
+
+function readJpegDimensions(filePath) {
+    const buffer = readFileSync(filePath);
+    if (buffer.length < 4 || buffer[0] !== 0xff || buffer[1] !== 0xd8) {
+        return {};
+    }
+
+    let offset = 2;
+    while (offset + 3 < buffer.length) {
+        if (buffer[offset] !== 0xff) {
+            offset += 1;
+            continue;
+        }
+
+        const marker = buffer[offset + 1];
+        if (marker === 0xd9 || marker === 0xda) {
+            break;
+        }
+
+        const length = buffer.readUInt16BE(offset + 2);
+        if (isJpegStartOfFrameMarker(marker) && offset + 8 < buffer.length) {
+            return {
+                height: String(buffer.readUInt16BE(offset + 5)),
+                width: String(buffer.readUInt16BE(offset + 7))
+            };
+        }
+
+        offset += 2 + length;
+    }
+
+    return {};
+}
+
+function isJpegStartOfFrameMarker(marker) {
+    return (marker >= 0xc0 && marker <= 0xc3)
+        || (marker >= 0xc5 && marker <= 0xc7)
+        || (marker >= 0xc9 && marker <= 0xcb)
+        || (marker >= 0xcd && marker <= 0xcf);
+}
+
+function getStaticPageDatePublished(file) {
+    const sourceFile = file === "index.html" ? "home.json" : file.replace(/\.html$/, ".json");
+
+    return getSourceCreatedIso(join(PAGES_ROOT, sourceFile));
 }
 
 function removeBodyAdsenseScripts(html) {
@@ -508,7 +834,12 @@ function getSitemapSourceFiles(file) {
 function isSitemapEntry(entry) {
     return entry.file !== "Shift2ics.html"
         && !entry.file.startsWith("lb_")
+        && !isNoindexStaticPage(entry.file)
         && !(isEnglishOnlyStaticPage(entry.file) && entry.locale !== "ja");
+}
+
+function isNoindexStaticPage(file) {
+    return staticPageIndex.get(file)?.noindex === true;
 }
 
 function isEnglishOnlyStaticPage(file) {
@@ -538,7 +869,7 @@ function getSitemapImageUrls(file) {
     const urls = new Set();
     const staticPage = staticPageIndex.get(file);
     if (staticPage) {
-        addSitemapImageUrl(urls, staticPage.ogImage);
+        addSitemapImageUrl(urls, staticPage.ogImage || DEFAULT_OG_IMAGE);
         if (file === "index.html" && staticPage.appImages) {
             Object.values(staticPage.appImages).forEach((image) => addSitemapImageUrl(urls, image));
         }
@@ -575,55 +906,55 @@ function absoluteAssetUrl(file) {
     return `${SITE_ORIGIN}/assets/${String(file || "").replace(/^\.?\/?assets\//, "")}`;
 }
 
-function writeManifestFiles() {
-    const sharedManifest = {
-        name: "Shiba Muscle",
-        short_name: "Shiba Muscle",
-        description: "平均重量、基準重量、鍛えられる筋肉を探せるワークアウトデータベース。",
+function buildWebAppManifest() {
+    return {
+        name: "Shiba",
+        short_name: "Shiba",
+        description: MANIFEST_DESCRIPTION,
+        id: "/",
         start_url: "/",
         scope: "/",
-        theme_color: "#ff6a00",
-        background_color: "#030303",
-        display: "standalone"
-    };
-
-    const siteManifest = {
-        ...sharedManifest,
-        icons: [
-            {
-                src: "/assets/android-chrome-192x192.png",
-                sizes: "192x192",
-                type: "image/png"
-            },
-            {
-                src: "/assets/android-chrome-512x512.png",
-                sizes: "512x512",
-                type: "image/png"
-            }
-        ]
-    };
-
-    const legacyManifest = {
-        ...sharedManifest,
+        lang: "ja",
+        dir: "ltr",
+        theme_color: APP_THEME_COLOR,
+        background_color: WEB_APP_BACKGROUND_COLOR,
+        display: "standalone",
         orientation: "any",
-        icons: [
-            { src: "/assets/android-chrome-36x36.png", sizes: "36x36", type: "image/png" },
-            { src: "/assets/android-chrome-48x48.png", sizes: "48x48", type: "image/png" },
-            { src: "/assets/android-chrome-72x72.png", sizes: "72x72", type: "image/png" },
-            { src: "/assets/android-chrome-96x96.png", sizes: "96x96", type: "image/png" },
-            { src: "/assets/android-chrome-128x128.png", sizes: "128x128", type: "image/png" },
-            { src: "/assets/android-chrome-144x144.png", sizes: "144x144", type: "image/png" },
-            { src: "/assets/android-chrome-152x152.png", sizes: "152x152", type: "image/png" },
-            { src: "/assets/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
-            { src: "/assets/android-chrome-256x256.png", sizes: "256x256", type: "image/png" },
-            { src: "/assets/android-chrome-384x384.png", sizes: "384x384", type: "image/png" },
-            { src: "/assets/android-chrome-512x512.png", sizes: "512x512", type: "image/png" }
-        ]
+        icons: ANDROID_ICON_SIZES.map((size) => ({
+            src: `/assets/android-chrome-${size}x${size}.png`,
+            sizes: `${size}x${size}`,
+            type: "image/png",
+            purpose: "any"
+        }))
     };
+}
 
-    writeFileSync(join(ROOT, "site.webmanifest"), `${JSON.stringify(siteManifest, null, 4)}\n`);
-    writeFileSync(join(ROOT, "assets", "site.webmanifest"), `${JSON.stringify(siteManifest, null, 4)}\n`);
-    writeFileSync(join(ROOT, "assets", "manifest.json"), `${JSON.stringify(legacyManifest, null, 4)}\n`);
+function buildBrowserConfigXml() {
+    return `<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square70x70logo src="/assets/site-tile-70x70.png"/>
+            <square150x150logo src="/assets/site-tile-150x150.png"/>
+            <wide310x150logo src="/assets/site-tile-310x150.png"/>
+            <square310x310logo src="/assets/site-tile-310x310.png"/>
+            <TileColor>${APP_THEME_COLOR}</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>
+`;
+}
+
+function writeManifestFiles() {
+    const manifest = buildWebAppManifest();
+    const manifestJson = `${JSON.stringify(manifest, null, 4)}\n`;
+    const browserConfig = buildBrowserConfigXml();
+
+    writeFileSync(join(ROOT, "site.webmanifest"), manifestJson);
+    writeFileSync(join(ROOT, "assets", "site.webmanifest"), manifestJson);
+    writeFileSync(join(ROOT, "assets", "manifest.json"), manifestJson);
+    writeFileSync(join(ROOT, "browserconfig.xml"), browserConfig);
+    writeFileSync(join(ROOT, "assets", "browserconfig.xml"), browserConfig);
 }
 
 function extractFirst(text, pattern) {

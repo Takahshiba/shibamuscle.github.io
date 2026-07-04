@@ -1,9 +1,12 @@
 {
-    "name": "Shiba Muscle",
-    "short_name": "Shiba Muscle",
-    "description": "平均重量、基準重量、鍛えられる筋肉を探せるワークアウトデータベース。",
+    "name": "Shiba",
+    "short_name": "Shiba",
+    "description": "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを一つの流れで管理できるiPhone向けワークアウトアプリです。",
+    "id": "/",
     "start_url": "/",
     "scope": "/",
+    "lang": "ja",
+    "dir": "ltr",
     "theme_color": "#ff6a00",
     "background_color": "#030303",
     "display": "standalone",
@@ -12,57 +15,68 @@
         {
             "src": "/assets/android-chrome-36x36.png",
             "sizes": "36x36",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-48x48.png",
             "sizes": "48x48",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-72x72.png",
             "sizes": "72x72",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-96x96.png",
             "sizes": "96x96",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-128x128.png",
             "sizes": "128x128",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-144x144.png",
             "sizes": "144x144",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-152x152.png",
             "sizes": "152x152",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-192x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-256x256.png",
             "sizes": "256x256",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-384x384.png",
             "sizes": "384x384",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/assets/android-chrome-512x512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         }
     ]
 }

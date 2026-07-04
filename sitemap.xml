@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://shibamuscle.com/</loc>
-    <lastmod>2026-07-04T05:49:53.890Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/" />
@@ -31,7 +31,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/about.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/about.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/about.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/about.html" />
@@ -42,10 +42,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/about.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/about.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/about.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/contact.html</loc>
-    <lastmod>2026-07-04T04:39:38.309Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/contact.html" />
@@ -62,7 +65,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/de/</loc>
-    <lastmod>2026-07-04T05:49:53.890Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/" />
@@ -91,7 +94,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/de/about.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/about.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/about.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/about.html" />
@@ -102,10 +105,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/about.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/about.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/about.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/de/contact.html</loc>
-    <lastmod>2026-07-04T04:39:38.309Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/contact.html" />
@@ -4610,7 +4616,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/de/kg_strict-curl.html</loc>
-    <lastmod>2026-07-04T06:08:26.641Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/kg_strict-curl.html" />
@@ -5001,7 +5007,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/de/methodology.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/methodology.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/methodology.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/methodology.html" />
@@ -5012,10 +5018,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/methodology.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/methodology.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/methodology.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/de/privacy-policy.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/privacy-policy.html" />
@@ -5026,10 +5035,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/privacy-policy.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/en/</loc>
-    <lastmod>2026-07-04T05:49:53.890Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/" />
@@ -5058,7 +5070,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/en/about.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/about.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/about.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/about.html" />
@@ -5069,10 +5081,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/about.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/about.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/about.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/en/contact.html</loc>
-    <lastmod>2026-07-04T04:39:38.309Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/contact.html" />
@@ -9577,7 +9592,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/en/kg_strict-curl.html</loc>
-    <lastmod>2026-07-04T06:08:26.641Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/kg_strict-curl.html" />
@@ -9968,7 +9983,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/en/methodology.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/methodology.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/methodology.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/methodology.html" />
@@ -9979,10 +9994,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/methodology.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/methodology.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/methodology.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/en/privacy-policy.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/privacy-policy.html" />
@@ -9993,10 +10011,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/privacy-policy.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/es/</loc>
-    <lastmod>2026-07-04T05:49:53.890Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/" />
@@ -10025,7 +10046,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/es/about.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/about.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/about.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/about.html" />
@@ -10036,10 +10057,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/about.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/about.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/about.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/es/contact.html</loc>
-    <lastmod>2026-07-04T04:39:38.309Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/contact.html" />
@@ -14544,7 +14568,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/es/kg_strict-curl.html</loc>
-    <lastmod>2026-07-04T06:08:26.641Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/kg_strict-curl.html" />
@@ -14935,7 +14959,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/es/methodology.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/methodology.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/methodology.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/methodology.html" />
@@ -14946,10 +14970,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/methodology.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/methodology.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/methodology.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/es/privacy-policy.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/privacy-policy.html" />
@@ -14960,10 +14987,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/privacy-policy.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/fr/</loc>
-    <lastmod>2026-07-04T05:49:53.890Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/" />
@@ -14992,7 +15022,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/fr/about.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/about.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/about.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/about.html" />
@@ -15003,10 +15033,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/about.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/about.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/about.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/fr/contact.html</loc>
-    <lastmod>2026-07-04T04:39:38.309Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/contact.html" />
@@ -19511,7 +19544,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/fr/kg_strict-curl.html</loc>
-    <lastmod>2026-07-04T06:08:26.641Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/kg_strict-curl.html" />
@@ -19902,7 +19935,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/fr/methodology.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/methodology.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/methodology.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/methodology.html" />
@@ -19913,10 +19946,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/methodology.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/methodology.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/methodology.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/fr/privacy-policy.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/privacy-policy.html" />
@@ -19927,10 +19963,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/privacy-policy.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/id/</loc>
-    <lastmod>2026-07-04T05:49:53.890Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/" />
@@ -19959,7 +19998,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/id/about.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/about.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/about.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/about.html" />
@@ -19970,10 +20009,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/about.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/about.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/about.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/id/contact.html</loc>
-    <lastmod>2026-07-04T04:39:38.309Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/contact.html" />
@@ -24478,7 +24520,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/id/kg_strict-curl.html</loc>
-    <lastmod>2026-07-04T06:08:26.641Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/kg_strict-curl.html" />
@@ -24869,7 +24911,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/id/methodology.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/methodology.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/methodology.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/methodology.html" />
@@ -24880,10 +24922,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/methodology.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/methodology.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/methodology.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/id/privacy-policy.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/privacy-policy.html" />
@@ -24894,6 +24939,9 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/privacy-policy.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/kg_ab-wheel-roller.html</loc>
@@ -29385,7 +29433,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/kg_strict-curl.html</loc>
-    <lastmod>2026-07-04T06:08:26.641Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/kg_strict-curl.html" />
@@ -29776,7 +29824,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/ko/</loc>
-    <lastmod>2026-07-04T05:49:53.890Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/" />
@@ -29805,7 +29853,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/ko/about.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/about.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/about.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/about.html" />
@@ -29816,10 +29864,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/about.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/about.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/about.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/ko/contact.html</loc>
-    <lastmod>2026-07-04T04:39:38.309Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/contact.html" />
@@ -34324,7 +34375,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/ko/kg_strict-curl.html</loc>
-    <lastmod>2026-07-04T06:08:26.641Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/kg_strict-curl.html" />
@@ -34715,7 +34766,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/ko/methodology.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/methodology.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/methodology.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/methodology.html" />
@@ -34726,10 +34777,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/methodology.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/methodology.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/methodology.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/ko/privacy-policy.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/privacy-policy.html" />
@@ -34740,10 +34794,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/privacy-policy.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/methodology.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/methodology.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/methodology.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/methodology.html" />
@@ -34754,10 +34811,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/methodology.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/methodology.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/methodology.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/privacy-policy.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/privacy-policy.html" />
@@ -34768,14 +34828,20 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/privacy-policy.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/shiba-privacy-policy.html</loc>
     <lastmod>2026-07-03T12:38:49.000Z</lastmod>
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hans/</loc>
-    <lastmod>2026-07-04T05:49:53.890Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/" />
@@ -34804,7 +34870,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hans/about.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/about.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/about.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/about.html" />
@@ -34815,10 +34881,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/about.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/about.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/about.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hans/contact.html</loc>
-    <lastmod>2026-07-04T04:39:38.309Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/contact.html" />
@@ -39323,7 +39392,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hans/kg_strict-curl.html</loc>
-    <lastmod>2026-07-04T06:08:26.641Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/kg_strict-curl.html" />
@@ -39714,7 +39783,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hans/methodology.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/methodology.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/methodology.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/methodology.html" />
@@ -39725,10 +39794,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/methodology.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/methodology.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/methodology.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hans/privacy-policy.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/privacy-policy.html" />
@@ -39739,10 +39811,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/privacy-policy.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hant/</loc>
-    <lastmod>2026-07-04T05:49:53.890Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/" />
@@ -39771,7 +39846,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hant/about.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/about.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/about.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/about.html" />
@@ -39782,10 +39857,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/about.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/about.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/about.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hant/contact.html</loc>
-    <lastmod>2026-07-04T04:39:38.309Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/contact.html" />
@@ -44290,7 +44368,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hant/kg_strict-curl.html</loc>
-    <lastmod>2026-07-04T06:08:26.641Z</lastmod>
+    <lastmod>2026-07-04T06:48:34.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/kg_strict-curl.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/kg_strict-curl.html" />
@@ -44681,7 +44759,7 @@
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hant/methodology.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/methodology.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/methodology.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/methodology.html" />
@@ -44692,10 +44770,13 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/methodology.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/methodology.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/methodology.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://shibamuscle.com/zh-hant/privacy-policy.html</loc>
-    <lastmod>2026-07-03T17:11:47.000Z</lastmod>
+    <lastmod>2026-07-04T15:01:38.000Z</lastmod>
     <xhtml:link rel="alternate" hreflang="ja" href="https://shibamuscle.com/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://shibamuscle.com/ko/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://shibamuscle.com/zh-hant/privacy-policy.html" />
@@ -44706,5 +44787,8 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://shibamuscle.com/id/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://shibamuscle.com/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://shibamuscle.com/privacy-policy.html" />
+    <image:image>
+      <image:loc>https://shibamuscle.com/assets/app/shiba-mascot.png</image:loc>
+    </image:image>
   </url>
 </urlset>

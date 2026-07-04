@@ -4048,115 +4048,217 @@ function buildExerciseSeo(exercise, measurementKind, unit, localeCode = "ja") {
     };
 }
 
+const SEO_DESCRIPTION_MAX_CHARACTERS = 170;
+
 function buildExerciseSeoDescription(exercise, section, measurementKind, unit, localeCode = "ja") {
     if (localeCode === "ja") {
-        const seo = buildExerciseSeo(exercise, measurementKind, unit, "ja");
-        const primaryMuscles = exercise.metadata?.primaryMuscles?.ja || [];
+        const name = getExerciseName(exercise, "ja");
+        const category = section?.label?.ja || section?.titles?.ja || getCategoryLabel(section || exercise.categoryId, "ja");
+        const unitLabel = unit === "lb" ? "lb表" : "kg表";
+        const metricPhrase = measurementKind === "reps" ? "平均回数・基準回数" : "平均重量・筋力基準";
+        const requiredParts = [
+            `${name}の${metricPhrase}を${unitLabel}で確認できます。`,
+            `${category}の代表種目です。`
+        ];
+        const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "ja", {
+            separator: "・",
+            format: (muscles) => `主働筋は${muscles}。`
+        });
         const metricSummary = measurementKind === "reps"
-            ? "関連種目もあわせて確認できます。"
-            : "体重別・年齢別の基準表と関連種目もあわせて確認できます。";
-        const muscleDescription = primaryMuscles.length ? `主働筋は${primaryMuscles.join("・")}。` : "";
-        const sectionDescription = section?.label?.ja || section?.titles?.ja ? `${section.label?.ja || section.titles?.ja}の代表種目です。` : "";
-        return `${seo.descriptionPrefix}${sectionDescription}${muscleDescription}${metricSummary}`;
+            ? "関連種目も確認できます。"
+            : "体重別・年齢別の基準表も確認できます。";
+        return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
     }
 
     if (localeCode === "en") {
-        const seo = buildExerciseSeo(exercise, measurementKind, unit, "en");
-        const category = getCategoryLabel(section || exercise.categoryId, "en");
-        const primaryMuscles = getLocalizedMuscleGroups(exercise, "en")[0]?.items || [];
+        const name = getExerciseName(exercise, "en");
+        const category = getCategoryLabel(section || exercise.categoryId, "en").toLowerCase();
+        const unitLabel = unit === "lb" ? "lb table" : "kg table";
+        const metricPhrase = measurementKind === "reps" ? "average reps and rep standards" : "average weight and strength standards";
+        const requiredParts = [
+            `${name}: ${metricPhrase} (${unitLabel}).`,
+            `Category: ${category}.`
+        ];
+        const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "en", {
+            separator: ", ",
+            format: (muscles) => `Primary muscles: ${muscles}.`
+        });
         const metricSummary = measurementKind === "reps"
-            ? "Related exercises are also available for comparison."
-            : "Includes bodyweight tables, age tables, and related exercises.";
-        const muscleDescription = primaryMuscles.length ? `Primary muscles: ${primaryMuscles.join(", ")}. ` : "";
-        return `${seo.descriptionPrefix} This is a reference page for ${category.toLowerCase()}. ${muscleDescription}${metricSummary}`;
+            ? "Related exercises included."
+            : "Bodyweight and age tables included.";
+        return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
     }
 
     if (localeCode === "es") {
-        const seo = buildExerciseSeo(exercise, measurementKind, unit, "es");
-        const category = getCategoryLabel(section || exercise.categoryId, "es");
-        const primaryMuscles = getLocalizedMuscleGroups(exercise, "es")[0]?.items || [];
+        const name = getExerciseName(exercise, "es");
+        const category = getCategoryLabel(section || exercise.categoryId, "es").toLowerCase();
+        const unitLabel = unit === "lb" ? "tabla en lb" : "tabla en kg";
+        const metricPhrase = measurementKind === "reps" ? "repeticiones medias y estándares" : "peso medio y estándares de fuerza";
+        const requiredParts = [
+            `${name}: ${metricPhrase} (${unitLabel}).`,
+            `Categoría: ${category}.`
+        ];
+        const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "es", {
+            separator: ", ",
+            format: (muscles) => `Músculos principales: ${muscles}.`
+        });
         const metricSummary = measurementKind === "reps"
-            ? "También puedes revisar ejercicios relacionados."
-            : "Incluye tablas por peso corporal, tablas por edad y ejercicios relacionados.";
-        const muscleDescription = primaryMuscles.length ? `Los músculos principales son ${primaryMuscles.join(", ")}. ` : "";
-        return `${seo.descriptionPrefix} Es una referencia de ${category.toLowerCase()}. ${muscleDescription}${metricSummary}`;
+            ? "Incluye ejercicios relacionados."
+            : "Incluye peso corporal y edad.";
+        return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
     }
 
     if (localeCode === "zh-hant") {
-        const seo = buildExerciseSeo(exercise, measurementKind, unit, "zh-hant");
+        const name = getExerciseName(exercise, "zh-hant");
         const category = getCategoryLabel(section || exercise.categoryId, "zh-hant");
-        const primaryMuscles = getLocalizedMuscleGroups(exercise, "zh-hant")[0]?.items || [];
-        const muscleDescription = primaryMuscles.length ? `主要肌群為${primaryMuscles.join("、")}。` : "";
+        const unitLabel = unit === "lb" ? "lb 表" : "kg 表";
+        const metricPhrase = measurementKind === "reps" ? "平均次數與標準次數" : "平均重量與力量標準";
+        const requiredParts = [
+            `${name}的${metricPhrase}可透過${unitLabel}查看。`,
+            `這是${category}的訓練參考頁。`
+        ];
+        const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "zh-hant", {
+            separator: "、",
+            format: (muscles) => `主要肌群為${muscles}。`
+        });
         const metricSummary = measurementKind === "reps"
-            ? "也可以一併查看相關訓練動作。"
-            : "包含體重別、年齡別標準表與相關訓練動作。";
-        return `${seo.descriptionPrefix}這是${category}的訓練參考頁，${muscleDescription}${metricSummary}`;
+            ? "也可查看相關訓練動作。"
+            : "包含體重別與年齡別標準表。";
+        return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
     }
 
     if (localeCode === "zh-hans") {
-        const seo = buildExerciseSeo(exercise, measurementKind, unit, "zh-hans");
+        const name = getExerciseName(exercise, "zh-hans");
         const category = getCategoryLabel(section || exercise.categoryId, "zh-hans");
-        const primaryMuscles = getLocalizedMuscleGroups(exercise, "zh-hans")[0]?.items || [];
-        const muscleDescription = primaryMuscles.length ? `主要肌群为${primaryMuscles.join("、")}。` : "";
+        const unitLabel = unit === "lb" ? "lb 表" : "kg 表";
+        const metricPhrase = measurementKind === "reps" ? "平均次数与标准次数" : "平均重量与力量标准";
+        const requiredParts = [
+            `可通过${unitLabel}查看${name}的${metricPhrase}。`,
+            `这是${category}的训练参考页。`
+        ];
+        const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "zh-hans", {
+            separator: "、",
+            format: (muscles) => `主要肌群为${muscles}。`
+        });
         const metricSummary = measurementKind === "reps"
-            ? "也可以一并查看相关训练动作。"
-            : "包含按体重、按年龄的标准表与相关训练动作。";
-        return `${seo.descriptionPrefix}这是${category}的训练参考页，${muscleDescription}${metricSummary}`;
+            ? "也可查看相关训练动作。"
+            : "包含按体重和年龄的标准表。";
+        return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
     }
 
     if (localeCode === "de") {
-        const seo = buildExerciseSeo(exercise, measurementKind, unit, "de");
+        const name = getExerciseName(exercise, "de");
         const category = getCategoryLabel(section || exercise.categoryId, "de");
-        const primaryMuscles = getLocalizedMuscleGroups(exercise, "de")[0]?.items || [];
+        const unitLabel = unit === "lb" ? "lb Tabelle" : "kg Tabelle";
+        const metricPhrase = measurementKind === "reps" ? "Wiederholungen und Standards" : "Durchschnittsgewicht und Kraftwerte";
+        const requiredParts = [
+            `${name}: ${metricPhrase} (${unitLabel}).`,
+            `Bereich: ${category}.`
+        ];
+        const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "de", {
+            separator: ", ",
+            format: (muscles) => `Zielmuskulatur: ${muscles}.`
+        });
         const metricSummary = measurementKind === "reps"
-            ? "Außerdem findest du verwandte Übungen."
-            : "Enthält Tabellen nach Körpergewicht, Tabellen nach Alter und verwandte Übungen.";
-        const muscleDescription = primaryMuscles.length ? `Zielmuskulatur: ${primaryMuscles.join(", ")}. ` : "";
-        return `${seo.descriptionPrefix} Diese Seite ist eine Referenz für den Bereich ${category}. ${muscleDescription}${metricSummary}`;
+            ? "Verwandte Übungen enthalten."
+            : "Gewicht und Alter enthalten.";
+        return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
     }
-
 
     if (localeCode === "fr") {
-        const seo = buildExerciseSeo(exercise, measurementKind, unit, "fr");
-        const category = getCategoryLabel(section || exercise.categoryId, "fr");
-        const primaryMuscles = getLocalizedMuscleGroups(exercise, "fr")[0]?.items || [];
+        const name = getExerciseName(exercise, "fr");
+        const category = getCategoryLabel(section || exercise.categoryId, "fr").toLowerCase();
+        const unitLabel = unit === "lb" ? "tableau en lb" : "tableau en kg";
+        const metricPhrase = measurementKind === "reps" ? "répétitions moyennes et standards" : "charge moyenne et standards de force";
+        const requiredParts = [
+            `${name} : ${metricPhrase} (${unitLabel}).`,
+            `Catégorie : ${category}.`
+        ];
+        const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "fr", {
+            separator: ", ",
+            format: (muscles) => `Muscles principaux : ${muscles}.`
+        });
         const metricSummary = measurementKind === "reps"
-            ? "Tu peux aussi consulter les exercices liés."
-            : "Inclut des tableaux par poids de corps, des tableaux par âge et des exercices liés.";
-        const muscleDescription = primaryMuscles.length ? `Les muscles principaux sont ${primaryMuscles.join(", ")}. ` : "";
-        return `${seo.descriptionPrefix} C'est une référence pour ${category.toLowerCase()}. ${muscleDescription}${metricSummary}`;
+            ? "Exercices liés inclus."
+            : "Poids et âge inclus.";
+        return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
     }
-
-    if (localeCode === "de") {
-            const seo = buildExerciseSeo(exercise, measurementKind, unit, "de");
-            const category = getCategoryLabel(section || exercise.categoryId, "de");
-            const primaryMuscles = getLocalizedMuscleGroups(exercise, "de")[0]?.items || [];
-            const metricSummary = measurementKind === "reps"
-                ? "Außerdem findest du verwandte Übungen."
-                : "Enthält Tabellen nach Körpergewicht, Tabellen nach Alter und verwandte Übungen.";
-            const muscleDescription = primaryMuscles.length ? `Zielmuskulatur: ${primaryMuscles.join(", ")}. ` : "";
-            return `${seo.descriptionPrefix} Diese Seite ist eine Referenz für den Bereich ${category}. ${muscleDescription}${metricSummary}`;
-        }
 
     if (localeCode === "id") {
-        const seo = buildExerciseSeo(exercise, measurementKind, unit, "id");
-        const category = getCategoryLabel(section || exercise.categoryId, "id");
-        const primaryMuscles = getLocalizedMuscleGroups(exercise, "id")[0]?.items || [];
+        const name = getExerciseName(exercise, "id");
+        const category = getCategoryLabel(section || exercise.categoryId, "id").toLowerCase();
+        const unitLabel = unit === "lb" ? "tabel lb" : "tabel kg";
+        const metricPhrase = measurementKind === "reps" ? "repetisi rata-rata dan standar" : "berat rata-rata dan standar kekuatan";
+        const requiredParts = [
+            `${name}: ${metricPhrase} (${unitLabel}).`,
+            `Kategori: ${category}.`
+        ];
+        const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "id", {
+            separator: ", ",
+            format: (muscles) => `Otot utama: ${muscles}.`
+        });
         const metricSummary = measurementKind === "reps"
-            ? "Latihan terkait juga tersedia untuk dibandingkan."
-            : "Mencakup tabel berdasarkan berat badan, tabel berdasarkan usia, dan latihan terkait.";
-        const muscleDescription = primaryMuscles.length ? `Otot utama: ${primaryMuscles.join(", ")}. ` : "";
-        return `${seo.descriptionPrefix} Ini adalah referensi latihan untuk kategori ${category.toLowerCase()}. ${muscleDescription}${metricSummary}`;
+            ? "Latihan terkait tersedia."
+            : "Berat badan dan usia tersedia.";
+        return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
     }
 
-    const seo = buildExerciseSeo(exercise, measurementKind, unit, "ko");
+    const name = getExerciseName(exercise, "ko");
     const category = getCategoryLabel(section || exercise.categoryId, "ko");
-    const primaryMuscles = getLocalizedMuscleGroups(exercise, "ko")[0]?.items || [];
+    const unitLabel = unit === "lb" ? "lb 기준표" : "kg 기준표";
+    const metricPhrase = measurementKind === "reps" ? "평균 반복 횟수와 기준 반복 횟수" : "평균 중량과 기준 중량";
+    const requiredParts = [
+        `${name}의 ${metricPhrase}를 ${unitLabel}로 확인할 수 있습니다.`,
+        `${category} 대표 운동 기준입니다.`
+    ];
+    const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "ko", {
+        separator: ", ",
+        format: (muscles) => `주동근은 ${muscles}입니다.`
+    });
     const metricSummary = measurementKind === "reps"
-        ? "관련 운동도 함께 확인할 수 있습니다."
-        : "체중별, 나이별 기준표와 관련 운동도 함께 확인할 수 있습니다.";
-    const muscleDescription = primaryMuscles.length ? `주동근은 ${primaryMuscles.join(", ")}입니다. ` : "";
-    return `${seo.descriptionPrefix} ${category} 대표 운동 기준이며, ${muscleDescription}${metricSummary}`;
+        ? "관련 운동도 확인할 수 있습니다."
+        : "체중별, 나이별 기준표도 확인할 수 있습니다.";
+    return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
+}
+
+function buildSeoDescription(requiredParts, optionalParts, maxLength = SEO_DESCRIPTION_MAX_CHARACTERS) {
+    const parts = requiredParts.filter(Boolean);
+    optionalParts.filter(Boolean).forEach((part) => {
+        const candidate = [...parts, part].join(" ");
+        if (countCharacters(candidate) <= maxLength) {
+            parts.push(part);
+        }
+    });
+
+    return parts.join(" ");
+}
+
+function buildFittingSeoMuscleDescription(baseParts, exercise, localeCode, { separator, format }, maxLength = SEO_DESCRIPTION_MAX_CHARACTERS) {
+    for (const limit of [2, 1]) {
+        const muscles = getSeoMuscleList(exercise, localeCode, limit, separator);
+        if (!muscles) {
+            return "";
+        }
+
+        const description = format(muscles);
+        if (countCharacters([...baseParts, description].join(" ")) <= maxLength) {
+            return description;
+        }
+    }
+
+    return "";
+}
+
+function getSeoMuscleList(exercise, localeCode, limit, separator) {
+    const muscles = localeCode === "ja"
+        ? exercise.metadata?.primaryMuscles?.ja || []
+        : getLocalizedMuscleGroups(exercise, localeCode)[0]?.items || [];
+
+    return muscles.filter(Boolean).slice(0, limit).join(separator);
+}
+
+function countCharacters(text) {
+    return Array.from(text || "").length;
 }
 
 function buildLocalizedCard(card, section, localeCode = "ja") {

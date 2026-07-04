@@ -1,0 +1,296 @@
+{
+  "file": "404.html",
+  "kind": "content",
+  "title": "ページが見つかりません | Shiba Muscle",
+  "description": "Shiba Muscleでページが見つからないときの案内ページです。ホーム、サポート、データの見方へ移動できます。",
+  "heading": "ページが見つかりません",
+  "noindex": true,
+  "sitemap": false,
+  "ads": false,
+  "scripts": false,
+  "intro": [
+    "URLが変更されたか、ページが削除された可能性があります。",
+    "以下のリンクから目的のページを探してください。"
+  ],
+  "sections": [
+    {
+      "className": "content-card",
+      "heading": "次にできること",
+      "blocks": [
+        {
+          "type": "link",
+          "text": "ホームへ戻る",
+          "href": "index.html"
+        },
+        {
+          "type": "link",
+          "text": "データの見方を読む",
+          "href": "methodology.html"
+        },
+        {
+          "type": "link",
+          "text": "サポートへ問い合わせる",
+          "href": "contact.html"
+        }
+      ]
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Page Not Found | Shiba Muscle",
+      "description": "Page not found on Shiba Muscle. Use the links to return home, contact support, or read how the data works.",
+      "heading": "Page not found",
+      "intro": [
+        "The URL may have changed or the page may have been removed.",
+        "Use one of these links to keep browsing."
+      ],
+      "sections": [
+        {
+          "className": "content-card",
+          "heading": "Next steps",
+          "blocks": [
+            {
+              "type": "link",
+              "text": "Go to home",
+              "href": "index.html"
+            },
+            {
+              "type": "link",
+              "text": "Read how the data works",
+              "href": "methodology.html"
+            },
+            {
+              "type": "link",
+              "text": "Contact support",
+              "href": "contact.html"
+            }
+          ]
+        }
+      ]
+    },
+    "ko": {
+      "title": "페이지를 찾을 수 없습니다 | Shiba Muscle",
+      "description": "Shiba Muscle에서 페이지를 찾을 수 없을 때의 안내 페이지입니다. 홈, 지원, 데이터 읽는 법으로 이동할 수 있습니다.",
+      "heading": "페이지를 찾을 수 없습니다",
+      "intro": [
+        "URL이 변경되었거나 페이지가 삭제되었을 수 있습니다.",
+        "아래 링크에서 필요한 페이지를 찾아보세요."
+      ],
+      "sections": [
+        {
+          "className": "content-card",
+          "heading": "다음 단계",
+          "blocks": [
+            {
+              "type": "link",
+              "text": "홈으로 이동",
+              "href": "index.html"
+            },
+            {
+              "type": "link",
+              "text": "데이터 읽는 법 보기",
+              "href": "methodology.html"
+            },
+            {
+              "type": "link",
+              "text": "지원 문의",
+              "href": "contact.html"
+            }
+          ]
+        }
+      ]
+    },
+    "zh-hant": {
+      "title": "找不到頁面 | Shiba Muscle",
+      "description": "Shiba Muscle 找不到頁面時的導覽頁。你可以前往首頁、支援頁或資料說明。",
+      "heading": "找不到頁面",
+      "intro": [
+        "網址可能已變更，或頁面已被移除。",
+        "請使用下方連結繼續瀏覽。"
+      ],
+      "sections": [
+        {
+          "className": "content-card",
+          "heading": "下一步",
+          "blocks": [
+            {
+              "type": "link",
+              "text": "前往首頁",
+              "href": "index.html"
+            },
+            {
+              "type": "link",
+              "text": "閱讀資料說明",
+              "href": "methodology.html"
+            },
+            {
+              "type": "link",
+              "text": "聯絡支援",
+              "href": "contact.html"
+            }
+          ]
+        }
+      ]
+    },
+    "zh-hans": {
+      "title": "找不到页面 | Shiba Muscle",
+      "description": "Shiba Muscle 找不到页面时的导航页。你可以前往首页、支持页或数据说明。",
+      "heading": "找不到页面",
+      "intro": [
+        "网址可能已更改，或页面已被移除。",
+        "请使用下方链接继续浏览。"
+      ],
+      "sections": [
+        {
+          "className": "content-card",
+          "heading": "下一步",
+          "blocks": [
+            {
+              "type": "link",
+              "text": "前往首页",
+              "href": "index.html"
+            },
+            {
+              "type": "link",
+              "text": "阅读数据说明",
+              "href": "methodology.html"
+            },
+            {
+              "type": "link",
+              "text": "联系支持",
+              "href": "contact.html"
+            }
+          ]
+        }
+      ]
+    },
+    "es": {
+      "title": "Página no encontrada | Shiba Muscle",
+      "description": "Página de Shiba Muscle para una URL no encontrada. Puedes volver al inicio, contactar soporte o leer cómo funcionan los datos.",
+      "heading": "Página no encontrada",
+      "intro": [
+        "La URL puede haber cambiado o la página puede haberse eliminado.",
+        "Usa estos enlaces para seguir navegando."
+      ],
+      "sections": [
+        {
+          "className": "content-card",
+          "heading": "Siguientes pasos",
+          "blocks": [
+            {
+              "type": "link",
+              "text": "Ir al inicio",
+              "href": "index.html"
+            },
+            {
+              "type": "link",
+              "text": "Leer cómo funcionan los datos",
+              "href": "methodology.html"
+            },
+            {
+              "type": "link",
+              "text": "Contactar soporte",
+              "href": "contact.html"
+            }
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "title": "Page introuvable | Shiba Muscle",
+      "description": "Page d'aide de Shiba Muscle lorsqu'une URL est introuvable. Retourne à l'accueil, contacte l'assistance ou lis les données.",
+      "heading": "Page introuvable",
+      "intro": [
+        "L'URL a peut-être changé ou la page a été supprimée.",
+        "Utilise ces liens pour continuer."
+      ],
+      "sections": [
+        {
+          "className": "content-card",
+          "heading": "Étapes suivantes",
+          "blocks": [
+            {
+              "type": "link",
+              "text": "Aller à l'accueil",
+              "href": "index.html"
+            },
+            {
+              "type": "link",
+              "text": "Lire les données",
+              "href": "methodology.html"
+            },
+            {
+              "type": "link",
+              "text": "Contacter l'assistance",
+              "href": "contact.html"
+            }
+          ]
+        }
+      ]
+    },
+    "de": {
+      "title": "Seite nicht gefunden | Shiba Muscle",
+      "description": "Hinweisseite von Shiba Muscle, wenn eine URL nicht gefunden wurde. Zur Startseite, Hilfe oder Datenerklärung wechseln.",
+      "heading": "Seite nicht gefunden",
+      "intro": [
+        "Die URL wurde möglicherweise geändert oder die Seite wurde entfernt.",
+        "Nutze diese Links, um weiterzumachen."
+      ],
+      "sections": [
+        {
+          "className": "content-card",
+          "heading": "Nächste Schritte",
+          "blocks": [
+            {
+              "type": "link",
+              "text": "Zur Startseite",
+              "href": "index.html"
+            },
+            {
+              "type": "link",
+              "text": "Daten verstehen",
+              "href": "methodology.html"
+            },
+            {
+              "type": "link",
+              "text": "Support kontaktieren",
+              "href": "contact.html"
+            }
+          ]
+        }
+      ]
+    },
+    "id": {
+      "title": "Halaman Tidak Ditemukan | Shiba Muscle",
+      "description": "Halaman panduan Shiba Muscle saat URL tidak ditemukan. Kembali ke beranda, hubungi dukungan, atau baca cara kerja data.",
+      "heading": "Halaman tidak ditemukan",
+      "intro": [
+        "URL mungkin berubah atau halaman telah dihapus.",
+        "Gunakan tautan berikut untuk melanjutkan."
+      ],
+      "sections": [
+        {
+          "className": "content-card",
+          "heading": "Langkah berikutnya",
+          "blocks": [
+            {
+              "type": "link",
+              "text": "Ke beranda",
+              "href": "index.html"
+            },
+            {
+              "type": "link",
+              "text": "Baca cara kerja data",
+              "href": "methodology.html"
+            },
+            {
+              "type": "link",
+              "text": "Hubungi dukungan",
+              "href": "contact.html"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "file": "about.html",
   "kind": "content",
   "title": "Shiba Muscleについて | Shiba Muscle",
-  "description": "Shiba Muscleの目的、掲載データの使い方、運営方針をまとめたページです。",
+  "description": "Shiba Muscleの目的、平均重量・筋力基準データの使い方、掲載情報、運営方針をまとめたページです。",
   "heading": "Shiba Muscleについて",
   "appShell": true,
   "shellClass": "policy-shell app-policy-shell",
@@ -52,7 +52,7 @@
   "locales": {
     "en": {
       "title": "About Shiba Muscle | Shiba Muscle",
-      "description": "Learn about Shiba Muscle, how to use the training data, and the site's operating principles.",
+      "description": "Learn what Shiba Muscle publishes, how to use average weight and strength standard data, and how the site is operated.",
       "heading": "About Shiba Muscle",
       "intro": [
         "Shiba Muscle is a workout database that organizes average weights, strength standards, and muscles worked by exercise so they are easier to compare."
@@ -93,7 +93,7 @@
     },
     "ko": {
       "title": "Shiba Muscle 소개 | Shiba Muscle",
-      "description": "Shiba Muscle의 목적, 데이터 활용법, 운영 방침을 정리한 페이지입니다.",
+      "description": "Shiba Muscle의 목적, 평균 중량과 근력 기준 데이터 활용법, 제공 정보, 운영 방침을 정리한 페이지입니다.",
       "heading": "Shiba Muscle 소개",
       "intro": [
         "Shiba Muscle은 운동별 평균 중량, 기준 중량, 자극되는 근육을 정리해 비교하기 쉽게 만든 운동 데이터베이스입니다."
@@ -134,7 +134,7 @@
     },
     "es": {
       "title": "Acerca de Shiba Muscle | Shiba Muscle",
-      "description": "Página sobre el propósito de Shiba Muscle, cómo usar sus datos y sus criterios de operación.",
+      "description": "Página sobre el propósito de Shiba Muscle, cómo usar los datos de peso medio y estándares de fuerza, y sus criterios de operación.",
       "heading": "Acerca de Shiba Muscle",
       "intro": [
         "Shiba Muscle es una base de datos de entrenamiento que organiza peso medio, estándares de fuerza y músculos trabajados por ejercicio para facilitar la comparación."
@@ -175,7 +175,7 @@
     },
     "zh-hant": {
       "title": "關於 Shiba Muscle | Shiba Muscle",
-      "description": "介紹 Shiba Muscle 的目的、資料使用方式與營運方針。",
+      "description": "介紹 Shiba Muscle 的目的、平均重量與力量標準資料的使用方式、刊載資訊與營運方針。",
       "heading": "關於 Shiba Muscle",
       "intro": [
         "Shiba Muscle 是整理各訓練動作平均重量、力量標準與目標肌群，方便比較的訓練資料庫。"
@@ -216,7 +216,7 @@
     },
     "zh-hans": {
       "title": "关于 Shiba Muscle | Shiba Muscle",
-      "description": "介绍 Shiba Muscle 的目的、数据使用方式与运营方针。",
+      "description": "介绍 Shiba Muscle 的目的、平均重量与力量标准数据的使用方式、刊载信息与运营方针。",
       "heading": "关于 Shiba Muscle",
       "intro": [
         "Shiba Muscle 是整理各训练动作平均重量、力量标准与目标肌群，方便比较的训练数据库。"
@@ -257,7 +257,7 @@
     },
     "fr": {
       "title": "À propos de Shiba Muscle | Shiba Muscle",
-      "description": "Présentation du but de Shiba Muscle, de l’utilisation des données et des principes d’exploitation.",
+      "description": "Présentation du but de Shiba Muscle, de l’utilisation des charges moyennes et standards de force, et des principes d’exploitation.",
       "heading": "À propos de Shiba Muscle",
       "intro": [
         "Shiba Muscle est une base de données d’entraînement qui organise charges moyennes, standards de force et muscles travaillés par exercice pour faciliter la comparaison."
@@ -298,7 +298,7 @@
     },
     "de": {
       "title": "Über Shiba Muscle | Shiba Muscle",
-      "description": "Informationen zum Zweck von Shiba Muscle, zur Nutzung der Daten und zu den Betriebsgrundsätzen.",
+      "description": "Informationen zum Zweck von Shiba Muscle, zur Nutzung von Durchschnittsgewicht und Kraftstandards sowie zu den Betriebsgrundsätzen.",
       "heading": "Über Shiba Muscle",
       "intro": [
         "Shiba Muscle ist eine Trainingsdatenbank, die Durchschnittsgewicht, Kraftstandards und Zielmuskeln pro Übung vergleichbar macht."
@@ -339,7 +339,7 @@
     },
     "id": {
       "title": "Tentang Shiba Muscle | Shiba Muscle",
-      "description": "Halaman tentang tujuan Shiba Muscle, cara memakai data latihan, dan prinsip pengelolaan situs.",
+      "description": "Halaman tentang tujuan Shiba Muscle, cara memakai data berat rata-rata dan standar kekuatan, serta prinsip pengelolaan situs.",
       "heading": "Tentang Shiba Muscle",
       "intro": [
         "Shiba Muscle adalah database latihan yang menyusun berat rata-rata, standar kekuatan, dan otot yang dilatih per gerakan agar mudah dibandingkan."

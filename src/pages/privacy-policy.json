@@ -2,7 +2,7 @@
   "file": "privacy-policy.html",
   "kind": "content",
   "title": "プライバシーポリシー | Shiba Muscle",
-  "description": "Shiba Muscleのプライバシーポリシー、Cookieポリシー、広告ポリシー、利用条件をまとめたページです。",
+  "description": "Shiba Muscleのプライバシーポリシー、Cookie、アクセス解析、広告配信、外部リンク、利用条件をまとめたページです。",
   "heading": "プライバシーポリシー",
   "appShell": true,
   "shellClass": "policy-shell app-policy-shell",
@@ -104,7 +104,7 @@
   "locales": {
     "en": {
       "title": "Privacy Policy | Shiba Muscle",
-      "description": "Shiba Muscle's privacy policy, cookie policy, advertising policy, and terms of use.",
+      "description": "Shiba Muscle's privacy policy covering cookies, analytics, advertising, external links, copyright, and terms of use.",
       "heading": "Privacy Policy",
       "intro": [
         "Shiba Muscle handles information only as needed to provide and improve the site, and works to protect user privacy. This page explains how information is handled on this site and the terms for using it.",
@@ -197,7 +197,7 @@
     },
     "ko": {
       "title": "개인정보 처리방침 | Shiba Muscle",
-      "description": "Shiba Muscle의 개인정보 처리방침, 쿠키 정책, 광고 정책, 이용 조건을 정리한 페이지입니다.",
+      "description": "Shiba Muscle의 개인정보 처리방침, 쿠키, 접속 분석, 광고 게재, 외부 링크, 이용 조건을 정리한 페이지입니다.",
       "heading": "개인정보 처리방침",
       "intro": [
         "Shiba Muscle은 서비스 제공에 필요한 범위에서만 정보를 취급하며 이용자의 개인정보 보호를 중요하게 생각합니다. 아래에서는 사이트 이용 중 정보가 어떻게 처리되는지와 이용 조건을 안내합니다.",
@@ -383,7 +383,7 @@
     },
     "zh-hant": {
       "title": "隱私權政策 | Shiba Muscle",
-      "description": "Shiba Muscle 的隱私權政策、Cookie 政策、廣告政策與使用條件。",
+      "description": "Shiba Muscle 的隱私權政策頁，整理 Cookie、流量分析、廣告投放、外部連結、著作權與使用條件。",
       "heading": "隱私權政策",
       "intro": [
         "Shiba Muscle 只在提供服務所需範圍內處理資訊，並重視使用者隱私。以下說明本站的資訊處理方式與使用條件。",
@@ -458,7 +458,7 @@
     },
     "zh-hans": {
       "title": "隐私政策 | Shiba Muscle",
-      "description": "Shiba Muscle 的隐私政策、Cookie 政策、广告政策与使用条件。",
+      "description": "Shiba Muscle 的隐私政策页，整理 Cookie、访问分析、广告投放、外部链接、版权与使用条件。",
       "heading": "隐私政策",
       "intro": [
         "Shiba Muscle 只在提供服务所需范围内处理信息，并重视用户隐私。以下说明本站的信息处理方式与使用条件。",

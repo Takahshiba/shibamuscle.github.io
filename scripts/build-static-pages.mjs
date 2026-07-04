@@ -6,12 +6,14 @@ import { join } from "node:path";
 import {
     escapeAttribute,
     escapeHtml,
+    imageSizeAttributes,
     renderBreadcrumb,
     renderDocument,
     renderStaticFooter,
     renderStaticHeader
 } from "./site-template.mjs";
 import {
+    absoluteUrlForFile,
     assetHref,
     buildLocalizedCard,
     buildOutputPath,
@@ -25,6 +27,7 @@ import {
     CATALOG_PATH,
     PAGES_ROOT,
     ensureDirectory,
+    getSourceCreatedIso,
     getSourceLastmodIso,
     loadCatalog,
     loadDiscovery,
@@ -37,6 +40,8 @@ const pages = loadPages();
 const staticPageByFile = new Map(pages.map((page) => [page.file, page]));
 const locales = getGeneratedLocales();
 const APP_THEME_COLOR = "#ff6a00";
+const SITE_ORIGIN = "https://shibamuscle.com";
+const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 assertExpectedLocales(locales);
 
 let generatedPages = 0;
@@ -88,6 +93,10 @@ function englishOnlyPage(page) {
 
 function renderHomePage(page, catalogData, locale) {
     const textLocale = locale === "ja" && page.textLocale ? page.textLocale : locale;
+    const canonicalUrl = absoluteUrlForFile(page.file, locale);
+    const datePublished = getStaticPageDatePublished(page.file);
+    const dateModified = getStaticPageDateModified(page.file);
+    const appImages = getAppImages(page);
     const body = `${renderStaticHeader({ pageType: "home", locale, textLocale })}
 
     <hr class="top-divider">
@@ -113,7 +122,18 @@ ${renderAppFooter(locale, textLocale)}
             type: "website",
             twitterCard: "summary_large_image",
             themeColor: APP_THEME_COLOR,
-            dateModified: getStaticPageDateModified(page.file)
+            webPageType: "CollectionPage",
+            preloadImages: [assetHref(appImages.today, locale)],
+            structuredData: buildHomeStructuredData({
+                page,
+                catalogData,
+                locale,
+                textLocale,
+                canonicalUrl
+            }),
+            mainEntity: { "@id": `${canonicalUrl}#exercise-preview-list` },
+            datePublished,
+            dateModified
         },
         enableAds: page.ads !== false,
         bodyClass: "home-page",
@@ -123,18 +143,55 @@ ${renderAppFooter(locale, textLocale)}
     });
 }
 
+function buildHomeStructuredData({ page, catalogData, locale, textLocale, canonicalUrl }) {
+    const previewCards = buildHomePreviewCards(catalogData, textLocale, page.unit || "kg", locale).slice(0, 4);
+    const itemListId = `${canonicalUrl}#exercise-preview-list`;
+
+    return [
+        {
+            "@type": "ItemList",
+            "@id": itemListId,
+            name: getHomeText(textLocale, "libraryHeading"),
+            description: page.description || getHomeText(textLocale, "libraryCopy"),
+            url: `${canonicalUrl}#library`,
+            inLanguage: getGeneratedLocaleHreflang(locale),
+            numberOfItems: previewCards.length,
+            itemListOrder: "https://schema.org/ItemListOrderAscending",
+            publisher: { "@id": `${SITE_ORIGIN}/#organization` },
+            publishingPrinciples: absoluteUrlForFile("methodology.html", locale),
+            itemListElement: previewCards.map((card, index) => {
+                const itemUrl = absoluteUrlForFile(card.href, locale);
+
+                return {
+                    "@type": "ListItem",
+                    position: index + 1,
+                    url: itemUrl,
+                    item: {
+                        "@type": "WebPage",
+                        "@id": `${itemUrl}#webpage`,
+                        url: itemUrl,
+                        name: card.name,
+                        image: absoluteStructuredDataAssetUrl(card.image)
+                    }
+                };
+            })
+        }
+    ];
+}
+
+function absoluteStructuredDataAssetUrl(href) {
+    if (/^https?:\/\//.test(href)) {
+        return href;
+    }
+
+    return `${SITE_ORIGIN}/${href.replace(/^(\.\.\/|\.\/)+/, "")}`;
+}
+
 function renderAppLanding(page, catalogData, locale, textLocale = locale) {
     const intro = page.intro || [];
     const overview = page.overview || {};
     const overviewItems = overview.items || [];
-    const images = {
-        today: "app/today-screen-current.png",
-        strength: "app/strength-percentile.jpg",
-        heatmap: "app/completion-heatmap.png",
-        heatmapDetail: "app/muscle-heatmap.png",
-        mascot: "app/shiba-mascot.png",
-        ...(page.appImages || {})
-    };
+    const images = getAppImages(page);
     const previewCards = buildHomePreviewCards(catalogData, textLocale, page.unit || "kg", locale);
     const sectionCount = catalogData.sections.length;
     const exerciseCount = catalogData.sections.reduce((count, section) => count + section.cards.length, 0);
@@ -228,7 +285,7 @@ ${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join
 
             <section class="app-cta-band" id="app-store">
                 <div class="app-cta-copy">
-                    <img src="${escapeAttribute(assetHref(images.mascot, locale))}" alt="" class="app-cta-mascot" loading="lazy">
+                    <img src="${escapeAttribute(assetHref(images.mascot, locale))}" alt="" class="app-cta-mascot" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.mascot, locale))}>
                     <p class="app-kicker">Shiba</p>
                     <h2>${renderMultilineText(getHomeText(textLocale, "appStoreHeading"))}</h2>
                     <p>${escapeHtml(getHomeText(textLocale, "appStoreCopy"))}</p>
@@ -241,18 +298,43 @@ ${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join
         </div>`;
 }
 
+function getAppImages(page) {
+    return {
+        today: "app/today-screen-current.png",
+        strength: "app/strength-percentile.jpg",
+        heatmap: "app/completion-heatmap.png",
+        heatmapDetail: "app/muscle-heatmap.png",
+        mascot: "app/shiba-mascot.png",
+        ...(page.appImages || {})
+    };
+}
+
 function renderAppFooter(locale, textLocale = locale) {
+    const homeHref = resolveLocalizedStaticPageHref("index.html", locale, textLocale);
+    const featuresHref = resolveLocalizedContentHref("index.html#analytics", locale, textLocale);
+    const aboutHref = resolveLocalizedStaticPageHref("about.html", locale, textLocale);
+    const methodologyHref = resolveLocalizedStaticPageHref("methodology.html", locale, textLocale);
+    const contactHref = resolveLocalizedStaticPageHref("contact.html", locale, textLocale);
+    const languageLinks = getGeneratedLocales()
+        .map((item) => `                <a href="${escapeAttribute(absoluteUrlForFile("index.html", item.code))}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a>`)
+        .join("\n");
+
     return `    <footer class="app-footer">
         <div class="app-footer-inner">
-            <a href="index.html" class="app-footer-brand">
-                <img src="${escapeAttribute(assetHref("app/shiba-mascot.png", locale))}" alt="" class="app-footer-brand-icon" loading="lazy">
+            <a href="${escapeAttribute(homeHref)}" class="app-footer-brand">
+                <img src="${escapeAttribute(assetHref("app/shiba-mascot.png", locale))}" alt="" class="app-footer-brand-icon" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                 <span>Shiba</span>
             </a>
             <nav class="app-footer-links" aria-label="Shiba footer">
-                <a href="index.html">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
-                <a href="index.html#analytics">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
+                <a href="${escapeAttribute(homeHref)}">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
+                <a href="${escapeAttribute(featuresHref)}">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
+                <a href="${escapeAttribute(aboutHref)}">${escapeHtml(getUiText(textLocale, "about"))}</a>
+                <a href="${escapeAttribute(methodologyHref)}">${escapeHtml(getUiText(textLocale, "methodology"))}</a>
                 <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
-                <a href="contact.html">${escapeHtml(getHomeText(textLocale, "footerContact"))}</a>
+                <a href="${escapeAttribute(contactHref)}">${escapeHtml(getHomeText(textLocale, "footerContact"))}</a>
+            </nav>
+            <nav class="app-footer-languages" aria-label="${escapeAttribute(getUiText(textLocale, "language"))}">
+${languageLinks}
             </nav>
             <p>© Shiba</p>
         </div>
@@ -273,12 +355,29 @@ ${blocks.map((block) => renderContentBlock(block, locale)).join("\n")}
 }
 
 function resolveStaticPageHref(file, locale = "ja") {
+    if (file === "index.html") {
+        return absoluteUrlForFile(file, locale);
+    }
+
     const page = staticPageByFile.get(file);
     if (page?.englishOnly === true && locale !== "ja") {
         return `../${file}`;
     }
 
     return file;
+}
+
+function resolveLocalizedStaticPageHref(file, locale = "ja", textLocale = locale) {
+    if (file === "index.html") {
+        const targetLocale = textLocale === "en" && locale !== "en" ? "en" : locale;
+        return absoluteUrlForFile(file, targetLocale);
+    }
+
+    if (textLocale !== "en" || locale === "en") {
+        return resolveStaticPageHref(file, locale);
+    }
+
+    return locale === "ja" ? `en/${file}` : `../en/${file}`;
 }
 
 function resolveContentHref(href, locale = "ja") {
@@ -288,6 +387,16 @@ function resolveContentHref(href, locale = "ja") {
 
     const [file, hash = ""] = href.split("#");
     const resolvedFile = resolveStaticPageHref(file, locale);
+    return hash ? `${resolvedFile}#${hash}` : resolvedFile;
+}
+
+function resolveLocalizedContentHref(href, locale = "ja", textLocale = locale) {
+    if (!href || href.startsWith("#") || /^[a-z][a-z0-9+.-]*:/i.test(href)) {
+        return href || "";
+    }
+
+    const [file, hash = ""] = href.split("#");
+    const resolvedFile = resolveLocalizedStaticPageHref(file, locale, textLocale);
     return hash ? `${resolvedFile}#${hash}` : resolvedFile;
 }
 
@@ -309,7 +418,7 @@ function renderPhoneImage(image, alt, locale, className = "") {
     const classes = ["app-phone", "app-phone--screen", className].filter(Boolean).join(" ");
     return `<div class="app-scene-media">
                         <div class="${escapeAttribute(classes)}">
-                            <img src="${escapeAttribute(assetHref(image, locale))}" alt="${escapeAttribute(alt)}" loading="lazy">
+                            <img src="${escapeAttribute(assetHref(image, locale))}" alt="${escapeAttribute(alt)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(image, locale))}>
                         </div>
                     </div>`;
 }
@@ -319,7 +428,7 @@ function renderHeroShowcase(images, locale, textLocale = locale) {
     return `<div class="app-device-stage" aria-label="${escapeAttribute(getHomeText(textLocale, "heroShowcaseAria"))}">
                         <div class="app-product-stack">
                             <div class="app-phone app-phone--screen app-phone--hero">
-                                <img src="${escapeAttribute(assetHref(images.today, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "todayAlt"))}" fetchpriority="high">
+                                <img src="${escapeAttribute(assetHref(images.today, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "todayAlt"))}" fetchpriority="high"${imageSizeAttributes(assetHref(images.today, locale))}>
                             </div>
                             <div class="app-insight-card app-insight-card--percentile" aria-hidden="true">
                                 <span>Strength Percentile</span>
@@ -327,7 +436,7 @@ function renderHeroShowcase(images, locale, textLocale = locale) {
                                 <small>${escapeHtml(getHomeText(textLocale, "heroPercentileCopy"))}</small>
                             </div>
                             <div class="app-insight-card app-insight-card--heatmap" aria-hidden="true">
-                                <img src="${escapeAttribute(assetHref(heatmapDetail, locale))}" alt="" loading="lazy">
+                                <img src="${escapeAttribute(assetHref(heatmapDetail, locale))}" alt="" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(heatmapDetail, locale))}>
                                 <span>Muscle Heatmap</span>
                             </div>
                         </div>
@@ -351,7 +460,7 @@ function renderAppFeatureCards(items) {
 function renderShowcasePhone(image, alt, label, locale) {
     return `                    <figure class="app-showcase-item">
                         <div class="app-phone app-phone--screen app-phone--compact">
-                            <img src="${escapeAttribute(assetHref(image, locale))}" alt="${escapeAttribute(alt)}" loading="lazy">
+                            <img src="${escapeAttribute(assetHref(image, locale))}" alt="${escapeAttribute(alt)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(image, locale))}>
                         </div>
                         <figcaption>${escapeHtml(label)}</figcaption>
                     </figure>`;
@@ -475,7 +584,7 @@ function englishCategoryLabel(sectionId) {
 
 function renderAppLibraryPreviewCard(card) {
     return `                            <a class="app-library-preview-card" href="${escapeAttribute(card.href)}">
-                                <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy">
+                                <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(card.image)}>
                                 <span>
                                     <strong>${escapeHtml(card.name)}</strong>
                                     <small>${escapeHtml(card.category)}</small>
@@ -966,9 +1075,15 @@ function renderContentPage(page, locale) {
     const appShell = page.appShell === true;
     const englishOnly = page.englishOnly === true;
     const duplicateEnglishOnly = englishOnly && locale !== "ja";
+    const explicitNoindex = page.noindex === true;
+    const isIndexablePage = !duplicateEnglishOnly && !explicitNoindex;
+    const canonicalLocale = englishOnly ? "ja" : locale;
+    const canonicalUrl = absoluteUrlForFile(page.file, canonicalLocale);
+    const datePublished = getStaticPageDatePublished(page.file);
+    const dateModified = getStaticPageDateModified(page.file);
     const textLocale = page.textLocale || (appShell && page.htmlLang === "en" ? "en" : locale);
     const breadcrumbs = appShell ? [] : [
-        { label: getUiText(locale, "home"), href: "index.html" },
+        { label: getUiText(locale, "home"), href: absoluteUrlForFile("index.html", locale) },
         { label: page.heading }
     ];
     const content = `        <section class="container content-shell ${escapeAttribute(page.shellClass || "")}">
@@ -1016,16 +1131,93 @@ ${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=cat
             type: "article",
             twitterCard: "summary",
             themeColor: appShell ? APP_THEME_COLOR : undefined,
-            canonicalLocale: englishOnly ? "ja" : locale,
-            includeAlternates: !englishOnly,
-            robots: duplicateEnglishOnly ? "noindex,follow,noarchive" : undefined,
+            webPageType: getStaticWebPageType(page.file),
+            canonicalLocale,
+            includeAlternates: !englishOnly && !explicitNoindex,
+            robots: isIndexablePage ? undefined : "noindex,follow,noarchive",
             breadcrumbs,
-            dateModified: getStaticPageDateModified(page.file)
+            mainEntity: isIndexablePage ? { "@id": `${canonicalUrl}#article` } : null,
+            datePublished: isIndexablePage ? datePublished : null,
+            dateModified,
+            articlePublishedTime: isIndexablePage ? datePublished : null,
+            articleModifiedTime: isIndexablePage ? dateModified : null,
+            articleSection: isIndexablePage ? page.heading : null,
+            structuredData: buildStaticContentStructuredData({
+                page,
+                canonicalUrl,
+                locale,
+                datePublished,
+                dateModified,
+                isIndexablePage
+            })
         },
-        enableAds: page.ads !== false && !duplicateEnglishOnly,
+        enableAds: page.ads !== false && isIndexablePage,
         bodyClass: appShell ? "content-page app-content-page" : "content-page",
         generatedComment: "<!-- Generated by scripts/build-static-pages.mjs. Edit src/pages/*.json instead of editing this file directly. -->"
     });
+}
+
+function buildStaticContentStructuredData({ page, canonicalUrl, locale, datePublished, dateModified, isIndexablePage }) {
+    if (!isIndexablePage) {
+        return [];
+    }
+
+    const language = page.htmlLang || getGeneratedLocaleHreflang(locale);
+    const imageUrl = page.ogImage || DEFAULT_OG_IMAGE;
+    const publisher = { "@id": `${SITE_ORIGIN}/#organization` };
+    const publishingPrinciplesLocale = language === "en" ? "en" : locale;
+    const publishingPrinciplesUrl = absoluteUrlForFile("methodology.html", publishingPrinciplesLocale);
+
+    return [
+        {
+            "@type": "Article",
+            "@id": `${canonicalUrl}#article`,
+            headline: page.title.replace(/\s*\|\s*(?:Shiba Muscle|Shiba)$/, ""),
+            name: page.heading,
+            description: page.description || (page.intro || []).join(" "),
+            url: canonicalUrl,
+            inLanguage: language,
+            datePublished,
+            dateModified,
+            image: [imageUrl],
+            mainEntityOfPage: { "@id": `${canonicalUrl}#webpage` },
+            articleSection: page.heading,
+            keywords: buildStaticContentKeywords(page).join(", "),
+            author: publisher,
+            publisher,
+            publishingPrinciples: publishingPrinciplesUrl,
+            isAccessibleForFree: true
+        }
+    ];
+}
+
+function buildStaticContentKeywords(page) {
+    const values = [
+        page.heading,
+        ...(page.sections || []).map((section) => section.heading)
+    ].filter(Boolean);
+    const seen = new Set();
+
+    return values.filter((value) => {
+        if (seen.has(value)) {
+            return false;
+        }
+        seen.add(value);
+        return true;
+    });
+}
+
+function getGeneratedLocaleHreflang(locale) {
+    return locales.find((entry) => entry.code === locale)?.hreflang || locale;
+}
+
+function getStaticWebPageType(file) {
+    const types = {
+        "about.html": "AboutPage",
+        "contact.html": "ContactPage"
+    };
+
+    return types[file] || "WebPage";
 }
 
 function getStaticPageDateModified(file) {
@@ -1039,16 +1231,29 @@ function getStaticPageDateModified(file) {
     return getSourceLastmodIso(sourceFiles);
 }
 
+function getStaticPageDatePublished(file) {
+    const sourceFile = file === "index.html" ? "home.json" : file.replace(/\.html$/, ".json");
+
+    return getSourceCreatedIso(join(PAGES_ROOT, sourceFile));
+}
+
 function renderAppPolicyHeader(locale, textLocale = "en") {
+    const homeHref = resolveLocalizedStaticPageHref("index.html", locale, textLocale);
+    const featuresHref = resolveLocalizedContentHref("index.html#analytics", locale, textLocale);
+    const aboutHref = resolveLocalizedStaticPageHref("about.html", locale, textLocale);
+    const methodologyHref = resolveLocalizedStaticPageHref("methodology.html", locale, textLocale);
+
     return `    <header class="site-header app-local-header">
         <nav class="site-topbar app-local-topbar" aria-label="Shiba">
-            <a href="index.html" class="app-local-brand">
-                <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="Shiba" class="app-local-brand-icon">
+            <a href="${escapeAttribute(homeHref)}" class="app-local-brand">
+                <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="app-local-brand-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                 <span>Shiba</span>
             </a>
             <div class="app-local-nav">
-                <a href="index.html" class="app-local-nav-link">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
-                <a href="index.html#analytics" class="app-local-nav-link">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
+                <a href="${escapeAttribute(homeHref)}" class="app-local-nav-link">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
+                <a href="${escapeAttribute(featuresHref)}" class="app-local-nav-link">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
+                <a href="${escapeAttribute(aboutHref)}" class="app-local-nav-link">${escapeHtml(getUiText(textLocale, "about"))}</a>
+                <a href="${escapeAttribute(methodologyHref)}" class="app-local-nav-link">${escapeHtml(getUiText(textLocale, "methodology"))}</a>
                 <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}" class="app-local-cta">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
             </div>
         </nav>

@@ -1,3 +1,6 @@
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+
 import {
     absoluteUrlForFile,
     assetHref,
@@ -26,6 +29,9 @@ const APP_THEME_COLOR = "#ff6a00";
 const SITE_STYLESHEET = "styles.css?v=workout-cards-20260704";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const ICON_ASSET_VERSION = "shiba-20260704";
+const ROOT = process.cwd();
+const INDEXABLE_ROBOTS = "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1";
+const imageMetadataCache = new Map();
 
 function buildFontBlock(locale = "ja") {
     const family = locale === "ko"
@@ -51,7 +57,8 @@ function buildFaviconBlock(locale = "ja") {
     <meta name="msapplication-square150x150logo" content="${iconAssetHref("site-tile-150x150.png", locale)}">
     <meta name="msapplication-wide310x150logo" content="${iconAssetHref("site-tile-310x150.png", locale)}">
     <meta name="msapplication-square310x310logo" content="${iconAssetHref("site-tile-310x310.png", locale)}">
-    <meta name="msapplication-TileColor" content="#0078d7">
+    <meta name="msapplication-TileColor" content="#ff6a00">
+    <meta name="msapplication-config" content="${iconAssetHref("browserconfig.xml", locale)}">
     <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="${iconAssetHref("favicon.ico", locale)}">
     <link rel="icon" type="image/vnd.microsoft.icon" href="${iconAssetHref("favicon.ico", locale)}">
     <link rel="apple-touch-icon" sizes="57x57" href="${iconAssetHref("apple-touch-icon-57x57.png", locale)}">
@@ -103,6 +110,7 @@ export {
     cleanSectionLabel,
     escapeAttribute,
     escapeHtml,
+    imageSizeAttributes,
     normalizeText,
     renderDiscoveryGrid,
     renderAdSlot,
@@ -153,7 +161,7 @@ function resolveStylesheetHref(href) {
         : href;
 }
 
-function buildSeoBlock({ file, title, description = "", locale = "ja", documentLang = null, ogImage, ogImageAlt, ogLocale, type = "article", twitterCard = "summary", canonicalFile = file, canonicalLocale = locale, includeAlternates = true, robots = "index,follow,max-image-preview:large", themeColor = THEME_COLOR, breadcrumbs = [], structuredData = [], dateModified = null }) {
+function buildSeoBlock({ file, title, description = "", locale = "ja", documentLang = null, ogImage, ogImageAlt, ogLocale, type = "article", twitterCard = "summary", canonicalFile = file, canonicalLocale = locale, includeAlternates = true, robots = INDEXABLE_ROBOTS, themeColor = THEME_COLOR, webPageType = "WebPage", preloadImages = [], breadcrumbs = [], structuredData = [], mainEntity = null, datePublished = null, dateModified = null, articlePublishedTime = null, articleModifiedTime = null, articleSection = null, articleTags = [] }) {
     if (!file) {
         return "";
     }
@@ -166,6 +174,18 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", documentL
     const canonicalUrl = absoluteUrlForFile(canonicalFile, canonicalLocale);
     const resolvedOgImage = ogImage || DEFAULT_OG_IMAGE;
     const resolvedOgImageAlt = ogImageAlt || title;
+    const resolvedOgImageMetadata = getOpenGraphImageMetadata(resolvedOgImage);
+    const ogImageMetadataBlock = renderOpenGraphImageMetadata(resolvedOgImageMetadata);
+    const updatedTimeBlock = renderOpenGraphUpdatedTime({ dateModified, robots });
+    const imagePreloadBlock = renderImagePreloadLinks(preloadImages, robots);
+    const articleMetadataBlock = renderArticleMetadata({
+        type,
+        robots,
+        articlePublishedTime,
+        articleModifiedTime,
+        articleSection,
+        articleTags
+    });
     const resolvedOgLocale = ogLocale || getOgLocale(locale);
     const ogLocaleAlternates = includeAlternates ? getGeneratedLocales()
         .filter((localeConfig) => localeConfig.code !== locale)
@@ -179,9 +199,13 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", documentL
         documentLang,
         imageUrl: resolvedOgImage,
         imageAlt: resolvedOgImageAlt,
+        imageMetadata: resolvedOgImageMetadata,
+        webPageType,
         breadcrumbs,
         structuredData,
+        mainEntity,
         robots,
+        datePublished,
         dateModified
     });
 
@@ -190,8 +214,11 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", documentL
     <meta name="robots" content="${escapeAttribute(robots)}">
     <meta name="theme-color" content="${escapeAttribute(themeColor)}">
     <link rel="canonical" href="${escapeAttribute(canonicalUrl)}">
+${imagePreloadBlock}
 ${alternateLinks}${xDefaultLink}
     <meta property="og:type" content="${escapeAttribute(type)}">
+${updatedTimeBlock}
+${articleMetadataBlock}
     <meta property="og:site_name" content="${SITE_NAME}">
     <meta property="og:locale" content="${escapeAttribute(resolvedOgLocale)}">
 ${ogLocaleAlternates}
@@ -199,6 +226,8 @@ ${ogLocaleAlternates}
     <meta property="og:description" content="${escapeAttribute(description)}">
     <meta property="og:url" content="${escapeAttribute(canonicalUrl)}">
     <meta property="og:image" content="${escapeAttribute(resolvedOgImage)}">
+    <meta property="og:image:secure_url" content="${escapeAttribute(resolvedOgImage)}">
+${ogImageMetadataBlock}
     <meta property="og:image:alt" content="${escapeAttribute(resolvedOgImageAlt)}">
     <meta name="twitter:card" content="${escapeAttribute(twitterCard)}">
     <meta name="twitter:title" content="${escapeAttribute(title)}">
@@ -217,7 +246,18 @@ ${structuredDataBlock}
 `;
 }
 
-function buildStructuredDataBlock({ canonicalUrl, title, description, locale, documentLang, imageUrl, imageAlt, breadcrumbs = [], structuredData = [], robots = "", dateModified = null }) {
+function renderImagePreloadLinks(images, robots = "") {
+    if (/noindex/i.test(robots)) {
+        return "";
+    }
+
+    const uniqueImages = normalizeStringList(images).slice(0, 2);
+    return uniqueImages.map((href) => {
+        return `    <link rel="preload" as="image" href="${escapeAttribute(href)}" fetchpriority="high">`;
+    }).join("\n");
+}
+
+function buildStructuredDataBlock({ canonicalUrl, title, description, locale, documentLang, imageUrl, imageAlt, imageMetadata = {}, webPageType = "WebPage", breadcrumbs = [], structuredData = [], mainEntity = null, robots = "", datePublished = null, dateModified = null }) {
     if (/noindex/i.test(robots)) {
         return "";
     }
@@ -227,6 +267,7 @@ function buildStructuredDataBlock({ canonicalUrl, title, description, locale, do
     const websiteId = `${SITE_ORIGIN}/#website`;
     const webpageId = `${canonicalUrl}#webpage`;
     const primaryImageId = `${canonicalUrl}#primaryimage`;
+    const navigationLocale = getStructuredDataNavigationLocale(locale, language);
     const graph = [
         {
             "@type": "Organization",
@@ -236,6 +277,7 @@ function buildStructuredDataBlock({ canonicalUrl, title, description, locale, do
             description: SITE_DESCRIPTION,
             url: SITE_ORIGIN,
             email: SUPPORT_EMAIL,
+            publishingPrinciples: `${SITE_ORIGIN}/methodology.html`,
             logo: {
                 "@type": "ImageObject",
                 url: DEFAULT_OG_IMAGE,
@@ -256,21 +298,25 @@ function buildStructuredDataBlock({ canonicalUrl, title, description, locale, do
             url: `${SITE_ORIGIN}/`,
             name: SITE_NAME,
             inLanguage: language,
+            hasPart: buildSiteNavigationElements(navigationLocale),
             publisher: { "@id": organizationId }
         },
         {
             "@type": "ImageObject",
             "@id": primaryImageId,
             url: imageUrl,
+            ...(imageMetadata.width ? { width: imageMetadata.width } : {}),
+            ...(imageMetadata.height ? { height: imageMetadata.height } : {}),
             caption: imageAlt
         },
         {
-            "@type": "WebPage",
+            "@type": normalizeWebPageTypes(webPageType),
             "@id": webpageId,
             url: canonicalUrl,
             name: title,
             description,
             inLanguage: language,
+            ...(datePublished ? { datePublished } : {}),
             ...(dateModified ? { dateModified } : {}),
             isPartOf: { "@id": websiteId },
             publisher: { "@id": organizationId },
@@ -287,10 +333,34 @@ function buildStructuredDataBlock({ canonicalUrl, title, description, locale, do
 
     graph.push(...normalizeStructuredData(structuredData));
 
+    const mainEntityReferences = normalizeStructuredDataReferences(mainEntity);
+    if (mainEntityReferences.length) {
+        graph.find((item) => item["@id"] === webpageId).mainEntity = mainEntityReferences.length === 1 ? mainEntityReferences[0] : mainEntityReferences;
+    }
+
     return `    <script type="application/ld+json">${serializeJsonLd({
         "@context": "https://schema.org",
         "@graph": graph
     })}</script>`;
+}
+
+function buildSiteNavigationElements(locale = "ja") {
+    return [
+        ["index.html", getUiText(locale, "home")],
+        ["about.html", getUiText(locale, "about")],
+        ["methodology.html", getUiText(locale, "methodology")],
+        ["contact.html", getUiText(locale, "contact")],
+        ["privacy-policy.html", getUiText(locale, "privacy")]
+    ].map(([file, name]) => ({
+        "@type": "SiteNavigationElement",
+        name,
+        url: absoluteUrlForFile(file, locale)
+    }));
+}
+
+function getStructuredDataNavigationLocale(locale = "ja", language = "") {
+    const normalizedLanguage = String(language || "").toLowerCase();
+    return normalizedLanguage === "en" || normalizedLanguage.startsWith("en-") ? "en" : locale;
 }
 
 function buildBreadcrumbStructuredData(items, canonicalUrl, locale) {
@@ -333,6 +403,266 @@ function normalizeStructuredData(value) {
     return Array.isArray(value) ? value.filter(Boolean) : [value];
 }
 
+function normalizeWebPageTypes(value) {
+    const types = Array.isArray(value) ? value : [value];
+    const seen = new Set(["WebPage"]);
+
+    types.map((type) => String(type || "").trim())
+        .filter(Boolean)
+        .forEach((type) => seen.add(type));
+
+    return Array.from(seen);
+}
+
+function normalizeStructuredDataReferences(value) {
+    return normalizeStructuredData(value).map((item) => typeof item === "string" ? { "@id": item } : item);
+}
+
+function renderOpenGraphUpdatedTime({ dateModified, robots = "" }) {
+    if (!dateModified || /noindex/i.test(robots)) {
+        return "";
+    }
+
+    return `    <meta property="og:updated_time" content="${escapeAttribute(dateModified)}">`;
+}
+
+function renderArticleMetadata({ type, robots = "", articlePublishedTime, articleModifiedTime, articleSection, articleTags = [] }) {
+    if (type !== "article" || /noindex/i.test(robots)) {
+        return "";
+    }
+
+    const tags = [];
+    if (articlePublishedTime) {
+        tags.push(["article:published_time", articlePublishedTime]);
+    }
+    if (articleModifiedTime) {
+        tags.push(["article:modified_time", articleModifiedTime]);
+    }
+    if (articleSection) {
+        tags.push(["article:section", articleSection]);
+    }
+
+    normalizeStringList(articleTags).slice(0, 12).forEach((tag) => {
+        tags.push(["article:tag", tag]);
+    });
+
+    return tags.map(([property, content]) => {
+        return `    <meta property="${property}" content="${escapeAttribute(content)}">`;
+    }).join("\n");
+}
+
+function normalizeStringList(value) {
+    const values = Array.isArray(value) ? value : [value];
+    const seen = new Set();
+
+    return values.map((item) => String(item || "").trim())
+        .filter(Boolean)
+        .filter((item) => {
+            if (seen.has(item)) {
+                return false;
+            }
+            seen.add(item);
+            return true;
+        });
+}
+
+function renderOpenGraphImageMetadata(metadata) {
+    if (!metadata?.width || !metadata?.height || !metadata?.type) {
+        return "";
+    }
+
+    return `    <meta property="og:image:type" content="${escapeAttribute(metadata.type)}">
+    <meta property="og:image:width" content="${escapeAttribute(metadata.width)}">
+    <meta property="og:image:height" content="${escapeAttribute(metadata.height)}">`;
+}
+
+function getOpenGraphImageMetadata(url) {
+    return getImageMetadata(url);
+}
+
+function imageSizeAttributes(src, { fallbackWidth = "", fallbackHeight = "" } = {}) {
+    const metadata = getImageMetadata(src);
+    const width = metadata.width || fallbackWidth;
+    const height = metadata.height || fallbackHeight;
+
+    return width && height ? ` width="${escapeAttribute(width)}" height="${escapeAttribute(height)}"` : "";
+}
+
+function getImageMetadata(url) {
+    const cacheKey = String(url || "");
+    if (imageMetadataCache.has(cacheKey)) {
+        return imageMetadataCache.get(cacheKey);
+    }
+
+    const pathname = getLocalAssetPathname(url);
+    const type = getImageMimeType(pathname || url);
+    const filePath = pathname ? join(ROOT, pathname.replace(/^\//, "")) : null;
+    const dimensions = filePath && existsSync(filePath) ? readImageDimensions(filePath) : {};
+
+    const metadata = {
+        ...(type ? { type } : {}),
+        ...dimensions
+    };
+    imageMetadataCache.set(cacheKey, metadata);
+
+    return metadata;
+}
+
+function getLocalAssetPathname(url) {
+    if (!url) {
+        return null;
+    }
+
+    try {
+        const parsed = new URL(url);
+        return parsed.origin === SITE_ORIGIN ? parsed.pathname : null;
+    } catch {
+        const pathname = String(url).split("?")[0].replace(/^(\.\.\/|\.\/)+/, "");
+        return pathname.startsWith("assets/") ? `/${pathname}` : null;
+    }
+}
+
+function getImageMimeType(value) {
+    const pathname = String(value || "").split("?")[0].toLowerCase();
+    if (pathname.endsWith(".svg")) return "image/svg+xml";
+    if (pathname.endsWith(".png")) return "image/png";
+    if (pathname.endsWith(".jpg") || pathname.endsWith(".jpeg")) return "image/jpeg";
+    if (pathname.endsWith(".webp")) return "image/webp";
+    return "";
+}
+
+function readImageDimensions(filePath) {
+    if (filePath.endsWith(".svg")) {
+        return readSvgDimensions(filePath);
+    }
+
+    if (filePath.endsWith(".png")) {
+        return readPngDimensions(filePath);
+    }
+
+    if (filePath.endsWith(".webp")) {
+        return readWebpDimensions(filePath);
+    }
+
+    if (filePath.endsWith(".jpg") || filePath.endsWith(".jpeg")) {
+        return readJpegDimensions(filePath);
+    }
+
+    return {};
+}
+
+function readSvgDimensions(filePath) {
+    const svg = readFileSync(filePath, "utf8");
+    const rootTag = svg.match(/<svg\b[^>]*>/i)?.[0] || "";
+    const width = parseSvgLength(rootTag.match(/\bwidth="([^"]+)"/i)?.[1]);
+    const height = parseSvgLength(rootTag.match(/\bheight="([^"]+)"/i)?.[1]);
+    if (width && height) {
+        return { width, height };
+    }
+
+    const viewBox = rootTag.match(/\bviewBox="([^"]+)"/i)?.[1]?.trim().split(/\s+/).map(Number);
+    if (viewBox?.length === 4 && Number.isFinite(viewBox[2]) && Number.isFinite(viewBox[3])) {
+        return {
+            width: String(Math.round(viewBox[2])),
+            height: String(Math.round(viewBox[3]))
+        };
+    }
+
+    return {};
+}
+
+function parseSvgLength(value) {
+    const number = Number.parseFloat(value || "");
+    return Number.isFinite(number) && number > 0 ? String(Math.round(number)) : "";
+}
+
+function readPngDimensions(filePath) {
+    const buffer = readFileSync(filePath);
+    if (buffer.length < 24 || buffer.toString("ascii", 1, 4) !== "PNG") {
+        return {};
+    }
+
+    return {
+        width: String(buffer.readUInt32BE(16)),
+        height: String(buffer.readUInt32BE(20))
+    };
+}
+
+function readWebpDimensions(filePath) {
+    const buffer = readFileSync(filePath);
+    if (buffer.length < 30 || buffer.toString("ascii", 0, 4) !== "RIFF" || buffer.toString("ascii", 8, 12) !== "WEBP") {
+        return {};
+    }
+
+    const chunkType = buffer.toString("ascii", 12, 16);
+    const payloadOffset = 20;
+    if (chunkType === "VP8X" && buffer.length >= payloadOffset + 10) {
+        return {
+            width: String(1 + buffer.readUIntLE(payloadOffset + 4, 3)),
+            height: String(1 + buffer.readUIntLE(payloadOffset + 7, 3))
+        };
+    }
+
+    if (chunkType === "VP8L" && buffer.length >= payloadOffset + 5 && buffer[payloadOffset] === 0x2f) {
+        const b1 = buffer[payloadOffset + 1];
+        const b2 = buffer[payloadOffset + 2];
+        const b3 = buffer[payloadOffset + 3];
+        const b4 = buffer[payloadOffset + 4];
+        return {
+            width: String(1 + (((b2 & 0x3f) << 8) | b1)),
+            height: String(1 + (((b4 & 0x0f) << 10) | (b3 << 2) | ((b2 & 0xc0) >> 6)))
+        };
+    }
+
+    if (chunkType === "VP8 " && buffer.length >= payloadOffset + 10 && buffer[payloadOffset + 3] === 0x9d && buffer[payloadOffset + 4] === 0x01 && buffer[payloadOffset + 5] === 0x2a) {
+        return {
+            width: String(buffer.readUInt16LE(payloadOffset + 6) & 0x3fff),
+            height: String(buffer.readUInt16LE(payloadOffset + 8) & 0x3fff)
+        };
+    }
+
+    return {};
+}
+
+function readJpegDimensions(filePath) {
+    const buffer = readFileSync(filePath);
+    if (buffer.length < 4 || buffer[0] !== 0xff || buffer[1] !== 0xd8) {
+        return {};
+    }
+
+    let offset = 2;
+    while (offset + 3 < buffer.length) {
+        if (buffer[offset] !== 0xff) {
+            offset += 1;
+            continue;
+        }
+
+        const marker = buffer[offset + 1];
+        if (marker === 0xd9 || marker === 0xda) {
+            break;
+        }
+
+        const length = buffer.readUInt16BE(offset + 2);
+        if (isJpegStartOfFrameMarker(marker) && offset + 8 < buffer.length) {
+            return {
+                height: String(buffer.readUInt16BE(offset + 5)),
+                width: String(buffer.readUInt16BE(offset + 7))
+            };
+        }
+
+        offset += 2 + length;
+    }
+
+    return {};
+}
+
+function isJpegStartOfFrameMarker(marker) {
+    return (marker >= 0xc0 && marker <= 0xc3)
+        || (marker >= 0xc5 && marker <= 0xc7)
+        || (marker >= 0xc9 && marker <= 0xcb)
+        || (marker >= 0xcd && marker <= 0xcf);
+}
+
 function serializeJsonLd(value) {
     return JSON.stringify(value)
         .replace(/</g, "\\u003c")
@@ -357,8 +687,8 @@ ${categoryNav}
     return `    <header>
         <nav>
             <div class="header-logo">
-                <a href="index.html" class="header-link">
-                    <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="Shiba Muscle" class="header-dumbbell-logo">
+                <a href="${escapeAttribute(absoluteUrlForFile("index.html", locale))}" class="header-link">
+                    <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="header-dumbbell-logo"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                     <span class="header-text">Shiba Muscle</span>
                 </a>
             </div>
@@ -376,8 +706,8 @@ function renderAppHeader(locale = "ja", textLocale = locale) {
 
     return `    <header class="site-header app-local-header">
         <nav class="site-topbar app-local-topbar" aria-label="Shiba">
-            <a href="index.html" class="app-local-brand">
-                <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="Shiba" class="app-local-brand-icon">
+            <a href="${escapeAttribute(absoluteUrlForFile("index.html", locale))}" class="app-local-brand">
+                <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="app-local-brand-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                 <span>Shiba</span>
             </a>
             <div class="app-local-nav">
@@ -407,20 +737,20 @@ function getAppHeaderText(locale, key) {
 function renderLegacyCategoryNav(pageType, locale = "ja") {
     const categoryLinks = getCategoryNavItems(locale);
     return categoryLinks.map((item, index) => {
-        const href = categoryNavHref(item.id, pageType);
+        const href = categoryNavHref(item.id, pageType, locale);
         const divider = index < categoryLinks.length - 1 ? '\n            <div class="divider">|</div>' : "";
         return `            <a href="${href}">
-                <img src="${item.icon}" alt="${item.alt}" class="exercise-icon"> ${item.label}
+                <img src="${item.icon}" alt="" aria-hidden="true" class="exercise-icon"${imageSizeAttributes(item.icon)}> ${item.label}
             </a>${divider}`;
     }).join("\n");
 }
 
-function categoryNavHref(sectionId, pageType) {
+function categoryNavHref(sectionId, pageType, locale = "ja") {
     if (pageType === "home" || pageType === "exercise") {
         return `#${sectionId}`;
     }
 
-    return `index.html#${sectionId}`;
+    return `${absoluteUrlForFile("index.html", locale)}#${sectionId}`;
 }
 
 function renderStaticFooter(file, locale = "ja") {
@@ -455,16 +785,16 @@ function renderStaticFooter(file, locale = "ja") {
             <div class="footer-section links">
                 <h4>${escapeHtml(getUiText(locale, "links"))}</h4>
                 <ul>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="${escapeAttribute(getUiText(locale, "contact"))}" class="link-icon">
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                         <a href="contact.html">${escapeHtml(getUiText(locale, "contact"))}</a>
                     </li>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="${escapeAttribute(getUiText(locale, "about"))}" class="link-icon">
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                         <a href="about.html">${escapeHtml(getUiText(locale, "about"))}</a>
                     </li>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="${escapeAttribute(getUiText(locale, "methodology"))}" class="link-icon">
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                         <a href="methodology.html">${escapeHtml(getUiText(locale, "methodology"))}</a>
                     </li>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="${escapeAttribute(getUiText(locale, "privacy"))}" class="link-icon">
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                         <a href="privacy-policy.html">${escapeHtml(getUiText(locale, "privacy"))}</a>
                     </li>
                 </ul>
@@ -475,7 +805,7 @@ function renderStaticFooter(file, locale = "ja") {
 ${alternates.map((item) => {
                     const icon = flagIcon[item.code] || "app/shiba-mascot.png";
                     const alt = flagAlt[item.code] || item.displayName;
-                    return `                    <li><img src="${assetHref(icon, locale)}" alt="${escapeAttribute(alt)}" class="flag-icon"> <a href="${escapeAttribute(item.href)}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a></li>`;
+                    return `                    <li><img src="${assetHref(icon, locale)}" alt="${escapeAttribute(alt)}" class="flag-icon"${imageSizeAttributes(assetHref(icon, locale), { fallbackWidth: "32", fallbackHeight: "20" })}> <a href="${escapeAttribute(item.href)}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a></li>`;
                 }).join("\n")}
                 </ul>
             </div>
@@ -504,7 +834,7 @@ function renderBreadcrumb(items, locale = "ja") {
     </div>`;
 }
 
-function renderExerciseLibrary(catalogData, { unit = "kg", titleTag = "h2", titleText = "", titleId = "other-workouts", locale = "ja", containerClass = "container", introText = "" } = {}) {
+function renderExerciseLibrary(catalogData, { unit = "kg", titleTag = "h2", titleText = "", titleId = "other-workouts", locale = "ja", containerClass = "container", introText = "", includeCardImages = true } = {}) {
     const heading = titleText || getUiText(locale, "moreWorkouts");
     const introBlock = introText ? `        <p class="section-intro">${escapeHtml(introText)}</p>\n\n` : "";
     return `
@@ -514,8 +844,8 @@ ${introBlock}
 ${catalogData.sections.map((section) => {
         const localizedTitle = locale === "ja" ? section.titles.ja : getCategoryLabel(section, locale);
         return `        <h2 id="${escapeAttribute(section.id)}" class="section-title">${escapeHtml(localizedTitle)}</h2>
-        <div class="exercise-cards-container">
-${section.cards.map((card) => renderCard(card, unit, locale, section)).join("\n")}
+        <div class="exercise-cards-container${includeCardImages ? "" : " exercise-cards-container--text"}">
+${section.cards.map((card) => renderCard(card, unit, locale, section, { includeImage: includeCardImages })).join("\n")}
         </div>`;
     }).join("\n")}
     </div>`;
@@ -528,7 +858,7 @@ ${cards.map((card) => renderCard(card, unit, locale)).join("\n")}
         </div>`;
 }
 
-function renderCard(card, unit, locale = "ja", section = {}) {
+function renderCard(card, unit, locale = "ja", section = {}, { includeImage = true } = {}) {
     const localizedCard = buildLocalizedCard(card, section, locale);
     const tags = (localizedCard.tags?.[locale] || localizedCard.tags?.ja || []).join(" | ");
     const aliases = (localizedCard.aliases?.[locale] || localizedCard.aliases?.ja || []).join(" | ");
@@ -537,17 +867,22 @@ function renderCard(card, unit, locale = "ja", section = {}) {
     const measurementKind = card.measurementKind || "";
     const name = localizedCard.names?.[locale] || localizedCard.names?.ja || "";
     const category = localizedCard.categories?.[locale] || localizedCard.categories?.ja || "";
+    const image = localizeImageHref(card.image, locale);
+    const imageAttribute = `data-image="${escapeAttribute(image)}"`;
+    const imageHtml = includeImage
+        ? `                    <img src="${escapeAttribute(image)}" alt="${escapeAttribute(name || card.imageAlt)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(image)}>\n`
+        : "";
 
     return `            <a class="card-link" href="${escapeAttribute(`${unit}_${card.slug}.html`)}">
-                <div class="exercise-card"
+                <div class="exercise-card${includeImage ? "" : " exercise-card--text-only"}"
                     data-card-slug="${escapeAttribute(card.slug)}"
+                    ${imageAttribute}
                     data-measurement-kind="${escapeAttribute(measurementKind)}"
                     data-description="${escapeAttribute(description)}"
                     data-primary-muscles="${escapeAttribute(primaryMuscles)}"
                     data-tags="${escapeAttribute(tags)}"
                     data-aliases="${escapeAttribute(aliases)}">
-                    <img src="${escapeAttribute(localizeImageHref(card.image, locale))}" alt="${escapeAttribute(name || card.imageAlt)}" loading="lazy">
-                    <div class="exercise-details">
+${imageHtml}                    <div class="exercise-details">
                         <div class="name">${escapeHtml(name)}</div>
                         <div class="category">${escapeHtml(category)}</div>
                     </div>
