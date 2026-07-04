@@ -19,6 +19,8 @@ import { buildExerciseFileIndex, loadExercises, loadPages } from "./source-data.
 
 const ROOT = process.cwd();
 const ANALYTICS_ID = "G-D9K58THBFM";
+const ADSENSE_CLIENT_ID = "ca-pub-2819086765117537";
+const ADS_TXT_LINE = "google.com, pub-2819086765117537, DIRECT, f08c47fec0942fa0";
 const SITE_ORIGIN = "https://shibamuscle.com";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const MANIFEST_DESCRIPTION = "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを一つの流れで管理できるiPhone向けワークアウトアプリです。";
@@ -86,6 +88,7 @@ sitemapLastmods.forEach((lastmod) => {
 });
 assert(sitemapAlternateLinkCount === expectedSitemapAlternateLinkCount, "sitemap.xml: hreflang alternate link count is incomplete");
 auditRobotsTxt();
+auditAdsTxt();
 auditAssetStylesheetFiles();
 auditWebAppMetadataFiles();
 auditStaticPageSourceLocalization();
@@ -135,6 +138,7 @@ for (const entry of htmlEntries) {
         isToolPage,
         isNoindexStaticPage
     });
+    auditAdsenseMetadata(entry, html, isIndexablePage);
     auditRobotsMeta(entry, html, {
         isIndexablePage,
         isToolPage,
@@ -368,6 +372,44 @@ function auditRobotsTxt() {
     const sitemapLines = Array.from(robots.matchAll(/^Sitemap:\s*(\S+)\s*$/gmi)).map((match) => match[1]);
     assert(sitemapLines.length === 1 && sitemapLines[0] === `${SITE_ORIGIN}/sitemap.xml`, "robots.txt: canonical sitemap URL is missing or duplicated");
     assert(!/^Disallow:/gmi.test(robots), "robots.txt: site should not publish Disallow rules");
+}
+
+function auditAdsTxt() {
+    const adsPath = join(ROOT, "ads.txt");
+
+    assert(existsSync(adsPath), "ads.txt: file is missing");
+    if (!existsSync(adsPath)) {
+        return;
+    }
+
+    const sellerLines = readFileSync(adsPath, "utf8")
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter((line) => line && !line.startsWith("#"));
+
+    assert(sellerLines.length === 1, "ads.txt: expected exactly one authorized seller line");
+    assert(sellerLines[0] === ADS_TXT_LINE, "ads.txt: AdSense seller line should match the site client id");
+}
+
+function auditAdsenseMetadata(entry, html, isIndexablePage) {
+    const scriptClients = Array.from(html.matchAll(/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=([^"&\s]+)/gi)).map((match) => match[1]);
+    const slotClients = Array.from(html.matchAll(/\bdata-ad-client="([^"]+)"/gi)).map((match) => match[1]);
+    const adSlots = (html.match(/\bclass="adsbygoogle"/g) || []).length;
+
+    [...scriptClients, ...slotClients].forEach((client) => {
+        assert(client === ADSENSE_CLIENT_ID, `${entry.relativePath}: AdSense client id should be ${ADSENSE_CLIENT_ID}`);
+    });
+
+    if (!isIndexablePage) {
+        assert(scriptClients.length === 0, `${entry.relativePath}: noindex page should not load AdSense script`);
+        assert(slotClients.length === 0 && adSlots === 0, `${entry.relativePath}: noindex page should not render AdSense slots`);
+        return;
+    }
+
+    if (adSlots > 0) {
+        assert(scriptClients.length === 1, `${entry.relativePath}: AdSense pages should load exactly one AdSense script`);
+        assert(slotClients.length === adSlots, `${entry.relativePath}: every AdSense slot should declare the site client id`);
+    }
 }
 
 function auditAssetStylesheetFiles() {
