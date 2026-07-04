@@ -127,6 +127,7 @@ for (const entry of htmlEntries) {
     auditFontLoadingHints(entry, html, expectedHtmlLang, isToolPage);
     auditHtmlAppIconMetadata(entry, html);
     auditSingletonHeadMetadata(entry, html);
+    auditHeadUrlMetadata(entry, html);
     const expectedAlternates = isToolPage || isSecondaryUnitPage || isEnglishOnlyPage || isNoindexStaticPage ? 0 : getGeneratedLocales().length + 1;
     assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === expectedAlternates, `${entry.relativePath}: hreflang set is incomplete`);
     assert(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${entry.relativePath}: canonical is missing or malformed`);
@@ -1281,6 +1282,57 @@ function auditSingletonHeadMetadata(entry, html) {
     assert(charset.toLowerCase() === "utf-8", `${entry.relativePath}: charset should be UTF-8`);
     assert(/^width=device-width,\s*initial-scale=1(?:\.0)?$/.test(viewport), `${entry.relativePath}: viewport should use width=device-width, initial-scale=1.0`);
     assert(author === "Shiba Muscle", `${entry.relativePath}: author meta should be Shiba Muscle`);
+}
+
+function auditHeadUrlMetadata(entry, html) {
+    const head = extractHeadMarkup(html);
+
+    Array.from(head.matchAll(/<link\b[^>]*>/gi)).forEach((match) => {
+        const tag = match[0];
+        const href = extractHtmlAttribute(tag, "href");
+        if (!href) {
+            return;
+        }
+
+        auditHeadUrlValue(entry, href, "link href");
+        if (hasHtmlRelToken(tag, "canonical") || hasHtmlRelToken(tag, "alternate")) {
+            auditCanonicalHeadPageUrl(entry, href, "link href");
+        }
+    });
+
+    [
+        ["og:url", /<meta\b(?=[^>]*\bproperty="og:url")[^>]*>/gi],
+        ["og:image", /<meta\b(?=[^>]*\bproperty="og:image")[^>]*>/gi],
+        ["og:image:secure_url", /<meta\b(?=[^>]*\bproperty="og:image:secure_url")[^>]*>/gi],
+        ["twitter:image", /<meta\b(?=[^>]*\bname="twitter:image")[^>]*>/gi],
+        ["msapplication-config", /<meta\b(?=[^>]*\bname="msapplication-config")[^>]*>/gi],
+        ["msapplication image", /<meta\b(?=[^>]*\bname="msapplication-(?:square\d+x\d+logo|wide\d+x\d+logo)")[^>]*>/gi]
+    ].forEach(([label, pattern]) => {
+        Array.from(head.matchAll(pattern)).forEach((match) => {
+            const value = extractHtmlAttribute(match[0], "content");
+            auditHeadUrlValue(entry, value, label);
+            if (label === "og:url") {
+                auditCanonicalHeadPageUrl(entry, value, label);
+            }
+        });
+    });
+}
+
+function auditHeadUrlValue(entry, value, label) {
+    assert(Boolean(value), `${entry.relativePath}: ${label} URL should not be empty`);
+    assert(!/[\s<>]/.test(value || ""), `${entry.relativePath}: ${label} URL should not contain spaces or angle brackets (${value})`);
+    assert(!/^http:\/\//i.test(value || ""), `${entry.relativePath}: ${label} URL should use HTTPS or a local asset path (${value})`);
+    assert(!String(value || "").startsWith("//"), `${entry.relativePath}: ${label} URL should not be protocol-relative (${value})`);
+}
+
+function auditCanonicalHeadPageUrl(entry, value, label) {
+    try {
+        const parsed = new URL(value);
+        assert(parsed.origin === SITE_ORIGIN, `${entry.relativePath}: ${label} should use the canonical site origin (${value})`);
+        assert(!parsed.search && !parsed.hash, `${entry.relativePath}: ${label} should not include query strings or fragments (${value})`);
+    } catch {
+        assert(false, `${entry.relativePath}: ${label} should be an absolute canonical URL (${value})`);
+    }
 }
 
 function auditSocialMetadataConsistency(entry, html, canonicalUrl) {
