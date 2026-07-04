@@ -143,7 +143,7 @@ function getGitLastCommitMs(filePath) {
 
 function getFilesystemLastmodMs(filePath) {
     try {
-        return statSync(filePath).mtime.getTime();
+        return Math.floor(statSync(filePath).mtime.getTime() / 1000) * 1000;
     } catch {
         return Number.NaN;
     }

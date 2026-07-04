@@ -983,9 +983,14 @@ function assertSocialImageMetadata(entry, html, isToolPage) {
     const ogImage = extractFirstGroup(html, /<meta property="og:image" content="([^"]+)">/i);
     const ogSecureImage = extractFirstGroup(html, /<meta property="og:image:secure_url" content="([^"]+)">/i);
     const twitterImage = extractFirstGroup(html, /<meta name="twitter:image" content="([^"]+)">/i);
+    const ogImageAlt = extractFirstGroup(html, /<meta property="og:image:alt" content="([^"]+)">/i);
+    const twitterImageAlt = extractFirstGroup(html, /<meta name="twitter:image:alt" content="([^"]+)">/i);
+    const twitterCard = extractFirstGroup(html, /<meta name="twitter:card" content="([^"]+)">/i);
     const imageType = extractFirstGroup(html, /<meta property="og:image:type" content="([^"]+)">/i);
     const imageWidth = extractFirstGroup(html, /<meta property="og:image:width" content="([^"]+)">/i);
     const imageHeight = extractFirstGroup(html, /<meta property="og:image:height" content="([^"]+)">/i);
+    const imageWidthNumber = Number.parseInt(imageWidth, 10);
+    const imageHeightNumber = Number.parseInt(imageHeight, 10);
 
     assert(/^https:\/\/shibamuscle\.com\/assets\//.test(ogImage), `${entry.relativePath}: og:image should be an absolute HTTPS asset URL`);
     assert(ogSecureImage === ogImage, `${entry.relativePath}: og:image:secure_url should match og:image`);
@@ -993,8 +998,17 @@ function assertSocialImageMetadata(entry, html, isToolPage) {
     assert(/^image\/(?:svg\+xml|png|jpe?g|webp)$/.test(imageType), `${entry.relativePath}: og:image:type is missing or invalid`);
     assert(isPositiveIntegerString(imageWidth), `${entry.relativePath}: og:image:width is missing or invalid`);
     assert(isPositiveIntegerString(imageHeight), `${entry.relativePath}: og:image:height is missing or invalid`);
-    assert(/<meta property="og:image:alt" content="[^"]+">/.test(html), `${entry.relativePath}: og:image:alt is missing`);
-    assert(/<meta name="twitter:image:alt" content="[^"]+">/.test(html), `${entry.relativePath}: twitter:image:alt is missing`);
+    if (twitterCard === "summary_large_image") {
+        const ratio = imageWidthNumber / imageHeightNumber;
+        assert(imageWidthNumber >= 600 && imageHeightNumber >= 315, `${entry.relativePath}: summary_large_image should use an image at least 600x315`);
+        assert(ratio >= 1.7 && ratio <= 2.1, `${entry.relativePath}: summary_large_image should use a landscape image close to 1.91:1`);
+    }
+    assert(Boolean(ogImageAlt), `${entry.relativePath}: og:image:alt is missing`);
+    assert(Boolean(twitterImageAlt), `${entry.relativePath}: twitter:image:alt is missing`);
+    if (ogImage.endsWith("/assets/app/shiba-social-card.png")) {
+        assert(!/\bToday\b/i.test(ogImageAlt), `${entry.relativePath}: app social card alt should describe the composite preview, not only Today`);
+        assert(!/\bToday\b/i.test(twitterImageAlt), `${entry.relativePath}: app social card Twitter alt should describe the composite preview, not only Today`);
+    }
 
     const resolved = resolveLocalCrawlPath(entry.relativePath, ogImage);
     if (resolved) {
