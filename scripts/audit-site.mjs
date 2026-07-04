@@ -75,6 +75,7 @@ assert(sitemap.includes('xmlns:xhtml="http://www.w3.org/1999/xhtml"'), "sitemap.
 assert(sitemap.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"'), "sitemap.xml: image namespace is missing");
 assert(sitemapUrlBlocks.length === sitemapUrls.size, "sitemap.xml: duplicate or malformed url entries are present");
 auditSitemapProtocolLimits();
+auditSitemapUrlOrdering();
 auditSitemapLocTargets();
 auditSitemapIndexableCoverage();
 assert(sitemapLastmods.length === sitemapUrls.size, "sitemap.xml: every URL should have one lastmod");
@@ -513,6 +514,13 @@ function auditSitemapProtocolLimits() {
     assert(Buffer.byteLength(sitemap, "utf8") <= 50 * 1024 * 1024, "sitemap.xml: sitemap should not exceed 50MB uncompressed");
 }
 
+function auditSitemapUrlOrdering() {
+    const listedUrls = sitemapUrlBlocks.map((match) => match[1]);
+    const sortedUrls = [...listedUrls].sort((left, right) => left.localeCompare(right));
+
+    assert(JSON.stringify(listedUrls) === JSON.stringify(sortedUrls), "sitemap.xml: URL entries should be sorted for stable crawl metadata");
+}
+
 function auditSitemapLocTargets() {
     sitemapUrls.forEach((url) => {
         const relativePath = resolveSitemapUrlPath(url);
@@ -599,16 +607,38 @@ function auditImageSitemapMarkup() {
         const url = match[1];
         const block = match[0];
         const imageBlocks = Array.from(block.matchAll(/<image:image>([\s\S]*?)<\/image:image>/g)).map((imageMatch) => imageMatch[1]);
+        const imageLocs = imageBlocks.flatMap((imageBlock) => {
+            return Array.from(imageBlock.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)).map((locMatch) => locMatch[1]);
+        });
 
         assert(imageBlocks.length <= 1000, `sitemap.xml: ${url} has more than 1000 image entries`);
+        assert(new Set(imageLocs).size === imageLocs.length, `sitemap.xml: ${url} image URLs should be unique`);
         imageBlocks.forEach((imageBlock) => {
             const locs = Array.from(imageBlock.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)).map((locMatch) => locMatch[1]);
             assert(locs.length === 1, `sitemap.xml: ${url} image block should contain exactly one image:loc`);
-            if (locs[0]) {
-                assert(/^https:\/\/shibamuscle\.com\/assets\//.test(locs[0]), `sitemap.xml: ${url} image URL should be an absolute HTTPS asset URL`);
-            }
+            locs.forEach((imageUrl) => auditSitemapImageLoc(url, imageUrl));
         });
     });
+}
+
+function auditSitemapImageLoc(pageUrl, imageUrl) {
+    assert(/^https:\/\/shibamuscle\.com\/assets\//.test(imageUrl), `sitemap.xml: ${pageUrl} image URL should be an absolute HTTPS asset URL`);
+    let parsed;
+    try {
+        parsed = new URL(imageUrl);
+    } catch {
+        assert(false, `sitemap.xml: ${pageUrl} image URL is invalid (${imageUrl})`);
+        return;
+    }
+
+    assert(parsed.origin === SITE_ORIGIN, `sitemap.xml: ${pageUrl} image URL should use the canonical origin (${imageUrl})`);
+    assert(!parsed.search && !parsed.hash, `sitemap.xml: ${pageUrl} image URL should not include query strings or fragments (${imageUrl})`);
+
+    const resolved = resolveLocalCrawlPath("sitemap.xml", imageUrl);
+    assert(Boolean(resolved), `sitemap.xml: ${pageUrl} image URL cannot be resolved (${imageUrl})`);
+    if (resolved) {
+        assertLocalFileExists("sitemap.xml", resolved, imageUrl);
+    }
 }
 
 function auditImageAltText(entry, html) {
