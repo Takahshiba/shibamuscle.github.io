@@ -2566,6 +2566,7 @@ export {
     getOgLocale,
     getRelatedTags,
     getSearchTerms,
+    getStaticContentOgImageAlt,
     getUiText,
     isGeneratedLocale,
     languageAlternates,
@@ -2576,6 +2577,109 @@ export {
     stripIntentionalLanguageSwitchText,
     stylesheetHref
 };
+
+const STATIC_CONTENT_OG_IMAGE_ALT = {
+    ja: {
+        "shiba-social-card.png": "Shibaの計画、記録、分析画面をまとめたプレビュー",
+        "today-screen-current.png": "Shibaの今日のワークアウト画面プレビュー",
+        "strength-percentile.jpg": "ShibaのStrength Percentile分析画面プレビュー",
+        "completion-heatmap.png": "Shibaの完了状況ヒートマップ画面プレビュー",
+        "muscle-heatmap.png": "Shibaの筋肉ヒートマップ画面プレビュー",
+        "shiba-mascot.png": "Shibaのマスコットアイコン"
+    },
+    ko: {
+        "shiba-social-card.png": "Shiba의 계획, 기록, 분석 화면을 모은 미리보기",
+        "today-screen-current.png": "Shiba의 오늘 운동 화면 미리보기",
+        "strength-percentile.jpg": "Shiba의 Strength Percentile 분석 화면 미리보기",
+        "completion-heatmap.png": "Shiba의 완료 현황 히트맵 화면 미리보기",
+        "muscle-heatmap.png": "Shiba의 근육 히트맵 화면 미리보기",
+        "shiba-mascot.png": "Shiba 마스코트 아이콘"
+    },
+    "zh-hant": {
+        "shiba-social-card.png": "Shiba 計畫、記錄與分析畫面的預覽",
+        "today-screen-current.png": "Shiba 今日訓練畫面預覽",
+        "strength-percentile.jpg": "Shiba Strength Percentile 分析畫面預覽",
+        "completion-heatmap.png": "Shiba 完成狀況熱圖畫面預覽",
+        "muscle-heatmap.png": "Shiba 肌肉熱圖畫面預覽",
+        "shiba-mascot.png": "Shiba 吉祥物圖示"
+    },
+    "zh-hans": {
+        "shiba-social-card.png": "Shiba 计划、记录与分析界面的预览",
+        "today-screen-current.png": "Shiba 今日训练界面预览",
+        "strength-percentile.jpg": "Shiba Strength Percentile 分析界面预览",
+        "completion-heatmap.png": "Shiba 完成情况热图界面预览",
+        "muscle-heatmap.png": "Shiba 肌肉热图界面预览",
+        "shiba-mascot.png": "Shiba 吉祥物图标"
+    },
+    es: {
+        "shiba-social-card.png": "Vista previa de las pantallas de planificación, registro y análisis de Shiba",
+        "today-screen-current.png": "Vista previa de la pantalla Today de Shiba",
+        "strength-percentile.jpg": "Vista previa del análisis Strength Percentile de Shiba",
+        "completion-heatmap.png": "Vista previa del mapa de calor de sesiones completadas en Shiba",
+        "muscle-heatmap.png": "Vista previa del mapa muscular de Shiba",
+        "shiba-mascot.png": "Icono de la mascota de Shiba"
+    },
+    fr: {
+        "shiba-social-card.png": "Aperçu des écrans de planification, de suivi et d’analyse de Shiba",
+        "today-screen-current.png": "Aperçu de l’écran Today de Shiba",
+        "strength-percentile.jpg": "Aperçu de l’analyse Strength Percentile de Shiba",
+        "completion-heatmap.png": "Aperçu de la carte de chaleur des séances terminées dans Shiba",
+        "muscle-heatmap.png": "Aperçu de la carte musculaire de Shiba",
+        "shiba-mascot.png": "Icône de la mascotte Shiba"
+    },
+    de: {
+        "shiba-social-card.png": "Vorschau der Planungs-, Protokoll- und Analyseansichten von Shiba",
+        "today-screen-current.png": "Vorschau der Today-Ansicht von Shiba",
+        "strength-percentile.jpg": "Vorschau der Strength Percentile Analyse in Shiba",
+        "completion-heatmap.png": "Vorschau der Abschluss-Heatmap in Shiba",
+        "muscle-heatmap.png": "Vorschau der Muskel-Heatmap in Shiba",
+        "shiba-mascot.png": "Shiba Maskottchen-Icon"
+    },
+    id: {
+        "shiba-social-card.png": "Pratinjau layar perencanaan, pencatatan, dan analitik Shiba",
+        "today-screen-current.png": "Pratinjau layar Today di Shiba",
+        "strength-percentile.jpg": "Pratinjau analisis Strength Percentile di Shiba",
+        "completion-heatmap.png": "Pratinjau heatmap penyelesaian latihan di Shiba",
+        "muscle-heatmap.png": "Pratinjau heatmap otot di Shiba",
+        "shiba-mascot.png": "Ikon maskot Shiba"
+    },
+    en: {
+        "shiba-social-card.png": "Preview of Shiba planning, logging, and analytics screens",
+        "today-screen-current.png": "Preview of the Shiba Today workout screen",
+        "strength-percentile.jpg": "Preview of Shiba Strength Percentile analytics",
+        "completion-heatmap.png": "Preview of the Shiba workout completion heatmap",
+        "muscle-heatmap.png": "Preview of the Shiba muscle heatmap",
+        "shiba-mascot.png": "Shiba mascot icon"
+    }
+};
+
+function getStaticContentOgImageAlt(page = {}, locale = "ja", textLocale = "") {
+    if (page.ogImageAlt) {
+        return page.ogImageAlt;
+    }
+
+    const imageKey = getStaticContentOgImageKey(page.ogImage);
+    const language = getStaticContentOgImageAltLocale(textLocale || page.textLocale || locale);
+    const copy = STATIC_CONTENT_OG_IMAGE_ALT[language]?.[imageKey]
+        || STATIC_CONTENT_OG_IMAGE_ALT.en[imageKey];
+
+    return copy || page.heading || page.title || "";
+}
+
+function getStaticContentOgImageKey(image) {
+    const value = String(image || "").split(/[?#]/)[0];
+
+    return value.slice(value.lastIndexOf("/") + 1);
+}
+
+function getStaticContentOgImageAltLocale(locale) {
+    const normalized = String(locale || "").toLowerCase();
+    if (normalized === "zh-hant" || normalized === "zh-tw") return "zh-hant";
+    if (normalized === "zh-hans" || normalized === "zh-cn") return "zh-hans";
+    if (normalized.startsWith("en")) return "en";
+
+    return STATIC_CONTENT_OG_IMAGE_ALT[normalized] ? normalized : "ja";
+}
 
 function getLocaleConfigs() {
     if (!cachedLocaleConfigs) {

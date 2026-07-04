@@ -19,6 +19,7 @@ import {
     buildOutputPath,
     getGeneratedLocales,
     getCategoryLabel,
+    getStaticContentOgImageAlt,
     getUiText,
     localizeStaticPage,
     stylesheetHref
@@ -1135,7 +1136,7 @@ ${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=cat
             file: page.file,
             description: page.description || (page.intro || []).join(" "),
             ogImage: page.ogImage,
-            ogImageAlt: page.heading || page.title,
+            ogImageAlt: getStaticContentOgImageAlt(page, locale, textLocale),
             ogLocale: appShell && page.htmlLang === "en" ? "en_US" : undefined,
             type: "article",
             twitterCard: "summary",

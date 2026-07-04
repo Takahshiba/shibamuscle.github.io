@@ -16,6 +16,7 @@ import {
     getLocaleConfig,
     getOgLocale,
     getRelatedTags,
+    getStaticContentOgImageAlt,
     getUiText,
     languageAlternates,
     localizeStaticPage
@@ -260,6 +261,7 @@ function buildPageContext(entry, html) {
             description: page.description || decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))),
             canonicalUrl: englishOnly ? absoluteUrlForFile(file, "ja") : canonicalUrl,
             ogImage: page.ogImage || DEFAULT_OG_IMAGE,
+            ogImageAlt: getStaticContentOgImageAlt(page, locale, page.textLocale || ""),
             ogLocale: page.htmlLang === "en" ? "en_US" : undefined,
             type: "article",
             twitterCard: "summary",

@@ -156,6 +156,11 @@ for (const entry of htmlEntries) {
         });
     }
     assertSocialImageMetadata(entry, html, isToolPage);
+    auditStaticSocialImageAlt(entry, html, {
+        isIndexablePage,
+        isExercisePage,
+        sourceStaticPage
+    });
     auditImagePreloadHints(entry, html, {
         isIndexablePage,
         isHomePage,
@@ -1416,6 +1421,23 @@ function isUsefulSocialImageAlt(value, imageUrl) {
     return countCharacters(text) >= 2
         && text !== imageUrl
         && !looksLikeImageFilename(text);
+}
+
+function auditStaticSocialImageAlt(entry, html, { isIndexablePage, isExercisePage, sourceStaticPage }) {
+    if (!isIndexablePage || isExercisePage || !sourceStaticPage) {
+        return;
+    }
+
+    const ogImageAlt = decodeAuditHtml(extractFirstGroup(html, /<meta property="og:image:alt" content="([^"]+)">/i));
+    const twitterImageAlt = decodeAuditHtml(extractFirstGroup(html, /<meta name="twitter:image:alt" content="([^"]+)">/i));
+    const title = decodeAuditHtml(extractFirstGroup(html, /<title>([\s\S]*?)<\/title>/i));
+    const h1 = decodeAuditHtml(htmlToText(extractFirstGroup(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i)));
+
+    [ogImageAlt, twitterImageAlt].forEach((alt) => {
+        assert(alt !== h1, `${entry.relativePath}: social image alt should describe the image instead of duplicating the H1`);
+        assert(alt !== title, `${entry.relativePath}: social image alt should describe the image instead of duplicating the title`);
+        assert(/\bShiba\b/.test(alt), `${entry.relativePath}: static social image alt should identify the Shiba image context`);
+    });
 }
 
 function auditOpenGraphImageIntrinsicDimensions(entry, resolved, imageUrl, imageWidth, imageHeight) {
