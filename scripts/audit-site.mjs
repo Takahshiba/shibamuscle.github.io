@@ -1179,6 +1179,7 @@ function auditSingletonHeadMetadata(entry, html) {
         ["viewport", /<meta\b(?=[^>]*\bname="viewport")[^>]*>/gi],
         ["title", /<title\b[\s\S]*?<\/title>/gi],
         ["meta description", /<meta\b(?=[^>]*\bname="description")[^>]*>/gi],
+        ["author meta", /<meta\b(?=[^>]*\bname="author")[^>]*>/gi],
         ["robots meta", /<meta\b(?=[^>]*\bname="robots")[^>]*>/gi],
         ["theme-color meta", /<meta\b(?=[^>]*\bname="theme-color")[^>]*>/gi],
         ["canonical link", /<link\b(?=[^>]*\brel="canonical")[^>]*>/gi],
@@ -1219,9 +1220,11 @@ function auditSingletonHeadMetadata(entry, html) {
     const charset = extractFirstGroup(head, /<meta\b[^>]*\bcharset=(?:"([^"]+)"|'([^']+)'|([^\s/>]+))/i);
     const viewportTag = head.match(/<meta\b(?=[^>]*\bname="viewport")[^>]*>/i)?.[0] || "";
     const viewport = extractHtmlAttribute(viewportTag, "content");
+    const author = extractFirstGroup(head, /<meta name="author" content="([^"]+)">/i);
 
     assert(charset.toLowerCase() === "utf-8", `${entry.relativePath}: charset should be UTF-8`);
     assert(/^width=device-width,\s*initial-scale=1(?:\.0)?$/.test(viewport), `${entry.relativePath}: viewport should use width=device-width, initial-scale=1.0`);
+    assert(author === "Shiba Muscle", `${entry.relativePath}: author meta should be Shiba Muscle`);
 }
 
 function auditSocialMetadataConsistency(entry, html, canonicalUrl) {

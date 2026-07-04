@@ -36,6 +36,7 @@ import {
 
 const ROOT = process.cwd();
 const SITE_ORIGIN = "https://shibamuscle.com";
+const SITE_NAME = "Shiba Muscle";
 const ANALYTICS_ID = "G-D9K58THBFM";
 const SITE_THEME_COLOR = "#148a6a";
 const APP_THEME_COLOR = "#ff6a00";
@@ -339,6 +340,7 @@ function stripGoogleTagBlock(html) {
 function stripSeoHeadTags(html) {
     return html
         .replace(/\n\s*<meta name="description"[^>]*>/gi, "")
+        .replace(/\n\s*<meta name="author"[^>]*>/gi, "")
         .replace(/\n\s*<meta name="robots"[^>]*>/gi, "")
         .replace(/\n\s*<meta name="theme-color"[^>]*>/gi, "")
         .replace(/\n\s*<link rel="canonical"[^>]*>/gi, "")
@@ -429,6 +431,7 @@ function buildSeoBlock(context) {
 
     return `
     <meta name="description" content="${escapeAttribute(context.description)}">
+    <meta name="author" content="${SITE_NAME}">
     <meta name="robots" content="${escapeAttribute(robots)}">
     <meta name="theme-color" content="${context.isAppPage || context.isExercisePage ? APP_THEME_COLOR : SITE_THEME_COLOR}">
     <link rel="canonical" href="${context.canonicalUrl}">

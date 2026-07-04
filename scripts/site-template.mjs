@@ -211,6 +211,7 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", documentL
 
     return `
     <meta name="description" content="${escapeAttribute(description)}">
+    <meta name="author" content="${SITE_NAME}">
     <meta name="robots" content="${escapeAttribute(robots)}">
     <meta name="theme-color" content="${escapeAttribute(themeColor)}">
     <link rel="canonical" href="${escapeAttribute(canonicalUrl)}">
