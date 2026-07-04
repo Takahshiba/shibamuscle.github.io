@@ -124,6 +124,7 @@ for (const entry of htmlEntries) {
     assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${entry.relativePath}: current GA script is missing`);
     assert(html.includes(`<html lang="${expectedHtmlLang}"`), `${entry.relativePath}: html lang is incorrect`);
     assert(html.includes(`<html lang="${expectedHtmlLang}" dir="${expectedHtmlDir}">`), `${entry.relativePath}: html dir is incorrect`);
+    auditFontLoadingHints(entry, html, expectedHtmlLang, isToolPage);
     auditHtmlAppIconMetadata(entry, html);
     auditSingletonHeadMetadata(entry, html);
     const expectedAlternates = isToolPage || isSecondaryUnitPage || isEnglishOnlyPage || isNoindexStaticPage ? 0 : getGeneratedLocales().length + 1;
@@ -364,6 +365,41 @@ function auditAssetStylesheetFiles() {
 
     const content = readFileSync(staleAssetStylesheetPath, "utf8").trimStart();
     assert(!/^<!doctype html/i.test(content) && !/^<html\b/i.test(content), "assets/styles.css: stale HTML document should not be served as CSS");
+}
+
+function auditFontLoadingHints(entry, html, expectedHtmlLang, isToolPage) {
+    if (isToolPage) {
+        return;
+    }
+
+    const head = extractHeadMarkup(html);
+    const preconnectTags = Array.from(head.matchAll(/<link\b(?=[^>]*\brel="preconnect")[^>]*>/gi)).map((match) => match[0]);
+    const googleApis = preconnectTags.filter((tag) => extractHtmlAttribute(tag, "href") === "https://fonts.googleapis.com");
+    const googleStatic = preconnectTags.filter((tag) => extractHtmlAttribute(tag, "href") === "https://fonts.gstatic.com");
+    const fontStylesheets = Array.from(head.matchAll(/<link\b(?=[^>]*\brel="stylesheet")(?=[^>]*\bhref="https:\/\/fonts\.googleapis\.com\/css2\?)[^>]*>/gi)).map((match) => match[0]);
+    const expectedFamily = getExpectedFontFamily(entry, expectedHtmlLang);
+
+    assert(googleApis.length === 1, `${entry.relativePath}: expected exactly one Google Fonts preconnect`);
+    assert(googleStatic.length === 1, `${entry.relativePath}: expected exactly one Google Fonts static preconnect`);
+    if (googleStatic[0]) {
+        assert(/\scrossorigin(?:[\s=>]|$)/i.test(googleStatic[0]), `${entry.relativePath}: fonts.gstatic.com preconnect should include crossorigin`);
+    }
+    assert(fontStylesheets.length === 1, `${entry.relativePath}: expected exactly one Google Fonts stylesheet`);
+    if (fontStylesheets[0]) {
+        const href = extractHtmlAttribute(fontStylesheets[0], "href");
+        assert(href.includes(`family=${expectedFamily}:wght@100..900`), `${entry.relativePath}: Google Fonts family should be ${expectedFamily}`);
+        assert(href.includes("display=swap"), `${entry.relativePath}: Google Fonts stylesheet should use display=swap`);
+    }
+}
+
+function getExpectedFontFamily(entry, expectedHtmlLang) {
+    const language = String(expectedHtmlLang || "").toLowerCase();
+    if (language.startsWith("en")) return "Noto+Sans";
+    if (entry.locale === "ko") return "Noto+Sans+KR";
+    if (entry.locale === "zh-hant") return "Noto+Sans+TC";
+    if (entry.locale === "zh-hans") return "Noto+Sans+SC";
+    if (entry.locale === "ja") return "Noto+Sans+JP";
+    return "Noto+Sans";
 }
 
 function auditWebAppMetadataFiles() {
