@@ -131,6 +131,10 @@ for (const entry of htmlEntries) {
     const expectedAlternates = isToolPage || isSecondaryUnitPage || isEnglishOnlyPage || isNoindexStaticPage ? 0 : getGeneratedLocales().length + 1;
     assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === expectedAlternates, `${entry.relativePath}: hreflang set is incomplete`);
     assert(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${entry.relativePath}: canonical is missing or malformed`);
+    auditCanonicalTarget(entry, canonicalUrl, {
+        isToolPage,
+        isNoindexStaticPage
+    });
     auditRobotsMeta(entry, html, {
         isIndexablePage,
         isToolPage,
@@ -1082,6 +1086,20 @@ function getExpectedOpenGraphLocale(entry, expectedHtmlLang) {
     }
 
     return getOgLocale(entry.locale);
+}
+
+function auditCanonicalTarget(entry, canonicalUrl, { isToolPage, isNoindexStaticPage }) {
+    const targetPath = resolveLocalCrawlPath(entry.relativePath, canonicalUrl);
+
+    assert(Boolean(targetPath), `${entry.relativePath}: canonical URL cannot be resolved (${canonicalUrl})`);
+    if (!targetPath) {
+        return;
+    }
+
+    assert(availableHtml.has(targetPath), `${entry.relativePath}: canonical URL target is not generated (${canonicalUrl})`);
+    if (!isToolPage && !isNoindexStaticPage) {
+        assert(!noindexHtmlTargets.has(targetPath), `${entry.relativePath}: canonical URL should not target a noindex page (${canonicalUrl})`);
+    }
 }
 
 function auditNoSitemapAlternates(entry, canonicalUrl) {
