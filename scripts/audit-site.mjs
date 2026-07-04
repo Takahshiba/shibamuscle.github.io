@@ -172,6 +172,7 @@ for (const entry of htmlEntries) {
     auditArticleOpenGraphDates(entry, html, isIndexablePage);
     auditNoFutureMetaDates(entry, html);
     auditHeadingStructure(entry, html, isIndexablePage, isToolPage);
+    auditMainLandmark(entry, html, isToolPage);
     auditTitleHeadingConsistency(entry, html, isIndexablePage, isToolPage);
     if (isEnglishOnlyDuplicate) {
         assert(!sitemapUrls.has(pageUrl), `${entry.relativePath}: duplicate English-only page should not be in sitemap`);
@@ -1490,6 +1491,19 @@ function auditHeadingStructure(entry, html, isIndexable, isToolPage) {
     assert(h1Count === 1, `${entry.relativePath}: expected exactly one H1`);
     if (isIndexable) {
         assert(h2Count >= 1, `${entry.relativePath}: indexable page should include at least one H2 section`);
+    }
+}
+
+function auditMainLandmark(entry, html, isToolPage) {
+    if (isToolPage) {
+        return;
+    }
+
+    const mainTags = Array.from(html.matchAll(/<main\b[^>]*>/gi)).map((match) => match[0]);
+
+    assert(mainTags.length === 1, `${entry.relativePath}: expected exactly one main landmark`);
+    if (mainTags[0]) {
+        assert(/\bclass="[^"]*\bpage-main\b/.test(mainTags[0]), `${entry.relativePath}: main landmark should use the page-main wrapper`);
     }
 }
 
