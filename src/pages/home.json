@@ -1,41 +1,41 @@
 {
   "file": "index.html",
   "kind": "home",
-  "title": "Shiba | Strength Training Tracker",
-  "description": "Shiba is a focused strength training tracker for logging workouts and seeing progress.",
+  "title": "Shiba | Plan, Log, and Analyze Strength Training",
+  "description": "Shiba helps you open today's workout, log sets fast, and turn training history into progress insights.",
   "ogImage": "https://shibamuscle.com/assets/app/today-screen-current.png",
   "textLocale": "en",
-  "heroHeading": "Log your workout. See your progress.",
+  "heroHeading": "Plan, log, and know what to train next.",
   "heading": "Explore Shiba",
   "intro": [
-    "Start today's plan, record sets, and review progress in one focused app.",
-    "A simple dark interface for lifting, analytics, and exercise discovery."
+    "Open today's workout, record each set without losing focus, and review progress by lift and muscle group.",
+    "Shiba connects workout logging, Strength Percentile, trend charts, and muscle heatmaps so your next session has a clear reason."
   ],
   "overview": {
     "eyebrow": "Shiba App",
-    "sectionEyebrow": "App overview",
-    "title": "Simple tracking. Clear progress.",
-    "copy": "Log sets, review analytics, and find exercises without extra clutter.",
+    "sectionEyebrow": "Workout flow",
+    "title": "What Shiba helps you do.",
+    "copy": "Move from today's plan to live set logging, progress review, and exercise selection without leaving the flow.",
     "items": [
       {
         "eyebrow": "Today",
-        "heading": "Start fast",
+        "heading": "Start today's workout with a plan",
         "paragraphs": [
-          "Open today's workout and begin your first set."
+          "See the next movement, active sets, and the first action in one place."
         ]
       },
       {
         "eyebrow": "Analytics",
-        "heading": "See progress",
+        "heading": "Turn every set into feedback",
         "paragraphs": [
-          "Review percentiles, charts, and muscle heatmaps."
+          "Strength Percentile, charts, and muscle heatmaps show what is improving and what needs attention."
         ]
       },
       {
         "eyebrow": "Library",
-        "heading": "Find exercises",
+        "heading": "Choose the next movement with context",
         "paragraphs": [
-          "Use the library when you need the next movement."
+          "Use the exercise library when you want options by body part, standards, and trained muscles."
         ]
       }
     ]
@@ -54,39 +54,39 @@
   ],
   "locales": {
     "en": {
-      "title": "Shiba | Strength Training Tracker",
-      "description": "Shiba is a focused strength training tracker for logging workouts and seeing progress.",
-      "heroHeading": "Log your workout. See your progress.",
+      "title": "Shiba | Plan, Log, and Analyze Strength Training",
+      "description": "Shiba helps you open today's workout, log sets fast, and turn training history into progress insights.",
+      "heroHeading": "Plan, log, and know what to train next.",
       "heading": "Explore Shiba",
       "intro": [
-        "Start today's plan, record sets, and review progress in one focused app.",
-        "A simple dark interface for lifting, analytics, and exercise discovery."
+        "Open today's workout, record each set without losing focus, and review progress by lift and muscle group.",
+        "Shiba connects workout logging, Strength Percentile, trend charts, and muscle heatmaps so your next session has a clear reason."
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "App overview",
-        "title": "Simple tracking. Clear progress.",
-        "copy": "Log sets, review analytics, and find exercises without extra clutter.",
+        "sectionEyebrow": "Workout flow",
+        "title": "What Shiba helps you do.",
+        "copy": "Move from today's plan to live set logging, progress review, and exercise selection without leaving the flow.",
         "items": [
           {
             "eyebrow": "Today",
-            "heading": "Start fast",
+            "heading": "Start today's workout with a plan",
             "paragraphs": [
-              "Open today's workout and begin your first set."
+              "See the next movement, active sets, and the first action in one place."
             ]
           },
           {
             "eyebrow": "Analytics",
-            "heading": "See progress",
+            "heading": "Turn every set into feedback",
             "paragraphs": [
-              "Review percentiles, charts, and muscle heatmaps."
+              "Strength Percentile, charts, and muscle heatmaps show what is improving and what needs attention."
             ]
           },
           {
             "eyebrow": "Library",
-            "heading": "Find exercises",
+            "heading": "Choose the next movement with context",
             "paragraphs": [
-              "Use the library when you need the next movement."
+              "Use the exercise library when you want options by body part, standards, and trained muscles."
             ]
           }
         ]
@@ -94,38 +94,38 @@
     },
     "ko": {
       "title": "Shiba | 분석이 강한 근력 운동 기록 앱",
-      "description": "Shiba는 오늘의 운동, 빠른 세트 기록, Strength Percentile, 성장 차트, 근육 히트맵을 아름다운 UI로 이어 주는 근력 운동 기록 앱입니다.",
-      "heroHeading": "기록하는 순간, 운동이 분석으로 바뀝니다.",
+      "description": "Shiba는 오늘의 운동, 빠른 세트 기록, Strength Percentile, 성장 차트, 근육 히트맵을 하나의 흐름으로 이어 주는 근력 운동 기록 앱입니다.",
+      "heroHeading": "오늘의 운동을 시작하고, 기록하고, 다음 목표를 정합니다.",
       "heading": "Shiba 살펴보기",
       "intro": [
         "Shiba는 오늘 할 루틴을 열고 세트를 빠르게 기록한 뒤, 어떤 운동과 부위가 성장하는지 다시 볼 수 있는 근력 운동 기록 앱입니다.",
-        "아름다운 다크 UI, Strength Percentile, 근육 히트맵, 진행 차트를 하나의 흐름으로 연결합니다."
+        "세트 기록, Strength Percentile, 근육 히트맵, 진행 차트를 연결해 다음 운동의 근거를 만들어 줍니다."
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "앱 소개",
-        "title": "기록, 분석, 운동 탐색을 하나의 흐름으로",
-        "copy": "홈에서는 앱 경험을 중심에 두고, 필요한 사용자가 데이터베이스로 이동할 수 있게 구성합니다.",
+        "sectionEyebrow": "운동 흐름",
+        "title": "Shiba로 할 수 있는 일",
+        "copy": "오늘의 루틴, 세트 입력, 진행 분석, 운동 선택을 한 흐름 안에서 이어 갑니다.",
         "items": [
           {
             "eyebrow": "Today",
-            "heading": "오늘의 루틴을 바로 시작",
+            "heading": "계획이 보이는 오늘의 루틴 시작",
             "paragraphs": [
-              "다음 운동, 진행 중인 세트, 시작 CTA가 한눈에 보이는 화면을 중심으로 보여 줍니다."
+              "다음 운동, 진행 중인 세트, 시작 액션이 한 화면에 모여 있습니다."
             ]
           },
           {
             "eyebrow": "Analytics",
-            "heading": "강점과 성장을 시각화",
+            "heading": "모든 세트를 피드백으로 전환",
             "paragraphs": [
-              "Strength Percentile, 성장 차트, 근육 히트맵으로 기록의 의미를 나중에 확인할 수 있습니다."
+              "Strength Percentile, 성장 차트, 근육 히트맵으로 좋아지는 부분과 보완할 부분을 확인합니다."
             ]
           },
           {
             "eyebrow": "Library",
-            "heading": "운동과 데이터베이스로 연결",
+            "heading": "다음 운동을 근거 있게 선택",
             "paragraphs": [
-              "앱 소개 아래에 기존 운동 데이터베이스로 가는 입구를 남깁니다."
+              "부위, 기준표, 자극되는 근육을 보며 운동 선택지를 빠르게 찾습니다."
             ]
           }
         ]
@@ -133,38 +133,38 @@
     },
     "zh-hant": {
       "title": "Shiba | 分析強大的重訓紀錄 App",
-      "description": "Shiba 以漂亮的 UI 串起今日訓練、快速組數紀錄、Strength Percentile、成長圖表與肌肉熱力圖。",
-      "heroHeading": "每一次紀錄，都變成下一次訓練的線索。",
+      "description": "Shiba 串起今日訓練、快速組數紀錄、Strength Percentile、成長圖表與肌肉熱力圖。",
+      "heroHeading": "開始今天的訓練，記錄每一組，知道下一步。",
       "heading": "認識 Shiba",
       "intro": [
         "Shiba 讓你打開今天的課表、快速記錄每一組，並在之後回顧成長的動作與訓練部位。",
-        "漂亮的深色 UI、Strength Percentile、肌肉熱力圖與進度圖表會串成一個完整流程。"
+        "組數紀錄、Strength Percentile、肌肉熱力圖與進度圖表會串成下一次訓練的依據。"
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "App 介紹",
-        "title": "紀錄、分析與動作探索串成一條流程",
-        "copy": "首頁以 App 體驗為主，需要時再前往訓練資料庫。",
+        "sectionEyebrow": "訓練流程",
+        "title": "Shiba 能幫你完成的事",
+        "copy": "從今日課表、組數紀錄、進度分析到動作選擇，都接在同一條流程裡。",
         "items": [
           {
             "eyebrow": "Today",
-            "heading": "快速開始今天的課表",
+            "heading": "帶著計畫開始今天的課表",
             "paragraphs": [
-              "下一個訓練、進行中的組數與開始按鈕會集中在同一個畫面。"
+              "下一個動作、進行中的組數與開始動作集中在同一個畫面。"
             ]
           },
           {
             "eyebrow": "Analytics",
-            "heading": "看見強項與成長",
+            "heading": "讓每一組都變成回饋",
             "paragraphs": [
-              "透過 Strength Percentile、成長圖表與肌肉熱力圖理解訓練紀錄。"
+              "透過 Strength Percentile、成長圖表與肌肉熱力圖，看見進步與需要補強的地方。"
             ]
           },
           {
             "eyebrow": "Library",
-            "heading": "回到動作與資料庫",
+            "heading": "有脈絡地選下一個動作",
             "paragraphs": [
-              "App 介紹下方保留既有訓練資料庫入口。"
+              "依部位、標準與目標肌群快速找到合適的動作。"
             ]
           }
         ]
@@ -172,38 +172,38 @@
     },
     "zh-hans": {
       "title": "Shiba | 分析强大的力量训练记录 App",
-      "description": "Shiba 用漂亮的 UI 连接今日训练、快速组数记录、Strength Percentile、成长图表和肌肉热力图。",
-      "heroHeading": "每一次记录，都会变成下一次训练的线索。",
+      "description": "Shiba 连接今日训练、快速组数记录、Strength Percentile、成长图表和肌肉热力图。",
+      "heroHeading": "开始今天的训练，记录每一组，知道下一步。",
       "heading": "了解 Shiba",
       "intro": [
         "Shiba 让你打开今天的计划、快速记录每一组，并在之后回顾成长的动作和训练部位。",
-        "漂亮的深色 UI、Strength Percentile、肌肉热力图和进度图表会连成一个完整流程。"
+        "组数记录、Strength Percentile、肌肉热力图和进度图表会连接成下一次训练的依据。"
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "App 介绍",
-        "title": "记录、分析和动作探索串成一个流程",
-        "copy": "首页以 App 体验为主，需要时再前往训练数据库。",
+        "sectionEyebrow": "训练流程",
+        "title": "Shiba 能帮你完成的事",
+        "copy": "从今日计划、组数记录、进度分析到动作选择，都接在同一个流程里。",
         "items": [
           {
             "eyebrow": "Today",
-            "heading": "快速开始今天的计划",
+            "heading": "带着计划开始今天的训练",
             "paragraphs": [
-              "下一项训练、进行中的组数和开始按钮会集中在同一个画面。"
+              "下一项动作、进行中的组数和开始操作集中在同一个画面。"
             ]
           },
           {
             "eyebrow": "Analytics",
-            "heading": "看见强项和成长",
+            "heading": "让每一组都变成反馈",
             "paragraphs": [
-              "通过 Strength Percentile、成长图表和肌肉热力图理解训练记录。"
+              "通过 Strength Percentile、成长图表和肌肉热力图，看见进步和需要补强的地方。"
             ]
           },
           {
             "eyebrow": "Library",
-            "heading": "回到动作和数据库",
+            "heading": "有依据地选择下一个动作",
             "paragraphs": [
-              "App 介绍下方保留原有训练数据库入口。"
+              "按部位、标准和目标肌群快速找到合适的动作。"
             ]
           }
         ]
@@ -212,37 +212,37 @@
     "es": {
       "title": "Shiba | App de entrenamiento con analítica clara",
       "description": "Shiba conecta la rutina de hoy, el registro rápido de series, Strength Percentile, gráficos de progreso y mapa muscular en una app de entrenamiento cuidada.",
-      "heroHeading": "Convierte cada serie registrada en una señal útil.",
+      "heroHeading": "Planifica, registra y decide tu próximo entrenamiento.",
       "heading": "Explora Shiba",
       "intro": [
         "Shiba te ayuda a abrir la rutina de hoy, registrar series rápido y revisar después qué ejercicios y zonas están creciendo.",
-        "Una interfaz oscura cuidada, Strength Percentile, mapa muscular y gráficos de progreso se integran en un solo flujo."
+        "Registro de series, Strength Percentile, mapa muscular y gráficos de progreso se conectan para orientar la próxima sesión."
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "App overview",
-        "title": "Registro, análisis y exploración en un solo flujo",
-        "copy": "La portada pone la experiencia de la app al frente y deja la base de datos como siguiente paso.",
+        "sectionEyebrow": "Flujo de entrenamiento",
+        "title": "Lo que puedes hacer con Shiba",
+        "copy": "Pasa de la rutina de hoy al registro de series, la revisión de progreso y la elección de ejercicios sin romper el flujo.",
         "items": [
           {
             "eyebrow": "Today",
-            "heading": "Empieza la rutina de hoy",
+            "heading": "Empieza la rutina de hoy con un plan",
             "paragraphs": [
-              "La próxima sesión, las series activas y la CTA principal aparecen en una pantalla clara."
+              "El siguiente movimiento, las series activas y la acción principal aparecen en una pantalla clara."
             ]
           },
           {
             "eyebrow": "Analytics",
-            "heading": "Visualiza fuerza y progreso",
+            "heading": "Convierte cada serie en feedback",
             "paragraphs": [
-              "Strength Percentile, gráficos de progreso y mapa muscular dan sentido a tus registros."
+              "Strength Percentile, gráficos y mapa muscular muestran qué mejora y qué necesita atención."
             ]
           },
           {
             "eyebrow": "Library",
-            "heading": "Vuelve a ejercicios y datos",
+            "heading": "Elige el siguiente ejercicio con contexto",
             "paragraphs": [
-              "El acceso a la base de datos existente queda debajo de la introducción de la app."
+              "Encuentra opciones por zona, estándares y músculos trabajados."
             ]
           }
         ]
@@ -251,37 +251,37 @@
     "fr": {
       "title": "Shiba | App musculation avec analyse claire",
       "description": "Shiba relie la séance du jour, la saisie rapide des séries, Strength Percentile, les graphiques de progression et la carte musculaire dans une app soignée.",
-      "heroHeading": "Chaque série notée devient un repère pour progresser.",
+      "heroHeading": "Planifier, noter et décider de la prochaine séance.",
       "heading": "Découvrir Shiba",
       "intro": [
         "Shiba permet d'ouvrir la séance du jour, de noter les séries rapidement et de revoir ensuite les exercices et zones qui progressent.",
-        "Une interface sombre soignée, Strength Percentile, la carte musculaire et les graphiques de progression forment un même flux."
+        "La saisie des séries, Strength Percentile, la carte musculaire et les graphiques de progression guident la prochaine séance."
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "Présentation de l'app",
-        "title": "Suivi, analyse et exploration dans un même flux",
-        "copy": "La page d'accueil met l'expérience app au premier plan et garde la base de données comme accès secondaire.",
+        "sectionEyebrow": "Flux d'entraînement",
+        "title": "Ce que Shiba te permet de faire",
+        "copy": "Passe de la séance du jour à la saisie, l'analyse de progression et le choix d'exercices sans casser le rythme.",
         "items": [
           {
             "eyebrow": "Today",
-            "heading": "Lancer la séance du jour",
+            "heading": "Lancer la séance du jour avec un plan",
             "paragraphs": [
-              "La prochaine séance, les séries en cours et l'action principale sont réunies dans un écran clair."
+              "Le prochain mouvement, les séries en cours et l'action principale restent réunis sur un écran clair."
             ]
           },
           {
             "eyebrow": "Analytics",
-            "heading": "Voir la force et la progression",
+            "heading": "Transformer chaque série en feedback",
             "paragraphs": [
-              "Strength Percentile, graphiques et carte musculaire donnent du sens aux entraînements."
+              "Strength Percentile, graphiques et carte musculaire montrent ce qui progresse et ce qui mérite attention."
             ]
           },
           {
             "eyebrow": "Library",
-            "heading": "Retrouver exercices et données",
+            "heading": "Choisir le prochain exercice avec contexte",
             "paragraphs": [
-              "L'accès à la base existante reste sous la présentation de l'app."
+              "Trouve des options par zone, standards et muscles sollicités."
             ]
           }
         ]
@@ -290,37 +290,37 @@
     "de": {
       "title": "Shiba | Krafttraining-App mit klarer Analyse",
       "description": "Shiba verbindet das heutige Workout, schnelle Satzerfassung, Strength Percentile, Fortschrittscharts und Muskel-Heatmap in einer sorgfältig gestalteten App.",
-      "heroHeading": "Jeder protokollierte Satz wird zu einem Trainingssignal.",
+      "heroHeading": "Planen, protokollieren und das nächste Training entscheiden.",
       "heading": "Shiba entdecken",
       "intro": [
         "Shiba öffnet dein heutiges Workout, hält Sätze schnell fest und zeigt später, welche Übungen und Bereiche wachsen.",
-        "Eine ruhige Dark UI, Strength Percentile, Muskel-Heatmap und Fortschrittscharts greifen in einem Ablauf ineinander."
+        "Satzerfassung, Strength Percentile, Muskel-Heatmap und Fortschrittscharts liefern die Grundlage für die nächste Einheit."
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "App overview",
-        "title": "Protokoll, Analyse und Übungssuche in einem Ablauf",
-        "copy": "Die Startseite stellt die App-Erfahrung in den Vordergrund und lässt die Datenbank als zweiten Einstieg bestehen.",
+        "sectionEyebrow": "Trainingsablauf",
+        "title": "Was du mit Shiba tun kannst",
+        "copy": "Vom heutigen Workout zur Satzerfassung, Fortschrittsanalyse und Übungsauswahl, ohne den Ablauf zu verlassen.",
         "items": [
           {
             "eyebrow": "Today",
-            "heading": "Das heutige Workout starten",
+            "heading": "Das heutige Workout mit Plan starten",
             "paragraphs": [
-              "Nächste Einheit, laufende Sätze und Hauptaktion stehen klar auf einem Screen."
+              "Nächste Übung, laufende Sätze und Hauptaktion stehen klar auf einem Screen."
             ]
           },
           {
             "eyebrow": "Analytics",
-            "heading": "Stärke und Fortschritt sehen",
+            "heading": "Jeden Satz in Feedback verwandeln",
             "paragraphs": [
-              "Strength Percentile, Fortschrittsdiagramme und Muskel-Heatmap machen Training nachvollziehbar."
+              "Strength Percentile, Charts und Muskel-Heatmap zeigen, was besser wird und was Aufmerksamkeit braucht."
             ]
           },
           {
             "eyebrow": "Library",
-            "heading": "Zurück zu Übungen und Daten",
+            "heading": "Die nächste Übung mit Kontext wählen",
             "paragraphs": [
-              "Der Einstieg in die bestehende Trainingsdatenbank bleibt unter der App-Vorstellung erhalten."
+              "Finde Optionen nach Bereich, Standards und trainierten Muskeln."
             ]
           }
         ]
@@ -329,37 +329,37 @@
     "id": {
       "title": "Shiba | Aplikasi latihan dengan analitik kuat",
       "description": "Shiba menghubungkan latihan hari ini, input set cepat, Strength Percentile, grafik progres, dan heatmap otot dalam satu aplikasi latihan yang rapi.",
-      "heroHeading": "Setiap set yang dicatat berubah menjadi insight latihan.",
+      "heroHeading": "Rencanakan, catat, lalu tentukan latihan berikutnya.",
       "heading": "Jelajahi Shiba",
       "intro": [
         "Shiba membantu membuka menu latihan hari ini, mencatat set dengan cepat, lalu melihat kembali latihan dan area yang berkembang.",
-        "UI gelap yang rapi, Strength Percentile, heatmap otot, dan grafik progres terhubung dalam satu alur."
+        "Catatan set, Strength Percentile, heatmap otot, dan grafik progres memberi dasar untuk sesi berikutnya."
       ],
       "overview": {
         "eyebrow": "Shiba App",
-        "sectionEyebrow": "App overview",
-        "title": "Catatan, analitik, dan eksplorasi latihan dalam satu alur",
-        "copy": "Home menonjolkan pengalaman aplikasi dan tetap memberi jalur ke database latihan saat dibutuhkan.",
+        "sectionEyebrow": "Alur latihan",
+        "title": "Yang bisa kamu lakukan dengan Shiba",
+        "copy": "Dari menu hari ini ke input set, analitik progres, dan pilihan latihan tanpa keluar dari alur.",
         "items": [
           {
             "eyebrow": "Today",
-            "heading": "Mulai menu latihan hari ini",
+            "heading": "Mulai menu hari ini dengan rencana",
             "paragraphs": [
-              "Latihan berikutnya, set yang sedang berjalan, dan CTA utama terlihat jelas dalam satu layar."
+              "Gerakan berikutnya, set aktif, dan aksi utama terlihat jelas dalam satu layar."
             ]
           },
           {
             "eyebrow": "Analytics",
-            "heading": "Lihat kekuatan dan progres",
+            "heading": "Ubah tiap set menjadi feedback",
             "paragraphs": [
-              "Strength Percentile, grafik perkembangan, dan heatmap otot membantu memahami catatan latihan."
+              "Strength Percentile, grafik, dan heatmap otot menunjukkan apa yang membaik dan apa yang perlu diperhatikan."
             ]
           },
           {
             "eyebrow": "Library",
-            "heading": "Kembali ke latihan dan data",
+            "heading": "Pilih latihan berikutnya dengan konteks",
             "paragraphs": [
-              "Akses ke database latihan lama tetap tersedia di bawah pengenalan aplikasi."
+              "Temukan opsi berdasarkan area, standar, dan otot yang dilatih."
             ]
           }
         ]

@@ -2449,7 +2449,7 @@ body.app-content-page {
 }
 
 .app-hero {
-    min-height: calc(92svh - 56px);
+    min-height: calc(84svh - 56px);
     display: grid;
     align-items: center;
     background:
@@ -2477,7 +2477,7 @@ body.app-content-page {
     grid-template-columns: minmax(0, 1fr) minmax(360px, 500px);
     gap: 48px;
     align-items: center;
-    padding: 38px 0 46px;
+    padding: 28px 0 32px;
 }
 
 .app-hero-copy,
@@ -2527,6 +2527,14 @@ body.app-content-page {
     color: rgba(255, 247, 238, 0.72);
     font-size: 1.12rem;
     line-height: 1.8;
+}
+
+.app-hero-availability {
+    margin: -4px 0 0;
+    color: rgba(255, 183, 96, 0.86);
+    font-size: 0.88rem;
+    font-weight: 800;
+    line-height: 1.5;
 }
 
 .app-hero-actions,
@@ -2589,6 +2597,7 @@ body.app-content-page {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
     max-width: 720px;
+    margin-top: 2px;
 }
 
 .app-stat {
@@ -2628,7 +2637,7 @@ body.app-content-page {
     position: relative;
     isolation: isolate;
     width: min(500px, 100%);
-    min-height: 650px;
+    min-height: 560px;
     display: grid;
     place-items: center;
 }
@@ -2701,7 +2710,7 @@ body.app-content-page {
 }
 
 .app-phone--hero {
-    width: min(300px, 72%);
+    width: min(268px, 70%);
     z-index: 2;
 }
 
@@ -2751,7 +2760,7 @@ body.app-content-page {
 }
 
 .app-insight-card--percentile {
-    top: 52px;
+    top: 38px;
     right: 4px;
     width: min(210px, 45%);
     padding: 16px;
@@ -2759,7 +2768,7 @@ body.app-content-page {
 
 .app-insight-card--heatmap {
     left: 0;
-    bottom: 38px;
+    bottom: 30px;
     width: min(230px, 48%);
     padding: 10px;
 }
@@ -3383,11 +3392,11 @@ body.app-content-page {
     }
 
     .app-product-stack {
-        min-height: 680px;
+        min-height: 560px;
     }
 
     .app-phone--hero {
-        width: min(292px, 76%);
+        width: min(252px, 72%);
     }
 
     .app-scene-sticky--reverse .app-scene-copy,
@@ -3519,11 +3528,11 @@ body.app-content-page {
         font-size: 0.94rem;
     }
 
-    .app-hero-stats {
-        display: none;
+    .app-hero-availability {
+        font-size: 0.82rem;
     }
 
-    .app-hero-stats::-webkit-scrollbar {
+    .app-hero-stats {
         display: none;
     }
 
@@ -3545,25 +3554,25 @@ body.app-content-page {
     }
 
     .app-phone--hero {
-        width: min(224px, 64%);
+        width: min(154px, 52%);
     }
 
     .app-product-stack {
         width: min(316px, calc(100vw - 24px));
-        min-height: 520px;
+        min-height: 340px;
         margin: 0 auto;
     }
 
     .app-product-stack::before {
-        inset: 42px 22px 34px;
+        inset: 34px 40px 30px;
         transform: rotate(-1deg);
     }
 
     .app-insight-card--percentile {
-        top: 18px;
-        right: 16px;
-        width: min(142px, 43%);
-        padding: 11px;
+        top: 12px;
+        right: 24px;
+        width: min(120px, 38%);
+        padding: 9px;
     }
 
     .app-insight-card--percentile small {
@@ -3571,13 +3580,13 @@ body.app-content-page {
     }
 
     .app-insight-card--heatmap {
-        left: 0;
-        bottom: 30px;
-        width: min(150px, 45%);
+        left: 16px;
+        bottom: 18px;
+        width: min(122px, 40%);
     }
 
     .app-insight-card strong {
-        font-size: 1.34rem;
+        font-size: 1.12rem;
     }
 
     .app-scene {
@@ -3763,15 +3772,15 @@ body.app-content-page {
     }
 
     .app-product-stack {
-        min-height: 500px;
+        min-height: 340px;
     }
 
     .app-insight-card--percentile {
-        width: min(138px, 43%);
+        width: min(120px, 38%);
     }
 
     .app-insight-card--heatmap {
-        width: min(146px, 45%);
+        width: min(122px, 40%);
     }
 
     .app-insight-card span,

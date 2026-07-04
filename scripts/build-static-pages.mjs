@@ -88,7 +88,7 @@ ${renderAppLanding(page, catalogData, locale, textLocale)}
 
 ${renderAppFooter(locale, textLocale)}
 
-    <script src="${stylesheetHref("app.js?v=adsense-clean-20260516", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=category-jump-20260704", locale)}"></script>
 `;
 
     return renderDocument({
@@ -140,8 +140,12 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
                         <p class="app-hero-subtitle">${renderMultilineText(page.heroHeading || "")}</p>
                         <p class="app-hero-lead">${renderMultilineText(intro[0] || page.description || "")}</p>
                         <div class="app-hero-actions">
-                            <a href="#app-store" class="app-pill app-pill--primary">${escapeHtml(getHomeText(textLocale, "comingSoon"))}</a>
-                            <a href="#analytics" class="app-pill app-pill--secondary">${escapeHtml(getHomeText(textLocale, "features"))}</a>
+                            <a href="#analytics" class="app-pill app-pill--primary">${escapeHtml(getHomeText(textLocale, "primaryAction"))}</a>
+                            <a href="#library" class="app-pill app-pill--secondary">${escapeHtml(getHomeText(textLocale, "secondaryAction"))}</a>
+                        </div>
+                        <p class="app-hero-availability">${escapeHtml(getHomeText(textLocale, "availability"))}</p>
+                        <div class="app-hero-stats">
+${renderAppStats(textLocale)}
                         </div>
                     </div>
                     ${renderHeroShowcase(images, locale, textLocale)}
@@ -182,7 +186,7 @@ ${renderAppFeatureCards([
 
             <section class="app-showcase">
                 <div class="app-showcase-copy">
-                    <p class="app-kicker">Black &amp; Orange UI</p>
+                    <p class="app-kicker">${escapeHtml(getHomeText(textLocale, "showcaseKicker"))}</p>
                     <h2>${renderMultilineText(getHomeText(textLocale, "showcaseHeading"))}</h2>
                     <p>${escapeHtml(getHomeText(textLocale, "showcaseCopy"))}</p>
                 </div>
@@ -477,6 +481,9 @@ function getHomeText(locale, key) {
         ja: {
             comingSoon: "App Store準備中",
             features: "分析を見る",
+            primaryAction: "できることを見る",
+            secondaryAction: "種目を探す",
+            availability: "iPhoneアプリとして公開準備中",
             privacy: "プライバシー",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
@@ -485,15 +492,16 @@ function getHomeText(locale, key) {
             heatmapAlt: "筋肉ヒートマップ画面",
             heroShowcaseAria: "ShibaのToday画面、Strength Percentile、筋肉ヒートマップのプレビュー",
             heroPercentileCopy: "近い条件のリフターと比較",
-            showcaseHeading: "黒とオレンジで、\nトレーニングに集中。",
-            showcaseCopy: "暗い背景、強いオレンジ、読みやすいカードで、記録と分析がひとつのアプリ体験として見えるようにします。",
+            showcaseKicker: "Workout flow",
+            showcaseHeading: "今日のメニューから、\n次の判断まで。",
+            showcaseCopy: "Todayで始め、セットを記録し、Strength Percentileと筋肉ヒートマップで次のメニューを調整できます。",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
             stats: [
-                { label: "開始", value: "Today", copy: "今日のメニューをすぐ開始" },
-                { label: "分析", value: "Percentile", copy: "強みと現在地を可視化" },
-                { label: "可視化", value: "Heatmap", copy: "鍛えた部位を全身で確認" }
+                { label: "計画", value: "Today", copy: "今日のメニューを迷わず開始" },
+                { label: "記録", value: "Sets", copy: "重量・回数・メモを素早く保存" },
+                { label: "判断", value: "Insights", copy: "強みと偏りを次の計画へ反映" }
             ],
             statStart: "今日のメニューをすぐ開始",
             statTrack: "重量・回数・メモを記録",
@@ -523,6 +531,9 @@ function getHomeText(locale, key) {
         en: {
             comingSoon: "Coming Soon",
             features: "See Features",
+            primaryAction: "See what Shiba does",
+            secondaryAction: "Explore exercises",
+            availability: "iPhone app in preparation",
             privacy: "Privacy Policy",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
@@ -531,15 +542,16 @@ function getHomeText(locale, key) {
             heatmapAlt: "Muscle heatmap screen",
             heroShowcaseAria: "Preview of Shiba Today, Strength Percentile, and muscle heatmap screens",
             heroPercentileCopy: "Compared with similar lifters",
-            showcaseHeading: "Focused dark UI.",
-            showcaseCopy: "Clean screens for logging, analytics, and review.",
+            showcaseKicker: "Workout flow",
+            showcaseHeading: "From today's plan\nto the next decision.",
+            showcaseCopy: "Start in Today, log sets as you train, then use Strength Percentile and muscle heatmaps to adjust the next session.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
             stats: [
-                { label: "Start", value: "Today", copy: "Open the next workout instantly" },
-                { label: "Analyze", value: "Percentile", copy: "See strength in context" },
-                { label: "Review", value: "Heatmap", copy: "Review trained muscle groups" }
+                { label: "Plan", value: "Today", copy: "Open the next workout instantly" },
+                { label: "Log", value: "Sets", copy: "Save weight, reps, and notes fast" },
+                { label: "Decide", value: "Insights", copy: "Turn strengths and gaps into the next plan" }
             ],
             statStart: "Open the next workout instantly",
             statTrack: "Log weight, reps, and notes",
@@ -569,6 +581,9 @@ function getHomeText(locale, key) {
         ko: {
             comingSoon: "출시 예정",
             features: "분석 보기",
+            primaryAction: "Shiba 기능 보기",
+            secondaryAction: "운동 찾기",
+            availability: "iPhone 앱 출시 준비 중",
             privacy: "개인정보",
             database: "데이터베이스 보기",
             databaseIntro: "평균 중량, 기준표, 자극되는 근육을 확인하고 싶다면 기존 운동 데이터베이스로 이동할 수 있습니다.",
@@ -577,15 +592,16 @@ function getHomeText(locale, key) {
             heatmapAlt: "근육 히트맵 화면",
             heroShowcaseAria: "Shiba Today, Strength Percentile, 근육 히트맵 화면 미리보기",
             heroPercentileCopy: "비슷한 리프터와 비교",
-            showcaseHeading: "블랙과 오렌지로\n훈련에 집중.",
-            showcaseCopy: "어두운 화면, 강한 오렌지 액션, 읽기 쉬운 카드가 기록과 분석을 하나의 흐름으로 보여 줍니다.",
+            showcaseKicker: "운동 흐름",
+            showcaseHeading: "오늘의 루틴에서\n다음 판단까지.",
+            showcaseCopy: "Today에서 시작하고 세트를 기록한 뒤 Strength Percentile과 근육 히트맵으로 다음 루틴을 조정합니다.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
             stats: [
-                { label: "Start", value: "Today", copy: "다음 운동을 바로 시작" },
-                { label: "Analyze", value: "Percentile", copy: "강점과 현재 위치 확인" },
-                { label: "Review", value: "Heatmap", copy: "훈련한 부위 확인" }
+                { label: "계획", value: "Today", copy: "다음 운동을 바로 시작" },
+                { label: "기록", value: "Sets", copy: "중량, 반복, 메모를 빠르게 저장" },
+                { label: "판단", value: "Insights", copy: "강점과 부족한 부분을 다음 계획에 반영" }
             ],
             statStart: "다음 운동을 바로 시작",
             statTrack: "중량, 반복, 메모 기록",
@@ -615,6 +631,9 @@ function getHomeText(locale, key) {
         "zh-hant": {
             comingSoon: "即將推出",
             features: "查看分析",
+            primaryAction: "看看 Shiba 能做什麼",
+            secondaryAction: "探索動作",
+            availability: "iPhone App 準備推出中",
             privacy: "隱私權",
             database: "查看資料庫",
             databaseIntro: "想查看平均重量、標準表與訓練肌群時，可以從這裡進入既有訓練資料庫。",
@@ -623,15 +642,16 @@ function getHomeText(locale, key) {
             heatmapAlt: "肌肉熱力圖畫面",
             heroShowcaseAria: "Shiba Today、Strength Percentile 與肌肉熱力圖畫面預覽",
             heroPercentileCopy: "與相近條件的訓練者比較",
-            showcaseHeading: "黑色與橘色，\n專注於訓練。",
-            showcaseCopy: "深色介面、醒目的橘色操作與清楚卡片，讓紀錄與分析連成一個安定的訓練流程。",
+            showcaseKicker: "訓練流程",
+            showcaseHeading: "從今日課表，\n到下一個判斷。",
+            showcaseCopy: "從 Today 開始、記錄每一組，再用 Strength Percentile 與肌肉熱力圖調整下一次課表。",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
             stats: [
-                { label: "Start", value: "Today", copy: "快速開始下一次訓練" },
-                { label: "Analyze", value: "Percentile", copy: "看見強項與位置" },
-                { label: "Review", value: "Heatmap", copy: "回顧訓練過的部位" }
+                { label: "計畫", value: "Today", copy: "快速開始下一次訓練" },
+                { label: "紀錄", value: "Sets", copy: "快速保存重量、次數與筆記" },
+                { label: "判斷", value: "Insights", copy: "把強項與缺口帶進下一個計畫" }
             ],
             statStart: "快速開始下一次訓練",
             statTrack: "記錄重量、次數與筆記",
@@ -661,6 +681,9 @@ function getHomeText(locale, key) {
         "zh-hans": {
             comingSoon: "即将推出",
             features: "查看分析",
+            primaryAction: "看看 Shiba 能做什么",
+            secondaryAction: "探索动作",
+            availability: "iPhone App 准备推出中",
             privacy: "隐私",
             database: "查看数据库",
             databaseIntro: "想查看平均重量、标准表和训练肌群时，可以从这里进入原有训练数据库。",
@@ -669,15 +692,16 @@ function getHomeText(locale, key) {
             heatmapAlt: "肌肉热力图画面",
             heroShowcaseAria: "Shiba Today、Strength Percentile 和肌肉热力图画面预览",
             heroPercentileCopy: "与相近条件的训练者比较",
-            showcaseHeading: "黑色与橙色，\n专注于训练。",
-            showcaseCopy: "深色界面、醒目的橙色操作和清楚卡片，让记录与分析连成一个稳定的训练流程。",
+            showcaseKicker: "训练流程",
+            showcaseHeading: "从今日计划，\n到下一步判断。",
+            showcaseCopy: "从 Today 开始、记录每一组，再用 Strength Percentile 和肌肉热力图调整下一次计划。",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
             stats: [
-                { label: "Start", value: "Today", copy: "快速开始下一次训练" },
-                { label: "Analyze", value: "Percentile", copy: "看见强项和位置" },
-                { label: "Review", value: "Heatmap", copy: "回顾训练过的部位" }
+                { label: "计划", value: "Today", copy: "快速开始下一次训练" },
+                { label: "记录", value: "Sets", copy: "快速保存重量、次数和笔记" },
+                { label: "判断", value: "Insights", copy: "把强项和缺口带进下一计划" }
             ],
             statStart: "快速开始下一次训练",
             statTrack: "记录重量、次数和笔记",
@@ -707,6 +731,9 @@ function getHomeText(locale, key) {
         es: {
             comingSoon: "Próximamente",
             features: "Ver análisis",
+            primaryAction: "Ver qué hace Shiba",
+            secondaryAction: "Explorar ejercicios",
+            availability: "App para iPhone en preparación",
             privacy: "Privacidad",
             database: "Ver base de datos",
             databaseIntro: "Cuando quieras revisar pesos medios, estándares y músculos trabajados, entra en la base de datos existente.",
@@ -715,15 +742,16 @@ function getHomeText(locale, key) {
             heatmapAlt: "Pantalla de mapa muscular",
             heroShowcaseAria: "Vista previa de Today, Strength Percentile y mapa muscular de Shiba",
             heroPercentileCopy: "Comparado con atletas similares",
-            showcaseHeading: "Negro y naranja,\nhecho para concentrarte.",
-            showcaseCopy: "Superficies oscuras, acciones naranjas claras y tarjetas legibles unen registro y análisis en un flujo tranquilo.",
+            showcaseKicker: "Flujo de entrenamiento",
+            showcaseHeading: "De la rutina de hoy\na la próxima decisión.",
+            showcaseCopy: "Empieza en Today, registra series mientras entrenas y usa Strength Percentile y el mapa muscular para ajustar la próxima sesión.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
             stats: [
-                { label: "Start", value: "Today", copy: "Rutina lista para empezar" },
-                { label: "Analyze", value: "Percentile", copy: "Fuerza en contexto" },
-                { label: "Review", value: "Heatmap", copy: "Zonas trabajadas visibles" }
+                { label: "Plan", value: "Today", copy: "Rutina lista para empezar" },
+                { label: "Registro", value: "Sets", copy: "Guarda peso, reps y notas rápido" },
+                { label: "Decisión", value: "Insights", copy: "Convierte fortalezas y huecos en el siguiente plan" }
             ],
             statStart: "Rutina lista para empezar",
             statTrack: "Peso, reps y notas",
@@ -753,6 +781,9 @@ function getHomeText(locale, key) {
         fr: {
             comingSoon: "Bientôt",
             features: "Voir l'analyse",
+            primaryAction: "Voir ce que fait Shiba",
+            secondaryAction: "Explorer les exercices",
+            availability: "App iPhone en préparation",
             privacy: "Confidentialité",
             database: "Voir la base",
             databaseIntro: "Pour consulter les poids moyens, standards et muscles sollicités, continue vers la base d'exercices existante.",
@@ -761,15 +792,16 @@ function getHomeText(locale, key) {
             heatmapAlt: "Écran de carte musculaire",
             heroShowcaseAria: "Aperçu des écrans Today, Strength Percentile et carte musculaire de Shiba",
             heroPercentileCopy: "Comparé à des profils proches",
-            showcaseHeading: "Noir et orange,\npour rester concentré.",
-            showcaseCopy: "Surfaces sombres, actions orange nettes et cartes lisibles relient la saisie et l'analyse dans un flux calme.",
+            showcaseKicker: "Flux d'entraînement",
+            showcaseHeading: "De la séance du jour\nà la prochaine décision.",
+            showcaseCopy: "Commence dans Today, note les séries pendant l'entraînement, puis utilise Strength Percentile et la carte musculaire pour ajuster la suite.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
             stats: [
-                { label: "Start", value: "Today", copy: "Séance prête à lancer" },
-                { label: "Analyze", value: "Percentile", copy: "Force mise en contexte" },
-                { label: "Review", value: "Heatmap", copy: "Zones travaillées visibles" }
+                { label: "Plan", value: "Today", copy: "Séance prête à lancer" },
+                { label: "Saisie", value: "Sets", copy: "Poids, reps et notes saisis vite" },
+                { label: "Décision", value: "Insights", copy: "Transformer forces et manques en prochain plan" }
             ],
             statStart: "Séance prête à lancer",
             statTrack: "Poids, reps et notes",
@@ -799,6 +831,9 @@ function getHomeText(locale, key) {
         de: {
             comingSoon: "Demnächst",
             features: "Analyse ansehen",
+            primaryAction: "Sehen, was Shiba kann",
+            secondaryAction: "Übungen entdecken",
+            availability: "iPhone App in Vorbereitung",
             privacy: "Datenschutz",
             database: "Datenbank ansehen",
             databaseIntro: "Wenn du Durchschnittsgewichte, Standards und trainierte Muskeln prüfen möchtest, nutze die bestehende Trainingsdatenbank.",
@@ -807,15 +842,16 @@ function getHomeText(locale, key) {
             heatmapAlt: "Muskel-Heatmap Screen",
             heroShowcaseAria: "Vorschau der Today-, Strength-Percentile- und Muskel-Heatmap-Screens von Shiba",
             heroPercentileCopy: "Verglichen mit ähnlichen Trainierenden",
-            showcaseHeading: "Schwarz und Orange,\ngebaut für Fokus.",
-            showcaseCopy: "Dunkle Flächen, klare orange Aktionen und lesbare Karten verbinden Logging und Analyse zu einem ruhigen Trainingsfluss.",
+            showcaseKicker: "Trainingsablauf",
+            showcaseHeading: "Vom heutigen Plan\nzur nächsten Entscheidung.",
+            showcaseCopy: "Starte in Today, erfasse Sätze beim Training und nutze Strength Percentile und Muskel-Heatmaps für die nächste Einheit.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
             stats: [
-                { label: "Start", value: "Today", copy: "Workout sofort starten" },
-                { label: "Analyze", value: "Percentile", copy: "Stärke im Kontext sehen" },
-                { label: "Review", value: "Heatmap", copy: "Trainierte Bereiche prüfen" }
+                { label: "Plan", value: "Today", copy: "Workout sofort starten" },
+                { label: "Log", value: "Sets", copy: "Gewicht, Wdh. und Notizen schnell sichern" },
+                { label: "Entscheid", value: "Insights", copy: "Stärken und Lücken in den nächsten Plan bringen" }
             ],
             statStart: "Workout sofort starten",
             statTrack: "Gewicht, Wdh. und Notizen",
@@ -845,6 +881,9 @@ function getHomeText(locale, key) {
         id: {
             comingSoon: "Segera hadir",
             features: "Lihat analitik",
+            primaryAction: "Lihat fungsi Shiba",
+            secondaryAction: "Jelajahi latihan",
+            availability: "Aplikasi iPhone sedang disiapkan",
             privacy: "Privasi",
             database: "Lihat database",
             databaseIntro: "Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada.",
@@ -853,15 +892,16 @@ function getHomeText(locale, key) {
             heatmapAlt: "Layar heatmap otot",
             heroShowcaseAria: "Pratinjau layar Today, Strength Percentile, dan heatmap otot Shiba",
             heroPercentileCopy: "Dibandingkan dengan lifter serupa",
-            showcaseHeading: "Hitam dan oranye,\ndibuat untuk fokus.",
-            showcaseCopy: "Permukaan gelap, aksi oranye yang jelas, dan kartu yang mudah dibaca menyatukan catatan dan analitik.",
+            showcaseKicker: "Alur latihan",
+            showcaseHeading: "Dari menu hari ini\nke keputusan berikutnya.",
+            showcaseCopy: "Mulai dari Today, catat set saat latihan, lalu pakai Strength Percentile dan heatmap otot untuk menyesuaikan sesi berikutnya.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
             stats: [
-                { label: "Start", value: "Today", copy: "Mulai latihan berikutnya" },
-                { label: "Analyze", value: "Percentile", copy: "Kekuatan dalam konteks" },
-                { label: "Review", value: "Heatmap", copy: "Lihat area yang dilatih" }
+                { label: "Rencana", value: "Today", copy: "Mulai latihan berikutnya" },
+                { label: "Catat", value: "Sets", copy: "Simpan berat, repetisi, dan catatan cepat" },
+                { label: "Putuskan", value: "Insights", copy: "Ubah kekuatan dan celah menjadi rencana berikutnya" }
             ],
             statStart: "Mulai latihan berikutnya",
             statTrack: "Catat berat, repetisi, catatan",
@@ -925,7 +965,7 @@ ${content}
 
 ${renderStaticFooter(page.file, locale)}
 
-${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=adsense-clean-20260516", locale)}"></script>`}
+${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=category-jump-20260704", locale)}"></script>`}
 `;
 
     return renderDocument({
