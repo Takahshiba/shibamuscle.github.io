@@ -1631,6 +1631,12 @@ function auditStructuredDataImageObjectDimensions(entry, ownerNode, imageObject)
     }
 
     const label = ownerNode?.["@id"] || ownerNode?.["@type"] || "JSON-LD";
+    assert(imageObject.contentUrl === url, `${entry.relativePath}: ${label} ImageObject contentUrl should match url`);
+    assert(imageObject.encodingFormat === getImageMimeTypeFromPath(resolved), `${entry.relativePath}: ${label} ImageObject encodingFormat should match the image MIME type`);
+    if (imageObject["@id"] && String(imageObject["@id"]).endsWith("#primaryimage")) {
+        assert(imageObject.representativeOfPage === true, `${entry.relativePath}: primary ImageObject should be marked representativeOfPage`);
+    }
+
     const width = imageObject.width;
     const height = imageObject.height;
     assert(Number.isInteger(width) && width > 0, `${entry.relativePath}: ${label} ImageObject width should be a positive integer`);
@@ -1644,6 +1650,15 @@ function auditStructuredDataImageObjectDimensions(entry, ownerNode, imageObject)
 
     assert(width === dimensions.width, `${entry.relativePath}: ${label} ImageObject width ${width} does not match ${url} intrinsic width ${dimensions.width}`);
     assert(height === dimensions.height, `${entry.relativePath}: ${label} ImageObject height ${height} does not match ${url} intrinsic height ${dimensions.height}`);
+}
+
+function getImageMimeTypeFromPath(pathname) {
+    const normalized = String(pathname || "").split("?")[0].toLowerCase();
+    if (normalized.endsWith(".svg")) return "image/svg+xml";
+    if (normalized.endsWith(".png")) return "image/png";
+    if (normalized.endsWith(".jpg") || normalized.endsWith(".jpeg")) return "image/jpeg";
+    if (normalized.endsWith(".webp")) return "image/webp";
+    return "";
 }
 
 function collectStructuredDataImageUrls(value) {

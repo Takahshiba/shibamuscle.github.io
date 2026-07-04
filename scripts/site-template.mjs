@@ -281,6 +281,8 @@ function buildStructuredDataBlock({ canonicalUrl, title, description, locale, do
             logo: {
                 "@type": "ImageObject",
                 url: DEFAULT_OG_IMAGE,
+                contentUrl: DEFAULT_OG_IMAGE,
+                encodingFormat: "image/png",
                 width: 520,
                 height: 520
             },
@@ -305,9 +307,12 @@ function buildStructuredDataBlock({ canonicalUrl, title, description, locale, do
             "@type": "ImageObject",
             "@id": primaryImageId,
             url: imageUrl,
+            contentUrl: imageUrl,
+            ...(imageMetadata.type ? { encodingFormat: imageMetadata.type } : {}),
             ...(toPositiveInteger(imageMetadata.width) ? { width: toPositiveInteger(imageMetadata.width) } : {}),
             ...(toPositiveInteger(imageMetadata.height) ? { height: toPositiveInteger(imageMetadata.height) } : {}),
-            caption: imageAlt
+            caption: imageAlt,
+            representativeOfPage: true
         },
         {
             "@type": normalizeWebPageTypes(webPageType),
