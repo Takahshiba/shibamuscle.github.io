@@ -87,6 +87,7 @@ sitemapLastmods.forEach((lastmod) => {
     assert(isNotFuturePublicDate(lastmod), `sitemap.xml: future lastmod value ${lastmod}`);
 });
 assert(sitemapAlternateLinkCount === expectedSitemapAlternateLinkCount, "sitemap.xml: hreflang alternate link count is incomplete");
+auditCanonicalHostConfig();
 auditRobotsTxt();
 auditAdsTxt();
 auditAssetStylesheetFiles();
@@ -372,6 +373,24 @@ function auditRobotsTxt() {
     const sitemapLines = Array.from(robots.matchAll(/^Sitemap:\s*(\S+)\s*$/gmi)).map((match) => match[1]);
     assert(sitemapLines.length === 1 && sitemapLines[0] === `${SITE_ORIGIN}/sitemap.xml`, "robots.txt: canonical sitemap URL is missing or duplicated");
     assert(!/^Disallow:/gmi.test(robots), "robots.txt: site should not publish Disallow rules");
+}
+
+function auditCanonicalHostConfig() {
+    const cnamePath = join(ROOT, "CNAME");
+    assert(existsSync(cnamePath), "CNAME: file is missing");
+    if (!existsSync(cnamePath)) {
+        return;
+    }
+
+    const lines = readFileSync(cnamePath, "utf8")
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+    const expectedHost = new URL(SITE_ORIGIN).hostname;
+
+    assert(lines.length === 1, "CNAME: expected exactly one canonical host");
+    assert(lines[0] === expectedHost, `CNAME: canonical host should be ${expectedHost}`);
+    assert(!/^https?:\/\//i.test(lines[0] || "") && !/\//.test(lines[0] || ""), "CNAME: host should not include protocol or path");
 }
 
 function auditAdsTxt() {
