@@ -1,41 +1,40 @@
 {
   "file": "index.html",
   "kind": "home",
-  "title": "Shiba | Plan, Log, Improve",
-  "description": "Plan workouts, log sets, and review progress with Shiba.",
+  "title": "Shiba | 筋トレを計画・記録・改善",
+  "description": "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを一つの流れで管理できるiPhone向けワークアウトアプリです。",
   "ogImage": "https://shibamuscle.com/assets/app/today-screen-current.png",
-  "textLocale": "en",
-  "heroHeading": "Plan. Log. Improve.",
-  "heading": "Explore Shiba",
+  "heroHeading": "計画。記録。改善。",
+  "heading": "Shibaを見る",
   "intro": [
-    "Start today's workout, log sets, and see what is improving.",
-    "Workout planning, set logging, and progress review in one flow."
+    "今日のワークアウトを開き、セットを記録し、伸びている部分を確認できます。",
+    "筋トレの計画、記録、振り返りを一つの流れでつなげます。"
   ],
   "overview": {
     "eyebrow": "Shiba App",
-    "sectionEyebrow": "Flow",
-    "title": "Your next step is clearer.",
-    "copy": "Plan, log, review, and choose what to train next.",
+    "sectionEyebrow": "流れ",
+    "title": "次にやることがはっきりします。",
+    "copy": "計画し、記録し、振り返り、次に鍛える種目を選べます。",
     "items": [
       {
         "eyebrow": "Today",
-        "heading": "Start today's plan",
+        "heading": "今日のメニューを始める",
         "paragraphs": [
-          "Know the next set."
+          "次のセットがすぐ分かります。"
         ]
       },
       {
         "eyebrow": "Analytics",
-        "heading": "See progress",
+        "heading": "進捗を見る",
         "paragraphs": [
-          "Percentiles, charts, and heatmaps."
+          "パーセンタイル、グラフ、ヒートマップで確認できます。"
         ]
       },
       {
         "eyebrow": "Library",
-        "heading": "Find exercises",
+        "heading": "種目を探す",
         "paragraphs": [
-          "Browse by body part and muscle."
+          "部位や筋肉からトレーニング種目を探せます。"
         ]
       }
     ]
@@ -55,7 +54,7 @@
   "locales": {
     "en": {
       "title": "Shiba | Plan, Log, Improve",
-      "description": "Plan workouts, log sets, and review progress with Shiba.",
+      "description": "Shiba helps you plan strength workouts, log sets, review progress, and choose exercises from one streamlined workout app.",
       "heroHeading": "Plan. Log. Improve.",
       "heading": "Explore Shiba",
       "intro": [
@@ -94,7 +93,7 @@
     },
     "ko": {
       "title": "Shiba | 근력 운동 기록 앱",
-      "description": "오늘의 운동을 열고, 세트를 기록하고, 진행 상황을 확인하세요.",
+      "description": "Shiba는 근력 운동 계획, 세트 기록, 진행 분석, 운동 선택을 한 흐름으로 관리할 수 있는 iPhone용 운동 앱입니다.",
       "heroHeading": "계획하고, 기록하고, 성장하세요.",
       "heading": "Shiba 살펴보기",
       "intro": [
@@ -133,7 +132,7 @@
     },
     "zh-hant": {
       "title": "Shiba | 重訓紀錄 App",
-      "description": "開始今日訓練、記錄組數、查看進度。",
+      "description": "Shiba 是重訓紀錄 App，可在同一流程中規劃訓練、記錄組數、查看進度並選擇下一個動作。",
       "heroHeading": "計畫、記錄、進步。",
       "heading": "認識 Shiba",
       "intro": [
@@ -172,7 +171,7 @@
     },
     "zh-hans": {
       "title": "Shiba | 力量训练记录 App",
-      "description": "开始今日训练、记录组数、查看进度。",
+      "description": "Shiba 是力量训练记录 App，可在同一流程中规划训练、记录组数、查看进度并选择下一个动作。",
       "heroHeading": "计划、记录、进步。",
       "heading": "了解 Shiba",
       "intro": [
@@ -211,7 +210,7 @@
     },
     "es": {
       "title": "Shiba | Registro de fuerza",
-      "description": "Abre tu rutina, registra series y revisa progreso.",
+      "description": "Shiba te ayuda a planificar entrenamientos de fuerza, registrar series, revisar progreso y elegir ejercicios en una sola app.",
       "heroHeading": "Planifica. Registra. Mejora.",
       "heading": "Explora Shiba",
       "intro": [
@@ -250,7 +249,7 @@
     },
     "fr": {
       "title": "Shiba | Suivi musculation",
-      "description": "Ouvre ta séance, note tes séries et suis tes progrès.",
+      "description": "Shiba aide à planifier tes séances de musculation, noter les séries, suivre les progrès et choisir les exercices dans une seule app.",
       "heroHeading": "Planifier. Noter. Progresser.",
       "heading": "Découvrir Shiba",
       "intro": [
@@ -289,7 +288,7 @@
     },
     "de": {
       "title": "Shiba | Krafttraining Tracker",
-      "description": "Workout öffnen, Sätze loggen und Fortschritt sehen.",
+      "description": "Shiba hilft dir, Krafttrainings zu planen, Sätze zu loggen, Fortschritt zu prüfen und Übungen in einer App auszuwählen.",
       "heroHeading": "Planen. Loggen. Besser werden.",
       "heading": "Shiba entdecken",
       "intro": [
@@ -328,7 +327,7 @@
     },
     "id": {
       "title": "Shiba | Catatan latihan beban",
-      "description": "Buka latihan, catat set, dan lihat progres.",
+      "description": "Shiba membantu merencanakan latihan beban, mencatat set, melihat progres, dan memilih latihan dalam satu app.",
       "heroHeading": "Rencanakan. Catat. Berkembang.",
       "heading": "Jelajahi Shiba",
       "intro": [

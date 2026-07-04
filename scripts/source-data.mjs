@@ -1,5 +1,6 @@
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { execFileSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { join, relative } from "node:path";
 
 const ROOT = process.cwd();
 const SRC_ROOT = join(ROOT, "src");
@@ -11,6 +12,8 @@ const CATALOG_PATH = join(SRC_ROOT, "catalog.json");
 const TAXONOMY_PATH = join(SRC_ROOT, "taxonomy.json");
 const DISCOVERY_PATH = join(SRC_ROOT, "discovery.json");
 const LOCALES_PATH = join(SRC_ROOT, "locales.json");
+const sourceCreatedCache = new Map();
+const sourceLastmodCache = new Map();
 
 export {
     ASSETS_ROOT,
@@ -25,6 +28,10 @@ export {
     buildExerciseFileIndex,
     ensureDirectory,
     getBaseSlugFromFile,
+    getSourceCreatedIso,
+    getSourceCreatedMs,
+    getSourceLastmodIso,
+    getSourceLastmodMs,
     getUnitFromFile,
     loadCatalog,
     loadDiscovery,
@@ -47,6 +54,99 @@ function writeJson(filePath, value) {
 
 function ensureDirectory(dirPath) {
     mkdirSync(dirPath, { recursive: true });
+}
+
+function getSourceLastmodIso(filePaths) {
+    const timestamps = (Array.isArray(filePaths) ? filePaths : [filePaths])
+        .filter((filePath) => existsSync(filePath))
+        .map((filePath) => getSourceLastmodMs(filePath))
+        .filter((timestamp) => Number.isFinite(timestamp));
+    const newestTimestamp = timestamps.length ? Math.max(...timestamps) : Date.now();
+
+    return new Date(newestTimestamp).toISOString();
+}
+
+function getSourceCreatedIso(filePaths) {
+    const timestamps = (Array.isArray(filePaths) ? filePaths : [filePaths])
+        .filter((filePath) => existsSync(filePath))
+        .map((filePath) => getSourceCreatedMs(filePath))
+        .filter((timestamp) => Number.isFinite(timestamp));
+    const oldestTimestamp = timestamps.length ? Math.min(...timestamps) : Date.now();
+
+    return new Date(oldestTimestamp).toISOString();
+}
+
+function getSourceCreatedMs(filePath) {
+    if (sourceCreatedCache.has(filePath)) {
+        return sourceCreatedCache.get(filePath);
+    }
+
+    const timestamp = getGitFirstCommitMs(filePath) || getFilesystemLastmodMs(filePath);
+
+    sourceCreatedCache.set(filePath, timestamp);
+    return timestamp;
+}
+
+function getSourceLastmodMs(filePath) {
+    if (sourceLastmodCache.has(filePath)) {
+        return sourceLastmodCache.get(filePath);
+    }
+
+    const timestamp = hasUncommittedSourceChange(filePath)
+        ? getFilesystemLastmodMs(filePath)
+        : getGitLastCommitMs(filePath) || getFilesystemLastmodMs(filePath);
+
+    sourceLastmodCache.set(filePath, timestamp);
+    return timestamp;
+}
+
+function hasUncommittedSourceChange(filePath) {
+    try {
+        return execFileSync("git", ["status", "--porcelain", "--", relativeToRoot(filePath)], {
+            cwd: ROOT,
+            encoding: "utf8"
+        }).trim().length > 0;
+    } catch {
+        return false;
+    }
+}
+
+function getGitFirstCommitMs(filePath) {
+    try {
+        const timestamp = execFileSync("git", ["log", "--follow", "--format=%cI", "--reverse", "--", relativeToRoot(filePath)], {
+            cwd: ROOT,
+            encoding: "utf8"
+        }).trim().split(/\r?\n/)[0] || "";
+
+        return timestamp ? Date.parse(timestamp) : null;
+    } catch {
+        return null;
+    }
+}
+
+function getGitLastCommitMs(filePath) {
+    try {
+        const timestamp = execFileSync("git", ["log", "-1", "--format=%cI", "--", relativeToRoot(filePath)], {
+            cwd: ROOT,
+            encoding: "utf8"
+        }).trim();
+
+        return timestamp ? Date.parse(timestamp) : null;
+    } catch {
+        return null;
+    }
+}
+
+function getFilesystemLastmodMs(filePath) {
+    try {
+        return statSync(filePath).mtime.getTime();
+    } catch {
+        return Number.NaN;
+    }
+}
+
+function relativeToRoot(filePath) {
+    return relative(ROOT, filePath).replace(/\\/g, "/");
 }
 
 function loadCatalog() {

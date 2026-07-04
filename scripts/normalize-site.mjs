@@ -18,7 +18,18 @@ import {
     languageAlternates,
     localizeStaticPage
 } from "./localization.mjs";
-import { buildExerciseFileIndex, loadDiscovery, loadExercises, loadPages, loadTaxonomy } from "./source-data.mjs";
+import {
+    CATALOG_PATH,
+    DISCOVERY_PATH,
+    EXERCISE_SRC_ROOT,
+    PAGES_ROOT,
+    buildExerciseFileIndex,
+    getSourceLastmodIso,
+    loadDiscovery,
+    loadExercises,
+    loadPages,
+    loadTaxonomy
+} from "./source-data.mjs";
 
 const ROOT = process.cwd();
 const SITE_ORIGIN = "https://shibamuscle.com";
@@ -219,17 +230,20 @@ function buildPageContext(entry, html) {
 
     if (staticPage) {
         const page = localizeStaticPage(staticPage, locale);
+        const englishOnly = staticPage.englishOnly === true;
         return {
             title: page.title,
             pageLabel: page.heading,
             homeLabel,
             description: page.description || decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))),
-            canonicalUrl,
+            canonicalUrl: englishOnly ? absoluteUrlForFile(file, "ja") : canonicalUrl,
             ogImage: page.ogImage || DEFAULT_OG_IMAGE,
             type: "article",
             twitterCard: "summary",
             alternates,
             locale,
+            robots: englishOnly && locale !== "ja" ? "noindex,follow,noarchive" : undefined,
+            standalone: englishOnly,
             isExercisePage: false,
             isToolPage: false,
             isHomePage: false,
@@ -441,13 +455,124 @@ function normalizeFooterLanguageLinks(html, context) {
 }
 
 function buildSitemap(entries) {
-    const lastmod = new Date().toISOString();
-    const urls = [...new Set(entries
-        .filter((entry) => entry.file !== "Shift2ics.html" && !entry.file.startsWith("lb_"))
-        .map((entry) => absoluteUrlForFile(entry.file, entry.locale)))].sort((left, right) => left.localeCompare(right));
-    const xmlEntries = urls.map((url) => `  <url>\n    <loc>${url}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`).join("\n");
+    const urls = [...new Map(entries
+        .filter(isSitemapEntry)
+        .map((entry) => [absoluteUrlForFile(entry.file, entry.locale), entry])).entries()]
+        .map(([url, entry]) => ({
+            url,
+            lastmod: buildSitemapLastmod(entry),
+            alternateLinks: isEnglishOnlyStaticPage(entry.file) ? "" : buildSitemapAlternateLinks(entry.file),
+            imageLinks: buildSitemapImageLinks(entry.file)
+        }))
+        .sort((left, right) => left.url.localeCompare(right.url));
+    const xmlEntries = urls.map(({ url, lastmod, alternateLinks, imageLinks }) => {
+        const alternateBlock = alternateLinks ? `\n${alternateLinks}` : "";
+        const imageBlock = imageLinks ? `\n${imageLinks}` : "";
+        return `  <url>\n    <loc>${escapeHtml(url)}</loc>\n    <lastmod>${escapeHtml(lastmod)}</lastmod>${alternateBlock}${imageBlock}\n  </url>`;
+    }).join("\n");
 
-    return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${xmlEntries}\n</urlset>\n`;
+    return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${xmlEntries}\n</urlset>\n`;
+}
+
+function buildSitemapLastmod(entry) {
+    return getSourceLastmodIso(getSitemapSourceFiles(entry.file));
+}
+
+function getSitemapSourceFiles(file) {
+    const staticPage = staticPageIndex.get(file);
+    if (staticPage) {
+        const pageSourceFile = file === "index.html" ? "home.json" : file.replace(/\.html$/, ".json");
+        const sourceFiles = [join(PAGES_ROOT, pageSourceFile)];
+        if (file === "index.html") {
+            sourceFiles.push(CATALOG_PATH);
+        }
+        return sourceFiles.filter((filePath) => existsSync(filePath));
+    }
+
+    const exerciseMatch = exerciseFileIndex.byFile.get(file);
+    if (exerciseMatch) {
+        return [
+            join(EXERCISE_SRC_ROOT, `${exerciseMatch.exercise.slug}.json`),
+            CATALOG_PATH
+        ].filter((filePath) => existsSync(filePath));
+    }
+
+    if (discoveryFileIndex.has(file)) {
+        return [DISCOVERY_PATH].filter((filePath) => existsSync(filePath));
+    }
+
+    const fallbackPath = join(ROOT, file);
+    return existsSync(fallbackPath) ? [fallbackPath] : [];
+}
+
+function isSitemapEntry(entry) {
+    return entry.file !== "Shift2ics.html"
+        && !entry.file.startsWith("lb_")
+        && !(isEnglishOnlyStaticPage(entry.file) && entry.locale !== "ja");
+}
+
+function isEnglishOnlyStaticPage(file) {
+    return staticPageIndex.get(file)?.englishOnly === true;
+}
+
+function buildSitemapAlternateLinks(file) {
+    const localeLinks = getGeneratedLocales().map((locale) => {
+        return buildSitemapAlternateLink(locale.hreflang, absoluteUrlForFile(file, locale.code));
+    });
+    const fallbackLink = buildSitemapAlternateLink("x-default", absoluteUrlForFile(file, "ja"));
+
+    return [...localeLinks, fallbackLink].join("\n");
+}
+
+function buildSitemapAlternateLink(hreflang, href) {
+    return `    <xhtml:link rel="alternate" hreflang="${escapeAttribute(hreflang)}" href="${escapeAttribute(href)}" />`;
+}
+
+function buildSitemapImageLinks(file) {
+    return getSitemapImageUrls(file)
+        .map((url) => `    <image:image>\n      <image:loc>${escapeHtml(url)}</image:loc>\n    </image:image>`)
+        .join("\n");
+}
+
+function getSitemapImageUrls(file) {
+    const urls = new Set();
+    const staticPage = staticPageIndex.get(file);
+    if (staticPage) {
+        addSitemapImageUrl(urls, staticPage.ogImage);
+        if (file === "index.html" && staticPage.appImages) {
+            Object.values(staticPage.appImages).forEach((image) => addSitemapImageUrl(urls, image));
+        }
+        return Array.from(urls);
+    }
+
+    const exerciseMatch = exerciseFileIndex.byFile.get(file);
+    if (exerciseMatch?.unit === "kg") {
+        addSitemapImageUrl(urls, exerciseMatch.exercise.image?.src);
+        return Array.from(urls);
+    }
+
+    const discoveryPage = discoveryFileIndex.get(file);
+    if (discoveryPage) {
+        addSitemapImageUrl(urls, `${SITE_ORIGIN}/assets/og/discovery/${discoveryPage.slug}.svg`);
+    }
+
+    return Array.from(urls);
+}
+
+function addSitemapImageUrl(urls, image) {
+    if (!image) {
+        return;
+    }
+
+    urls.add(absoluteAssetUrl(image));
+}
+
+function absoluteAssetUrl(file) {
+    if (/^https?:\/\//i.test(file || "")) {
+        return file;
+    }
+
+    return `${SITE_ORIGIN}/assets/${String(file || "").replace(/^\.?\/?assets\//, "")}`;
 }
 
 function writeManifestFiles() {

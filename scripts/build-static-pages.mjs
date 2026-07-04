@@ -21,11 +21,20 @@ import {
     localizeStaticPage,
     stylesheetHref
 } from "./localization.mjs";
-import { ensureDirectory, loadCatalog, loadDiscovery, loadPages } from "./source-data.mjs";
+import {
+    CATALOG_PATH,
+    PAGES_ROOT,
+    ensureDirectory,
+    getSourceLastmodIso,
+    loadCatalog,
+    loadDiscovery,
+    loadPages
+} from "./source-data.mjs";
 
 const catalog = loadCatalog();
 const discovery = loadDiscovery();
 const pages = loadPages();
+const staticPageByFile = new Map(pages.map((page) => [page.file, page]));
 const locales = getGeneratedLocales();
 const APP_THEME_COLOR = "#ff6a00";
 assertExpectedLocales(locales);
@@ -100,9 +109,11 @@ ${renderAppFooter(locale, textLocale)}
             file: page.file,
             description: page.description,
             ogImage: page.ogImage,
+            ogImageAlt: getHomeText(textLocale, "todayAlt"),
             type: "website",
             twitterCard: "summary_large_image",
-            themeColor: APP_THEME_COLOR
+            themeColor: APP_THEME_COLOR,
+            dateModified: getStaticPageDateModified(page.file)
         },
         enableAds: page.ads !== false,
         bodyClass: "home-page",
@@ -223,7 +234,7 @@ ${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join
                     <p>${escapeHtml(getHomeText(textLocale, "appStoreCopy"))}</p>
                     <div class="app-cta-actions">
                         <span class="app-pill app-pill--dark app-pill--disabled" aria-disabled="true">${escapeHtml(getHomeText(textLocale, "comingSoon"))}</span>
-                        <a href="shiba-privacy-policy.html" class="app-pill app-pill--outline-dark">${escapeHtml(getHomeText(textLocale, "privacy"))}</a>
+                        <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}" class="app-pill app-pill--outline-dark">${escapeHtml(getHomeText(textLocale, "privacy"))}</a>
                     </div>
                 </div>
             </section>
@@ -240,7 +251,7 @@ function renderAppFooter(locale, textLocale = locale) {
             <nav class="app-footer-links" aria-label="Shiba footer">
                 <a href="index.html">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
                 <a href="index.html#analytics">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
-                <a href="shiba-privacy-policy.html">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
+                <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
                 <a href="contact.html">${escapeHtml(getHomeText(textLocale, "footerContact"))}</a>
             </nav>
             <p>© Shiba</p>
@@ -248,7 +259,7 @@ function renderAppFooter(locale, textLocale = locale) {
     </footer>`;
 }
 
-function renderHomeOverviewCard(card) {
+function renderHomeOverviewCard(card, locale = "ja") {
     const blocks = [
         ...(card.paragraphs || []).map((text) => ({ type: "paragraph", text })),
         ...(card.blocks || [])
@@ -257,8 +268,27 @@ function renderHomeOverviewCard(card) {
     return `                <article class="summary-card">
                     <span class="metric-label">${escapeHtml(card.eyebrow || "")}</span>
                     <h3>${escapeHtml(card.heading)}</h3>
-${blocks.map((block) => renderContentBlock(block)).join("\n")}
+${blocks.map((block) => renderContentBlock(block, locale)).join("\n")}
                 </article>`;
+}
+
+function resolveStaticPageHref(file, locale = "ja") {
+    const page = staticPageByFile.get(file);
+    if (page?.englishOnly === true && locale !== "ja") {
+        return `../${file}`;
+    }
+
+    return file;
+}
+
+function resolveContentHref(href, locale = "ja") {
+    if (!href || href.startsWith("#") || /^[a-z][a-z0-9+.-]*:/i.test(href)) {
+        return href || "";
+    }
+
+    const [file, hash = ""] = href.split("#");
+    const resolvedFile = resolveStaticPageHref(file, locale);
+    return hash ? `${resolvedFile}#${hash}` : resolvedFile;
 }
 
 function renderAppScene({ id, theme, reverse = false, kicker, heading, copy, features, media }) {
@@ -934,14 +964,20 @@ function getHomeText(locale, key) {
 
 function renderContentPage(page, locale) {
     const appShell = page.appShell === true;
+    const englishOnly = page.englishOnly === true;
+    const duplicateEnglishOnly = englishOnly && locale !== "ja";
     const textLocale = page.textLocale || (appShell && page.htmlLang === "en" ? "en" : locale);
+    const breadcrumbs = appShell ? [] : [
+        { label: getUiText(locale, "home"), href: "index.html" },
+        { label: page.heading }
+    ];
     const content = `        <section class="container content-shell ${escapeAttribute(page.shellClass || "")}">
             <div class="content-intro">
                 <h1>${escapeHtml(page.heading)}</h1>
 ${(page.intro || []).map((paragraph) => `                <p>${escapeHtml(paragraph)}</p>`).join("\n")}
             </div>
 
-${(page.sections || []).map((section) => renderContentSection(section)).join("\n\n")}
+${(page.sections || []).map((section) => renderContentSection(section, locale)).join("\n\n")}
         </section>`;
     const body = appShell ? `${renderAppPolicyHeader(locale, textLocale)}
 
@@ -954,10 +990,7 @@ ${renderAppFooter(locale, textLocale)}
 
     <hr class="top-divider">
     <main class="page-main">
-${renderBreadcrumb([
-        { label: getUiText(locale, "home"), href: "index.html" },
-        { label: page.heading }
-    ], locale)}
+${renderBreadcrumb(breadcrumbs, locale)}
 
 ${content}
     </main>
@@ -978,15 +1011,32 @@ ${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=cat
             file: page.file,
             description: page.description || (page.intro || []).join(" "),
             ogImage: page.ogImage,
+            ogImageAlt: page.heading || page.title,
             ogLocale: appShell && page.htmlLang === "en" ? "en_US" : undefined,
             type: "article",
             twitterCard: "summary",
-            themeColor: appShell ? APP_THEME_COLOR : undefined
+            themeColor: appShell ? APP_THEME_COLOR : undefined,
+            canonicalLocale: englishOnly ? "ja" : locale,
+            includeAlternates: !englishOnly,
+            robots: duplicateEnglishOnly ? "noindex,follow,noarchive" : undefined,
+            breadcrumbs,
+            dateModified: getStaticPageDateModified(page.file)
         },
-        enableAds: page.ads !== false,
+        enableAds: page.ads !== false && !duplicateEnglishOnly,
         bodyClass: appShell ? "content-page app-content-page" : "content-page",
         generatedComment: "<!-- Generated by scripts/build-static-pages.mjs. Edit src/pages/*.json instead of editing this file directly. -->"
     });
+}
+
+function getStaticPageDateModified(file) {
+    const sourceFile = file === "index.html" ? "home.json" : file.replace(/\.html$/, ".json");
+    const sourceFiles = [join(PAGES_ROOT, sourceFile)];
+
+    if (file === "index.html") {
+        sourceFiles.push(CATALOG_PATH);
+    }
+
+    return getSourceLastmodIso(sourceFiles);
 }
 
 function renderAppPolicyHeader(locale, textLocale = "en") {
@@ -999,24 +1049,24 @@ function renderAppPolicyHeader(locale, textLocale = "en") {
             <div class="app-local-nav">
                 <a href="index.html" class="app-local-nav-link">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
                 <a href="index.html#analytics" class="app-local-nav-link">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
-                <a href="shiba-privacy-policy.html" class="app-local-cta">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
+                <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}" class="app-local-cta">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
             </div>
         </nav>
     </header>`;
 }
 
-function renderContentSection(section) {
+function renderContentSection(section, locale = "ja") {
     const blocks = [
         ...(section.paragraphs || []).map((text) => ({ type: "paragraph", text })),
         ...(section.blocks || [])
     ];
 
     return `            <section class="${escapeAttribute(section.className || "content-card")}">
-${section.heading ? `                <h2>${escapeHtml(section.heading)}</h2>\n` : ""}${blocks.map((block) => renderContentBlock(block)).join("\n")}
+${section.heading ? `                <h2>${escapeHtml(section.heading)}</h2>\n` : ""}${blocks.map((block) => renderContentBlock(block, locale)).join("\n")}
             </section>`;
 }
 
-function renderContentBlock(block) {
+function renderContentBlock(block, locale = "ja") {
     if (block.type === "paragraph") {
         return `                <p>${escapeHtml(block.text)}</p>`;
     }
@@ -1039,8 +1089,9 @@ ${block.items.map((item) => `                    <li>${escapeHtml(item)}</li>`).
     }
 
     if (block.type === "link") {
+        const href = resolveContentHref(block.href, locale);
         return `                <p class="${escapeAttribute(block.className || "content-link")}">
-                    ${block.label ? `<span>${escapeHtml(block.label)}:</span> ` : ""}<a href="${escapeAttribute(block.href)}">${escapeHtml(block.text || block.href)}</a>
+                    ${block.label ? `<span>${escapeHtml(block.label)}:</span> ` : ""}<a href="${escapeAttribute(href)}">${escapeHtml(block.text || block.href)}</a>
                 </p>`;
     }
 

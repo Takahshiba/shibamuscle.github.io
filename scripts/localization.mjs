@@ -3584,6 +3584,50 @@ function getExerciseName(exerciseOrCard, localeCode = "ja") {
     return exerciseOrCard.names?.ja || exerciseOrCard.name || exerciseOrCard.slug || "";
 }
 
+function getExerciseTitleMetric(kind = "weight", localeCode = "ja") {
+    const metrics = {
+        ja: {
+            reps: "平均・基準レップ",
+            weight: "平均・基準重量"
+        },
+        en: {
+            reps: "Rep standards",
+            weight: "Strength standards"
+        },
+        es: {
+            reps: "Reps",
+            weight: "Fuerza"
+        },
+        "zh-hant": {
+            reps: "次數標準",
+            weight: "力量標準"
+        },
+        "zh-hans": {
+            reps: "次数标准",
+            weight: "力量标准"
+        },
+        de: {
+            reps: "Wdh.-Werte",
+            weight: "Kraftwerte"
+        },
+        fr: {
+            reps: "Répétitions",
+            weight: "Force"
+        },
+        id: {
+            reps: "Repetisi",
+            weight: "Standar"
+        },
+        ko: {
+            reps: "반복 기준",
+            weight: "중량 기준"
+        }
+    };
+
+    const metricKind = kind === "reps" ? "reps" : "weight";
+    return metrics[localeCode]?.[metricKind] || metrics.ja[metricKind];
+}
+
 function getMuscleGroupLabel(label, localeCode = "ja") {
     if (localeCode === "zh-hant") {
         return MUSCLE_GROUPS_ZH_HANT[label] || label;
@@ -3900,64 +3944,70 @@ function buildExerciseDescription(exercise, section, measurementKind, localeCode
 function buildExerciseSeo(exercise, measurementKind, unit, localeCode = "ja") {
     if (localeCode === "ja") {
         const copy = getMeasurementCopy(measurementKind, "ja");
+        const titleMetric = getExerciseTitleMetric(measurementKind, "ja");
         const unitLabel = unit === "lb" ? "lb表" : "kg表";
         return {
-            title: `${exercise.names.ja}の${copy.averageLabel}・${copy.standardsLabel} | Shiba Muscle`,
+            title: `${exercise.names.ja}の${titleMetric} | Shiba Muscle`,
             descriptionPrefix: `${exercise.names.ja}の${copy.averageLabel}と${copy.standardsLabel}を${unitLabel}で確認できるページです。`
         };
     }
 
     if (localeCode === "en") {
         const copy = getMeasurementCopy(measurementKind, "en");
+        const titleMetric = getExerciseTitleMetric(measurementKind, "en");
         const name = getExerciseName(exercise, "en");
         const unitLabel = unit === "lb" ? "lb table" : "kg table";
 
         return {
-            title: `${name}: ${copy.averageLabel} and ${copy.standardsLabel} | Shiba Muscle`,
+            title: `${name}: ${titleMetric} | Shiba Muscle`,
             descriptionPrefix: `View ${copy.averageLabel.toLowerCase()} and ${copy.standardsLabel.toLowerCase()} for ${name} with the ${unitLabel}.`
         };
     }
 
     if (localeCode === "es") {
         const copy = getMeasurementCopy(measurementKind, "es");
+        const titleMetric = getExerciseTitleMetric(measurementKind, "es");
         const name = getExerciseName(exercise, "es");
         const unitLabel = unit === "lb" ? "tabla en lb" : "tabla en kg";
 
         return {
-            title: `${name}: ${copy.averageLabel} y ${copy.standardsLabel} | Shiba Muscle`,
+            title: `${name}: ${titleMetric} | Shiba Muscle`,
             descriptionPrefix: `Página para consultar ${copy.averageLabel.toLowerCase()} y ${copy.standardsLabel.toLowerCase()} de ${name} con ${unitLabel}.`
         };
     }
 
     if (localeCode === "zh-hant") {
         const copy = getMeasurementCopy(measurementKind, "zh-hant");
+        const titleMetric = getExerciseTitleMetric(measurementKind, "zh-hant");
         const name = getExerciseName(exercise, "zh-hant");
         const unitLabel = unit === "lb" ? "lb 表" : "kg 表";
 
         return {
-            title: `${name}的${copy.averageLabel} / ${copy.standardsLabel} | Shiba Muscle`,
+            title: `${name}的${titleMetric} | Shiba Muscle`,
             descriptionPrefix: `${name}的${copy.averageLabel}與${copy.standardsLabel}可透過${unitLabel}查看。`
         };
     }
 
     if (localeCode === "zh-hans") {
         const copy = getMeasurementCopy(measurementKind, "zh-hans");
+        const titleMetric = getExerciseTitleMetric(measurementKind, "zh-hans");
         const name = getExerciseName(exercise, "zh-hans");
         const unitLabel = unit === "lb" ? "lb 表" : "kg 表";
 
         return {
-            title: `${name}的${copy.averageLabel} / ${copy.standardsLabel} | Shiba Muscle`,
+            title: `${name}的${titleMetric} | Shiba Muscle`,
             descriptionPrefix: `可通过${unitLabel}查看${name}的${copy.averageLabel}与${copy.standardsLabel}。`
         };
     }
 
     if (localeCode === "de") {
         const copy = getMeasurementCopy(measurementKind, "de");
+        const titleMetric = getExerciseTitleMetric(measurementKind, "de");
         const name = getExerciseName(exercise, "de");
         const unitLabel = unit === "lb" ? "lb Tabelle" : "kg Tabelle";
 
         return {
-            title: `${name}: ${copy.averageLabel} und ${copy.standardsLabel} | Shiba Muscle`,
+            title: `${name}: ${titleMetric} | Shiba Muscle`,
             descriptionPrefix: `Sieh dir ${copy.averageLabel} und ${copy.standardsLabel} für ${name} in der ${unitLabel} an.`
         };
     }
@@ -3965,43 +4015,35 @@ function buildExerciseSeo(exercise, measurementKind, unit, localeCode = "ja") {
 
     if (localeCode === "fr") {
         const copy = getMeasurementCopy(measurementKind, "fr");
+        const titleMetric = getExerciseTitleMetric(measurementKind, "fr");
         const name = getExerciseName(exercise, "fr");
         const unitLabel = unit === "lb" ? "tableau en lb" : "tableau en kg";
 
         return {
-            title: `${name} : ${copy.averageLabel} et ${copy.standardsLabel} | Shiba Muscle`,
+            title: `${name} : ${titleMetric} | Shiba Muscle`,
             descriptionPrefix: `Page pour consulter ${copy.averageLabel.toLowerCase()} et ${copy.standardsLabel.toLowerCase()} de ${name} avec un ${unitLabel}.`
         };
     }
 
-    if (localeCode === "de") {
-            const copy = getMeasurementCopy(measurementKind, "de");
-            const name = getExerciseName(exercise, "de");
-            const unitLabel = unit === "lb" ? "lb Tabelle" : "kg Tabelle";
-
-            return {
-                title: `${name}: ${copy.averageLabel} und ${copy.standardsLabel} | Shiba Muscle`,
-                descriptionPrefix: `Sieh dir ${copy.averageLabel} und ${copy.standardsLabel} für ${name} in der ${unitLabel} an.`
-            };
-        }
-
     if (localeCode === "id") {
         const copy = getMeasurementCopy(measurementKind, "id");
+        const titleMetric = getExerciseTitleMetric(measurementKind, "id");
         const name = getExerciseName(exercise, "id");
         const unitLabel = unit === "lb" ? "tabel lb" : "tabel kg";
 
         return {
-            title: `${name}: ${copy.averageLabel} dan ${copy.standardsLabel} | Shiba Muscle`,
+            title: `${name}: ${titleMetric} | Shiba Muscle`,
             descriptionPrefix: `Halaman untuk melihat ${copy.averageLabel.toLowerCase()} dan ${copy.standardsLabel.toLowerCase()} ${name} dengan ${unitLabel}.`
         };
     }
 
     const copy = getMeasurementCopy(measurementKind, "ko");
+    const titleMetric = getExerciseTitleMetric(measurementKind, "ko");
     const name = getExerciseName(exercise, "ko");
     const unitLabel = unit === "lb" ? "lb 기준표" : "kg 기준표";
 
     return {
-        title: `${name} ${copy.averageLabel} / ${copy.standardsLabel} | Shiba Muscle`,
+        title: `${name} ${titleMetric} | Shiba Muscle`,
         descriptionPrefix: `${name}의 ${formatKoreanMeasurementPair(copy)} ${unitLabel}로 확인하는 페이지입니다.`
     };
 }

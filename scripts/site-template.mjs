@@ -18,6 +18,9 @@ const ADSENSE_CLIENT_ID = "ca-pub-2819086765117537";
 const ADSENSE_SCRIPT_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`;
 const ANALYTICS_ID = "G-D9K58THBFM";
 const SITE_ORIGIN = "https://shibamuscle.com";
+const SITE_NAME = "Shiba Muscle";
+const SITE_DESCRIPTION = "Shiba Muscle provides localized strength training standards and the Shiba workout planning and logging app.";
+const SUPPORT_EMAIL = "info@shibamuscle.com";
 const THEME_COLOR = "#148a6a";
 const APP_THEME_COLOR = "#ff6a00";
 const SITE_STYLESHEET = "styles.css?v=workout-cards-20260704";
@@ -115,13 +118,13 @@ function renderDocument({ title, stylesheets = ["styles.css"], body, generatedCo
     const localeConfig = getLocaleConfig(locale);
     const comment = generatedComment ? `${generatedComment}\n` : "";
     const stylesheetLinks = stylesheets.map((href) => `    <link rel="stylesheet" href="${escapeAttribute(stylesheetHref(resolveStylesheetHref(href), locale))}">`).join("\n");
-    const seoBlock = seo ? buildSeoBlock({ ...seo, title, locale }) : "";
+    const documentLang = htmlLang || localeConfig.hreflang;
+    const seoBlock = seo ? buildSeoBlock({ ...seo, title, locale, documentLang }) : "";
     const adsenseScript = enableAds ? `
     <script async src="${ADSENSE_SCRIPT_SRC}"
      crossorigin="anonymous"></script>
 ` : "";
     const bodyClassAttribute = bodyClass ? ` class="${escapeAttribute(bodyClass)}"` : "";
-    const documentLang = htmlLang || localeConfig.hreflang;
 
     return `<!DOCTYPE html>
 ${comment}<html lang="${escapeAttribute(documentLang)}" dir="${escapeAttribute(localeConfig.dir || "ltr")}">
@@ -150,7 +153,7 @@ function resolveStylesheetHref(href) {
         : href;
 }
 
-function buildSeoBlock({ file, title, description = "", locale = "ja", ogImage, ogLocale, type = "article", twitterCard = "summary", canonicalFile = file, includeAlternates = true, robots = "index,follow,max-image-preview:large", themeColor = THEME_COLOR }) {
+function buildSeoBlock({ file, title, description = "", locale = "ja", documentLang = null, ogImage, ogImageAlt, ogLocale, type = "article", twitterCard = "summary", canonicalFile = file, canonicalLocale = locale, includeAlternates = true, robots = "index,follow,max-image-preview:large", themeColor = THEME_COLOR, breadcrumbs = [], structuredData = [], dateModified = null }) {
     if (!file) {
         return "";
     }
@@ -160,9 +163,27 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", ogImage, 
         return `    <link rel="alternate" hreflang="${escapeAttribute(localeConfig.hreflang)}" href="${escapeAttribute(alternates[localeConfig.code])}">`;
     }).join("\n") : "";
     const xDefaultLink = includeAlternates ? `\n    <link rel="alternate" hreflang="x-default" href="${escapeAttribute(alternates.ja)}">` : "";
-    const canonicalUrl = absoluteUrlForFile(canonicalFile, locale);
+    const canonicalUrl = absoluteUrlForFile(canonicalFile, canonicalLocale);
     const resolvedOgImage = ogImage || DEFAULT_OG_IMAGE;
+    const resolvedOgImageAlt = ogImageAlt || title;
     const resolvedOgLocale = ogLocale || getOgLocale(locale);
+    const ogLocaleAlternates = includeAlternates ? getGeneratedLocales()
+        .filter((localeConfig) => localeConfig.code !== locale)
+        .map((localeConfig) => `    <meta property="og:locale:alternate" content="${escapeAttribute(getOgLocale(localeConfig.code))}">`)
+        .join("\n") : "";
+    const structuredDataBlock = buildStructuredDataBlock({
+        canonicalUrl,
+        title,
+        description,
+        locale,
+        documentLang,
+        imageUrl: resolvedOgImage,
+        imageAlt: resolvedOgImageAlt,
+        breadcrumbs,
+        structuredData,
+        robots,
+        dateModified
+    });
 
     return `
     <meta name="description" content="${escapeAttribute(description)}">
@@ -171,16 +192,20 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", ogImage, 
     <link rel="canonical" href="${escapeAttribute(canonicalUrl)}">
 ${alternateLinks}${xDefaultLink}
     <meta property="og:type" content="${escapeAttribute(type)}">
-    <meta property="og:site_name" content="Shiba Muscle">
+    <meta property="og:site_name" content="${SITE_NAME}">
     <meta property="og:locale" content="${escapeAttribute(resolvedOgLocale)}">
+${ogLocaleAlternates}
     <meta property="og:title" content="${escapeAttribute(title)}">
     <meta property="og:description" content="${escapeAttribute(description)}">
     <meta property="og:url" content="${escapeAttribute(canonicalUrl)}">
     <meta property="og:image" content="${escapeAttribute(resolvedOgImage)}">
+    <meta property="og:image:alt" content="${escapeAttribute(resolvedOgImageAlt)}">
     <meta name="twitter:card" content="${escapeAttribute(twitterCard)}">
     <meta name="twitter:title" content="${escapeAttribute(title)}">
     <meta name="twitter:description" content="${escapeAttribute(description)}">
     <meta name="twitter:image" content="${escapeAttribute(resolvedOgImage)}">
+    <meta name="twitter:image:alt" content="${escapeAttribute(resolvedOgImageAlt)}">
+${structuredDataBlock}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}"></script>
     <script>
@@ -190,6 +215,131 @@ ${alternateLinks}${xDefaultLink}
       gtag('config', '${ANALYTICS_ID}');
     </script>
 `;
+}
+
+function buildStructuredDataBlock({ canonicalUrl, title, description, locale, documentLang, imageUrl, imageAlt, breadcrumbs = [], structuredData = [], robots = "", dateModified = null }) {
+    if (/noindex/i.test(robots)) {
+        return "";
+    }
+
+    const language = documentLang || getLocaleConfig(locale).hreflang;
+    const organizationId = `${SITE_ORIGIN}/#organization`;
+    const websiteId = `${SITE_ORIGIN}/#website`;
+    const webpageId = `${canonicalUrl}#webpage`;
+    const primaryImageId = `${canonicalUrl}#primaryimage`;
+    const graph = [
+        {
+            "@type": "Organization",
+            "@id": organizationId,
+            name: SITE_NAME,
+            alternateName: "Shiba",
+            description: SITE_DESCRIPTION,
+            url: SITE_ORIGIN,
+            email: SUPPORT_EMAIL,
+            logo: {
+                "@type": "ImageObject",
+                url: DEFAULT_OG_IMAGE,
+                width: 520,
+                height: 520
+            },
+            contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "customer support",
+                email: SUPPORT_EMAIL,
+                url: `${SITE_ORIGIN}/contact.html`,
+                availableLanguage: ["ja", "en", "ko", "zh-Hant", "zh-Hans", "es", "fr", "de", "id"]
+            }
+        },
+        {
+            "@type": "WebSite",
+            "@id": websiteId,
+            url: `${SITE_ORIGIN}/`,
+            name: SITE_NAME,
+            inLanguage: language,
+            publisher: { "@id": organizationId }
+        },
+        {
+            "@type": "ImageObject",
+            "@id": primaryImageId,
+            url: imageUrl,
+            caption: imageAlt
+        },
+        {
+            "@type": "WebPage",
+            "@id": webpageId,
+            url: canonicalUrl,
+            name: title,
+            description,
+            inLanguage: language,
+            ...(dateModified ? { dateModified } : {}),
+            isPartOf: { "@id": websiteId },
+            publisher: { "@id": organizationId },
+            primaryImageOfPage: { "@id": primaryImageId },
+            image: { "@id": primaryImageId }
+        }
+    ];
+
+    const breadcrumbSchema = buildBreadcrumbStructuredData(breadcrumbs, canonicalUrl, locale);
+    if (breadcrumbSchema) {
+        graph.push(breadcrumbSchema);
+        graph.find((item) => item["@id"] === webpageId).breadcrumb = { "@id": breadcrumbSchema["@id"] };
+    }
+
+    graph.push(...normalizeStructuredData(structuredData));
+
+    return `    <script type="application/ld+json">${serializeJsonLd({
+        "@context": "https://schema.org",
+        "@graph": graph
+    })}</script>`;
+}
+
+function buildBreadcrumbStructuredData(items, canonicalUrl, locale) {
+    const cleanItems = (items || []).filter((item) => item?.label);
+    if (cleanItems.length < 2) {
+        return null;
+    }
+
+    return {
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        itemListElement: cleanItems.map((item, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: item.label,
+            item: item.href ? resolveStructuredDataHref(item.href, canonicalUrl, locale) : canonicalUrl
+        }))
+    };
+}
+
+function resolveStructuredDataHref(href, canonicalUrl, locale) {
+    if (/^https?:\/\//i.test(href)) {
+        return href;
+    }
+
+    if (href.startsWith("#")) {
+        return `${canonicalUrl}${href}`;
+    }
+
+    const [file, hash = ""] = href.split("#");
+    const resolved = absoluteUrlForFile(file || "index.html", locale);
+    return hash ? `${resolved}#${hash}` : resolved;
+}
+
+function normalizeStructuredData(value) {
+    if (!value) {
+        return [];
+    }
+
+    return Array.isArray(value) ? value.filter(Boolean) : [value];
+}
+
+function serializeJsonLd(value) {
+    return JSON.stringify(value)
+        .replace(/</g, "\\u003c")
+        .replace(/>/g, "\\u003e")
+        .replace(/&/g, "\\u0026")
+        .replace(/\u2028/g, "\\u2028")
+        .replace(/\u2029/g, "\\u2029");
 }
 
 function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja", textLocale = locale, showCategoryNav = pageType === "exercise" } = {}) {
@@ -276,16 +426,16 @@ function categoryNavHref(sectionId, pageType) {
 function renderStaticFooter(file, locale = "ja") {
     const alternates = languageAlternates(file);
     const flagAlt = {
-        en: locale === "ko" ? "영국 국기" : locale === "zh-hant" ? "英國國旗" : locale === "zh-hans" ? "英国国旗" : locale === "es" ? "Bandera del Reino Unido" : locale === "id" ? "Bendera Britania Raya" : "UK",
-        ja: locale === "ko" ? "일본 국기" : locale === "zh-hant" ? "日本國旗" : locale === "zh-hans" ? "日本国旗" : locale === "es" ? "Bandera de Japón" : locale === "id" ? "Bendera Jepang" : "Japan",
+        en: locale === "ko" ? "영국 국기" : locale === "zh-hant" ? "英國國旗" : locale === "zh-hans" ? "英国国旗" : locale === "es" ? "Bandera del Reino Unido" : locale === "fr" ? "Drapeau du Royaume-Uni" : locale === "de" ? "Flagge des Vereinigten Königreichs" : locale === "id" ? "Bendera Britania Raya" : "UK flag",
+        ja: locale === "ko" ? "일본 국기" : locale === "zh-hant" ? "日本國旗" : locale === "zh-hans" ? "日本国旗" : locale === "es" ? "Bandera de Japón" : locale === "fr" ? "Drapeau du Japon" : locale === "de" ? "Flagge Japans" : locale === "id" ? "Bendera Jepang" : "Japanese flag",
         "zh-hant": locale === "ko" ? "번체 중국어" : locale === "zh-hant" ? "繁體中文" : locale === "zh-hans" ? "繁体中文" : locale === "es" ? "Chino tradicional" : locale === "id" ? "Bahasa Tionghoa tradisional" : "Traditional Chinese",
         "zh-hans": locale === "ko" ? "간체 중국어" : locale === "zh-hant" ? "簡體中文" : locale === "zh-hans" ? "简体中文" : locale === "es" ? "Chino simplificado" : locale === "id" ? "Bahasa Tionghoa sederhana" : "Simplified Chinese",
-        ko: locale === "ko" ? "한국 국기" : locale === "zh-hant" ? "韓國國旗" : locale === "zh-hans" ? "韩国国旗" : locale === "es" ? "Bandera de Corea" : locale === "id" ? "Bendera Korea" : "Korea",
-        es: locale === "ko" ? "스페인 국기" : locale === "zh-hant" ? "西班牙國旗" : locale === "zh-hans" ? "西班牙国旗" : locale === "es" ? "Bandera de España" : locale === "de" ? "Spanien" : locale === "id" ? "Bendera Spanyol" : "Spain",
-        zh: locale === "ko" ? "중국 국기" : locale === "zh-hant" ? "中國國旗" : locale === "zh-hans" ? "中国国旗" : locale === "es" ? "Bandera de China" : locale === "fr" ? "Drapeau de la Chine" : locale === "de" ? "China" : locale === "id" ? "Bendera Tiongkok" : "China",
-        fr: locale === "ko" ? "프랑스 국기" : locale === "es" ? "Bandera de Francia" : locale === "fr" ? "Drapeau de la France" : locale === "de" ? "Frankreich" : locale === "id" ? "Bendera Prancis" : "France",
-        de: locale === "ko" ? "독일 국기" : locale === "es" ? "Bandera de Alemania" : locale === "fr" ? "Drapeau de l'Allemagne" : locale === "de" ? "Deutschland" : locale === "id" ? "Bendera Jerman" : "Germany",
-        id: locale === "id" ? "Bendera Indonesia" : "Indonesia"
+        ko: locale === "ko" ? "한국 국기" : locale === "zh-hant" ? "韓國國旗" : locale === "zh-hans" ? "韩国国旗" : locale === "es" ? "Bandera de Corea" : locale === "fr" ? "Drapeau de la Corée" : locale === "de" ? "Flagge Koreas" : locale === "id" ? "Bendera Korea" : "Korean flag",
+        es: locale === "ko" ? "스페인 국기" : locale === "zh-hant" ? "西班牙國旗" : locale === "zh-hans" ? "西班牙国旗" : locale === "es" ? "Bandera de España" : locale === "fr" ? "Drapeau de l'Espagne" : locale === "de" ? "Flagge Spaniens" : locale === "id" ? "Bendera Spanyol" : "Spanish flag",
+        zh: locale === "ko" ? "중국 국기" : locale === "zh-hant" ? "中國國旗" : locale === "zh-hans" ? "中国国旗" : locale === "es" ? "Bandera de China" : locale === "fr" ? "Drapeau de la Chine" : locale === "de" ? "Flagge Chinas" : locale === "id" ? "Bendera Tiongkok" : "Chinese flag",
+        fr: locale === "ko" ? "프랑스 국기" : locale === "es" ? "Bandera de Francia" : locale === "fr" ? "Drapeau de la France" : locale === "de" ? "Flagge Frankreichs" : locale === "id" ? "Bendera Prancis" : "French flag",
+        de: locale === "ko" ? "독일 국기" : locale === "es" ? "Bandera de Alemania" : locale === "fr" ? "Drapeau de l'Allemagne" : locale === "de" ? "Flagge Deutschlands" : locale === "id" ? "Bendera Jerman" : "German flag",
+        id: locale === "id" ? "Bendera Indonesia" : locale === "fr" ? "Drapeau de l'Indonésie" : locale === "de" ? "Flagge Indonesiens" : "Indonesian flag"
     };
     const flagIcon = {
         en: "uk-flag.webp",

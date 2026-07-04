@@ -1,11 +1,9 @@
 {
   "file": "contact.html",
   "kind": "content",
-  "title": "Shiba Support | Shiba",
-  "description": "Get support for the Shiba strength training app. Contact us about app issues, purchases, privacy, data deletion, or feedback.",
-  "heading": "Shiba Support",
-  "htmlLang": "en",
-  "textLocale": "en",
+  "title": "Shibaサポート | Shiba",
+  "description": "Shiba筋トレ記録アプリのサポートページです。アプリの不具合、購入、プライバシー、データ削除、フィードバックについてお問い合わせください。",
+  "heading": "Shibaサポート",
   "appShell": true,
   "shellClass": "contact-shell support-shell app-policy-shell",
   "ads": false,
@@ -17,15 +15,15 @@
     "contact.css"
   ],
   "intro": [
-    "Need help with Shiba? Email us and we will review your request.",
-    "Support URL: https://shibamuscle.com/contact.html"
+    "Shibaの利用中にお困りの場合は、メールでお問い合わせください。内容を確認して返信します。",
+    "サポートURL: https://shibamuscle.com/contact.html"
   ],
   "sections": [
     {
       "className": "content-card contact-card",
-      "heading": "Contact support",
+      "heading": "サポートへのお問い合わせ",
       "paragraphs": [
-        "For app issues, purchase questions, privacy requests, or feedback, contact:"
+        "アプリの不具合、購入に関する質問、プライバシーに関する依頼、フィードバックは以下のメールアドレスまでお送りください。"
       ],
       "blocks": [
         {
@@ -37,37 +35,95 @@
     },
     {
       "className": "content-card support-note",
-      "heading": "What to include",
+      "heading": "お問い合わせに含めるとよい情報",
       "blocks": [
         {
           "type": "list",
           "items": [
-            "Your device model and iOS version.",
-            "The Shiba app version, if available.",
-            "What happened and the steps that led to the issue.",
-            "Screenshots, if helpful. Please do not send passwords or full payment details."
+            "端末のモデルとiOSバージョン。",
+            "分かる場合はShibaアプリのバージョン。",
+            "発生した内容と、問題が起きるまでの操作手順。",
+            "状況が分かるスクリーンショット。パスワードや完全な支払い情報は送らないでください。"
           ]
         }
       ]
     },
     {
       "className": "content-card support-note",
-      "heading": "Response and privacy",
+      "heading": "返信とプライバシー",
       "paragraphs": [
-        "We review support requests in order. Response times may vary depending on the request.",
-        "Information you send is used to respond to and manage your support request."
+        "サポート依頼は受信順に確認します。返信までの時間は内容によって異なります。",
+        "送信いただいた情報は、サポート依頼への返信と管理のために使用します。"
       ],
       "blocks": [
         {
           "type": "link",
-          "label": "Privacy Policy",
-          "text": "Read the Shiba Privacy Policy",
+          "label": "プライバシーポリシー",
+          "text": "Shibaプライバシーポリシーを読む",
           "href": "shiba-privacy-policy.html"
         }
       ]
     }
   ],
   "locales": {
+    "en": {
+      "title": "Shiba Support | Shiba",
+      "description": "Get support for the Shiba strength training app. Contact us about app issues, purchases, privacy, data deletion, or feedback.",
+      "heading": "Shiba Support",
+      "htmlLang": "en",
+      "textLocale": "en",
+      "intro": [
+        "Need help with Shiba? Email us and we will review your request.",
+        "Support URL: https://shibamuscle.com/contact.html"
+      ],
+      "sections": [
+        {
+          "className": "content-card contact-card",
+          "heading": "Contact support",
+          "paragraphs": [
+            "For app issues, purchase questions, privacy requests, or feedback, contact:"
+          ],
+          "blocks": [
+            {
+              "type": "email",
+              "label": "Email",
+              "value": "info@shibamuscle.com"
+            }
+          ]
+        },
+        {
+          "className": "content-card support-note",
+          "heading": "What to include",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Your device model and iOS version.",
+                "The Shiba app version, if available.",
+                "What happened and the steps that led to the issue.",
+                "Screenshots, if helpful. Please do not send passwords or full payment details."
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card support-note",
+          "heading": "Response and privacy",
+          "paragraphs": [
+            "We review support requests in order. Response times may vary depending on the request.",
+            "Information you send is used to respond to and manage your support request."
+          ],
+          "blocks": [
+            {
+              "type": "link",
+              "label": "Privacy Policy",
+              "text": "Read the Shiba Privacy Policy",
+              "href": "shiba-privacy-policy.html"
+            }
+          ]
+        }
+      ]
+    },
     "ko": {
       "title": "Shiba 지원 | Shiba",
       "description": "Shiba 근력 운동 기록 앱에 대한 지원을 받을 수 있습니다. 앱 문제, 결제, 개인정보, 데이터 삭제, 의견을 문의해 주세요.",
@@ -359,9 +415,9 @@
       ]
     },
     "de": {
-      "title": "Shiba Support | Shiba",
+      "title": "Shiba Hilfe | Shiba",
       "description": "Erhalte Support für die Shiba Krafttraining-App. Kontaktiere uns zu App-Problemen, Käufen, Datenschutz, Datenlöschung oder Feedback.",
-      "heading": "Shiba Support",
+      "heading": "Shiba Hilfe",
       "htmlLang": "de",
       "textLocale": "de",
       "intro": [

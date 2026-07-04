@@ -15,6 +15,7 @@ import {
     renderStaticHeader
 } from "./site-template.mjs";
 import {
+    absoluteUrlForFile,
     assetHref,
     buildExerciseDescription,
     buildExerciseSeo,
@@ -24,6 +25,7 @@ import {
     getCategoryLabel,
     getExerciseName,
     getGeneratedLocales,
+    getLocaleConfig,
     getLocalizedMuscleGroups,
     getMeasurementCopy,
     getRelatedTags,
@@ -31,11 +33,20 @@ import {
     localizeExerciseHtml,
     stylesheetHref
 } from "./localization.mjs";
-import { ensureDirectory, loadCatalog, loadExercises } from "./source-data.mjs";
+import {
+    CATALOG_PATH,
+    EXERCISE_SRC_ROOT,
+    ensureDirectory,
+    getSourceCreatedIso,
+    getSourceLastmodIso,
+    loadCatalog,
+    loadExercises
+} from "./source-data.mjs";
 
 const catalog = loadCatalog();
 const exercises = loadExercises();
 const locales = getGeneratedLocales();
+const SITE_ORIGIN = "https://shibamuscle.com";
 const APP_THEME_COLOR = "#ff6a00";
 assertExpectedLocales(locales);
 
@@ -86,7 +97,15 @@ function renderExercisePage(exercise, catalogData, unit, variant, locale) {
     const summary = buildExerciseSummary(exercise, currentCategory, measurementKind, locale);
     const description = buildExerciseDescription(exercise, currentCategory, measurementKind, locale);
     const seoDescription = buildExerciseSeoDescription(exercise, currentCategory, measurementKind, unit, locale);
+    const datePublished = getExerciseDatePublished(exercise);
+    const dateModified = getExerciseDateModified(exercise);
     const relatedTags = getRelatedTags(exercise, exercise.categoryId, locale);
+    const primaryMuscles = getLocalizedPrimaryMuscles(exercise, locale);
+    const breadcrumbs = [
+        { label: getUiText(locale, "home"), href: "index.html" },
+        { label: cleanSectionLabel(categoryLabel, locale), href: `#${exercise.categoryId || "whole-body-section"}` },
+        { label: name }
+    ];
     const postMusclesAdSlotHtml = isIndexableUnit ? renderAdSlot("after-muscles") : "";
     const postDetailsAdSlotHtml = isIndexableUnit ? renderAdSlot("after-details") : "";
     const preFooterAdSlotHtml = isIndexableUnit ? renderAdSlot("before-footer") : "";
@@ -107,13 +126,9 @@ function renderExercisePage(exercise, catalogData, unit, variant, locale) {
         data-standards-label="${escapeAttribute(measurementCopy.standardsLabel)}"
         data-summary="${escapeAttribute(summary)}"
         data-description="${escapeAttribute(description)}"
-        data-primary-muscles="${escapeAttribute((getLocalizedPrimaryMuscles(exercise, locale)).join(" | "))}"
+        data-primary-muscles="${escapeAttribute(primaryMuscles.join(" | "))}"
         data-related-tags="${escapeAttribute(relatedTags.join(" | "))}">
-${renderBreadcrumb([
-        { label: getUiText(locale, "home"), href: "index.html" },
-        { label: cleanSectionLabel(categoryLabel, locale), href: `#${exercise.categoryId || "whole-body-section"}` },
-        { label: name }
-    ], locale)}
+${renderBreadcrumb(breadcrumbs, locale)}
 ${renderHero(exercise, locale)}
 ${renderAverageSummary(exercise, variant, measurementKind, locale)}
 ${renderLocalizedExerciseBlock(variant.averageBlock, { exercise, unit, locale, block: "average" })}
@@ -143,11 +158,30 @@ ${renderStaticFooter(currentFile, locale)}
             canonicalFile,
             description: seoDescription,
             ogImage: `https://shibamuscle.com/assets/og/exercises/${exercise.slug}.svg`,
+            ogImageAlt: summary,
             includeAlternates: isIndexableUnit,
             robots: isIndexableUnit ? "index,follow,max-image-preview:large" : "noindex,follow,noarchive",
             type: "article",
             twitterCard: "summary_large_image",
-            themeColor: APP_THEME_COLOR
+            themeColor: APP_THEME_COLOR,
+            breadcrumbs,
+            dateModified,
+            structuredData: buildExerciseStructuredData({
+                exercise,
+                unit,
+                locale,
+                canonicalFile,
+                title,
+                datePublished,
+                dateModified,
+                description,
+                seoDescription,
+                summary,
+                categoryLabel,
+                measurementKind,
+                relatedTags,
+                primaryMuscles
+            })
         },
         ads: isIndexableUnit,
         bodyClass: "exercise-page",
@@ -155,8 +189,256 @@ ${renderStaticFooter(currentFile, locale)}
     });
 }
 
+function buildExerciseStructuredData({ exercise, unit, locale, canonicalFile, title, datePublished, dateModified, description, seoDescription, summary, categoryLabel, measurementKind, relatedTags, primaryMuscles }) {
+    if (unit !== "kg") {
+        return [];
+    }
+
+    const canonicalUrl = absoluteUrlForFile(canonicalFile, locale);
+    const dataCatalogId = `${canonicalUrl}#exercise-data-catalog`;
+    const dataCatalogUrl = `${canonicalUrl}#other-workouts`;
+    const name = getExerciseName(exercise, locale);
+    const measurementCopy = getMeasurementCopy(measurementKind, locale);
+    const exerciseTermId = `${canonicalUrl}#exercise`;
+    const imageUrl = absoluteAssetUrl(exercise.image.src);
+    const ogImageUrl = `${SITE_ORIGIN}/assets/og/exercises/${exercise.slug}.svg`;
+    const publisher = { "@id": `${SITE_ORIGIN}/#organization` };
+    const keywordText = relatedTags.join(", ");
+    const muscleMentions = primaryMuscles.map((muscle) => ({
+        "@type": "AnatomicalStructure",
+        name: muscle
+    }));
+
+    return [
+        {
+            "@type": "DefinedTerm",
+            "@id": exerciseTermId,
+            name,
+            description: summary || description || seoDescription,
+            termCode: exercise.slug,
+            inDefinedTermSet: {
+                "@type": "DefinedTermSet",
+                name: categoryLabel,
+                url: `${canonicalUrl}#${exercise.categoryId || "whole-body-section"}`
+            }
+        },
+        {
+            "@type": "Article",
+            "@id": `${canonicalUrl}#article`,
+            headline: title.replace(/\s*\|\s*Shiba Muscle$/, ""),
+            name,
+            description: seoDescription,
+            datePublished,
+            dateModified,
+            image: [ogImageUrl, imageUrl],
+            mainEntityOfPage: { "@id": `${canonicalUrl}#webpage` },
+            articleSection: categoryLabel,
+            keywords: keywordText,
+            about: { "@id": exerciseTermId },
+            mentions: muscleMentions,
+            author: publisher,
+            publisher,
+            isAccessibleForFree: true
+        },
+        {
+            "@type": "DataCatalog",
+            "@id": dataCatalogId,
+            name: getExerciseDataCatalogName(locale),
+            description: getExerciseDataCatalogDescription(locale),
+            url: dataCatalogUrl,
+            inLanguage: getLocaleConfig(locale).hreflang,
+            publisher
+        },
+        {
+            "@type": "Dataset",
+            "@id": `${canonicalUrl}#dataset`,
+            identifier: `${canonicalUrl}#dataset`,
+            name: `${name} ${measurementCopy.averageLabel} / ${measurementCopy.standardsLabel} (${unit})`,
+            description: seoDescription,
+            url: canonicalUrl,
+            dateModified,
+            image: ogImageUrl,
+            keywords: relatedTags,
+            about: { "@id": exerciseTermId },
+            creator: publisher,
+            publisher,
+            includedInDataCatalog: { "@id": dataCatalogId },
+            isAccessibleForFree: true,
+            variableMeasured: [
+                `${measurementCopy.averageLabel} (${unit})`,
+                `${measurementCopy.standardsLabel} (${unit})`,
+                measurementCopy.detailLabel,
+                ...primaryMuscles
+            ],
+            measurementTechnique: getDatasetMeasurementTechnique(measurementKind, locale)
+        }
+    ];
+}
+
+function getDatasetMeasurementTechnique(measurementKind, locale) {
+    const techniques = {
+        ja: {
+            reps: "性別、体重、年齢別の平均レップ数と基準レップ数の表です。",
+            weight: "性別、体重、年齢別の平均重量と筋力基準の表です。"
+        },
+        ko: {
+            reps: "성별, 체중, 나이별 평균 반복 횟수와 기준 반복 횟수 표입니다.",
+            weight: "성별, 체중, 나이별 평균 중량과 근력 기준 표입니다."
+        },
+        "zh-hant": {
+            reps: "依性別、體重與年齡整理的平均次數與標準次數表。",
+            weight: "依性別、體重與年齡整理的平均重量與肌力標準表。"
+        },
+        "zh-hans": {
+            reps: "按性别、体重和年龄整理的平均次数与标准次数表。",
+            weight: "按性别、体重和年龄整理的平均重量与力量标准表。"
+        },
+        es: {
+            reps: "Tablas de repeticiones medias y estándares de repeticiones por sexo, peso corporal y edad.",
+            weight: "Tablas de peso medio y estándares de fuerza por sexo, peso corporal y edad."
+        },
+        fr: {
+            reps: "Tableaux de répétitions moyennes et de standards de répétitions par sexe, poids corporel et âge.",
+            weight: "Tableaux de poids moyen et de standards de force par sexe, poids corporel et âge."
+        },
+        de: {
+            reps: "Tabellen zu durchschnittlichen Wiederholungen und Wiederholungsstandards nach Geschlecht, Körpergewicht und Alter.",
+            weight: "Tabellen zu Durchschnittsgewicht und Kraftstandards nach Geschlecht, Körpergewicht und Alter."
+        },
+        id: {
+            reps: "Tabel repetisi rata-rata dan standar repetisi berdasarkan jenis kelamin, berat badan, dan usia.",
+            weight: "Tabel berat rata-rata dan standar kekuatan berdasarkan jenis kelamin, berat badan, dan usia."
+        },
+        en: {
+            reps: "Average rep and rep standard tables by sex, bodyweight, and age.",
+            weight: "Average load and strength standard tables by sex, bodyweight, and age."
+        }
+    };
+    const kind = measurementKind === "reps" ? "reps" : "weight";
+
+    return techniques[locale]?.[kind] || techniques.en[kind];
+}
+
+function getExerciseDataCatalogName(locale) {
+    const names = {
+        ja: "Shiba Muscle 筋力基準データ",
+        ko: "Shiba Muscle 근력 기준 데이터",
+        "zh-hant": "Shiba Muscle 肌力標準資料",
+        "zh-hans": "Shiba Muscle 力量标准数据",
+        es: "Datos de estándares de fuerza de Shiba Muscle",
+        fr: "Données de standards de force Shiba Muscle",
+        de: "Shiba Muscle Kraftstandard-Daten",
+        id: "Data standar kekuatan Shiba Muscle",
+        en: "Shiba Muscle Strength Standards Data"
+    };
+
+    return names[locale] || names.en;
+}
+
+function getExerciseDataCatalogDescription(locale) {
+    const descriptions = {
+        ja: "種目別の平均重量、基準重量、体重別・年齢別の筋力基準をまとめたShiba Muscleのデータカタログです。",
+        ko: "운동별 평균 중량, 기준 중량, 체중 및 나이별 근력 기준을 모은 Shiba Muscle 데이터 카탈로그입니다.",
+        "zh-hant": "Shiba Muscle 的資料目錄，彙整各動作平均重量、標準重量，以及依體重與年齡區分的肌力標準。",
+        "zh-hans": "Shiba Muscle 的数据目录，汇总各动作平均重量、标准重量，以及按体重和年龄划分的力量标准。",
+        es: "Catálogo de datos de Shiba Muscle con pesos medios, estándares de fuerza y tablas por peso corporal y edad para cada ejercicio.",
+        fr: "Catalogue de données Shiba Muscle avec charges moyennes, standards de force et tableaux par poids corporel et âge pour chaque exercice.",
+        de: "Shiba Muscle Datenkatalog mit Durchschnittsgewichten, Kraftstandards sowie Tabellen nach Körpergewicht und Alter für jede Übung.",
+        id: "Katalog data Shiba Muscle berisi rata-rata beban, standar kekuatan, serta tabel berdasarkan berat badan dan usia untuk setiap latihan.",
+        en: "Shiba Muscle data catalog covering average loads, strength standards, and bodyweight and age tables for each exercise."
+    };
+
+    return descriptions[locale] || descriptions.en;
+}
+
+function getExerciseDatePublished(exercise) {
+    return getSourceCreatedIso(join(EXERCISE_SRC_ROOT, `${exercise.slug}.json`));
+}
+
+function getExerciseDateModified(exercise) {
+    return getSourceLastmodIso([
+        join(EXERCISE_SRC_ROOT, `${exercise.slug}.json`),
+        CATALOG_PATH
+    ]);
+}
+
+function absoluteAssetUrl(file) {
+    if (/^https?:\/\//i.test(file || "")) {
+        return file;
+    }
+
+    return `${SITE_ORIGIN}/assets/${String(file || "").replace(/^\.?\/?assets\//, "")}`;
+}
+
 function renderLocalizedExerciseBlock(html, options) {
-    return localizeExerciseHtml(html, options).trim().replace(/[ \t]+$/gm, "");
+    return normalizeContentImageLoading(normalizeRecordFlagAltText(localizeExerciseHtml(html, options), options.locale)).trim().replace(/[ \t]+$/gm, "");
+}
+
+function normalizeRecordFlagAltText(html, locale) {
+    return html.replace(/<img\b(?=[^>]*countryflags\.com)(?=[^>]*\bclass="[^"]*\bflag-icon\b[^"]*")[^>]*\salt="([^"]*)"[^>]*>/gi, (tag, alt) => {
+        const cleanAlt = alt.trim();
+        if (!cleanAlt || isDescriptiveFlagAlt(cleanAlt)) {
+            return tag;
+        }
+
+        return tag.replace(/\salt="[^"]*"/i, ` alt="${escapeAttribute(buildRecordFlagAlt(cleanAlt, locale))}"`);
+    });
+}
+
+function isDescriptiveFlagAlt(value) {
+    return /flag|国旗|國旗|Bandera|Drapeau|Flagge|Bendera/i.test(value);
+}
+
+function buildRecordFlagAlt(country, locale) {
+    if (locale === "ja") {
+        return `${country}の国旗`;
+    }
+
+    if (locale === "ko") {
+        return `${country} 국기`;
+    }
+
+    if (locale === "zh-hant") {
+        return `${country}國旗`;
+    }
+
+    if (locale === "zh-hans") {
+        return `${country}国旗`;
+    }
+
+    if (locale === "es") {
+        return `Bandera de ${country}`;
+    }
+
+    if (locale === "fr") {
+        return `Drapeau de ${country}`;
+    }
+
+    if (locale === "de") {
+        return `Flagge ${country}`;
+    }
+
+    if (locale === "id") {
+        return `Bendera ${country}`;
+    }
+
+    return `${country} flag`;
+}
+
+function normalizeContentImageLoading(html) {
+    return html.replace(/<img\b[^>]*>/gi, (tag) => {
+        let next = tag;
+
+        if (!/\sloading="/i.test(next)) {
+            next = next.replace(/>$/, ' loading="lazy">');
+        }
+
+        if (!/\sdecoding="/i.test(next)) {
+            next = next.replace(/>$/, ' decoding="async">');
+        }
+
+        return next;
+    });
 }
 
 function renderHero(exercise, locale) {
