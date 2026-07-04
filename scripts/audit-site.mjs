@@ -1454,10 +1454,14 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
         assert(isChronologicalDateRange(webPage.datePublished, webPage.dateModified), `${entry.relativePath}: WebPage schema datePublished should not be newer than dateModified`);
         assert(openGraphUpdatedTime === webPage.dateModified, `${entry.relativePath}: og:updated_time should match WebPage schema dateModified`);
         assert(webPage.isPartOf?.["@id"] === "https://shibamuscle.com/#website", `${entry.relativePath}: WebPage schema site link is missing`);
+        assert(webPage.publisher?.["@id"] === "https://shibamuscle.com/#organization", `${entry.relativePath}: WebPage schema publisher organization is missing`);
+        assert(webPage.primaryImageOfPage?.["@id"] === `${canonicalUrl}#primaryimage`, `${entry.relativePath}: WebPage schema primary image link is missing`);
+        assert(webPage.image?.["@id"] === `${canonicalUrl}#primaryimage`, `${entry.relativePath}: WebPage schema image link is missing`);
     }
 
     auditStructuredDataImages(entry, graph);
     auditStructuredDataPrimaryImageConsistency(entry, html, graph, canonicalUrl);
+    const primaryImageUrl = extractFirstGroup(html, /<meta property="og:image" content="([^"]+)">/i);
 
     if (hasVisibleBreadcrumb) {
         const breadcrumb = graph.find((node) => node?.["@id"] === `${canonicalUrl}#breadcrumb` && hasType(node, "BreadcrumbList"));
@@ -1474,11 +1478,11 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
     }
 
     if (isExercisePage) {
-        auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, documentHeading, metaDescription });
+        auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, documentHeading, metaDescription, primaryImageUrl });
     }
 
     if (isStaticContentPage) {
-        auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, documentHeading, metaDescription });
+        auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, documentHeading, metaDescription, primaryImageUrl });
     }
 }
 
@@ -1762,7 +1766,7 @@ function getExpectedWebPageTypes(entry, sourceStaticPage, isExercisePage) {
     return types;
 }
 
-function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, documentHeading, metaDescription }) {
+function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, documentHeading, metaDescription, primaryImageUrl }) {
     const article = graph.find((node) => node?.["@id"] === `${canonicalUrl}#article` && hasType(node, "Article"));
     const publishingPrinciplesUrl = getExpectedPublishingPrinciplesUrl(entry, expectedLanguage);
 
@@ -1784,6 +1788,7 @@ function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, e
     assert(isValidSitemapLastmod(article.dateModified), `${entry.relativePath}: static Article dateModified is missing or invalid`);
     assert(isChronologicalDateRange(article.datePublished, article.dateModified), `${entry.relativePath}: static Article datePublished should not be newer than dateModified`);
     assert(Array.isArray(article.image) && article.image.length >= 1, `${entry.relativePath}: static Article image list is missing`);
+    assert(hasStructuredDataImageUrl(article.image, primaryImageUrl), `${entry.relativePath}: static Article image should include the primary page image`);
     assert(article.mainEntityOfPage?.["@id"] === `${canonicalUrl}#webpage`, `${entry.relativePath}: static Article mainEntityOfPage is incorrect`);
     assert(Boolean(article.articleSection), `${entry.relativePath}: static Article section is missing`);
     assert(Boolean(article.keywords) && article.keywords.length >= 10, `${entry.relativePath}: static Article keywords are missing or too short`);
@@ -1791,10 +1796,14 @@ function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, e
     assert(article.publisher?.["@id"] === "https://shibamuscle.com/#organization", `${entry.relativePath}: static Article publisher organization is missing`);
     assert(article.publishingPrinciples === publishingPrinciplesUrl, `${entry.relativePath}: static Article publishingPrinciples URL is incorrect`);
     assert(article.isAccessibleForFree === true, `${entry.relativePath}: static Article should be marked accessible for free`);
+    if (webPage) {
+        assert(article.datePublished === webPage.datePublished, `${entry.relativePath}: static Article datePublished should match WebPage datePublished`);
+        assert(article.dateModified === webPage.dateModified, `${entry.relativePath}: static Article dateModified should match WebPage dateModified`);
+    }
     assert(referencesStructuredDataNode(webPage?.mainEntity, `${canonicalUrl}#article`), `${entry.relativePath}: WebPage mainEntity should reference static Article`);
 }
 
-function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, documentHeading, metaDescription }) {
+function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, documentHeading, metaDescription, primaryImageUrl }) {
     const exerciseMatch = exerciseFileIndex.byFile.get(entry.file);
     const measurementKind = exerciseMatch?.exercise?.metadata?.measurementKind || "weight";
     const measurementCopy = getMeasurementCopy(measurementKind, entry.locale);
@@ -1832,6 +1841,7 @@ function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { docu
         assert(isValidSitemapLastmod(article.datePublished), `${entry.relativePath}: Article datePublished is missing or invalid`);
         assert(isValidSitemapLastmod(article.dateModified), `${entry.relativePath}: Article dateModified is missing or invalid`);
         assert(isChronologicalDateRange(article.datePublished, article.dateModified), `${entry.relativePath}: Article datePublished should not be newer than dateModified`);
+        assert(hasStructuredDataImageUrl(article.image, primaryImageUrl), `${entry.relativePath}: Article image should include the primary page image`);
         assert(Boolean(article.articleSection), `${entry.relativePath}: Article section is missing`);
         assert(Boolean(article.keywords) && article.keywords.length >= 10, `${entry.relativePath}: Article keywords are missing or too short`);
         assert(article.about?.["@id"] === `${canonicalUrl}#exercise`, `${entry.relativePath}: Article about link should reference the exercise node`);
@@ -1840,6 +1850,10 @@ function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { docu
         assert(article.publisher?.["@id"] === "https://shibamuscle.com/#organization", `${entry.relativePath}: Article publisher organization is missing`);
         assert(article.publishingPrinciples === publishingPrinciplesUrl, `${entry.relativePath}: Article publishingPrinciples URL is incorrect`);
         assert(article.isAccessibleForFree === true, `${entry.relativePath}: Article should be marked accessible for free`);
+        if (webPage) {
+            assert(article.datePublished === webPage.datePublished, `${entry.relativePath}: Article datePublished should match WebPage datePublished`);
+            assert(article.dateModified === webPage.dateModified, `${entry.relativePath}: Article dateModified should match WebPage dateModified`);
+        }
     }
 
     if (dataCatalog) {
@@ -1862,6 +1876,7 @@ function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { docu
         assert(isValidSitemapLastmod(dataset.dateModified), `${entry.relativePath}: Dataset dateModified is missing or invalid`);
         assert(isChronologicalDateRange(dataset.datePublished, dataset.dateModified), `${entry.relativePath}: Dataset datePublished should not be newer than dateModified`);
         assert(Boolean(dataset.image), `${entry.relativePath}: Dataset image is missing`);
+        assert(hasStructuredDataImageUrl(dataset.image, primaryImageUrl), `${entry.relativePath}: Dataset image should match the primary page image`);
         assert(Array.isArray(dataset.keywords) && dataset.keywords.length >= 1, `${entry.relativePath}: Dataset keywords are missing`);
         assert(dataset.about?.["@id"] === `${canonicalUrl}#exercise`, `${entry.relativePath}: Dataset about link should reference the exercise node`);
         assert(dataset.creator?.["@id"] === "https://shibamuscle.com/#organization", `${entry.relativePath}: Dataset creator organization is missing`);
@@ -1872,6 +1887,10 @@ function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { docu
         assert(Array.isArray(dataset.variableMeasured) && dataset.variableMeasured.length >= 3, `${entry.relativePath}: Dataset measured variables are incomplete`);
         assert(dataset.variableMeasured?.[2] === measurementCopy.detailLabel, `${entry.relativePath}: Dataset measured variable label is not localized`);
         assert(dataset.measurementTechnique === getExpectedDatasetMeasurementTechnique(measurementKind, entry.locale), `${entry.relativePath}: Dataset measurement technique is not localized`);
+        if (webPage) {
+            assert(dataset.datePublished === webPage.datePublished, `${entry.relativePath}: Dataset datePublished should match WebPage datePublished`);
+            assert(dataset.dateModified === webPage.dateModified, `${entry.relativePath}: Dataset dateModified should match WebPage dateModified`);
+        }
     }
 
     if (webPage) {
@@ -1883,6 +1902,26 @@ function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { docu
             assert(referencesStructuredDataNode(webPage.mainEntity, id), `${entry.relativePath}: WebPage mainEntity should reference ${id}`);
         });
     }
+}
+
+function hasStructuredDataImageUrl(value, expectedUrl) {
+    if (!expectedUrl) {
+        return false;
+    }
+
+    if (typeof value === "string") {
+        return value === expectedUrl;
+    }
+
+    if (Array.isArray(value)) {
+        return value.some((item) => hasStructuredDataImageUrl(item, expectedUrl));
+    }
+
+    if (value && typeof value === "object") {
+        return value.url === expectedUrl || value.contentUrl === expectedUrl;
+    }
+
+    return false;
 }
 
 function getExpectedPublishingPrinciplesUrl(entry, expectedLanguage) {
