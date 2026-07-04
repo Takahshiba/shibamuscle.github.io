@@ -349,12 +349,11 @@ function auditRobotsTxt() {
 
     const robots = readFileSync(robotsPath, "utf8");
     assert(/User-agent:\s*\*/i.test(robots), "robots.txt: default User-agent rule is missing");
+    const allowLines = Array.from(robots.matchAll(/^Allow:\s*(\S+)\s*$/gmi)).map((match) => match[1]);
+    assert(allowLines.length === 1 && allowLines[0] === "/", "robots.txt: canonical Allow: / rule is missing or duplicated");
     const sitemapLines = Array.from(robots.matchAll(/^Sitemap:\s*(\S+)\s*$/gmi)).map((match) => match[1]);
     assert(sitemapLines.length === 1 && sitemapLines[0] === `${SITE_ORIGIN}/sitemap.xml`, "robots.txt: canonical sitemap URL is missing or duplicated");
-    Array.from(robots.matchAll(/^Disallow:[^\S\r\n]*(\S.*)$/gmi)).forEach((match) => {
-        assert(false, `robots.txt: unexpected disallow rule ${match[1]}`);
-    });
-    assert(!/Disallow:\s*\/(?:assets\/|styles\.css|app\.js|sitemap\.xml)/i.test(robots), "robots.txt: crawl-critical assets or sitemap should not be disallowed");
+    assert(!/^Disallow:/gmi.test(robots), "robots.txt: site should not publish Disallow rules");
 }
 
 function auditAssetStylesheetFiles() {
