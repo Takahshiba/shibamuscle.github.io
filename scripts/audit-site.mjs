@@ -1410,6 +1410,7 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
     assert(graph.length >= 4, `${entry.relativePath}: JSON-LD graph is too small`);
     auditStructuredDataGraphIdentity(entry, graph);
     auditStructuredDataGraphReferences(entry, graph);
+    auditStructuredDataAbsoluteUrls(entry, document);
     auditNoFutureStructuredDataDates(entry, graph);
     const organization = graph.find((node) => node?.["@id"] === "https://shibamuscle.com/#organization" && hasType(node, "Organization"));
     const website = graph.find((node) => node?.["@id"] === "https://shibamuscle.com/#website" && hasType(node, "WebSite"));
@@ -1913,6 +1914,45 @@ function auditStructuredDataGraphReferences(entry, graph) {
             assert(ids.has(id), `${entry.relativePath}: JSON-LD reference ${path} points to missing graph node ${id}`);
         });
     });
+}
+
+function auditStructuredDataAbsoluteUrls(entry, document) {
+    collectStructuredDataAbsoluteUrls(document).forEach(({ url, path }) => {
+        assert(isAllowedStructuredDataAbsoluteUrl(url), `${entry.relativePath}: JSON-LD absolute URL ${path} has an unexpected origin (${url})`);
+    });
+}
+
+function collectStructuredDataAbsoluteUrls(value, path = [], urls = [], seen = new Set()) {
+    if (typeof value === "string") {
+        if (/^https?:\/\//i.test(value)) {
+            urls.push({ url: value, path: path.join(".") || "@context" });
+        }
+        return urls;
+    }
+
+    if (!value || typeof value !== "object" || seen.has(value)) {
+        return urls;
+    }
+    seen.add(value);
+
+    const entries = Array.isArray(value)
+        ? value.map((item, index) => [String(index), item])
+        : Object.entries(value);
+
+    entries.forEach(([key, child]) => {
+        collectStructuredDataAbsoluteUrls(child, path.concat(key), urls, seen);
+    });
+
+    return urls;
+}
+
+function isAllowedStructuredDataAbsoluteUrl(value) {
+    try {
+        const parsed = new URL(value);
+        return parsed.origin === SITE_ORIGIN || parsed.origin === "https://schema.org";
+    } catch {
+        return false;
+    }
 }
 
 function collectStructuredDataReferenceIds(value, path = [], references = [], seen = new Set()) {
