@@ -108,16 +108,19 @@ for (const entry of htmlEntries) {
     const isIndexablePage = !isToolPage && !isSecondaryUnitPage && !isEnglishOnlyDuplicate && !isNoindexStaticPage;
     const localeConfig = getLocaleConfig(entry.locale);
     const expectedHtmlLang = localizedStaticPage?.htmlLang || localeConfig.hreflang;
+    const expectedHtmlDir = localeConfig.dir || "ltr";
     const canonicalFile = isSecondaryUnitPage ? entry.file.replace(/^lb_/, "kg_") : entry.file;
     const canonicalUrl = absoluteUrlForFile(canonicalFile, isEnglishOnlyPage ? "ja" : entry.locale);
     const pageUrl = absoluteUrlForFile(entry.file, entry.locale);
 
+    assert(/^<!DOCTYPE html>/i.test(html), `${entry.relativePath}: HTML5 doctype is missing`);
     assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|en)\.shibamuscle\.com/i.test(localeConfig.origin), `${entry.locale}: old locale subdomain origin remains`);
     assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|en)\.shibamuscle\.com/i.test(html), `${entry.relativePath}: old locale subdomain link remains`);
     assert(!html.includes("precaonnect"), `${entry.relativePath}: precaonnect typo is still present`);
     assert(!html.includes("G-ZPM6B2KLSV"), `${entry.relativePath}: legacy GA id is still present`);
     assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${entry.relativePath}: current GA script is missing`);
     assert(html.includes(`<html lang="${expectedHtmlLang}"`), `${entry.relativePath}: html lang is incorrect`);
+    assert(html.includes(`<html lang="${expectedHtmlLang}" dir="${expectedHtmlDir}">`), `${entry.relativePath}: html dir is incorrect`);
     auditHtmlAppIconMetadata(entry, html);
     auditSingletonHeadMetadata(entry, html);
     const expectedAlternates = isToolPage || isSecondaryUnitPage || isEnglishOnlyPage || isNoindexStaticPage ? 0 : getGeneratedLocales().length + 1;
@@ -1071,6 +1074,8 @@ function auditRobotsMeta(entry, html, { isIndexablePage, isToolPage, isSecondary
 function auditSingletonHeadMetadata(entry, html) {
     const head = extractHeadMarkup(html);
     const requiredSingletons = [
+        ["charset", /<meta\b(?=[^>]*\bcharset=)[^>]*>/gi],
+        ["viewport", /<meta\b(?=[^>]*\bname="viewport")[^>]*>/gi],
         ["title", /<title\b[\s\S]*?<\/title>/gi],
         ["meta description", /<meta\b(?=[^>]*\bname="description")[^>]*>/gi],
         ["robots meta", /<meta\b(?=[^>]*\bname="robots")[^>]*>/gi],
@@ -1109,6 +1114,13 @@ function auditSingletonHeadMetadata(entry, html) {
         const count = countMatches(head, pattern);
         assert(count <= 1, `${entry.relativePath}: expected at most one ${label} tag, found ${count}`);
     });
+
+    const charset = extractFirstGroup(head, /<meta\b[^>]*\bcharset=(?:"([^"]+)"|'([^']+)'|([^\s/>]+))/i);
+    const viewportTag = head.match(/<meta\b(?=[^>]*\bname="viewport")[^>]*>/i)?.[0] || "";
+    const viewport = extractHtmlAttribute(viewportTag, "content");
+
+    assert(charset.toLowerCase() === "utf-8", `${entry.relativePath}: charset should be UTF-8`);
+    assert(/^width=device-width,\s*initial-scale=1(?:\.0)?$/.test(viewport), `${entry.relativePath}: viewport should use width=device-width, initial-scale=1.0`);
 }
 
 function auditSocialMetadataConsistency(entry, html, canonicalUrl) {
