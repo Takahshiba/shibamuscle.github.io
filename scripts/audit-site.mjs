@@ -1373,7 +1373,7 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
         const breadcrumb = graph.find((node) => node?.["@id"] === `${canonicalUrl}#breadcrumb` && hasType(node, "BreadcrumbList"));
         assert(Boolean(breadcrumb), `${entry.relativePath}: BreadcrumbList schema is missing`);
         if (breadcrumb) {
-            assert((breadcrumb.itemListElement || []).length >= 2, `${entry.relativePath}: BreadcrumbList schema is incomplete`);
+            auditBreadcrumbStructuredData(entry, html, breadcrumb, canonicalUrl);
             assert(webPage?.breadcrumb?.["@id"] === breadcrumb["@id"], `${entry.relativePath}: WebPage schema does not reference BreadcrumbList`);
         }
     }
@@ -1428,6 +1428,44 @@ function auditHomeStructuredData(entry, graph, canonicalUrl, webPage) {
             assertLocalFileExists(entry.relativePath, resolvedImage, item.item.image);
         }
     });
+}
+
+function auditBreadcrumbStructuredData(entry, html, breadcrumb, canonicalUrl) {
+    const visibleItems = extractVisibleBreadcrumbItems(html);
+    const schemaItems = Array.isArray(breadcrumb.itemListElement) ? breadcrumb.itemListElement : [];
+
+    assert(visibleItems.length >= 2, `${entry.relativePath}: visible breadcrumb is incomplete`);
+    assert(schemaItems.length === visibleItems.length, `${entry.relativePath}: BreadcrumbList item count should match visible breadcrumb`);
+    assert(schemaItems.length >= 2, `${entry.relativePath}: BreadcrumbList schema is incomplete`);
+
+    schemaItems.forEach((item, index) => {
+        const visibleItem = visibleItems[index] || {};
+        assert(item?.["@type"] === "ListItem", `${entry.relativePath}: BreadcrumbList item ${index + 1} should be a ListItem`);
+        assert(item.position === index + 1, `${entry.relativePath}: BreadcrumbList item ${index + 1} position is incorrect`);
+        assert(item.name === visibleItem.label, `${entry.relativePath}: BreadcrumbList item ${index + 1} name should match visible breadcrumb`);
+        assert(typeof item.item === "string" && item.item.startsWith(SITE_ORIGIN), `${entry.relativePath}: BreadcrumbList item ${index + 1} should use an absolute site URL`);
+    });
+
+    const firstItem = schemaItems[0];
+    const lastItem = schemaItems[schemaItems.length - 1];
+    assert(firstItem?.item === absoluteUrlForFile("index.html", entry.locale), `${entry.relativePath}: BreadcrumbList first item should link to the localized home`);
+    assert(lastItem?.item === canonicalUrl, `${entry.relativePath}: BreadcrumbList last item should link to the canonical URL`);
+    assert(lastItem?.name === visibleItems[visibleItems.length - 1]?.label, `${entry.relativePath}: BreadcrumbList last item name should match the current page label`);
+}
+
+function extractVisibleBreadcrumbItems(html) {
+    const breadcrumbHtml = html.match(/<nav class="breadcrumb"[^>]*>([\s\S]*?)<\/nav>/i)?.[1] || "";
+    if (!breadcrumbHtml) {
+        return [];
+    }
+
+    return Array.from(breadcrumbHtml.matchAll(/<(a|span)\b(?![^>]*breadcrumb-separator\b)([^>]*)>([\s\S]*?)<\/\1>/gi))
+        .map((match) => ({
+            tag: match[1].toLowerCase(),
+            href: extractHtmlAttribute(match[0], "href"),
+            label: decodeAuditHtml(htmlToText(match[3]))
+        }))
+        .filter((item) => item.label && item.label !== "/");
 }
 
 function auditWebSiteStructuredData(entry, website, expectedLanguage) {
