@@ -1457,6 +1457,7 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
     }
 
     auditStructuredDataImages(entry, graph);
+    auditStructuredDataPrimaryImageConsistency(entry, html, graph, canonicalUrl);
 
     if (hasVisibleBreadcrumb) {
         const breadcrumb = graph.find((node) => node?.["@id"] === `${canonicalUrl}#breadcrumb` && hasType(node, "BreadcrumbList"));
@@ -1608,6 +1609,31 @@ function auditStructuredDataImages(entry, graph) {
             auditStructuredDataImageObjectDimensions(entry, node, imageObject);
         });
     });
+}
+
+function auditStructuredDataPrimaryImageConsistency(entry, html, graph, canonicalUrl) {
+    const primaryImage = graph.find((node) => node?.["@id"] === `${canonicalUrl}#primaryimage` && hasType(node, "ImageObject"));
+    assert(Boolean(primaryImage), `${entry.relativePath}: primary ImageObject node is missing`);
+    if (!primaryImage) {
+        return;
+    }
+
+    const ogImage = extractFirstGroup(html, /<meta property="og:image" content="([^"]+)">/i);
+    const twitterImage = extractFirstGroup(html, /<meta name="twitter:image" content="([^"]+)">/i);
+    const ogImageAlt = decodeAuditHtml(extractFirstGroup(html, /<meta property="og:image:alt" content="([^"]+)">/i));
+    const twitterImageAlt = decodeAuditHtml(extractFirstGroup(html, /<meta name="twitter:image:alt" content="([^"]+)">/i));
+    const imageType = extractFirstGroup(html, /<meta property="og:image:type" content="([^"]+)">/i);
+    const imageWidth = Number.parseInt(extractFirstGroup(html, /<meta property="og:image:width" content="([^"]+)">/i), 10);
+    const imageHeight = Number.parseInt(extractFirstGroup(html, /<meta property="og:image:height" content="([^"]+)">/i), 10);
+
+    assert(primaryImage.url === ogImage, `${entry.relativePath}: primary ImageObject url should match og:image`);
+    assert(primaryImage.contentUrl === ogImage, `${entry.relativePath}: primary ImageObject contentUrl should match og:image`);
+    assert(twitterImage === ogImage, `${entry.relativePath}: twitter:image should match primary ImageObject url`);
+    assert(primaryImage.caption === ogImageAlt, `${entry.relativePath}: primary ImageObject caption should match og:image:alt`);
+    assert(twitterImageAlt === ogImageAlt, `${entry.relativePath}: twitter:image:alt should match primary ImageObject caption`);
+    assert(primaryImage.encodingFormat === imageType, `${entry.relativePath}: primary ImageObject encodingFormat should match og:image:type`);
+    assert(primaryImage.width === imageWidth, `${entry.relativePath}: primary ImageObject width should match og:image:width`);
+    assert(primaryImage.height === imageHeight, `${entry.relativePath}: primary ImageObject height should match og:image:height`);
 }
 
 function collectStructuredDataImageObjects(value, seen = new Set()) {
