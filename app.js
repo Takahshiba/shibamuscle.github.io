@@ -1249,7 +1249,7 @@ function detectPageType() {
         return "home";
     }
 
-    if (document.querySelector(".main-image-title")) {
+    if (document.body.classList.contains("exercise-page") || document.querySelector("main[data-exercise-slug]")) {
         return "exercise";
     }
 
