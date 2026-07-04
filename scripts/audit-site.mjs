@@ -223,6 +223,7 @@ for (const entry of htmlEntries) {
 
     auditInternalLinks(entry, html, isIndexablePage);
     auditInternalFragmentLinks(entry, html);
+    auditDuplicateHtmlIds(entry, html);
     auditCanonicalHomeLinks(entry, html);
     auditTargetBlankLinks(entry, html);
     auditLocalAssetReferences(entry, html);
@@ -2643,6 +2644,20 @@ function collectHtmlIds(html) {
     }
 
     return ids;
+}
+
+function auditDuplicateHtmlIds(entry, html) {
+    const ids = new Set();
+    let match;
+    const idPattern = /\sid="([^"]+)"/gi;
+
+    while ((match = idPattern.exec(html))) {
+        const id = match[1];
+
+        assert(Boolean(id.trim()), `${entry.relativePath}: HTML id should not be empty`);
+        assert(!ids.has(id), `${entry.relativePath}: duplicate HTML id "${id}"`);
+        ids.add(id);
+    }
 }
 
 function auditCanonicalHomeLinks(entry, html) {
