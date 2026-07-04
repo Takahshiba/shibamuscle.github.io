@@ -10,6 +10,7 @@ import {
     getGeneratedLocales,
     getLocaleConfig,
     getMeasurementCopy,
+    getOgLocale,
     getUiText,
     localizeStaticPage,
     stripIntentionalLanguageSwitchText
@@ -196,7 +197,7 @@ for (const entry of htmlEntries) {
     });
     if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexStaticPage) {
         assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "ja")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
-        assert((html.match(/<meta property="og:locale:alternate"/g) || []).length === getGeneratedLocales().length - 1, `${entry.relativePath}: og:locale:alternate set is incomplete`);
+        auditOpenGraphLocaleAlternates(entry, html, expectedHtmlLang);
         if (!isAppPage) {
             getGeneratedLocales().forEach((locale) => {
                 assert(html.includes(`href="${absoluteUrlForFile(canonicalFile, locale.code)}" data-lang="${locale.code}"`), `${entry.relativePath}: footer language link for ${locale.code} is incorrect`);
@@ -877,6 +878,39 @@ function auditHreflangReciprocity(entry, canonicalFile, canonicalUrl) {
         assert(targetHead.includes(`<link rel="alternate" hreflang="${sourceHreflang}" href="${canonicalUrl}">`), `${entry.relativePath}: hreflang target ${targetPath} does not link back to ${canonicalUrl}`);
         assert(targetHead.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "ja")}">`), `${entry.relativePath}: hreflang target ${targetPath} has incorrect x-default`);
     });
+}
+
+function auditOpenGraphLocaleAlternates(entry, html, expectedHtmlLang) {
+    const expectedPrimary = getExpectedOpenGraphLocale(entry, expectedHtmlLang);
+    const actualPrimary = extractFirstGroup(html, /<meta property="og:locale" content="([^"]+)">/i);
+    const actualAlternates = Array.from(html.matchAll(/<meta property="og:locale:alternate" content="([^"]+)">/gi)).map((match) => match[1]);
+    const expectedAlternates = getGeneratedLocales()
+        .map((locale) => getOgLocale(locale.code))
+        .filter((locale) => locale !== expectedPrimary);
+
+    assert(actualPrimary === expectedPrimary, `${entry.relativePath}: og:locale should be ${expectedPrimary}`);
+    assert(actualAlternates.length === expectedAlternates.length, `${entry.relativePath}: og:locale:alternate set is incomplete`);
+    assert(new Set(actualAlternates).size === actualAlternates.length, `${entry.relativePath}: og:locale:alternate values should be unique`);
+    expectedAlternates.forEach((locale) => {
+        assert(actualAlternates.includes(locale), `${entry.relativePath}: og:locale:alternate is missing ${locale}`);
+    });
+    actualAlternates.forEach((locale) => {
+        assert(expectedAlternates.includes(locale), `${entry.relativePath}: unexpected og:locale:alternate ${locale}`);
+    });
+}
+
+function getExpectedOpenGraphLocale(entry, expectedHtmlLang) {
+    const matchingLocale = getGeneratedLocales().find((locale) => {
+        return locale.hreflang.toLowerCase() === String(expectedHtmlLang || "").toLowerCase();
+    });
+    if (matchingLocale) {
+        return getOgLocale(matchingLocale.code);
+    }
+    if (String(expectedHtmlLang || "").toLowerCase().startsWith("en")) {
+        return "en_US";
+    }
+
+    return getOgLocale(entry.locale);
 }
 
 function auditNoSitemapAlternates(entry, canonicalUrl) {

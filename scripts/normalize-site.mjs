@@ -259,6 +259,7 @@ function buildPageContext(entry, html) {
             description: page.description || decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))),
             canonicalUrl: englishOnly ? absoluteUrlForFile(file, "ja") : canonicalUrl,
             ogImage: page.ogImage || DEFAULT_OG_IMAGE,
+            ogLocale: page.htmlLang === "en" ? "en_US" : undefined,
             type: "article",
             twitterCard: "summary",
             dateModified,
@@ -419,6 +420,12 @@ function buildSeoBlock(context) {
     const updatedTimeBlock = renderOpenGraphUpdatedTime(context.dateModified, robots);
     const imagePreloadBlock = renderImagePreloadLinks(context.preloadImages || [], robots);
     const articleMetadataBlock = renderArticleMetadata(context);
+    const resolvedOgLocale = context.ogLocale || getOgLocale(context.locale);
+    const ogLocaleAlternates = context.standalone ? "" : getGeneratedLocales()
+        .filter((locale) => getOgLocale(locale.code) !== resolvedOgLocale)
+        .map((locale) => `    <meta property="og:locale:alternate" content="${escapeAttribute(getOgLocale(locale.code))}">`)
+        .join("\n");
+    const ogLocaleAlternateBlock = ogLocaleAlternates ? `\n${ogLocaleAlternates}` : "";
 
     return `
     <meta name="description" content="${escapeAttribute(context.description)}">
@@ -431,7 +438,7 @@ ${alternateLinks}${xDefaultLink}
 ${updatedTimeBlock}
 ${articleMetadataBlock}
     <meta property="og:site_name" content="Shiba Muscle">
-    <meta property="og:locale" content="${getOgLocale(context.locale)}">
+    <meta property="og:locale" content="${escapeAttribute(resolvedOgLocale)}">${ogLocaleAlternateBlock}
     <meta property="og:title" content="${escapeAttribute(context.title)}">
     <meta property="og:description" content="${escapeAttribute(context.description)}">
     <meta property="og:url" content="${context.canonicalUrl}">
