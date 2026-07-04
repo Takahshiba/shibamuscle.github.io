@@ -1428,16 +1428,27 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
 
     if (organization) {
         assert(organization.name === "Shiba Muscle", `${entry.relativePath}: Organization name is incorrect`);
+        assert(organization.alternateName === "Shiba", `${entry.relativePath}: Organization alternateName is incorrect`);
         assert(Boolean(organization.description), `${entry.relativePath}: Organization description is missing`);
         assert(organization.url === "https://shibamuscle.com", `${entry.relativePath}: Organization URL is incorrect`);
         assert(organization.email === "info@shibamuscle.com", `${entry.relativePath}: Organization support email is missing`);
         assert(organization.publishingPrinciples === "https://shibamuscle.com/methodology.html", `${entry.relativePath}: Organization publishingPrinciples URL is incorrect`);
+        assert(organization.logo?.["@type"] === "ImageObject", `${entry.relativePath}: Organization logo should be an ImageObject`);
         assert(organization.logo?.url === "https://shibamuscle.com/assets/app/shiba-mascot.png", `${entry.relativePath}: Organization logo is incorrect`);
+        assert(organization.logo?.contentUrl === organization.logo?.url, `${entry.relativePath}: Organization logo contentUrl should match url`);
+        assert(organization.logo?.encodingFormat === "image/png", `${entry.relativePath}: Organization logo encodingFormat is incorrect`);
+        assert(organization.logo?.width === 520, `${entry.relativePath}: Organization logo width is incorrect`);
+        assert(organization.logo?.height === 520, `${entry.relativePath}: Organization logo height is incorrect`);
         assert(organization.contactPoint?.["@type"] === "ContactPoint", `${entry.relativePath}: Organization contactPoint is missing`);
+        assert(organization.contactPoint?.contactType === "customer support", `${entry.relativePath}: Organization contactPoint type is incorrect`);
         assert(organization.contactPoint?.email === "info@shibamuscle.com", `${entry.relativePath}: Organization contactPoint email is missing`);
         assert(organization.contactPoint?.url === "https://shibamuscle.com/contact.html", `${entry.relativePath}: Organization contactPoint URL is missing`);
-        ["ja", "en", "ko", "zh-Hant", "zh-Hans", "es", "fr", "de", "id"].forEach((language) => {
-            assert((organization.contactPoint?.availableLanguage || []).includes(language), `${entry.relativePath}: Organization contactPoint language ${language} is missing`);
+        const contactLanguages = Array.isArray(organization.contactPoint?.availableLanguage) ? organization.contactPoint.availableLanguage : [];
+        const expectedContactLanguages = ["ja", "en", "ko", "zh-Hant", "zh-Hans", "es", "fr", "de", "id"];
+        assert(contactLanguages.length === expectedContactLanguages.length, `${entry.relativePath}: Organization contactPoint languages are incomplete`);
+        assert(new Set(contactLanguages).size === contactLanguages.length, `${entry.relativePath}: Organization contactPoint languages should be unique`);
+        expectedContactLanguages.forEach((language) => {
+            assert(contactLanguages.includes(language), `${entry.relativePath}: Organization contactPoint language ${language} is missing`);
         });
     }
 
@@ -1610,6 +1621,7 @@ function auditWebSiteStructuredData(entry, website, expectedLanguage) {
     const hasPart = Array.isArray(website.hasPart) ? website.hasPart : [];
 
     assert(website.url === "https://shibamuscle.com/", `${entry.relativePath}: WebSite URL is incorrect`);
+    assert(website.name === "Shiba Muscle", `${entry.relativePath}: WebSite name is incorrect`);
     assert(website.inLanguage === expectedLanguage, `${entry.relativePath}: WebSite language is incorrect`);
     assert(website.publisher?.["@id"] === "https://shibamuscle.com/#organization", `${entry.relativePath}: WebSite publisher organization is missing`);
     assert(hasPart.length === expectedNavigation.length, `${entry.relativePath}: WebSite navigation schema is incomplete`);
@@ -1621,8 +1633,21 @@ function auditWebSiteStructuredData(entry, website, expectedLanguage) {
         assert(Boolean(item), `${entry.relativePath}: WebSite navigation schema is missing ${expectedUrl}`);
         if (item) {
             assert(item.name === label, `${entry.relativePath}: WebSite navigation label for ${expectedUrl} is incorrect`);
+            auditWebSiteNavigationTarget(entry, item);
         }
     });
+}
+
+function auditWebSiteNavigationTarget(entry, item) {
+    const targetPath = resolveLocalCrawlPath(entry.relativePath, item.url);
+
+    assert(Boolean(targetPath), `${entry.relativePath}: WebSite navigation URL cannot be resolved (${item.url})`);
+    if (!targetPath) {
+        return;
+    }
+
+    assert(availableHtml.has(targetPath), `${entry.relativePath}: WebSite navigation target is not generated (${item.url})`);
+    assert(!noindexHtmlTargets.has(targetPath), `${entry.relativePath}: WebSite navigation target should not be noindex (${item.url})`);
 }
 
 function getNavigationLocaleForLanguage(locale = "ja", language = "") {
