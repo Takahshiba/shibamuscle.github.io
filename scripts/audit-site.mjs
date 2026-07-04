@@ -1073,6 +1073,38 @@ function auditNoFutureStructuredDataDates(entry, graph) {
     });
 }
 
+function auditStructuredDataGraphIdentity(entry, graph) {
+    const ids = new Set();
+
+    graph.forEach((node) => {
+        const id = node?.["@id"];
+        assert(Boolean(id), `${entry.relativePath}: JSON-LD node ${node?.["@type"] || "unknown"} is missing @id`);
+        if (!id) {
+            return;
+        }
+
+        assert(!ids.has(id), `${entry.relativePath}: duplicate JSON-LD @id ${id}`);
+        ids.add(id);
+        assert(isCanonicalStructuredDataUrl(id), `${entry.relativePath}: JSON-LD @id should use the canonical site origin (${id})`);
+
+        ["url", "identifier", "publishingPrinciples"].forEach((field) => {
+            const value = node?.[field];
+            if (typeof value === "string" && /^https?:\/\//i.test(value)) {
+                assert(isCanonicalStructuredDataUrl(value), `${entry.relativePath}: JSON-LD ${field} should use the canonical site origin (${value})`);
+            }
+        });
+    });
+}
+
+function isCanonicalStructuredDataUrl(value) {
+    try {
+        const parsed = new URL(value);
+        return parsed.origin === SITE_ORIGIN;
+    } catch {
+        return false;
+    }
+}
+
 function auditRobotsMeta(entry, html, { isIndexablePage, isToolPage, isSecondaryUnitPage, isEnglishOnlyDuplicate, isNoindexStaticPage }) {
     const robots = extractFirstGroup(html, /<meta name="robots" content="([^"]+)">/i);
 
@@ -1341,6 +1373,7 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
     const documentHeading = decodeAuditHtml(htmlToText(extractFirstGroup(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i)));
     const metaDescription = decodeAuditHtml(extractFirstGroup(html, /<meta name="description" content="([^"]+)">/i));
     assert(graph.length >= 4, `${entry.relativePath}: JSON-LD graph is too small`);
+    auditStructuredDataGraphIdentity(entry, graph);
     auditNoFutureStructuredDataDates(entry, graph);
     const organization = graph.find((node) => node?.["@id"] === "https://shibamuscle.com/#organization" && hasType(node, "Organization"));
     const website = graph.find((node) => node?.["@id"] === "https://shibamuscle.com/#website" && hasType(node, "WebSite"));
