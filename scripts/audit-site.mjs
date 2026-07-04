@@ -52,6 +52,7 @@ const exerciseFileIndex = buildExerciseFileIndex(loadExercises());
 const localFileExistsCache = new Map();
 const headCache = new Map();
 const htmlIdCache = new Map();
+const imageDimensionsCache = new Map();
 const englishOnlySitemapUrls = new Set(Array.from(staticPageByFile.values())
     .filter((page) => page.englishOnly === true)
     .map((page) => absoluteUrlForFile(page.file, "ja")));
@@ -632,6 +633,24 @@ function auditImageDimensions(entry, html) {
 
         assert(isPositiveIntegerString(width), `${entry.relativePath}: image width attribute is missing or invalid`);
         assert(isPositiveIntegerString(height), `${entry.relativePath}: image height attribute is missing or invalid`);
+        if (!isPositiveIntegerString(width) || !isPositiveIntegerString(height)) {
+            return;
+        }
+
+        const src = extractHtmlAttribute(tag, "src");
+        const resolved = resolveLocalCrawlPath(entry.relativePath, src);
+        if (!resolved || !isDimensionAuditableImage(resolved)) {
+            return;
+        }
+
+        const dimensions = readLocalImageDimensions(resolved);
+        assert(Boolean(dimensions), `${entry.relativePath}: image dimensions could not be read for ${src}`);
+        if (!dimensions) {
+            return;
+        }
+
+        assert(Number(width) === dimensions.width, `${entry.relativePath}: image width ${width} does not match ${src} intrinsic width ${dimensions.width}`);
+        assert(Number(height) === dimensions.height, `${entry.relativePath}: image height ${height} does not match ${src} intrinsic height ${dimensions.height}`);
     });
 }
 
@@ -2212,6 +2231,142 @@ function normalizeCrawlPath(pathname) {
 
 function isAuditableLocalAsset(resolved) {
     return /\.(?:css|js|png|jpe?g|webp|svg|ico|json|xml|webmanifest|txt)$/i.test(resolved);
+}
+
+function isDimensionAuditableImage(resolved) {
+    return /\.(?:png|jpe?g|webp|svg)$/i.test(resolved || "");
+}
+
+function readLocalImageDimensions(resolved) {
+    if (!imageDimensionsCache.has(resolved)) {
+        const filePath = join(ROOT, resolved);
+        imageDimensionsCache.set(resolved, existsSync(filePath) ? readImageDimensions(filePath) : null);
+    }
+
+    return imageDimensionsCache.get(resolved);
+}
+
+function readImageDimensions(filePath) {
+    const lowerPath = filePath.toLowerCase();
+
+    if (lowerPath.endsWith(".svg")) return readSvgDimensions(filePath);
+    if (lowerPath.endsWith(".png")) return readPngDimensions(filePath);
+    if (lowerPath.endsWith(".webp")) return readWebpDimensions(filePath);
+    if (lowerPath.endsWith(".jpg") || lowerPath.endsWith(".jpeg")) return readJpegDimensions(filePath);
+    return null;
+}
+
+function readSvgDimensions(filePath) {
+    const svg = readFileSync(filePath, "utf8");
+    const rootTag = svg.match(/<svg\b[^>]*>/i)?.[0] || "";
+    const width = parseSvgLength(rootTag.match(/\bwidth="([^"]+)"/i)?.[1]);
+    const height = parseSvgLength(rootTag.match(/\bheight="([^"]+)"/i)?.[1]);
+    if (width && height) {
+        return { width, height };
+    }
+
+    const viewBox = rootTag.match(/\bviewBox="([^"]+)"/i)?.[1]?.trim().split(/\s+/).map(Number);
+    if (viewBox?.length === 4 && Number.isFinite(viewBox[2]) && Number.isFinite(viewBox[3])) {
+        return {
+            width: Math.round(viewBox[2]),
+            height: Math.round(viewBox[3])
+        };
+    }
+
+    return null;
+}
+
+function parseSvgLength(value) {
+    const number = Number.parseFloat(value || "");
+
+    return Number.isFinite(number) && number > 0 ? Math.round(number) : 0;
+}
+
+function readPngDimensions(filePath) {
+    const buffer = readFileSync(filePath);
+    if (buffer.length < 24 || buffer.toString("ascii", 1, 4) !== "PNG") {
+        return null;
+    }
+
+    return {
+        width: buffer.readUInt32BE(16),
+        height: buffer.readUInt32BE(20)
+    };
+}
+
+function readWebpDimensions(filePath) {
+    const buffer = readFileSync(filePath);
+    if (buffer.length < 30 || buffer.toString("ascii", 0, 4) !== "RIFF" || buffer.toString("ascii", 8, 12) !== "WEBP") {
+        return null;
+    }
+
+    const chunkType = buffer.toString("ascii", 12, 16);
+    const payloadOffset = 20;
+    if (chunkType === "VP8X" && buffer.length >= payloadOffset + 10) {
+        return {
+            width: 1 + buffer.readUIntLE(payloadOffset + 4, 3),
+            height: 1 + buffer.readUIntLE(payloadOffset + 7, 3)
+        };
+    }
+
+    if (chunkType === "VP8L" && buffer.length >= payloadOffset + 5 && buffer[payloadOffset] === 0x2f) {
+        const b1 = buffer[payloadOffset + 1];
+        const b2 = buffer[payloadOffset + 2];
+        const b3 = buffer[payloadOffset + 3];
+        const b4 = buffer[payloadOffset + 4];
+        return {
+            width: 1 + (((b2 & 0x3f) << 8) | b1),
+            height: 1 + (((b4 & 0x0f) << 10) | (b3 << 2) | ((b2 & 0xc0) >> 6))
+        };
+    }
+
+    if (chunkType === "VP8 " && buffer.length >= payloadOffset + 10 && buffer[payloadOffset + 3] === 0x9d && buffer[payloadOffset + 4] === 0x01 && buffer[payloadOffset + 5] === 0x2a) {
+        return {
+            width: buffer.readUInt16LE(payloadOffset + 6) & 0x3fff,
+            height: buffer.readUInt16LE(payloadOffset + 8) & 0x3fff
+        };
+    }
+
+    return null;
+}
+
+function readJpegDimensions(filePath) {
+    const buffer = readFileSync(filePath);
+    if (buffer.length < 4 || buffer[0] !== 0xff || buffer[1] !== 0xd8) {
+        return null;
+    }
+
+    let offset = 2;
+    while (offset + 8 < buffer.length) {
+        if (buffer[offset] !== 0xff) {
+            offset += 1;
+            continue;
+        }
+
+        const marker = buffer[offset + 1];
+        if (marker === 0xd9 || marker === 0xda) {
+            break;
+        }
+
+        const length = buffer.readUInt16BE(offset + 2);
+        if (isJpegStartOfFrameMarker(marker)) {
+            return {
+                height: buffer.readUInt16BE(offset + 5),
+                width: buffer.readUInt16BE(offset + 7)
+            };
+        }
+
+        offset += 2 + length;
+    }
+
+    return null;
+}
+
+function isJpegStartOfFrameMarker(marker) {
+    return (marker >= 0xc0 && marker <= 0xc3)
+        || (marker >= 0xc5 && marker <= 0xc7)
+        || (marker >= 0xc9 && marker <= 0xcb)
+        || (marker >= 0xcd && marker <= 0xcf);
 }
 
 function assertLocalFileExists(owner, resolved, original) {
