@@ -1292,6 +1292,8 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
     assert(document["@context"] === "https://schema.org", `${entry.relativePath}: JSON-LD context should be https://schema.org`);
 
     const graph = Array.isArray(document["@graph"]) ? document["@graph"] : [];
+    const documentTitle = decodeAuditHtml(extractFirstGroup(html, /<title>([\s\S]*?)<\/title>/i));
+    const metaDescription = decodeAuditHtml(extractFirstGroup(html, /<meta name="description" content="([^"]+)">/i));
     assert(graph.length >= 4, `${entry.relativePath}: JSON-LD graph is too small`);
     auditNoFutureStructuredDataDates(entry, graph);
     const organization = graph.find((node) => node?.["@id"] === "https://shibamuscle.com/#organization" && hasType(node, "Organization"));
@@ -1328,6 +1330,8 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
         assert(webPage.url === canonicalUrl, `${entry.relativePath}: WebPage schema URL does not match canonical`);
         assert(Boolean(webPage.name), `${entry.relativePath}: WebPage schema name is empty`);
         assert(Boolean(webPage.description), `${entry.relativePath}: WebPage schema description is empty`);
+        assert(webPage.name === documentTitle, `${entry.relativePath}: WebPage schema name should match the document title`);
+        assert(webPage.description === metaDescription, `${entry.relativePath}: WebPage schema description should match meta description`);
         assert(Boolean(webPage.inLanguage), `${entry.relativePath}: WebPage schema language is empty`);
         assert(isValidSitemapLastmod(webPage.datePublished), `${entry.relativePath}: WebPage schema datePublished is missing or invalid`);
         assert(isValidSitemapLastmod(webPage.dateModified), `${entry.relativePath}: WebPage schema dateModified is missing or invalid`);
@@ -1353,11 +1357,11 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
     }
 
     if (isExercisePage) {
-        auditExerciseStructuredData(entry, graph, canonicalUrl, webPage);
+        auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, metaDescription });
     }
 
     if (isStaticContentPage) {
-        auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage);
+        auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, metaDescription });
     }
 }
 
@@ -1494,7 +1498,7 @@ function getExpectedWebPageTypes(entry, sourceStaticPage, isExercisePage) {
     return types;
 }
 
-function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage) {
+function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, metaDescription }) {
     const article = graph.find((node) => node?.["@id"] === `${canonicalUrl}#article` && hasType(node, "Article"));
     const publishingPrinciplesUrl = getExpectedPublishingPrinciplesUrl(entry, expectedLanguage);
 
@@ -1506,6 +1510,8 @@ function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, e
     assert(Boolean(article.headline), `${entry.relativePath}: static Article headline is empty`);
     assert(Boolean(article.name), `${entry.relativePath}: static Article name is empty`);
     assert(Boolean(article.description) && article.description.length >= 45, `${entry.relativePath}: static Article description is too short`);
+    assert(documentTitle.includes(article.headline), `${entry.relativePath}: static Article headline should be represented in the document title`);
+    assert(article.description === metaDescription, `${entry.relativePath}: static Article description should match meta description`);
     assert(article.url === canonicalUrl, `${entry.relativePath}: static Article URL does not match canonical`);
     assert(article.inLanguage === expectedLanguage, `${entry.relativePath}: static Article language is incorrect`);
     assert(isValidSitemapLastmod(article.datePublished), `${entry.relativePath}: static Article datePublished is missing or invalid`);
@@ -1522,7 +1528,7 @@ function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, e
     assert(referencesStructuredDataNode(webPage?.mainEntity, `${canonicalUrl}#article`), `${entry.relativePath}: WebPage mainEntity should reference static Article`);
 }
 
-function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage) {
+function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, metaDescription }) {
     const exerciseMatch = exerciseFileIndex.byFile.get(entry.file);
     const measurementKind = exerciseMatch?.exercise?.metadata?.measurementKind || "weight";
     const measurementCopy = getMeasurementCopy(measurementKind, entry.locale);
@@ -1548,6 +1554,8 @@ function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage) {
     if (article) {
         assert(Boolean(article.headline), `${entry.relativePath}: Article headline is empty`);
         assert(Boolean(article.description), `${entry.relativePath}: Article description is empty`);
+        assert(documentTitle.includes(article.headline), `${entry.relativePath}: Article headline should be represented in the document title`);
+        assert(article.description === metaDescription, `${entry.relativePath}: Article description should match meta description`);
         assert(article.url === canonicalUrl, `${entry.relativePath}: Article URL does not match canonical`);
         assert(article.inLanguage === getLocaleConfig(entry.locale).hreflang, `${entry.relativePath}: Article language is incorrect`);
         assert(Array.isArray(article.image) && article.image.length >= 1, `${entry.relativePath}: Article image list is missing`);
