@@ -74,6 +74,7 @@ assert(sitemap.includes('xmlns:image="http://www.google.com/schemas/sitemap-imag
 assert(sitemapUrlBlocks.length === sitemapUrls.size, "sitemap.xml: duplicate or malformed url entries are present");
 auditSitemapProtocolLimits();
 auditSitemapLocTargets();
+auditSitemapIndexableCoverage();
 assert(sitemapLastmods.length === sitemapUrls.size, "sitemap.xml: every URL should have one lastmod");
 assert(new Set(sitemapLastmods).size > 1, "sitemap.xml: lastmod values should reflect source changes, not one build timestamp");
 sitemapLastmods.forEach((lastmod) => {
@@ -116,6 +117,7 @@ for (const entry of htmlEntries) {
     assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${entry.relativePath}: current GA script is missing`);
     assert(html.includes(`<html lang="${expectedHtmlLang}"`), `${entry.relativePath}: html lang is incorrect`);
     auditHtmlAppIconMetadata(entry, html);
+    auditSingletonHeadMetadata(entry, html);
     const expectedAlternates = isToolPage || isSecondaryUnitPage || isEnglishOnlyPage || isNoindexStaticPage ? 0 : getGeneratedLocales().length + 1;
     assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === expectedAlternates, `${entry.relativePath}: hreflang set is incomplete`);
     assert(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${entry.relativePath}: canonical is missing or malformed`);
@@ -327,7 +329,11 @@ function auditRobotsTxt() {
 
     const robots = readFileSync(robotsPath, "utf8");
     assert(/User-agent:\s*\*/i.test(robots), "robots.txt: default User-agent rule is missing");
-    assert(/Sitemap:\s*https:\/\/shibamuscle\.com\/sitemap\.xml/i.test(robots), "robots.txt: canonical sitemap URL is missing");
+    const sitemapLines = Array.from(robots.matchAll(/^Sitemap:\s*(\S+)\s*$/gmi)).map((match) => match[1]);
+    assert(sitemapLines.length === 1 && sitemapLines[0] === `${SITE_ORIGIN}/sitemap.xml`, "robots.txt: canonical sitemap URL is missing or duplicated");
+    Array.from(robots.matchAll(/^Disallow:[^\S\r\n]*(\S.*)$/gmi)).forEach((match) => {
+        assert(false, `robots.txt: unexpected disallow rule ${match[1]}`);
+    });
     assert(!/Disallow:\s*\/(?:assets\/|styles\.css|app\.js|sitemap\.xml)/i.test(robots), "robots.txt: crawl-critical assets or sitemap should not be disallowed");
 }
 
@@ -459,6 +465,25 @@ function auditSitemapLocTargets() {
         assert(availableHtml.has(relativePath), `sitemap.xml: URL does not map to generated HTML (${url})`);
         assert(!relativePath.endsWith("Shift2ics.html"), `sitemap.xml: noindex tool page should not be listed (${url})`);
         assert(!/(^|\/)lb_[^/]+\.html$/.test(relativePath), `sitemap.xml: secondary lb page should not be listed (${url})`);
+    });
+}
+
+function auditSitemapIndexableCoverage() {
+    const expectedUrls = new Set(htmlEntries
+        .filter((entry) => !isNoindexHtmlEntry(entry))
+        .map((entry) => {
+            const staticPage = staticPageByFile.get(entry.file);
+            const locale = staticPage?.englishOnly === true ? "ja" : entry.locale;
+
+            return absoluteUrlForFile(entry.file, locale);
+        }));
+
+    assert(sitemapUrls.size === expectedUrls.size, `sitemap.xml: expected ${expectedUrls.size} indexable URLs, found ${sitemapUrls.size}`);
+    expectedUrls.forEach((url) => {
+        assert(sitemapUrls.has(url), `sitemap.xml: missing indexable URL ${url}`);
+    });
+    sitemapUrls.forEach((url) => {
+        assert(expectedUrls.has(url), `sitemap.xml: URL should not be listed because it is not indexable ${url}`);
     });
 }
 
@@ -973,6 +998,57 @@ function auditRobotsMeta(entry, html, { isIndexablePage, isToolPage, isSecondary
     if (isSecondaryUnitPage || isEnglishOnlyDuplicate || isNoindexStaticPage) {
         assert(robots === "noindex,follow,noarchive", `${entry.relativePath}: duplicate/noindex page robots meta is incorrect`);
     }
+}
+
+function auditSingletonHeadMetadata(entry, html) {
+    const head = extractHeadMarkup(html);
+    const requiredSingletons = [
+        ["title", /<title\b[\s\S]*?<\/title>/gi],
+        ["meta description", /<meta\b(?=[^>]*\bname="description")[^>]*>/gi],
+        ["robots meta", /<meta\b(?=[^>]*\bname="robots")[^>]*>/gi],
+        ["theme-color meta", /<meta\b(?=[^>]*\bname="theme-color")[^>]*>/gi],
+        ["canonical link", /<link\b(?=[^>]*\brel="canonical")[^>]*>/gi],
+        ["og:type", /<meta\b(?=[^>]*\bproperty="og:type")[^>]*>/gi],
+        ["og:site_name", /<meta\b(?=[^>]*\bproperty="og:site_name")[^>]*>/gi],
+        ["og:locale", /<meta\b(?=[^>]*\bproperty="og:locale")[^>]*>/gi],
+        ["og:title", /<meta\b(?=[^>]*\bproperty="og:title")[^>]*>/gi],
+        ["og:description", /<meta\b(?=[^>]*\bproperty="og:description")[^>]*>/gi],
+        ["og:url", /<meta\b(?=[^>]*\bproperty="og:url")[^>]*>/gi],
+        ["og:image", /<meta\b(?=[^>]*\bproperty="og:image")[^>]*>/gi],
+        ["og:image:secure_url", /<meta\b(?=[^>]*\bproperty="og:image:secure_url")[^>]*>/gi],
+        ["og:image:type", /<meta\b(?=[^>]*\bproperty="og:image:type")[^>]*>/gi],
+        ["og:image:width", /<meta\b(?=[^>]*\bproperty="og:image:width")[^>]*>/gi],
+        ["og:image:height", /<meta\b(?=[^>]*\bproperty="og:image:height")[^>]*>/gi],
+        ["og:image:alt", /<meta\b(?=[^>]*\bproperty="og:image:alt")[^>]*>/gi],
+        ["twitter:card", /<meta\b(?=[^>]*\bname="twitter:card")[^>]*>/gi],
+        ["twitter:title", /<meta\b(?=[^>]*\bname="twitter:title")[^>]*>/gi],
+        ["twitter:description", /<meta\b(?=[^>]*\bname="twitter:description")[^>]*>/gi],
+        ["twitter:image", /<meta\b(?=[^>]*\bname="twitter:image")[^>]*>/gi],
+        ["twitter:image:alt", /<meta\b(?=[^>]*\bname="twitter:image:alt")[^>]*>/gi]
+    ];
+    const optionalSingletons = [
+        ["og:updated_time", /<meta\b(?=[^>]*\bproperty="og:updated_time")[^>]*>/gi],
+        ["article:published_time", /<meta\b(?=[^>]*\bproperty="article:published_time")[^>]*>/gi],
+        ["article:modified_time", /<meta\b(?=[^>]*\bproperty="article:modified_time")[^>]*>/gi],
+        ["article:section", /<meta\b(?=[^>]*\bproperty="article:section")[^>]*>/gi]
+    ];
+
+    requiredSingletons.forEach(([label, pattern]) => {
+        const count = countMatches(head, pattern);
+        assert(count === 1, `${entry.relativePath}: expected exactly one ${label} tag, found ${count}`);
+    });
+    optionalSingletons.forEach(([label, pattern]) => {
+        const count = countMatches(head, pattern);
+        assert(count <= 1, `${entry.relativePath}: expected at most one ${label} tag, found ${count}`);
+    });
+}
+
+function extractHeadMarkup(html) {
+    return html.match(/<head\b[^>]*>[\s\S]*?<\/head>/i)?.[0] || html;
+}
+
+function countMatches(text, pattern) {
+    return (text.match(pattern) || []).length;
 }
 
 function assertSocialImageMetadata(entry, html, isToolPage) {
