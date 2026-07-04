@@ -131,6 +131,7 @@ for (const entry of htmlEntries) {
     });
     assert(/<title>[^<]+<\/title>/.test(html), `${entry.relativePath}: title is missing`);
     assert(/<meta name="description" content="[^"]+">/.test(html), `${entry.relativePath}: meta description is missing`);
+    auditSocialMetadataConsistency(entry, html, canonicalUrl);
     if (isAppHomePage) {
         auditAppHomeDescription(entry, html);
     }
@@ -1075,6 +1076,30 @@ function auditSingletonHeadMetadata(entry, html) {
         const count = countMatches(head, pattern);
         assert(count <= 1, `${entry.relativePath}: expected at most one ${label} tag, found ${count}`);
     });
+}
+
+function auditSocialMetadataConsistency(entry, html, canonicalUrl) {
+    const title = decodeAuditHtml(extractFirstGroup(html, /<title>([\s\S]*?)<\/title>/i));
+    const description = decodeAuditHtml(extractFirstGroup(html, /<meta name="description" content="([^"]+)">/i));
+    const canonical = extractFirstGroup(html, /<link rel="canonical" href="([^"]+)">/i);
+    const ogTitle = decodeAuditHtml(extractFirstGroup(html, /<meta property="og:title" content="([^"]+)">/i));
+    const ogDescription = decodeAuditHtml(extractFirstGroup(html, /<meta property="og:description" content="([^"]+)">/i));
+    const ogUrl = extractFirstGroup(html, /<meta property="og:url" content="([^"]+)">/i);
+    const twitterTitle = decodeAuditHtml(extractFirstGroup(html, /<meta name="twitter:title" content="([^"]+)">/i));
+    const twitterDescription = decodeAuditHtml(extractFirstGroup(html, /<meta name="twitter:description" content="([^"]+)">/i));
+    const ogSiteName = extractFirstGroup(html, /<meta property="og:site_name" content="([^"]+)">/i);
+    const ogType = extractFirstGroup(html, /<meta property="og:type" content="([^"]+)">/i);
+    const twitterCard = extractFirstGroup(html, /<meta name="twitter:card" content="([^"]+)">/i);
+
+    assert(canonical === canonicalUrl, `${entry.relativePath}: canonical URL should match the resolved canonical URL`);
+    assert(ogUrl === canonical, `${entry.relativePath}: og:url should match canonical URL`);
+    assert(ogTitle === title, `${entry.relativePath}: og:title should match the document title`);
+    assert(twitterTitle === title, `${entry.relativePath}: twitter:title should match the document title`);
+    assert(ogDescription === description, `${entry.relativePath}: og:description should match meta description`);
+    assert(twitterDescription === description, `${entry.relativePath}: twitter:description should match meta description`);
+    assert(ogSiteName === "Shiba Muscle", `${entry.relativePath}: og:site_name should be Shiba Muscle`);
+    assert(["website", "article"].includes(ogType), `${entry.relativePath}: og:type should be website or article`);
+    assert(["summary", "summary_large_image"].includes(twitterCard), `${entry.relativePath}: twitter:card is unsupported`);
 }
 
 function extractHeadMarkup(html) {
