@@ -162,6 +162,7 @@ for (const entry of htmlEntries) {
     auditArticleOpenGraphDates(entry, html, isIndexablePage);
     auditNoFutureMetaDates(entry, html);
     auditHeadingStructure(entry, html, isIndexablePage, isToolPage);
+    auditTitleHeadingConsistency(entry, html, isIndexablePage, isToolPage);
     if (isEnglishOnlyDuplicate) {
         assert(!sitemapUrls.has(pageUrl), `${entry.relativePath}: duplicate English-only page should not be in sitemap`);
         assert(html.includes('<meta name="robots" content="noindex,follow,noarchive">'), `${entry.relativePath}: duplicate English-only page should be noindex`);
@@ -1233,6 +1234,19 @@ function auditHeadingStructure(entry, html, isIndexable, isToolPage) {
     }
 }
 
+function auditTitleHeadingConsistency(entry, html, isIndexable, isToolPage) {
+    if (!isIndexable || isToolPage) {
+        return;
+    }
+
+    const title = decodeAuditHtml(extractFirstGroup(html, /<title>([\s\S]*?)<\/title>/i));
+    const h1 = decodeAuditHtml(htmlToText(extractFirstGroup(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i)));
+
+    assert(Boolean(title), `${entry.relativePath}: title should not be empty`);
+    assert(Boolean(h1), `${entry.relativePath}: H1 should not be empty`);
+    assert(title.includes(h1), `${entry.relativePath}: document title should include the H1`);
+}
+
 function auditArticleOpenGraphDates(entry, html, isIndexable) {
     if (!/<meta property="og:type" content="article">/i.test(html)) {
         return;
@@ -1305,6 +1319,7 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
 
     const graph = Array.isArray(document["@graph"]) ? document["@graph"] : [];
     const documentTitle = decodeAuditHtml(extractFirstGroup(html, /<title>([\s\S]*?)<\/title>/i));
+    const documentHeading = decodeAuditHtml(htmlToText(extractFirstGroup(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i)));
     const metaDescription = decodeAuditHtml(extractFirstGroup(html, /<meta name="description" content="([^"]+)">/i));
     assert(graph.length >= 4, `${entry.relativePath}: JSON-LD graph is too small`);
     auditNoFutureStructuredDataDates(entry, graph);
@@ -1369,11 +1384,11 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
     }
 
     if (isExercisePage) {
-        auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, metaDescription });
+        auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, documentHeading, metaDescription });
     }
 
     if (isStaticContentPage) {
-        auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, metaDescription });
+        auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, documentHeading, metaDescription });
     }
 }
 
@@ -1510,7 +1525,7 @@ function getExpectedWebPageTypes(entry, sourceStaticPage, isExercisePage) {
     return types;
 }
 
-function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, metaDescription }) {
+function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, expectedLanguage, { documentTitle, documentHeading, metaDescription }) {
     const article = graph.find((node) => node?.["@id"] === `${canonicalUrl}#article` && hasType(node, "Article"));
     const publishingPrinciplesUrl = getExpectedPublishingPrinciplesUrl(entry, expectedLanguage);
 
@@ -1522,6 +1537,8 @@ function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, e
     assert(Boolean(article.headline), `${entry.relativePath}: static Article headline is empty`);
     assert(Boolean(article.name), `${entry.relativePath}: static Article name is empty`);
     assert(Boolean(article.description) && article.description.length >= 45, `${entry.relativePath}: static Article description is too short`);
+    assert(article.headline === documentHeading, `${entry.relativePath}: static Article headline should match the H1`);
+    assert(article.name === documentHeading, `${entry.relativePath}: static Article name should match the H1`);
     assert(documentTitle.includes(article.headline), `${entry.relativePath}: static Article headline should be represented in the document title`);
     assert(article.description === metaDescription, `${entry.relativePath}: static Article description should match meta description`);
     assert(article.url === canonicalUrl, `${entry.relativePath}: static Article URL does not match canonical`);
@@ -1540,7 +1557,7 @@ function auditStaticContentStructuredData(entry, graph, canonicalUrl, webPage, e
     assert(referencesStructuredDataNode(webPage?.mainEntity, `${canonicalUrl}#article`), `${entry.relativePath}: WebPage mainEntity should reference static Article`);
 }
 
-function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, metaDescription }) {
+function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { documentTitle, documentHeading, metaDescription }) {
     const exerciseMatch = exerciseFileIndex.byFile.get(entry.file);
     const measurementKind = exerciseMatch?.exercise?.metadata?.measurementKind || "weight";
     const measurementCopy = getMeasurementCopy(measurementKind, entry.locale);
@@ -1565,7 +1582,10 @@ function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { docu
 
     if (article) {
         assert(Boolean(article.headline), `${entry.relativePath}: Article headline is empty`);
+        assert(Boolean(article.name), `${entry.relativePath}: Article name is empty`);
         assert(Boolean(article.description), `${entry.relativePath}: Article description is empty`);
+        assert(article.headline.includes(documentHeading), `${entry.relativePath}: Article headline should include the H1`);
+        assert(article.name === documentHeading, `${entry.relativePath}: Article name should match the H1`);
         assert(documentTitle.includes(article.headline), `${entry.relativePath}: Article headline should be represented in the document title`);
         assert(article.description === metaDescription, `${entry.relativePath}: Article description should match meta description`);
         assert(article.url === canonicalUrl, `${entry.relativePath}: Article URL does not match canonical`);
