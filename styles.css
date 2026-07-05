@@ -2655,7 +2655,7 @@ body.app-content-page {
 }
 
 .app-product-stack::before {
-    content: "";
+    content: none;
     position: absolute;
     inset: 58px 42px 42px;
     z-index: 0;
@@ -2673,14 +2673,13 @@ body.app-content-page {
 .app-phone {
     width: min(350px, 100%);
     aspect-ratio: 414 / 900;
-    padding: 9px;
-    border: 1px solid rgba(255, 137, 26, 0.82);
+    padding: 0;
+    border: 1px solid rgba(255, 137, 26, 0.5);
     border-radius: 42px;
-    background: linear-gradient(158deg, #ff8a00 0%, #2a1202 10%, #050505 44%, #100b07 100%);
+    background: transparent;
     box-shadow:
-        0 30px 82px rgba(0, 0, 0, 0.64),
-        0 0 0 1px rgba(255, 122, 0, 0.28),
-        0 0 54px rgba(255, 106, 0, 0.3);
+        0 26px 70px rgba(0, 0, 0, 0.54),
+        0 0 42px rgba(255, 106, 0, 0.16);
     overflow: hidden;
     display: grid;
     position: relative;
@@ -2688,7 +2687,7 @@ body.app-content-page {
 }
 
 .app-phone--screen::after {
-    content: "";
+    content: none;
     position: absolute;
     inset: 8px;
     border: 1px solid rgba(255, 122, 0, 0.24);
@@ -2698,7 +2697,7 @@ body.app-content-page {
 }
 
 .app-phone--screen::before {
-    content: "";
+    content: none;
     position: absolute;
     top: 9px;
     right: 9px;
@@ -2715,10 +2714,10 @@ body.app-content-page {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: 50% 50%;
-    border-radius: 32px;
-    background: #050505;
+    border-radius: inherit;
+    background: transparent;
 }
 
 .app-phone--hero {
@@ -2782,7 +2781,9 @@ body.app-content-page {
     left: -48px;
     bottom: 56px;
     width: min(190px, 38%);
-    padding: 9px;
+    padding: 6px;
+    background: rgba(10, 7, 5, 0.86);
+    border-color: rgba(255, 122, 0, 0.46);
 }
 
 .app-insight-card--heatmap img {
@@ -2908,7 +2909,7 @@ body.app-content-page {
 }
 
 .app-phone--compact img {
-    border-radius: 25px;
+    border-radius: inherit;
 }
 
 .app-showcase-item figcaption {
@@ -3574,14 +3575,14 @@ body.app-content-page {
 
     .app-phone {
         width: min(300px, 88%);
-        padding: 8px;
+        padding: 0;
         border-radius: 34px;
     }
 
     .app-phone img {
         height: 100%;
         max-height: none;
-        border-radius: 26px;
+        border-radius: inherit;
     }
 
     .app-phone--hero {
@@ -3614,7 +3615,7 @@ body.app-content-page {
         left: 0;
         bottom: 22px;
         width: min(108px, 34%);
-        padding: 8px;
+        padding: 6px;
     }
 
     .app-insight-card strong {
