@@ -2787,6 +2787,7 @@ body.app-content-page {
 
 .app-insight-card--heatmap img {
     width: 100%;
+    height: auto;
     aspect-ratio: 1 / 1.08;
     object-fit: contain;
     object-position: 50% 50%;

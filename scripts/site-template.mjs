@@ -156,6 +156,10 @@ ${body}
 }
 
 function resolveStylesheetHref(href) {
+    if (href.startsWith("styles.css?v=app-home-")) {
+        return href;
+    }
+
     return href === "styles.css" || href.startsWith("styles.css?")
         ? SITE_STYLESHEET
         : href;
