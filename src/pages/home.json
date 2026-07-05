@@ -49,7 +49,7 @@
     "mascot": "app/shiba-mascot.png"
   },
   "stylesheets": [
-    "styles.css?v=app-home-heatmap-20260705"
+    "styles.css?v=app-home-heatmap-card-20260705"
   ],
   "locales": {
     "en": {

@@ -2779,16 +2779,16 @@ body.app-content-page {
 }
 
 .app-insight-card--heatmap {
-    left: 0;
-    bottom: 30px;
-    width: min(230px, 48%);
-    padding: 10px;
+    left: -48px;
+    bottom: 56px;
+    width: min(190px, 38%);
+    padding: 9px;
 }
 
 .app-insight-card--heatmap img {
     width: 100%;
     height: auto;
-    aspect-ratio: 1 / 1.08;
+    aspect-ratio: 896 / 1000;
     object-fit: contain;
     object-position: 50% 50%;
     border-radius: 6px;
@@ -3611,9 +3611,10 @@ body.app-content-page {
     }
 
     .app-insight-card--heatmap {
-        left: 16px;
-        bottom: 18px;
-        width: min(122px, 40%);
+        left: 0;
+        bottom: 22px;
+        width: min(108px, 34%);
+        padding: 8px;
     }
 
     .app-insight-card strong {
@@ -3816,7 +3817,7 @@ body.app-content-page {
     }
 
     .app-insight-card--heatmap {
-        width: min(122px, 40%);
+        width: min(108px, 34%);
     }
 
     .app-insight-card span,
