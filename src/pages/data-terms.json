@@ -1,0 +1,644 @@
+{
+  "file": "data-terms.html",
+  "kind": "content",
+  "title": "データ利用条件 | Shiba Muscle",
+  "description": "Shiba Muscleの平均重量、平均レップ数、筋力基準、種目メタデータの利用条件をまとめたページです。",
+  "heading": "データ利用条件",
+  "ogImage": "https://shibamuscle.com/assets/app/strength-percentile.jpg",
+  "appShell": true,
+  "shellClass": "policy-shell app-policy-shell",
+  "ads": false,
+  "scripts": false,
+  "stylesheets": [
+    "sanitize.css",
+    "styles.css",
+    "privacy-policy.css"
+  ],
+  "intro": [
+    "このページでは、Shiba Muscleに掲載しているトレーニング関連データの利用条件を説明します。データを引用、参照、共有する場合は、以下の条件を確認してください。",
+    "最終更新日: 2026年7月10日"
+  ],
+  "sections": [
+    {
+      "className": "content-card policy-section",
+      "heading": "対象となるデータ",
+      "paragraphs": [
+        "この利用条件は、Shiba Muscleに掲載している種目ごとの平均重量、平均レップ数、筋力基準、主働筋やカテゴリなどの種目メタデータに適用されます。",
+        "各ページの文章、画像、デザイン、アプリ関連素材には、それぞれ当サイトの著作権および利用条件が適用されます。"
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "利用できること",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "個人のトレーニング計画、学習、比較のためにデータを参照すること",
+            "Shiba Muscleへのリンクを付けて、短い抜粋や要約を引用すること",
+            "記事、SNS、資料などで、出典を明記したうえで個別ページを紹介すること"
+          ]
+        }
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "利用時の条件",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "出典として「Shiba Muscle」と該当ページのURLを明記してください。",
+            "数値の更新日、単位、対象種目、性別、体重、年齢などの文脈を誤認させないでください。",
+            "Shiba Muscleが第三者のサービス、商品、主張を推奨または承認しているように表示しないでください。"
+          ]
+        }
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "禁止される利用",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "誤解を招く形でデータを改変、転載、再配布すること",
+            "Shiba Muscleのデータベース全体または大部分を複製し、代替サービスや再配布用データとして提供すること",
+            "サーバーに高い負荷をかける自動取得、スクレイピング、クローリングを行うこと",
+            "違法、危険、悪意ある目的でデータを利用すること"
+          ]
+        }
+      ]
+    },
+    {
+      "className": "content-card policy-section",
+      "heading": "免責とお問い合わせ",
+      "paragraphs": [
+        "Shiba Muscleのデータは、一般的なフィットネス情報としての参考値です。正確性、完全性、特定の目的への適合性を保証するものではありません。",
+        "データの利用について不明点がある場合、または大規模な利用を検討している場合は、お問い合わせページからご連絡ください。"
+      ]
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Data Usage Terms | Shiba Muscle",
+      "description": "Usage terms for Shiba Muscle data, including average weights, average reps, strength standards, and exercise metadata.",
+      "heading": "Data Usage Terms",
+      "intro": [
+        "This page explains the terms for using training-related data published on Shiba Muscle. Please review these terms before quoting, referencing, or sharing the data.",
+        "Last updated: July 10, 2026"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Covered data",
+          "paragraphs": [
+            "These terms apply to exercise-level average weights, average reps, strength standards, and exercise metadata such as primary muscles and categories published on Shiba Muscle.",
+            "Page copy, images, design, and app-related materials are covered by the site's copyright and general terms of use."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Allowed uses",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Referencing the data for personal training plans, learning, or comparison",
+                "Quoting short excerpts or summaries with a link to Shiba Muscle",
+                "Introducing individual pages in articles, social posts, or documents with clear source credit"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Conditions",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Credit \"Shiba Muscle\" and include the URL of the relevant page.",
+                "Do not misrepresent context such as update date, unit, exercise, sex, bodyweight, or age.",
+                "Do not imply that Shiba Muscle endorses or approves a third-party service, product, or claim."
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Prohibited uses",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Modifying, reposting, or redistributing data in a misleading way",
+                "Copying all or a substantial part of the Shiba Muscle database as a replacement service or redistributable dataset",
+                "Automated collection, scraping, or crawling that places heavy load on the server",
+                "Using the data for illegal, dangerous, or malicious purposes"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Disclaimer and contact",
+          "paragraphs": [
+            "Shiba Muscle data is reference information for general fitness use. We do not guarantee accuracy, completeness, or fitness for a particular purpose.",
+            "If you have questions about data use or are considering large-scale use, please contact us through the contact page."
+          ]
+        }
+      ]
+    },
+    "ko": {
+      "title": "데이터 이용 조건 | Shiba Muscle",
+      "description": "Shiba Muscle의 평균 중량, 평균 반복 횟수, 근력 기준, 운동 메타데이터 이용 조건을 정리한 페이지입니다.",
+      "heading": "데이터 이용 조건",
+      "intro": [
+        "이 페이지는 Shiba Muscle에 게시된 트레이닝 관련 데이터의 이용 조건을 설명합니다. 데이터를 인용, 참고, 공유하기 전에 아래 조건을 확인해 주세요.",
+        "최종 업데이트: 2026년 7월 10일"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "대상 데이터",
+          "paragraphs": [
+            "이 조건은 Shiba Muscle에 게시된 운동별 평균 중량, 평균 반복 횟수, 근력 기준, 주동근과 카테고리 같은 운동 메타데이터에 적용됩니다.",
+            "각 페이지의 문장, 이미지, 디자인, 앱 관련 자료에는 사이트의 저작권 및 일반 이용 조건이 적용됩니다."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "허용되는 이용",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "개인 운동 계획, 학습, 비교를 위해 데이터를 참고하는 것",
+                "Shiba Muscle 링크와 함께 짧은 발췌나 요약을 인용하는 것",
+                "출처를 명확히 표시하고 기사, SNS, 자료에서 개별 페이지를 소개하는 것"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "이용 조건",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "출처로 \"Shiba Muscle\"과 해당 페이지 URL을 표시해 주세요.",
+                "업데이트일, 단위, 운동, 성별, 체중, 나이 등의 맥락을 오해하게 만들지 마세요.",
+                "Shiba Muscle이 제3자의 서비스, 제품, 주장을 추천하거나 승인한 것처럼 표시하지 마세요."
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "금지되는 이용",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "데이터를 오해를 부르는 방식으로 수정, 전재, 재배포하는 것",
+                "Shiba Muscle 데이터베이스 전체 또는 상당 부분을 복제해 대체 서비스나 재배포용 데이터로 제공하는 것",
+                "서버에 큰 부하를 주는 자동 수집, 스크래핑, 크롤링",
+                "불법적이거나 위험하거나 악의적인 목적으로 데이터를 이용하는 것"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "면책 및 문의",
+          "paragraphs": [
+            "Shiba Muscle의 데이터는 일반적인 피트니스 참고 정보입니다. 정확성, 완전성, 특정 목적에의 적합성을 보장하지 않습니다.",
+            "데이터 이용에 대해 궁금한 점이 있거나 대규모 이용을 검토 중이라면 문의 페이지로 연락해 주세요."
+          ]
+        }
+      ]
+    },
+    "zh-hant": {
+      "title": "資料使用條款 | Shiba Muscle",
+      "description": "說明 Shiba Muscle 平均重量、平均次數、力量標準、動作中繼資料的引用、分享與再利用條件。",
+      "heading": "資料使用條款",
+      "intro": [
+        "本頁說明 Shiba Muscle 所發布訓練相關資料的使用條件。引用、參考或分享資料前，請先確認以下條款。",
+        "最後更新日：2026年7月10日"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "適用資料",
+          "paragraphs": [
+            "本條款適用於 Shiba Muscle 發布的各動作平均重量、平均次數、力量標準，以及主動肌、分類等動作中繼資料。",
+            "各頁面的文字、圖片、設計與 App 相關素材，另受本網站著作權與一般使用條件規範。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "可使用的方式",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "為個人訓練規劃、學習或比較而參考資料",
+                "附上 Shiba Muscle 連結後引用短摘錄或摘要",
+                "在文章、社群貼文或資料中，標明來源並介紹個別頁面"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "使用條件",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "請標明來源為「Shiba Muscle」並附上相關頁面的 URL。",
+                "請勿使更新日、單位、動作、性別、體重、年齡等脈絡被誤解。",
+                "請勿暗示 Shiba Muscle 推薦或背書第三方服務、產品或主張。"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "禁止使用方式",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "以造成誤解的方式修改、轉載或再發布資料",
+                "複製 Shiba Muscle 資料庫的全部或大部分，作為替代服務或可再發布資料集提供",
+                "進行造成伺服器高負載的自動取得、擷取或爬取",
+                "為違法、危險或惡意目的使用資料"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "免責與聯絡",
+          "paragraphs": [
+            "Shiba Muscle 的資料是一般健身資訊的參考值，不保證正確性、完整性或符合特定目的。",
+            "如對資料使用有疑問，或正在考慮大規模使用，請透過聯絡頁與我們聯繫。"
+          ]
+        }
+      ]
+    },
+    "zh-hans": {
+      "title": "数据使用条款 | Shiba Muscle",
+      "description": "说明 Shiba Muscle 平均重量、平均次数、力量标准、动作元数据的引用、分享和再利用条件。",
+      "heading": "数据使用条款",
+      "intro": [
+        "本页说明 Shiba Muscle 发布的训练相关数据的使用条件。在引用、参考或分享数据前，请先确认以下条款。",
+        "最后更新日期：2026年7月10日"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "适用数据",
+          "paragraphs": [
+            "本条款适用于 Shiba Muscle 发布的各动作平均重量、平均次数、力量标准，以及主动肌、分类等动作元数据。",
+            "各页面的文字、图片、设计和 App 相关素材，另受本网站版权和一般使用条件约束。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "可使用方式",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "为个人训练计划、学习或比较而参考数据",
+                "附上 Shiba Muscle 链接后引用短摘录或摘要",
+                "在文章、社交媒体或资料中，标明来源并介绍单个页面"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "使用条件",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "请标明来源为“Shiba Muscle”并附上相关页面 URL。",
+                "请勿使更新日期、单位、动作、性别、体重、年龄等语境被误解。",
+                "请勿暗示 Shiba Muscle 推荐或认可第三方服务、产品或主张。"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "禁止使用方式",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "以造成误解的方式修改、转载或重新发布数据",
+                "复制 Shiba Muscle 数据库的全部或大部分，作为替代服务或可再发布数据集提供",
+                "进行造成服务器高负载的自动获取、抓取或爬取",
+                "为违法、危险或恶意目的使用数据"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "免责声明与联系",
+          "paragraphs": [
+            "Shiba Muscle 的数据是一般健身信息的参考值，不保证准确性、完整性或适合特定目的。",
+            "如对数据使用有疑问，或正在考虑大规模使用，请通过联系页面与我们联系。"
+          ]
+        }
+      ]
+    },
+    "es": {
+      "title": "Condiciones de uso de datos | Shiba Muscle",
+      "description": "Condiciones para usar los datos de Shiba Muscle, como peso medio, repeticiones medias, estándares de fuerza y metadatos de ejercicios.",
+      "heading": "Condiciones de uso de datos",
+      "intro": [
+        "Esta página explica las condiciones para usar los datos de entrenamiento publicados en Shiba Muscle. Revísalas antes de citar, consultar o compartir los datos.",
+        "Última actualización: 10 de julio de 2026"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Datos cubiertos",
+          "paragraphs": [
+            "Estas condiciones se aplican al peso medio, las repeticiones medias, los estándares de fuerza y los metadatos de ejercicios, como músculos principales y categorías, publicados en Shiba Muscle.",
+            "Los textos, imágenes, diseño y materiales relacionados con la app se rigen por los derechos de autor y las condiciones generales del sitio."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Usos permitidos",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Consultar los datos para planes personales de entrenamiento, aprendizaje o comparación",
+                "Citar extractos breves o resúmenes con un enlace a Shiba Muscle",
+                "Presentar páginas individuales en artículos, redes sociales o documentos con atribución clara"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Condiciones",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Atribuye la fuente a \"Shiba Muscle\" e incluye la URL de la página correspondiente.",
+                "No distorsiones el contexto, como fecha de actualización, unidad, ejercicio, sexo, peso corporal o edad.",
+                "No sugieras que Shiba Muscle respalda o aprueba servicios, productos o afirmaciones de terceros."
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Usos prohibidos",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Modificar, republicar o redistribuir datos de forma engañosa",
+                "Copiar toda o gran parte de la base de datos de Shiba Muscle como servicio sustituto o conjunto de datos redistribuible",
+                "Realizar recopilación automatizada, scraping o rastreo que genere mucha carga en el servidor",
+                "Usar los datos con fines ilegales, peligrosos o maliciosos"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Aviso y contacto",
+          "paragraphs": [
+            "Los datos de Shiba Muscle son información de referencia para fitness general. No garantizamos exactitud, integridad ni idoneidad para un fin concreto.",
+            "Si tienes preguntas sobre el uso de datos o planeas un uso a gran escala, contáctanos desde la página de contacto."
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "title": "Conditions d'utilisation des données | Shiba Muscle",
+      "description": "Conditions d'utilisation des données Shiba Muscle, dont charges moyennes, répétitions moyennes, standards de force et métadonnées d'exercices.",
+      "heading": "Conditions d'utilisation des données",
+      "intro": [
+        "Cette page explique les conditions d'utilisation des données d'entraînement publiées sur Shiba Muscle. Merci de les consulter avant de citer, référencer ou partager les données.",
+        "Dernière mise à jour : 10 juillet 2026"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Données concernées",
+          "paragraphs": [
+            "Ces conditions s'appliquent aux charges moyennes, répétitions moyennes, standards de force et métadonnées d'exercices, comme les muscles principaux et catégories, publiés sur Shiba Muscle.",
+            "Les textes, images, éléments de design et supports liés à l'app restent soumis au droit d'auteur et aux conditions générales du site."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Utilisations autorisées",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Consulter les données pour un plan d'entraînement personnel, l'apprentissage ou la comparaison",
+                "Citer de courts extraits ou résumés avec un lien vers Shiba Muscle",
+                "Présenter des pages individuelles dans des articles, publications sociales ou documents avec une attribution claire"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Conditions",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Mentionnez \"Shiba Muscle\" comme source et ajoutez l'URL de la page concernée.",
+                "Ne présentez pas de manière trompeuse le contexte, comme la date de mise à jour, l'unité, l'exercice, le sexe, le poids corporel ou l'âge.",
+                "Ne laissez pas entendre que Shiba Muscle recommande ou approuve un service, produit ou propos tiers."
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Utilisations interdites",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Modifier, republier ou redistribuer les données de façon trompeuse",
+                "Copier tout ou une grande partie de la base Shiba Muscle comme service de remplacement ou jeu de données redistribuable",
+                "Effectuer une collecte automatisée, du scraping ou du crawl provoquant une forte charge serveur",
+                "Utiliser les données à des fins illégales, dangereuses ou malveillantes"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Avertissement et contact",
+          "paragraphs": [
+            "Les données Shiba Muscle sont des repères d'information pour le fitness général. Nous ne garantissons pas leur exactitude, exhaustivité ou adéquation à un usage particulier.",
+            "Pour toute question sur l'utilisation des données, ou pour un usage à grande échelle, contactez-nous via la page de contact."
+          ]
+        }
+      ]
+    },
+    "de": {
+      "title": "Datennutzungsbedingungen | Shiba Muscle",
+      "description": "Nutzungsbedingungen für Shiba Muscle Daten wie Durchschnittsgewicht, durchschnittliche Wiederholungen, Kraftstandards und Übungsmetadaten.",
+      "heading": "Datennutzungsbedingungen",
+      "intro": [
+        "Diese Seite erklärt die Bedingungen für die Nutzung der auf Shiba Muscle veröffentlichten Trainingsdaten. Bitte lies sie, bevor du die Daten zitierst, referenzierst oder teilst.",
+        "Letzte Aktualisierung: 10. Juli 2026"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Abgedeckte Daten",
+          "paragraphs": [
+            "Diese Bedingungen gelten für Durchschnittsgewichte, durchschnittliche Wiederholungen, Kraftstandards und Übungsmetadaten wie Zielmuskeln und Kategorien, die auf Shiba Muscle veröffentlicht werden.",
+            "Seitentexte, Bilder, Design und App-bezogene Materialien unterliegen dem Urheberrecht und den allgemeinen Nutzungsbedingungen der Website."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Erlaubte Nutzung",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Die Daten für persönliche Trainingsplanung, Lernen oder Vergleiche zu verwenden",
+                "Kurze Auszüge oder Zusammenfassungen mit Link zu Shiba Muscle zu zitieren",
+                "Einzelne Seiten in Artikeln, Social Posts oder Dokumenten mit klarer Quellenangabe vorzustellen"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Bedingungen",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Nenne \"Shiba Muscle\" als Quelle und füge die URL der jeweiligen Seite hinzu.",
+                "Stelle Kontext wie Aktualisierungsdatum, Einheit, Übung, Geschlecht, Körpergewicht oder Alter nicht irreführend dar.",
+                "Erwecke nicht den Eindruck, Shiba Muscle empfehle oder genehmige Dienste, Produkte oder Aussagen Dritter."
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Untersagte Nutzung",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Daten irreführend zu verändern, erneut zu veröffentlichen oder weiterzuverteilen",
+                "Die gesamte oder einen wesentlichen Teil der Shiba Muscle Datenbank als Ersatzdienst oder weiterverteilbaren Datensatz zu kopieren",
+                "Automatisierte Erfassung, Scraping oder Crawling mit hoher Serverlast durchzuführen",
+                "Die Daten für illegale, gefährliche oder böswillige Zwecke zu nutzen"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Haftungsausschluss und Kontakt",
+          "paragraphs": [
+            "Shiba Muscle Daten sind Referenzinformationen für allgemeines Fitnesstraining. Wir garantieren keine Richtigkeit, Vollständigkeit oder Eignung für einen bestimmten Zweck.",
+            "Wenn du Fragen zur Datennutzung hast oder eine umfangreiche Nutzung planst, kontaktiere uns bitte über die Kontaktseite."
+          ]
+        }
+      ]
+    },
+    "id": {
+      "title": "Ketentuan Penggunaan Data | Shiba Muscle",
+      "description": "Ketentuan penggunaan data Shiba Muscle, termasuk beban rata-rata, repetisi rata-rata, standar kekuatan, dan metadata latihan.",
+      "heading": "Ketentuan Penggunaan Data",
+      "intro": [
+        "Halaman ini menjelaskan ketentuan penggunaan data latihan yang diterbitkan di Shiba Muscle. Harap baca sebelum mengutip, merujuk, atau membagikan data.",
+        "Terakhir diperbarui: 10 Juli 2026"
+      ],
+      "sections": [
+        {
+          "className": "content-card policy-section",
+          "heading": "Data yang dicakup",
+          "paragraphs": [
+            "Ketentuan ini berlaku untuk beban rata-rata, repetisi rata-rata, standar kekuatan, dan metadata latihan seperti otot utama dan kategori yang diterbitkan di Shiba Muscle.",
+            "Teks halaman, gambar, desain, dan materi terkait app dilindungi oleh hak cipta dan ketentuan penggunaan umum situs."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Penggunaan yang diizinkan",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Merujuk data untuk rencana latihan pribadi, pembelajaran, atau perbandingan",
+                "Mengutip cuplikan singkat atau ringkasan dengan tautan ke Shiba Muscle",
+                "Memperkenalkan halaman individual di artikel, media sosial, atau dokumen dengan atribusi sumber yang jelas"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Syarat penggunaan",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Cantumkan \"Shiba Muscle\" sebagai sumber dan sertakan URL halaman terkait.",
+                "Jangan menyesatkan konteks seperti tanggal pembaruan, satuan, latihan, jenis kelamin, berat badan, atau usia.",
+                "Jangan menyiratkan bahwa Shiba Muscle mendukung atau menyetujui layanan, produk, atau klaim pihak ketiga."
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Penggunaan yang dilarang",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Mengubah, memublikasikan ulang, atau mendistribusikan data dengan cara yang menyesatkan",
+                "Menyalin seluruh atau sebagian besar database Shiba Muscle sebagai layanan pengganti atau dataset untuk didistribusikan ulang",
+                "Melakukan pengambilan otomatis, scraping, atau crawling yang membebani server",
+                "Menggunakan data untuk tujuan ilegal, berbahaya, atau beritikad buruk"
+              ]
+            }
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Penafian dan kontak",
+          "paragraphs": [
+            "Data Shiba Muscle adalah informasi referensi untuk fitness umum. Kami tidak menjamin akurasi, kelengkapan, atau kesesuaian untuk tujuan tertentu.",
+            "Jika ada pertanyaan tentang penggunaan data atau rencana penggunaan berskala besar, hubungi kami melalui halaman kontak."
+          ]
+        }
+      ]
+    }
+  }
+}

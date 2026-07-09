@@ -237,39 +237,48 @@ UI_TEXT["zh-hans"] = mapSimplifiedChineseObject(UI_TEXT["zh-hant"], {
 
 Object.assign(UI_TEXT.ja, {
     about: "Shiba Muscleについて",
-    methodology: "データの見方"
+    methodology: "データの見方",
+    dataTerms: "データ利用条件"
 });
 Object.assign(UI_TEXT.ko, {
     about: "Shiba Muscle 소개",
-    methodology: "데이터 읽는 법"
+    methodology: "데이터 읽는 법",
+    dataTerms: "데이터 이용 조건"
 });
 Object.assign(UI_TEXT["zh-hant"], {
     about: "關於 Shiba Muscle",
-    methodology: "資料說明"
+    methodology: "資料說明",
+    dataTerms: "資料使用條款"
 });
 Object.assign(UI_TEXT["zh-hans"], {
     about: "关于 Shiba Muscle",
-    methodology: "数据说明"
+    methodology: "数据说明",
+    dataTerms: "数据使用条款"
 });
 Object.assign(UI_TEXT.es, {
     about: "Acerca de Shiba Muscle",
-    methodology: "Cómo leer los datos"
+    methodology: "Cómo leer los datos",
+    dataTerms: "Condiciones de datos"
 });
 Object.assign(UI_TEXT.fr, {
     about: "À propos de Shiba Muscle",
-    methodology: "Lire les données"
+    methodology: "Lire les données",
+    dataTerms: "Conditions des données"
 });
 Object.assign(UI_TEXT.de, {
     about: "Über Shiba Muscle",
-    methodology: "Daten verstehen"
+    methodology: "Daten verstehen",
+    dataTerms: "Datennutzung"
 });
 Object.assign(UI_TEXT.id, {
     about: "Tentang Shiba Muscle",
-    methodology: "Cara membaca data"
+    methodology: "Cara membaca data",
+    dataTerms: "Ketentuan data"
 });
 Object.assign(UI_TEXT.en, {
     about: "About Shiba Muscle",
-    methodology: "How to read the data"
+    methodology: "How to read the data",
+    dataTerms: "Data Usage Terms"
 });
 
 const CATEGORY_NAV = [

@@ -310,14 +310,15 @@ function getAppImages(page) {
     };
 }
 
-function renderAppFooter(locale, textLocale = locale) {
+function renderAppFooter(locale, textLocale = locale, languageFile = "index.html") {
     const homeHref = resolveLocalizedStaticPageHref("index.html", locale, textLocale);
     const featuresHref = resolveLocalizedContentHref("index.html#analytics", locale, textLocale);
     const aboutHref = resolveLocalizedStaticPageHref("about.html", locale, textLocale);
     const methodologyHref = resolveLocalizedStaticPageHref("methodology.html", locale, textLocale);
+    const dataTermsHref = resolveLocalizedStaticPageHref("data-terms.html", locale, textLocale);
     const contactHref = resolveLocalizedStaticPageHref("contact.html", locale, textLocale);
     const languageLinks = getGeneratedLocales()
-        .map((item) => `                <a href="${escapeAttribute(absoluteUrlForFile("index.html", item.code))}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a>`)
+        .map((item) => `                <a href="${escapeAttribute(absoluteUrlForFile(languageFile, item.code))}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a>`)
         .join("\n");
 
     return `    <footer class="app-footer">
@@ -331,6 +332,7 @@ function renderAppFooter(locale, textLocale = locale) {
                 <a href="${escapeAttribute(featuresHref)}">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
                 <a href="${escapeAttribute(aboutHref)}">${escapeHtml(getUiText(textLocale, "about"))}</a>
                 <a href="${escapeAttribute(methodologyHref)}">${escapeHtml(getUiText(textLocale, "methodology"))}</a>
+                <a href="${escapeAttribute(dataTermsHref)}">${escapeHtml(getUiText(textLocale, "dataTerms"))}</a>
                 <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
                 <a href="${escapeAttribute(contactHref)}">${escapeHtml(getHomeText(textLocale, "footerContact"))}</a>
             </nav>
@@ -1182,7 +1184,7 @@ ${(page.sections || []).map((section) => renderContentSection(section, locale)).
 ${content}
     </main>
 
-${renderAppFooter(locale, textLocale)}
+${renderAppFooter(locale, textLocale, englishOnly ? "index.html" : page.file)}
 ` : `${renderStaticHeader({ pageType: "content", locale })}
 
     <hr class="top-divider">
@@ -1324,6 +1326,7 @@ function renderAppPolicyHeader(locale, textLocale = "en") {
     const featuresHref = resolveLocalizedContentHref("index.html#analytics", locale, textLocale);
     const aboutHref = resolveLocalizedStaticPageHref("about.html", locale, textLocale);
     const methodologyHref = resolveLocalizedStaticPageHref("methodology.html", locale, textLocale);
+    const dataTermsHref = resolveLocalizedStaticPageHref("data-terms.html", locale, textLocale);
 
     return `    <header class="site-header app-local-header">
         <nav class="site-topbar app-local-topbar" aria-label="Shiba">
@@ -1336,6 +1339,7 @@ function renderAppPolicyHeader(locale, textLocale = "en") {
                 <a href="${escapeAttribute(featuresHref)}" class="app-local-nav-link">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
                 <a href="${escapeAttribute(aboutHref)}" class="app-local-nav-link">${escapeHtml(getUiText(textLocale, "about"))}</a>
                 <a href="${escapeAttribute(methodologyHref)}" class="app-local-nav-link">${escapeHtml(getUiText(textLocale, "methodology"))}</a>
+                <a href="${escapeAttribute(dataTermsHref)}" class="app-local-nav-link">${escapeHtml(getUiText(textLocale, "dataTerms"))}</a>
                 <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}" class="app-local-cta">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
             </div>
         </nav>

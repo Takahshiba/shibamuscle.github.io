@@ -224,11 +224,9 @@ for (const entry of htmlEntries) {
     if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexStaticPage) {
         assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "ja")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
         auditOpenGraphLocaleAlternates(entry, html, expectedHtmlLang);
-        if (!isAppPage) {
-            getGeneratedLocales().forEach((locale) => {
-                assert(html.includes(`href="${absoluteUrlForFile(canonicalFile, locale.code)}" data-lang="${locale.code}"`), `${entry.relativePath}: footer language link for ${locale.code} is incorrect`);
-            });
-        }
+        getGeneratedLocales().forEach((locale) => {
+            assert(html.includes(`href="${absoluteUrlForFile(canonicalFile, locale.code)}" data-lang="${locale.code}"`), `${entry.relativePath}: footer language link for ${locale.code} is incorrect`);
+        });
     }
 
     auditInternalLinks(entry, html, isIndexablePage);
@@ -1030,6 +1028,7 @@ function auditAppTrustNavigation(entry, html, expectedLanguage) {
     const homeHref = buildExpectedLocalizedStaticHref("index.html", entry.locale, expectedLanguage);
     const aboutHref = buildExpectedLocalizedStaticHref("about.html", entry.locale, expectedLanguage);
     const methodologyHref = buildExpectedLocalizedStaticHref("methodology.html", entry.locale, expectedLanguage);
+    const dataTermsHref = buildExpectedLocalizedStaticHref("data-terms.html", entry.locale, expectedLanguage);
     const contactHref = buildExpectedLocalizedStaticHref("contact.html", entry.locale, expectedLanguage);
 
     [
@@ -1037,6 +1036,7 @@ function auditAppTrustNavigation(entry, html, expectedLanguage) {
         [`${homeHref}#analytics`, "Features"],
         [aboutHref, "About"],
         [methodologyHref, "Methodology"],
+        [dataTermsHref, "Data Usage Terms"],
         [contactHref, "Contact"]
     ].forEach(([href, label]) => {
         assert(html.includes(`href="${href}"`), `${entry.relativePath}: app navigation should link to ${label}`);
@@ -1894,6 +1894,7 @@ function auditWebSiteStructuredData(entry, website, expectedLanguage) {
         ["index.html", getUiText(navigationLocale, "home")],
         ["about.html", getUiText(navigationLocale, "about")],
         ["methodology.html", getUiText(navigationLocale, "methodology")],
+        ["data-terms.html", getUiText(navigationLocale, "dataTerms")],
         ["contact.html", getUiText(navigationLocale, "contact")],
         ["privacy-policy.html", getUiText(navigationLocale, "privacy")]
     ];
@@ -2127,6 +2128,7 @@ function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { docu
     const dataCatalog = graph.find((node) => node?.["@id"] === dataCatalogId && hasType(node, "DataCatalog"));
     const dataset = graph.find((node) => node?.["@id"] === `${canonicalUrl}#dataset` && hasType(node, "Dataset"));
     const publishingPrinciplesUrl = absoluteUrlForFile("methodology.html", entry.locale);
+    const datasetLicenseUrl = absoluteUrlForFile("data-terms.html", entry.locale);
 
     assert(Boolean(exerciseTerm), `${entry.relativePath}: exercise DefinedTerm schema is missing`);
     assert(Boolean(article), `${entry.relativePath}: exercise Article schema is missing`);
@@ -2195,6 +2197,7 @@ function auditExerciseStructuredData(entry, graph, canonicalUrl, webPage, { docu
         assert(dataset.creator?.["@id"] === "https://shibamuscle.com/#organization", `${entry.relativePath}: Dataset creator organization is missing`);
         assert(dataset.publisher?.["@id"] === "https://shibamuscle.com/#organization", `${entry.relativePath}: Dataset publisher organization is missing`);
         assert(dataset.publishingPrinciples === publishingPrinciplesUrl, `${entry.relativePath}: Dataset publishingPrinciples URL is incorrect`);
+        assert(dataset.license === datasetLicenseUrl, `${entry.relativePath}: Dataset license URL is incorrect`);
         assert(dataset.includedInDataCatalog?.["@id"] === dataCatalogId, `${entry.relativePath}: Dataset catalog link is missing or incorrect`);
         assert(dataset.isAccessibleForFree === true, `${entry.relativePath}: Dataset should be marked accessible for free`);
         assert(Array.isArray(dataset.variableMeasured) && dataset.variableMeasured.length >= 3, `${entry.relativePath}: Dataset measured variables are incomplete`);

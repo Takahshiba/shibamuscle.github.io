@@ -359,6 +359,7 @@ function buildSiteNavigationElements(locale = "ja") {
         ["index.html", getUiText(locale, "home")],
         ["about.html", getUiText(locale, "about")],
         ["methodology.html", getUiText(locale, "methodology")],
+        ["data-terms.html", getUiText(locale, "dataTerms")],
         ["contact.html", getUiText(locale, "contact")],
         ["privacy-policy.html", getUiText(locale, "privacy")]
     ].map(([file, name]) => ({
@@ -808,6 +809,9 @@ function renderStaticFooter(file, locale = "ja") {
                     </li>
                     <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                         <a href="methodology.html">${escapeHtml(getUiText(locale, "methodology"))}</a>
+                    </li>
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
+                        <a href="data-terms.html">${escapeHtml(getUiText(locale, "dataTerms"))}</a>
                     </li>
                     <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                         <a href="privacy-policy.html">${escapeHtml(getUiText(locale, "privacy"))}</a>

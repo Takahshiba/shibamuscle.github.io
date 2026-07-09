@@ -222,6 +222,7 @@ function buildExerciseStructuredData({ exercise, unit, locale, canonicalFile, ti
     const ogImageUrl = `${SITE_ORIGIN}/assets/og/exercises/${exercise.slug}.svg`;
     const publisher = { "@id": `${SITE_ORIGIN}/#organization` };
     const publishingPrinciplesUrl = absoluteUrlForFile("methodology.html", locale);
+    const licenseUrl = absoluteUrlForFile("data-terms.html", locale);
     const keywordText = relatedTags.join(", ");
     const datasetId = `${canonicalUrl}#dataset`;
     const muscleMentions = primaryMuscles.map((muscle) => ({
@@ -290,6 +291,7 @@ function buildExerciseStructuredData({ exercise, unit, locale, canonicalFile, ti
             creator: publisher,
             publisher,
             publishingPrinciples: publishingPrinciplesUrl,
+            license: licenseUrl,
             includedInDataCatalog: { "@id": dataCatalogId },
             isAccessibleForFree: true,
             variableMeasured: [
