@@ -10,6 +10,7 @@ import {
     escapeHtml,
     imageSizeAttributes,
     renderBreadcrumb,
+    renderCard,
     renderDocument,
     renderStaticFooter,
     renderStaticHeader
@@ -62,6 +63,8 @@ for (const locale of locales) {
 
         if (page.kind === "home") {
             html = renderHomePage(page, catalog, locale.code);
+        } else if (page.kind === "library") {
+            html = renderLibraryPage(page, catalog, locale.code);
         } else if (page.kind === "content") {
             html = renderContentPage(page, locale.code);
         } else {
@@ -198,7 +201,7 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
     const images = getAppImages(page);
     const previewCards = buildHomePreviewCards(catalogData, textLocale, page.unit || "kg", locale);
     const sectionCount = catalogData.sections.length;
-    const exerciseCount = catalogData.sections.reduce((count, section) => count + section.cards.length, 0);
+    const exerciseCount = new Set(catalogData.sections.flatMap((section) => section.cards.map((card) => card.slug))).size;
     const todayItem = overviewItems[0] || {};
     const analyticsItem = overviewItems[1] || {};
     const libraryItem = overviewItems[2] || {};
@@ -279,7 +282,10 @@ ${renderShowcasePhone(images.heatmap, getHomeText(textLocale, "heatmapAlt"), get
                             <span>${escapeHtml(formatExerciseCount(exerciseCount, textLocale))}</span>
                             <span>${escapeHtml(formatCategoryCount(sectionCount, textLocale))}</span>
                         </div>
-                        ${renderAppStoreBadge(locale)}
+                        <div class="app-library-actions">
+                            <a href="exercises.html" class="app-pill app-pill--dark">${escapeHtml(getHomeText(textLocale, "libraryAction"))}</a>
+                            ${renderAppStoreBadge(locale)}
+                        </div>
                     </div>
                     <div class="app-library-preview">
 ${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join("\n")}
@@ -333,6 +339,7 @@ function renderAppFooter(locale, textLocale = locale, languageFile = "index.html
             <nav class="app-footer-links" aria-label="Shiba footer">
                 <a href="${escapeAttribute(homeHref)}">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
                 <a href="${escapeAttribute(featuresHref)}">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
+                <a href="${escapeAttribute(resolveLocalizedStaticPageHref("exercises.html", locale, textLocale))}">${escapeHtml(getUiText(textLocale, "exerciseLibrary"))}</a>
                 <a href="${escapeAttribute(aboutHref)}">${escapeHtml(getUiText(textLocale, "about"))}</a>
                 <a href="${escapeAttribute(methodologyHref)}">${escapeHtml(getUiText(textLocale, "methodology"))}</a>
                 <a href="${escapeAttribute(dataTermsHref)}">${escapeHtml(getUiText(textLocale, "dataTerms"))}</a>
@@ -682,6 +689,7 @@ function getHomeText(locale, key) {
             libraryHeading: "次の種目を探す",
             libraryKicker: "種目",
             libraryCopy: "部位別にすばやく探せます。",
+            libraryAction: "全287種目を見る",
             appStoreHeading: "トレーニングの進歩を、\n今日から記録。",
             appStoreCopy: "ShibaはApp Storeで無料配信中。iPhoneですぐに始められます。",
             footerHome: "ホーム",
@@ -742,6 +750,7 @@ function getHomeText(locale, key) {
             libraryHeading: "Find exercises.",
             libraryKicker: "Library",
             libraryCopy: "Search by body part and muscle.",
+            libraryAction: "Browse all 287 exercises",
             appStoreHeading: "Start tracking\nwhat changes.",
             appStoreCopy: "Shiba is available free on the App Store. Start your next workout on iPhone.",
             footerHome: "Home",
@@ -802,6 +811,7 @@ function getHomeText(locale, key) {
             libraryHeading: "운동 찾기",
             libraryKicker: "운동",
             libraryCopy: "부위와 근육으로 빠르게 탐색.",
+            libraryAction: "287개 운동 모두 보기",
             appStoreHeading: "오늘부터\n성장을 기록하세요.",
             appStoreCopy: "Shiba를 App Store에서 무료로 다운로드하고 iPhone에서 바로 시작하세요.",
             footerHome: "홈",
@@ -862,6 +872,7 @@ function getHomeText(locale, key) {
             libraryHeading: "尋找動作",
             libraryKicker: "動作",
             libraryCopy: "依部位與肌群快速搜尋。",
+            libraryAction: "查看全部 287 個動作",
             appStoreHeading: "從今天開始，\n記錄每一次進步。",
             appStoreCopy: "Shiba 已在 App Store 免費上架，立即用 iPhone 開始下一次訓練。",
             footerHome: "首頁",
@@ -922,6 +933,7 @@ function getHomeText(locale, key) {
             libraryHeading: "寻找动作",
             libraryKicker: "动作",
             libraryCopy: "按部位和肌群快速搜索。",
+            libraryAction: "查看全部 287 个动作",
             appStoreHeading: "从今天开始，\n记录每一次进步。",
             appStoreCopy: "Shiba 已在 App Store 免费上架，立即用 iPhone 开始下一次训练。",
             footerHome: "首页",
@@ -982,6 +994,7 @@ function getHomeText(locale, key) {
             libraryHeading: "Encuentra ejercicios",
             libraryKicker: "Ejercicios",
             libraryCopy: "Busca por zona y músculo.",
+            libraryAction: "Ver los 287 ejercicios",
             appStoreHeading: "Registra tu progreso\ndesde hoy.",
             appStoreCopy: "Shiba ya está disponible gratis en App Store. Empieza tu próximo entrenamiento en el iPhone.",
             footerHome: "Inicio",
@@ -1042,6 +1055,7 @@ function getHomeText(locale, key) {
             libraryHeading: "Trouver un exercice",
             libraryKicker: "Exercices",
             libraryCopy: "Recherche par zone et par muscle.",
+            libraryAction: "Voir les 287 exercices",
             appStoreHeading: "Suivez vos progrès\ndès aujourd’hui.",
             appStoreCopy: "Shiba est disponible gratuitement sur l’App Store. Lancez votre prochaine séance sur iPhone.",
             footerHome: "Accueil",
@@ -1102,6 +1116,7 @@ function getHomeText(locale, key) {
             libraryHeading: "Übungen finden",
             libraryKicker: "Übungen",
             libraryCopy: "Nach Bereich und Muskel suchen.",
+            libraryAction: "Alle 287 Übungen ansehen",
             appStoreHeading: "Fortschritt ab heute\nfesthalten.",
             appStoreCopy: "Shiba ist kostenlos im App Store verfügbar. Starte dein nächstes Workout auf dem iPhone.",
             footerHome: "Start",
@@ -1162,6 +1177,7 @@ function getHomeText(locale, key) {
             libraryHeading: "Cari latihan",
             libraryKicker: "Latihan",
             libraryCopy: "Cari berdasarkan area dan otot.",
+            libraryAction: "Lihat semua 287 latihan",
             appStoreHeading: "Catat progresmu\nmulai hari ini.",
             appStoreCopy: "Shiba kini tersedia gratis di App Store. Mulai latihan berikutnya di iPhone.",
             footerHome: "Beranda",
@@ -1173,6 +1189,149 @@ function getHomeText(locale, key) {
     };
 
     return text[locale]?.[key] || text.ja[key] || "";
+}
+
+function renderLibraryPage(page, catalogData, locale) {
+    const records = buildUniqueLibraryRecords(catalogData);
+    const unit = page.unit || "kg";
+    const canonicalUrl = absoluteUrlForFile(page.file, locale);
+    const datePublished = getStaticPageDatePublished(page.file);
+    const dateModified = getStaticPageDateModified(page.file);
+    const breadcrumbs = [
+        { label: getUiText(locale, "home"), href: absoluteUrlForFile("index.html", locale) },
+        { label: page.heading }
+    ];
+    const categoryButtons = catalogData.sections.map((section) => {
+        const label = locale === "ja" ? section.titles.ja : getCategoryLabel(section, locale);
+        return `                    <button type="button" id="${escapeAttribute(section.id)}" class="exercise-library-filter" data-library-category="${escapeAttribute(section.id)}" aria-pressed="false">${escapeHtml(label)}</button>`;
+    }).join("\n");
+    const cards = records.map(({ card, section, sectionIds }) => {
+        return renderCard({ ...card, sectionIds }, unit, locale, section, { includeImage: true });
+    }).join("\n");
+    const resultText = String(page.resultTemplate || "{count}").replace("{count}", String(records.length));
+    const body = `${renderStaticHeader({ pageType: "library", locale, showCategoryNav: true })}
+
+    <hr class="top-divider">
+    <main class="page-main" data-exercise-library data-result-template="${escapeAttribute(page.resultTemplate || "{count}")}">
+${renderBreadcrumb(breadcrumbs, locale)}
+        <section class="container exercise-library-hero">
+            <p class="eyebrow">${escapeHtml(page.eyebrow || "Exercise Library")}</p>
+            <h1>${escapeHtml(page.heading)}</h1>
+${(page.intro || []).map((paragraph) => `            <p>${escapeHtml(paragraph)}</p>`).join("\n")}
+            <div class="exercise-library-counts" aria-label="${escapeAttribute(resultText)}">
+                <span>${escapeHtml(formatExerciseCount(records.length, locale))}</span>
+                <span>${escapeHtml(formatCategoryCount(catalogData.sections.length, locale))}</span>
+            </div>
+        </section>
+
+        <section class="container exercise-library-index" aria-labelledby="exercise-library-title">
+            <div class="exercise-library-heading">
+                <p class="eyebrow">${escapeHtml(page.eyebrow || "Exercise Library")}</p>
+                <h2 id="exercise-library-title">${escapeHtml(page.libraryHeading || page.heading)}</h2>
+            </div>
+            <div class="exercise-library-controls">
+                <label class="exercise-library-search">
+                    <span>${escapeHtml(page.searchLabel || "Search")}</span>
+                    <input type="search" data-library-search autocomplete="off" placeholder="${escapeAttribute(page.searchPlaceholder || "")}">
+                </label>
+                <div class="exercise-library-filter-group" role="group" aria-label="${escapeAttribute(page.categoryLabel || "Categories")}">
+                    <button type="button" class="exercise-library-filter is-active" data-library-category="all" aria-pressed="true">${escapeHtml(page.allCategories || "All")}</button>
+${categoryButtons}
+                </div>
+                <p class="exercise-library-results" data-library-results aria-live="polite">${escapeHtml(resultText)}</p>
+            </div>
+            <div class="exercise-cards-container exercise-library-grid" data-library-grid>
+${cards}
+            </div>
+            <div class="exercise-library-empty" data-library-empty hidden>
+                <h3>${escapeHtml(page.emptyHeading || "No exercises found")}</h3>
+                <p>${escapeHtml(page.emptyText || "")}</p>
+            </div>
+        </section>
+    </main>
+
+${renderStaticFooter(page.file, locale)}
+
+    <script src="${stylesheetHref("app.js?v=exercise-library-20260715", locale)}"></script>
+`;
+
+    return renderDocument({
+        title: page.title,
+        stylesheets: page.stylesheets || ["styles.css"],
+        body,
+        locale,
+        seo: {
+            file: page.file,
+            description: page.description,
+            ogImage: page.ogImage,
+            ogImageAlt: `Shiba ${page.heading} - ${formatExerciseCount(records.length, locale)}`,
+            type: "website",
+            twitterCard: "summary_large_image",
+            themeColor: APP_THEME_COLOR,
+            webPageType: "CollectionPage",
+            breadcrumbs,
+            mainEntity: { "@id": `${canonicalUrl}#exercise-list` },
+            datePublished,
+            dateModified,
+            structuredData: [buildLibraryStructuredData(records, unit, locale, canonicalUrl, page)]
+        },
+        enableAds: false,
+        bodyClass: "content-page exercise-library-page",
+        generatedComment: "<!-- Generated by scripts/build-static-pages.mjs. Edit src/pages/exercises.json and src/catalog.json instead of editing this file directly. -->"
+    });
+}
+
+function buildUniqueLibraryRecords(catalogData) {
+    const recordsBySlug = new Map();
+
+    catalogData.sections.forEach((section) => {
+        section.cards.forEach((card) => {
+            const existing = recordsBySlug.get(card.slug);
+            const sectionIds = existing ? [...existing.sectionIds] : [];
+            if (!sectionIds.includes(section.id)) {
+                sectionIds.push(section.id);
+            }
+            recordsBySlug.set(card.slug, { card, section, sectionIds });
+        });
+    });
+
+    return Array.from(recordsBySlug.values());
+}
+
+function buildLibraryStructuredData(records, unit, locale, canonicalUrl, page) {
+    return {
+        "@type": "ItemList",
+        "@id": `${canonicalUrl}#exercise-list`,
+        name: page.heading,
+        description: page.description,
+        url: canonicalUrl,
+        inLanguage: getGeneratedLocaleHreflang(locale),
+        numberOfItems: records.length,
+        itemListOrder: "https://schema.org/ItemListOrderAscending",
+        publisher: { "@id": `${SITE_ORIGIN}/#organization` },
+        publishingPrinciples: absoluteUrlForFile("methodology.html", locale),
+        itemListElement: records.map(({ card, section }, index) => {
+            const localizedCard = buildLocalizedCard(card, section, locale);
+            const name = localizedCard.names?.[locale]
+                || localizedCard.names?.ja
+                || titleFromSlug(card.slug);
+            const file = `${unit}_${card.slug}.html`;
+            const itemUrl = absoluteUrlForFile(file, locale);
+
+            return {
+                "@type": "ListItem",
+                position: index + 1,
+                url: itemUrl,
+                item: {
+                    "@type": "WebPage",
+                    "@id": `${itemUrl}#webpage`,
+                    url: itemUrl,
+                    name,
+                    image: absoluteStructuredDataAssetUrl(card.image)
+                }
+            };
+        })
+    };
 }
 
 function renderContentPage(page, locale) {
@@ -1328,7 +1487,7 @@ function getStaticPageDateModified(file) {
     const sourceFile = file === "index.html" ? "home.json" : file.replace(/\.html$/, ".json");
     const sourceFiles = [join(PAGES_ROOT, sourceFile)];
 
-    if (file === "index.html") {
+    if (file === "index.html" || file === "exercises.html") {
         sourceFiles.push(CATALOG_PATH);
     }
 

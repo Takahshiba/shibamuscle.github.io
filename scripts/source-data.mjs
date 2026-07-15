@@ -12,6 +12,7 @@ const CATALOG_PATH = join(SRC_ROOT, "catalog.json");
 const TAXONOMY_PATH = join(SRC_ROOT, "taxonomy.json");
 const DISCOVERY_PATH = join(SRC_ROOT, "discovery.json");
 const LOCALES_PATH = join(SRC_ROOT, "locales.json");
+const SLUG_ALIASES_PATH = join(SRC_ROOT, "slug-aliases.json");
 const sourceCreatedCache = new Map();
 const sourceLastmodCache = new Map();
 
@@ -23,6 +24,7 @@ export {
     LOCALES_PATH,
     PAGES_ROOT,
     ROOT,
+    SLUG_ALIASES_PATH,
     SRC_ROOT,
     TAXONOMY_PATH,
     buildExerciseFileIndex,
@@ -39,6 +41,7 @@ export {
     loadExercises,
     loadLocales,
     loadPages,
+    loadSlugAliases,
     loadTaxonomy,
     readJson,
     writeJson
@@ -174,6 +177,10 @@ function loadPages() {
         .filter((file) => file.endsWith(".json"))
         .sort((left, right) => left.localeCompare(right))
         .map((file) => readJson(join(PAGES_ROOT, file)));
+}
+
+function loadSlugAliases() {
+    return readJson(SLUG_ALIASES_PATH);
 }
 
 function loadExerciseFiles() {

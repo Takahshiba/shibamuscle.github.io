@@ -941,7 +941,7 @@
           }
         },
         {
-          "slug": "muscle-ups",
+          "slug": "muscle-up",
           "names": {
             "ja": "マッスルアップ"
           },
@@ -949,7 +949,7 @@
             "ja": "全身 / 自重"
           },
           "image": "./assets/muscle-ups.webp",
-          "imageAlt": "muscle-ups",
+          "imageAlt": "muscle-up",
           "measurementKind": "reps",
           "description": {
             "ja": "マッスルアップは全身の中でも広背筋・大胸筋・三角筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -987,7 +987,7 @@
             "ja": [
               "マッスルアップ",
               "muscle",
-              "ups",
+              "up",
               "全身",
               "全身トレーニング",
               "全身トレ",
@@ -1368,7 +1368,7 @@
           }
         },
         {
-          "slug": "burpees",
+          "slug": "burpee-jump",
           "names": {
             "ja": "バーピージャンプ"
           },
@@ -1376,7 +1376,7 @@
             "ja": "全身 / 自重"
           },
           "image": "./assets/burpees.webp",
-          "imageAlt": "burpees",
+          "imageAlt": "burpee-jump",
           "measurementKind": "reps",
           "description": {
             "ja": "バーピージャンプは全身の中でも大腿四頭筋・大臀筋・下腿三頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -1413,7 +1413,8 @@
           "searchTerms": {
             "ja": [
               "バーピージャンプ",
-              "burpees",
+              "burpee",
+              "jump",
               "全身",
               "全身トレーニング",
               "全身トレ",
@@ -2353,7 +2354,7 @@
           }
         },
         {
-          "slug": "ring-muscle-ups",
+          "slug": "ring-muscle-up",
           "names": {
             "ja": "リングマッスルアップ"
           },
@@ -2361,7 +2362,7 @@
             "ja": "全身 / 自重"
           },
           "image": "./assets/ring-muscle-ups.webp",
-          "imageAlt": "ring-muscle-ups",
+          "imageAlt": "ring-muscle-up",
           "measurementKind": "reps",
           "description": {
             "ja": "リングマッスルアップは全身の中でも広背筋・大胸筋・上腕三頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -2404,7 +2405,7 @@
               "リングマッスルアップ",
               "ring",
               "muscle",
-              "ups",
+              "up",
               "全身",
               "全身トレーニング",
               "全身トレ",
@@ -2740,7 +2741,7 @@
             "ja": "クラッププルアップ"
           },
           "categories": {
-            "ja": "全身"
+            "ja": "全身 / 自重"
           },
           "image": "./assets/clap-pull-ups.webp",
           "imageAlt": "clap-pull-up",
@@ -2762,6 +2763,7 @@
               "BIG3/全身",
               "広背筋",
               "上腕二頭筋",
+              "自重",
               "全身連動",
               "レップ数"
             ]
@@ -2786,6 +2788,7 @@
               "BIG3/全身",
               "広背筋",
               "上腕二頭筋",
+              "自重",
               "全身連動",
               "レップ数"
             ]
@@ -2972,7 +2975,7 @@
           }
         },
         {
-          "slug": "push-ups",
+          "slug": "push-up",
           "names": {
             "ja": "腕立て伏せ"
           },
@@ -2980,7 +2983,7 @@
             "ja": "胸 / 自重"
           },
           "image": "./assets/push-ups.webp",
-          "imageAlt": "push-ups",
+          "imageAlt": "push-up",
           "measurementKind": "reps",
           "description": {
             "ja": "腕立て伏せは胸の中でも大胸筋・上腕三頭筋・上腕二頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -3019,7 +3022,7 @@
             "ja": [
               "腕立て伏せ",
               "push",
-              "ups",
+              "up",
               "胸",
               "胸トレ",
               "胸トレーニング",
@@ -3900,7 +3903,7 @@
           }
         },
         {
-          "slug": "one-arm-push-ups",
+          "slug": "one-arm-push-up",
           "names": {
             "ja": "片腕立て伏せ"
           },
@@ -3908,7 +3911,7 @@
             "ja": "胸 / 自重"
           },
           "image": "./assets/one-arm-push-ups.webp",
-          "imageAlt": "one-arm-push-ups",
+          "imageAlt": "one-arm-push-up",
           "measurementKind": "reps",
           "description": {
             "ja": "片腕立て伏せは胸の中でも大胸筋・上腕三頭筋・上腕二頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -3947,7 +3950,7 @@
               "one",
               "arm",
               "push",
-              "ups",
+              "up",
               "胸",
               "胸トレ",
               "胸トレーニング",
@@ -4020,7 +4023,7 @@
           }
         },
         {
-          "slug": "diamond-push-ups",
+          "slug": "diamond-push-up",
           "names": {
             "ja": "ダイヤモンドプッシュアップ"
           },
@@ -4028,7 +4031,7 @@
             "ja": "胸 / 自重"
           },
           "image": "./assets/diamond-push-ups.webp",
-          "imageAlt": "diamond-push-ups",
+          "imageAlt": "diamond-push-up",
           "measurementKind": "reps",
           "description": {
             "ja": "ダイヤモンドプッシュアップは胸の中でも上腕三頭筋・上腕二頭筋・大胸筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -4066,7 +4069,7 @@
               "ダイヤモンドプッシュアップ",
               "diamond",
               "push",
-              "ups",
+              "up",
               "胸",
               "胸トレ",
               "胸トレーニング",
@@ -4253,7 +4256,7 @@
           }
         },
         {
-          "slug": "decline-push-ups",
+          "slug": "decline-push-up",
           "names": {
             "ja": "デクライン腕立て伏せ"
           },
@@ -4261,7 +4264,7 @@
             "ja": "胸 / 自重"
           },
           "image": "./assets/decline-push-ups.webp",
-          "imageAlt": "decline-push-ups",
+          "imageAlt": "decline-push-up",
           "measurementKind": "reps",
           "description": {
             "ja": "デクライン腕立て伏せは胸の中でも大胸筋上部・上腕三頭筋・上腕二頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -4300,7 +4303,7 @@
               "デクライン腕立て伏せ",
               "decline",
               "push",
-              "ups",
+              "up",
               "胸",
               "胸トレ",
               "胸トレーニング",
@@ -4377,7 +4380,7 @@
           }
         },
         {
-          "slug": "incline-push-ups",
+          "slug": "incline-push-up",
           "names": {
             "ja": "インクライン腕立て伏せ"
           },
@@ -4385,7 +4388,7 @@
             "ja": "胸 / 自重"
           },
           "image": "./assets/incline-push-ups.webp",
-          "imageAlt": "incline-push-ups",
+          "imageAlt": "incline-push-up",
           "measurementKind": "reps",
           "description": {
             "ja": "インクライン腕立て伏せは胸の中でも大胸筋上部・三角筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -4422,7 +4425,7 @@
               "インクライン腕立て伏せ",
               "incline",
               "push",
-              "ups",
+              "up",
               "胸",
               "胸トレ",
               "胸トレーニング",
@@ -4436,7 +4439,7 @@
           }
         },
         {
-          "slug": "close-grip-push-ups",
+          "slug": "close-grip-push-up",
           "names": {
             "ja": "クロースグリップ腕立て伏せ"
           },
@@ -4444,7 +4447,7 @@
             "ja": "胸 / 自重"
           },
           "image": "./assets/close-grip-push-ups.webp",
-          "imageAlt": "close-grip-push-ups",
+          "imageAlt": "close-grip-push-up",
           "measurementKind": "reps",
           "description": {
             "ja": "クロースグリップ腕立て伏せは胸の中でも上腕三頭筋・上腕二頭筋・大胸筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -4483,7 +4486,7 @@
               "close",
               "grip",
               "push",
-              "ups",
+              "up",
               "胸",
               "胸トレ",
               "胸トレーニング",
@@ -4497,7 +4500,7 @@
           }
         },
         {
-          "slug": "archer-push-ups",
+          "slug": "archer-push-up",
           "names": {
             "ja": "アーチャープッシュアップ"
           },
@@ -4505,7 +4508,7 @@
             "ja": "胸 / 自重"
           },
           "image": "./assets/archer-push-ups.webp",
-          "imageAlt": "archer-push-ups",
+          "imageAlt": "archer-push-up",
           "measurementKind": "reps",
           "description": {
             "ja": "アーチャープッシュアップは胸の中でも大胸筋・上腕三頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -4541,7 +4544,7 @@
               "アーチャープッシュアップ",
               "archer",
               "push",
-              "ups",
+              "up",
               "胸",
               "胸トレ",
               "胸トレーニング",
@@ -4679,7 +4682,7 @@
           }
         },
         {
-          "slug": "pull-ups",
+          "slug": "pull-up",
           "names": {
             "ja": "懸垂"
           },
@@ -4687,7 +4690,7 @@
             "ja": "背中 / 自重"
           },
           "image": "./assets/pull-ups.webp",
-          "imageAlt": "pull-ups",
+          "imageAlt": "pull-up",
           "measurementKind": "reps",
           "description": {
             "ja": "懸垂は背中の中でも広背筋・上腕二頭筋・僧帽筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -4724,7 +4727,7 @@
             "ja": [
               "懸垂",
               "pull",
-              "ups",
+              "up",
               "背中",
               "背中トレ",
               "背中トレーニング",
@@ -4847,7 +4850,7 @@
           }
         },
         {
-          "slug": "chin-ups",
+          "slug": "chin-up",
           "names": {
             "ja": "チンニング"
           },
@@ -4855,7 +4858,7 @@
             "ja": "背中 / 自重"
           },
           "image": "./assets/chin-ups.webp",
-          "imageAlt": "chin-ups",
+          "imageAlt": "chin-up",
           "measurementKind": "reps",
           "description": {
             "ja": "チンニングは背中の中でも広背筋・上腕二頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -4890,7 +4893,7 @@
             "ja": [
               "チンニング",
               "chin",
-              "ups",
+              "up",
               "背中",
               "背中トレ",
               "背中トレーニング",
@@ -5632,7 +5635,7 @@
           }
         },
         {
-          "slug": "neutral-grip-pull-ups",
+          "slug": "neutral-grip-pull-up",
           "names": {
             "ja": "ニュートラルグリップ懸垂"
           },
@@ -5640,7 +5643,7 @@
             "ja": "背中 / 自重"
           },
           "image": "./assets/neutral-grip-pull-ups.webp",
-          "imageAlt": "neutral-grip-pull-ups",
+          "imageAlt": "neutral-grip-pull-up",
           "measurementKind": "reps",
           "description": {
             "ja": "ニュートラルグリップ懸垂は背中の中でも広背筋・上腕二頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -5677,7 +5680,7 @@
               "neutral",
               "grip",
               "pull",
-              "ups",
+              "up",
               "背中",
               "背中トレ",
               "背中トレーニング",
@@ -6138,7 +6141,7 @@
           }
         },
         {
-          "slug": "one-arm-pull-ups",
+          "slug": "one-arm-pull-up",
           "names": {
             "ja": "片腕懸垂"
           },
@@ -6146,7 +6149,7 @@
             "ja": "背中 / 自重"
           },
           "image": "./assets/one-arm-pull-ups.webp",
-          "imageAlt": "one-arm-pull-ups",
+          "imageAlt": "one-arm-pull-up",
           "measurementKind": "reps",
           "description": {
             "ja": "片腕懸垂は背中の中でも広背筋・上腕二頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -6183,7 +6186,7 @@
               "one",
               "arm",
               "pull",
-              "ups",
+              "up",
               "背中",
               "背中トレ",
               "背中トレーニング",
@@ -8028,7 +8031,7 @@
           }
         },
         {
-          "slug": "handstand-push-ups",
+          "slug": "handstand-push-up",
           "names": {
             "ja": "垂直腕立て伏せ"
           },
@@ -8036,7 +8039,7 @@
             "ja": "肩 / 自重"
           },
           "image": "./assets/handstand-push-ups.webp",
-          "imageAlt": "handstand-push-ups",
+          "imageAlt": "handstand-push-up",
           "measurementKind": "reps",
           "description": {
             "ja": "垂直腕立て伏せは肩の中でも三角筋・上腕三頭筋・上腕二頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -8074,7 +8077,7 @@
               "垂直腕立て伏せ",
               "handstand",
               "push",
-              "ups",
+              "up",
               "肩",
               "肩トレ",
               "肩トレーニング",
@@ -8641,7 +8644,7 @@
           }
         },
         {
-          "slug": "pike-push-ups",
+          "slug": "pike-push-up",
           "names": {
             "ja": "パイクプッシュアップ"
           },
@@ -8649,7 +8652,7 @@
             "ja": "肩 / 自重"
           },
           "image": "./assets/pike-push-ups.webp",
-          "imageAlt": "pike-push-ups",
+          "imageAlt": "pike-push-up",
           "measurementKind": "reps",
           "description": {
             "ja": "パイクプッシュアップは肩の中でも三角筋・上腕三頭筋・上腕二頭筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -8689,7 +8692,7 @@
               "パイクプッシュアップ",
               "pike",
               "push",
-              "ups",
+              "up",
               "肩",
               "肩トレ",
               "肩トレーニング",
@@ -9169,7 +9172,7 @@
           }
         },
         {
-          "slug": "cable-bicep-curl",
+          "slug": "cable-biceps-curl",
           "names": {
             "ja": "ケーブルバイセップカール"
           },
@@ -9177,7 +9180,7 @@
             "ja": "腕 / ケーブル"
           },
           "image": "./assets/cable-bicep-curl.webp",
-          "imageAlt": "cable-bicep-curl",
+          "imageAlt": "cable-biceps-curl",
           "measurementKind": "weight",
           "description": {
             "ja": "ケーブルバイセップカールの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕二頭筋です。"
@@ -9213,7 +9216,7 @@
             "ja": [
               "ケーブルバイセップカール",
               "cable",
-              "bicep",
+              "biceps",
               "curl",
               "腕",
               "腕トレ",
@@ -9346,7 +9349,7 @@
           }
         },
         {
-          "slug": "machine-bicep-curl",
+          "slug": "machine-biceps-curl",
           "names": {
             "ja": "マシーンバイセップカール"
           },
@@ -9354,7 +9357,7 @@
             "ja": "腕 / マシン"
           },
           "image": "./assets/machine-bicep-curl.webp",
-          "imageAlt": "machine-bicep-curl",
+          "imageAlt": "machine-biceps-curl",
           "measurementKind": "weight",
           "description": {
             "ja": "マシーンバイセップカールの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕二頭筋です。"
@@ -9390,7 +9393,7 @@
             "ja": [
               "マシーンバイセップカール",
               "machine",
-              "bicep",
+              "biceps",
               "curl",
               "腕",
               "腕トレ",
@@ -9461,7 +9464,7 @@
           }
         },
         {
-          "slug": "one-arm-cable-bicep-curl",
+          "slug": "one-arm-cable-biceps-curl",
           "names": {
             "ja": "片腕ケーブルバイセップカール"
           },
@@ -9469,7 +9472,7 @@
             "ja": "腕 / ケーブル"
           },
           "image": "./assets/one-arm-cable-bicep-curl.webp",
-          "imageAlt": "one-arm-cable-bicep-curl",
+          "imageAlt": "one-arm-cable-biceps-curl",
           "measurementKind": "weight",
           "description": {
             "ja": "片腕ケーブルバイセップカールの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕二頭筋です。"
@@ -9507,7 +9510,7 @@
               "one",
               "arm",
               "cable",
-              "bicep",
+              "biceps",
               "curl",
               "腕",
               "腕トレ",
@@ -10169,7 +10172,7 @@
           }
         },
         {
-          "slug": "tricep-pushdown",
+          "slug": "triceps-pushdown",
           "names": {
             "ja": "トライセッププッシュダウン"
           },
@@ -10177,7 +10180,7 @@
             "ja": "腕"
           },
           "image": "./assets/tricep-pushdown.webp",
-          "imageAlt": "tricep-pushdown",
+          "imageAlt": "triceps-pushdown",
           "measurementKind": "weight",
           "description": {
             "ja": "トライセッププッシュダウンの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋・上腕二頭筋です。"
@@ -10213,7 +10216,7 @@
           "searchTerms": {
             "ja": [
               "トライセッププッシュダウン",
-              "tricep",
+              "triceps",
               "pushdown",
               "腕",
               "腕トレ",
@@ -10228,7 +10231,7 @@
           }
         },
         {
-          "slug": "lying-tricep-extension",
+          "slug": "skull-crusher",
           "names": {
             "ja": "スカルクラッシャー"
           },
@@ -10236,7 +10239,7 @@
             "ja": "腕"
           },
           "image": "./assets/lying-tricep-extension.webp",
-          "imageAlt": "lying-tricep-extension",
+          "imageAlt": "skull-crusher",
           "measurementKind": "weight",
           "description": {
             "ja": "スカルクラッシャーの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋・上腕二頭筋です。"
@@ -10272,9 +10275,8 @@
           "searchTerms": {
             "ja": [
               "スカルクラッシャー",
-              "lying",
-              "tricep",
-              "extension",
+              "skull",
+              "crusher",
               "腕",
               "腕トレ",
               "腕トレーニング",
@@ -10288,7 +10290,7 @@
           }
         },
         {
-          "slug": "tricep-rope-pushdown",
+          "slug": "triceps-rope-pushdown",
           "names": {
             "ja": "トライセップローププッシュダウン"
           },
@@ -10332,7 +10334,7 @@
           "searchTerms": {
             "ja": [
               "トライセップローププッシュダウン",
-              "tricep",
+              "triceps",
               "rope",
               "pushdown",
               "腕",
@@ -10348,7 +10350,7 @@
           }
         },
         {
-          "slug": "one-arm-pulldown",
+          "slug": "one-arm-triceps-pushdown",
           "names": {
             "ja": "片腕プルダウン"
           },
@@ -10356,7 +10358,7 @@
             "ja": "腕"
           },
           "image": "./assets/one-arm-pulldown.webp",
-          "imageAlt": "one-arm-pulldown",
+          "imageAlt": "one-arm-triceps-pushdown",
           "measurementKind": "weight",
           "description": {
             "ja": "片腕プルダウンの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は広背筋・上腕三頭筋・上腕二頭筋です。"
@@ -10396,7 +10398,8 @@
               "片腕プルダウン",
               "one",
               "arm",
-              "pulldown",
+              "triceps",
+              "pushdown",
               "腕",
               "腕トレ",
               "腕トレーニング",
@@ -10411,7 +10414,7 @@
           }
         },
         {
-          "slug": "dumbbell-tricep-extension",
+          "slug": "dumbbell-triceps-extension",
           "names": {
             "ja": "ダンベルトライセップエクステンション"
           },
@@ -10419,7 +10422,7 @@
             "ja": "腕 / ダンベル"
           },
           "image": "./assets/dumbbell-tricep-extension.webp",
-          "imageAlt": "dumbbell-tricep-extension",
+          "imageAlt": "dumbbell-triceps-extension",
           "measurementKind": "weight",
           "description": {
             "ja": "ダンベルトライセップエクステンションの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋です。"
@@ -10455,7 +10458,7 @@
             "ja": [
               "ダンベルトライセップエクステンション",
               "dumbbell",
-              "tricep",
+              "triceps",
               "extension",
               "腕",
               "腕トレ",
@@ -10470,7 +10473,7 @@
           }
         },
         {
-          "slug": "tricep-extension",
+          "slug": "barbell-french-press",
           "names": {
             "ja": "バーベルフレンチプレス"
           },
@@ -10478,7 +10481,7 @@
             "ja": "腕 / バーベル"
           },
           "image": "./assets/tricep-extension.webp",
-          "imageAlt": "tricep-extension",
+          "imageAlt": "barbell-french-press",
           "measurementKind": "weight",
           "description": {
             "ja": "バーベルフレンチプレスの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋・上腕二頭筋です。"
@@ -10515,8 +10518,9 @@
           "searchTerms": {
             "ja": [
               "バーベルフレンチプレス",
-              "tricep",
-              "extension",
+              "barbell",
+              "french",
+              "press",
               "腕",
               "腕トレ",
               "腕トレーニング",
@@ -10531,7 +10535,7 @@
           }
         },
         {
-          "slug": "lying-dumbbell-tricep-extension",
+          "slug": "lying-dumbbell-triceps-extension",
           "names": {
             "ja": "ライングダンベルトライセップエクステンション"
           },
@@ -10539,7 +10543,7 @@
             "ja": "腕 / ダンベル"
           },
           "image": "./assets/lying-dumbbell-tricep-extension.webp",
-          "imageAlt": "lying-dumbbell-tricep-extension",
+          "imageAlt": "lying-dumbbell-triceps-extension",
           "measurementKind": "weight",
           "description": {
             "ja": "ライングダンベルトライセップエクステンションの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋・上腕二頭筋です。"
@@ -10578,7 +10582,7 @@
               "ライングダンベルトライセップエクステンション",
               "lying",
               "dumbbell",
-              "tricep",
+              "triceps",
               "extension",
               "腕",
               "腕トレ",
@@ -10658,7 +10662,7 @@
           }
         },
         {
-          "slug": "dumbbell-tricep-kickback",
+          "slug": "dumbbell-kickback",
           "names": {
             "ja": "ダンベルキックバック"
           },
@@ -10666,7 +10670,7 @@
             "ja": "腕 / ダンベル"
           },
           "image": "./assets/dumbbell-tricep-kickback.webp",
-          "imageAlt": "dumbbell-tricep-kickback",
+          "imageAlt": "dumbbell-kickback",
           "measurementKind": "weight",
           "description": {
             "ja": "ダンベルキックバックの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋です。"
@@ -10702,7 +10706,6 @@
             "ja": [
               "ダンベルキックバック",
               "dumbbell",
-              "tricep",
               "kickback",
               "腕",
               "腕トレ",
@@ -10717,7 +10720,7 @@
           }
         },
         {
-          "slug": "cable-overhead-tricep-extension",
+          "slug": "cable-overhead-extension",
           "names": {
             "ja": "ケーブルオーバーヘッドエクステンション"
           },
@@ -10725,7 +10728,7 @@
             "ja": "腕 / ケーブル"
           },
           "image": "./assets/cable-overhead-tricep-extension.webp",
-          "imageAlt": "cable-overhead-tricep-extension",
+          "imageAlt": "cable-overhead-extension",
           "measurementKind": "weight",
           "description": {
             "ja": "ケーブルオーバーヘッドエクステンションの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋・上腕二頭筋です。"
@@ -10764,7 +10767,6 @@
               "ケーブルオーバーヘッドエクステンション",
               "cable",
               "overhead",
-              "tricep",
               "extension",
               "腕",
               "腕トレ",
@@ -10780,7 +10782,7 @@
           }
         },
         {
-          "slug": "machine-tricep-extension",
+          "slug": "machine-triceps-extension",
           "names": {
             "ja": "マシーントライセップエクステンション"
           },
@@ -10788,7 +10790,7 @@
             "ja": "腕 / マシン"
           },
           "image": "./assets/machine-tricep-extension.webp",
-          "imageAlt": "machine-tricep-extension",
+          "imageAlt": "machine-triceps-extension",
           "measurementKind": "weight",
           "description": {
             "ja": "マシーントライセップエクステンションの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋・上腕二頭筋です。"
@@ -10826,7 +10828,7 @@
             "ja": [
               "マシーントライセップエクステンション",
               "machine",
-              "tricep",
+              "triceps",
               "extension",
               "腕",
               "腕トレ",
@@ -10842,7 +10844,7 @@
           }
         },
         {
-          "slug": "seated-dumbbell-tricep-extension",
+          "slug": "seated-dumbbell-french-press",
           "names": {
             "ja": "シーテッドダンベルフレンチプレス"
           },
@@ -10850,7 +10852,7 @@
             "ja": "腕 / ダンベル"
           },
           "image": "./assets/seated-dumbbell-tricep-extension.webp",
-          "imageAlt": "seated-dumbbell-tricep-extension",
+          "imageAlt": "seated-dumbbell-french-press",
           "measurementKind": "weight",
           "description": {
             "ja": "シーテッドダンベルフレンチプレスの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋・上腕二頭筋です。"
@@ -10889,8 +10891,8 @@
               "シーテッドダンベルフレンチプレス",
               "seated",
               "dumbbell",
-              "tricep",
-              "extension",
+              "french",
+              "press",
               "腕",
               "腕トレ",
               "腕トレーニング",
@@ -10905,7 +10907,7 @@
           }
         },
         {
-          "slug": "reverse-grip-tricep-pushdown",
+          "slug": "reverse-grip-pushdown",
           "names": {
             "ja": "逆手プッシュダウン"
           },
@@ -10913,7 +10915,7 @@
             "ja": "腕"
           },
           "image": "./assets/reverse-grip-tricep-pushdown.webp",
-          "imageAlt": "reverse-grip-tricep-pushdown",
+          "imageAlt": "reverse-grip-pushdown",
           "measurementKind": "weight",
           "description": {
             "ja": "逆手プッシュダウンの平均重量と基準重量を、腕の代表種目として確認できます。主働筋は上腕三頭筋・上腕二頭筋です。"
@@ -10951,7 +10953,6 @@
               "逆手プッシュダウン",
               "reverse",
               "grip",
-              "tricep",
               "pushdown",
               "腕",
               "腕トレ",
@@ -15449,7 +15450,7 @@
       },
       "cards": [
         {
-          "slug": "sit-ups",
+          "slug": "sit-up",
           "names": {
             "ja": "上体起こし"
           },
@@ -15457,7 +15458,7 @@
             "ja": "体幹 / 自重"
           },
           "image": "./assets/sit-ups.webp",
-          "imageAlt": "sit-ups",
+          "imageAlt": "sit-up",
           "measurementKind": "reps",
           "description": {
             "ja": "上体起こしは体幹の中でも腹直筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -15490,7 +15491,7 @@
             "ja": [
               "上体起こし",
               "sit",
-              "ups",
+              "up",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -15502,7 +15503,7 @@
           }
         },
         {
-          "slug": "cable-crunches",
+          "slug": "cable-crunch",
           "names": {
             "ja": "ケーブルクランチ"
           },
@@ -15510,7 +15511,7 @@
             "ja": "体幹 / ケーブル"
           },
           "image": "./assets/cable-crunches.webp",
-          "imageAlt": "cable-crunches",
+          "imageAlt": "cable-crunch",
           "measurementKind": "weight",
           "description": {
             "ja": "ケーブルクランチの平均重量と基準重量を、体幹の代表種目として確認できます。主働筋は腹直筋です。"
@@ -15544,7 +15545,7 @@
             "ja": [
               "ケーブルクランチ",
               "cable",
-              "crunches",
+              "crunch",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -15557,7 +15558,7 @@
           }
         },
         {
-          "slug": "machine-seated-crunches",
+          "slug": "machine-seated-crunch",
           "names": {
             "ja": "マシーンシーテッドクランチ"
           },
@@ -15565,7 +15566,7 @@
             "ja": "体幹 / マシン"
           },
           "image": "./assets/machine-seated-crunches.webp",
-          "imageAlt": "machine-seated-crunches",
+          "imageAlt": "machine-seated-crunch",
           "measurementKind": "weight",
           "description": {
             "ja": "マシーンシーテッドクランチの平均重量と基準重量を、体幹の代表種目として確認できます。主働筋は腹直筋です。"
@@ -15600,7 +15601,7 @@
               "マシーンシーテッドクランチ",
               "machine",
               "seated",
-              "crunches",
+              "crunch",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -15613,7 +15614,7 @@
           }
         },
         {
-          "slug": "crunches",
+          "slug": "crunch",
           "names": {
             "ja": "クランチ"
           },
@@ -15621,7 +15622,7 @@
             "ja": "体幹 / 自重"
           },
           "image": "./assets/crunches.webp",
-          "imageAlt": "crunches",
+          "imageAlt": "crunch",
           "measurementKind": "reps",
           "description": {
             "ja": "クランチは体幹の中でも腹直筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -15653,7 +15654,7 @@
           "searchTerms": {
             "ja": [
               "クランチ",
-              "crunches",
+              "crunch",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -15940,7 +15941,7 @@
           }
         },
         {
-          "slug": "decline-sit-ups",
+          "slug": "decline-sit-up",
           "names": {
             "ja": "デクラインシットアップ"
           },
@@ -15948,7 +15949,7 @@
             "ja": "体幹 / 自重"
           },
           "image": "./assets/decline-sit-ups.webp",
-          "imageAlt": "decline-sit-ups",
+          "imageAlt": "decline-sit-up",
           "measurementKind": "reps",
           "description": {
             "ja": "デクラインシットアップは体幹の中でも腹直筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -15982,7 +15983,7 @@
               "デクラインシットアップ",
               "decline",
               "sit",
-              "ups",
+              "up",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -16048,7 +16049,7 @@
           }
         },
         {
-          "slug": "ab-wheel-roller",
+          "slug": "ab-wheel-rollout",
           "names": {
             "ja": "腹筋ローラー"
           },
@@ -16056,7 +16057,7 @@
             "ja": "体幹"
           },
           "image": "./assets/ab-wheel-roller.webp",
-          "imageAlt": "ab-wheel-roller",
+          "imageAlt": "ab-wheel-rollout",
           "measurementKind": "reps",
           "description": {
             "ja": "腹筋ローラーは体幹の中でも腹直筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -16089,7 +16090,7 @@
               "腹筋ローラー",
               "ab",
               "wheel",
-              "roller",
+              "rollout",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -16154,7 +16155,7 @@
           }
         },
         {
-          "slug": "decline-crunches",
+          "slug": "decline-crunch",
           "names": {
             "ja": "デクラインクランチ"
           },
@@ -16162,7 +16163,7 @@
             "ja": "体幹 / 自重"
           },
           "image": "./assets/decline-crunches.webp",
-          "imageAlt": "decline-crunches",
+          "imageAlt": "decline-crunch",
           "measurementKind": "reps",
           "description": {
             "ja": "デクラインクランチは体幹の中でも腹直筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -16195,7 +16196,7 @@
             "ja": [
               "デクラインクランチ",
               "decline",
-              "crunches",
+              "crunch",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -16266,7 +16267,7 @@
           }
         },
         {
-          "slug": "bicycle-crunches",
+          "slug": "bicycle-crunch",
           "names": {
             "ja": "バイシクルクランチ"
           },
@@ -16274,7 +16275,7 @@
             "ja": "体幹 / 自重"
           },
           "image": "./assets/bicycle-crunches.webp",
-          "imageAlt": "bicycle-crunches",
+          "imageAlt": "bicycle-crunch",
           "measurementKind": "reps",
           "description": {
             "ja": "バイシクルクランチは体幹の中でも腹直筋・外腹斜筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -16309,7 +16310,7 @@
             "ja": [
               "バイシクルクランチ",
               "bicycle",
-              "crunches",
+              "crunch",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -16322,7 +16323,7 @@
           }
         },
         {
-          "slug": "reverse-crunches",
+          "slug": "reverse-crunch",
           "names": {
             "ja": "リバースクランチ"
           },
@@ -16330,7 +16331,7 @@
             "ja": "体幹 / 自重"
           },
           "image": "./assets/reverse-crunches.webp",
-          "imageAlt": "reverse-crunches",
+          "imageAlt": "reverse-crunch",
           "measurementKind": "reps",
           "description": {
             "ja": "リバースクランチは体幹の中でも腹直筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -16363,7 +16364,7 @@
             "ja": [
               "リバースクランチ",
               "reverse",
-              "crunches",
+              "crunch",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -16431,7 +16432,7 @@
           }
         },
         {
-          "slug": "mountain-climbers",
+          "slug": "mountain-climber",
           "names": {
             "ja": "マウンテンクライマー"
           },
@@ -16439,7 +16440,7 @@
             "ja": "体幹 / 自重"
           },
           "image": "./assets/mountain-climbers.webp",
-          "imageAlt": "mountain-climbers",
+          "imageAlt": "mountain-climber",
           "measurementKind": "reps",
           "description": {
             "ja": "マウンテンクライマーは体幹の中でも腹直筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -16472,7 +16473,7 @@
             "ja": [
               "マウンテンクライマー",
               "mountain",
-              "climbers",
+              "climber",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -16484,7 +16485,7 @@
           }
         },
         {
-          "slug": "high-pulley-crunches",
+          "slug": "high-pulley-crunch",
           "names": {
             "ja": "ハイプーリークランチ"
           },
@@ -16492,7 +16493,7 @@
             "ja": "体幹"
           },
           "image": "./assets/high-pulley-crunches.webp",
-          "imageAlt": "high-pulley-crunches",
+          "imageAlt": "high-pulley-crunch",
           "measurementKind": "weight",
           "description": {
             "ja": "ハイプーリークランチの平均重量と基準重量を、体幹の代表種目として確認できます。主働筋は腹直筋です。"
@@ -16526,7 +16527,7 @@
               "ハイプーリークランチ",
               "high",
               "pulley",
-              "crunches",
+              "crunch",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -16538,7 +16539,7 @@
           }
         },
         {
-          "slug": "standing-cable-crunches",
+          "slug": "standing-cable-crunch",
           "names": {
             "ja": "スタンディングケーブルクランチ"
           },
@@ -16546,7 +16547,7 @@
             "ja": "体幹 / ケーブル"
           },
           "image": "./assets/standing-cable-crunches.webp",
-          "imageAlt": "standing-cable-crunches",
+          "imageAlt": "standing-cable-crunch",
           "measurementKind": "weight",
           "description": {
             "ja": "スタンディングケーブルクランチの平均重量と基準重量を、体幹の代表種目として確認できます。主働筋は腹直筋です。"
@@ -16581,7 +16582,7 @@
               "スタンディングケーブルクランチ",
               "standing",
               "cable",
-              "crunches",
+              "crunch",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -16649,7 +16650,7 @@
           }
         },
         {
-          "slug": "side-crunches",
+          "slug": "side-crunch",
           "names": {
             "ja": "サイドクランチ"
           },
@@ -16657,7 +16658,7 @@
             "ja": "体幹 / 自重"
           },
           "image": "./assets/side-crunches.webp",
-          "imageAlt": "side-crunches",
+          "imageAlt": "side-crunch",
           "measurementKind": "reps",
           "description": {
             "ja": "サイドクランチは体幹の中でも外腹斜筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -16690,7 +16691,7 @@
             "ja": [
               "サイドクランチ",
               "side",
-              "crunches",
+              "crunch",
               "体幹",
               "体幹トレーニング",
               "体幹トレ",
@@ -16702,7 +16703,7 @@
           }
         },
         {
-          "slug": "romanchair-side-bend",
+          "slug": "roman-chair-side-bend",
           "names": {
             "ja": "ルーマンチェアサイドベンド"
           },
@@ -16710,7 +16711,7 @@
             "ja": "体幹"
           },
           "image": "./assets/romanchair-side-bend.webp",
-          "imageAlt": "romanchair-side-bend",
+          "imageAlt": "roman-chair-side-bend",
           "measurementKind": "reps",
           "description": {
             "ja": "ルーマンチェアサイドベンドは体幹の中でも外腹斜筋・腹直筋を中心に鍛える種目です。平均レップ数と基準レップ数を同じ導線で確認できます。"
@@ -16743,7 +16744,8 @@
           "searchTerms": {
             "ja": [
               "ルーマンチェアサイドベンド",
-              "romanchair",
+              "roman",
+              "chair",
               "side",
               "bend",
               "体幹",

@@ -3,12 +3,14 @@
 `src/` is the editable source of truth for the site pages that are generated into the repo root and locale subdirectories.
 
 - `catalog.json`
-  Shared exercise library data used by the homepage and exercise pages.
+  Shared exercise library data used by the homepage, exercise library, and exercise pages. An exercise may appear in more than one category, so count unique slugs when displaying the library total.
 - `exercises/*.json`
   One file per exercise slug. Each file keeps:
   - shared exercise data such as the Japanese name, image, muscle groups, and shared section blocks
   - source-driven `metadata` for category labels, measurement kind, primary muscles, descriptions, tags, and SEO copy
   - `kg` / `lb` variant blocks for the average and standards sections
+- `slug-aliases.json`
+  Legacy website slug to canonical app slug mappings. Canonical exercise files and links use the app slugs; the build keeps old URLs as `noindex` redirect pages for compatibility.
 - `taxonomy.json`
   Canonical category labels, aliases, and shared vocabulary used to normalize section names and search terms.
 - `pages/*.json`
@@ -36,7 +38,7 @@ node scripts/extract-exercise-source.mjs
 
 The generated root HTML files and locale HTML files under `/ko/`, `/zh-hant/`, `/zh-hans/`, `/es/`, `/fr/`, `/de/`, `/id/`, and `/en/` are build outputs. Edit `src/` instead of editing the generated exercise pages directly.
 
-Today this covers the homepage, contact page, privacy policy, and all exercise pages. `Shift2ics.html` is still hand-maintained because it is a standalone PDF tool with its own inline runtime.
+Today this covers the homepage, the 287-exercise library at `exercises.html`, contact page, privacy policy, and all exercise pages. `Shift2ics.html` is still hand-maintained because it is a standalone PDF tool with its own inline runtime.
 
 Localization notes:
 

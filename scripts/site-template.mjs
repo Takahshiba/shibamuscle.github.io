@@ -119,6 +119,7 @@ export {
     renderDiscoveryGrid,
     renderAdSlot,
     renderBreadcrumb,
+    renderCard,
     renderCardGrid,
     renderDocument,
     renderExerciseLibrary,
@@ -362,6 +363,7 @@ function buildStructuredDataBlock({ canonicalUrl, title, description, locale, do
 function buildSiteNavigationElements(locale = "ja") {
     return [
         ["index.html", getUiText(locale, "home")],
+        ["exercises.html", getUiText(locale, "exerciseLibrary")],
         ["about.html", getUiText(locale, "about")],
         ["methodology.html", getUiText(locale, "methodology")],
         ["data-terms.html", getUiText(locale, "dataTerms")],
@@ -722,7 +724,7 @@ function renderAppHeader(locale = "ja", textLocale = locale) {
     const navItems = [
         ["#today", getAppHeaderText(textLocale, "today")],
         ["#analytics", getAppHeaderText(textLocale, "analytics")],
-        ["#library", getAppHeaderText(textLocale, "library")]
+        ["exercises.html", getAppHeaderText(textLocale, "library")]
     ];
 
     return `    <header class="site-header app-local-header">
@@ -769,11 +771,15 @@ function renderLegacyCategoryNav(pageType, locale = "ja") {
 }
 
 function categoryNavHref(sectionId, pageType, locale = "ja") {
-    if (pageType === "home" || pageType === "exercise") {
+    if (pageType === "home" || pageType === "library") {
         return `#${sectionId}`;
     }
 
-    return `${absoluteUrlForFile("index.html", locale)}#${sectionId}`;
+    if (pageType === "exercise") {
+        return `exercises.html#${sectionId}`;
+    }
+
+    return `exercises.html#${sectionId}`;
 }
 
 function renderStaticFooter(file, locale = "ja") {
@@ -808,6 +814,9 @@ function renderStaticFooter(file, locale = "ja") {
             <div class="footer-section links">
                 <h4>${escapeHtml(getUiText(locale, "links"))}</h4>
                 <ul>
+                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
+                        <a href="exercises.html">${escapeHtml(getUiText(locale, "exerciseLibrary"))}</a>
+                    </li>
                     <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
                         <a href="contact.html">${escapeHtml(getUiText(locale, "contact"))}</a>
                     </li>
@@ -895,6 +904,9 @@ function renderCard(card, unit, locale = "ja", section = {}, { includeImage = tr
     const category = localizedCard.categories?.[locale] || localizedCard.categories?.ja || "";
     const image = localizeImageHref(card.image, locale);
     const imageAttribute = `data-image="${escapeAttribute(image)}"`;
+    const categoryIds = Array.isArray(card.sectionIds) && card.sectionIds.length
+        ? card.sectionIds
+        : [section.id].filter(Boolean);
     const imageHtml = includeImage
         ? `                    <img src="${escapeAttribute(image)}" alt="${escapeAttribute(name || card.imageAlt)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(image)}>\n`
         : "";
@@ -902,6 +914,7 @@ function renderCard(card, unit, locale = "ja", section = {}, { includeImage = tr
     return `            <a class="card-link" href="${escapeAttribute(`${unit}_${card.slug}.html`)}">
                 <div class="exercise-card${includeImage ? "" : " exercise-card--text-only"}"
                     data-card-slug="${escapeAttribute(card.slug)}"
+                    data-category-ids="${escapeAttribute(categoryIds.join(" "))}"
                     ${imageAttribute}
                     data-measurement-kind="${escapeAttribute(measurementKind)}"
                     data-description="${escapeAttribute(description)}"

@@ -117,9 +117,9 @@ const CATEGORY_LINKS = [
 ];
 
 const HOME_FEATURES = {
-    popular: ["deadlift", "bench-press", "squat", "pull-ups", "chin-ups", "hip-thrust"],
+    popular: ["deadlift", "bench-press", "squat", "pull-up", "chin-up", "hip-thrust"],
     big3: ["deadlift", "bench-press", "squat"],
-    beginner: ["bodyweight-squat", "push-ups", "lat-pulldown", "glute-bridge", "dumbbell-row", "bench-dips"]
+    beginner: ["bodyweight-squat", "push-up", "lat-pulldown", "glute-bridge", "dumbbell-row", "bench-dips"]
 };
 
 const HOME_ENTRY_ROUTES = [
@@ -1116,40 +1116,49 @@ Object.values(UI_TEXT).forEach((messages) => {
 });
 Object.assign(UI_TEXT.ja, {
     about: "Shiba Muscleについて",
-    methodology: "データの見方"
+    methodology: "データの見方",
+    exerciseLibrary: "種目ライブラリ"
 });
 Object.assign(UI_TEXT.ko, {
     about: "Shiba Muscle 소개",
-    methodology: "데이터 읽는 법"
+    methodology: "데이터 읽는 법",
+    exerciseLibrary: "운동 라이브러리"
 });
 Object.assign(UI_TEXT["zh-hant"], {
     about: "關於 Shiba Muscle",
-    methodology: "資料說明"
+    methodology: "資料說明",
+    exerciseLibrary: "動作資料庫"
 });
 Object.assign(UI_TEXT["zh-hans"], {
     about: "关于 Shiba Muscle",
     methodology: "数据说明",
+    exerciseLibrary: "动作库",
     languageGerman: "Deutsch"
 });
 Object.assign(UI_TEXT.es, {
     about: "Acerca de Shiba Muscle",
-    methodology: "Cómo leer los datos"
+    methodology: "Cómo leer los datos",
+    exerciseLibrary: "Biblioteca de ejercicios"
 });
 Object.assign(UI_TEXT.fr, {
     about: "À propos de Shiba Muscle",
-    methodology: "Lire les données"
+    methodology: "Lire les données",
+    exerciseLibrary: "Bibliothèque d’exercices"
 });
 Object.assign(UI_TEXT.de, {
     about: "Über Shiba Muscle",
-    methodology: "Daten verstehen"
+    methodology: "Daten verstehen",
+    exerciseLibrary: "Übungsbibliothek"
 });
 Object.assign(UI_TEXT.id, {
     about: "Tentang Shiba Muscle",
-    methodology: "Cara membaca data"
+    methodology: "Cara membaca data",
+    exerciseLibrary: "Pustaka latihan"
 });
 Object.assign(UI_TEXT.en, {
     about: "About Shiba Muscle",
-    methodology: "How to read the data"
+    methodology: "How to read the data",
+    exerciseLibrary: "Exercise Library"
 });
 
 const LIBRARY_INITIAL_CARD_LIMIT = 8;
@@ -1179,6 +1188,8 @@ document.addEventListener("DOMContentLoaded", () => {
         libraryContext = enhanceHomePage(main, { preserveStaticLanding: hasStaticAppHome });
     } else if (pageType === "exercise") {
         libraryContext = enhanceExercisePage(main);
+    } else if (pageType === "library") {
+        libraryContext = enhanceLibraryPage(main);
     } else {
         libraryContext = enhanceContentPage(main);
     }
@@ -1253,6 +1264,10 @@ function detectPageType() {
         return "exercise";
     }
 
+    if (document.body.classList.contains("exercise-library-page") || document.querySelector("main[data-exercise-library]")) {
+        return "library";
+    }
+
     return "content";
 }
 
@@ -1304,6 +1319,10 @@ function canonicalHomeHref(locale = detectLocale()) {
     return locale === "ja" ? "https://shibamuscle.com/" : `https://shibamuscle.com/${locale}/`;
 }
 
+function canonicalLibraryHref() {
+    return "exercises.html";
+}
+
 function rebuildSharedChrome(pageType) {
     const existingHeader = document.querySelector("header");
     const unitSwitch = existingHeader?.querySelector(".toggle-buttons")?.outerHTML || "";
@@ -1318,7 +1337,15 @@ function rebuildSharedChrome(pageType) {
 }
 
 function categorySectionHref(sectionId, pageType) {
-    return pageType === "home" || pageType === "exercise" ? `#${sectionId}` : `${canonicalHomeHref()}#${sectionId}`;
+    if (pageType === "library") {
+        return `#${sectionId}`;
+    }
+
+    if (pageType === "exercise") {
+        return `${canonicalLibraryHref()}#${sectionId}`;
+    }
+
+    return pageType === "home" ? `#${sectionId}` : `${canonicalLibraryHref()}#${sectionId}`;
 }
 
 function buildHeader(pageType, unitSwitch) {
@@ -1326,7 +1353,7 @@ function buildHeader(pageType, unitSwitch) {
         const navItems = [
             { href: "#today", label: "Today" },
             { href: "#analytics", label: "Analytics" },
-            { href: "#library", label: "Library" }
+            { href: "exercises.html", label: "Library" }
         ].map((item) => `<a href="${item.href}" class="app-local-nav-link">${item.label}</a>`).join("");
 
         return htmlToElement(`
@@ -1420,6 +1447,7 @@ function buildFooter(pageType) {
                 <div class="footer-column">
                     <h4>${escapeHtml(t("support"))}</h4>
                     <div class="footer-link-list footer-link-list--support">
+                        <a href="exercises.html">${escapeHtml(t("exerciseLibrary"))}</a>
                         <a href="about.html">${escapeHtml(t("about"))}</a>
                         <a href="methodology.html">${escapeHtml(t("methodology"))}</a>
                         <a href="contact.html">${escapeHtml(t("contact"))}</a>
@@ -2088,7 +2116,7 @@ function enhanceExercisePage(main) {
 
     const breadcrumb = buildBreadcrumb([
         { label: t("home"), href: canonicalHomeHref() },
-        { label: sectionLabel, href: `${canonicalHomeHref()}#${sectionId}` },
+        { label: t("exerciseLibrary"), href: `${canonicalLibraryHref()}#${sectionId}` },
         { label: heroTitle }
     ]);
 
@@ -2290,6 +2318,99 @@ function enhanceContentPage(main) {
         allCards: libraryData.allCards,
         showToolbar: false
     });
+}
+
+function enhanceLibraryPage(main) {
+    const root = main.matches("[data-exercise-library]") ? main : main.querySelector("[data-exercise-library]");
+    if (!root) {
+        return null;
+    }
+
+    const searchInput = root.querySelector("[data-library-search]");
+    const resultNode = root.querySelector("[data-library-results]");
+    const emptyNode = root.querySelector("[data-library-empty]");
+    const buttons = Array.from(root.querySelectorAll("[data-library-category]"));
+    const cards = Array.from(root.querySelectorAll("[data-library-grid] > .card-link")).map((anchor) => {
+        const card = anchor.querySelector(".exercise-card");
+        const categoryIds = new Set(String(card?.dataset.categoryIds || "").split(/\s+/).filter(Boolean));
+        const searchableText = [
+            card?.dataset.cardSlug,
+            card?.dataset.description,
+            card?.dataset.primaryMuscles,
+            card?.dataset.tags,
+            card?.dataset.aliases,
+            anchor.textContent
+        ].filter(Boolean).join(" ");
+
+        return {
+            anchor,
+            categoryIds,
+            searchableText: normalizeLibrarySearchText(searchableText)
+        };
+    });
+    const resultTemplate = root.dataset.resultTemplate || "{count}";
+    const validCategories = new Set(buttons.map((button) => button.dataset.libraryCategory).filter(Boolean));
+    let activeCategory = categoryFromHash(validCategories);
+
+    function applyFilters() {
+        const query = normalizeLibrarySearchText(searchInput?.value || "");
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+            const matchesCategory = activeCategory === "all" || card.categoryIds.has(activeCategory);
+            const matchesQuery = !query || card.searchableText.includes(query);
+            const visible = matchesCategory && matchesQuery;
+            card.anchor.hidden = !visible;
+            if (visible) {
+                visibleCount += 1;
+            }
+        });
+
+        buttons.forEach((button) => {
+            const isActive = button.dataset.libraryCategory === activeCategory;
+            button.classList.toggle("is-active", isActive);
+            button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+
+        if (resultNode) {
+            resultNode.textContent = resultTemplate.replace("{count}", String(visibleCount));
+        }
+        if (emptyNode) {
+            emptyNode.hidden = visibleCount !== 0;
+        }
+    }
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            activeCategory = button.dataset.libraryCategory || "all";
+            const nextUrl = activeCategory === "all"
+                ? `${window.location.pathname}${window.location.search}`
+                : `${window.location.pathname}${window.location.search}#${activeCategory}`;
+            window.history.replaceState(null, "", nextUrl);
+            applyFilters();
+        });
+    });
+
+    searchInput?.addEventListener("input", applyFilters);
+    window.addEventListener("hashchange", () => {
+        activeCategory = categoryFromHash(validCategories);
+        applyFilters();
+    });
+
+    applyFilters();
+    return { cards, buttons, searchInput, resultNode };
+}
+
+function categoryFromHash(validCategories) {
+    const value = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    return validCategories.has(value) ? value : "all";
+}
+
+function normalizeLibrarySearchText(value) {
+    return String(value || "")
+        .normalize("NFKC")
+        .toLocaleLowerCase()
+        .replace(/[\s\u3000]+/g, "");
 }
 
 function buildHomeEntryRoutes(allCards) {

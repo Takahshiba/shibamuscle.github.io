@@ -15,7 +15,7 @@ import {
     localizeStaticPage,
     stripIntentionalLanguageSwitchText
 } from "./localization.mjs";
-import { buildExerciseFileIndex, loadExercises, loadPages } from "./source-data.mjs";
+import { buildExerciseFileIndex, getBaseSlugFromFile, loadExercises, loadPages, loadSlugAliases } from "./source-data.mjs";
 
 const ROOT = process.cwd();
 const ANALYTICS_ID = "G-D9K58THBFM";
@@ -51,6 +51,7 @@ const sitemapLastmodByUrl = new Map(sitemapUrlBlocks.map((match) => {
 const sitemapAlternateLinkCount = (sitemap.match(/<xhtml:link\b/g) || []).length;
 const staticPageByFile = new Map(loadPages().map((page) => [page.file, page]));
 const exerciseFileIndex = buildExerciseFileIndex(loadExercises());
+const slugAliases = loadSlugAliases();
 const localFileExistsCache = new Map();
 const headCache = new Map();
 const htmlIdCache = new Map();
@@ -102,7 +103,9 @@ for (const entry of htmlEntries) {
     const html = readFileSync(entry.path, "utf8");
     const sourceStaticPage = staticPageByFile.get(entry.file);
     const localizedStaticPage = sourceStaticPage ? localizeStaticPageForAudit(sourceStaticPage, entry.locale) : null;
-    const isExercisePage = /^(kg|lb)_/.test(entry.file);
+    const legacyCanonicalSlug = slugAliases[getBaseSlugFromFile(entry.file)];
+    const isLegacyAliasPage = Boolean(legacyCanonicalSlug);
+    const isExercisePage = /^(kg|lb)_/.test(entry.file) && !isLegacyAliasPage;
     const isSecondaryUnitPage = entry.file.startsWith("lb_");
     const isHomePage = entry.file === "index.html";
     const isToolPage = entry.file === "Shift2ics.html";
@@ -112,11 +115,13 @@ for (const entry of htmlEntries) {
     const isEnglishOnlyPage = sourceStaticPage?.englishOnly === true;
     const isEnglishOnlyDuplicate = isEnglishOnlyPage && entry.locale !== "ja";
     const isNoindexStaticPage = sourceStaticPage?.noindex === true;
-    const isIndexablePage = !isToolPage && !isSecondaryUnitPage && !isEnglishOnlyDuplicate && !isNoindexStaticPage;
+    const isIndexablePage = !isToolPage && !isSecondaryUnitPage && !isEnglishOnlyDuplicate && !isNoindexStaticPage && !isLegacyAliasPage;
     const localeConfig = getLocaleConfig(entry.locale);
     const expectedHtmlLang = localizedStaticPage?.htmlLang || localeConfig.hreflang;
     const expectedHtmlDir = localeConfig.dir || "ltr";
-    const canonicalFile = isSecondaryUnitPage ? entry.file.replace(/^lb_/, "kg_") : entry.file;
+    const canonicalFile = isLegacyAliasPage
+        ? `kg_${legacyCanonicalSlug}.html`
+        : isSecondaryUnitPage ? entry.file.replace(/^lb_/, "kg_") : entry.file;
     const canonicalUrl = absoluteUrlForFile(canonicalFile, isEnglishOnlyPage ? "ja" : entry.locale);
     const pageUrl = absoluteUrlForFile(entry.file, entry.locale);
 
@@ -132,12 +137,12 @@ for (const entry of htmlEntries) {
     auditHtmlAppIconMetadata(entry, html);
     auditSingletonHeadMetadata(entry, html);
     auditHeadUrlMetadata(entry, html);
-    const expectedAlternates = isToolPage || isSecondaryUnitPage || isEnglishOnlyPage || isNoindexStaticPage ? 0 : getGeneratedLocales().length + 1;
+    const expectedAlternates = isToolPage || isSecondaryUnitPage || isEnglishOnlyPage || isNoindexStaticPage || isLegacyAliasPage ? 0 : getGeneratedLocales().length + 1;
     assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === expectedAlternates, `${entry.relativePath}: hreflang set is incomplete`);
     assert(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${entry.relativePath}: canonical is missing or malformed`);
     auditCanonicalTarget(entry, canonicalUrl, {
         isToolPage,
-        isNoindexStaticPage
+        isNoindexStaticPage: isNoindexStaticPage || isLegacyAliasPage
     });
     auditAdsenseMetadata(entry, html, isIndexablePage);
     auditRobotsMeta(entry, html, {
@@ -145,7 +150,7 @@ for (const entry of htmlEntries) {
         isToolPage,
         isSecondaryUnitPage,
         isEnglishOnlyDuplicate,
-        isNoindexStaticPage
+        isNoindexStaticPage: isNoindexStaticPage || isLegacyAliasPage
     });
     assert(/<title>[^<]+<\/title>/.test(html), `${entry.relativePath}: title is missing`);
     assert(/<meta name="description" content="[^"]+">/.test(html), `${entry.relativePath}: meta description is missing`);
@@ -186,7 +191,7 @@ for (const entry of htmlEntries) {
     if (isEnglishOnlyDuplicate) {
         assert(!sitemapUrls.has(pageUrl), `${entry.relativePath}: duplicate English-only page should not be in sitemap`);
         assert(html.includes('<meta name="robots" content="noindex,follow,noarchive">'), `${entry.relativePath}: duplicate English-only page should be noindex`);
-    } else if (isNoindexStaticPage) {
+    } else if (isNoindexStaticPage || isLegacyAliasPage) {
         assert(!sitemapUrls.has(pageUrl), `${entry.relativePath}: noindex static page should not be in sitemap`);
         assert(html.includes('<meta name="robots" content="noindex,follow,noarchive">'), `${entry.relativePath}: noindex static page robots meta is incorrect`);
     } else if (!isToolPage && !isSecondaryUnitPage) {
@@ -218,10 +223,10 @@ for (const entry of htmlEntries) {
         hasVisibleBreadcrumb: /<nav class="breadcrumb" aria-label="/.test(html)
     });
 
-    if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexStaticPage) getGeneratedLocales().forEach((locale) => {
+    if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexStaticPage && !isLegacyAliasPage) getGeneratedLocales().forEach((locale) => {
         assert(html.includes(`<link rel="alternate" hreflang="${locale.hreflang}" href="${absoluteUrlForFile(canonicalFile, locale.code)}">`), `${entry.relativePath}: ${locale.code} hreflang target is incorrect`);
     });
-    if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexStaticPage) {
+    if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexStaticPage && !isLegacyAliasPage) {
         assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "ja")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
         auditOpenGraphLocaleAlternates(entry, html, expectedHtmlLang);
         getGeneratedLocales().forEach((locale) => {
@@ -321,7 +326,7 @@ for (const entry of htmlEntries) {
         assert(/<nav class="breadcrumb" aria-label="/.test(html), `${entry.relativePath}: breadcrumb is missing`);
     }
 
-    if (!isExercisePage) {
+    if (!isExercisePage && sourceStaticPage?.kind !== "library") {
         auditNoCategorySubNav(entry, html);
     }
 }
@@ -343,7 +348,8 @@ console.log(`Site audit passed for ${htmlEntries.length} HTML files.`);
 function auditExerciseCategoryLinks(entry, html) {
     CATEGORY_SECTION_IDS.forEach((sectionId) => {
         assert(html.includes(`id="${sectionId}"`), `${entry.relativePath}: ${sectionId} target section is missing`);
-        assert(html.includes(`href="#${sectionId}"`), `${entry.relativePath}: ${sectionId} category link does not target this page`);
+        assert(html.includes(`href="exercises.html#${sectionId}"`), `${entry.relativePath}: ${sectionId} category link does not target the exercise library`);
+        assert(!html.includes(`href="#${sectionId}"`), `${entry.relativePath}: ${sectionId} category link should not target the long detail-page catalog`);
         assert(!html.includes(`href="index.html#${sectionId}"`), `${entry.relativePath}: ${sectionId} category link still points to the homepage`);
     });
 }
@@ -555,7 +561,7 @@ function auditStaticPageSourceLocalization() {
 
 function auditStaticPageSourceSocialImages() {
     staticPageByFile.forEach((page) => {
-        if (page.noindex === true || !["home", "content"].includes(page.kind)) {
+        if (page.noindex === true || !["home", "content", "library"].includes(page.kind)) {
             return;
         }
 
@@ -1892,6 +1898,7 @@ function auditWebSiteStructuredData(entry, website, expectedLanguage) {
     const navigationLocale = getNavigationLocaleForLanguage(entry.locale, expectedLanguage);
     const expectedNavigation = [
         ["index.html", getUiText(navigationLocale, "home")],
+        ["exercises.html", getUiText(navigationLocale, "exerciseLibrary")],
         ["about.html", getUiText(navigationLocale, "about")],
         ["methodology.html", getUiText(navigationLocale, "methodology")],
         ["data-terms.html", getUiText(navigationLocale, "dataTerms")],
@@ -2064,7 +2071,7 @@ function getExpectedWebPageTypes(entry, sourceStaticPage, isExercisePage) {
     if (isExercisePage && entry.file.startsWith("kg_")) {
         types.push("ItemPage");
     }
-    if (sourceStaticPage?.kind === "home") {
+    if (sourceStaticPage?.kind === "home" || sourceStaticPage?.kind === "library") {
         types.push("CollectionPage");
     }
 
@@ -2863,6 +2870,7 @@ function isNoindexHtmlEntry(entry) {
 
     return entry.file === "Shift2ics.html"
         || entry.file.startsWith("lb_")
+        || Boolean(slugAliases[getBaseSlugFromFile(entry.file)])
         || staticPage?.noindex === true
         || (staticPage?.englishOnly === true && entry.locale !== "ja");
 }

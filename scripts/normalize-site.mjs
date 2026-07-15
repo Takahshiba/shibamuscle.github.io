@@ -27,11 +27,13 @@ import {
     EXERCISE_SRC_ROOT,
     PAGES_ROOT,
     buildExerciseFileIndex,
+    getBaseSlugFromFile,
     getSourceCreatedIso,
     getSourceLastmodIso,
     loadDiscovery,
     loadExercises,
     loadPages,
+    loadSlugAliases,
     loadTaxonomy
 } from "./source-data.mjs";
 
@@ -63,6 +65,7 @@ const taxonomy = loadTaxonomy();
 const exercises = loadExercises();
 const discovery = loadDiscovery();
 const staticPages = loadPages();
+const slugAliases = loadSlugAliases();
 const exerciseFileIndex = buildExerciseFileIndex(exercises);
 const discoveryFileIndex = new Map(discovery.pages.map((page) => [page.file, page]));
 const staticPageIndex = new Map(staticPages.map((page) => [page.file, page]));
@@ -183,6 +186,7 @@ function buildPageContext(entry, html) {
     const canonicalFile = file.startsWith("lb_") ? file.replace(/^lb_/, "kg_") : file;
     const resolvedCanonicalUrl = absoluteUrlForFile(canonicalFile, locale);
     const dateModified = buildSitemapLastmod(entry);
+    const legacyCanonicalSlug = slugAliases[getBaseSlugFromFile(file)];
 
     if (file === "index.html") {
         const page = localizeStaticPage(staticPageIndex.get("index.html"), locale);
@@ -227,6 +231,33 @@ function buildPageContext(entry, html) {
         };
     }
 
+    if (legacyCanonicalSlug) {
+        const exercise = exerciseFileIndex.bySlug.get(legacyCanonicalSlug);
+        const targetFile = `kg_${legacyCanonicalSlug}.html`;
+        const h1 = decodeHtml(stripTags(extractFirst(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i)));
+        const description = decodeHtml(stripTags(extractFirst(html, /<main[\s\S]*?<p>([\s\S]*?)<\/p>/i)));
+
+        return {
+            title: h1 ? `${h1} | Shiba Muscle` : "Shiba Muscle",
+            pageLabel: h1 || getExerciseName(exercise, locale),
+            homeLabel,
+            description: description || `${getExerciseName(exercise, locale)} page moved.`,
+            canonicalUrl: absoluteUrlForFile(targetFile, locale),
+            ogImage: `${SITE_ORIGIN}/assets/og/exercises/${legacyCanonicalSlug}.svg`,
+            type: "website",
+            twitterCard: "summary_large_image",
+            dateModified,
+            alternates: buildAlternateUrls(targetFile),
+            locale,
+            robots: "noindex,follow,noarchive",
+            standalone: true,
+            isExercisePage: false,
+            isToolPage: false,
+            isHomePage: false,
+            isLegacyAliasPage: true
+        };
+    }
+
     if (discoveryPage) {
         return {
             title: discoveryPage.title,
@@ -254,6 +285,7 @@ function buildPageContext(entry, html) {
         const englishOnly = staticPage.englishOnly === true;
         const explicitNoindex = staticPage.noindex === true;
         const isIndexablePage = !(englishOnly && locale !== "ja") && !explicitNoindex;
+        const isLibraryPage = staticPage.kind === "library";
         return {
             title: page.title,
             pageLabel: page.heading,
@@ -263,12 +295,12 @@ function buildPageContext(entry, html) {
             ogImage: page.ogImage || DEFAULT_OG_IMAGE,
             ogImageAlt: getStaticContentOgImageAlt(page, locale, page.textLocale || ""),
             ogLocale: page.htmlLang === "en" ? "en_US" : undefined,
-            type: "article",
-            twitterCard: "summary",
+            type: isLibraryPage ? "website" : "article",
+            twitterCard: isLibraryPage ? "summary_large_image" : "summary",
             dateModified,
-            articlePublishedTime: isIndexablePage ? getStaticPageDatePublished(file) : null,
-            articleModifiedTime: isIndexablePage ? dateModified : null,
-            articleSection: isIndexablePage ? page.heading : null,
+            articlePublishedTime: isIndexablePage && !isLibraryPage ? getStaticPageDatePublished(file) : null,
+            articleModifiedTime: isIndexablePage && !isLibraryPage ? dateModified : null,
+            articleSection: isIndexablePage && !isLibraryPage ? page.heading : null,
             alternates,
             locale,
             robots: isIndexablePage ? undefined : "noindex,follow,noarchive",
@@ -821,7 +853,7 @@ function getSitemapSourceFiles(file) {
     if (staticPage) {
         const pageSourceFile = file === "index.html" ? "home.json" : file.replace(/\.html$/, ".json");
         const sourceFiles = [join(PAGES_ROOT, pageSourceFile)];
-        if (file === "index.html") {
+        if (file === "index.html" || file === "exercises.html") {
             sourceFiles.push(CATALOG_PATH);
         }
         return sourceFiles.filter((filePath) => existsSync(filePath));
@@ -846,6 +878,7 @@ function getSitemapSourceFiles(file) {
 function isSitemapEntry(entry) {
     return entry.file !== "Shift2ics.html"
         && !entry.file.startsWith("lb_")
+        && !slugAliases[getBaseSlugFromFile(entry.file)]
         && !isNoindexStaticPage(entry.file)
         && !(isEnglishOnlyStaticPage(entry.file) && entry.locale !== "ja");
 }

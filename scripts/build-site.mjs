@@ -21,9 +21,9 @@ const steps = [
     ["scripts/generate-site-icons.mjs", "Generating site icon assets"],
     ["scripts/generate-app-social-card.mjs", "Generating app social card asset"],
     ["scripts/sync-exercise-metadata.mjs", "Syncing exercise metadata into src/"],
+    ["scripts/generate-og-images.mjs", "Generating dedicated OG image assets"],
     ["scripts/build-static-pages.mjs", "Generating shared static pages from src/pages/"],
     ["scripts/build-exercise-pages.mjs", "Generating exercise pages from src/"],
-    ["scripts/generate-og-images.mjs", "Generating dedicated OG image assets"],
     [NORMALIZE_SCRIPT, "Normalizing shared head/meta/footer markup"],
     ["scripts/audit-site.mjs", "Running site audit"]
 ];

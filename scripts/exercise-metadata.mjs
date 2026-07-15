@@ -142,7 +142,7 @@ function inferEquipmentTags(exercise) {
         tags.push("スミスマシン");
     }
 
-    if (/push-ups|pull-ups|chin-ups|dips|muscle-ups|burpees|jumping-jack|mountain-climbers|crunches|sit-ups|leg-raise|leg-raises|knee-raise|toes-to-bar|superman|plank|flutter-kicks|scissor-kicks|russian-twist/.test(slug)) {
+    if (/push-up|pull-up|chin-up|dips|muscle-up|burpee-jump|jumping-jack|mountain-climber|crunch|sit-up|leg-raise|leg-raises|knee-raise|toes-to-bar|superman|plank|flutter-kicks|scissor-kicks|russian-twist/.test(slug)) {
         tags.push("自重");
     }
 
