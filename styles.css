@@ -2441,6 +2441,24 @@ body.app-content-page {
     box-shadow: 0 10px 32px rgba(255, 106, 0, 0.34);
 }
 
+.app-local-store-badge {
+    width: 120px;
+    height: 40px;
+    min-height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    box-shadow: none;
+    line-height: 0;
+}
+
+.app-local-store-badge img {
+    display: block;
+    width: 120px;
+    height: 40px;
+}
+
 .app-home-shell {
     --accent: #ff6a00;
     --accent-strong: #ffae42;
@@ -2514,6 +2532,32 @@ body.app-content-page {
     text-transform: uppercase;
 }
 
+.app-release-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    width: fit-content;
+    min-height: 32px;
+    margin: 0;
+    padding: 0 12px;
+    border: 1px solid rgba(255, 183, 96, 0.52);
+    border-radius: 999px;
+    background: rgba(255, 122, 0, 0.13);
+    color: #ffd09a;
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.app-release-badge span {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #ff8a1f;
+    box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.16), 0 0 18px rgba(255, 122, 0, 0.88);
+}
+
 .app-hero-title {
     margin: 0;
     max-width: 760px;
@@ -2532,6 +2576,10 @@ body.app-content-page {
     font-weight: 800;
     line-height: 1.12;
     letter-spacing: 0;
+}
+
+.app-hero-subtitle span {
+    display: block;
 }
 
 .app-hero-lead {
@@ -2599,6 +2647,30 @@ body.app-content-page {
     border: 1px solid rgba(255, 122, 0, 0.36);
     background: rgba(255, 122, 0, 0.1);
     color: #ffffff;
+}
+
+.app-store-badge-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: start;
+    width: 198px;
+    height: 66px;
+    border-radius: 10px;
+    line-height: 0;
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.app-store-badge-link:hover,
+.app-store-badge-link:focus-visible {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.app-store-badge {
+    display: block;
+    width: 198px;
+    height: 66px;
 }
 
 .app-pill--disabled {
@@ -3276,6 +3348,15 @@ body.app-content-page {
     font-size: 0.86rem;
 }
 
+.app-footer p.app-footer-legal {
+    flex-basis: 100%;
+    margin: -6px 0 0;
+    color: rgba(255, 247, 238, 0.42);
+    font-size: 0.68rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
 body.app-content-page {
     --bg: #000000;
     --surface: #090806;
@@ -3461,11 +3542,26 @@ body.app-content-page {
     }
 
     .app-local-nav {
+        display: inline-flex;
+        margin-left: auto;
+    }
+
+    .app-local-nav-link {
         display: none;
     }
 
     .app-local-cta {
-        display: none;
+        display: inline-flex;
+        min-height: 32px;
+        padding: 0 11px;
+        font-size: 0.74rem;
+    }
+
+    .app-local-store-badge {
+        width: 120px;
+        height: 40px;
+        min-height: 40px;
+        padding: 0;
     }
 
     .app-hero {
@@ -3495,6 +3591,10 @@ body.app-content-page {
         border-left: 0;
         justify-items: center;
         text-align: center;
+    }
+
+    .app-release-badge {
+        justify-content: center;
     }
 
     .app-hero-title {
@@ -3544,6 +3644,7 @@ body.app-content-page {
         width: 100%;
         max-width: min(100%, 366px);
         margin: 0 auto;
+        justify-items: center;
     }
 
     .app-device-stage {
@@ -3558,6 +3659,17 @@ body.app-content-page {
         white-space: normal;
         text-align: center;
         font-size: 0.94rem;
+    }
+
+    .app-store-badge-link {
+        justify-self: center;
+        width: 180px;
+        height: 60px;
+    }
+
+    .app-store-badge {
+        width: 180px;
+        height: 60px;
     }
 
     .app-hero-availability {

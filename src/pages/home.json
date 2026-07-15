@@ -1,20 +1,20 @@
 {
   "file": "index.html",
   "kind": "home",
-  "title": "Shiba | 筋トレを計画・記録・改善",
-  "description": "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを一つの流れで管理できるiPhone向けワークアウトアプリです。",
+  "title": "Shiba | 筋トレ記録・分析アプリ",
+  "description": "Shibaは筋トレの計画、素早いセット記録、筋力パーセンタイルや推定1RMによる進捗分析、筋肉ヒートマップを使った種目選びを一つにしたiPhoneアプリです。",
   "ogImage": "https://shibamuscle.com/assets/app/shiba-social-card.png",
-  "heroHeading": "計画。記録。改善。",
+  "heroHeading": "筋トレの現在地が、\nひと目でわかる。",
   "heading": "Shibaを見る",
   "intro": [
-    "今日のワークアウトを開き、セットを記録し、伸びている部分を確認できます。",
-    "筋トレの計画、記録、振り返りを一つの流れでつなげます。"
+    "重量と回数をすばやく記録。筋力パーセンタイル、推定1RM、筋肉ヒートマップで、伸びと偏りを確認できます。",
+    "記録する。変化が見える。次に鍛える種目が決まる。"
   ],
   "overview": {
     "eyebrow": "Shiba App",
     "sectionEyebrow": "流れ",
-    "title": "次にやることがはっきりします。",
-    "copy": "計画し、記録し、振り返り、次に鍛える種目を選べます。",
+    "title": "記録が、次の1セットにつながる。",
+    "copy": "今日のメニューからセット記録、分析、種目選びまで、ひとつの流れに。",
     "items": [
       {
         "eyebrow": "Today",
@@ -49,7 +49,7 @@
     "mascot": "app/shiba-mascot.png"
   },
   "stylesheets": [
-    "styles.css?v=app-home-image-cleanup-20260705"
+    "styles.css?v=app-home-release-20260715"
   ],
   "locales": {
     "en": {

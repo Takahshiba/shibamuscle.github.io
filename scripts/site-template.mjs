@@ -26,6 +26,8 @@ const SITE_DESCRIPTION = "Shiba Muscle provides localized strength training stan
 const SUPPORT_EMAIL = "info@shibamuscle.com";
 const THEME_COLOR = "#148a6a";
 const APP_THEME_COLOR = "#ff6a00";
+const APP_STORE_URL = "https://apps.apple.com/us/app/shiba-gym-workout-tracker/id6785443075";
+const APP_STORE_BADGE_ASSET = "app/download-on-the-app-store.svg";
 const SITE_STYLESHEET = "styles.css?v=workout-cards-20260704";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const ICON_ASSET_VERSION = "shiba-20260704";
@@ -107,6 +109,8 @@ function iconAssetHref(file, locale = "ja") {
 
 export {
     ADSENSE_CLIENT_ID,
+    APP_STORE_BADGE_ASSET,
+    APP_STORE_URL,
     cleanSectionLabel,
     escapeAttribute,
     escapeHtml,
@@ -165,7 +169,7 @@ function resolveStylesheetHref(href) {
         : href;
 }
 
-function buildSeoBlock({ file, title, description = "", locale = "ja", documentLang = null, ogImage, ogImageAlt, ogLocale, type = "article", twitterCard = "summary", canonicalFile = file, canonicalLocale = locale, includeAlternates = true, robots = INDEXABLE_ROBOTS, themeColor = THEME_COLOR, webPageType = "WebPage", preloadImages = [], breadcrumbs = [], structuredData = [], mainEntity = null, datePublished = null, dateModified = null, articlePublishedTime = null, articleModifiedTime = null, articleSection = null, articleTags = [] }) {
+function buildSeoBlock({ file, title, description = "", locale = "ja", documentLang = null, ogImage, ogImageAlt, ogLocale, type = "article", twitterCard = "summary", canonicalFile = file, canonicalLocale = locale, includeAlternates = true, robots = INDEXABLE_ROBOTS, themeColor = THEME_COLOR, appleAppId = "", webPageType = "WebPage", preloadImages = [], breadcrumbs = [], structuredData = [], mainEntity = null, datePublished = null, dateModified = null, articlePublishedTime = null, articleModifiedTime = null, articleSection = null, articleTags = [] }) {
     if (!file) {
         return "";
     }
@@ -176,6 +180,7 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", documentL
     }).join("\n") : "";
     const xDefaultLink = includeAlternates ? `\n    <link rel="alternate" hreflang="x-default" href="${escapeAttribute(alternates.ja)}">` : "";
     const canonicalUrl = absoluteUrlForFile(canonicalFile, canonicalLocale);
+    const smartAppBanner = appleAppId ? `\n    <meta name="apple-itunes-app" content="app-id=${escapeAttribute(appleAppId)}">` : "";
     const resolvedOgImage = ogImage || DEFAULT_OG_IMAGE;
     const resolvedOgImageAlt = ogImageAlt || title;
     const resolvedOgImageMetadata = getOpenGraphImageMetadata(resolvedOgImage);
@@ -217,7 +222,7 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", documentL
     <meta name="description" content="${escapeAttribute(description)}">
     <meta name="author" content="${SITE_NAME}">
     <meta name="robots" content="${escapeAttribute(robots)}">
-    <meta name="theme-color" content="${escapeAttribute(themeColor)}">
+    <meta name="theme-color" content="${escapeAttribute(themeColor)}">${smartAppBanner}
     <link rel="canonical" href="${escapeAttribute(canonicalUrl)}">
 ${imagePreloadBlock}
 ${alternateLinks}${xDefaultLink}
@@ -713,7 +718,7 @@ ${unitSwitchHtml ? `            ${unitSwitchHtml}\n` : ""}        </nav>${subNav
 }
 
 function renderAppHeader(locale = "ja", textLocale = locale) {
-    const ctaLabel = getAppHeaderText(textLocale, "comingSoon");
+    const appStoreBadgeSrc = assetHref(APP_STORE_BADGE_ASSET, locale);
     const navItems = [
         ["#today", getAppHeaderText(textLocale, "today")],
         ["#analytics", getAppHeaderText(textLocale, "analytics")],
@@ -728,7 +733,9 @@ function renderAppHeader(locale = "ja", textLocale = locale) {
             </a>
             <div class="app-local-nav">
 ${navItems.map(([href, label]) => `                <a href="${escapeAttribute(href)}" class="app-local-nav-link">${escapeHtml(label)}</a>`).join("\n")}
-                <a href="#app-store" class="app-local-cta" aria-disabled="true">${escapeHtml(ctaLabel)}</a>
+                <a href="${escapeAttribute(APP_STORE_URL)}" class="app-local-cta app-local-store-badge" target="_blank" rel="noopener noreferrer external">
+                    <img src="${escapeAttribute(appStoreBadgeSrc)}" alt="Download on the App Store"${imageSizeAttributes(appStoreBadgeSrc)}>
+                </a>
             </div>
         </nav>
     </header>`;
@@ -736,15 +743,15 @@ ${navItems.map(([href, label]) => `                <a href="${escapeAttribute(hr
 
 function getAppHeaderText(locale, key) {
     const text = {
-        ja: { today: "今日", analytics: "分析", library: "種目", comingSoon: "App Store準備中" },
-        ko: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "출시 예정" },
-        "zh-hant": { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "即將推出" },
-        "zh-hans": { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "即将推出" },
-        es: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Próximamente" },
-        fr: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Bientôt" },
-        de: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Demnächst" },
-        id: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Segera hadir" },
-        en: { today: "Today", analytics: "Analytics", library: "Library", comingSoon: "Coming Soon" }
+        ja: { today: "今日", analytics: "分析", library: "種目" },
+        ko: { today: "Today", analytics: "Analytics", library: "Library" },
+        "zh-hant": { today: "Today", analytics: "Analytics", library: "Library" },
+        "zh-hans": { today: "Today", analytics: "Analytics", library: "Library" },
+        es: { today: "Today", analytics: "Analytics", library: "Library" },
+        fr: { today: "Today", analytics: "Analytics", library: "Library" },
+        de: { today: "Today", analytics: "Analytics", library: "Library" },
+        id: { today: "Today", analytics: "Analytics", library: "Library" },
+        en: { today: "Today", analytics: "Analytics", library: "Library" }
     };
 
     return text[locale]?.[key] || text.ja[key] || key;

@@ -4,6 +4,8 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import {
+    APP_STORE_BADGE_ASSET,
+    APP_STORE_URL,
     escapeAttribute,
     escapeHtml,
     imageSizeAttributes,
@@ -105,7 +107,7 @@ function renderHomePage(page, catalogData, locale) {
 ${renderAppLanding(page, catalogData, locale, textLocale)}
     </main>
 
-${renderAppFooter(locale, textLocale)}
+${renderAppFooter(locale, textLocale, "index.html", true)}
 
     <script src="${stylesheetHref("app.js?v=category-jump-20260704", locale)}"></script>
 `;
@@ -122,6 +124,7 @@ ${renderAppFooter(locale, textLocale)}
             ogImageAlt: getHomeText(textLocale, "socialCardAlt"),
             type: "website",
             twitterCard: "summary_large_image",
+            appleAppId: "6785443075",
             themeColor: APP_THEME_COLOR,
             webPageType: "CollectionPage",
             preloadImages: [assetHref(appImages.today, locale)],
@@ -204,13 +207,13 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
             <section class="app-hero" id="today">
                 <div class="app-hero-inner">
                     <div class="app-hero-copy">
-                        <p class="app-kicker">${escapeHtml(overview.eyebrow || "Shiba App")}</p>
+                        <p class="app-release-badge"><span aria-hidden="true"></span>${escapeHtml(getHomeText(textLocale, "releaseStatus"))}</p>
                         <h1 class="app-hero-title">Shiba</h1>
                         <p class="app-hero-subtitle">${renderMultilineText(page.heroHeading || "")}</p>
                         <p class="app-hero-lead">${renderMultilineText(intro[0] || page.description || "")}</p>
                         <div class="app-hero-actions">
-                            <a href="#analytics" class="app-pill app-pill--primary">${escapeHtml(getHomeText(textLocale, "primaryAction"))}</a>
-                            <a href="#library" class="app-pill app-pill--secondary">${escapeHtml(getHomeText(textLocale, "secondaryAction"))}</a>
+                            ${renderAppStoreBadge(locale)}
+                            <a href="#analytics" class="app-pill app-pill--secondary">${escapeHtml(getHomeText(textLocale, "primaryAction"))}</a>
                         </div>
                         <p class="app-hero-availability">${escapeHtml(getHomeText(textLocale, "availability"))}</p>
                         <div class="app-hero-stats">
@@ -276,7 +279,7 @@ ${renderShowcasePhone(images.heatmap, getHomeText(textLocale, "heatmapAlt"), get
                             <span>${escapeHtml(formatExerciseCount(exerciseCount, textLocale))}</span>
                             <span>${escapeHtml(formatCategoryCount(sectionCount, textLocale))}</span>
                         </div>
-                        <a href="#app-store" class="app-pill app-pill--dark">${escapeHtml(getHomeText(textLocale, "comingSoon"))}</a>
+                        ${renderAppStoreBadge(locale)}
                     </div>
                     <div class="app-library-preview">
 ${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join("\n")}
@@ -291,7 +294,7 @@ ${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join
                     <h2>${renderMultilineText(getHomeText(textLocale, "appStoreHeading"))}</h2>
                     <p>${escapeHtml(getHomeText(textLocale, "appStoreCopy"))}</p>
                     <div class="app-cta-actions">
-                        <span class="app-pill app-pill--dark app-pill--disabled" aria-disabled="true">${escapeHtml(getHomeText(textLocale, "comingSoon"))}</span>
+                        ${renderAppStoreBadge(locale)}
                         <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}" class="app-pill app-pill--outline-dark">${escapeHtml(getHomeText(textLocale, "privacy"))}</a>
                     </div>
                 </div>
@@ -310,7 +313,7 @@ function getAppImages(page) {
     };
 }
 
-function renderAppFooter(locale, textLocale = locale, languageFile = "index.html") {
+function renderAppFooter(locale, textLocale = locale, languageFile = "index.html", includeAppleCredit = false) {
     const homeHref = resolveLocalizedStaticPageHref("index.html", locale, textLocale);
     const featuresHref = resolveLocalizedContentHref("index.html#analytics", locale, textLocale);
     const aboutHref = resolveLocalizedStaticPageHref("about.html", locale, textLocale);
@@ -339,7 +342,8 @@ function renderAppFooter(locale, textLocale = locale, languageFile = "index.html
             <nav class="app-footer-languages" aria-label="${escapeAttribute(getUiText(textLocale, "language"))}">
 ${languageLinks}
             </nav>
-            <p>© Shiba</p>
+            <p>© Shiba</p>${includeAppleCredit ? `
+            <p class="app-footer-legal">Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store is a service mark of Apple Inc.</p>` : ""}
         </div>
     </footer>`;
 }
@@ -478,6 +482,13 @@ function renderAppStats(locale) {
                                 <span>${escapeHtml(label)}</span>
                                 <strong>${escapeHtml(value)}</strong>
                             </div>`).join("\n");
+}
+
+function renderAppStoreBadge(locale) {
+    const badgeSrc = assetHref(APP_STORE_BADGE_ASSET, locale);
+    return `<a href="${escapeAttribute(APP_STORE_URL)}" class="app-store-badge-link" target="_blank" rel="noopener noreferrer external">
+                                <img src="${escapeAttribute(badgeSrc)}" alt="Download on the App Store" class="app-store-badge" decoding="async"${imageSizeAttributes(badgeSrc)}>
+                            </a>`;
 }
 
 function renderLoggingMock(locale) {
@@ -620,11 +631,12 @@ function formatCategoryCount(count, locale) {
 function getHomeText(locale, key) {
     const text = {
         ja: {
-            comingSoon: "App Store準備中",
+            download: "App Storeから無料でダウンロード",
+            releaseStatus: "App Storeで配信中",
             features: "分析を見る",
             primaryAction: "機能を見る",
             secondaryAction: "種目",
-            availability: "iPhone版を準備中",
+            availability: "無料 • アカウント登録不要 • iOS 17以降",
             privacy: "プライバシー",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
@@ -670,8 +682,8 @@ function getHomeText(locale, key) {
             libraryHeading: "次の種目を探す",
             libraryKicker: "種目",
             libraryCopy: "部位別にすばやく探せます。",
-            appStoreHeading: "iPhone版、準備中。",
-            appStoreCopy: "ShibaをApp Store公開に向けて準備しています。",
+            appStoreHeading: "トレーニングの進歩を、\n今日から記録。",
+            appStoreCopy: "ShibaはApp Storeで無料配信中。iPhoneですぐに始められます。",
             footerHome: "ホーム",
             footerFeatures: "機能",
             footerPrivacy: "プライバシーポリシー",
@@ -679,11 +691,12 @@ function getHomeText(locale, key) {
             loggingMock: { aria: "ワークアウト記録プレビュー", title: "ベンチプレス", set: "Set", weight: "重量", reps: "回数", done: "完了", live: "入力中" }
         },
         en: {
-            comingSoon: "Coming Soon",
+            download: "Download free on the App Store",
+            releaseStatus: "Now available on the App Store",
             features: "See Features",
             primaryAction: "See features",
             secondaryAction: "Exercises",
-            availability: "iPhone app in preparation",
+            availability: "Free • No account required • iOS 17+",
             privacy: "Privacy Policy",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
@@ -729,8 +742,8 @@ function getHomeText(locale, key) {
             libraryHeading: "Find exercises.",
             libraryKicker: "Library",
             libraryCopy: "Search by body part and muscle.",
-            appStoreHeading: "Coming to iPhone.",
-            appStoreCopy: "Shiba is preparing for App Store release.",
+            appStoreHeading: "Start tracking\nwhat changes.",
+            appStoreCopy: "Shiba is available free on the App Store. Start your next workout on iPhone.",
             footerHome: "Home",
             footerFeatures: "Features",
             footerPrivacy: "Privacy Policy",
@@ -738,11 +751,12 @@ function getHomeText(locale, key) {
             loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Weight", reps: "Reps", done: "Done", live: "Live" }
         },
         ko: {
-            comingSoon: "출시 예정",
+            download: "App Store에서 무료 다운로드",
+            releaseStatus: "App Store에서 지금 이용 가능",
             features: "분석 보기",
             primaryAction: "기능 보기",
             secondaryAction: "운동",
-            availability: "iPhone 앱 준비 중",
+            availability: "무료 • 계정 필요 없음 • iOS 17 이상",
             privacy: "개인정보",
             database: "데이터베이스 보기",
             databaseIntro: "평균 중량, 기준표, 자극되는 근육을 확인하고 싶다면 기존 운동 데이터베이스로 이동할 수 있습니다.",
@@ -788,8 +802,8 @@ function getHomeText(locale, key) {
             libraryHeading: "운동 찾기",
             libraryKicker: "운동",
             libraryCopy: "부위와 근육으로 빠르게 탐색.",
-            appStoreHeading: "iPhone 앱 준비 중.",
-            appStoreCopy: "Shiba의 App Store 공개를 준비하고 있습니다.",
+            appStoreHeading: "오늘부터\n성장을 기록하세요.",
+            appStoreCopy: "Shiba를 App Store에서 무료로 다운로드하고 iPhone에서 바로 시작하세요.",
             footerHome: "홈",
             footerFeatures: "기능",
             footerPrivacy: "개인정보 처리방침",
@@ -797,11 +811,12 @@ function getHomeText(locale, key) {
             loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "중량", reps: "반복", done: "완료", live: "진행 중" }
         },
         "zh-hant": {
-            comingSoon: "即將推出",
+            download: "在 App Store 免費下載",
+            releaseStatus: "現已在 App Store 上架",
             features: "查看分析",
             primaryAction: "看功能",
             secondaryAction: "動作",
-            availability: "iPhone App 準備中",
+            availability: "免費 • 無需帳號 • iOS 17 以上",
             privacy: "隱私權",
             database: "查看資料庫",
             databaseIntro: "想查看平均重量、標準表與訓練肌群時，可以從這裡進入既有訓練資料庫。",
@@ -847,8 +862,8 @@ function getHomeText(locale, key) {
             libraryHeading: "尋找動作",
             libraryKicker: "動作",
             libraryCopy: "依部位與肌群快速搜尋。",
-            appStoreHeading: "iPhone App 準備中。",
-            appStoreCopy: "Shiba 正在準備於 App Store 推出。",
+            appStoreHeading: "從今天開始，\n記錄每一次進步。",
+            appStoreCopy: "Shiba 已在 App Store 免費上架，立即用 iPhone 開始下一次訓練。",
             footerHome: "首頁",
             footerFeatures: "功能",
             footerPrivacy: "隱私權政策",
@@ -856,11 +871,12 @@ function getHomeText(locale, key) {
             loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "重量", reps: "次數", done: "完成", live: "進行中" }
         },
         "zh-hans": {
-            comingSoon: "即将推出",
+            download: "在 App Store 免费下载",
+            releaseStatus: "现已上架 App Store",
             features: "查看分析",
             primaryAction: "看功能",
             secondaryAction: "动作",
-            availability: "iPhone App 准备中",
+            availability: "免费 • 无需账号 • iOS 17 或更高版本",
             privacy: "隐私",
             database: "查看数据库",
             databaseIntro: "想查看平均重量、标准表和训练肌群时，可以从这里进入原有训练数据库。",
@@ -906,8 +922,8 @@ function getHomeText(locale, key) {
             libraryHeading: "寻找动作",
             libraryKicker: "动作",
             libraryCopy: "按部位和肌群快速搜索。",
-            appStoreHeading: "iPhone App 准备中。",
-            appStoreCopy: "Shiba 正在准备于 App Store 推出。",
+            appStoreHeading: "从今天开始，\n记录每一次进步。",
+            appStoreCopy: "Shiba 已在 App Store 免费上架，立即用 iPhone 开始下一次训练。",
             footerHome: "首页",
             footerFeatures: "功能",
             footerPrivacy: "隐私政策",
@@ -915,11 +931,12 @@ function getHomeText(locale, key) {
             loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "重量", reps: "次数", done: "完成", live: "进行中" }
         },
         es: {
-            comingSoon: "Próximamente",
+            download: "Descargar gratis en App Store",
+            releaseStatus: "Ya disponible en App Store",
             features: "Ver análisis",
             primaryAction: "Ver funciones",
             secondaryAction: "Ejercicios",
-            availability: "App para iPhone en preparación",
+            availability: "Gratis • Sin cuenta • iOS 17 o posterior",
             privacy: "Privacidad",
             database: "Ver base de datos",
             databaseIntro: "Cuando quieras revisar pesos medios, estándares y músculos trabajados, entra en la base de datos existente.",
@@ -965,8 +982,8 @@ function getHomeText(locale, key) {
             libraryHeading: "Encuentra ejercicios",
             libraryKicker: "Ejercicios",
             libraryCopy: "Busca por zona y músculo.",
-            appStoreHeading: "Pronto en iPhone.",
-            appStoreCopy: "Estamos preparando Shiba para App Store.",
+            appStoreHeading: "Registra tu progreso\ndesde hoy.",
+            appStoreCopy: "Shiba ya está disponible gratis en App Store. Empieza tu próximo entrenamiento en el iPhone.",
             footerHome: "Inicio",
             footerFeatures: "Funciones",
             footerPrivacy: "Política de privacidad",
@@ -974,11 +991,12 @@ function getHomeText(locale, key) {
             loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Peso", reps: "Reps", done: "Listo", live: "En vivo" }
         },
         fr: {
-            comingSoon: "Bientôt",
-            features: "Voir l'analyse",
+            download: "Télécharger gratuitement",
+            releaseStatus: "Disponible sur l’App Store",
+            features: "Voir l’analyse",
             primaryAction: "Voir les fonctions",
             secondaryAction: "Exercices",
-            availability: "App iPhone en préparation",
+            availability: "Gratuit • Sans compte • iOS 17 ou version ultérieure",
             privacy: "Confidentialité",
             database: "Voir la base",
             databaseIntro: "Pour consulter les poids moyens, standards et muscles sollicités, continue vers la base d'exercices existante.",
@@ -1024,8 +1042,8 @@ function getHomeText(locale, key) {
             libraryHeading: "Trouver un exercice",
             libraryKicker: "Exercices",
             libraryCopy: "Recherche par zone et par muscle.",
-            appStoreHeading: "Bientôt sur iPhone.",
-            appStoreCopy: "Shiba se prépare pour l'App Store.",
+            appStoreHeading: "Suivez vos progrès\ndès aujourd’hui.",
+            appStoreCopy: "Shiba est disponible gratuitement sur l’App Store. Lancez votre prochaine séance sur iPhone.",
             footerHome: "Accueil",
             footerFeatures: "Fonctions",
             footerPrivacy: "Politique de confidentialité",
@@ -1033,11 +1051,12 @@ function getHomeText(locale, key) {
             loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Poids", reps: "Reps", done: "Fait", live: "Live" }
         },
         de: {
-            comingSoon: "Demnächst",
+            download: "Kostenlos im App Store",
+            releaseStatus: "Jetzt im App Store",
             features: "Analyse ansehen",
             primaryAction: "Funktionen",
             secondaryAction: "Übungen",
-            availability: "iPhone App in Vorbereitung",
+            availability: "Kostenlos • Kein Konto nötig • Ab iOS 17",
             privacy: "Datenschutz",
             database: "Datenbank ansehen",
             databaseIntro: "Wenn du Durchschnittsgewichte, Standards und trainierte Muskeln prüfen möchtest, nutze die bestehende Trainingsdatenbank.",
@@ -1083,8 +1102,8 @@ function getHomeText(locale, key) {
             libraryHeading: "Übungen finden",
             libraryKicker: "Übungen",
             libraryCopy: "Nach Bereich und Muskel suchen.",
-            appStoreHeading: "Bald auf iPhone.",
-            appStoreCopy: "Shiba wird für den App Store vorbereitet.",
+            appStoreHeading: "Fortschritt ab heute\nfesthalten.",
+            appStoreCopy: "Shiba ist kostenlos im App Store verfügbar. Starte dein nächstes Workout auf dem iPhone.",
             footerHome: "Start",
             footerFeatures: "Funktionen",
             footerPrivacy: "Datenschutzerklärung",
@@ -1092,11 +1111,12 @@ function getHomeText(locale, key) {
             loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Gewicht", reps: "Wdh.", done: "Fertig", live: "Live" }
         },
         id: {
-            comingSoon: "Segera hadir",
+            download: "Unduh gratis di App Store",
+            releaseStatus: "Kini tersedia di App Store",
             features: "Lihat analitik",
             primaryAction: "Lihat fitur",
             secondaryAction: "Latihan",
-            availability: "Aplikasi iPhone disiapkan",
+            availability: "Gratis • Tanpa akun • iOS 17 atau lebih baru",
             privacy: "Privasi",
             database: "Lihat database",
             databaseIntro: "Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada.",
@@ -1142,8 +1162,8 @@ function getHomeText(locale, key) {
             libraryHeading: "Cari latihan",
             libraryKicker: "Latihan",
             libraryCopy: "Cari berdasarkan area dan otot.",
-            appStoreHeading: "Segera di iPhone.",
-            appStoreCopy: "Shiba sedang disiapkan untuk App Store.",
+            appStoreHeading: "Catat progresmu\nmulai hari ini.",
+            appStoreCopy: "Shiba kini tersedia gratis di App Store. Mulai latihan berikutnya di iPhone.",
             footerHome: "Beranda",
             footerFeatures: "Fitur",
             footerPrivacy: "Kebijakan privasi",
