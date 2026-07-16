@@ -22,6 +22,18 @@ const ANALYTICS_ID = "G-D9K58THBFM";
 const ADSENSE_CLIENT_ID = "ca-pub-2819086765117537";
 const ADS_TXT_LINE = "google.com, pub-2819086765117537, DIRECT, f08c47fec0942fa0";
 const SITE_ORIGIN = "https://shibamuscle.com";
+const APP_STORE_ID = "6785443075";
+const APP_STORE_STOREFRONT_BY_LOCALE = {
+    ja: "jp",
+    ko: "kr",
+    "zh-hant": "tw",
+    "zh-hans": "cn",
+    es: "es",
+    fr: "fr",
+    de: "de",
+    id: "id",
+    en: "us"
+};
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const MANIFEST_DESCRIPTION = "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを一つの流れで管理できるiPhone向けワークアウトアプリです。";
 const THEME_COLOR = "#ff6a00";
@@ -187,7 +199,7 @@ for (const entry of htmlEntries) {
     auditNoFutureMetaDates(entry, html);
     auditHeadingStructure(entry, html, isIndexablePage, isToolPage);
     auditMainLandmark(entry, html, isToolPage);
-    auditTitleHeadingConsistency(entry, html, isIndexablePage, isToolPage);
+    auditTitleHeadingConsistency(entry, html, isIndexablePage, isToolPage, isAppHomePage);
     if (isEnglishOnlyDuplicate) {
         assert(!sitemapUrls.has(pageUrl), `${entry.relativePath}: duplicate English-only page should not be in sitemap`);
         assert(html.includes('<meta name="robots" content="noindex,follow,noarchive">'), `${entry.relativePath}: duplicate English-only page should be noindex`);
@@ -289,6 +301,7 @@ for (const entry of htmlEntries) {
         auditRecordImageLoading(entry, html);
         auditExerciseCategoryLinks(entry, html);
         auditExerciseUnitDisplay(entry, html);
+        auditExerciseGrowthFeatures(entry, html, isIndexablePage);
         assert(!/<h1 class="section-title"/.test(html), `${entry.relativePath}: section heading is still h1`);
         assert(html.includes("/assets/og/exercises/"), `${entry.relativePath}: dedicated exercise OG image is missing`);
         if (isSecondaryUnitPage) {
@@ -346,12 +359,91 @@ if (errors.length) {
 console.log(`Site audit passed for ${htmlEntries.length} HTML files.`);
 
 function auditExerciseCategoryLinks(entry, html) {
+    const currentCategoryId = exerciseFileIndex.byFile.get(entry.file)?.exercise?.categoryId || "";
+
+    assert(Boolean(currentCategoryId), `${entry.relativePath}: source exercise category is missing`);
+    if (currentCategoryId) {
+        assert(html.includes(`id="${currentCategoryId}"`), `${entry.relativePath}: related ${currentCategoryId} section is missing`);
+    }
+
     CATEGORY_SECTION_IDS.forEach((sectionId) => {
-        assert(html.includes(`id="${sectionId}"`), `${entry.relativePath}: ${sectionId} target section is missing`);
         assert(html.includes(`href="exercises.html#${sectionId}"`), `${entry.relativePath}: ${sectionId} category link does not target the exercise library`);
         assert(!html.includes(`href="#${sectionId}"`), `${entry.relativePath}: ${sectionId} category link should not target the long detail-page catalog`);
         assert(!html.includes(`href="index.html#${sectionId}"`), `${entry.relativePath}: ${sectionId} category link still points to the homepage`);
     });
+}
+
+function auditExerciseGrowthFeatures(entry, html, isIndexablePage) {
+    const relatedCardCount = (html.match(/<div class="exercise-card(?:\s|")/g) || []).length;
+    const storefront = APP_STORE_STOREFRONT_BY_LOCALE[entry.locale] || "";
+    const appStoreUrl = `https://apps.apple.com/${storefront}/app/id${APP_STORE_ID}`;
+    const calculatorCount = (html.match(/<section\b(?=[^>]*\bdata-strength-level-tool(?:\s|=|>))[^>]*>/gi) || []).length;
+    const smartAppBanners = Array.from(extractHeadMarkup(html).matchAll(/<meta\b(?=[^>]*\bname="apple-itunes-app")[^>]*>/gi), (match) => match[0]);
+    const appStoreLinks = Array.from(html.matchAll(/<a\b[^>]*>/gi), (match) => match[0]).filter((tag) => {
+        return extractHtmlAttribute(tag, "href").startsWith("https://apps.apple.com/");
+    });
+    const expectedPlacements = isIndexablePage
+        ? ["exercise_hero", "level_result", "exercise_mid"]
+        : ["exercise_hero", "exercise_mid"];
+
+    assert(Boolean(storefront), `${entry.relativePath}: App Store storefront is not configured for ${entry.locale}`);
+    assert(relatedCardCount === 12, `${entry.relativePath}: related exercise cards should stay at 12`);
+    assert(Buffer.byteLength(html, "utf8") <= 120_000, `${entry.relativePath}: exercise HTML exceeds the 120 KB performance budget`);
+    assert(appStoreLinks.length === expectedPlacements.length, `${entry.relativePath}: direct App Store CTA count is incorrect`);
+    appStoreLinks.forEach((tag) => {
+        assert(extractHtmlAttribute(tag, "href") === appStoreUrl, `${entry.relativePath}: App Store CTA should use localized URL ${appStoreUrl}`);
+        assert(extractHtmlAttribute(tag, "data-analytics-link") === "app-store", `${entry.relativePath}: App Store CTA analytics link is missing`);
+        assert(Boolean(extractHtmlAttribute(tag, "data-analytics-placement")), `${entry.relativePath}: App Store CTA analytics placement is missing`);
+    });
+    expectedPlacements.forEach((placement) => {
+        assert(html.includes(`data-analytics-placement="${placement}"`), `${entry.relativePath}: ${placement} App Store analytics placement is missing`);
+    });
+    assert(!/href="[^"]*#app-store"/i.test(html), `${entry.relativePath}: App Store CTA still detours through the homepage`);
+
+    if (isIndexablePage) {
+        assert(calculatorCount === 1, `${entry.relativePath}: indexable exercise page should have exactly one strength-level calculator`);
+        assert(smartAppBanners.length === 1, `${entry.relativePath}: indexable exercise page should have exactly one Smart App Banner`);
+        if (smartAppBanners[0]) {
+            assert(extractHtmlAttribute(smartAppBanners[0], "content") === `app-id=${APP_STORE_ID}`, `${entry.relativePath}: Smart App Banner app id is incorrect`);
+        }
+        auditExerciseBodyweightTierOrdering(entry, html);
+    } else {
+        assert(calculatorCount === 0, `${entry.relativePath}: noindex secondary-unit page should not expose the kg-based calculator`);
+        assert(smartAppBanners.length === 0, `${entry.relativePath}: noindex secondary-unit page should not have a Smart App Banner`);
+    }
+}
+
+function auditExerciseBodyweightTierOrdering(entry, html) {
+    ["Male", "Female"].forEach((gender) => {
+        const panelStart = html.indexOf(`id="${gender}-By bodyweight"`);
+        const panelEnd = panelStart >= 0 ? html.indexOf(`id="${gender}-By Age"`, panelStart) : -1;
+
+        assert(panelStart >= 0 && panelEnd > panelStart, `${entry.relativePath}: ${gender} bodyweight standards panel is missing`);
+        if (panelStart < 0 || panelEnd <= panelStart) {
+            return;
+        }
+
+        const panel = html.slice(panelStart, panelEnd);
+        Array.from(panel.matchAll(/<tr>([\s\S]*?)<\/tr>/g)).forEach((rowMatch) => {
+            const values = Array.from(rowMatch[1].matchAll(/<td>([\s\S]*?)<\/td>/g), (cell) => parseAuditThreshold(cell[1]));
+            if (values.length < 3) {
+                return;
+            }
+
+            assert(values.every(Number.isFinite), `${entry.relativePath}: ${gender} bodyweight standards row is not numeric`);
+            for (let index = 2; index < values.length; index += 1) {
+                assert(values[index] >= values[index - 1], `${entry.relativePath}: ${gender} bodyweight standards tiers are not monotonic`);
+            }
+        });
+    });
+}
+
+function parseAuditThreshold(value) {
+    const text = decodeAuditHtml(htmlToText(String(value || ""))).trim();
+    if (/^</.test(text)) {
+        return 0;
+    }
+    return Number.parseFloat(text.replace(/,/g, "").replace(/[^0-9.+-]/g, ""));
 }
 
 function auditRecordImageLoading(entry, html) {
@@ -1614,7 +1706,7 @@ function auditMainLandmark(entry, html, isToolPage) {
     }
 }
 
-function auditTitleHeadingConsistency(entry, html, isIndexable, isToolPage) {
+function auditTitleHeadingConsistency(entry, html, isIndexable, isToolPage, isAppHomePage) {
     if (!isIndexable || isToolPage) {
         return;
     }
@@ -1624,7 +1716,11 @@ function auditTitleHeadingConsistency(entry, html, isIndexable, isToolPage) {
 
     assert(Boolean(title), `${entry.relativePath}: title should not be empty`);
     assert(Boolean(h1), `${entry.relativePath}: H1 should not be empty`);
-    assert(title.includes(h1), `${entry.relativePath}: document title should include the H1`);
+    if (isAppHomePage) {
+        assert(title.includes("Shiba") && h1.includes("Shiba"), `${entry.relativePath}: app homepage title and H1 should both identify Shiba`);
+    } else {
+        assert(title.includes(h1), `${entry.relativePath}: document title should include the H1`);
+    }
 }
 
 function auditArticleOpenGraphDates(entry, html, isIndexable) {

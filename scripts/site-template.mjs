@@ -26,9 +26,21 @@ const SITE_DESCRIPTION = "Shiba Muscle provides localized strength training stan
 const SUPPORT_EMAIL = "info@shibamuscle.com";
 const THEME_COLOR = "#148a6a";
 const APP_THEME_COLOR = "#ff6a00";
-const APP_STORE_URL = "https://apps.apple.com/us/app/shiba-gym-workout-tracker/id6785443075";
+const APP_STORE_ID = "6785443075";
+const APP_STORE_STOREFRONTS = {
+    ja: "jp",
+    ko: "kr",
+    "zh-hant": "tw",
+    "zh-hans": "cn",
+    es: "es",
+    fr: "fr",
+    de: "de",
+    id: "id",
+    en: "us"
+};
+const APP_STORE_URL = `https://apps.apple.com/us/app/id${APP_STORE_ID}`;
 const APP_STORE_BADGE_ASSET = "app/download-on-the-app-store.svg";
-const SITE_STYLESHEET = "styles.css?v=workout-cards-20260704";
+const SITE_STYLESHEET = "styles.css?v=site-ui-20260716";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const ICON_ASSET_VERSION = "shiba-20260704";
 const ROOT = process.cwd();
@@ -114,6 +126,7 @@ export {
     cleanSectionLabel,
     escapeAttribute,
     escapeHtml,
+    getAppStoreUrl,
     imageSizeAttributes,
     normalizeText,
     renderDiscoveryGrid,
@@ -695,32 +708,33 @@ function serializeJsonLd(value) {
         .replace(/\u2029/g, "\\u2029");
 }
 
-function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja", textLocale = locale, showCategoryNav = pageType === "exercise" } = {}) {
+function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja", textLocale = locale, showCategoryNav = pageType !== "home" } = {}) {
     if (pageType === "home") {
         return renderAppHeader(locale, textLocale);
     }
 
     const categoryNav = showCategoryNav ? renderLegacyCategoryNav(pageType, locale) : "";
     const subNavHtml = categoryNav ? `
-
-        <div class="sub-nav">
+            <nav class="sub-nav" id="global-category-nav" aria-label="${escapeAttribute(getUiText(locale, "categories"))}">
 ${categoryNav}
-        </div>` : "";
+            </nav>` : "";
 
-    return `    <header>
-        <nav>
-            <div class="header-logo">
+    return `    <header class="site-header">
+        <nav class="site-topbar" aria-label="Shiba Muscle">
+            <div class="header-brand">
                 <a href="${escapeAttribute(absoluteUrlForFile("index.html", locale))}" class="header-link">
-                    <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="header-dumbbell-logo"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
+                    <img src="${assetHref("dumbbell-logo.png", locale)}" alt="" aria-hidden="true" class="header-dumbbell-logo"${imageSizeAttributes(assetHref("dumbbell-logo.png", locale))}>
                     <span class="header-text">Shiba Muscle</span>
                 </a>
             </div>
-${unitSwitchHtml ? `            ${unitSwitchHtml}\n` : ""}        </nav>${subNavHtml}
+${unitSwitchHtml ? `            <div class="header-actions">\n                ${unitSwitchHtml}\n            </div>\n` : ""}        </nav>
+${subNavHtml}
     </header>`;
 }
 
 function renderAppHeader(locale = "ja", textLocale = locale) {
     const appStoreBadgeSrc = assetHref(APP_STORE_BADGE_ASSET, locale);
+    const appStoreUrl = getAppStoreUrl(locale);
     const navItems = [
         ["#today", getAppHeaderText(textLocale, "today")],
         ["#analytics", getAppHeaderText(textLocale, "analytics")],
@@ -735,12 +749,17 @@ function renderAppHeader(locale = "ja", textLocale = locale) {
             </a>
             <div class="app-local-nav">
 ${navItems.map(([href, label]) => `                <a href="${escapeAttribute(href)}" class="app-local-nav-link">${escapeHtml(label)}</a>`).join("\n")}
-                <a href="${escapeAttribute(APP_STORE_URL)}" class="app-local-cta app-local-store-badge" target="_blank" rel="noopener noreferrer external">
+                <a href="${escapeAttribute(appStoreUrl)}" class="app-local-cta app-local-store-badge" target="_blank" rel="noopener noreferrer external" data-analytics-link="app-store" data-analytics-placement="header">
                     <img src="${escapeAttribute(appStoreBadgeSrc)}" alt="Download on the App Store"${imageSizeAttributes(appStoreBadgeSrc)}>
                 </a>
             </div>
         </nav>
     </header>`;
+}
+
+function getAppStoreUrl(locale = "en") {
+    const storefront = APP_STORE_STOREFRONTS[locale] || APP_STORE_STOREFRONTS.en;
+    return `https://apps.apple.com/${storefront}/app/id${APP_STORE_ID}`;
 }
 
 function getAppHeaderText(locale, key) {
@@ -761,12 +780,14 @@ function getAppHeaderText(locale, key) {
 
 function renderLegacyCategoryNav(pageType, locale = "ja") {
     const categoryLinks = getCategoryNavItems(locale);
-    return categoryLinks.map((item, index) => {
+    return categoryLinks.map((item) => {
         const href = categoryNavHref(item.id, pageType, locale);
-        const divider = index < categoryLinks.length - 1 ? '\n            <div class="divider">|</div>' : "";
-        return `            <a href="${href}">
-                <img src="${item.icon}" alt="" aria-hidden="true" class="exercise-icon"${imageSizeAttributes(item.icon)}> ${item.label}
-            </a>${divider}`;
+        return `                <a href="${escapeAttribute(href)}" class="category-nav-link">
+                    <span class="category-nav-icon" aria-hidden="true">
+                        <img src="${escapeAttribute(item.icon)}" alt="" aria-hidden="true"${imageSizeAttributes(item.icon)}>
+                    </span>
+                    <span class="category-nav-label">${escapeHtml(item.label)}</span>
+                </a>`;
     }).join("\n");
 }
 
@@ -784,69 +805,49 @@ function categoryNavHref(sectionId, pageType, locale = "ja") {
 
 function renderStaticFooter(file, locale = "ja") {
     const alternates = languageAlternates(file);
-    const flagAlt = {
-        en: locale === "ko" ? "영국 국기" : locale === "zh-hant" ? "英國國旗" : locale === "zh-hans" ? "英国国旗" : locale === "es" ? "Bandera del Reino Unido" : locale === "fr" ? "Drapeau du Royaume-Uni" : locale === "de" ? "Flagge des Vereinigten Königreichs" : locale === "id" ? "Bendera Britania Raya" : "UK flag",
-        ja: locale === "ko" ? "일본 국기" : locale === "zh-hant" ? "日本國旗" : locale === "zh-hans" ? "日本国旗" : locale === "es" ? "Bandera de Japón" : locale === "fr" ? "Drapeau du Japon" : locale === "de" ? "Flagge Japans" : locale === "id" ? "Bendera Jepang" : "Japanese flag",
-        "zh-hant": locale === "ko" ? "번체 중국어" : locale === "zh-hant" ? "繁體中文" : locale === "zh-hans" ? "繁体中文" : locale === "es" ? "Chino tradicional" : locale === "id" ? "Bahasa Tionghoa tradisional" : "Traditional Chinese",
-        "zh-hans": locale === "ko" ? "간체 중국어" : locale === "zh-hant" ? "簡體中文" : locale === "zh-hans" ? "简体中文" : locale === "es" ? "Chino simplificado" : locale === "id" ? "Bahasa Tionghoa sederhana" : "Simplified Chinese",
-        ko: locale === "ko" ? "한국 국기" : locale === "zh-hant" ? "韓國國旗" : locale === "zh-hans" ? "韩国国旗" : locale === "es" ? "Bandera de Corea" : locale === "fr" ? "Drapeau de la Corée" : locale === "de" ? "Flagge Koreas" : locale === "id" ? "Bendera Korea" : "Korean flag",
-        es: locale === "ko" ? "스페인 국기" : locale === "zh-hant" ? "西班牙國旗" : locale === "zh-hans" ? "西班牙国旗" : locale === "es" ? "Bandera de España" : locale === "fr" ? "Drapeau de l'Espagne" : locale === "de" ? "Flagge Spaniens" : locale === "id" ? "Bendera Spanyol" : "Spanish flag",
-        zh: locale === "ko" ? "중국 국기" : locale === "zh-hant" ? "中國國旗" : locale === "zh-hans" ? "中国国旗" : locale === "es" ? "Bandera de China" : locale === "fr" ? "Drapeau de la Chine" : locale === "de" ? "Flagge Chinas" : locale === "id" ? "Bendera Tiongkok" : "Chinese flag",
-        fr: locale === "ko" ? "프랑스 국기" : locale === "es" ? "Bandera de Francia" : locale === "fr" ? "Drapeau de la France" : locale === "de" ? "Flagge Frankreichs" : locale === "id" ? "Bendera Prancis" : "French flag",
-        de: locale === "ko" ? "독일 국기" : locale === "es" ? "Bandera de Alemania" : locale === "fr" ? "Drapeau de l'Allemagne" : locale === "de" ? "Flagge Deutschlands" : locale === "id" ? "Bendera Jerman" : "German flag",
-        id: locale === "id" ? "Bendera Indonesia" : locale === "fr" ? "Drapeau de l'Indonésie" : locale === "de" ? "Flagge Indonesiens" : "Indonesian flag"
-    };
-    const flagIcon = {
-        en: "uk-flag.webp",
-        ja: "japan-flag.webp",
-        "zh-hant": "china-flag.webp",
-        "zh-hans": "china-flag.webp",
-        ko: "korea-flag.webp",
-        es: "spain-flag.svg",
-        fr: "france-flag.svg",
-        de: "germany-flag.svg",
-        id: "indonesia-flag.svg"
-    };
+    const pageType = file === "exercises.html"
+        ? "library"
+        : /^(?:kg|lb)_.+\.html$/.test(file)
+            ? "exercise"
+            : "content";
+    const categoryLinks = getCategoryNavItems(locale).map((item) => {
+        return `                    <a href="${escapeAttribute(categoryNavHref(item.id, pageType, locale))}" class="footer-category-link">
+                        <span class="category-nav-icon" aria-hidden="true"><img src="${escapeAttribute(item.icon)}" alt="" aria-hidden="true"${imageSizeAttributes(item.icon)}></span>
+                        <span class="category-nav-label">${escapeHtml(item.label)}</span>
+                    </a>`;
+    }).join("\n");
 
     return `
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section links">
-                <h4>${escapeHtml(getUiText(locale, "links"))}</h4>
-                <ul>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
-                        <a href="exercises.html">${escapeHtml(getUiText(locale, "exerciseLibrary"))}</a>
-                    </li>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
-                        <a href="contact.html">${escapeHtml(getUiText(locale, "contact"))}</a>
-                    </li>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
-                        <a href="about.html">${escapeHtml(getUiText(locale, "about"))}</a>
-                    </li>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
-                        <a href="methodology.html">${escapeHtml(getUiText(locale, "methodology"))}</a>
-                    </li>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
-                        <a href="data-terms.html">${escapeHtml(getUiText(locale, "dataTerms"))}</a>
-                    </li>
-                    <li><img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="link-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
-                        <a href="privacy-policy.html">${escapeHtml(getUiText(locale, "privacy"))}</a>
-                    </li>
-                </ul>
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <div class="footer-brand">
+                    <img src="${assetHref("dumbbell-logo.png", locale)}" alt="" aria-hidden="true" class="footer-brand-logo"${imageSizeAttributes(assetHref("dumbbell-logo.png", locale))}>
+                    <h4>Shiba Muscle</h4>
+                </div>
             </div>
-            <div class="footer-section languages">
-                <h4>${escapeHtml(getUiText(locale, "language"))}</h4>
-                <ul>
-${alternates.map((item) => {
-                    const icon = flagIcon[item.code] || "app/shiba-mascot.png";
-                    const alt = flagAlt[item.code] || item.displayName;
-                    return `                    <li><img src="${assetHref(icon, locale)}" alt="${escapeAttribute(alt)}" class="flag-icon"${imageSizeAttributes(assetHref(icon, locale), { fallbackWidth: "32", fallbackHeight: "20" })}> <a href="${escapeAttribute(item.href)}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a></li>`;
-                }).join("\n")}
-                </ul>
+            <div class="footer-column">
+                <h4>${escapeHtml(getUiText(locale, "categories"))}</h4>
+                <div class="footer-link-list footer-link-list--categories">
+${categoryLinks}
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>${escapeHtml(getUiText(locale, "support"))}</h4>
+                <div class="footer-link-list footer-link-list--support">
+                    <a href="exercises.html">${escapeHtml(getUiText(locale, "exerciseLibrary"))}</a>
+                    <a href="about.html">${escapeHtml(getUiText(locale, "about"))}</a>
+                    <a href="methodology.html">${escapeHtml(getUiText(locale, "methodology"))}</a>
+                    <a href="data-terms.html">${escapeHtml(getUiText(locale, "dataTerms"))}</a>
+                    <a href="contact.html">${escapeHtml(getUiText(locale, "contact"))}</a>
+                    <a href="privacy-policy.html">${escapeHtml(getUiText(locale, "privacy"))}</a>
+                </div>
             </div>
         </div>
-        <hr class="footer-divider">
-        <div class="footer-bottom">
+        <div class="footer-meta">
+            <div class="footer-languages">
+${alternates.map((item) => `                <a href="${escapeAttribute(item.href)}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a>`).join("\n")}
+            </div>
             <p>© Shiba Muscle</p>
         </div>
     </footer>`;
@@ -869,20 +870,58 @@ function renderBreadcrumb(items, locale = "ja") {
     </div>`;
 }
 
-function renderExerciseLibrary(catalogData, { unit = "kg", titleTag = "h2", titleText = "", titleId = "other-workouts", locale = "ja", containerClass = "container", introText = "", includeCardImages = true } = {}) {
+function renderExerciseLibrary(catalogData, {
+    unit = "kg",
+    titleTag = "h2",
+    titleText = "",
+    titleId = "other-workouts",
+    locale = "ja",
+    containerClass = "container",
+    introText = "",
+    includeCardImages = true,
+    sectionIds = [],
+    excludeSlugs = [],
+    cardLimit = 0,
+    currentSlug = "",
+    viewAllHref = "",
+    viewAllText = ""
+} = {}) {
     const heading = titleText || getUiText(locale, "moreWorkouts");
     const introBlock = introText ? `        <p class="section-intro">${escapeHtml(introText)}</p>\n\n` : "";
+    const includedSectionIds = new Set(sectionIds);
+    const excludedSlugs = new Set(excludeSlugs);
+    const sections = catalogData.sections
+        .filter((section) => !includedSectionIds.size || includedSectionIds.has(section.id))
+        .map((section) => {
+            const currentIndex = currentSlug
+                ? section.cards.findIndex((card) => card.slug === currentSlug)
+                : -1;
+            const orderedCards = currentIndex >= 0
+                ? [...section.cards.slice(currentIndex + 1), ...section.cards.slice(0, currentIndex)]
+                : section.cards;
+
+            return {
+                ...section,
+                cards: orderedCards
+                    .filter((card) => !excludedSlugs.has(card.slug))
+                    .slice(0, cardLimit > 0 ? cardLimit : undefined)
+            };
+        })
+        .filter((section) => section.cards.length);
+    const viewAllLink = viewAllHref
+        ? `\n        <div class="exercise-library-all"><a href="${escapeAttribute(viewAllHref)}">${escapeHtml(viewAllText || getUiText(locale, "exerciseLibrary"))}</a></div>`
+        : "";
     return `
     <div class="${escapeAttribute(containerClass)}">
         <${titleTag} class="section-title" id="${escapeAttribute(titleId)}">${escapeHtml(heading)}</${titleTag}>
 ${introBlock}
-${catalogData.sections.map((section) => {
+${sections.map((section) => {
         const localizedTitle = locale === "ja" ? section.titles.ja : getCategoryLabel(section, locale);
         return `        <h2 id="${escapeAttribute(section.id)}" class="section-title">${escapeHtml(localizedTitle)}</h2>
         <div class="exercise-cards-container${includeCardImages ? "" : " exercise-cards-container--text"}">
 ${section.cards.map((card) => renderCard(card, unit, locale, section, { includeImage: includeCardImages })).join("\n")}
         </div>`;
-    }).join("\n")}
+    }).join("\n")}${viewAllLink}
     </div>`;
 }
 

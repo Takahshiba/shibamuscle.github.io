@@ -1196,6 +1196,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initStandardsTabs();
     initHeaderActions();
+    initGrowthAnalytics(pageType, locale);
+    initStrengthLevelTools();
 
     if (pageType === "home") {
         initHomeDashboardInteractions();
@@ -1207,6 +1209,237 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+function initGrowthAnalytics(pageType, locale) {
+    if (document.body.dataset.growthAnalyticsReady === "true") {
+        return;
+    }
+    document.body.dataset.growthAnalyticsReady = "true";
+
+    document.addEventListener("click", (event) => {
+        const link = event.target.closest('a[data-analytics-link="app-store"], a[href*="//apps.apple.com/"]');
+        if (!link) {
+            return;
+        }
+
+        trackGrowthEvent("app_store_click", {
+            placement: link.dataset.analyticsPlacement || inferAppStorePlacement(link),
+            locale,
+            page_type: pageType,
+            exercise_slug: document.querySelector("main[data-exercise-slug]")?.dataset.exerciseSlug || "",
+            device_type: getAnalyticsDeviceType()
+        });
+    });
+}
+
+function inferAppStorePlacement(link) {
+    if (link.closest("header")) {
+        return "header";
+    }
+    if (link.closest(".strength-level-result")) {
+        return "level_result";
+    }
+    if (link.closest(".exercise-hero")) {
+        return "exercise_hero";
+    }
+    if (link.closest("footer")) {
+        return "footer";
+    }
+    return "content";
+}
+
+function getAnalyticsDeviceType() {
+    if (window.matchMedia("(max-width: 760px)").matches) {
+        return "mobile";
+    }
+    if (window.matchMedia("(max-width: 1100px)").matches) {
+        return "tablet";
+    }
+    return "desktop";
+}
+
+function trackGrowthEvent(name, parameters = {}) {
+    if (typeof window.gtag !== "function") {
+        return;
+    }
+
+    window.gtag("event", name, {
+        locale: detectLocale(),
+        page_type: document.body.dataset.pageType || detectPageType(),
+        ...parameters
+    });
+}
+
+function initStrengthLevelTools() {
+    document.querySelectorAll("[data-strength-level-tool]").forEach((tool) => {
+        const form = tool.querySelector("[data-level-form]");
+        if (!form || form.dataset.levelToolReady === "true") {
+            return;
+        }
+        form.dataset.levelToolReady = "true";
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const result = calculateStrengthLevel(tool);
+            renderStrengthLevelResult(tool, result);
+        });
+    });
+}
+
+function calculateStrengthLevel(tool) {
+    const gender = tool.querySelector("[data-level-gender]")?.value || "Male";
+    const bodyweight = Number.parseFloat(tool.querySelector("[data-level-bodyweight]")?.value || "");
+    const reps = Number.parseFloat(tool.querySelector("[data-level-reps]")?.value || "");
+    const measurementKind = tool.dataset.measurementKind || "weight";
+    const load = measurementKind === "reps"
+        ? 0
+        : Number.parseFloat(tool.querySelector("[data-level-load]")?.value || "");
+    const panel = document.getElementById(`${gender}-By bodyweight`);
+    const table = panel?.querySelector("table");
+
+    if (!Number.isFinite(bodyweight) || !Number.isFinite(reps) || reps <= 0 || (measurementKind !== "reps" && (!Number.isFinite(load) || load <= 0)) || !table) {
+        return null;
+    }
+
+    const levelLabels = Array.from(table.querySelectorAll("thead th"))
+        .slice(1)
+        .map((cell) => normalizeText(cell.textContent));
+    const rows = Array.from(table.querySelectorAll("tbody tr"))
+        .map((row) => Array.from(row.querySelectorAll("th, td")).map((cell) => parseStrengthNumber(cell.textContent)))
+        .filter((cells) => cells.length > 1 && cells.every((value) => Number.isFinite(value)))
+        .map((cells) => ({ reference: cells[0], thresholds: cells.slice(1) }))
+        .sort((a, b) => a.reference - b.reference);
+
+    if (!levelLabels.length || !rows.length) {
+        return null;
+    }
+
+    const referenceBodyweight = Math.min(Math.max(bodyweight, rows[0].reference), rows[rows.length - 1].reference);
+    const thresholds = normalizeLevelThresholds(interpolateStrengthThresholds(rows, referenceBodyweight));
+    const performedValue = measurementKind === "reps"
+        ? reps
+        : reps === 1 ? load : load * (1 + reps / 30);
+    let levelIndex = -1;
+    thresholds.forEach((threshold, index) => {
+        if (performedValue >= threshold) {
+            levelIndex = index;
+        }
+    });
+    const nextIndex = levelIndex + 1;
+
+    return {
+        bodyweight: referenceBodyweight,
+        performedValue,
+        level: levelIndex >= 0 ? levelLabels[levelIndex] : tool.dataset.belowLabel,
+        nextLevel: nextIndex < levelLabels.length ? levelLabels[nextIndex] : "",
+        nextValue: nextIndex < thresholds.length ? thresholds[nextIndex] : null,
+        measurementKind
+    };
+}
+
+function parseStrengthNumber(value) {
+    const normalized = String(value || "")
+        .replace(/,/g, "")
+        .replace(/[−–—]/g, "-")
+        .trim();
+    if (/^</.test(normalized)) {
+        return 0;
+    }
+    return Number.parseFloat(normalized.replace(/[^0-9.+-]/g, ""));
+}
+
+function interpolateStrengthThresholds(rows, reference) {
+    if (reference <= rows[0].reference) {
+        return rows[0].thresholds;
+    }
+    if (reference >= rows[rows.length - 1].reference) {
+        return rows[rows.length - 1].thresholds;
+    }
+
+    const upperIndex = rows.findIndex((row) => row.reference >= reference);
+    const lower = rows[Math.max(0, upperIndex - 1)];
+    const upper = rows[upperIndex];
+    const distance = upper.reference - lower.reference;
+    const ratio = distance > 0 ? (reference - lower.reference) / distance : 0;
+
+    return lower.thresholds.map((value, index) => {
+        const upperValue = upper.thresholds[index] ?? value;
+        return value + ((upperValue - value) * ratio);
+    });
+}
+
+function normalizeLevelThresholds(thresholds) {
+    let minimum = Number.NEGATIVE_INFINITY;
+
+    return thresholds.map((threshold) => {
+        minimum = Math.max(minimum, threshold);
+        return minimum;
+    });
+}
+
+function renderStrengthLevelResult(tool, result) {
+    const resultNode = tool.querySelector("[data-level-result]");
+    const liveNode = tool.querySelector("[data-level-live]");
+    const primaryNode = tool.querySelector("[data-level-result-primary]");
+    const estimateNode = tool.querySelector("[data-level-result-estimate]");
+    const nextNode = tool.querySelector("[data-level-result-next]");
+    if (!resultNode || !liveNode || !primaryNode || !estimateNode || !nextNode) {
+        return;
+    }
+
+    resultNode.hidden = false;
+    if (!result) {
+        primaryNode.textContent = tool.dataset.errorMessage || "Check your inputs.";
+        estimateNode.textContent = "";
+        nextNode.textContent = "";
+        liveNode.textContent = primaryNode.textContent;
+        return;
+    }
+
+    const unit = tool.dataset.unit || "kg";
+    const formattedValue = formatStrengthValue(result.performedValue);
+    const formattedBodyweight = formatStrengthValue(result.bodyweight);
+    primaryNode.textContent = fillStrengthTemplate(tool.dataset.resultTemplate, {
+        level: result.level,
+        value: formattedValue,
+        unit
+    });
+    estimateNode.textContent = fillStrengthTemplate(tool.dataset.estimateTemplate, {
+        value: formattedValue,
+        unit
+    });
+    const progressCopy = result.nextLevel && Number.isFinite(result.nextValue)
+        ? fillStrengthTemplate(tool.dataset.nextTemplate, {
+            level: result.nextLevel,
+            value: formatStrengthValue(result.nextValue),
+            unit
+        })
+        : tool.dataset.topTemplate || "";
+    const referenceCopy = fillStrengthTemplate(tool.dataset.referenceTemplate, {
+        bodyweight: formattedBodyweight,
+        unit
+    });
+    nextNode.textContent = [progressCopy, referenceCopy].filter(Boolean).join(" ");
+    liveNode.textContent = [primaryNode.textContent, estimateNode.textContent, nextNode.textContent].filter(Boolean).join(" ");
+
+    trackGrowthEvent("strength_level_check", {
+        measurement_kind: result.measurementKind,
+        result_level: result.level,
+        exercise_slug: document.querySelector("main[data-exercise-slug]")?.dataset.exerciseSlug || ""
+    });
+}
+
+function fillStrengthTemplate(template, values) {
+    return Object.entries(values).reduce((text, [key, value]) => {
+        return String(text || "").replaceAll(`{${key}}`, String(value));
+    }, template || "");
+}
+
+function formatStrengthValue(value) {
+    return new Intl.NumberFormat(document.documentElement.lang || undefined, {
+        maximumFractionDigits: 1
+    }).format(Math.round(value * 10) / 10);
+}
 
 window.toggleMenu = function () {
     document.body.classList.toggle("nav-open");
@@ -1383,6 +1616,10 @@ function buildHeader(pageType, unitSwitch) {
             </a>
         `;
     }).join("");
+    const categoryNav = pageType === "library" ? "" : `
+            <nav class="sub-nav" id="global-category-nav" aria-label="${escapeAttribute(t("category"))}">
+                ${categoryLinks}
+            </nav>`;
 
     return htmlToElement(`
         <header class="site-header">
@@ -1399,9 +1636,7 @@ function buildHeader(pageType, unitSwitch) {
                     </div>
                 ` : ""}
             </nav>
-            <div class="sub-nav" id="global-category-nav">
-                ${categoryLinks}
-            </div>
+            ${categoryNav}
         </header>
     `);
 }
@@ -1450,6 +1685,7 @@ function buildFooter(pageType) {
                         <a href="exercises.html">${escapeHtml(t("exerciseLibrary"))}</a>
                         <a href="about.html">${escapeHtml(t("about"))}</a>
                         <a href="methodology.html">${escapeHtml(t("methodology"))}</a>
+                        <a href="data-terms.html">${escapeHtml(t("dataTerms"))}</a>
                         <a href="contact.html">${escapeHtml(t("contact"))}</a>
                         <a href="privacy-policy.html">${escapeHtml(t("privacy"))}</a>
                     </div>
@@ -2329,8 +2565,9 @@ function enhanceLibraryPage(main) {
     const searchInput = root.querySelector("[data-library-search]");
     const resultNode = root.querySelector("[data-library-results]");
     const emptyNode = root.querySelector("[data-library-empty]");
+    const resetButton = root.querySelector("[data-library-reset]");
     const buttons = Array.from(root.querySelectorAll("[data-library-category]"));
-    const cards = Array.from(root.querySelectorAll("[data-library-grid] > .card-link")).map((anchor) => {
+    const cards = Array.from(root.querySelectorAll("[data-library-grid] > .exercise-library-item > .card-link")).map((anchor) => {
         const card = anchor.querySelector(".exercise-card");
         const categoryIds = new Set(String(card?.dataset.categoryIds || "").split(/\s+/).filter(Boolean));
         const searchableText = [
@@ -2344,6 +2581,7 @@ function enhanceLibraryPage(main) {
 
         return {
             anchor,
+            item: anchor.closest(".exercise-library-item"),
             categoryIds,
             searchableText: normalizeLibrarySearchText(searchableText)
         };
@@ -2351,6 +2589,7 @@ function enhanceLibraryPage(main) {
     const resultTemplate = root.dataset.resultTemplate || "{count}";
     const validCategories = new Set(buttons.map((button) => button.dataset.libraryCategory).filter(Boolean));
     let activeCategory = categoryFromHash(validCategories);
+    let searchAnalyticsTimer = 0;
 
     function applyFilters() {
         const query = normalizeLibrarySearchText(searchInput?.value || "");
@@ -2360,7 +2599,11 @@ function enhanceLibraryPage(main) {
             const matchesCategory = activeCategory === "all" || card.categoryIds.has(activeCategory);
             const matchesQuery = !query || card.searchableText.includes(query);
             const visible = matchesCategory && matchesQuery;
-            card.anchor.hidden = !visible;
+            if (card.item) {
+                card.item.hidden = !visible;
+            } else {
+                card.anchor.hidden = !visible;
+            }
             if (visible) {
                 visibleCount += 1;
             }
@@ -2378,6 +2621,8 @@ function enhanceLibraryPage(main) {
         if (emptyNode) {
             emptyNode.hidden = visibleCount !== 0;
         }
+
+        return visibleCount;
     }
 
     buttons.forEach((button) => {
@@ -2387,11 +2632,45 @@ function enhanceLibraryPage(main) {
                 ? `${window.location.pathname}${window.location.search}`
                 : `${window.location.pathname}${window.location.search}#${activeCategory}`;
             window.history.replaceState(null, "", nextUrl);
-            applyFilters();
+            const visibleCount = applyFilters();
+            trackGrowthEvent("exercise_filter", {
+                filter_category: activeCategory,
+                result_count: visibleCount
+            });
         });
     });
 
-    searchInput?.addEventListener("input", applyFilters);
+    searchInput?.addEventListener("input", () => {
+        const visibleCount = applyFilters();
+        window.clearTimeout(searchAnalyticsTimer);
+        const normalizedQuery = normalizeLibrarySearchText(searchInput.value);
+        if (!normalizedQuery) {
+            return;
+        }
+        searchAnalyticsTimer = window.setTimeout(() => {
+            trackGrowthEvent("exercise_search", {
+                query_length: normalizedQuery.length,
+                filter_category: activeCategory,
+                result_count: visibleCount
+            });
+        }, 600);
+    });
+    searchInput?.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && searchInput.value) {
+            searchInput.value = "";
+            applyFilters();
+        }
+    });
+    resetButton?.addEventListener("click", () => {
+        activeCategory = "all";
+        if (searchInput) {
+            searchInput.value = "";
+        }
+        window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+        const visibleCount = applyFilters();
+        trackGrowthEvent("exercise_filter_reset", { result_count: visibleCount });
+        searchInput?.focus();
+    });
     window.addEventListener("hashchange", () => {
         activeCategory = categoryFromHash(validCategories);
         applyFilters();
@@ -2402,7 +2681,12 @@ function enhanceLibraryPage(main) {
 }
 
 function categoryFromHash(validCategories) {
-    const value = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    let value = "";
+    try {
+        value = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    } catch {
+        return "all";
+    }
     return validCategories.has(value) ? value : "all";
 }
 

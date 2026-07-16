@@ -5,9 +5,9 @@ import { join } from "node:path";
 
 import {
     APP_STORE_BADGE_ASSET,
-    APP_STORE_URL,
     escapeAttribute,
     escapeHtml,
+    getAppStoreUrl,
     imageSizeAttributes,
     renderBreadcrumb,
     renderCard,
@@ -22,6 +22,7 @@ import {
     buildOutputPath,
     getGeneratedLocales,
     getCategoryLabel,
+    getCategoryNavItems,
     getStaticContentOgImageAlt,
     getUiText,
     localizeStaticPage,
@@ -112,7 +113,7 @@ ${renderAppLanding(page, catalogData, locale, textLocale)}
 
 ${renderAppFooter(locale, textLocale, "index.html", true)}
 
-    <script src="${stylesheetHref("app.js?v=category-jump-20260704", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=site-ui-20260716", locale)}"></script>
 `;
 
     return renderDocument({
@@ -205,17 +206,18 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
     const todayItem = overviewItems[0] || {};
     const analyticsItem = overviewItems[1] || {};
     const libraryItem = overviewItems[2] || {};
+    const trustCopy = getHomeTrustCopy(textLocale);
 
     return `        <div class="app-home-shell">
             <section class="app-hero" id="today">
                 <div class="app-hero-inner">
                     <div class="app-hero-copy">
                         <p class="app-release-badge"><span aria-hidden="true"></span>${escapeHtml(getHomeText(textLocale, "releaseStatus"))}</p>
-                        <h1 class="app-hero-title">Shiba</h1>
+                        <h1 class="app-hero-title"><span class="app-hero-title-name">Shiba</span><span class="app-hero-title-category">${escapeHtml(trustCopy.productCategory)}</span></h1>
                         <p class="app-hero-subtitle">${renderMultilineText(page.heroHeading || "")}</p>
                         <p class="app-hero-lead">${renderMultilineText(intro[0] || page.description || "")}</p>
                         <div class="app-hero-actions">
-                            ${renderAppStoreBadge(locale)}
+                            ${renderAppStoreBadge(locale, "hero")}
                             <a href="#analytics" class="app-pill app-pill--secondary">${escapeHtml(getHomeText(textLocale, "primaryAction"))}</a>
                         </div>
                         <p class="app-hero-availability">${escapeHtml(getHomeText(textLocale, "availability"))}</p>
@@ -224,6 +226,13 @@ ${renderAppStats(textLocale)}
                         </div>
                     </div>
                     ${renderHeroShowcase(images, locale, textLocale)}
+                </div>
+            </section>
+
+            <section class="app-trust-strip" aria-label="${escapeAttribute(trustCopy.heading)}">
+                <p class="app-kicker">${escapeHtml(trustCopy.heading)}</p>
+                <div class="app-trust-grid">
+${trustCopy.items.map((item) => `                    <div class="app-trust-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.copy)}</span></div>`).join("\n")}
                 </div>
             </section>
 
@@ -284,7 +293,7 @@ ${renderShowcasePhone(images.heatmap, getHomeText(textLocale, "heatmapAlt"), get
                         </div>
                         <div class="app-library-actions">
                             <a href="exercises.html" class="app-pill app-pill--dark">${escapeHtml(getHomeText(textLocale, "libraryAction"))}</a>
-                            ${renderAppStoreBadge(locale)}
+                            ${renderAppStoreBadge(locale, "library")}
                         </div>
                     </div>
                     <div class="app-library-preview">
@@ -300,7 +309,7 @@ ${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join
                     <h2>${renderMultilineText(getHomeText(textLocale, "appStoreHeading"))}</h2>
                     <p>${escapeHtml(getHomeText(textLocale, "appStoreCopy"))}</p>
                     <div class="app-cta-actions">
-                        ${renderAppStoreBadge(locale)}
+                        ${renderAppStoreBadge(locale, "final_cta")}
                         <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}" class="app-pill app-pill--outline-dark">${escapeHtml(getHomeText(textLocale, "privacy"))}</a>
                     </div>
                 </div>
@@ -491,11 +500,99 @@ function renderAppStats(locale) {
                             </div>`).join("\n");
 }
 
-function renderAppStoreBadge(locale) {
+function renderAppStoreBadge(locale, placement = "unknown") {
     const badgeSrc = assetHref(APP_STORE_BADGE_ASSET, locale);
-    return `<a href="${escapeAttribute(APP_STORE_URL)}" class="app-store-badge-link" target="_blank" rel="noopener noreferrer external">
+    return `<a href="${escapeAttribute(getAppStoreUrl(locale))}" class="app-store-badge-link" target="_blank" rel="noopener noreferrer external" data-analytics-link="app-store" data-analytics-placement="${escapeAttribute(placement)}">
                                 <img src="${escapeAttribute(badgeSrc)}" alt="Download on the App Store" class="app-store-badge" decoding="async"${imageSizeAttributes(badgeSrc)}>
                             </a>`;
+}
+
+function getHomeTrustCopy(locale) {
+    const copy = {
+        ja: {
+            productCategory: "筋トレ記録・分析アプリ",
+            heading: "プライベートに、すぐ始められる",
+            items: [
+                { title: "登録不要", copy: "アカウントを作らずに開始" },
+                { title: "端末内で管理", copy: "記録データを外部送信しない" },
+                { title: "追跡なし", copy: "第三者広告・追跡SDKなし" }
+            ]
+        },
+        ko: {
+            productCategory: "근력 운동 기록·분석 앱",
+            heading: "개인 정보를 지키며 바로 시작",
+            items: [
+                { title: "가입 불필요", copy: "계정 없이 바로 시작" },
+                { title: "기기 내 저장", copy: "운동 기록을 외부로 전송하지 않음" },
+                { title: "추적 없음", copy: "제3자 광고·추적 SDK 없음" }
+            ]
+        },
+        "zh-hant": {
+            productCategory: "重訓紀錄與分析 App",
+            heading: "保有隱私，立即開始",
+            items: [
+                { title: "免註冊", copy: "不建立帳號也能開始" },
+                { title: "儲存在裝置上", copy: "訓練紀錄不傳送至外部" },
+                { title: "不追蹤", copy: "沒有第三方廣告或追蹤 SDK" }
+            ]
+        },
+        "zh-hans": {
+            productCategory: "力量训练记录与分析 App",
+            heading: "保护隐私，立即开始",
+            items: [
+                { title: "免注册", copy: "无需创建账号即可开始" },
+                { title: "存储在设备上", copy: "训练记录不会发送到外部" },
+                { title: "不追踪", copy: "没有第三方广告或追踪 SDK" }
+            ]
+        },
+        es: {
+            productCategory: "App de registro y análisis de fuerza",
+            heading: "Privado y listo para empezar",
+            items: [
+                { title: "Sin cuenta", copy: "Empieza sin registrarte" },
+                { title: "Datos en el dispositivo", copy: "Tus entrenamientos no se envían fuera" },
+                { title: "Sin rastreo", copy: "Sin anuncios ni SDK de rastreo de terceros" }
+            ]
+        },
+        fr: {
+            productCategory: "App de suivi et d’analyse musculation",
+            heading: "Privé et prêt à démarrer",
+            items: [
+                { title: "Sans compte", copy: "Commence sans inscription" },
+                { title: "Données sur l’appareil", copy: "Les séances ne sont pas envoyées ailleurs" },
+                { title: "Sans suivi", copy: "Aucune pub ni SDK de suivi tiers" }
+            ]
+        },
+        de: {
+            productCategory: "Krafttraining-Tracker mit Analyse",
+            heading: "Privat und sofort startklar",
+            items: [
+                { title: "Kein Konto", copy: "Ohne Registrierung starten" },
+                { title: "Auf dem Gerät", copy: "Trainingsdaten werden nicht extern gesendet" },
+                { title: "Kein Tracking", copy: "Keine Drittanbieter-Werbung oder Tracking-SDKs" }
+            ]
+        },
+        id: {
+            productCategory: "Aplikasi catatan dan analitik latihan",
+            heading: "Privat dan langsung siap",
+            items: [
+                { title: "Tanpa akun", copy: "Mulai tanpa mendaftar" },
+                { title: "Data di perangkat", copy: "Catatan latihan tidak dikirim keluar" },
+                { title: "Tanpa pelacakan", copy: "Tanpa iklan atau SDK pelacakan pihak ketiga" }
+            ]
+        },
+        en: {
+            productCategory: "Workout logging and analytics app",
+            heading: "Private and ready to start",
+            items: [
+                { title: "No account", copy: "Start without signing up" },
+                { title: "On-device data", copy: "Workout records are not sent elsewhere" },
+                { title: "No tracking", copy: "No third-party ads or tracking SDKs" }
+            ]
+        }
+    };
+
+    return copy[locale] || copy.en;
 }
 
 function renderLoggingMock(locale) {
@@ -643,7 +740,7 @@ function getHomeText(locale, key) {
             features: "分析を見る",
             primaryAction: "機能を見る",
             secondaryAction: "種目",
-            availability: "無料 • アカウント登録不要 • iOS 17以降",
+            availability: "無料で開始 • 一部機能はPremium • アカウント登録不要 • iOS 17以降",
             privacy: "プライバシー",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
@@ -691,7 +788,7 @@ function getHomeText(locale, key) {
             libraryCopy: "部位別にすばやく探せます。",
             libraryAction: "全287種目を見る",
             appStoreHeading: "トレーニングの進歩を、\n今日から記録。",
-            appStoreCopy: "ShibaはApp Storeで無料配信中。iPhoneですぐに始められます。",
+            appStoreCopy: "Shibaは無料で始められます。一部の全履歴・長期分析・メニュー拡張機能はShiba Premiumで利用できます。",
             footerHome: "ホーム",
             footerFeatures: "機能",
             footerPrivacy: "プライバシーポリシー",
@@ -704,7 +801,7 @@ function getHomeText(locale, key) {
             features: "See Features",
             primaryAction: "See features",
             secondaryAction: "Exercises",
-            availability: "Free • No account required • iOS 17+",
+            availability: "Free to start • Some features require Premium • No account • iOS 17+",
             privacy: "Privacy Policy",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
@@ -752,7 +849,7 @@ function getHomeText(locale, key) {
             libraryCopy: "Search by body part and muscle.",
             libraryAction: "Browse all 287 exercises",
             appStoreHeading: "Start tracking\nwhat changes.",
-            appStoreCopy: "Shiba is available free on the App Store. Start your next workout on iPhone.",
+            appStoreCopy: "Start Shiba for free. Some full-history, long-term analytics, and expanded planning features require Shiba Premium.",
             footerHome: "Home",
             footerFeatures: "Features",
             footerPrivacy: "Privacy Policy",
@@ -765,7 +862,7 @@ function getHomeText(locale, key) {
             features: "분석 보기",
             primaryAction: "기능 보기",
             secondaryAction: "운동",
-            availability: "무료 • 계정 필요 없음 • iOS 17 이상",
+            availability: "무료로 시작 • 일부 기능 Premium • 계정 불필요 • iOS 17 이상",
             privacy: "개인정보",
             database: "데이터베이스 보기",
             databaseIntro: "평균 중량, 기준표, 자극되는 근육을 확인하고 싶다면 기존 운동 데이터베이스로 이동할 수 있습니다.",
@@ -813,7 +910,7 @@ function getHomeText(locale, key) {
             libraryCopy: "부위와 근육으로 빠르게 탐색.",
             libraryAction: "287개 운동 모두 보기",
             appStoreHeading: "오늘부터\n성장을 기록하세요.",
-            appStoreCopy: "Shiba를 App Store에서 무료로 다운로드하고 iPhone에서 바로 시작하세요.",
+            appStoreCopy: "Shiba는 무료로 시작할 수 있습니다. 전체 기록, 장기 분석, 확장 메뉴의 일부 기능은 Shiba Premium에서 제공됩니다.",
             footerHome: "홈",
             footerFeatures: "기능",
             footerPrivacy: "개인정보 처리방침",
@@ -826,7 +923,7 @@ function getHomeText(locale, key) {
             features: "查看分析",
             primaryAction: "看功能",
             secondaryAction: "動作",
-            availability: "免費 • 無需帳號 • iOS 17 以上",
+            availability: "免費開始 • 部分功能需 Premium • 無需帳號 • iOS 17 以上",
             privacy: "隱私權",
             database: "查看資料庫",
             databaseIntro: "想查看平均重量、標準表與訓練肌群時，可以從這裡進入既有訓練資料庫。",
@@ -874,7 +971,7 @@ function getHomeText(locale, key) {
             libraryCopy: "依部位與肌群快速搜尋。",
             libraryAction: "查看全部 287 個動作",
             appStoreHeading: "從今天開始，\n記錄每一次進步。",
-            appStoreCopy: "Shiba 已在 App Store 免費上架，立即用 iPhone 開始下一次訓練。",
+            appStoreCopy: "Shiba 可免費開始使用；完整紀錄、長期分析與進階課表的部分功能需使用 Shiba Premium。",
             footerHome: "首頁",
             footerFeatures: "功能",
             footerPrivacy: "隱私權政策",
@@ -887,7 +984,7 @@ function getHomeText(locale, key) {
             features: "查看分析",
             primaryAction: "看功能",
             secondaryAction: "动作",
-            availability: "免费 • 无需账号 • iOS 17 或更高版本",
+            availability: "免费开始 • 部分功能需 Premium • 无需账号 • iOS 17 或更高版本",
             privacy: "隐私",
             database: "查看数据库",
             databaseIntro: "想查看平均重量、标准表和训练肌群时，可以从这里进入原有训练数据库。",
@@ -935,7 +1032,7 @@ function getHomeText(locale, key) {
             libraryCopy: "按部位和肌群快速搜索。",
             libraryAction: "查看全部 287 个动作",
             appStoreHeading: "从今天开始，\n记录每一次进步。",
-            appStoreCopy: "Shiba 已在 App Store 免费上架，立即用 iPhone 开始下一次训练。",
+            appStoreCopy: "Shiba 可免费开始使用；完整记录、长期分析与进阶计划的部分功能需要 Shiba Premium。",
             footerHome: "首页",
             footerFeatures: "功能",
             footerPrivacy: "隐私政策",
@@ -948,7 +1045,7 @@ function getHomeText(locale, key) {
             features: "Ver análisis",
             primaryAction: "Ver funciones",
             secondaryAction: "Ejercicios",
-            availability: "Gratis • Sin cuenta • iOS 17 o posterior",
+            availability: "Gratis para empezar • Algunas funciones requieren Premium • Sin cuenta • iOS 17+",
             privacy: "Privacidad",
             database: "Ver base de datos",
             databaseIntro: "Cuando quieras revisar pesos medios, estándares y músculos trabajados, entra en la base de datos existente.",
@@ -996,7 +1093,7 @@ function getHomeText(locale, key) {
             libraryCopy: "Busca por zona y músculo.",
             libraryAction: "Ver los 287 ejercicios",
             appStoreHeading: "Registra tu progreso\ndesde hoy.",
-            appStoreCopy: "Shiba ya está disponible gratis en App Store. Empieza tu próximo entrenamiento en el iPhone.",
+            appStoreCopy: "Empieza Shiba gratis. Algunas funciones de historial completo, análisis a largo plazo y planificación ampliada requieren Shiba Premium.",
             footerHome: "Inicio",
             footerFeatures: "Funciones",
             footerPrivacy: "Política de privacidad",
@@ -1009,7 +1106,7 @@ function getHomeText(locale, key) {
             features: "Voir l’analyse",
             primaryAction: "Voir les fonctions",
             secondaryAction: "Exercices",
-            availability: "Gratuit • Sans compte • iOS 17 ou version ultérieure",
+            availability: "Gratuit au départ • Certaines fonctions exigent Premium • Sans compte • iOS 17+",
             privacy: "Confidentialité",
             database: "Voir la base",
             databaseIntro: "Pour consulter les poids moyens, standards et muscles sollicités, continue vers la base d'exercices existante.",
@@ -1057,7 +1154,7 @@ function getHomeText(locale, key) {
             libraryCopy: "Recherche par zone et par muscle.",
             libraryAction: "Voir les 287 exercices",
             appStoreHeading: "Suivez vos progrès\ndès aujourd’hui.",
-            appStoreCopy: "Shiba est disponible gratuitement sur l’App Store. Lancez votre prochaine séance sur iPhone.",
+            appStoreCopy: "Commence Shiba gratuitement. Certaines fonctions d’historique complet, d’analyse longue durée et de planification avancée exigent Shiba Premium.",
             footerHome: "Accueil",
             footerFeatures: "Fonctions",
             footerPrivacy: "Politique de confidentialité",
@@ -1070,7 +1167,7 @@ function getHomeText(locale, key) {
             features: "Analyse ansehen",
             primaryAction: "Funktionen",
             secondaryAction: "Übungen",
-            availability: "Kostenlos • Kein Konto nötig • Ab iOS 17",
+            availability: "Kostenlos starten • Einige Funktionen mit Premium • Kein Konto • Ab iOS 17",
             privacy: "Datenschutz",
             database: "Datenbank ansehen",
             databaseIntro: "Wenn du Durchschnittsgewichte, Standards und trainierte Muskeln prüfen möchtest, nutze die bestehende Trainingsdatenbank.",
@@ -1118,7 +1215,7 @@ function getHomeText(locale, key) {
             libraryCopy: "Nach Bereich und Muskel suchen.",
             libraryAction: "Alle 287 Übungen ansehen",
             appStoreHeading: "Fortschritt ab heute\nfesthalten.",
-            appStoreCopy: "Shiba ist kostenlos im App Store verfügbar. Starte dein nächstes Workout auf dem iPhone.",
+            appStoreCopy: "Shiba lässt sich kostenlos starten. Einige Funktionen für vollständige Historie, Langzeitanalyse und erweiterte Pläne benötigen Shiba Premium.",
             footerHome: "Start",
             footerFeatures: "Funktionen",
             footerPrivacy: "Datenschutzerklärung",
@@ -1131,7 +1228,7 @@ function getHomeText(locale, key) {
             features: "Lihat analitik",
             primaryAction: "Lihat fitur",
             secondaryAction: "Latihan",
-            availability: "Gratis • Tanpa akun • iOS 17 atau lebih baru",
+            availability: "Gratis untuk mulai • Beberapa fitur perlu Premium • Tanpa akun • iOS 17+",
             privacy: "Privasi",
             database: "Lihat database",
             databaseIntro: "Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada.",
@@ -1179,7 +1276,7 @@ function getHomeText(locale, key) {
             libraryCopy: "Cari berdasarkan area dan otot.",
             libraryAction: "Lihat semua 287 latihan",
             appStoreHeading: "Catat progresmu\nmulai hari ini.",
-            appStoreCopy: "Shiba kini tersedia gratis di App Store. Mulai latihan berikutnya di iPhone.",
+            appStoreCopy: "Mulai Shiba secara gratis. Beberapa fitur riwayat lengkap, analitik jangka panjang, dan menu lanjutan memerlukan Shiba Premium.",
             footerHome: "Beranda",
             footerFeatures: "Fitur",
             footerPrivacy: "Kebijakan privasi",
@@ -1201,58 +1298,72 @@ function renderLibraryPage(page, catalogData, locale) {
         { label: getUiText(locale, "home"), href: absoluteUrlForFile("index.html", locale) },
         { label: page.heading }
     ];
+    const categoryNavItems = new Map(getCategoryNavItems(locale).map((item) => [item.id, item]));
     const categoryButtons = catalogData.sections.map((section) => {
         const label = locale === "ja" ? section.titles.ja : getCategoryLabel(section, locale);
-        return `                    <button type="button" id="${escapeAttribute(section.id)}" class="exercise-library-filter" data-library-category="${escapeAttribute(section.id)}" aria-pressed="false">${escapeHtml(label)}</button>`;
+        const navItem = categoryNavItems.get(section.id);
+        const icon = navItem
+            ? `<span class="category-nav-icon" aria-hidden="true"><img src="${escapeAttribute(navItem.icon)}" alt="" aria-hidden="true"${imageSizeAttributes(navItem.icon)}></span>`
+            : "";
+        return `                        <button type="button" id="${escapeAttribute(section.id)}" class="exercise-library-filter" data-library-category="${escapeAttribute(section.id)}" aria-pressed="false" aria-controls="exercise-library-grid">${icon}<span>${escapeHtml(label)}</span><span class="exercise-library-filter-count">${section.cards.length}</span></button>`;
     }).join("\n");
     const cards = records.map(({ card, section, sectionIds }) => {
-        return renderCard({ ...card, sectionIds }, unit, locale, section, { includeImage: true });
+        return `                <li class="exercise-library-item">\n${renderCard({ ...card, sectionIds }, unit, locale, section, { includeImage: true })}\n                </li>`;
     }).join("\n");
     const resultText = String(page.resultTemplate || "{count}").replace("{count}", String(records.length));
-    const body = `${renderStaticHeader({ pageType: "library", locale, showCategoryNav: true })}
+    const body = `${renderStaticHeader({ pageType: "library", locale, showCategoryNav: false })}
 
     <hr class="top-divider">
     <main class="page-main" data-exercise-library data-result-template="${escapeAttribute(page.resultTemplate || "{count}")}">
 ${renderBreadcrumb(breadcrumbs, locale)}
         <section class="container exercise-library-hero">
-            <p class="eyebrow">${escapeHtml(page.eyebrow || "Exercise Library")}</p>
-            <h1>${escapeHtml(page.heading)}</h1>
-${(page.intro || []).map((paragraph) => `            <p>${escapeHtml(paragraph)}</p>`).join("\n")}
-            <div class="exercise-library-counts" aria-label="${escapeAttribute(resultText)}">
+            <div class="exercise-library-hero-copy">
+                <p class="eyebrow">${escapeHtml(page.eyebrow || "Exercise Library")}</p>
+                <h1>${escapeHtml(page.heading)}</h1>
+${(page.intro || []).map((paragraph) => `                <p>${escapeHtml(paragraph)}</p>`).join("\n")}
+            </div>
+            <div class="exercise-library-counts">
                 <span>${escapeHtml(formatExerciseCount(records.length, locale))}</span>
                 <span>${escapeHtml(formatCategoryCount(catalogData.sections.length, locale))}</span>
             </div>
         </section>
 
+${renderLibraryAppCta(locale)}
+
         <section class="container exercise-library-index" aria-labelledby="exercise-library-title">
             <div class="exercise-library-heading">
-                <p class="eyebrow">${escapeHtml(page.eyebrow || "Exercise Library")}</p>
                 <h2 id="exercise-library-title">${escapeHtml(page.libraryHeading || page.heading)}</h2>
             </div>
             <div class="exercise-library-controls">
-                <label class="exercise-library-search">
-                    <span>${escapeHtml(page.searchLabel || "Search")}</span>
-                    <input type="search" data-library-search autocomplete="off" placeholder="${escapeAttribute(page.searchPlaceholder || "")}">
-                </label>
-                <div class="exercise-library-filter-group" role="group" aria-label="${escapeAttribute(page.categoryLabel || "Categories")}">
-                    <button type="button" class="exercise-library-filter is-active" data-library-category="all" aria-pressed="true">${escapeHtml(page.allCategories || "All")}</button>
-${categoryButtons}
+                <div class="exercise-library-search-row">
+                    <label class="exercise-library-search" for="exercise-library-search">
+                        <span class="exercise-library-control-label">${escapeHtml(page.searchLabel || "Search")}</span>
+                        <input id="exercise-library-search" type="search" data-library-search aria-controls="exercise-library-grid" autocomplete="off" placeholder="${escapeAttribute(page.searchPlaceholder || "")}">
+                    </label>
+                    <p class="exercise-library-results" data-library-results role="status" aria-live="polite" aria-atomic="true">${escapeHtml(resultText)}</p>
                 </div>
-                <p class="exercise-library-results" data-library-results aria-live="polite">${escapeHtml(resultText)}</p>
+                <fieldset class="exercise-library-filter-fieldset">
+                    <legend class="exercise-library-control-label">${escapeHtml(page.categoryLabel || "Categories")}</legend>
+                    <div class="exercise-library-filter-group">
+                        <button type="button" class="exercise-library-filter is-active" data-library-category="all" aria-pressed="true" aria-controls="exercise-library-grid"><span>${escapeHtml(page.allCategories || "All")}</span><span class="exercise-library-filter-count">${records.length}</span></button>
+${categoryButtons}
+                    </div>
+                </fieldset>
             </div>
-            <div class="exercise-cards-container exercise-library-grid" data-library-grid>
+            <ul id="exercise-library-grid" class="exercise-cards-container exercise-library-grid" data-library-grid>
 ${cards}
-            </div>
+            </ul>
             <div class="exercise-library-empty" data-library-empty hidden>
                 <h3>${escapeHtml(page.emptyHeading || "No exercises found")}</h3>
                 <p>${escapeHtml(page.emptyText || "")}</p>
+                <button type="button" class="exercise-library-reset" data-library-reset>${escapeHtml(page.resetFilters || "Reset filters")}</button>
             </div>
         </section>
     </main>
 
 ${renderStaticFooter(page.file, locale)}
 
-    <script src="${stylesheetHref("app.js?v=exercise-library-20260715", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=site-ui-20260716", locale)}"></script>
 `;
 
     return renderDocument({
@@ -1267,6 +1378,7 @@ ${renderStaticFooter(page.file, locale)}
             ogImageAlt: `Shiba ${page.heading} - ${formatExerciseCount(records.length, locale)}`,
             type: "website",
             twitterCard: "summary_large_image",
+            appleAppId: "6785443075",
             themeColor: APP_THEME_COLOR,
             webPageType: "CollectionPage",
             breadcrumbs,
@@ -1276,9 +1388,35 @@ ${renderStaticFooter(page.file, locale)}
             structuredData: [buildLibraryStructuredData(records, unit, locale, canonicalUrl, page)]
         },
         enableAds: false,
-        bodyClass: "content-page exercise-library-page",
+        bodyClass: "exercise-library-page",
         generatedComment: "<!-- Generated by scripts/build-static-pages.mjs. Edit src/pages/exercises.json and src/catalog.json instead of editing this file directly. -->"
     });
+}
+
+function renderLibraryAppCta(locale) {
+    const copy = {
+        ja: { title: "見つけた種目を、そのまま記録", text: "Shibaなら重量・回数をすばやく残し、推定1RMや筋力の現在地まで確認できます。", cta: "Shibaを無料で始める" },
+        ko: { title: "찾은 운동을 바로 기록하세요", text: "Shiba에서 중량과 반복 횟수를 빠르게 남기고, 추정 1RM과 현재 근력 수준까지 확인할 수 있습니다.", cta: "Shiba 무료로 시작" },
+        "zh-hant": { title: "找到動作後，直接開始記錄", text: "使用 Shiba 快速記下重量與次數，並查看估算 1RM 與目前肌力位置。", cta: "免費開始使用 Shiba" },
+        "zh-hans": { title: "找到动作后，直接开始记录", text: "使用 Shiba 快速记录重量与次数，并查看估算 1RM 和当前力量位置。", cta: "免费开始使用 Shiba" },
+        es: { title: "Encuentra el ejercicio y regístralo", text: "Con Shiba puedes guardar peso y repeticiones rápido y revisar tu 1RM estimado y nivel de fuerza.", cta: "Empezar gratis con Shiba" },
+        fr: { title: "Trouve l’exercice, puis enregistre-le", text: "Avec Shiba, saisis vite charge et répétitions, puis consulte ton 1RM estimé et ton niveau de force.", cta: "Commencer Shiba gratuitement" },
+        de: { title: "Übung finden und direkt loggen", text: "Mit Shiba erfasst du Gewicht und Wiederholungen schnell und siehst geschätztes 1RM und Kraftniveau.", cta: "Shiba kostenlos starten" },
+        id: { title: "Temukan latihan, lalu langsung catat", text: "Dengan Shiba, simpan beban dan repetisi dengan cepat lalu lihat estimasi 1RM dan level kekuatanmu.", cta: "Mulai Shiba gratis" },
+        en: { title: "Find an exercise, then log it", text: "Shiba lets you save weight and reps quickly, then review estimated 1RM and your current strength level.", cta: "Start Shiba free" }
+    }[locale] || {
+        title: "Find an exercise, then log it",
+        text: "Shiba lets you save weight and reps quickly, then review estimated 1RM and your current strength level.",
+        cta: "Start Shiba free"
+    };
+
+    return `        <section class="container exercise-app-cta-band exercise-library-app-cta">
+            <div>
+                <h2>${escapeHtml(copy.title)}</h2>
+                <p>${escapeHtml(copy.text)}</p>
+            </div>
+            <a href="${escapeAttribute(getAppStoreUrl(locale))}" class="exercise-app-cta-button" target="_blank" rel="noopener noreferrer external" data-analytics-link="app-store" data-analytics-placement="library_hero">${escapeHtml(copy.cta)}</a>
+        </section>`;
 }
 
 function buildUniqueLibraryRecords(catalogData) {
@@ -1375,7 +1513,7 @@ ${content}
 
 ${renderStaticFooter(page.file, locale)}
 
-${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=category-jump-20260704", locale)}"></script>`}
+${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=site-ui-20260716", locale)}"></script>`}
 `;
 
     return renderDocument({

@@ -17,6 +17,7 @@
   "resultTemplate": "{count}種目を表示",
   "emptyHeading": "該当する種目がありません",
   "emptyText": "検索語やカテゴリを変更してください。",
+  "resetFilters": "絞り込みをリセット",
   "unit": "kg",
   "ads": false,
   "ogImage": "https://shibamuscle.com/assets/app/shiba-social-card.png",
@@ -37,7 +38,8 @@
       "allCategories": "전체",
       "resultTemplate": "운동 {count}개 표시",
       "emptyHeading": "일치하는 운동이 없습니다",
-      "emptyText": "검색어나 부위 필터를 변경해 보세요."
+      "emptyText": "검색어나 부위 필터를 변경해 보세요.",
+      "resetFilters": "필터 초기화"
     },
     "zh-hant": {
       "title": "重訓動作資料庫 | Shiba Muscle",
@@ -55,7 +57,8 @@
       "allCategories": "全部",
       "resultTemplate": "顯示 {count} 個動作",
       "emptyHeading": "找不到符合的動作",
-      "emptyText": "請調整搜尋字詞或部位篩選。"
+      "emptyText": "請調整搜尋字詞或部位篩選。",
+      "resetFilters": "重設篩選"
     },
     "zh-hans": {
       "title": "力量训练动作库 | Shiba Muscle",
@@ -73,7 +76,8 @@
       "allCategories": "全部",
       "resultTemplate": "显示 {count} 个动作",
       "emptyHeading": "没有找到匹配的动作",
-      "emptyText": "请调整搜索词或部位筛选。"
+      "emptyText": "请调整搜索词或部位筛选。",
+      "resetFilters": "重置筛选"
     },
     "es": {
       "title": "Biblioteca de ejercicios de fuerza | Shiba Muscle",
@@ -91,7 +95,8 @@
       "allCategories": "Todos",
       "resultTemplate": "{count} ejercicios",
       "emptyHeading": "No hay ejercicios coincidentes",
-      "emptyText": "Prueba otra búsqueda o cambia el filtro de zona."
+      "emptyText": "Prueba otra búsqueda o cambia el filtro de zona.",
+      "resetFilters": "Restablecer filtros"
     },
     "fr": {
       "title": "Bibliothèque d’exercices de musculation | Shiba Muscle",
@@ -109,7 +114,8 @@
       "allCategories": "Tous",
       "resultTemplate": "{count} exercices affichés",
       "emptyHeading": "Aucun exercice correspondant",
-      "emptyText": "Modifie la recherche ou le filtre de zone."
+      "emptyText": "Modifie la recherche ou le filtre de zone.",
+      "resetFilters": "Réinitialiser les filtres"
     },
     "de": {
       "title": "Kraftübungsbibliothek | Shiba Muscle",
@@ -127,7 +133,8 @@
       "allCategories": "Alle",
       "resultTemplate": "{count} Übungen angezeigt",
       "emptyHeading": "Keine passenden Übungen",
-      "emptyText": "Ändere den Suchbegriff oder den Körperbereich."
+      "emptyText": "Ändere den Suchbegriff oder den Körperbereich.",
+      "resetFilters": "Filter zurücksetzen"
     },
     "id": {
       "title": "Pustaka latihan kekuatan | Shiba Muscle",
@@ -145,7 +152,8 @@
       "allCategories": "Semua",
       "resultTemplate": "Menampilkan {count} latihan",
       "emptyHeading": "Tidak ada latihan yang cocok",
-      "emptyText": "Ubah kata pencarian atau filter bagian tubuh."
+      "emptyText": "Ubah kata pencarian atau filter bagian tubuh.",
+      "resetFilters": "Atur ulang filter"
     },
     "en": {
       "title": "Strength Exercise Library | Shiba Muscle",
@@ -163,7 +171,8 @@
       "allCategories": "All",
       "resultTemplate": "Showing {count} exercises",
       "emptyHeading": "No matching exercises",
-      "emptyText": "Try another search or change the body-area filter."
+      "emptyText": "Try another search or change the body-area filter.",
+      "resetFilters": "Reset filters"
     }
   }
 }

@@ -180,5 +180,42 @@ function normalizeStandardsBlock(exercise, html, unit, measurementKind, equipmen
     </div>
 `);
 
+    if (unit === "kg") {
+        next = normalizeCanonicalTierOrdering(next);
+    }
+
     return next;
+}
+
+function normalizeCanonicalTierOrdering(html) {
+    return String(html || "").replace(/<tr>([\s\S]*?)<\/tr>/g, (row, contents) => {
+        const cells = Array.from(contents.matchAll(/<td>([^<]+)<\/td>/g));
+        if (cells.length < 3) {
+            return row;
+        }
+
+        const values = cells.map((cell) => {
+            const text = cell[1].trim();
+            return /^[-+]?\d+(?:\.\d+)?$/.test(text) ? Number.parseFloat(text) : Number.NaN;
+        });
+        if (values.some((value) => !Number.isFinite(value))) {
+            return row;
+        }
+
+        const normalized = values.slice();
+        for (let index = 2; index < normalized.length; index += 1) {
+            normalized[index] = Math.max(normalized[index - 1], normalized[index]);
+        }
+        if (normalized.every((value, index) => value === values[index])) {
+            return row;
+        }
+
+        let cellIndex = 0;
+        const nextContents = contents.replace(/<td>([^<]+)<\/td>/g, () => {
+            const value = normalized[cellIndex];
+            cellIndex += 1;
+            return `<td>${value}</td>`;
+        });
+        return `<tr>${nextContents}</tr>`;
+    });
 }

@@ -28,6 +28,15 @@
     },
     {
       "className": "content-card policy-section",
+      "heading": "推定1RMとレベル判定",
+      "paragraphs": [
+        "重量種目の計算では、1回なら入力重量をそのまま使い、2〜12回ならEpley式（重量 × (1 + 回数 ÷ 30)）で推定1RMを求めます。回数が多いほど誤差が大きくなるため、12回までに制限しています。",
+        "体重別のレベルは、入力体重をはさむ基準表の2行を線形補間して判定します。表の範囲外では、最も近い体重の行を使います。レップ数が基準の種目では1RM換算をせず、入力した1セットの回数を比較します。",
+        "どちらも競技判定や医療的評価ではなく、同じフォームと可動域で変化を見るための参考値です。"
+      ]
+    },
+    {
+      "className": "content-card policy-section",
       "heading": "基準表のレベル",
       "blocks": [
         {
@@ -74,6 +83,15 @@
           "paragraphs": [
             "For weighted exercises, we show average weight. For exercises that are easier to compare by repetitions, especially many bodyweight movements, we show average reps. Treat both as reference values that smooth over individual differences.",
             "kg pages and lb pages are unit variants of the same exercise. The English pages default to kg."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Estimated 1RM and level calculator",
+          "paragraphs": [
+            "For weighted exercises, one rep uses the entered load directly. For 2–12 reps, estimated 1RM uses the Epley formula: load × (1 + reps ÷ 30). Higher-rep estimates are less reliable, so the calculator is limited to 12 reps.",
+            "The bodyweight level interpolates linearly between the two surrounding rows in the standards table. Outside the table range, it uses the nearest row. Rep-based exercises compare the entered reps directly without a 1RM conversion.",
+            "These results are reference points for tracking comparable form and range of motion, not competition judging or medical assessment."
           ]
         },
         {
@@ -128,6 +146,15 @@
         },
         {
           "className": "content-card policy-section",
+          "heading": "추정 1RM과 레벨 계산",
+          "paragraphs": [
+            "중량 운동은 1회일 때 입력 중량을 그대로 사용하고, 2~12회는 Epley 공식(중량 × (1 + 반복 횟수 ÷ 30))으로 추정 1RM을 계산합니다. 고반복일수록 오차가 커질 수 있어 12회로 제한합니다.",
+            "체중별 레벨은 입력 체중을 사이에 둔 기준표 두 행을 선형 보간합니다. 표 범위를 벗어나면 가장 가까운 체중 행을 사용합니다. 반복 횟수 기준 운동은 1RM으로 환산하지 않고 입력한 한 세트 횟수를 직접 비교합니다.",
+            "결과는 같은 자세와 가동 범위에서 변화를 확인하기 위한 참고값이며 경기 판정이나 의학적 평가는 아닙니다."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
           "heading": "기준표 레벨",
           "blocks": [
             {
@@ -174,6 +201,15 @@
           "paragraphs": [
             "En ejercicios de carga mostramos peso medio. En ejercicios donde tiene más sentido comparar repeticiones, como muchos movimientos de peso corporal, mostramos repeticiones medias. Ambos valores deben leerse como referencias con variación individual.",
             "Las páginas kg y lb muestran el mismo ejercicio con distinta unidad. La unidad predeterminada del sitio es kg."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "1RM estimado y cálculo de nivel",
+          "paragraphs": [
+            "En ejercicios con carga, una repetición usa directamente el peso introducido. Para 2–12 repeticiones se estima el 1RM con la fórmula de Epley: peso × (1 + repeticiones ÷ 30). La precisión baja con muchas repeticiones, por eso el límite es 12.",
+            "El nivel por peso corporal se interpola linealmente entre las dos filas más cercanas de la tabla. Fuera del rango se usa la fila más próxima. Los ejercicios medidos por repeticiones comparan el valor introducido sin convertirlo a 1RM.",
+            "Los resultados son referencias para comparar una técnica y amplitud similares, no una evaluación médica ni un criterio de competición."
           ]
         },
         {
@@ -228,6 +264,15 @@
         },
         {
           "className": "content-card policy-section",
+          "heading": "估算 1RM 與等級判定",
+          "paragraphs": [
+            "重量動作在 1 次時直接使用輸入重量；2–12 次則以 Epley 公式（重量 × (1 + 次數 ÷ 30)）估算 1RM。高次數的誤差較大，因此計算器限制在 12 次以內。",
+            "體重等級會在標準表前後兩列之間做線性插值；超出表格範圍時使用最接近的列。以次數為標準的動作不換算 1RM，而是直接比較單組次數。",
+            "結果僅供在相同姿勢與活動範圍下追蹤變化，不是比賽判定或醫療評估。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
           "heading": "標準表等級",
           "blocks": [
             {
@@ -274,6 +319,15 @@
           "paragraphs": [
             "重量动作显示平均重量；更适合用反复次数比较的自重动作则显示平均次数。两者都应视为存在个体差异的参考值。",
             "kg 页面与 lb 页面是同一动作的不同单位版本。默认单位为 kg。"
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "估算 1RM 与等级判断",
+          "paragraphs": [
+            "重量动作在 1 次时直接使用输入重量；2–12 次则用 Epley 公式（重量 × (1 + 次数 ÷ 30)）估算 1RM。高次数的误差更大，因此计算器限制在 12 次以内。",
+            "体重等级会在标准表前后两行之间进行线性插值；超出表格范围时使用最接近的一行。以次数为标准的动作不换算 1RM，而是直接比较单组次数。",
+            "结果仅用于在相同动作姿势和活动范围下追踪变化，不是比赛判断或医疗评估。"
           ]
         },
         {
@@ -328,6 +382,15 @@
         },
         {
           "className": "content-card policy-section",
+          "heading": "1RM estimé et calcul du niveau",
+          "paragraphs": [
+            "Pour un exercice chargé, une répétition reprend directement la charge saisie. De 2 à 12 répétitions, le 1RM estimé utilise la formule d’Epley : charge × (1 + répétitions ÷ 30). L’estimation devient moins fiable à hautes répétitions, d’où la limite de 12.",
+            "Le niveau par poids de corps est interpolé linéairement entre les deux lignes voisines du tableau. Hors plage, la ligne la plus proche est utilisée. Les exercices évalués en répétitions comparent directement la série saisie, sans conversion en 1RM.",
+            "Ces résultats sont des repères à technique et amplitude comparables, pas un jugement de compétition ni une évaluation médicale."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
           "heading": "Niveaux des tableaux",
           "blocks": [
             {
@@ -378,6 +441,15 @@
         },
         {
           "className": "content-card policy-section",
+          "heading": "Geschätztes 1RM und Levelberechnung",
+          "paragraphs": [
+            "Bei einer Wiederholung wird das eingegebene Gewicht direkt verwendet. Für 2–12 Wiederholungen nutzt das geschätzte 1RM die Epley-Formel: Gewicht × (1 + Wiederholungen ÷ 30). Bei hohen Wiederholungszahlen steigt die Unsicherheit, daher gilt ein Maximum von 12.",
+            "Das Körpergewichts-Level wird linear zwischen den beiden benachbarten Tabellenzeilen interpoliert. Außerhalb des Bereichs gilt die nächste Zeile. Wiederholungsbasierte Übungen vergleichen die eingegebene Satzleistung direkt, ohne 1RM-Umrechnung.",
+            "Die Ergebnisse sind Richtwerte für vergleichbare Technik und Bewegungsamplitude, keine Wettkampf- oder medizinische Bewertung."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
           "heading": "Level der Tabellen",
           "blocks": [
             {
@@ -424,6 +496,15 @@
           "paragraphs": [
             "Untuk latihan berbeban, kami menampilkan berat rata-rata. Untuk latihan yang lebih cocok dibandingkan lewat repetisi, seperti banyak gerakan bodyweight, kami menampilkan repetisi rata-rata. Keduanya perlu dibaca sebagai patokan umum dengan variasi individual.",
             "Halaman kg dan lb menampilkan latihan yang sama dengan satuan berbeda. Unit bawaan untuk halaman Bahasa Indonesia adalah kg."
+          ]
+        },
+        {
+          "className": "content-card policy-section",
+          "heading": "Estimasi 1RM dan perhitungan level",
+          "paragraphs": [
+            "Untuk satu repetisi, kalkulator memakai beban yang dimasukkan. Untuk 2–12 repetisi, estimasi 1RM memakai rumus Epley: beban × (1 + repetisi ÷ 30). Estimasi repetisi tinggi kurang akurat, sehingga dibatasi sampai 12.",
+            "Level berdasarkan berat badan dihitung dengan interpolasi linear antara dua baris tabel terdekat. Di luar rentang tabel, baris terdekat digunakan. Latihan berbasis repetisi membandingkan jumlah satu set secara langsung tanpa konversi 1RM.",
+            "Hasil ini adalah acuan untuk teknik dan rentang gerak yang sebanding, bukan penilaian kompetisi atau medis."
           ]
         },
         {
