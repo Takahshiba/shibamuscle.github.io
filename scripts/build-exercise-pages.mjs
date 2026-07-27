@@ -95,7 +95,7 @@ console.log(`Generated ${generatedPages} localized exercise pages from src/.`);
 
 function assertExpectedLocales(locales) {
     const localeCodes = locales.map((locale) => locale.code);
-    const requiredLocales = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "en"];
+    const requiredLocales = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "id", "pt-br", "en"];
     const missingLocales = requiredLocales.filter((locale) => !localeCodes.includes(locale));
 
     if (missingLocales.length) {
@@ -329,6 +329,11 @@ function getLegacyAliasCopy(locale, name) {
             message: `Halaman detail ${name} tersedia di URL baru. Anda akan dialihkan secara otomatis.`,
             link: "Buka halaman baru"
         },
+        "pt-br": {
+            heading: "Esta página foi movida",
+            message: `A página de detalhes de ${name} está disponível em uma nova URL. Você será redirecionado automaticamente.`,
+            link: "Abrir a nova página"
+        },
         en: {
             heading: "This page has moved",
             message: `The ${name} detail page now has a new URL. You will be redirected automatically.`,
@@ -476,6 +481,10 @@ function getDatasetMeasurementTechnique(measurementKind, locale) {
             reps: "Tabel repetisi rata-rata dan standar repetisi berdasarkan jenis kelamin, berat badan, dan usia.",
             weight: "Tabel berat rata-rata dan standar kekuatan berdasarkan jenis kelamin, berat badan, dan usia."
         },
+        "pt-br": {
+            reps: "Tabelas de repetições médias e padrões de repetições por sexo, peso corporal e idade.",
+            weight: "Tabelas de carga média e padrões de força por sexo, peso corporal e idade."
+        },
         en: {
             reps: "Average rep and rep standard tables by sex, bodyweight, and age.",
             weight: "Average load and strength standard tables by sex, bodyweight, and age."
@@ -496,6 +505,7 @@ function getExerciseDataCatalogName(locale) {
         fr: "Données de standards de force Shiba Muscle",
         de: "Shiba Muscle Kraftstandard-Daten",
         id: "Data standar kekuatan Shiba Muscle",
+        "pt-br": "Dados de padrões de força do Shiba Muscle",
         en: "Shiba Muscle Strength Standards Data"
     };
 
@@ -512,6 +522,7 @@ function getExerciseDataCatalogDescription(locale) {
         fr: "Catalogue de données Shiba Muscle avec charges moyennes, standards de force et tableaux par poids corporel et âge pour chaque exercice.",
         de: "Shiba Muscle Datenkatalog mit Durchschnittsgewichten, Kraftstandards sowie Tabellen nach Körpergewicht und Alter für jede Übung.",
         id: "Katalog data Shiba Muscle berisi rata-rata beban, standar kekuatan, serta tabel berdasarkan berat badan dan usia untuk setiap latihan.",
+        "pt-br": "Catálogo de dados do Shiba Muscle com cargas médias, padrões de força e tabelas por peso corporal e idade para cada exercício.",
         en: "Shiba Muscle data catalog covering average loads, strength standards, and bodyweight and age tables for each exercise."
     };
 
@@ -553,7 +564,7 @@ function normalizeRecordFlagAltText(html, locale) {
 }
 
 function isDescriptiveFlagAlt(value) {
-    return /flag|国旗|國旗|Bandera|Drapeau|Flagge|Bendera/i.test(value);
+    return /flag|国旗|國旗|Bandera|Drapeau|Flagge|Bendera|Bandeira/i.test(value);
 }
 
 function buildRecordFlagAlt(country, locale) {
@@ -587,6 +598,10 @@ function buildRecordFlagAlt(country, locale) {
 
     if (locale === "id") {
         return `Bendera ${country}`;
+    }
+
+    if (locale === "pt-br") {
+        return `Bandeira de ${country}`;
     }
 
     return `${country} flag`;
@@ -782,6 +797,7 @@ function getPerDumbbellQualifier(locale) {
         fr: " (par haltère)",
         de: " (pro Hantel)",
         id: " (per dumbel)",
+        "pt-br": " (por halter)",
         en: " (per dumbbell)"
     };
 
@@ -820,6 +836,9 @@ function getStrengthLevelToolCopy(locale, measurementKind, name) {
         },
         id: {
             eyebrow: "Posisimu saat ini", title: isWeight ? `Hitung estimasi 1RM dan level ${name}` : `Cek level ${name}`, description: isWeight ? "Hitung estimasi 1RM dari beban dan repetisi lalu bandingkan dengan standar berat badan." : "Bandingkan repetisi satu set dengan standar berat badan.", genderLabel: "Jenis kelamin", bodyweightLabel: "Berat badan", loadLabel: "Beban yang diangkat", repsLabel: isWeight ? "Repetisi (1–12)" : "Repetisi tercapai", submit: "Hitung level", resultLabel: "Hasil", belowLabel: "Di bawah pemula", resultTemplate: "Perkiraan level: {level}", estimateTemplate: isWeight ? "Estimasi 1RM: {value} {unit}" : "Repetisi: {value}", nextTemplate: isWeight ? "Level berikutnya, “{level}”, sekitar {value} {unit}." : "Level berikutnya, “{level}”, sekitar {value} repetisi.", topTemplate: "Standar level tertinggi telah tercapai.", referenceTemplate: "Dihitung dengan standar berat badan {bodyweight} {unit}.", errorMessage: "Periksa input dan tabel standar.", appCta: `Catat ${name} di Shiba`, note: "Hasil ini hanya perkiraan. Teknik, rentang gerak, dan kelelahan dapat mengubah hasil.", methodology: "Lihat metode"
+        },
+        "pt-br": {
+            eyebrow: "Seu nível atual", title: isWeight ? `Calcule o 1RM estimado e o nível de ${name}` : `Confira seu nível em ${name}`, description: isWeight ? "Estime o 1RM pela carga e repetições realizadas e compare com padrões por peso corporal." : "Compare as repetições de uma série com padrões por peso corporal.", genderLabel: "Sexo", bodyweightLabel: "Peso corporal", loadLabel: "Carga levantada", repsLabel: isWeight ? "Repetições (1–12)" : "Repetições feitas", submit: "Calcular nível", resultLabel: "Resultado", belowLabel: "Abaixo de iniciante", resultTemplate: "Nível estimado: {level}", estimateTemplate: isWeight ? "1RM estimado: {value} {unit}" : "Repetições informadas: {value}", nextTemplate: isWeight ? "O próximo padrão “{level}” fica perto de {value} {unit}." : "O próximo padrão “{level}” fica perto de {value} repetições.", topTemplate: "Você atinge o padrão mais alto exibido.", referenceTemplate: "Calculado com o padrão para {bodyweight} {unit} de peso corporal.", errorMessage: "Confira os valores e a tabela de padrões.", appCta: `Registrar ${name} no Shiba`, note: "Isto é uma estimativa. Técnica, amplitude e fadiga podem alterar o resultado.", methodology: "Ver método"
         },
         en: {
             eyebrow: "Your current level", title: isWeight ? `Calculate your ${name} estimated 1RM and level` : `Check your ${name} level`, description: isWeight ? "Estimate 1RM from the weight and reps you performed, then compare it with bodyweight standards." : "Compare reps in one set with bodyweight standards.", genderLabel: "Sex", bodyweightLabel: "Bodyweight", loadLabel: "Weight lifted", repsLabel: isWeight ? "Reps (1–12)" : "Reps achieved", submit: "Calculate level", resultLabel: "Result", belowLabel: "Below beginner", resultTemplate: "Estimated level: {level}", estimateTemplate: isWeight ? "Estimated 1RM: {value} {unit}" : "Reps entered: {value}", nextTemplate: isWeight ? "The next “{level}” standard is about {value} {unit}." : "The next “{level}” standard is about {value} reps.", topTemplate: "You meet the highest standard shown.", referenceTemplate: "Calculated with the standard for {bodyweight} {unit} bodyweight.", errorMessage: "Check the inputs and standards table.", appCta: `Log ${name} in Shiba`, note: "This is an estimate. Technique, range of motion, and fatigue can change the result.", methodology: "See the method"
@@ -968,6 +987,10 @@ function getAverageSummaryCopy(locale, measurementCopy) {
         id: {
             title: `${measurementCopy.averageLabel}: ${level}`,
             note: "Acuan untuk level menengah."
+        },
+        "pt-br": {
+            title: `${measurementCopy.averageLabel}: ${level}`,
+            note: "Referência para uma pessoa de nível intermediário."
         }
     };
 
@@ -986,7 +1009,8 @@ function getIntermediateLabel(locale) {
         es: "Intermedio",
         fr: "Intermédiaire",
         de: "Mittelstufe",
-        id: "Menengah"
+        id: "Menengah",
+        "pt-br": "Intermediário"
     };
 
     return labels[locale] || "Intermediate";
@@ -1033,6 +1057,11 @@ function getAppAnalysisCtaCopy(locale, name) {
             title: "Catat dan analisis di aplikasi Shiba",
             description: "Lihat beban, repetisi, dan perkembangan di satu tempat.",
             cta: `Catat ${name} di Shiba`
+        },
+        "pt-br": {
+            title: "Registre e analise no app Shiba",
+            description: "Revise carga, repetições e progresso em um só lugar.",
+            cta: `Registrar ${name} no Shiba`
         }
     };
 
@@ -1052,7 +1081,8 @@ function getExerciseHeroCtaText(locale, name) {
         es: `Registrar ${name}`,
         fr: `Noter ${name}`,
         de: `${name} loggen`,
-        id: `Catat ${name}`
+        id: `Catat ${name}`,
+        "pt-br": `Registrar ${name}`
     };
 
     return text[locale] || `Log ${name}`;

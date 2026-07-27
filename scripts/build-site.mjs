@@ -10,7 +10,7 @@ const NORMALIZE_SCRIPT = "scripts/normalize-site.mjs";
 const NORMALIZE_CHUNK_SIZE = Number.parseInt(process.env.SHIBA_NORMALIZE_CHUNK_SIZE || "1000", 10);
 const NORMALIZE_HTML = process.env.SHIBA_NORMALIZE_HTML === "1";
 const generatedLocaleCodes = getGeneratedLocales().map((locale) => locale.code);
-const REQUIRED_GENERATED_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "id", "en"];
+const REQUIRED_GENERATED_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "id", "pt-br", "en"];
 
 const missingLocales = REQUIRED_GENERATED_LOCALE_CODES.filter((locale) => !generatedLocaleCodes.includes(locale));
 if (missingLocales.length) {
@@ -20,6 +20,7 @@ if (missingLocales.length) {
 const steps = [
     ["scripts/generate-site-icons.mjs", "Generating site icon assets"],
     ["scripts/generate-app-social-card.mjs", "Generating app social card asset"],
+    ["scripts/generate-app-screenshot-assets.mjs", "Generating localized App Store screenshot assets"],
     ["scripts/sync-exercise-metadata.mjs", "Syncing exercise metadata into src/"],
     ["scripts/generate-og-images.mjs", "Generating dedicated OG image assets"],
     ["scripts/build-static-pages.mjs", "Generating shared static pages from src/pages/"],

@@ -15,7 +15,7 @@ import { basename, dirname, join, relative } from "node:path";
 import { deflateSync, inflateSync } from "node:zlib";
 
 const ROOT = process.cwd();
-const SOURCE_ICON = join(ROOT, "assets", "app", "shiba-mascot.png");
+const SOURCE_ICON = join(ROOT, "assets", "app", "shiba-favicon.png");
 const ASSETS_DIR = join(ROOT, "assets");
 const MANIFEST_DESCRIPTION = "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを一つの流れで管理できるiPhone向けワークアウトアプリです。";
 const THEME_COLOR = "#ff6a00";

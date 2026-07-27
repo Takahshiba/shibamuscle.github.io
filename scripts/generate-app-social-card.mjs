@@ -13,36 +13,43 @@ const appAsset = (file) => join(ASSETS_ROOT, "app", file);
 
 function main() {
     const card = createImage(WIDTH, HEIGHT);
+    const gym = readPng(appAsset("shiba-gym-hero.png"));
     const today = readPng(appAsset("today-screen-current.png"));
     const heatmap = readPng(appAsset("completion-heatmap.png"));
     const muscle = readPng(appAsset("muscle-heatmap.png"));
     const mascot = readPng(appAsset("shiba-mascot.png"));
 
-    renderBackground(card);
-    drawRadialGlow(card, 995, 125, 430, [255, 106, 0], 0.34);
-    drawRadialGlow(card, 170, 520, 270, [255, 154, 36], 0.24);
-    fillRoundedRect(card, 38, 34, 1124, 562, 36, [255, 255, 255, 18]);
-    fillRoundedRect(card, 54, 50, 1092, 530, 30, [3, 3, 3, 198]);
+    drawImageCover(card, gym, 0, 0, WIDTH, HEIGHT, 0);
+    fillRect(card, 0, 0, WIDTH, HEIGHT, [0, 0, 0, 132]);
+    drawRadialGlow(card, 950, 118, 440, [255, 106, 0], 0.34);
+    drawRadialGlow(card, 190, 530, 290, [255, 154, 36], 0.2);
+    fillRoundedRect(card, 36, 32, 1128, 566, 28, [255, 255, 255, 20]);
+    fillRoundedRect(card, 52, 48, 1096, 534, 22, [3, 3, 3, 184]);
 
-    drawText(card, "SHIBA", 78, 82, 10, [255, 154, 36, 255]);
-    drawText(card, "PLAN LOG", 82, 180, 5, [255, 255, 255, 245]);
-    drawText(card, "IMPROVE", 82, 224, 5, [255, 255, 255, 245]);
-    drawText(card, "WORKOUT PLANNING", 84, 286, 3, [196, 196, 196, 255]);
+    drawText(card, "SHIBA", 78, 78, 10, [255, 154, 36, 255]);
+    drawText(card, "LIFT TRACK", 82, 178, 5, [255, 255, 255, 245]);
+    drawText(card, "SHARE", 82, 222, 5, [255, 255, 255, 245]);
+    drawText(card, "WORKOUT PROOF", 84, 286, 3, [214, 214, 214, 255]);
     drawText(card, "SHIBAMUSCLE.COM", 84, 548, 3, [255, 154, 36, 255]);
-    drawImageContain(card, mascot, 106, 342, 154, 154);
+    drawImageContain(card, mascot, 106, 338, 150, 150);
+
+    fillRoundedRect(card, 330, 342, 232, 150, 22, [7, 6, 5, 218]);
+    fillRoundedRect(card, 346, 358, 200, 118, 16, [255, 106, 0, 34]);
+    drawText(card, "TOP 1%", 370, 386, 7, [255, 255, 255, 255]);
+    drawText(card, "47725 KG", 372, 452, 3, [255, 154, 36, 255]);
 
     [
-        [today, 430],
-        [heatmap, 685],
-        [muscle, 940]
-    ].forEach(([image, x], index) => {
-        const y = 66 + index * 18;
-        const width = 220;
-        const height = 500;
-        fillRoundedRect(card, x - 10, y + 14, width + 20, height + 8, 38, [0, 0, 0, 112]);
-        fillRoundedRect(card, x - 3, y - 3, width + 6, height + 6, 36, [255, 106, 0, 72]);
-        drawImageCover(card, image, x, y, width, height, 32);
+        [today, 600, 74, 184, 430],
+        [heatmap, 770, 112, 184, 430],
+        [muscle, 940, 70, 176, 430]
+    ].forEach(([image, x, y, width, height]) => {
+        fillRoundedRect(card, x - 8, y + 14, width + 16, height + 8, 34, [0, 0, 0, 128]);
+        fillRoundedRect(card, x - 3, y - 3, width + 6, height + 6, 30, [255, 106, 0, 80]);
+        drawImageCover(card, image, x, y, width, height, 28);
     });
+
+    fillRoundedRect(card, 610, 518, 500, 42, 10, [255, 106, 0, 224]);
+    drawText(card, "FAST PRIVATE BEAUTIFUL", 646, 532, 2, [19, 8, 0, 255]);
 
     writeFileSync(OUTPUT_PATH, encodePng(card));
     console.log("Generated app social card asset.");
@@ -385,6 +392,7 @@ function blendPixel(image, x, y, color) {
 const FONT = {
     "?": ["111", "001", "011", "010", "000", "010", "000"],
     ".": ["0", "0", "0", "0", "0", "1", "0"],
+    "%": ["10001", "00010", "00100", "01000", "10001", "00000", "00000"],
     "0": ["111", "101", "101", "101", "101", "101", "111"],
     "1": ["010", "110", "010", "010", "010", "010", "111"],
     "2": ["111", "001", "001", "111", "100", "100", "111"],

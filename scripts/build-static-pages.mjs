@@ -47,6 +47,8 @@ const locales = getGeneratedLocales();
 const APP_THEME_COLOR = "#ff6a00";
 const SITE_ORIGIN = "https://shibamuscle.com";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
+const HOME_SCREENSHOT_COUNT = 10;
+const HOME_SCREENSHOT_HERO_INDICES = [1, 2, 4];
 assertExpectedLocales(locales);
 
 let generatedPages = 0;
@@ -81,7 +83,7 @@ console.log(`Generated ${generatedPages} localized static pages from src/pages/.
 
 function assertExpectedLocales(locales) {
     const localeCodes = locales.map((locale) => locale.code);
-    const requiredLocales = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "en"];
+    const requiredLocales = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "id", "pt-br", "en"];
     const missingLocales = requiredLocales.filter((locale) => !localeCodes.includes(locale));
 
     if (missingLocales.length) {
@@ -131,7 +133,7 @@ ${renderAppFooter(locale, textLocale, "index.html", true)}
             appleAppId: "6785443075",
             themeColor: APP_THEME_COLOR,
             webPageType: "CollectionPage",
-            preloadImages: [assetHref(appImages.today, locale)],
+            preloadImages: [assetHref(appImages.lcp || appImages.gymHero || appImages.today, locale)],
             structuredData: buildHomeStructuredData({
                 page,
                 catalogData,
@@ -200,6 +202,7 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
     const overview = page.overview || {};
     const overviewItems = overview.items || [];
     const images = getAppImages(page);
+    const story = getHomeStoryCopy(textLocale, page.story || {});
     const previewCards = buildHomePreviewCards(catalogData, textLocale, page.unit || "kg", locale);
     const sectionCount = catalogData.sections.length;
     const exerciseCount = new Set(catalogData.sections.flatMap((section) => section.cards.map((card) => card.slug))).size;
@@ -207,86 +210,77 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
     const analyticsItem = overviewItems[1] || {};
     const libraryItem = overviewItems[2] || {};
     const trustCopy = getHomeTrustCopy(textLocale);
+    const sections = new Map((story.sections || []).map((section) => [section.id, section]));
+    const liftSection = sections.get("lift") || {
+        id: "lift",
+        kicker: getHomeText(textLocale, "todayKicker"),
+        heading: todayItem.heading || getHomeText(textLocale, "todayHeading"),
+        copy: getHomeText(textLocale, "todayCopy"),
+        items: getHomeText(textLocale, "todayFeatures")
+    };
+    const trackSection = sections.get("track") || {
+        id: "analytics",
+        kicker: getHomeText(textLocale, "analyticsKicker"),
+        heading: analyticsItem.heading || getHomeText(textLocale, "analyticsHeading"),
+        copy: getHomeText(textLocale, "analyticsCopy"),
+        items: getHomeText(textLocale, "analyticsFeatures")
+    };
+    const share = story.share || {};
+    const library = story.library || {};
 
     return `        <div class="app-home-shell">
             <section class="app-hero" id="today">
+                <img class="app-hero-bg" src="${escapeAttribute(assetHref(images.gymHero, locale))}" alt="" aria-hidden="true" loading="eager" decoding="async" fetchpriority="high"${imageSizeAttributes(assetHref(images.gymHero, locale))}>
                 <div class="app-hero-inner">
                     <div class="app-hero-copy">
                         <p class="app-release-badge"><span aria-hidden="true"></span>${escapeHtml(getHomeText(textLocale, "releaseStatus"))}</p>
                         <h1 class="app-hero-title"><span class="app-hero-title-name">Shiba</span><span class="app-hero-title-category">${escapeHtml(trustCopy.productCategory)}</span></h1>
-                        <p class="app-hero-subtitle">${renderMultilineText(page.heroHeading || "")}</p>
-                        <p class="app-hero-lead">${renderMultilineText(intro[0] || page.description || "")}</p>
+                        <p class="app-hero-rhythm">${escapeHtml(story.heroPromise || "Lift, Track, Share")}</p>
+                        <p class="app-hero-subtitle">${renderMultilineText(share.heading || story.heroPromise || page.heroHeading || "")}</p>
+                        <p class="app-hero-lead">${escapeHtml(share.copy || intro[0] || page.description || "")}</p>
+                        <p class="app-hero-proof">${escapeHtml(story.heroProof || "")}</p>
                         <div class="app-hero-actions">
                             ${renderAppStoreBadge(locale, "hero")}
-                            <a href="#analytics" class="app-pill app-pill--secondary">${escapeHtml(getHomeText(textLocale, "primaryAction"))}</a>
+                            <a href="#share" class="app-pill app-pill--secondary">${escapeHtml(story.shareAction || getHomeText(textLocale, "primaryAction"))}</a>
                         </div>
                         <p class="app-hero-availability">${escapeHtml(getHomeText(textLocale, "availability"))}</p>
                         <div class="app-hero-stats">
-${renderAppStats(textLocale)}
+${renderAppMetricRail(story.metrics || getHomeText(textLocale, "stats"))}
                         </div>
                     </div>
-                    ${renderHeroShowcase(images, locale, textLocale)}
+                    ${renderHeroScreenshotStack(locale, textLocale)}
                 </div>
             </section>
 
-            <section class="app-trust-strip" aria-label="${escapeAttribute(trustCopy.heading)}">
-                <p class="app-kicker">${escapeHtml(trustCopy.heading)}</p>
-                <div class="app-trust-grid">
-${trustCopy.items.map((item) => `                    <div class="app-trust-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.copy)}</span></div>`).join("\n")}
-                </div>
-            </section>
+${renderHomeRhythm(story.rhythm || [])}
 
-            <section class="app-feature-panel" id="analytics">
-                <div class="app-section-copy">
-                    <p class="app-kicker">${escapeHtml(overview.sectionEyebrow || "App overview")}</p>
-                    <h2>${renderMultilineText(overview.title || page.heading || "Shiba")}</h2>
-                    <p>${escapeHtml(overview.copy || intro[1] || page.description || "")}</p>
-                </div>
-                <div class="app-feature-grid">
-${renderAppFeatureCards([
-        {
-            kicker: getHomeText(textLocale, "todayKicker"),
-            heading: todayItem.heading || getHomeText(textLocale, "todayHeading"),
-            copy: (todayItem.paragraphs || [getHomeText(textLocale, "todayCopy")])[0]
-        },
-        {
-            kicker: getHomeText(textLocale, "loggingKicker"),
-            heading: getHomeText(textLocale, "loggingHeading"),
-            copy: getHomeText(textLocale, "loggingCopy")
-        },
-        {
-            kicker: getHomeText(textLocale, "analyticsKicker"),
-            heading: analyticsItem.heading || getHomeText(textLocale, "analyticsHeading"),
-            copy: (analyticsItem.paragraphs || [getHomeText(textLocale, "analyticsCopy")])[0]
-        },
-        {
-            kicker: getHomeText(textLocale, "heatmapKicker"),
-            heading: getHomeText(textLocale, "heatmapHeading"),
-            copy: getHomeText(textLocale, "heatmapCopy")
-        }
-    ])}
-                </div>
-            </section>
+${renderHomeScreenshotGallery(locale, textLocale)}
 
-            <section class="app-showcase">
-                <div class="app-showcase-copy">
-                    <p class="app-kicker">${escapeHtml(getHomeText(textLocale, "showcaseKicker"))}</p>
-                    <h2>${renderMultilineText(getHomeText(textLocale, "showcaseHeading"))}</h2>
-                    <p>${escapeHtml(getHomeText(textLocale, "showcaseCopy"))}</p>
-                </div>
-                <div class="app-showcase-phones" aria-label="${escapeAttribute(getHomeText(textLocale, "heroShowcaseAria"))}">
-${renderShowcasePhone(images.today, getHomeText(textLocale, "todayAlt"), getHomeText(textLocale, "todayLabel"), locale)}
-${renderShowcasePhone(images.strength, getHomeText(textLocale, "strengthAlt"), getHomeText(textLocale, "analyticsLabel"), locale)}
-${renderShowcasePhone(images.heatmap, getHomeText(textLocale, "heatmapAlt"), getHomeText(textLocale, "heatmapLabel"), locale)}
-                </div>
-            </section>
+${renderHomeStorySection({
+        ...liftSection,
+        kicker: liftSection.kicker || getHomeText(textLocale, "todayKicker"),
+        heading: liftSection.heading || todayItem.heading || getHomeText(textLocale, "todayHeading"),
+        copy: liftSection.copy || (todayItem.paragraphs || [getHomeText(textLocale, "todayCopy")])[0],
+        items: liftSection.items || getHomeText(textLocale, "todayFeatures")
+    }, renderLiftProof(images, locale, textLocale))}
+
+${renderHomeStorySection({
+        ...trackSection,
+        id: "analytics",
+        kicker: trackSection.kicker || overview.sectionEyebrow || getHomeText(textLocale, "analyticsKicker"),
+        heading: trackSection.heading || analyticsItem.heading || overview.title || getHomeText(textLocale, "analyticsHeading"),
+        copy: trackSection.copy || overview.copy || getHomeText(textLocale, "analyticsCopy"),
+        items: trackSection.items || getHomeText(textLocale, "analyticsFeatures")
+    }, renderAnalyticsProof(images, locale, textLocale, story.analyticsProof || {}), true)}
+
+${renderShareSection(share, images, locale, textLocale)}
 
             <section class="app-library-section" id="library">
                 <div class="app-library-inner">
                     <div class="app-section-copy">
-                        <p class="app-kicker">${escapeHtml(getHomeText(textLocale, "libraryKicker"))}</p>
-                        <h2>${renderMultilineText(libraryItem.heading || getHomeText(textLocale, "libraryHeading"))}</h2>
-                        <p>${escapeHtml((libraryItem.paragraphs || [getHomeText(textLocale, "libraryCopy")])[0])}</p>
+                        <p class="app-kicker">${escapeHtml(library.kicker || getHomeText(textLocale, "libraryKicker"))}</p>
+                        <h2>${renderMultilineText(library.heading || libraryItem.heading || getHomeText(textLocale, "libraryHeading"))}</h2>
+                        <p>${escapeHtml(library.copy || (libraryItem.paragraphs || [getHomeText(textLocale, "libraryCopy")])[0])}</p>
                         <div class="app-library-meta">
                             <span>${escapeHtml(formatExerciseCount(exerciseCount, textLocale))}</span>
                             <span>${escapeHtml(formatCategoryCount(sectionCount, textLocale))}</span>
@@ -301,6 +295,10 @@ ${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join
                         </div>
                 </div>
             </section>
+
+${renderPrivacySection(trustCopy, story.privacy || {})}
+
+${renderPremiumSection(story.premium || {}, locale)}
 
             <section class="app-cta-band" id="app-store">
                 <div class="app-cta-copy">
@@ -323,6 +321,8 @@ function getAppImages(page) {
         strength: "app/strength-percentile.jpg",
         heatmap: "app/completion-heatmap.png",
         heatmapDetail: "app/muscle-heatmap.png",
+        lcp: "app/shiba-gym-hero.png",
+        gymHero: "app/shiba-gym-hero.png",
         mascot: "app/shiba-mascot.png",
         ...(page.appImages || {})
     };
@@ -446,7 +446,187 @@ function renderPhoneImage(image, alt, locale, className = "") {
                     </div>`;
 }
 
-function renderHeroShowcase(images, locale, textLocale = locale) {
+function renderHeroShareSpotlight(share, images, locale, textLocale = locale) {
+    const copy = normalizeShareCopy(share, textLocale);
+    const label = String(copy.heading || "").replace(/\s+/g, " ").trim();
+
+    return `<div class="app-hero-share-stage" aria-label="${escapeAttribute(label)}">
+                        ${renderShareArtifact(copy, images, locale, textLocale, "hero")}
+                    </div>`;
+}
+
+function renderHeroScreenshotStack(locale, textLocale = locale) {
+    const copy = getHomeScreenshotCopy(textLocale);
+
+    return `<div class="app-hero-screen-stage" aria-label="${escapeAttribute(copy.aria)}">
+                        <div class="app-hero-screen-stack">
+${HOME_SCREENSHOT_HERO_INDICES.map((item, index) => {
+        const image = homeScreenshotAsset(locale, item);
+        const imageHref = assetHref(image, locale);
+        const title = copy.titles[item - 1] || copy.titles[0];
+        const classes = [
+            "app-hero-shot",
+            index === 0 ? "app-hero-shot--primary" : "",
+            index === 1 ? "app-hero-shot--logging" : "",
+            index === 2 ? "app-hero-shot--analytics" : ""
+        ].filter(Boolean).join(" ");
+
+        return `                            <figure class="${escapeAttribute(classes)}">
+                                <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(title)}" decoding="async"${imageSizeAttributes(imageHref)}>
+                            </figure>`;
+    }).join("\n")}
+                        </div>
+                    </div>`;
+}
+
+function renderHomeScreenshotGallery(locale, textLocale = locale) {
+    const copy = getHomeScreenshotCopy(textLocale);
+
+    return `            <section class="app-screenshot-gallery" id="screenshots" aria-labelledby="screenshots-heading">
+                <div class="app-screenshot-gallery-inner">
+                    <div class="app-screenshot-copy">
+                        <p class="app-kicker">${escapeHtml(copy.kicker)}</p>
+                        <h2 id="screenshots-heading">${renderMultilineText(copy.heading)}</h2>
+                        <p>${escapeHtml(copy.copy)}</p>
+                    </div>
+                    <div class="app-screenshot-track" aria-label="${escapeAttribute(copy.trackAria)}">
+${Array.from({ length: HOME_SCREENSHOT_COUNT }, (_, index) => {
+        const position = index + 1;
+        const image = homeScreenshotAsset(locale, position);
+        const imageHref = assetHref(image, locale);
+        const title = copy.titles[index] || `${copy.defaultTitle} ${position}`;
+
+        return `                        <figure class="app-screenshot-card">
+                            <div class="app-screenshot-frame">
+                                <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(title)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(imageHref)}>
+                            </div>
+                            <figcaption><span>${String(position).padStart(2, "0")}</span>${escapeHtml(title)}</figcaption>
+                        </figure>`;
+    }).join("\n")}
+                    </div>
+                </div>
+            </section>`;
+}
+
+function homeScreenshotAsset(locale, index) {
+    return `app/screenshots/${resolveHomeScreenshotLocale(locale)}/${String(index).padStart(2, "0")}.jpg`;
+}
+
+function resolveHomeScreenshotLocale(locale) {
+    const screenshotLocales = {
+        ja: "ja",
+        ko: "ko",
+        "zh-hant": "zh-hant",
+        "zh-hans": "zh-hans",
+        es: "es",
+        fr: "fr",
+        de: "de",
+        "pt-br": "pt-br",
+        id: "en",
+        en: "en"
+    };
+
+    return screenshotLocales[locale] || "en";
+}
+
+function getHomeScreenshotCopy(locale) {
+    const copy = {
+        ja: {
+            kicker: "App Store Preview",
+            heading: "10枚でわかる\nShibaの流れ",
+            copy: "Burn Fitのように、価値の順番がひと目で伝わる実画面プレビューです。",
+            aria: "Shiba App Storeスクリーンショットのプレビュー",
+            trackAria: "Shibaの10枚のApp Storeスクリーンショット",
+            defaultTitle: "スクリーンショット",
+            titles: ["迷わず開始", "セットを素早く記録", "強さの現在地", "伸びを追跡", "鍛えた筋肉を見る", "次の種目を探す", "結果を共有", "アカウントなしで記録", "種目ごとに深掘り", "Premiumで長く見る"]
+        },
+        ko: {
+            kicker: "App Store Preview",
+            heading: "10장으로 보는\nShiba의 흐름",
+            copy: "실제 화면으로 시작, 기록, 분석, 공유의 가치를 빠르게 이해할 수 있습니다.",
+            aria: "Shiba App Store 스크린샷 미리보기",
+            trackAria: "Shiba App Store 스크린샷 10장",
+            defaultTitle: "스크린샷",
+            titles: ["망설임 없이 시작", "세트를 빠르게 기록", "근력의 현재 위치", "성장 추적", "운동한 근육 확인", "다음 운동 찾기", "결과 공유", "계정 없이 기록", "운동별로 깊게 보기", "Premium으로 길게 보기"]
+        },
+        "zh-hant": {
+            kicker: "App Store Preview",
+            heading: "用 10 張圖看懂\nShiba 流程",
+            copy: "以實際畫面呈現開始、紀錄、分析與分享，讓價值順序一眼清楚。",
+            aria: "Shiba App Store 截圖預覽",
+            trackAria: "Shiba 的 10 張 App Store 截圖",
+            defaultTitle: "截圖",
+            titles: ["不猶豫地開始", "快速記錄組數", "肌力目前位置", "追蹤成長", "查看訓練肌肉", "尋找下一個動作", "分享成果", "免帳號記錄", "深入每個動作", "用 Premium 看更久"]
+        },
+        "zh-hans": {
+            kicker: "App Store Preview",
+            heading: "用 10 张图看懂\nShiba 流程",
+            copy: "用实际画面呈现开始、记录、分析和分享，让价值顺序一眼清楚。",
+            aria: "Shiba App Store 截图预览",
+            trackAria: "Shiba 的 10 张 App Store 截图",
+            defaultTitle: "截图",
+            titles: ["不犹豫地开始", "快速记录组数", "力量当前位置", "追踪成长", "查看训练肌肉", "寻找下一项动作", "分享成果", "免账号记录", "深入每个动作", "用 Premium 看更久"]
+        },
+        es: {
+            kicker: "App Store Preview",
+            heading: "El flujo de Shiba\nen 10 pantallas",
+            copy: "Pantallas reales para entender rápido cómo se empieza, registra, analiza y comparte.",
+            aria: "Vista previa de capturas de Shiba para App Store",
+            trackAria: "10 capturas de Shiba para App Store",
+            defaultTitle: "Captura",
+            titles: ["Empieza sin dudar", "Registra series rápido", "Tu fuerza actual", "Sigue el progreso", "Mira músculos trabajados", "Encuentra el siguiente ejercicio", "Comparte resultados", "Registra sin cuenta", "Profundiza por ejercicio", "Ve más con Premium"]
+        },
+        fr: {
+            kicker: "App Store Preview",
+            heading: "Le flux Shiba\nen 10 écrans",
+            copy: "Des écrans réels pour comprendre vite comment commencer, noter, analyser et partager.",
+            aria: "Aperçu des captures App Store de Shiba",
+            trackAria: "10 captures App Store de Shiba",
+            defaultTitle: "Capture",
+            titles: ["Commencer sans hésiter", "Noter vite les séries", "Ta force actuelle", "Suivre la progression", "Voir les muscles travaillés", "Trouver le prochain exercice", "Partager les résultats", "Noter sans compte", "Approfondir par exercice", "Voir plus avec Premium"]
+        },
+        de: {
+            kicker: "App Store Preview",
+            heading: "Shiba in\n10 Screens",
+            copy: "Echte Screens zeigen schnell, wie Start, Logging, Analyse und Teilen zusammenhängen.",
+            aria: "Vorschau der Shiba App Store Screenshots",
+            trackAria: "10 Shiba App Store Screenshots",
+            defaultTitle: "Screenshot",
+            titles: ["Ohne Zögern starten", "Sätze schnell loggen", "Dein Kraftniveau", "Fortschritt verfolgen", "Trainierte Muskeln sehen", "Nächste Übung finden", "Ergebnisse teilen", "Ohne Konto loggen", "Jede Übung vertiefen", "Mehr mit Premium sehen"]
+        },
+        id: {
+            kicker: "App Store Preview",
+            heading: "Alur Shiba\ndalam 10 layar",
+            copy: "Layar nyata membantu pengguna memahami mulai, catat, analisis, dan bagikan dengan cepat.",
+            aria: "Pratinjau tangkapan layar App Store Shiba",
+            trackAria: "10 tangkapan layar App Store Shiba",
+            defaultTitle: "Tangkapan layar",
+            titles: ["Mulai tanpa ragu", "Catat set dengan cepat", "Posisi kekuatanmu", "Pantau progres", "Lihat otot terlatih", "Temukan latihan berikut", "Bagikan hasil", "Catat tanpa akun", "Dalami tiap latihan", "Lihat lebih jauh dengan Premium"]
+        },
+        "pt-br": {
+            kicker: "App Store Preview",
+            heading: "O fluxo do Shiba\nem 10 telas",
+            copy: "Telas reais mostram rapidamente como começar, registrar, analisar e compartilhar.",
+            aria: "Prévia das capturas do Shiba para a App Store",
+            trackAria: "10 capturas do Shiba para a App Store",
+            defaultTitle: "Captura",
+            titles: ["Comece sem pensar", "Registre séries rápido", "Sua força atual", "Acompanhe a evolução", "Veja músculos trabalhados", "Encontre o próximo exercício", "Compartilhe resultados", "Registre sem conta", "Aprofunde por exercício", "Veja mais com Premium"]
+        },
+        en: {
+            kicker: "App Store Preview",
+            heading: "Shiba in\n10 screenshots",
+            copy: "Real screens make the value clear: start, log, analyze, and share without extra explanation.",
+            aria: "Preview of Shiba App Store screenshots",
+            trackAria: "10 Shiba App Store screenshots",
+            defaultTitle: "Screenshot",
+            titles: ["Start without friction", "Log sets fast", "Know your strength", "Track growth", "See muscles worked", "Find the next lift", "Share results", "Private by default", "Compare each lift", "Go deeper with Premium"]
+        }
+    };
+
+    return copy[locale] || copy.en;
+}
+
+function renderHeroShowcase(images, locale, textLocale = locale, story = {}) {
     const heatmapDetail = images.heatmapDetail || images.heatmap;
     return `<div class="app-device-stage" aria-label="${escapeAttribute(getHomeText(textLocale, "heroShowcaseAria"))}">
                         <div class="app-product-stack">
@@ -462,11 +642,189 @@ function renderHeroShowcase(images, locale, textLocale = locale) {
                                 <img src="${escapeAttribute(assetHref(heatmapDetail, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "heatmapAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(heatmapDetail, locale))}>
                                 <span aria-hidden="true">${escapeHtml(getHomeText(textLocale, "heatmapCardLabel"))}</span>
                             </div>
+                            <div class="app-insight-card app-insight-card--share" aria-hidden="true">
+                                <span>${escapeHtml(story.heroCardLabel || "Share card")}</span>
+                                <strong>${escapeHtml(story.heroCardValue || "Top 1%")}</strong>
+                            </div>
                         </div>
                     </div>`;
 }
 
+function renderHomeRhythm(items) {
+    if (!items.length) {
+        return "";
+    }
+
+    return `            <nav class="app-rhythm-strip" aria-label="Lift Track Share">
+                <div class="app-rhythm-grid">
+${items.map((item, index) => `                    <a class="app-rhythm-item" href="${escapeAttribute(getHomeRhythmHref(item, index))}">
+                        <span>${escapeHtml(item.kicker)}</span>
+                        <strong>${escapeHtml(item.heading)}</strong>
+                        <p>${escapeHtml(item.copy)}</p>
+                    </a>`).join("\n")}
+                </div>
+            </nav>`;
+}
+
+function getHomeRhythmHref(item, index) {
+    const key = String(item.kicker || "").toLowerCase();
+    if (key === "lift" || index === 0) return "#lift";
+    if (key === "track" || index === 1) return "#analytics";
+    if (key === "share" || index === 2) return "#share";
+    return "#today";
+}
+
+function renderHomeStorySection(section, media, reverse = false) {
+    return `            <section class="app-story-section${reverse ? " app-story-section--reverse" : ""}" id="${escapeAttribute(section.id)}">
+                <div class="app-story-inner">
+                    <div class="app-section-copy">
+                        <p class="app-kicker">${escapeHtml(section.kicker)}</p>
+                        <h2>${renderMultilineText(section.heading)}</h2>
+                        <p>${escapeHtml(section.copy)}</p>
+${renderAppFeatureList(section.items || [])}
+                    </div>
+${media}
+                </div>
+            </section>`;
+}
+
+function renderLiftProof(images, locale, textLocale = locale) {
+    return `                    <div class="app-scene-media">
+                        <div class="app-lift-proof">
+                            <div class="app-phone app-phone--screen app-phone--lift-proof">
+                                <img src="${escapeAttribute(assetHref(images.today, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "todayAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.today, locale))}>
+                            </div>
+                            ${renderLoggingMock(textLocale, true)}
+                        </div>
+                    </div>`;
+}
+
+function renderAnalyticsProof(images, locale, textLocale = locale, analyticsProof = {}) {
+    const labels = { ...getHomeStoryCopy(textLocale).analyticsProof, ...analyticsProof };
+    return `                    <div class="app-scene-media">
+                        <div class="app-analytics-proof">
+                            <div class="app-phone app-phone--screen app-phone--analytics-proof">
+                                <img src="${escapeAttribute(assetHref(images.strength, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "strengthAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.strength, locale))}>
+                            </div>
+                            <div class="app-chart-proof" aria-label="${escapeAttribute(labels.aria)}">
+                                <span>${escapeHtml(labels.kicker)}</span>
+                                <strong>${escapeHtml(labels.value)}</strong>
+                                <div class="app-chart-bars" aria-hidden="true">
+                                    <i style="--height: 42%"></i>
+                                    <i style="--height: 54%"></i>
+                                    <i style="--height: 48%"></i>
+                                    <i style="--height: 67%"></i>
+                                    <i style="--height: 82%"></i>
+                                </div>
+                                <p>${escapeHtml(labels.copy)}</p>
+                            </div>
+                        </div>
+                    </div>`;
+}
+
+function renderShareSection(share, images, locale, textLocale = locale) {
+    const copy = normalizeShareCopy(share, textLocale);
+
+    return `            <section class="app-share-section" id="share">
+                <div class="app-share-inner">
+                    <div class="app-section-copy">
+                        <p class="app-kicker">${escapeHtml(copy.kicker)}</p>
+                        <h2>${renderMultilineText(copy.heading)}</h2>
+                        <p>${escapeHtml(copy.copy)}</p>
+                    </div>
+                    <div class="app-share-layout">
+${renderShareArtifact(copy, images, locale, textLocale)}
+                        <div class="app-share-modes">
+${copy.modes.map((mode, index) => `                            <article class="app-share-mode">
+                                <span>${escapeHtml(mode.kicker)}</span>
+                                <strong>${escapeHtml(mode.heading)}</strong>
+                                <p>${escapeHtml(mode.copy)}</p>
+                                <small>${escapeHtml(copy.stats[index]?.value || copy.stats[0]?.value || "")}</small>
+                            </article>`).join("\n")}
+                        </div>
+                    </div>
+                </div>
+            </section>`;
+}
+
+function normalizeShareCopy(share, textLocale = "ja") {
+    return {
+        kicker: share.kicker || getHomeText(textLocale, "shareKicker"),
+        heading: share.heading || getHomeText(textLocale, "shareHeading"),
+        copy: share.copy || getHomeText(textLocale, "shareCopy"),
+        modes: share.modes || [],
+        stats: share.stats || getHomeText(textLocale, "shareStats"),
+        heroCardLabel: share.heroCardLabel || "Share-ready result",
+        heroCardValue: share.heroCardValue || "Top 1%"
+    };
+}
+
+function renderShareArtifact(copy, images, locale, textLocale = locale, variant = "section") {
+    const stats = copy.stats || [];
+    const modes = copy.modes || [];
+    const primaryValue = copy.heroCardValue || stats[0]?.value || getHomeText(textLocale, "percentileValue");
+    const primaryLabel = modes[0]?.heading || copy.heroCardLabel || getHomeText(textLocale, "percentileLabel");
+    const primaryCopy = modes[0]?.copy || getHomeText(textLocale, "heroPercentileCopy");
+
+    return `                        <figure class="app-share-artifact app-share-artifact--${escapeAttribute(variant)}">
+                            <img class="app-share-artifact-bg" src="${escapeAttribute(assetHref(images.gymHero, locale))}" alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.gymHero, locale))}>
+                            <figcaption>
+                                <span>${escapeHtml(primaryLabel)}</span>
+                                <strong>${escapeHtml(primaryValue)}</strong>
+                                <small>${escapeHtml(primaryCopy)}</small>
+                            </figcaption>
+                            <div class="app-share-artifact-tabs" aria-hidden="true">
+${modes.slice(0, 3).map((mode, index) => `                                <span${index === 0 ? " class=\"is-active\"" : ""}>${escapeHtml(mode.heading)}</span>`).join("\n")}
+                            </div>
+                            <div class="app-share-artifact-grid">
+${stats.slice(1).map((item) => `                                <div>
+                                    <span>${escapeHtml(item.label)}</span>
+                                    <strong>${escapeHtml(item.value)}</strong>
+                                </div>`).join("\n")}
+                            </div>
+                            <img class="app-share-heatmap" src="${escapeAttribute(assetHref(images.heatmapDetail, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "heatmapAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.heatmapDetail, locale))}>
+                            <div class="app-share-artifact-footer" aria-hidden="true">
+                                <span>Lift</span><span>Track</span><span>Share</span>
+                            </div>
+                        </figure>`;
+}
+
+function renderPrivacySection(trustCopy, privacy) {
+    return `            <section class="app-trust-strip" id="privacy" aria-label="${escapeAttribute(trustCopy.heading)}">
+                <div class="app-section-copy">
+                    <p class="app-kicker">${escapeHtml(privacy.kicker || trustCopy.heading)}</p>
+                    <h2>${renderMultilineText(privacy.heading || trustCopy.heading)}</h2>
+                    <p>${escapeHtml(privacy.copy || "")}</p>
+                </div>
+                <div class="app-trust-grid">
+${trustCopy.items.map((item) => `                    <div class="app-trust-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.copy)}</span></div>`).join("\n")}
+                </div>
+            </section>`;
+}
+
+function renderPremiumSection(premium, locale) {
+    if (!premium.heading) {
+        return "";
+    }
+
+    return `            <section class="app-premium-band" id="premium">
+                <div class="app-premium-copy">
+                    <p class="app-kicker">${escapeHtml(premium.kicker || "Premium")}</p>
+                    <h2>${renderMultilineText(premium.heading)}</h2>
+                    <p>${escapeHtml(premium.copy || "")}</p>
+                </div>
+                <div class="app-premium-list">
+${(premium.items || []).map((item) => `                    <span>${escapeHtml(item)}</span>`).join("\n")}
+                </div>
+                ${renderAppStoreBadge(locale, "premium")}
+            </section>`;
+}
+
 function renderAppFeatureList(items) {
+    if (!items.length) {
+        return "";
+    }
+
     return `                        <ul class="app-feature-list">
 ${items.map((item) => `                            <li>${escapeHtml(item)}</li>`).join("\n")}
                         </ul>`;
@@ -493,8 +851,19 @@ function renderMultilineText(text) {
     return String(text).split("\n").map((line) => `<span>${escapeHtml(line)}</span>`).join("\n");
 }
 
+function renderResponsiveHeading(text, lineClass, lineSeparator = "") {
+    return String(text).split("\n").map((line, index) => {
+        const separator = index > 0 ? escapeHtml(lineSeparator) : "";
+        return `${separator}<span class="${escapeAttribute(lineClass)}">${escapeHtml(line)}</span>`;
+    }).join("");
+}
+
 function renderAppStats(locale) {
-    return getHomeText(locale, "stats").map(({ label, value }) => `                            <div class="app-stat">
+    return renderAppMetricRail(getHomeText(locale, "stats"));
+}
+
+function renderAppMetricRail(items) {
+    return items.map(({ label, value }) => `                            <div class="app-stat">
                                 <span>${escapeHtml(label)}</span>
                                 <strong>${escapeHtml(value)}</strong>
                             </div>`).join("\n");
@@ -510,84 +879,93 @@ function renderAppStoreBadge(locale, placement = "unknown") {
 function getHomeTrustCopy(locale) {
     const copy = {
         ja: {
-            productCategory: "筋トレ記録・分析アプリ",
-            heading: "プライベートに、すぐ始められる",
+            productCategory: "本気で続ける筋トレ記録・分析アプリ",
+            heading: "アカウントなし、SNSフィードなし",
             items: [
-                { title: "登録不要", copy: "アカウントを作らずに開始" },
-                { title: "端末内で管理", copy: "記録データを外部送信しない" },
-                { title: "追跡なし", copy: "第三者広告・追跡SDKなし" }
+                { title: "登録不要", copy: "アカウントを作らずに記録開始" },
+                { title: "端末内で管理", copy: "ワークアウト記録を端末で保持" },
+                { title: "追跡なし", copy: "第三者広告・追跡SDK・SNSフィードなし" }
             ]
         },
         ko: {
-            productCategory: "근력 운동 기록·분석 앱",
-            heading: "개인 정보를 지키며 바로 시작",
+            productCategory: "진지한 근력 운동 기록·분석 앱",
+            heading: "계정도 피드도 없이 시작",
             items: [
-                { title: "가입 불필요", copy: "계정 없이 바로 시작" },
-                { title: "기기 내 저장", copy: "운동 기록을 외부로 전송하지 않음" },
-                { title: "추적 없음", copy: "제3자 광고·추적 SDK 없음" }
+                { title: "가입 불필요", copy: "계정 없이 기록 시작" },
+                { title: "기기 내 저장", copy: "운동 기록을 기기에서 관리" },
+                { title: "추적 없음", copy: "제3자 광고·추적 SDK·소셜 피드 없음" }
             ]
         },
         "zh-hant": {
-            productCategory: "重訓紀錄與分析 App",
-            heading: "保有隱私，立即開始",
+            productCategory: "認真重訓的紀錄與分析 App",
+            heading: "不用帳號，也沒有社群動態",
             items: [
-                { title: "免註冊", copy: "不建立帳號也能開始" },
-                { title: "儲存在裝置上", copy: "訓練紀錄不傳送至外部" },
-                { title: "不追蹤", copy: "沒有第三方廣告或追蹤 SDK" }
+                { title: "免註冊", copy: "不建立帳號也能開始記錄" },
+                { title: "裝置內管理", copy: "訓練紀錄保存在裝置上" },
+                { title: "不追蹤", copy: "無第三方廣告、追蹤 SDK 或社群動態" }
             ]
         },
         "zh-hans": {
-            productCategory: "力量训练记录与分析 App",
-            heading: "保护隐私，立即开始",
+            productCategory: "认真力量训练的记录与分析 App",
+            heading: "不用账号，也没有社交动态",
             items: [
-                { title: "免注册", copy: "无需创建账号即可开始" },
-                { title: "存储在设备上", copy: "训练记录不会发送到外部" },
-                { title: "不追踪", copy: "没有第三方广告或追踪 SDK" }
+                { title: "免注册", copy: "无需创建账号即可开始记录" },
+                { title: "设备内管理", copy: "训练记录保存在设备上" },
+                { title: "不追踪", copy: "无第三方广告、追踪 SDK 或社交动态" }
             ]
         },
         es: {
-            productCategory: "App de registro y análisis de fuerza",
-            heading: "Privado y listo para empezar",
+            productCategory: "Registro y análisis para entrenar en serio",
+            heading: "Sin cuenta y sin feed social",
             items: [
-                { title: "Sin cuenta", copy: "Empieza sin registrarte" },
-                { title: "Datos en el dispositivo", copy: "Tus entrenamientos no se envían fuera" },
-                { title: "Sin rastreo", copy: "Sin anuncios ni SDK de rastreo de terceros" }
+                { title: "Sin registro", copy: "Empieza a registrar sin crear cuenta" },
+                { title: "En el dispositivo", copy: "Tus entrenamientos se mantienen en el dispositivo" },
+                { title: "Sin rastreo", copy: "Sin anuncios, SDK de rastreo ni feed social" }
             ]
         },
         fr: {
-            productCategory: "App de suivi et d’analyse musculation",
-            heading: "Privé et prêt à démarrer",
+            productCategory: "Suivi et analyse pour s'entraîner sérieusement",
+            heading: "Sans compte et sans fil social",
             items: [
-                { title: "Sans compte", copy: "Commence sans inscription" },
-                { title: "Données sur l’appareil", copy: "Les séances ne sont pas envoyées ailleurs" },
-                { title: "Sans suivi", copy: "Aucune pub ni SDK de suivi tiers" }
+                { title: "Sans inscription", copy: "Commence à noter sans créer de compte" },
+                { title: "Sur l'appareil", copy: "Les entraînements restent sur l'appareil" },
+                { title: "Sans suivi", copy: "Pas de pub, SDK de suivi ni fil social" }
             ]
         },
         de: {
-            productCategory: "Krafttraining-Tracker mit Analyse",
-            heading: "Privat und sofort startklar",
+            productCategory: "Ernsthaftes Krafttraining loggen und analysieren",
+            heading: "Ohne Konto und ohne Social Feed",
             items: [
-                { title: "Kein Konto", copy: "Ohne Registrierung starten" },
-                { title: "Auf dem Gerät", copy: "Trainingsdaten werden nicht extern gesendet" },
-                { title: "Kein Tracking", copy: "Keine Drittanbieter-Werbung oder Tracking-SDKs" }
+                { title: "Keine Anmeldung", copy: "Direkt ohne Konto loggen" },
+                { title: "Auf dem Gerät", copy: "Trainingsdaten bleiben auf dem Gerät" },
+                { title: "Kein Tracking", copy: "Keine Werbung, Tracking-SDKs oder Social Feeds" }
             ]
         },
         id: {
-            productCategory: "Aplikasi catatan dan analitik latihan",
-            heading: "Privat dan langsung siap",
+            productCategory: "Catatan dan analitik untuk latihan serius",
+            heading: "Tanpa akun dan tanpa feed sosial",
             items: [
-                { title: "Tanpa akun", copy: "Mulai tanpa mendaftar" },
-                { title: "Data di perangkat", copy: "Catatan latihan tidak dikirim keluar" },
-                { title: "Tanpa pelacakan", copy: "Tanpa iklan atau SDK pelacakan pihak ketiga" }
+                { title: "Tanpa daftar", copy: "Mulai mencatat tanpa membuat akun" },
+                { title: "Di perangkat", copy: "Catatan latihan disimpan di perangkat" },
+                { title: "Tanpa pelacakan", copy: "Tanpa iklan, SDK pelacakan, atau feed sosial" }
+            ]
+        },
+        "pt-br": {
+            productCategory: "Registro e análise para treino de força sério",
+            heading: "Sem conta. Sem feed social.",
+            items: [
+                { title: "Sem cadastro", copy: "Comece a registrar sem criar conta" },
+                { title: "No dispositivo", copy: "Os treinos ficam no seu dispositivo" },
+                { title: "Sem rastreamento", copy: "Sem anúncios, SDKs de rastreamento ou feed social" }
             ]
         },
         en: {
-            productCategory: "Workout logging and analytics app",
-            heading: "Private and ready to start",
+            productCategory: "Serious workout logging and analytics app",
+            heading: "No account. No social feed.",
             items: [
-                { title: "No account", copy: "Start without signing up" },
-                { title: "On-device data", copy: "Workout records are not sent elsewhere" },
-                { title: "No tracking", copy: "No third-party ads or tracking SDKs" }
+                { title: "No signup", copy: "Start logging without creating an account" },
+                { title: "On-device records", copy: "Workout data stays on the device" },
+                { title: "No tracking", copy: "No third-party ads, tracking SDKs, or social feed" }
             ]
         }
     };
@@ -595,7 +973,448 @@ function getHomeTrustCopy(locale) {
     return copy[locale] || copy.en;
 }
 
-function renderLoggingMock(locale) {
+function getHomeStoryCopy(locale, overrides = {}) {
+    const copy = {
+        ja: {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "速く記録し、美しく見返し、深く分析する。",
+            shareAction: "共有画面を見る",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "入力", value: "数秒" },
+                { label: "証拠", value: "Top 1%" },
+                { label: "分析", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "ジムの流れを止めず、今日の1セットへ。" },
+                { kicker: "Track", heading: "See your strength", copy: "PR、推定1RM、ボリューム、ヒートマップで確認。" },
+                { kicker: "Share", heading: "Share the work", copy: "終わった記録を、残したくなるカードに。" }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "筋トレを\n数秒で記録", copy: "今日のメニュー、セット入力、レストタイマーを近くに置き、トレーニング中の判断を減らします。", items: ["今日のワークアウトをすぐ開始", "重量・回数・メモを素早く保存", "インターバル中も進行中のセットへ戻れる"] },
+                { id: "track", kicker: "Track", heading: "筋力の現在地が\n見える", copy: "PR、推定1RM、Strength Percentile、トレーニング量、筋肉ヒートマップで、伸びと偏りを見返せます。", items: ["PRと推定1RMの変化を確認", "Top Percentileで現在地を把握", "鍛えた筋肉をオレンジの強度で可視化"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "今日の記録、\n残したくなる。",
+                copy: "完了したワークアウトを、数字と筋肉ヒートマップが主役のストーリーカードに。投稿しなくても保存したくなる結果画面です。",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "近い条件のリフターと比べた強さを大きく表示。" },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "鍛えた部位をオレンジの強度で直感的に。" },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "ボリューム、時間、セット数を一枚に整理。" }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "鍛えたい部位から\n種目を探す", copy: "部位、筋肉、器具から次の種目へ。記録と分析の流れを切らずに、次に狙うトレーニングを選べます。" },
+            privacy: { kicker: "Privacy", heading: "集中を邪魔しない\nプライベート設計", copy: "必要なのはトレーニング記録だけ。アカウントもSNSフィードも必須ではありません。" },
+            premium: { kicker: "Premium", heading: "長く続けるほど、\n見えるものが増える。", copy: "Shiba Premiumでは、全履歴、長期トレンド、拡張メニュー、より深い筋肉バランス確認を使えます。", items: ["Full history", "Longer trends", "Expanded menus", "Muscle balance"] },
+            analyticsProof: { aria: "Shiba analytics proof preview", kicker: "e1RM trend", value: "+12.5 kg", copy: "PRとボリュームの変化を次の重量設定へ。" }
+        },
+        en: {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "Log sets fast. See your strength. Share the work.",
+            shareAction: "See share cards",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "Input", value: "Seconds" },
+                { label: "Proof", value: "Top 1%" },
+                { label: "Insight", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "Get into today’s work without breaking gym rhythm." },
+                { kicker: "Track", heading: "See your strength", copy: "Review PRs, e1RM, volume, and heatmaps." },
+                { kicker: "Share", heading: "Share the work", copy: "Turn the finished session into a card worth saving." }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "Log sets\nin seconds", copy: "Today’s workout, set input, notes, and rest timing stay close so training does not slow down.", items: ["Start today’s workout quickly", "Save weight, reps, and notes fast", "Return to active sets between rests"] },
+                { id: "track", kicker: "Track", heading: "See where your\nstrength stands", copy: "PRs, estimated 1RM, Strength Percentile, training load, and muscle heatmaps make progress easier to read.", items: ["Review PR and e1RM changes", "Compare with Top Percentile context", "See trained muscles through orange intensity"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "Your workout becomes\nsomething beautiful.",
+                copy: "Completed workouts become story-ready cards where numbers and muscle proof lead the composition.",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "Lead with your strength standing against similar lifters." },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "Show trained muscles through orange intensity." },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "Package volume, duration, and sets into one polished result." }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "Find the next lift\nfrom the gap.", copy: "Search by body part, muscle, and equipment when the heatmap shows what needs attention." },
+            privacy: { kicker: "Privacy", heading: "Private by default,\nfocused by design.", copy: "No required account. No social feed. Just a focused workout history you control." },
+            premium: { kicker: "Premium", heading: "The longer you train,\nthe more you can see.", copy: "Shiba Premium unlocks full history, longer trends, expanded menus, and deeper muscle-balance views.", items: ["Full history", "Longer trends", "Expanded menus", "Muscle balance"] },
+            analyticsProof: { aria: "Shiba analytics proof preview", kicker: "e1RM trend", value: "+12.5 kg", copy: "Turn PR and volume changes into the next target." }
+        },
+        ko: {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "빠르게 기록하고, 아름답게 돌아보고, 깊게 분석합니다.",
+            shareAction: "공유 카드 보기",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "입력", value: "몇 초" },
+                { label: "증거", value: "Top 1%" },
+                { label: "분석", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "운동 흐름을 끊지 않고 오늘 세트로." },
+                { kicker: "Track", heading: "See your strength", copy: "PR, 추정 1RM, 볼륨, 히트맵 확인." },
+                { kicker: "Share", heading: "Share the work", copy: "끝난 운동을 저장하고 싶은 카드로." }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "세트를\n몇 초 만에 기록", copy: "오늘 루틴, 세트 입력, 메모, 휴식 타이머를 가까이에 두어 훈련 속도를 지킵니다.", items: ["오늘 운동을 빠르게 시작", "중량, 반복, 메모를 즉시 저장", "휴식 중에도 진행 중 세트로 복귀"] },
+                { id: "track", kicker: "Track", heading: "근력의 현재 위치를\n확인", copy: "PR, 추정 1RM, Strength Percentile, 훈련량, 근육 히트맵으로 성장과 빈틈을 읽습니다.", items: ["PR과 추정 1RM 변화 확인", "Top Percentile로 현재 위치 파악", "운동한 근육을 오렌지 강도로 표시"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "오늘 기록을\n남기고 싶게.",
+                copy: "완료한 운동을 숫자와 근육 히트맵이 중심인 스토리 카드로 만듭니다.",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "비슷한 리프터와 비교한 강점을 크게 보여줍니다." },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "운동한 부위를 오렌지 강도로 직관적으로." },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "볼륨, 시간, 세트 수를 한 장에 정리." }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "빈틈에서\n다음 운동 찾기", copy: "부위, 근육, 장비 기준으로 다음 운동을 빠르게 선택합니다." },
+            privacy: { kicker: "Privacy", heading: "집중을 지키는\n개인 중심 설계", copy: "필요한 것은 운동 기록뿐입니다. 계정이나 소셜 피드는 필수가 아닙니다." },
+            premium: { kicker: "Premium", heading: "오래 훈련할수록\n더 많이 보입니다.", copy: "전체 기록, 장기 추세, 확장 메뉴, 더 깊은 근육 밸런스 보기를 사용할 수 있습니다.", items: ["Full history", "Longer trends", "Expanded menus", "Muscle balance"] },
+            analyticsProof: { aria: "Shiba analytics proof preview", kicker: "e1RM trend", value: "+12.5 kg", copy: "PR과 볼륨 변화를 다음 목표로 연결." }
+        },
+        "zh-hant": {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "快速記錄，美觀回顧，深入分析。",
+            shareAction: "查看分享卡",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "輸入", value: "幾秒" },
+                { label: "證據", value: "Top 1%" },
+                { label: "分析", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "不打斷健身房節奏，直接進入今天的組數。" },
+                { kicker: "Track", heading: "See your strength", copy: "查看 PR、估算 1RM、訓練量與熱力圖。" },
+                { kicker: "Share", heading: "Share the work", copy: "把完成的訓練變成值得保存的卡片。" }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "幾秒內\n記錄組數", copy: "今日課表、組數輸入、筆記與休息時間放在同一節奏裡，訓練不中斷。", items: ["快速開始今日訓練", "立即保存重量、次數與筆記", "休息間也能回到進行中的組數"] },
+                { id: "track", kicker: "Track", heading: "看見肌力的\n目前位置", copy: "用 PR、估算 1RM、Strength Percentile、訓練量與肌肉熱力圖理解進步。", items: ["查看 PR 與估算 1RM 變化", "用 Top Percentile 掌握位置", "以橘色強度呈現訓練肌群"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "今天的紀錄，\n會想留下來。",
+                copy: "完成的訓練會成為以數字與肌肉熱力圖為主角的故事卡。",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "大方呈現與相近訓練者比較的位置。" },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "用橘色強度顯示訓練部位。" },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "將訓練量、時間與組數整理成一張卡。" }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "從缺口找到\n下一個動作", copy: "依部位、肌肉與器材快速選擇下一個訓練動作。" },
+            privacy: { kicker: "Privacy", heading: "預設私密，\n專注訓練。", copy: "沒有必須建立的帳號，也沒有社群動態。只留下你掌控的訓練紀錄。" },
+            premium: { kicker: "Premium", heading: "訓練越久，\n看見越多。", copy: "Premium 提供完整歷史、長期趨勢、進階課表與更深入的肌肉平衡視圖。", items: ["Full history", "Longer trends", "Expanded menus", "Muscle balance"] },
+            analyticsProof: { aria: "Shiba analytics proof preview", kicker: "e1RM trend", value: "+12.5 kg", copy: "把 PR 與訓練量變化帶到下一個目標。" }
+        },
+        "zh-hans": {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "快速记录，美观回顾，深入分析。",
+            shareAction: "查看分享卡",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "输入", value: "几秒" },
+                { label: "证据", value: "Top 1%" },
+                { label: "分析", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "不打断健身房节奏，直接进入今天的组数。" },
+                { kicker: "Track", heading: "See your strength", copy: "查看 PR、预估 1RM、训练量和热力图。" },
+                { kicker: "Share", heading: "Share the work", copy: "把完成的训练变成值得保存的卡片。" }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "几秒内\n记录组数", copy: "今日计划、组数输入、笔记和休息时间放在同一节奏里，训练不中断。", items: ["快速开始今日训练", "立即保存重量、次数和笔记", "休息间也能回到进行中的组数"] },
+                { id: "track", kicker: "Track", heading: "看见力量的\n当前位置", copy: "用 PR、预估 1RM、Strength Percentile、训练量和肌肉热力图理解进步。", items: ["查看 PR 与预估 1RM 变化", "用 Top Percentile 掌握位置", "以橙色强度呈现训练肌群"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "今天的记录，\n会想留下来。",
+                copy: "完成的训练会成为以数字和肌肉热力图为主角的故事卡。",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "清楚呈现与相近训练者比较的位置。" },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "用橙色强度显示训练部位。" },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "将训练量、时间和组数整理成一张卡。" }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "从短板找到\n下一项动作", copy: "按部位、肌肉和器械快速选择下一项训练动作。" },
+            privacy: { kicker: "Privacy", heading: "默认私密，\n专注训练。", copy: "没有必须创建的账号，也没有社交动态。只留下你掌控的训练记录。" },
+            premium: { kicker: "Premium", heading: "训练越久，\n看见越多。", copy: "Premium 提供完整历史、长期趋势、进阶计划和更深入的肌肉平衡视图。", items: ["Full history", "Longer trends", "Expanded menus", "Muscle balance"] },
+            analyticsProof: { aria: "Shiba analytics proof preview", kicker: "e1RM trend", value: "+12.5 kg", copy: "把 PR 与训练量变化带到下一个目标。" }
+        },
+        es: {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "Registra rápido. Revisa bonito. Analiza a fondo.",
+            shareAction: "Ver tarjetas",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "Entrada", value: "Segundos" },
+                { label: "Prueba", value: "Top 1%" },
+                { label: "Análisis", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "Entra en la rutina sin romper el ritmo del gimnasio." },
+                { kicker: "Track", heading: "See your strength", copy: "Revisa PR, 1RM estimado, volumen y mapa muscular." },
+                { kicker: "Share", heading: "Share the work", copy: "Convierte la sesión terminada en una tarjeta guardable." }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "Registra series\nen segundos", copy: "Rutina de hoy, series, notas y descanso se mantienen cerca para no frenar el entrenamiento.", items: ["Empieza la rutina rápido", "Guarda peso, reps y notas", "Vuelve a series activas entre descansos"] },
+                { id: "track", kicker: "Track", heading: "Ve dónde está\ntu fuerza", copy: "PR, 1RM estimado, Strength Percentile, volumen y mapa muscular hacen claro el progreso.", items: ["Revisa cambios de PR y 1RM", "Compara con Top Percentile", "Ve músculos trabajados en intensidad naranja"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "Tu entrenamiento se vuelve\nalgo bonito.",
+                copy: "Las sesiones completadas se transforman en tarjetas listas para historias, con números y mapa muscular como protagonistas.",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "Muestra tu posición frente a atletas similares." },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "Muestra músculos trabajados con intensidad naranja." },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "Resume volumen, duración y series en una tarjeta." }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "Encuentra el siguiente ejercicio\ndesde el hueco.", copy: "Busca por zona, músculo y equipo cuando el mapa muestra qué necesita atención." },
+            privacy: { kicker: "Privacy", heading: "Privado por defecto,\nenfocado por diseño.", copy: "Sin cuenta obligatoria. Sin feed social. Solo un historial de entrenamiento bajo tu control." },
+            premium: { kicker: "Premium", heading: "Cuanto más entrenas,\nmás puedes ver.", copy: "Premium desbloquea historial completo, tendencias largas, menús ampliados y vista de balance muscular.", items: ["Full history", "Longer trends", "Expanded menus", "Muscle balance"] },
+            analyticsProof: { aria: "Shiba analytics proof preview", kicker: "e1RM trend", value: "+12.5 kg", copy: "Convierte cambios de PR y volumen en el siguiente objetivo." }
+        },
+        fr: {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "Noter vite. Relire avec soin. Analyser en profondeur.",
+            shareAction: "Voir les cartes",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "Saisie", value: "Secondes" },
+                { label: "Preuve", value: "Top 1%" },
+                { label: "Analyse", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "Entrer dans la séance sans casser le rythme." },
+                { kicker: "Track", heading: "See your strength", copy: "Relire PR, 1RM estimé, volume et carte musculaire." },
+                { kicker: "Share", heading: "Share the work", copy: "Transformer la séance finie en carte à garder." }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "Noter les séries\nen quelques secondes", copy: "Séance du jour, séries, notes et repos restent proches pour ne pas ralentir l'entraînement.", items: ["Lancer vite la séance du jour", "Enregistrer charge, reps et notes", "Revenir aux séries en cours entre deux repos"] },
+                { id: "track", kicker: "Track", heading: "Voir où se situe\nta force", copy: "PR, 1RM estimé, Strength Percentile, volume et carte musculaire rendent la progression lisible.", items: ["Relire les changements de PR et 1RM", "Se situer avec Top Percentile", "Voir les muscles travaillés en intensité orange"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "Ton entraînement devient\nun bel objet.",
+                copy: "Les séances terminées deviennent des cartes prêtes pour story, portées par les chiffres et la carte musculaire.",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "Mettre en avant ta position face à des profils proches." },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "Afficher les muscles travaillés en intensité orange." },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "Résumer volume, durée et séries dans une carte." }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "Trouver le prochain exercice\ndepuis le manque.", copy: "Recherche par zone, muscle et équipement quand la carte indique quoi renforcer." },
+            privacy: { kicker: "Privacy", heading: "Privé par défaut,\ncentré sur l'entraînement.", copy: "Pas de compte obligatoire. Pas de fil social. Seulement ton historique sous contrôle." },
+            premium: { kicker: "Premium", heading: "Plus tu t'entraînes,\nplus tu peux voir.", copy: "Premium débloque historique complet, tendances longues, menus étendus et équilibre musculaire.", items: ["Full history", "Longer trends", "Expanded menus", "Muscle balance"] },
+            analyticsProof: { aria: "Shiba analytics proof preview", kicker: "e1RM trend", value: "+12.5 kg", copy: "Transformer PR et volume en prochain objectif." }
+        },
+        de: {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "Schnell loggen. Schön prüfen. Tief analysieren.",
+            shareAction: "Karten ansehen",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "Eingabe", value: "Sekunden" },
+                { label: "Beweis", value: "Top 1%" },
+                { label: "Analyse", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "Ins heutige Training gehen, ohne den Rhythmus zu brechen." },
+                { kicker: "Track", heading: "See your strength", copy: "PRs, geschätztes 1RM, Volumen und Heatmap prüfen." },
+                { kicker: "Share", heading: "Share the work", copy: "Die fertige Einheit als speicherwürdige Karte." }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "Sätze in Sekunden\nloggen", copy: "Heutiges Workout, Satzeingabe, Notizen und Pausen bleiben nah beieinander, damit das Training fließt.", items: ["Workout schnell starten", "Gewicht, Wdh. und Notizen sichern", "Zwischen Pausen zurück zu aktiven Sätzen"] },
+                { id: "track", kicker: "Track", heading: "Sehen, wo deine\nKraft steht", copy: "PRs, geschätztes 1RM, Strength Percentile, Volumen und Muskel-Heatmaps machen Fortschritt lesbar.", items: ["PR- und 1RM-Änderungen prüfen", "Mit Top Percentile einordnen", "Trainierte Muskeln in Orange sehen"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "Dein Workout wird\nsehenswert.",
+                copy: "Abgeschlossene Workouts werden zu Story-Karten, in denen Zahlen und Muskelbelege die Bühne bekommen.",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "Deinen Stand gegenüber ähnlichen Trainierenden zeigen." },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "Trainierte Muskeln mit oranger Intensität zeigen." },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "Volumen, Dauer und Sätze in einer Karte bündeln." }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "Die nächste Übung\naus der Lücke finden.", copy: "Suche nach Bereich, Muskel und Equipment, wenn die Heatmap zeigt, was Aufmerksamkeit braucht." },
+            privacy: { kicker: "Privacy", heading: "Privat voreingestellt,\nfokussiert gebaut.", copy: "Kein Pflichtkonto. Kein Social Feed. Nur ein Trainingsverlauf, den du kontrollierst." },
+            premium: { kicker: "Premium", heading: "Je länger du trainierst,\ndesto mehr siehst du.", copy: "Premium schaltet vollständige Historie, längere Trends, erweiterte Menüs und Muskelbalance frei.", items: ["Full history", "Longer trends", "Expanded menus", "Muscle balance"] },
+            analyticsProof: { aria: "Shiba analytics proof preview", kicker: "e1RM trend", value: "+12.5 kg", copy: "PR- und Volumenänderungen ins nächste Ziel übertragen." }
+        },
+        id: {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "Catat cepat. Tinjau indah. Analisis lebih dalam.",
+            shareAction: "Lihat kartu",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "Input", value: "Detik" },
+                { label: "Bukti", value: "Top 1%" },
+                { label: "Analitik", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "Masuk ke latihan hari ini tanpa memutus ritme gym." },
+                { kicker: "Track", heading: "See your strength", copy: "Tinjau PR, estimasi 1RM, volume, dan heatmap." },
+                { kicker: "Share", heading: "Share the work", copy: "Ubah sesi selesai menjadi kartu yang layak disimpan." }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "Catat set\ndalam hitungan detik", copy: "Menu hari ini, input set, catatan, dan waktu istirahat tetap dekat agar latihan tidak melambat.", items: ["Mulai latihan hari ini cepat", "Simpan beban, repetisi, catatan", "Kembali ke set aktif saat istirahat"] },
+                { id: "track", kicker: "Track", heading: "Lihat posisi\nkekuatanmu", copy: "PR, estimasi 1RM, Strength Percentile, volume, dan heatmap otot membuat progres mudah dibaca.", items: ["Tinjau perubahan PR dan 1RM", "Pahami posisi lewat Top Percentile", "Lihat otot terlatih dengan intensitas oranye"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "Latihanmu menjadi\nsesuatu yang indah.",
+                copy: "Latihan selesai berubah menjadi kartu story dengan angka dan heatmap otot sebagai bukti utama.",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "Tampilkan posisimu dibanding lifter serupa." },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "Tampilkan otot terlatih dengan intensitas oranye." },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "Ringkas volume, durasi, dan set dalam satu kartu." }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "Temukan latihan berikut\ndari celah.", copy: "Cari berdasarkan area, otot, dan alat saat heatmap menunjukkan bagian yang perlu perhatian." },
+            privacy: { kicker: "Privacy", heading: "Privat sejak awal,\nfokus sejak desain.", copy: "Tanpa akun wajib. Tanpa feed sosial. Hanya riwayat latihan yang kamu kendalikan." },
+            premium: { kicker: "Premium", heading: "Semakin lama berlatih,\nsemakin banyak yang terlihat.", copy: "Premium membuka riwayat penuh, tren lebih panjang, menu lanjutan, dan tampilan keseimbangan otot.", items: ["Full history", "Longer trends", "Expanded menus", "Muscle balance"] },
+            analyticsProof: { aria: "Shiba analytics proof preview", kicker: "e1RM trend", value: "+12.5 kg", copy: "Ubah perubahan PR dan volume menjadi target berikutnya." }
+        },
+        "pt-br": {
+            heroPromise: "Lift, Track, Share",
+            heroProof: "Registre rápido. Entenda melhor. Compartilhe bonito.",
+            shareAction: "Ver cartões",
+            heroCardLabel: "Share-ready result",
+            heroCardValue: "Top 1%",
+            metrics: [
+                { label: "Entrada", value: "Segundos" },
+                { label: "Prova", value: "Top 1%" },
+                { label: "Análise", value: "1RM" }
+            ],
+            rhythm: [
+                { kicker: "Lift", heading: "Log sets fast", copy: "Entre no treino de hoje sem quebrar o ritmo da academia." },
+                { kicker: "Track", heading: "See your strength", copy: "Revise PRs, 1RM estimado, volume e mapa muscular." },
+                { kicker: "Share", heading: "Share the work", copy: "Transforme a sessão concluída em um cartão que dá vontade de salvar." }
+            ],
+            sections: [
+                { id: "lift", kicker: "Lift", heading: "Registre séries\nem segundos", copy: "Treino de hoje, entrada de séries, notas e descanso ficam próximos para não desacelerar o treino.", items: ["Comece o treino de hoje rapidamente", "Salve carga, repetições e notas", "Volte às séries ativas entre descansos"] },
+                { id: "track", kicker: "Track", heading: "Veja onde sua\nforça está", copy: "PRs, 1RM estimado, Strength Percentile, volume e mapas musculares deixam o progresso fácil de ler.", items: ["Revise mudanças de PR e 1RM", "Entenda seu nível com Top Percentile", "Veja músculos treinados com intensidade laranja"] }
+            ],
+            share: {
+                kicker: "Share",
+                heading: "Seu treino vira\nalgo bonito.",
+                copy: "Treinos concluídos viram cartões prontos para stories, com números e mapa muscular guiando a composição.",
+                modes: [
+                    { kicker: "Mode 01", heading: "Top Percentile", copy: "Mostre sua posição frente a atletas parecidos." },
+                    { kicker: "Mode 02", heading: "Muscle Heatmap", copy: "Mostre os músculos treinados com intensidade laranja." },
+                    { kicker: "Mode 03", heading: "Workout Summary", copy: "Organize volume, duração e séries em um resultado polido." }
+                ],
+                stats: [
+                    { label: "Strength", value: "Top 1%" },
+                    { label: "Volume", value: "47,725 kg" },
+                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Time", value: "58m" }
+                ]
+            },
+            library: { kicker: "Find lifts", heading: "Encontre o próximo exercício\npela lacuna.", copy: "Busque por região, músculo e equipamento quando o mapa mostrar o que precisa de atenção." },
+            privacy: { kicker: "Privacy", heading: "Privado por padrão,\nfocado por design.", copy: "Sem conta obrigatória. Sem feed social. Apenas um histórico de treino sob seu controle." },
+            premium: { kicker: "Premium", heading: "Quanto mais você treina,\nmais consegue ver.", copy: "O Premium desbloqueia histórico completo, tendências longas, menus expandidos e visões mais profundas de equilíbrio muscular.", items: ["Histórico completo", "Tendências longas", "Menus expandidos", "Equilíbrio muscular"] },
+            analyticsProof: { aria: "Prévia de análise do Shiba", kicker: "Tendência de 1RM", value: "+12.5 kg", copy: "Transforme mudanças de PR e volume no próximo alvo." }
+        }
+    };
+
+    return mergeHomeStory(copy[locale] || copy.en, overrides);
+}
+
+function mergeHomeStory(base, overrides = {}) {
+    return {
+        ...base,
+        ...overrides,
+        metrics: overrides.metrics || base.metrics,
+        rhythm: overrides.rhythm || base.rhythm,
+        sections: overrides.sections || base.sections,
+        share: {
+            ...(base.share || {}),
+            ...(overrides.share || {}),
+            modes: overrides.share?.modes || base.share?.modes || [],
+            stats: overrides.share?.stats || base.share?.stats || []
+        },
+        library: { ...(base.library || {}), ...(overrides.library || {}) },
+        privacy: { ...(base.privacy || {}), ...(overrides.privacy || {}) },
+        premium: {
+            ...(base.premium || {}),
+            ...(overrides.premium || {}),
+            items: overrides.premium?.items || base.premium?.items || []
+        },
+        analyticsProof: { ...(base.analyticsProof || {}), ...(overrides.analyticsProof || {}) }
+    };
+}
+
+function renderLoggingMock(locale, compact = false) {
     const labels = getHomeText(locale, "loggingMock");
     const rows = [
         ["1", "80kg", "8", labels.done],
@@ -604,8 +1423,7 @@ function renderLoggingMock(locale) {
         ["4", "90kg", "3", labels.live]
     ];
 
-    return `<div class="app-scene-media">
-                        <div class="app-logging-mock" aria-label="${escapeAttribute(labels.aria)}">
+    const mock = `<div class="app-logging-mock${compact ? " app-logging-mock--compact" : ""}" aria-label="${escapeAttribute(labels.aria)}">
                             <div class="app-logging-header">
                                 <span>${escapeHtml(labels.title)}</span>
                                 <strong>4 / 5</strong>
@@ -622,7 +1440,14 @@ ${rows.map((row) => `                                <div class="app-logging-row
                                 <span>${escapeHtml(labels.weight)}</span>
                                 <span>${escapeHtml(labels.reps)}</span>
                             </div>
-                        </div>
+                        </div>`;
+
+    if (compact) {
+        return mock;
+    }
+
+    return `<div class="app-scene-media">
+                        ${mock}
                     </div>`;
 }
 
@@ -718,6 +1543,7 @@ function formatExerciseCount(count, locale) {
     if (locale === "fr") return `${count} exercices`;
     if (locale === "de") return `${count} Übungen`;
     if (locale === "id") return `${count} latihan`;
+    if (locale === "pt-br") return `${count} exercícios`;
     return `${count} exercises`;
 }
 
@@ -729,7 +1555,12 @@ function formatCategoryCount(count, locale) {
     if (locale === "fr") return `${count} catégories`;
     if (locale === "de") return `${count} Kategorien`;
     if (locale === "id") return `${count} kategori`;
+    if (locale === "pt-br") return `${count} categorias`;
     return `${count} categories`;
+}
+
+function getResponsiveHeadingSeparator(locale) {
+    return ["ja", "zh-hant", "zh-hans"].includes(locale) ? "" : " ";
 }
 
 function getHomeText(locale, key) {
@@ -744,7 +1575,7 @@ function getHomeText(locale, key) {
             privacy: "プライバシー",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
-            socialCardAlt: "Shibaアプリの計画、記録、分析画面のプレビュー",
+            socialCardAlt: "Shibaアプリの本気の筋トレ記録・分析画面のプレビュー",
             todayAlt: "ShibaアプリのToday画面",
             strengthAlt: "筋力パーセンタイルの分析画面",
             heatmapAlt: "筋肉ヒートマップ画面",
@@ -753,9 +1584,9 @@ function getHomeText(locale, key) {
             percentileValue: "上位41%",
             heroPercentileCopy: "近い条件のリフターと比較",
             heatmapCardLabel: "筋肉ヒートマップ",
-            showcaseKicker: "流れ",
-            showcaseHeading: "記録から\n次の一手へ。",
-            showcaseCopy: "メニュー、記録、分析をひとつの流れに。",
+            showcaseKicker: "判断",
+            showcaseHeading: "記録が\n次の判断に変わる。",
+            showcaseCopy: "今日のメニュー、セット記録、分析をつなぎ、次に狙う重量と種目を決めやすく。",
             todayLabel: "今日",
             analyticsLabel: "分析",
             heatmapLabel: "ヒートマップ",
@@ -764,30 +1595,30 @@ function getHomeText(locale, key) {
             analyticsKicker: "分析",
             heatmapKicker: "ヒートマップ",
             stats: [
-                { label: "計画", value: "今日", copy: "今日のメニューを迷わず開始" },
-                { label: "記録", value: "セット", copy: "重量・回数・メモを素早く保存" },
-                { label: "判断", value: "分析", copy: "強みと偏りを次の計画へ反映" }
+                { label: "入力", value: "速く", copy: "重量・回数・メモを素早く保存" },
+                { label: "分析", value: "深く", copy: "PR・1RM・ボリュームを確認" },
+                { label: "判断", value: "次へ", copy: "強みと偏りを次の計画へ反映" }
             ],
             statStart: "今日のメニューをすぐ開始",
             statTrack: "重量・回数・メモを記録",
             statReview: "鍛えた部位を確認",
-            todayHeading: "今日のメニューを\nすぐ始める",
-            todayCopy: "Shibaは、トレーニング前の迷いを減らし、最初の1セットへ自然に入れる画面設計です。",
+            todayHeading: "今日のメニューを\n迷わず始める",
+            todayCopy: "トレーニング前の迷いを減らし、最初の1セットへ自然に入れる画面設計です。",
             todayFeatures: ["今日のメニューをひと目で確認", "開始ボタンを迷わない位置に配置", "進行中のセットへすぐ戻れる"],
-            loggingHeading: "セットをすぐ記録",
-            loggingCopy: "重量と回数を、その場で保存。",
+            loggingHeading: "集中を切らさず\nセットを記録",
+            loggingCopy: "重量・回数・メモを、その場で素早く保存。",
             loggingFeatures: ["前回重量を見ながら入力", "各セットの結果をすぐ確認", "入力した記録がそのまま分析へつながる"],
-            analyticsHeading: "強みと成長を\nきれいに可視化",
-            analyticsCopy: "Strength Percentile、1RM推移、ボリュームの変化から、次に狙う重量の根拠を見つけられます。",
+            analyticsHeading: "成長と偏りを\nデータで見る",
+            analyticsCopy: "PR、推定1RM、Strength Percentile、ボリュームの変化から、次に狙う重量の根拠を見つけられます。",
             analyticsFeatures: ["Strength Percentileで現在地を把握", "1RMとボリュームの推移を確認", "伸びた種目を次の計画に反映"],
-            heatmapHeading: "鍛えた部位を見る",
-            heatmapCopy: "ヒートマップで偏りを確認。",
+            heatmapHeading: "鍛えた部位から\n次を決める",
+            heatmapCopy: "筋肉ヒートマップで偏りを確認し、次の種目選びへ。",
             heatmapFeatures: ["鍛えた部位を全身で確認", "偏りを見つけて次のメニューを調整", "数字だけでは足りない感覚を補う"],
-            libraryHeading: "次の種目を探す",
+            libraryHeading: "偏りから次の種目を探す",
             libraryKicker: "種目",
-            libraryCopy: "部位別にすばやく探せます。",
+            libraryCopy: "部位や筋肉から、次に狙うトレーニング種目をすばやく探せます。",
             libraryAction: "全287種目を見る",
-            appStoreHeading: "トレーニングの進歩を、\n今日から記録。",
+            appStoreHeading: "本気の筋トレを、\n今日からデータに。",
             appStoreCopy: "Shibaは無料で始められます。一部の全履歴・長期分析・メニュー拡張機能はShiba Premiumで利用できます。",
             footerHome: "ホーム",
             footerFeatures: "機能",
@@ -805,7 +1636,7 @@ function getHomeText(locale, key) {
             privacy: "Privacy Policy",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
-            socialCardAlt: "Preview of Shiba workout planning, logging, and analytics screens",
+            socialCardAlt: "Preview of Shiba serious workout logging and analytics screens",
             todayAlt: "Shiba app Today screen",
             strengthAlt: "Strength Percentile screen",
             heatmapAlt: "Muscle heatmap screen",
@@ -814,9 +1645,9 @@ function getHomeText(locale, key) {
             percentileValue: "Top 41%",
             heroPercentileCopy: "Compared with similar lifters",
             heatmapCardLabel: "Muscle Heatmap",
-            showcaseKicker: "Flow",
-            showcaseHeading: "From log\nto next step.",
-            showcaseCopy: "Plan, logging, and insights in one flow.",
+            showcaseKicker: "Decision",
+            showcaseHeading: "Logs become\ntraining decisions.",
+            showcaseCopy: "Connect today’s plan, set logging, and analytics so the next weight and exercise are easier to choose.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
@@ -825,30 +1656,30 @@ function getHomeText(locale, key) {
             analyticsKicker: "Analytics",
             heatmapKicker: "Heatmap",
             stats: [
-                { label: "Plan", value: "Today", copy: "Open the next workout instantly" },
-                { label: "Log", value: "Sets", copy: "Save weight, reps, and notes fast" },
-                { label: "Decide", value: "Insights", copy: "Turn strengths and gaps into the next plan" }
+                { label: "Input", value: "Fast", copy: "Save weight, reps, and notes quickly" },
+                { label: "Review", value: "Deep", copy: "Check PRs, 1RM, and volume" },
+                { label: "Decide", value: "Next", copy: "Turn strengths and gaps into the next plan" }
             ],
             statStart: "Open the next workout instantly",
             statTrack: "Log weight, reps, and notes",
             statReview: "Review trained muscle groups",
-            todayHeading: "Start fast",
-            todayCopy: "Open today's workout and begin the first set.",
+            todayHeading: "Start today's plan without friction",
+            todayCopy: "Reduce pre-workout decisions and move naturally into the first set.",
             todayFeatures: ["See today's plan at a glance", "Keep the primary start action obvious", "Jump back to active sets quickly"],
-            loggingHeading: "Log sets fast.",
-            loggingCopy: "Save weight and reps on the spot.",
+            loggingHeading: "Log sets without breaking focus",
+            loggingCopy: "Save weight, reps, and notes quickly on the spot.",
             loggingFeatures: ["Log while seeing recent performance", "Keep each set's result visible", "Feed every entry into analytics"],
-            analyticsHeading: "Progress at a glance.",
-            analyticsCopy: "Percentiles and charts show what is moving.",
+            analyticsHeading: "See growth and gaps in data",
+            analyticsCopy: "PRs, estimated 1RM, Strength Percentile, and volume trends give you a reason for the next target.",
             analyticsFeatures: ["Understand your current level", "Review 1RM and volume trends", "Use progress to plan the next session"],
-            heatmapHeading: "See trained muscles.",
-            heatmapCopy: "Heatmaps reveal balance and gaps.",
+            heatmapHeading: "Use trained muscles to choose next",
+            heatmapCopy: "Muscle heatmaps reveal balance and gaps before you pick the next exercise.",
             heatmapFeatures: ["Review trained areas across the body", "Spot bias and adjust the next plan", "Add visual context beyond numbers"],
-            libraryHeading: "Find exercises.",
+            libraryHeading: "Find exercises from gaps.",
             libraryKicker: "Library",
-            libraryCopy: "Search by body part and muscle.",
+            libraryCopy: "Search by body part and muscle when you know what needs attention next.",
             libraryAction: "Browse all 287 exercises",
-            appStoreHeading: "Start tracking\nwhat changes.",
+            appStoreHeading: "Turn serious training\ninto data today.",
             appStoreCopy: "Start Shiba for free. Some full-history, long-term analytics, and expanded planning features require Shiba Premium.",
             footerHome: "Home",
             footerFeatures: "Features",
@@ -866,7 +1697,7 @@ function getHomeText(locale, key) {
             privacy: "개인정보",
             database: "데이터베이스 보기",
             databaseIntro: "평균 중량, 기준표, 자극되는 근육을 확인하고 싶다면 기존 운동 데이터베이스로 이동할 수 있습니다.",
-            socialCardAlt: "Shiba 운동 계획, 기록, 분석 화면 미리보기",
+            socialCardAlt: "Shiba의 진지한 근력 운동 기록·분석 화면 미리보기",
             todayAlt: "Shiba 앱 Today 화면",
             strengthAlt: "Strength Percentile 화면",
             heatmapAlt: "근육 히트맵 화면",
@@ -875,9 +1706,9 @@ function getHomeText(locale, key) {
             percentileValue: "상위 41%",
             heroPercentileCopy: "비슷한 리프터와 비교",
             heatmapCardLabel: "근육 히트맵",
-            showcaseKicker: "흐름",
-            showcaseHeading: "기록에서\n다음 단계로.",
-            showcaseCopy: "루틴, 기록, 분석을 한 흐름으로.",
+            showcaseKicker: "판단",
+            showcaseHeading: "기록이\n다음 판단이 됩니다.",
+            showcaseCopy: "오늘 루틴, 세트 기록, 분석을 이어 다음 중량과 운동을 더 쉽게 정합니다.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
@@ -886,30 +1717,30 @@ function getHomeText(locale, key) {
             analyticsKicker: "분석",
             heatmapKicker: "히트맵",
             stats: [
-                { label: "계획", value: "Today", copy: "다음 운동을 바로 시작" },
-                { label: "기록", value: "Sets", copy: "중량, 반복, 메모를 빠르게 저장" },
-                { label: "판단", value: "Insights", copy: "강점과 부족한 부분을 다음 계획에 반영" }
+                { label: "입력", value: "빠르게", copy: "중량, 반복, 메모를 빠르게 저장" },
+                { label: "분석", value: "깊게", copy: "PR, 1RM, 볼륨을 확인" },
+                { label: "판단", value: "다음", copy: "강점과 부족한 부분을 다음 계획에 반영" }
             ],
             statStart: "다음 운동을 바로 시작",
             statTrack: "중량, 반복, 메모 기록",
             statReview: "훈련한 부위 확인",
-            todayHeading: "오늘의 루틴을 바로 시작",
-            todayCopy: "운동 시작 전 망설임을 줄이고 오늘의 첫 동작에 집중하게 해 줍니다.",
+            todayHeading: "오늘 루틴을\n망설임 없이 시작",
+            todayCopy: "운동 전 결정을 줄이고 첫 세트에 자연스럽게 집중하게 해 줍니다.",
             todayFeatures: ["오늘 할 루틴을 한눈에 확인", "시작 버튼을 명확하게 배치", "진행 중인 세트로 바로 복귀"],
-            loggingHeading: "세트 빠른 기록",
-            loggingCopy: "중량과 반복을 바로 저장.",
+            loggingHeading: "집중을 끊지 않고\n세트 기록",
+            loggingCopy: "중량, 반복, 메모를 그 자리에서 빠르게 저장.",
             loggingFeatures: ["이전 중량을 보며 입력", "세트별 달성감을 남김", "기록이 분석 화면으로 이어짐"],
-            analyticsHeading: "강점과 성장을 시각화",
-            analyticsCopy: "Strength Percentile, 성장 차트, 볼륨 추이로 다음 중량 설정의 근거를 얻습니다.",
+            analyticsHeading: "성장과 빈틈을\n데이터로 확인",
+            analyticsCopy: "PR, 추정 1RM, Strength Percentile, 볼륨 변화로 다음 목표 중량의 근거를 얻습니다.",
             analyticsFeatures: ["Strength Percentile로 현재 위치 확인", "1RM 추이와 볼륨 변화 확인", "성장한 운동을 다음 계획에 반영"],
-            heatmapHeading: "훈련 부위 확인",
-            heatmapCopy: "히트맵으로 균형을 확인.",
+            heatmapHeading: "훈련 부위에서\n다음을 결정",
+            heatmapCopy: "근육 히트맵으로 균형과 빈틈을 보고 다음 운동을 고릅니다.",
             heatmapFeatures: ["훈련한 부위를 전신으로 확인", "편향을 찾아 다음 루틴 조정", "숫자만으로 부족한 감각 보완"],
-            libraryHeading: "운동 찾기",
+            libraryHeading: "빈틈에서 다음 운동 찾기",
             libraryKicker: "운동",
-            libraryCopy: "부위와 근육으로 빠르게 탐색.",
+            libraryCopy: "주의가 필요한 부위와 근육을 기준으로 빠르게 탐색.",
             libraryAction: "287개 운동 모두 보기",
-            appStoreHeading: "오늘부터\n성장을 기록하세요.",
+            appStoreHeading: "진지한 훈련을\n오늘부터 데이터로.",
             appStoreCopy: "Shiba는 무료로 시작할 수 있습니다. 전체 기록, 장기 분석, 확장 메뉴의 일부 기능은 Shiba Premium에서 제공됩니다.",
             footerHome: "홈",
             footerFeatures: "기능",
@@ -927,7 +1758,7 @@ function getHomeText(locale, key) {
             privacy: "隱私權",
             database: "查看資料庫",
             databaseIntro: "想查看平均重量、標準表與訓練肌群時，可以從這裡進入既有訓練資料庫。",
-            socialCardAlt: "Shiba 訓練規劃、紀錄與分析畫面預覽",
+            socialCardAlt: "Shiba 認真重訓紀錄與分析畫面預覽",
             todayAlt: "Shiba App 的 Today 畫面",
             strengthAlt: "Strength Percentile 畫面",
             heatmapAlt: "肌肉熱力圖畫面",
@@ -936,9 +1767,9 @@ function getHomeText(locale, key) {
             percentileValue: "前 41%",
             heroPercentileCopy: "與相近條件的訓練者比較",
             heatmapCardLabel: "肌肉熱力圖",
-            showcaseKicker: "流程",
-            showcaseHeading: "從紀錄\n到下一步。",
-            showcaseCopy: "課表、紀錄、分析接在一起。",
+            showcaseKicker: "判斷",
+            showcaseHeading: "紀錄會變成\n下一次判斷。",
+            showcaseCopy: "把今日課表、組數紀錄與分析接在一起，讓下一個重量與動作更容易決定。",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
@@ -947,30 +1778,30 @@ function getHomeText(locale, key) {
             analyticsKicker: "分析",
             heatmapKicker: "熱力圖",
             stats: [
-                { label: "計畫", value: "Today", copy: "快速開始下一次訓練" },
-                { label: "紀錄", value: "Sets", copy: "快速保存重量、次數與筆記" },
-                { label: "判斷", value: "Insights", copy: "把強項與缺口帶進下一個計畫" }
+                { label: "輸入", value: "快速", copy: "快速保存重量、次數與筆記" },
+                { label: "分析", value: "深入", copy: "查看 PR、1RM 與訓練量" },
+                { label: "判斷", value: "下一步", copy: "把強項與缺口帶進下一個計畫" }
             ],
             statStart: "快速開始下一次訓練",
             statTrack: "記錄重量、次數與筆記",
             statReview: "回顧訓練過的部位",
-            todayHeading: "快速開始今天的課表",
-            todayCopy: "減少開始訓練前的猶豫，把注意力放回今天的第一組。",
+            todayHeading: "少一點猶豫，\n開始今日課表",
+            todayCopy: "減少訓練前的判斷，把注意力自然放回第一組。",
             todayFeatures: ["一眼確認今天的課表", "開始按鈕放在清楚位置", "快速回到進行中的組數"],
-            loggingHeading: "快速記錄組數",
-            loggingCopy: "重量與次數立即保存。",
+            loggingHeading: "不中斷專注地\n記錄組數",
+            loggingCopy: "重量、次數與筆記立即快速保存。",
             loggingFeatures: ["一邊看前次重量一邊輸入", "每一組都有完成感", "紀錄自然銜接到分析"],
-            analyticsHeading: "看見強項與成長",
-            analyticsCopy: "Strength Percentile、成長圖表與訓練量趨勢，讓下一次重量設定更有根據。",
+            analyticsHeading: "用資料看見\n成長與缺口",
+            analyticsCopy: "PR、估算 1RM、Strength Percentile 與訓練量變化，讓下一次重量設定更有根據。",
             analyticsFeatures: ["用 Strength Percentile 掌握位置", "查看 1RM 與訓練量變化", "把進步反映到下一個計畫"],
-            heatmapHeading: "查看訓練部位",
-            heatmapCopy: "用熱力圖看平衡與缺口。",
+            heatmapHeading: "從訓練部位\n決定下一步",
+            heatmapCopy: "用肌肉熱力圖看平衡與缺口，再選下一個動作。",
             heatmapFeatures: ["用全身視角回顧訓練部位", "找出偏重並調整課表", "補足數字以外的感受"],
-            libraryHeading: "尋找動作",
+            libraryHeading: "從缺口尋找下一個動作",
             libraryKicker: "動作",
-            libraryCopy: "依部位與肌群快速搜尋。",
+            libraryCopy: "依需要補強的部位與肌群快速搜尋。",
             libraryAction: "查看全部 287 個動作",
-            appStoreHeading: "從今天開始，\n記錄每一次進步。",
+            appStoreHeading: "從今天開始，\n把認真訓練變成資料。",
             appStoreCopy: "Shiba 可免費開始使用；完整紀錄、長期分析與進階課表的部分功能需使用 Shiba Premium。",
             footerHome: "首頁",
             footerFeatures: "功能",
@@ -988,7 +1819,7 @@ function getHomeText(locale, key) {
             privacy: "隐私",
             database: "查看数据库",
             databaseIntro: "想查看平均重量、标准表和训练肌群时，可以从这里进入原有训练数据库。",
-            socialCardAlt: "Shiba 训练规划、记录和分析画面预览",
+            socialCardAlt: "Shiba 认真力量训练记录与分析画面预览",
             todayAlt: "Shiba App 的 Today 画面",
             strengthAlt: "Strength Percentile 画面",
             heatmapAlt: "肌肉热力图画面",
@@ -997,9 +1828,9 @@ function getHomeText(locale, key) {
             percentileValue: "前 41%",
             heroPercentileCopy: "与相近条件的训练者比较",
             heatmapCardLabel: "肌肉热力图",
-            showcaseKicker: "流程",
-            showcaseHeading: "从记录\n到下一步。",
-            showcaseCopy: "计划、记录、分析接在一起。",
+            showcaseKicker: "判断",
+            showcaseHeading: "记录会变成\n下一次判断。",
+            showcaseCopy: "把今日计划、组数记录和分析接在一起，让下一个重量和动作更容易决定。",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
@@ -1008,30 +1839,30 @@ function getHomeText(locale, key) {
             analyticsKicker: "分析",
             heatmapKicker: "热力图",
             stats: [
-                { label: "计划", value: "Today", copy: "快速开始下一次训练" },
-                { label: "记录", value: "Sets", copy: "快速保存重量、次数和笔记" },
-                { label: "判断", value: "Insights", copy: "把强项和缺口带进下一计划" }
+                { label: "输入", value: "快速", copy: "快速保存重量、次数和笔记" },
+                { label: "分析", value: "深入", copy: "查看 PR、1RM 和训练量" },
+                { label: "判断", value: "下一步", copy: "把强项和缺口带进下一计划" }
             ],
             statStart: "快速开始下一次训练",
             statTrack: "记录重量、次数和笔记",
             statReview: "回顾训练过的部位",
-            todayHeading: "快速开始今天的计划",
-            todayCopy: "减少开始训练前的犹豫，把注意力放回今天的第一组。",
+            todayHeading: "少一点犹豫，\n开始今日计划",
+            todayCopy: "减少训练前的判断，把注意力自然放回第一组。",
             todayFeatures: ["一眼确认今天的计划", "开始按钮放在清楚位置", "快速回到进行中的组数"],
-            loggingHeading: "快速记录组数",
-            loggingCopy: "重量和次数立即保存。",
+            loggingHeading: "不中断专注地\n记录组数",
+            loggingCopy: "重量、次数和笔记立即快速保存。",
             loggingFeatures: ["一边看上次重量一边输入", "每一组都有完成感", "记录自然衔接到分析"],
-            analyticsHeading: "看见强项和成长",
-            analyticsCopy: "Strength Percentile、成长图表和训练量趋势，让下一次重量设置更有根据。",
+            analyticsHeading: "用数据看见\n成长和短板",
+            analyticsCopy: "PR、预估 1RM、Strength Percentile 和训练量变化，让下一次重量设置更有根据。",
             analyticsFeatures: ["用 Strength Percentile 掌握位置", "查看 1RM 和训练量变化", "把进步反映到下一计划"],
-            heatmapHeading: "查看训练部位",
-            heatmapCopy: "用热力图看平衡和缺口。",
+            heatmapHeading: "从训练部位\n决定下一步",
+            heatmapCopy: "用肌肉热力图看平衡和短板，再选下一项动作。",
             heatmapFeatures: ["用全身视角回顾训练部位", "找出偏重并调整计划", "补足数字以外的感受"],
-            libraryHeading: "寻找动作",
+            libraryHeading: "从短板寻找下一个动作",
             libraryKicker: "动作",
-            libraryCopy: "按部位和肌群快速搜索。",
+            libraryCopy: "按需要补强的部位和肌群快速搜索。",
             libraryAction: "查看全部 287 个动作",
-            appStoreHeading: "从今天开始，\n记录每一次进步。",
+            appStoreHeading: "从今天开始，\n把认真训练变成数据。",
             appStoreCopy: "Shiba 可免费开始使用；完整记录、长期分析与进阶计划的部分功能需要 Shiba Premium。",
             footerHome: "首页",
             footerFeatures: "功能",
@@ -1049,7 +1880,7 @@ function getHomeText(locale, key) {
             privacy: "Privacidad",
             database: "Ver base de datos",
             databaseIntro: "Cuando quieras revisar pesos medios, estándares y músculos trabajados, entra en la base de datos existente.",
-            socialCardAlt: "Vista previa de las pantallas de planificación, registro y análisis de Shiba",
+            socialCardAlt: "Vista previa de las pantallas de registro y análisis para entrenar en serio con Shiba",
             todayAlt: "Pantalla Today de la app Shiba",
             strengthAlt: "Pantalla Strength Percentile",
             heatmapAlt: "Pantalla de mapa muscular",
@@ -1058,9 +1889,9 @@ function getHomeText(locale, key) {
             percentileValue: "Top 41%",
             heroPercentileCopy: "Comparado con atletas similares",
             heatmapCardLabel: "Mapa muscular",
-            showcaseKicker: "Flujo",
-            showcaseHeading: "Del registro\nal siguiente paso.",
-            showcaseCopy: "Rutina, registro y análisis en un solo flujo.",
+            showcaseKicker: "Decisión",
+            showcaseHeading: "Los registros se vuelven\ndecisiones de entrenamiento.",
+            showcaseCopy: "Conecta la rutina de hoy, el registro de series y el análisis para elegir mejor el siguiente peso y ejercicio.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
@@ -1069,30 +1900,30 @@ function getHomeText(locale, key) {
             analyticsKicker: "Análisis",
             heatmapKicker: "Mapa",
             stats: [
-                { label: "Plan", value: "Today", copy: "Rutina lista para empezar" },
-                { label: "Registro", value: "Sets", copy: "Guarda peso, reps y notas rápido" },
-                { label: "Decisión", value: "Insights", copy: "Convierte fortalezas y huecos en el siguiente plan" }
+                { label: "Entrada", value: "Rápida", copy: "Guarda peso, reps y notas rápido" },
+                { label: "Análisis", value: "Profundo", copy: "Revisa PR, 1RM y volumen" },
+                { label: "Decisión", value: "Siguiente", copy: "Convierte fortalezas y huecos en el siguiente plan" }
             ],
             statStart: "Rutina lista para empezar",
             statTrack: "Peso, reps y notas",
             statReview: "Zonas trabajadas visibles",
-            todayHeading: "Empieza la rutina de hoy",
-            todayCopy: "Reduce decisiones antes de entrenar y centra la pantalla en el primer paso.",
+            todayHeading: "Empieza la rutina de hoy sin fricción",
+            todayCopy: "Reduce decisiones antes de entrenar y te lleva con naturalidad a la primera serie.",
             todayFeatures: ["Rutina de hoy visible al instante", "Acción principal siempre clara", "Vuelta rápida a series activas"],
-            loggingHeading: "Registra series rápido",
-            loggingCopy: "Guarda peso y reps al momento.",
+            loggingHeading: "Registra series sin perder foco",
+            loggingCopy: "Guarda peso, reps y notas al momento.",
             loggingFeatures: ["Registra junto al peso anterior", "Cada serie deja una señal clara", "Los datos alimentan el análisis"],
-            analyticsHeading: "Visualiza fuerza y progreso",
-            analyticsCopy: "Strength Percentile, gráficos y volumen dan criterio para el siguiente peso.",
+            analyticsHeading: "Ve progreso y huecos con datos",
+            analyticsCopy: "PR, 1RM estimado, Strength Percentile y volumen dan criterio para el siguiente objetivo.",
             analyticsFeatures: ["Strength Percentile muestra tu posición", "Revisa tendencia de 1RM y volumen", "Convierte el progreso en el siguiente plan"],
-            heatmapHeading: "Ve zonas trabajadas",
-            heatmapCopy: "El mapa muestra equilibrio y huecos.",
+            heatmapHeading: "Usa las zonas trabajadas para decidir",
+            heatmapCopy: "El mapa muscular muestra equilibrio y huecos antes de elegir el siguiente ejercicio.",
             heatmapFeatures: ["Vista global de músculos trabajados", "Detecta sesgos y ajusta la rutina", "Añade contexto más allá de los números"],
-            libraryHeading: "Encuentra ejercicios",
+            libraryHeading: "Encuentra ejercicios desde tus huecos",
             libraryKicker: "Ejercicios",
-            libraryCopy: "Busca por zona y músculo.",
+            libraryCopy: "Busca por zona y músculo cuando sabes qué necesita atención.",
             libraryAction: "Ver los 287 ejercicios",
-            appStoreHeading: "Registra tu progreso\ndesde hoy.",
+            appStoreHeading: "Convierte tu entrenamiento serio\nen datos desde hoy.",
             appStoreCopy: "Empieza Shiba gratis. Algunas funciones de historial completo, análisis a largo plazo y planificación ampliada requieren Shiba Premium.",
             footerHome: "Inicio",
             footerFeatures: "Funciones",
@@ -1110,7 +1941,7 @@ function getHomeText(locale, key) {
             privacy: "Confidentialité",
             database: "Voir la base",
             databaseIntro: "Pour consulter les poids moyens, standards et muscles sollicités, continue vers la base d'exercices existante.",
-            socialCardAlt: "Aperçu des écrans de planification, de suivi et d'analyse de Shiba",
+            socialCardAlt: "Aperçu des écrans de suivi et d'analyse pour s'entraîner sérieusement avec Shiba",
             todayAlt: "Écran Today de l'app Shiba",
             strengthAlt: "Écran Strength Percentile",
             heatmapAlt: "Écran de carte musculaire",
@@ -1119,9 +1950,9 @@ function getHomeText(locale, key) {
             percentileValue: "Top 41 %",
             heroPercentileCopy: "Comparé à des profils proches",
             heatmapCardLabel: "Carte musculaire",
-            showcaseKicker: "Flux",
-            showcaseHeading: "Du suivi\nà la suite.",
-            showcaseCopy: "Séance, saisie et analyse dans un seul flux.",
+            showcaseKicker: "Décision",
+            showcaseHeading: "Le suivi devient\nune décision d'entraînement.",
+            showcaseCopy: "Relie séance du jour, saisie des séries et analyse pour choisir plus facilement la prochaine charge et le prochain exercice.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
@@ -1130,30 +1961,30 @@ function getHomeText(locale, key) {
             analyticsKicker: "Analyse",
             heatmapKicker: "Carte",
             stats: [
-                { label: "Plan", value: "Today", copy: "Séance prête à lancer" },
-                { label: "Saisie", value: "Sets", copy: "Poids, reps et notes saisis vite" },
-                { label: "Décision", value: "Insights", copy: "Transformer forces et manques en prochain plan" }
+                { label: "Saisie", value: "Rapide", copy: "Poids, reps et notes saisis vite" },
+                { label: "Analyse", value: "Profonde", copy: "Relire PR, 1RM et volume" },
+                { label: "Décision", value: "Suite", copy: "Transformer forces et manques en prochain plan" }
             ],
             statStart: "Séance prête à lancer",
             statTrack: "Poids, reps et notes",
             statReview: "Zones travaillées visibles",
-            todayHeading: "Lancer la séance du jour",
-            todayCopy: "Moins d'hésitation avant l'entraînement, plus d'attention sur la première série.",
+            todayHeading: "Lancer la séance du jour sans friction",
+            todayCopy: "Moins d'hésitation avant l'entraînement, et une entrée naturelle dans la première série.",
             todayFeatures: ["Séance du jour visible tout de suite", "Action principale claire", "Retour rapide aux séries en cours"],
-            loggingHeading: "Noter vite les séries",
-            loggingCopy: "Poids et reps enregistrés tout de suite.",
+            loggingHeading: "Noter les séries sans perdre le focus",
+            loggingCopy: "Poids, reps et notes enregistrés tout de suite.",
             loggingFeatures: ["Saisie avec le poids précédent", "Chaque série laisse un repère clair", "Les données nourrissent l'analyse"],
-            analyticsHeading: "Voir la force et la progression",
-            analyticsCopy: "Strength Percentile, graphiques et volume donnent un repère pour la prochaine charge.",
+            analyticsHeading: "Voir progrès et manques dans les données",
+            analyticsCopy: "PR, 1RM estimé, Strength Percentile et volume donnent un repère pour le prochain objectif.",
             analyticsFeatures: ["Strength Percentile situe ton niveau", "Suivi du 1RM et du volume", "Le progrès guide le prochain plan"],
-            heatmapHeading: "Voir les zones travaillées",
-            heatmapCopy: "La carte montre équilibre et manques.",
+            heatmapHeading: "Décider avec les zones travaillées",
+            heatmapCopy: "La carte musculaire montre équilibre et manques avant de choisir le prochain exercice.",
             heatmapFeatures: ["Vue globale des muscles travaillés", "Repérer les biais et ajuster", "Ajouter du contexte aux chiffres"],
-            libraryHeading: "Trouver un exercice",
+            libraryHeading: "Trouver l'exercice depuis les manques",
             libraryKicker: "Exercices",
-            libraryCopy: "Recherche par zone et par muscle.",
+            libraryCopy: "Recherche par zone et par muscle quand tu sais quoi renforcer.",
             libraryAction: "Voir les 287 exercices",
-            appStoreHeading: "Suivez vos progrès\ndès aujourd’hui.",
+            appStoreHeading: "Transformez l'entraînement sérieux\nen données dès aujourd’hui.",
             appStoreCopy: "Commence Shiba gratuitement. Certaines fonctions d’historique complet, d’analyse longue durée et de planification avancée exigent Shiba Premium.",
             footerHome: "Accueil",
             footerFeatures: "Fonctions",
@@ -1171,7 +2002,7 @@ function getHomeText(locale, key) {
             privacy: "Datenschutz",
             database: "Datenbank ansehen",
             databaseIntro: "Wenn du Durchschnittsgewichte, Standards und trainierte Muskeln prüfen möchtest, nutze die bestehende Trainingsdatenbank.",
-            socialCardAlt: "Vorschau der Planungs-, Logging- und Analyse-Screens von Shiba",
+            socialCardAlt: "Vorschau der Logging- und Analyse-Screens für ernsthaftes Krafttraining mit Shiba",
             todayAlt: "Today-Screen der Shiba App",
             strengthAlt: "Strength Percentile Screen",
             heatmapAlt: "Muskel-Heatmap Screen",
@@ -1180,9 +2011,9 @@ function getHomeText(locale, key) {
             percentileValue: "Top 41 %",
             heroPercentileCopy: "Verglichen mit ähnlichen Trainierenden",
             heatmapCardLabel: "Muskel-Heatmap",
-            showcaseKicker: "Ablauf",
-            showcaseHeading: "Vom Log\nzum nächsten Schritt.",
-            showcaseCopy: "Workout, Logging und Analyse in einem Ablauf.",
+            showcaseKicker: "Entscheidung",
+            showcaseHeading: "Logs werden\nzu Trainingsentscheidungen.",
+            showcaseCopy: "Heutiges Workout, Satzeingabe und Analyse verbinden sich, damit nächstes Gewicht und nächste Übung leichter fallen.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
@@ -1191,30 +2022,30 @@ function getHomeText(locale, key) {
             analyticsKicker: "Analyse",
             heatmapKicker: "Heatmap",
             stats: [
-                { label: "Plan", value: "Today", copy: "Workout sofort starten" },
-                { label: "Log", value: "Sets", copy: "Gewicht, Wdh. und Notizen schnell sichern" },
-                { label: "Entscheid", value: "Insights", copy: "Stärken und Lücken in den nächsten Plan bringen" }
+                { label: "Eingabe", value: "Schnell", copy: "Gewicht, Wdh. und Notizen schnell sichern" },
+                { label: "Analyse", value: "Tief", copy: "PRs, 1RM und Volumen prüfen" },
+                { label: "Entscheid", value: "Weiter", copy: "Stärken und Lücken in den nächsten Plan bringen" }
             ],
             statStart: "Workout sofort starten",
             statTrack: "Gewicht, Wdh. und Notizen",
             statReview: "Trainierte Bereiche prüfen",
-            todayHeading: "Das heutige Workout starten",
-            todayCopy: "Weniger Entscheidungen vor dem Training, mehr Fokus auf den ersten Satz.",
+            todayHeading: "Das heutige Workout ohne Reibung starten",
+            todayCopy: "Weniger Entscheidungen vor dem Training und ein natürlicher Einstieg in den ersten Satz.",
             todayFeatures: ["Heutiges Workout sofort sichtbar", "Klare Hauptaktion", "Schnell zurück zu laufenden Sätzen"],
-            loggingHeading: "Sätze schnell loggen",
-            loggingCopy: "Gewicht und Wdh. sofort sichern.",
+            loggingHeading: "Sätze loggen, ohne den Fokus zu verlieren",
+            loggingCopy: "Gewicht, Wdh. und Notizen sofort sichern.",
             loggingFeatures: ["Mit vorherigem Gewicht eintragen", "Jeder Satz hat klares Feedback", "Daten fließen in die Analyse"],
-            analyticsHeading: "Stärke und Fortschritt sehen",
-            analyticsCopy: "Strength Percentile, Charts und Volumen geben Orientierung für das nächste Gewicht.",
+            analyticsHeading: "Fortschritt und Lücken in Daten sehen",
+            analyticsCopy: "PRs, geschätztes 1RM, Strength Percentile und Volumen geben Orientierung für das nächste Ziel.",
             analyticsFeatures: ["Strength Percentile ordnet dich ein", "1RM- und Volumentrends prüfen", "Fortschritt in den nächsten Plan bringen"],
-            heatmapHeading: "Trainierte Bereiche sehen",
-            heatmapCopy: "Heatmaps zeigen Balance und Lücken.",
+            heatmapHeading: "Mit trainierten Bereichen entscheiden",
+            heatmapCopy: "Muskel-Heatmaps zeigen Balance und Lücken, bevor du die nächste Übung wählst.",
             heatmapFeatures: ["Ganzkörperblick auf trainierte Muskeln", "Schwerpunkte erkennen und anpassen", "Zahlen um Kontext ergänzen"],
-            libraryHeading: "Übungen finden",
+            libraryHeading: "Übungen aus deinen Lücken finden",
             libraryKicker: "Übungen",
-            libraryCopy: "Nach Bereich und Muskel suchen.",
+            libraryCopy: "Nach Bereich und Muskel suchen, wenn klar ist, was Aufmerksamkeit braucht.",
             libraryAction: "Alle 287 Übungen ansehen",
-            appStoreHeading: "Fortschritt ab heute\nfesthalten.",
+            appStoreHeading: "Ernsthaftes Training ab heute\nin Daten verwandeln.",
             appStoreCopy: "Shiba lässt sich kostenlos starten. Einige Funktionen für vollständige Historie, Langzeitanalyse und erweiterte Pläne benötigen Shiba Premium.",
             footerHome: "Start",
             footerFeatures: "Funktionen",
@@ -1232,7 +2063,7 @@ function getHomeText(locale, key) {
             privacy: "Privasi",
             database: "Lihat database",
             databaseIntro: "Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada.",
-            socialCardAlt: "Pratinjau layar perencanaan, pencatatan, dan analitik Shiba",
+            socialCardAlt: "Pratinjau layar catatan dan analitik untuk latihan serius dengan Shiba",
             todayAlt: "Layar Today aplikasi Shiba",
             strengthAlt: "Layar Strength Percentile",
             heatmapAlt: "Layar heatmap otot",
@@ -1241,9 +2072,9 @@ function getHomeText(locale, key) {
             percentileValue: "Top 41%",
             heroPercentileCopy: "Dibandingkan dengan lifter serupa",
             heatmapCardLabel: "Heatmap otot",
-            showcaseKicker: "Alur",
-            showcaseHeading: "Dari catatan\nke langkah berikutnya.",
-            showcaseCopy: "Latihan, catatan, dan analitik dalam satu alur.",
+            showcaseKicker: "Keputusan",
+            showcaseHeading: "Catatan menjadi\nkeputusan latihan.",
+            showcaseCopy: "Hubungkan menu hari ini, catatan set, dan analitik agar beban serta latihan berikutnya lebih mudah dipilih.",
             todayLabel: "Today",
             analyticsLabel: "Analytics",
             heatmapLabel: "Heatmap",
@@ -1252,36 +2083,97 @@ function getHomeText(locale, key) {
             analyticsKicker: "Analitik",
             heatmapKicker: "Heatmap",
             stats: [
-                { label: "Rencana", value: "Today", copy: "Mulai latihan berikutnya" },
-                { label: "Catat", value: "Sets", copy: "Simpan berat, repetisi, dan catatan cepat" },
-                { label: "Putuskan", value: "Insights", copy: "Ubah kekuatan dan celah menjadi rencana berikutnya" }
+                { label: "Input", value: "Cepat", copy: "Simpan berat, repetisi, dan catatan cepat" },
+                { label: "Analitik", value: "Dalam", copy: "Cek PR, 1RM, dan volume" },
+                { label: "Putuskan", value: "Lanjut", copy: "Ubah kekuatan dan celah menjadi rencana berikutnya" }
             ],
             statStart: "Mulai latihan berikutnya",
             statTrack: "Catat berat, repetisi, catatan",
             statReview: "Lihat area yang dilatih",
-            todayHeading: "Mulai menu latihan hari ini",
-            todayCopy: "Mengurangi keputusan sebelum latihan dan membuat fokus pada langkah pertama.",
+            todayHeading: "Mulai menu hari ini tanpa ragu",
+            todayCopy: "Kurangi keputusan sebelum latihan dan masuk alami ke set pertama.",
             todayFeatures: ["Menu hari ini langsung terlihat", "Tombol mulai berada di posisi jelas", "Kembali cepat ke set aktif"],
-            loggingHeading: "Catat set cepat",
-            loggingCopy: "Simpan berat dan repetisi saat itu juga.",
+            loggingHeading: "Catat set tanpa memutus fokus",
+            loggingCopy: "Simpan berat, repetisi, dan catatan saat itu juga.",
             loggingFeatures: ["Input sambil melihat berat sebelumnya", "Setiap set terasa selesai", "Catatan mengalir ke analitik"],
-            analyticsHeading: "Lihat kekuatan dan progres",
-            analyticsCopy: "Strength Percentile, grafik, dan volume memberi dasar untuk beban berikutnya.",
+            analyticsHeading: "Lihat progres dan celah dalam data",
+            analyticsCopy: "PR, estimasi 1RM, Strength Percentile, dan volume memberi dasar untuk target berikutnya.",
             analyticsFeatures: ["Strength Percentile menunjukkan posisi", "Lihat tren 1RM dan volume", "Masukkan progres ke rencana berikutnya"],
-            heatmapHeading: "Lihat area terlatih",
-            heatmapCopy: "Heatmap menunjukkan keseimbangan dan celah.",
+            heatmapHeading: "Putuskan dari area yang sudah dilatih",
+            heatmapCopy: "Heatmap otot menunjukkan keseimbangan dan celah sebelum memilih latihan berikutnya.",
             heatmapFeatures: ["Lihat area terlatih seluruh tubuh", "Temukan ketimpangan dan sesuaikan menu", "Lengkapi angka dengan konteks visual"],
-            libraryHeading: "Cari latihan",
+            libraryHeading: "Cari latihan dari celahmu",
             libraryKicker: "Latihan",
-            libraryCopy: "Cari berdasarkan area dan otot.",
+            libraryCopy: "Cari berdasarkan area dan otot saat tahu apa yang perlu diperhatikan.",
             libraryAction: "Lihat semua 287 latihan",
-            appStoreHeading: "Catat progresmu\nmulai hari ini.",
+            appStoreHeading: "Ubah latihan serius\nmenjadi data mulai hari ini.",
             appStoreCopy: "Mulai Shiba secara gratis. Beberapa fitur riwayat lengkap, analitik jangka panjang, dan menu lanjutan memerlukan Shiba Premium.",
             footerHome: "Beranda",
             footerFeatures: "Fitur",
             footerPrivacy: "Kebijakan privasi",
             footerContact: "Kontak",
             loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Berat", reps: "Reps", done: "Selesai", live: "Live" }
+        },
+        "pt-br": {
+            download: "Baixe grátis na App Store",
+            releaseStatus: "Disponível agora na App Store",
+            features: "Ver análises",
+            primaryAction: "Ver recursos",
+            secondaryAction: "Exercícios",
+            availability: "Grátis para começar • Alguns recursos exigem Premium • Sem conta • iOS 17+",
+            privacy: "Privacidade",
+            database: "Explorar biblioteca",
+            databaseIntro: "As referências de exercícios ficam perto do fluxo do app para você passar do registro ao planejamento sem atrito.",
+            socialCardAlt: "Prévia das telas de registro e análise de treino sério do Shiba",
+            todayAlt: "Tela Today do app Shiba",
+            strengthAlt: "Tela de Strength Percentile",
+            heatmapAlt: "Tela de mapa muscular",
+            heroShowcaseAria: "Prévia das telas Today, Strength Percentile e mapa muscular do Shiba",
+            percentileLabel: "Percentil de força",
+            percentileValue: "Top 41%",
+            heroPercentileCopy: "Comparado com atletas parecidos",
+            heatmapCardLabel: "Mapa muscular",
+            showcaseKicker: "Decisão",
+            showcaseHeading: "Registros viram\ndecisões de treino.",
+            showcaseCopy: "Conecte plano de hoje, registro de séries e análises para escolher melhor a próxima carga e exercício.",
+            todayLabel: "Today",
+            analyticsLabel: "Analytics",
+            heatmapLabel: "Heatmap",
+            todayKicker: "Hoje",
+            loggingKicker: "Registro",
+            analyticsKicker: "Análise",
+            heatmapKicker: "Mapa muscular",
+            stats: [
+                { label: "Entrada", value: "Rápida", copy: "Salve carga, repetições e notas rapidamente" },
+                { label: "Revisão", value: "Profunda", copy: "Confira PRs, 1RM e volume" },
+                { label: "Decisão", value: "Próxima", copy: "Leve forças e lacunas para o próximo plano" }
+            ],
+            statStart: "Abra o próximo treino instantaneamente",
+            statTrack: "Registre carga, repetições e notas",
+            statReview: "Revise os grupos musculares treinados",
+            todayHeading: "Comece o plano de hoje sem atrito",
+            todayCopy: "Reduza decisões antes do treino e entre naturalmente na primeira série.",
+            todayFeatures: ["Veja o plano de hoje de relance", "Mantenha a ação principal clara", "Volte às séries ativas rapidamente"],
+            loggingHeading: "Registre séries sem perder o foco",
+            loggingCopy: "Salve carga, repetições e notas rapidamente no momento.",
+            loggingFeatures: ["Registre vendo o desempenho recente", "Mantenha o resultado de cada série visível", "Leve cada entrada para as análises"],
+            analyticsHeading: "Veja crescimento e lacunas em dados",
+            analyticsCopy: "PRs, 1RM estimado, Strength Percentile e tendências de volume dão base para o próximo alvo.",
+            analyticsFeatures: ["Entenda seu nível atual", "Revise tendências de 1RM e volume", "Use o progresso para planejar a próxima sessão"],
+            heatmapHeading: "Escolha o próximo pelo músculo treinado",
+            heatmapCopy: "Mapas musculares revelam equilíbrio e lacunas antes de escolher o próximo exercício.",
+            heatmapFeatures: ["Revise áreas treinadas no corpo todo", "Encontre vieses e ajuste o próximo plano", "Adicione contexto visual além dos números"],
+            libraryHeading: "Encontre exercícios pelas lacunas.",
+            libraryKicker: "Biblioteca",
+            libraryCopy: "Busque por região e músculo quando souber o que precisa de atenção.",
+            libraryAction: "Ver todos os 287 exercícios",
+            appStoreHeading: "Transforme treino sério\nem dados hoje.",
+            appStoreCopy: "Comece o Shiba grátis. Alguns recursos de histórico completo, análises de longo prazo e planejamento expandido exigem Shiba Premium.",
+            footerHome: "Início",
+            footerFeatures: "Recursos",
+            footerPrivacy: "Política de privacidade",
+            footerContact: "Contato",
+            loggingMock: { aria: "Prévia de registro de treino", title: "Supino reto", set: "Série", weight: "Carga", reps: "Reps", done: "Feito", live: "Ao vivo" }
         }
     };
 
@@ -1311,6 +2203,7 @@ function renderLibraryPage(page, catalogData, locale) {
         return `                <li class="exercise-library-item">\n${renderCard({ ...card, sectionIds }, unit, locale, section, { includeImage: true })}\n                </li>`;
     }).join("\n");
     const resultText = String(page.resultTemplate || "{count}").replace("{count}", String(records.length));
+    const heroHeading = page.displayHeading || page.heading;
     const body = `${renderStaticHeader({ pageType: "library", locale, showCategoryNav: false })}
 
     <hr class="top-divider">
@@ -1319,7 +2212,7 @@ ${renderBreadcrumb(breadcrumbs, locale)}
         <section class="container exercise-library-hero">
             <div class="exercise-library-hero-copy">
                 <p class="eyebrow">${escapeHtml(page.eyebrow || "Exercise Library")}</p>
-                <h1>${escapeHtml(page.heading)}</h1>
+                <h1>${renderResponsiveHeading(heroHeading, "exercise-library-heading-line", getResponsiveHeadingSeparator(locale))}</h1>
 ${(page.intro || []).map((paragraph) => `                <p>${escapeHtml(paragraph)}</p>`).join("\n")}
             </div>
             <div class="exercise-library-counts">
@@ -1403,6 +2296,7 @@ function renderLibraryAppCta(locale) {
         fr: { title: "Trouve l’exercice, puis enregistre-le", text: "Avec Shiba, saisis vite charge et répétitions, puis consulte ton 1RM estimé et ton niveau de force.", cta: "Commencer Shiba gratuitement" },
         de: { title: "Übung finden und direkt loggen", text: "Mit Shiba erfasst du Gewicht und Wiederholungen schnell und siehst geschätztes 1RM und Kraftniveau.", cta: "Shiba kostenlos starten" },
         id: { title: "Temukan latihan, lalu langsung catat", text: "Dengan Shiba, simpan beban dan repetisi dengan cepat lalu lihat estimasi 1RM dan level kekuatanmu.", cta: "Mulai Shiba gratis" },
+        "pt-br": { title: "Encontre um exercício e registre na hora", text: "Com Shiba, você salva carga e repetições rapidamente e revisa o 1RM estimado e seu nível de força.", cta: "Começar Shiba grátis" },
         en: { title: "Find an exercise, then log it", text: "Shiba lets you save weight and reps quickly, then review estimated 1RM and your current strength level.", cta: "Start Shiba free" }
     }[locale] || {
         title: "Find an exercise, then log it",

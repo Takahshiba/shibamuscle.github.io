@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ROOT, loadLocales } from "./source-data.mjs";
 
 const SITE_ORIGIN = "https://shibamuscle.com";
-const ACTIVE_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "id", "en"];
+const ACTIVE_LOCALE_CODES = ["ja", "ko", "zh-hant", "zh-hans", "es", "fr", "de", "id", "pt-br", "en"];
 const INACTIVE_LOCALE_CODES = new Set([]);
 let cachedLocaleConfigs = null;
 const SIMPLIFIED_CHINESE_LOCALE_CONFIG = {
@@ -194,6 +194,31 @@ const UI_TEXT = {
         support: "Dukungan",
         wholeBody: "Seluruh tubuh"
     },
+    "pt-br": {
+        ad: "Anúncio",
+        arm: "Braços",
+        back: "Costas",
+        breadcrumb: "Navegação",
+        categories: "Categorias",
+        chest: "Peito",
+        contact: "Contato",
+        core: "Core",
+        data: "Dados",
+        female: "Mulheres",
+        group: "Grupo",
+        home: "Início",
+        language: "Idioma",
+        leg: "Pernas",
+        links: "Links",
+        male: "Homens",
+        moreWorkouts: "Outros exercícios",
+        muscles: "Músculos",
+        musclesHeading: "Músculos trabalhados",
+        privacy: "Política de privacidade",
+        shoulder: "Ombros",
+        support: "Suporte",
+        wholeBody: "Corpo inteiro"
+    },
     en: {
         ad: "Ad",
         arm: "Arms",
@@ -283,6 +308,12 @@ Object.assign(UI_TEXT.id, {
     dataTerms: "Ketentuan data",
     exerciseLibrary: "Pustaka latihan"
 });
+Object.assign(UI_TEXT["pt-br"], {
+    about: "Sobre o Shiba Muscle",
+    methodology: "Como ler os dados",
+    dataTerms: "Termos de uso dos dados",
+    exerciseLibrary: "Biblioteca de exercícios"
+});
 Object.assign(UI_TEXT.en, {
     about: "About Shiba Muscle",
     methodology: "How to read the data",
@@ -303,6 +334,7 @@ const CATEGORY_NAV = [
             fr: "Pages de référence pour les exercices globaux comme le soulevé de terre, le clean et le snatch",
             de: "Referenzseiten für Ganzkörperübungen wie Kreuzheben, Clean und Snatch",
             id: "Halaman referensi untuk deadlift, clean, snatch, dan gerakan seluruh tubuh",
+            "pt-br": "Páginas de referência para movimentos de corpo inteiro como deadlift, clean e snatch",
             en: "Reference pages for full-body lifts like deadlifts, cleans, and snatches"
         }
     },
@@ -318,6 +350,7 @@ const CATEGORY_NAV = [
             fr: "Charges moyennes et comparaisons des exercices de poussée",
             de: "Durchschnittsgewichte und Vergleiche für Druckübungen",
             id: "Berat rata-rata dan perbandingan latihan dorong",
+            "pt-br": "Cargas médias e comparações para exercícios de empurrar",
             en: "Average weights and comparisons for pressing exercises"
         }
     },
@@ -333,6 +366,7 @@ const CATEGORY_NAV = [
             fr: "Comparaisons des tirages, rowings et mouvements de charnière",
             de: "Vergleiche für Rudern, Zugübungen und Hüftstreckbewegungen",
             id: "Perbandingan row, pull, dan gerakan hip hinge",
+            "pt-br": "Comparações para remadas, puxadas e movimentos de hinge",
             en: "Comparisons for rows, pulls, and hip-hinge movements"
         }
     },
@@ -348,6 +382,7 @@ const CATEGORY_NAV = [
             fr: "Exercices de développé, d'élévation et de stabilité des épaules",
             de: "Schulterdrücken, Seitheben und Stabilitätsübungen",
             id: "Daftar press, raise, dan latihan stabilitas bahu",
+            "pt-br": "Exercícios de press, elevação e estabilidade de ombros",
             en: "Presses, raises, and shoulder stability exercises"
         }
     },
@@ -363,6 +398,7 @@ const CATEGORY_NAV = [
             fr: "Curls, triceps et exercices d'avant-bras",
             de: "Curls, Trizeps- und Unterarmübungen",
             id: "Curl, triseps, dan latihan lengan bawah",
+            "pt-br": "Roscas, tríceps e exercícios de antebraço",
             en: "Curls, triceps, and forearm exercises"
         }
     },
@@ -378,6 +414,7 @@ const CATEGORY_NAV = [
             fr: "Squats, fentes et exercices dominants hanche",
             de: "Kniebeugen, Ausfallschritte und hüftdominante Übungen",
             id: "Squat, lunge, dan latihan dominan pinggul",
+            "pt-br": "Agachamentos, avanços e exercícios dominantes de quadril",
             en: "Squats, lunges, and hip-dominant exercises"
         }
     },
@@ -393,6 +430,7 @@ const CATEGORY_NAV = [
             fr: "Abdominaux, rotation et stabilité du tronc",
             de: "Bauchübungen, Rotation und Rumpfstabilität",
             id: "Abs, rotasi, dan stabilitas core",
+            "pt-br": "Abdômen, rotação e estabilidade do core",
             en: "Abs, rotation, and core stability exercises"
         }
     }
@@ -576,6 +614,36 @@ const CATEGORY_DEFAULT_TAGS_ID = {
     "arm-section": ["Lengan", "Curl"],
     "leg-section": ["Kaki", "Squat"],
     "core-section": ["Core", "Perut"]
+};
+
+const CATEGORY_LABELS_PT_BR = {
+    "whole-body-section": "Corpo inteiro",
+    "chest-section": "Peito",
+    "back-section": "Costas",
+    "shoulder-section": "Ombros",
+    "arm-section": "Braços",
+    "leg-section": "Pernas",
+    "core-section": "Core"
+};
+
+const CATEGORY_ALIASES_PT_BR = {
+    "whole-body-section": ["Exercícios de corpo inteiro", "BIG3 / corpo inteiro"],
+    "chest-section": ["Exercícios de peito", "Peitoral"],
+    "back-section": ["Exercícios de costas", "Latíssimo do dorso"],
+    "shoulder-section": ["Exercícios de ombro", "Deltoides"],
+    "arm-section": ["Exercícios de braços", "Bíceps", "Tríceps"],
+    "leg-section": ["Exercícios de pernas", "Membros inferiores"],
+    "core-section": ["Exercícios de core", "Abdômen"]
+};
+
+const CATEGORY_DEFAULT_TAGS_PT_BR = {
+    "whole-body-section": ["Corpo inteiro", "Levantamento composto"],
+    "chest-section": ["Peito", "Press"],
+    "back-section": ["Costas", "Puxada"],
+    "shoulder-section": ["Ombros", "Press"],
+    "arm-section": ["Braços", "Rosca"],
+    "leg-section": ["Pernas", "Agachamento"],
+    "core-section": ["Core", "Abdômen"]
 };
 
 const CATEGORY_LABELS_EN = {
@@ -824,6 +892,42 @@ const MUSCLES_ID = {
     "腹直筋": "Rectus abdominis"
 };
 
+const MUSCLE_GROUPS_PT_BR = {
+    "グリップ": "Pegada",
+    "主働筋": "Músculos principais",
+    "主動筋": "Músculos principais",
+    "副働筋": "Músculos secundários",
+    "副動筋": "Músculos secundários",
+    "安定筋": "Estabilizadores"
+};
+
+const MUSCLES_PT_BR = {
+    "なし": "Nenhum",
+    "ハムストリングス": "Posteriores de coxa",
+    "三角筋": "Deltoides",
+    "上腕三頭筋": "Tríceps braquial",
+    "上腕二頭筋": "Bíceps braquial",
+    "下腿三頭筋": "Panturrilhas",
+    "僧帽筋": "Trapézio",
+    "内転筋群": "Adutores",
+    "前脛骨筋": "Tibial anterior",
+    "前腕伸筋群": "Extensores do antebraço",
+    "前腕屈筋群": "Flexores do antebraço",
+    "外腹斜筋": "Oblíquos externos",
+    "大円筋": "Redondo maior",
+    "大胸筋": "Peitoral maior",
+    "大胸筋上部": "Peitoral superior",
+    "大胸筋下部": "Peitoral inferior",
+    "大腿四頭筋": "Quadríceps",
+    "大臀筋": "Glúteo máximo",
+    "広背筋": "Latíssimo do dorso",
+    "棘上筋": "Supraespinhal",
+    "棘下筋": "Infraespinhal",
+    "胸鎖乳突筋": "Esternocleidomastoideo",
+    "脊柱起立筋": "Eretores da espinha",
+    "腹直筋": "Reto abdominal"
+};
+
 const MUSCLE_GROUPS_EN = {
     "グリップ": "Grip",
     "主働筋": "Primary muscles",
@@ -918,6 +1022,16 @@ const EQUIPMENT_TAGS_ID = {
     "バーベル": "Barbell",
     "マシン": "Machine",
     "自重": "Bodyweight"
+};
+
+const EQUIPMENT_TAGS_PT_BR = {
+    BIG3: "BIG3",
+    "ケーブル": "Cabo",
+    "スミスマシン": "Smith machine",
+    "ダンベル": "Halteres",
+    "バーベル": "Barra",
+    "マシン": "Máquina",
+    "自重": "Peso corporal"
 };
 
 const EQUIPMENT_TAGS_EN = {
@@ -2501,6 +2615,54 @@ const JAPANESE_TO_INDONESIAN_TEXT = [
     ["注：", "Catatan: "]
 ].sort((left, right) => right[0].length - left[0].length);
 
+const JAPANESE_TO_PORTUGUESE_TEXT = [
+    ["その他のワークアウト", "Outros exercícios"],
+    ["ワークアウトデータベース", "Banco de dados de treinos"],
+    ["鍛えられる筋肉", "Músculos trabalhados"],
+    ["テーブルの見方", "Como ler a tabela"],
+    ["世界記録", "Recordes mundiais"],
+    ["公式記録", "Recorde oficial"],
+    ["プライバシーポリシー", "Política de privacidade"],
+    ["お問い合わせ", "Contato"],
+    ["リンク", "Links"],
+    ["言語", "Idioma"],
+    ["男性・体重別", "Homens por peso corporal"],
+    ["女性・体重別", "Mulheres por peso corporal"],
+    ["男性・年齢別", "Homens por idade"],
+    ["女性・年齢別", "Mulheres por idade"],
+    ["平均レップ数", "Repetições médias"],
+    ["基準レップ数", "Padrões de repetições"],
+    ["平均重量", "Carga média"],
+    ["基準重量", "Padrões de força"],
+    ["レップ数", "Repetições"],
+    ["体重別", "Por peso corporal"],
+    ["年齢別", "Por idade"],
+    ["レベル", "Nível"],
+    ["グループ", "Grupo"],
+    ["データ", "Dados"],
+    ["説明", "Descrição"],
+    ["分布", "Distribuição"],
+    ["体重", "Peso corporal"],
+    ["年齢", "Idade"],
+    ["男性", "Homens"],
+    ["女性", "Mulheres"],
+    ["筋肉", "Músculos"],
+    ["重量", "Carga"],
+    ["基礎", "Iniciante"],
+    ["初級", "Novato"],
+    ["中級", "Intermediário"],
+    ["上級", "Avançado"],
+    ["プロ", "Elite"],
+    ["上位", "Top"],
+    ["下位", "Base"],
+    ["正しいフォームを身につけ、1か月以上継続してトレーニングに励む。", "Aprendeu a forma correta e treinou consistentemente por pelo menos 1 mês."],
+    ["6か月以上継続的にトレーニングに励む。", "Treinou consistentemente por pelo menos 6 meses."],
+    ["２年以上継続的にトレーニングに励む。", "Treinou consistentemente por pelo menos 2 anos."],
+    ["5年以上継続的にトレーニングに励む。", "Treinou consistentemente por mais de 5 anos."],
+    ["5年以上当該メニューを専門にトレーニング。", "Treinou especificamente este exercício por mais de 5 anos."],
+    ["注：", "Nota: "]
+].sort((left, right) => right[0].length - left[0].length);
+
 const JAPANESE_TO_FRENCH_TEXT = [
     ["その他のワークアウト", "Autres exercices"],
     ["ワークアウトデータベース", "Base de données de musculation"],
@@ -3383,7 +3545,11 @@ function localizeStaticPage(page, localeCode = "ja") {
         return basePage;
     }
 
-    const fallbackLocale = localeCode === "zh-hans" ? simplifyChineseText(locales?.["zh-hant"] || {}) : {};
+    const fallbackLocale = localeCode === "zh-hans"
+        ? simplifyChineseText(locales?.["zh-hant"] || {})
+        : localeCode === "pt-br"
+            ? locales?.en || {}
+            : {};
     return {
         ...basePage,
         ...fallbackLocale,
@@ -3406,6 +3572,7 @@ function getCategoryLabels(localeCode) {
     if (localeCode === "fr") return CATEGORY_LABELS_FR;
     if (localeCode === "de") return CATEGORY_LABELS_DE;
     if (localeCode === "id") return CATEGORY_LABELS_ID;
+    if (localeCode === "pt-br") return CATEGORY_LABELS_PT_BR;
     if (localeCode === "en") return CATEGORY_LABELS_EN;
     return null;
 }
@@ -3418,6 +3585,7 @@ function getCategoryAliases(localeCode) {
     if (localeCode === "fr") return CATEGORY_ALIASES_FR;
     if (localeCode === "de") return CATEGORY_ALIASES_DE;
     if (localeCode === "id") return CATEGORY_ALIASES_ID;
+    if (localeCode === "pt-br") return CATEGORY_ALIASES_PT_BR;
     if (localeCode === "en") return CATEGORY_ALIASES_EN;
     return {};
 }
@@ -3430,6 +3598,7 @@ function getCategoryDefaultTags(localeCode) {
     if (localeCode === "fr") return CATEGORY_DEFAULT_TAGS_FR;
     if (localeCode === "de") return CATEGORY_DEFAULT_TAGS_DE;
     if (localeCode === "id") return CATEGORY_DEFAULT_TAGS_ID;
+    if (localeCode === "pt-br") return CATEGORY_DEFAULT_TAGS_PT_BR;
     if (localeCode === "en") return CATEGORY_DEFAULT_TAGS_EN;
     return {};
 }
@@ -3442,6 +3611,7 @@ function getEquipmentTags(localeCode) {
     if (localeCode === "fr") return EQUIPMENT_TAGS_FR;
     if (localeCode === "de") return EQUIPMENT_TAGS_DE;
     if (localeCode === "id") return EQUIPMENT_TAGS_ID;
+    if (localeCode === "pt-br") return EQUIPMENT_TAGS_PT_BR;
     if (localeCode === "en") return EQUIPMENT_TAGS_EN;
     return {};
 }
@@ -3602,6 +3772,26 @@ function getMeasurementCopy(kind = "weight", localeCode = "ja") {
         };
     }
 
+    if (localeCode === "pt-br") {
+        if (kind === "reps") {
+            return {
+                averageLabel: "Repetições médias",
+                standardsLabel: "Padrões de repetições",
+                detailLabel: "Repetições",
+                pageTerm: "Repetições",
+                note: "Os valores da tabela são referências de repetições possíveis em uma série."
+            };
+        }
+
+        return {
+            averageLabel: "Carga média",
+            standardsLabel: "Padrões de força",
+            detailLabel: "1RM",
+            pageTerm: "Carga",
+            note: "Os valores da tabela são estimativas baseadas em 1RM."
+        };
+    }
+
     if (localeCode === "en") {
         if (kind === "reps") {
             return {
@@ -3693,6 +3883,11 @@ function getExerciseName(exerciseOrCard, localeCode = "ja") {
         return exerciseOrCard.names?.id || EXACT_EXERCISE_NAMES_ID[slug] || inferIndonesianExerciseName(slug);
     }
 
+    if (localeCode === "pt-br") {
+        const slug = exerciseOrCard.slug || "";
+        return exerciseOrCard.names?.["pt-br"] || exerciseOrCard.names?.en || inferEnglishExerciseName(slug);
+    }
+
     if (localeCode === "en") {
         const slug = exerciseOrCard.slug || "";
         return exerciseOrCard.names?.en || inferEnglishExerciseName(slug);
@@ -3740,6 +3935,10 @@ function getExerciseTitleMetric(kind = "weight", localeCode = "ja") {
             reps: "Repetisi",
             weight: "Standar"
         },
+        "pt-br": {
+            reps: "Repetições",
+            weight: "Padrões de força"
+        },
         ko: {
             reps: "반복 기준",
             weight: "중량 기준"
@@ -3776,6 +3975,10 @@ function getMuscleGroupLabel(label, localeCode = "ja") {
         return MUSCLE_GROUPS_ID[label] || label;
     }
 
+    if (localeCode === "pt-br") {
+        return MUSCLE_GROUPS_PT_BR[label] || label;
+    }
+
     if (localeCode === "en") {
         return MUSCLE_GROUPS_EN[label] || label;
     }
@@ -3807,6 +4010,10 @@ function getMuscleName(name, localeCode = "ja") {
 
     if (localeCode === "id") {
         return MUSCLES_ID[name] || name;
+    }
+
+    if (localeCode === "pt-br") {
+        return MUSCLES_PT_BR[name] || name;
     }
 
     if (localeCode === "en") {
@@ -3943,6 +4150,18 @@ function buildExerciseSummary(exercise, section, measurementKind, localeCode = "
         return `${name} menampilkan berat rata-rata dan standar kekuatan sebagai referensi untuk kategori ${category.toLowerCase()}. Otot utama: ${muscles}.`;
     }
 
+    if (localeCode === "pt-br") {
+        const name = getExerciseName(exercise, localeCode);
+        const category = getCategoryLabel(section || exercise.categoryId, localeCode);
+        const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "músculos principais";
+
+        if (measurementKind === "reps") {
+            return `${name} é um exercício de ${category.toLowerCase()} focado em ${muscles}. Você pode revisar repetições médias e padrões de repetições em uma página.`;
+        }
+
+        return `${name} mostra carga média e padrões de força como referência para ${category.toLowerCase()}. Músculos principais: ${muscles}.`;
+    }
+
     const name = getExerciseName(exercise, localeCode);
     const category = getCategoryLabel(section || exercise.categoryId, localeCode);
     const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "주요 근육";
@@ -4052,6 +4271,18 @@ function buildExerciseDescription(exercise, section, measurementKind, localeCode
         return `${name} adalah latihan representatif untuk ${category.toLowerCase()}. Latihan ini terutama melibatkan ${muscles} dan membantu membandingkan berat rata-rata, standar kekuatan, dan latihan terkait.`;
     }
 
+    if (localeCode === "pt-br") {
+        const name = getExerciseName(exercise, localeCode);
+        const category = getCategoryLabel(section || exercise.categoryId, localeCode);
+        const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "músculos principais";
+
+        if (measurementKind === "reps") {
+            return `${name} é útil em ${category.toLowerCase()}, especialmente para treino com peso corporal ou baixa carga. Compare repetições médias e padrões enquanto confere o estímulo em ${muscles}.`;
+        }
+
+        return `${name} é um exercício representativo de ${category.toLowerCase()}. Ele usa principalmente ${muscles} e ajuda a comparar carga média, padrões de força e exercícios relacionados.`;
+    }
+
     const name = getExerciseName(exercise, localeCode);
     const category = getCategoryLabel(section || exercise.categoryId, localeCode);
     const muscles = getLocalizedMuscleGroups(exercise, localeCode)[0]?.items?.slice(0, 3).join(", ") || "주요 근육";
@@ -4156,6 +4387,18 @@ function buildExerciseSeo(exercise, measurementKind, unit, localeCode = "ja") {
         return {
             title: `${name}: ${titleMetric} | Shiba Muscle`,
             descriptionPrefix: `Halaman untuk melihat ${copy.averageLabel.toLowerCase()} dan ${copy.standardsLabel.toLowerCase()} ${name} dengan ${unitLabel}.`
+        };
+    }
+
+    if (localeCode === "pt-br") {
+        const copy = getMeasurementCopy(measurementKind, "pt-br");
+        const titleMetric = getExerciseTitleMetric(measurementKind, "pt-br");
+        const name = getExerciseName(exercise, "pt-br");
+        const unitLabel = unit === "lb" ? "tabela em lb" : "tabela em kg";
+
+        return {
+            title: `${name}: ${titleMetric} | Shiba Muscle`,
+            descriptionPrefix: `Veja ${copy.averageLabel.toLowerCase()} e ${copy.standardsLabel.toLowerCase()} de ${name} com a ${unitLabel}.`
         };
     }
 
@@ -4325,6 +4568,25 @@ function buildExerciseSeoDescription(exercise, section, measurementKind, unit, l
         return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
     }
 
+    if (localeCode === "pt-br") {
+        const name = getExerciseName(exercise, "pt-br");
+        const category = getCategoryLabel(section || exercise.categoryId, "pt-br").toLowerCase();
+        const unitLabel = unit === "lb" ? "tabela em lb" : "tabela em kg";
+        const metricPhrase = measurementKind === "reps" ? "repetições médias e padrões" : "carga média e padrões de força";
+        const requiredParts = [
+            `${name}: ${metricPhrase} (${unitLabel}).`,
+            `Categoria: ${category}.`
+        ];
+        const muscleDescription = buildFittingSeoMuscleDescription(requiredParts, exercise, "pt-br", {
+            separator: ", ",
+            format: (muscles) => `Músculos principais: ${muscles}.`
+        });
+        const metricSummary = measurementKind === "reps"
+            ? "Exercícios relacionados incluídos."
+            : "Tabelas por peso corporal e idade incluídas.";
+        return buildSeoDescription(requiredParts, [muscleDescription, metricSummary]);
+    }
+
     const name = getExerciseName(exercise, "ko");
     const category = getCategoryLabel(section || exercise.categoryId, "ko");
     const unitLabel = unit === "lb" ? "lb 기준표" : "kg 기준표";
@@ -4475,6 +4737,7 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
     const isEnglish = locale === "en";
     const isGerman = locale === "de";
     const isIndonesian = locale === "id";
+    const isPortuguese = locale === "pt-br";
     const isTraditionalChinese = locale === "zh-hant";
     const isSimplifiedChinese = locale === "zh-hans";
     const isChinese = isTraditionalChinese || isSimplifiedChinese;
@@ -4485,7 +4748,7 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
     if (block === "average") {
         const heading = isEnglish
             ? `${name}: ${copy.averageLabel}${suffix}`
-            : isSpanish || isFrench
+            : isSpanish || isFrench || isPortuguese
             ? `${copy.averageLabel} de ${name}${suffix}`
             : isGerman
                 ? `${name}: ${copy.averageLabel}${suffix}`
@@ -4506,7 +4769,7 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
         const detailLabel = measurementKind === "weight" ? "1RM" : copy.detailLabel;
         const heading = isEnglish
             ? `${name}: ${copy.standardsLabel}${unitLabel ? ` ${unitLabel}` : ""}`
-            : isSpanish || isFrench
+            : isSpanish || isFrench || isPortuguese
             ? `${copy.standardsLabel} de ${name}${unitLabel ? ` ${unitLabel}` : ""}`
             : isGerman
                 ? `${name}: ${copy.standardsLabel}${unitLabel}`
@@ -4517,7 +4780,7 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
                     : `${name} ${copy.standardsLabel}${unitLabel}`;
         next = next.replace(/<h2 class="section-title">[\s\S]*?<\/h2>/i, `<h2 class="section-title">${escapeHtml(heading)}</h2>`);
 
-        if (isChinese || isSpanish || isFrench || isGerman || isIndonesian || isEnglish) {
+        if (isChinese || isSpanish || isFrench || isGerman || isIndonesian || isPortuguese || isEnglish) {
             const standardsTableLabels = isChinese
                 ? {
                     maleByWeight: `${isTraditionalChinese ? "男性按體重" : "男性按体重"}(${unit})${isTraditionalChinese ? "資料" : "数据"} [${detailLabel}]`,
@@ -4552,6 +4815,13 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
                         femaleByWeight: `Wanita berdasarkan berat badan (${unit}) [${detailLabel}]`,
                         maleByAge: `Pria berdasarkan usia [${detailLabel}]`,
                         femaleByAge: `Wanita berdasarkan usia [${detailLabel}]`
+                    }
+                    : isPortuguese
+                    ? {
+                        maleByWeight: `Homens por peso corporal (${unit}) [${detailLabel}]`,
+                        femaleByWeight: `Mulheres por peso corporal (${unit}) [${detailLabel}]`,
+                        maleByAge: `Homens por idade [${detailLabel}]`,
+                        femaleByAge: `Mulheres por idade [${detailLabel}]`
                     }
                     : {
                         maleByWeight: `Hombres por peso corporal (${unit}) [${detailLabel}]`,
@@ -4650,6 +4920,21 @@ function localizeExerciseHtml(html, { exercise, unit, locale = "ja", block = "" 
             .replace(/Heaviest/g, "Terberat")
             .replace(/Overall/g, "Keseluruhan")
             .replace(/Official Record/g, "Rekor resmi");
+    } else if (isPortuguese) {
+        next = next
+            .replace(/alt="male"/g, 'alt="Homens"')
+            .replace(/alt="female"/g, 'alt="Mulheres"')
+            .replace(/alt="Male"/g, 'alt="Homens"')
+            .replace(/alt="Female"/g, 'alt="Mulheres"')
+            .replace(/alt="Official Record"/g, 'alt="Recorde oficial"')
+            .replace(/Last Updated:/g, "Atualizado:")
+            .replace(/Men's Raw/g, "Homens Raw")
+            .replace(/Men's Equipped/g, "Homens Equipped")
+            .replace(/Women's Raw/g, "Mulheres Raw")
+            .replace(/Women's Equipped/g, "Mulheres Equipped")
+            .replace(/Heaviest/g, "Mais pesado")
+            .replace(/Overall/g, "Geral")
+            .replace(/Official Record/g, "Recorde oficial");
     } else {
         next = next
             .replace(/alt="male"/g, 'alt="남성"')
@@ -4716,6 +5001,10 @@ function cleanSectionLabel(text, localeCode = "ja") {
 
     if (localeCode === "id") {
         return String(text || "").replace(/\s*latihan/gi, "").trim();
+    }
+
+    if (localeCode === "pt-br") {
+        return String(text || "").replace(/\s*exercícios?/gi, "").trim();
     }
 
     if (localeCode === "de") {
@@ -5121,6 +5410,14 @@ function buildCardDescription(card, section, localeCode) {
         return `Lihat berat rata-rata dan standar kekuatan ${name} untuk kategori ${sectionLabel.toLowerCase()}.${primaryMuscles ? ` Otot utama: ${primaryMuscles}.` : ""}`;
     }
 
+    if (localeCode === "pt-br") {
+        if (measurementKind === "reps") {
+            return `Veja repetições médias e padrões de repetições de ${name} em ${sectionLabel.toLowerCase()}.`;
+        }
+
+        return `Veja carga média e padrões de força de ${name} em ${sectionLabel.toLowerCase()}.${primaryMuscles ? ` Músculos principais: ${primaryMuscles}.` : ""}`;
+    }
+
     if (localeCode === "de") {
             if (measurementKind === "reps") {
                 return `Vergleiche durchschnittliche Wiederholungen und Wiederholungsstandards für ${name} im Bereich ${sectionLabel}.`;
@@ -5214,6 +5511,12 @@ function buildAverageNote(measurementKind, localeCode = "ko") {
         return measurementKind === "reps"
             ? "Catatan: nilai ini adalah estimasi repetisi rata-rata yang bisa dilakukan dalam satu set. Berat badan, rentang gerak, tempo, dan faktor pribadi lain dapat memengaruhi hasil. Lihat data detail pada tabel di bawah."
             : "Catatan: standar ini adalah estimasi 1RM berdasarkan lifter rata-rata. Berat badan, usia, dan faktor pribadi lain dapat memengaruhi hasil. Lihat data detail pada tabel di bawah.";
+    }
+
+    if (localeCode === "pt-br") {
+        return measurementKind === "reps"
+            ? "Nota: estes valores estimam repetições médias que podem ser feitas em uma série. Peso corporal, amplitude, tempo e outros fatores pessoais podem afetar o desempenho. Veja as tabelas detalhadas abaixo."
+            : "Nota: estes padrões são estimativas de 1RM baseadas em atletas médios. Peso corporal, idade e outros fatores pessoais podem afetar os valores. Veja as tabelas detalhadas abaixo.";
     }
 
     if (localeCode === "en") {
@@ -5333,6 +5636,23 @@ function buildStandardsNote(exercise, unit, measurementKind, localeCode = "ko") 
         return `Catatan: barbell standar di gym umumnya berbobot ${unit === "lb" ? "44 lb" : "20 kg"}.`;
     }
 
+    if (localeCode === "pt-br") {
+        if (measurementKind === "reps") {
+            return "Nota: os valores da tabela são referências de repetições possíveis em uma série. Dados por peso corporal ajudam a estimar carga relativa, e dados por idade ajudam a observar tendências.";
+        }
+
+        const tags = inferEquipmentTags(exercise.slug, localeCode);
+        if (tags.includes("Halteres")) {
+            return "Nota: a carga de halter indicada na tabela corresponde a um halter.";
+        }
+
+        if (tags.some((tag) => ["Máquina", "Cabo", "Smith machine"].includes(tag))) {
+            return "Nota: a carga exibida em máquinas e cabos pode variar por fabricante e configuração. Use estes valores como referência em equipamentos com condições semelhantes.";
+        }
+
+        return `Nota: uma barra padrão de academia geralmente pesa ${unit === "lb" ? "44 lb" : "20 kg"}.`;
+    }
+
     if (localeCode === "en") {
         if (measurementKind === "reps") {
             return "Note: The table values are reference rep counts for one set. Bodyweight data can help estimate relative load, while age data can show trend differences.";
@@ -5378,6 +5698,8 @@ function replaceJapaneseText(html, localeCode = "ko") {
                 ? MUSCLE_GROUPS_DE
                 : localeCode === "id"
                     ? MUSCLE_GROUPS_ID
+                : localeCode === "pt-br"
+                    ? MUSCLE_GROUPS_PT_BR
                 : localeCode === "zh-hant"
                     ? MUSCLE_GROUPS_ZH_HANT
                     : localeCode === "zh-hans"
@@ -5393,6 +5715,8 @@ function replaceJapaneseText(html, localeCode = "ko") {
                 ? MUSCLES_DE
                 : localeCode === "id"
                     ? MUSCLES_ID
+                : localeCode === "pt-br"
+                    ? MUSCLES_PT_BR
                 : localeCode === "zh-hant"
                     ? MUSCLES_ZH_HANT
                     : localeCode === "zh-hans"
@@ -5408,6 +5732,8 @@ function replaceJapaneseText(html, localeCode = "ko") {
                 ? JAPANESE_TO_GERMAN_TEXT
                 : localeCode === "id"
                     ? JAPANESE_TO_INDONESIAN_TEXT
+                : localeCode === "pt-br"
+                    ? JAPANESE_TO_PORTUGUESE_TEXT
                 : localeCode === "zh-hant"
                     ? JAPANESE_TO_ZH_HANT_TEXT
                     : localeCode === "zh-hans"

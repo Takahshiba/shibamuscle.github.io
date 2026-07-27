@@ -291,6 +291,11 @@
           ]
         }
       ]
+    },
+    "pt-br": {
+      "title": "Página não encontrada | Shiba Muscle",
+      "description": "Página de orientação do Shiba Muscle quando uma URL não foi encontrada. Volte ao início, fale com o suporte ou leia como os dados funcionam.",
+      "heading": "Página não encontrada"
     }
   }
 }

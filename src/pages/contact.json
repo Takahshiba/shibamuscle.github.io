@@ -529,6 +529,13 @@
           ]
         }
       ]
+    },
+    "pt-br": {
+      "title": "Suporte do Shiba | Shiba",
+      "description": "Obtenha suporte para o app de treino de força Shiba. Entre em contato sobre problemas no app, compras, privacidade, exclusão de dados ou feedback.",
+      "heading": "Suporte do Shiba",
+      "htmlLang": "pt-BR",
+      "textLocale": "pt-br"
     }
   }
 }

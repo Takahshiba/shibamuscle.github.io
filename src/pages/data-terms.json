@@ -639,6 +639,11 @@
           ]
         }
       ]
+    },
+    "pt-br": {
+      "title": "Termos de Uso dos Dados | Shiba Muscle",
+      "description": "Termos para uso dos dados publicados no Shiba Muscle, incluindo cargas médias, padrões de força, repetições médias e metadados de exercícios.",
+      "heading": "Termos de Uso dos Dados"
     }
   }
 }

@@ -540,6 +540,11 @@
           ]
         }
       ]
+    },
+    "pt-br": {
+      "title": "Como Ler os Dados | Shiba Muscle",
+      "description": "Entenda cargas médias, repetições médias, padrões de força, músculos trabalhados e alternância de unidades kg/lb no Shiba Muscle.",
+      "heading": "Como Ler os Dados"
     }
   }
 }

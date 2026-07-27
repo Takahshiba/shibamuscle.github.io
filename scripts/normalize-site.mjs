@@ -45,7 +45,7 @@ const SITE_THEME_COLOR = "#148a6a";
 const APP_THEME_COLOR = "#ff6a00";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const INDEXABLE_ROBOTS = "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1";
-const ICON_ASSET_VERSION = "shiba-20260704";
+const ICON_ASSET_VERSION = "shiba-20260726";
 const MANIFEST_DESCRIPTION = "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを一つの流れで管理できるiPhone向けワークアウトアプリです。";
 const WEB_APP_BACKGROUND_COLOR = "#030303";
 const ANDROID_ICON_SIZES = [36, 48, 72, 96, 128, 144, 152, 192, 256, 384, 512];
@@ -197,7 +197,15 @@ function buildPageContext(entry, html) {
             description: page?.description || "",
             canonicalUrl,
             ogImage: page?.ogImage || DEFAULT_OG_IMAGE,
-            preloadImages: [assetHref(page?.appImages?.today || "app/today-screen-current.png", locale)],
+            preloadImages: [
+                assetHref(
+                    page?.appImages?.lcp ||
+                        page?.appImages?.gymHero ||
+                        page?.appImages?.today ||
+                        "app/today-screen-current.png",
+                    locale
+                )
+            ],
             type: "website",
             twitterCard: "summary_large_image",
             dateModified,

@@ -32,6 +32,7 @@ const APP_STORE_STOREFRONT_BY_LOCALE = {
     fr: "fr",
     de: "de",
     id: "id",
+    "pt-br": "br",
     en: "us"
 };
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
@@ -85,7 +86,7 @@ const indexableMetadata = [];
 const errors = [];
 let suppressedErrorCount = 0;
 
-assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|en)\.shibamuscle\.com/i.test(sitemap), "sitemap.xml: old locale subdomain URL remains");
+assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|pt-br|en)\.shibamuscle\.com/i.test(sitemap), "sitemap.xml: old locale subdomain URL remains");
 assert(sitemap.includes('xmlns:xhtml="http://www.w3.org/1999/xhtml"'), "sitemap.xml: xhtml namespace for hreflang alternates is missing");
 assert(sitemap.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"'), "sitemap.xml: image namespace is missing");
 assert(sitemapUrlBlocks.length === sitemapUrls.size, "sitemap.xml: duplicate or malformed url entries are present");
@@ -138,8 +139,8 @@ for (const entry of htmlEntries) {
     const pageUrl = absoluteUrlForFile(entry.file, entry.locale);
 
     assert(/^<!DOCTYPE html>/i.test(html), `${entry.relativePath}: HTML5 doctype is missing`);
-    assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|en)\.shibamuscle\.com/i.test(localeConfig.origin), `${entry.locale}: old locale subdomain origin remains`);
-    assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|en)\.shibamuscle\.com/i.test(html), `${entry.relativePath}: old locale subdomain link remains`);
+    assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|pt-br|en)\.shibamuscle\.com/i.test(localeConfig.origin), `${entry.locale}: old locale subdomain origin remains`);
+    assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|pt-br|en)\.shibamuscle\.com/i.test(html), `${entry.relativePath}: old locale subdomain link remains`);
     assert(!html.includes("precaonnect"), `${entry.relativePath}: precaonnect typo is still present`);
     assert(!html.includes("G-ZPM6B2KLSV"), `${entry.relativePath}: legacy GA id is still present`);
     assert(html.includes(`gtag/js?id=${ANALYTICS_ID}`), `${entry.relativePath}: current GA script is missing`);
@@ -324,6 +325,8 @@ for (const entry of htmlEntries) {
             assert(/<meta name="description" content="[^"]+(kg Tabelle|lb Tabelle)[^"]*(Zielmuskulatur|Tabellen)[^"]+">/.test(html), `${entry.relativePath}: German exercise description is not specific enough`);
         } else if (entry.locale === "id") {
             assert(/<meta name="description" content="[^"]+(tabel kg|tabel lb)[^"]*(Otot utama|tabel berdasarkan|standar)[^"]+">/i.test(html), `${entry.relativePath}: Indonesian exercise description is not specific enough`);
+        } else if (entry.locale === "pt-br") {
+            assert(/<meta name="description" content="[^"]+(tabela em kg|tabela em lb)[^"]*(Músculos principais|padrões de força|Tabelas)[^"]+">/i.test(html), `${entry.relativePath}: Portuguese exercise description is not specific enough`);
         } else if (entry.locale === "en") {
             assert(/<meta name="description" content="[^"]+(kg table|lb table)[^"]*(Primary muscles|bodyweight tables|strength standards)[^"]+">/i.test(html), `${entry.relativePath}: English exercise description is not specific enough`);
         } else {
@@ -710,8 +713,8 @@ function readManifestJson(relativePath) {
 
 function auditHtmlAppIconMetadata(entry, html) {
     assert(html.includes(`<meta name="msapplication-TileColor" content="${THEME_COLOR}">`), `${entry.relativePath}: msapplication TileColor should match the app theme`);
-    assert(/<meta name="msapplication-config" content="[^"]*assets\/browserconfig\.xml\?v=shiba-20260704">/.test(html), `${entry.relativePath}: msapplication browserconfig reference is missing`);
-    assert(/<link rel="manifest" href="[^"]*assets\/manifest\.json\?v=shiba-20260704">/.test(html), `${entry.relativePath}: web app manifest reference is missing`);
+    assert(/<meta name="msapplication-config" content="[^"]*assets\/browserconfig\.xml\?v=shiba-20260726">/.test(html), `${entry.relativePath}: msapplication browserconfig reference is missing`);
+    assert(/<link rel="manifest" href="[^"]*assets\/manifest\.json\?v=shiba-20260726">/.test(html), `${entry.relativePath}: web app manifest reference is missing`);
 }
 
 function auditSitemapProtocolLimits() {
@@ -1003,7 +1006,13 @@ function auditImagePreloadHints(entry, html, { isIndexablePage, isHomePage, isEx
 
 function getExpectedLcpImageHref(entry, { isHomePage, isExercisePage, sourceStaticPage }) {
     if (isHomePage) {
-        return assetHref(sourceStaticPage?.appImages?.today || "app/today-screen-current.png", entry.locale);
+        return assetHref(
+            sourceStaticPage?.appImages?.lcp ||
+                sourceStaticPage?.appImages?.gymHero ||
+                sourceStaticPage?.appImages?.today ||
+                "app/today-screen-current.png",
+            entry.locale
+        );
     }
 
     if (isExercisePage && entry.file.startsWith("kg_")) {
@@ -1022,7 +1031,7 @@ function hasHighPriorityImage(html, expectedHref) {
 }
 
 function isDescriptiveFlagAlt(value) {
-    return /flag|国旗|國旗|국기|Bandera|Drapeau|Flagge|Bendera/i.test(value);
+    return /flag|国旗|國旗|국기|Bandera|Drapeau|Flagge|Bendera|Bandeira/i.test(value);
 }
 
 function auditIndexableMetadataQuality() {
@@ -1113,6 +1122,7 @@ function auditAppHomeDescription(entry, html) {
         fr: [/planifier .*séances de musculation/i, /noter les séries/i, /suivre les progrès/i, /choisir les exercices/i],
         de: [/Krafttrainings zu planen/, /Sätze zu loggen/, /Fortschritt zu prüfen/, /Übungen/],
         id: [/merencanakan latihan beban/i, /mencatat set/i, /melihat progres/i, /memilih latihan/i],
+        "pt-br": [/planejar treinos de força/i, /registrar séries/i, /acompanhar progresso/i, /escolher exercícios/i],
         en: [/plan strength workouts/i, /log sets/i, /review progress/i, /choose exercises/i]
     };
     const patterns = requiredPatterns[entry.locale] || requiredPatterns.en;
@@ -2382,6 +2392,10 @@ function getExpectedDatasetMeasurementTechnique(measurementKind, locale) {
         id: {
             reps: "Tabel repetisi rata-rata dan standar repetisi berdasarkan jenis kelamin, berat badan, dan usia.",
             weight: "Tabel berat rata-rata dan standar kekuatan berdasarkan jenis kelamin, berat badan, dan usia."
+        },
+        "pt-br": {
+            reps: "Tabelas de repetições médias e padrões de repetições por sexo, peso corporal e idade.",
+            weight: "Tabelas de carga média e padrões de força por sexo, peso corporal e idade."
         },
         en: {
             reps: "Average rep and rep standard tables by sex, bodyweight, and age.",
