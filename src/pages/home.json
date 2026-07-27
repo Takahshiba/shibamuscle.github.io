@@ -52,7 +52,7 @@
   },
   "story": {
     "heroPromise": "Lift, Track, Share",
-    "heroProof": "速く記録し、美しく見返し、深く分析する。",
+    "heroProof": "",
     "shareAction": "共有画面を見る",
     "heroCardLabel": "Share-ready result",
     "heroCardValue": "Top 1%",
@@ -92,7 +92,7 @@
         "id": "lift",
         "kicker": "Lift",
         "heading": "筋トレを\n数秒で記録",
-        "copy": "今日のメニュー、セット入力、レストタイマーを近くに置き、トレーニング中の判断を減らします。",
+        "copy": "今日のメニューから記録まで、迷わず進めます。",
         "items": [
           "今日のワークアウトをすぐ開始",
           "重量・回数・メモを素早く保存",
@@ -103,7 +103,7 @@
         "id": "track",
         "kicker": "Track",
         "heading": "筋力の現在地が\n見える",
-        "copy": "PR、推定1RM、Strength Percentile、トレーニング量、筋肉ヒートマップで、伸びと偏りを見返せます。",
+        "copy": "PR、1RM、Percentile、ヒートマップを確認。",
         "items": [
           "PRと推定1RMの変化を確認",
           "Top Percentileで現在地を把握",
@@ -113,23 +113,17 @@
     ],
     "share": {
       "kicker": "Share",
-      "heading": "今日の記録、\n残したくなる。",
-      "copy": "完了したワークアウトを、数字と筋肉ヒートマップが主役のストーリーカードに。投稿しなくても保存したくなる結果画面です。",
+      "heading": "今日の記録を\n美しく。",
+      "copy": "数字と筋肉ヒートマップを一枚に。",
       "modes": [
         {
-          "kicker": "Mode 01",
-          "heading": "Top Percentile",
-          "copy": "近い条件のリフターと比べた強さを大きく表示。"
+          "heading": "Top Percentile"
         },
         {
-          "kicker": "Mode 02",
-          "heading": "Muscle Heatmap",
-          "copy": "鍛えた部位をオレンジの強度で直感的に。"
+          "heading": "Muscle Heatmap"
         },
         {
-          "kicker": "Mode 03",
-          "heading": "Workout Summary",
-          "copy": "ボリューム、時間、セット数を一枚に整理。"
+          "heading": "Workout Summary"
         }
       ],
       "stats": [
@@ -154,17 +148,17 @@
     "library": {
       "kicker": "Find lifts",
       "heading": "鍛えたい部位から\n種目を探す",
-      "copy": "部位、筋肉、器具から次の種目へ。記録と分析の流れを切らずに、次に狙うトレーニングを選べます。"
+      "copy": "部位や器具から、次の種目へ。"
     },
     "privacy": {
       "kicker": "Privacy",
       "heading": "集中を邪魔しない\nプライベート設計",
-      "copy": "必要なのはトレーニング記録だけ。アカウントもSNSフィードも必須ではありません。"
+      "copy": "アカウント登録なしで記録できます。"
     },
     "premium": {
       "kicker": "Premium",
       "heading": "長く続けるほど、\n見えるものが増える。",
-      "copy": "Shiba Premiumでは、全履歴、長期トレンド、拡張メニュー、より深い筋肉バランス確認を使えます。",
+      "copy": "全履歴、長期トレンド、メニュー拡張を使えます。",
       "items": [
         "Full history",
         "Longer trends",
@@ -176,11 +170,11 @@
       "aria": "Shiba analytics proof preview",
       "kicker": "e1RM trend",
       "value": "+12.5 kg",
-      "copy": "PRとボリュームの変化を次の重量設定へ。"
+      "copy": "次の重量へ。"
     }
   },
   "stylesheets": [
-    "styles.css?v=app-home-spacing-20260727"
+    "styles.css?v=app-home-simplified-20260728"
   ],
   "locales": {
     "en": {
@@ -223,7 +217,7 @@
       },
       "story": {
         "heroPromise": "Lift, Track, Share",
-        "heroProof": "Log sets fast. See your strength. Share the work.",
+        "heroProof": "",
         "shareAction": "See share cards",
         "heroCardLabel": "Share-ready result",
         "heroCardValue": "Top 1%",
@@ -263,7 +257,7 @@
             "id": "lift",
             "kicker": "Lift",
             "heading": "Log sets\nin seconds",
-            "copy": "Today’s workout, set input, notes, and rest timing stay close so training does not slow down.",
+            "copy": "Start and log without extra steps.",
             "items": [
               "Start today’s workout quickly",
               "Save weight, reps, and notes fast",
@@ -274,7 +268,7 @@
             "id": "track",
             "kicker": "Track",
             "heading": "See where your\nstrength stands",
-            "copy": "PRs, estimated 1RM, Strength Percentile, training load, and muscle heatmaps make progress easier to read.",
+            "copy": "Review PRs, 1RM, percentiles, and heatmaps.",
             "items": [
               "Review PR and e1RM changes",
               "Compare with Top Percentile context",
@@ -284,23 +278,17 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Your workout becomes\nsomething beautiful.",
-          "copy": "Completed workouts become story-ready cards where numbers and muscle proof lead the composition.",
+          "heading": "Today's workout,\ncleanly saved.",
+          "copy": "Numbers and muscle heatmap in one card.",
           "modes": [
             {
-              "kicker": "Mode 01",
-              "heading": "Top Percentile",
-              "copy": "Lead with your strength standing against similar lifters."
+              "heading": "Top Percentile"
             },
             {
-              "kicker": "Mode 02",
-              "heading": "Muscle Heatmap",
-              "copy": "Show trained muscles through orange intensity."
+              "heading": "Muscle Heatmap"
             },
             {
-              "kicker": "Mode 03",
-              "heading": "Workout Summary",
-              "copy": "Package volume, duration, and sets into one polished result."
+              "heading": "Workout Summary"
             }
           ],
           "stats": [
@@ -325,17 +313,17 @@
         "library": {
           "kicker": "Find lifts",
           "heading": "Find the next lift\nfrom the gap.",
-          "copy": "Search by body part, muscle, and equipment when the heatmap shows what needs attention."
+          "copy": "Find lifts by muscle or equipment."
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "Private by default,\nfocused by design.",
-          "copy": "No required account. No social feed. Just a focused workout history you control."
+          "copy": "Log without creating an account."
         },
         "premium": {
           "kicker": "Premium",
           "heading": "The longer you train,\nthe more you can see.",
-          "copy": "Shiba Premium unlocks full history, longer trends, expanded menus, and deeper muscle-balance views.",
+          "copy": "Full history, longer trends, expanded menus.",
           "items": [
             "Full history",
             "Longer trends",
@@ -347,7 +335,7 @@
           "aria": "Shiba analytics proof preview",
           "kicker": "e1RM trend",
           "value": "+12.5 kg",
-          "copy": "Turn PR and volume changes into the next target."
+          "copy": "Set the next weight."
         }
       }
     },
@@ -391,7 +379,7 @@
       },
       "story": {
         "heroPromise": "Lift, Track, Share",
-        "heroProof": "빠르게 기록하고, 아름답게 돌아보고, 깊게 분석합니다.",
+        "heroProof": "",
         "shareAction": "공유 카드 보기",
         "heroCardLabel": "Share-ready result",
         "heroCardValue": "Top 1%",
@@ -431,7 +419,7 @@
             "id": "lift",
             "kicker": "Lift",
             "heading": "세트를\n몇 초 만에 기록",
-            "copy": "오늘 루틴, 세트 입력, 메모, 휴식 타이머를 가까이에 두어 훈련 속도를 지킵니다.",
+            "copy": "오늘 루틴부터 기록까지 빠르게 이어집니다.",
             "items": [
               "오늘 운동을 빠르게 시작",
               "중량, 반복, 메모를 즉시 저장",
@@ -442,7 +430,7 @@
             "id": "track",
             "kicker": "Track",
             "heading": "근력의 현재 위치를\n확인",
-            "copy": "PR, 추정 1RM, Strength Percentile, 훈련량, 근육 히트맵으로 성장과 빈틈을 읽습니다.",
+            "copy": "PR, 1RM, 퍼센타일, 히트맵을 확인합니다.",
             "items": [
               "PR과 추정 1RM 변화 확인",
               "Top Percentile로 현재 위치 파악",
@@ -452,23 +440,17 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "오늘 기록을\n남기고 싶게.",
-          "copy": "완료한 운동을 숫자와 근육 히트맵이 중심인 스토리 카드로 만듭니다.",
+          "heading": "오늘 기록을\n깔끔하게.",
+          "copy": "숫자와 근육 히트맵을 한 장에.",
           "modes": [
             {
-              "kicker": "Mode 01",
-              "heading": "Top Percentile",
-              "copy": "비슷한 리프터와 비교한 강점을 크게 보여줍니다."
+              "heading": "Top Percentile"
             },
             {
-              "kicker": "Mode 02",
-              "heading": "Muscle Heatmap",
-              "copy": "운동한 부위를 오렌지 강도로 직관적으로."
+              "heading": "Muscle Heatmap"
             },
             {
-              "kicker": "Mode 03",
-              "heading": "Workout Summary",
-              "copy": "볼륨, 시간, 세트 수를 한 장에 정리."
+              "heading": "Workout Summary"
             }
           ],
           "stats": [
@@ -493,17 +475,17 @@
         "library": {
           "kicker": "Find lifts",
           "heading": "빈틈에서\n다음 운동 찾기",
-          "copy": "부위, 근육, 장비 기준으로 다음 운동을 빠르게 선택합니다."
+          "copy": "부위나 장비로 다음 운동을 찾습니다."
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "집중을 지키는\n개인 중심 설계",
-          "copy": "필요한 것은 운동 기록뿐입니다. 계정이나 소셜 피드는 필수가 아닙니다."
+          "copy": "계정 없이 바로 기록합니다."
         },
         "premium": {
           "kicker": "Premium",
           "heading": "오래 훈련할수록\n더 많이 보입니다.",
-          "copy": "전체 기록, 장기 추세, 확장 메뉴, 더 깊은 근육 밸런스 보기를 사용할 수 있습니다.",
+          "copy": "전체 기록, 장기 추세, 확장 메뉴.",
           "items": [
             "Full history",
             "Longer trends",
@@ -515,7 +497,7 @@
           "aria": "Shiba analytics proof preview",
           "kicker": "e1RM trend",
           "value": "+12.5 kg",
-          "copy": "PR과 볼륨 변화를 다음 목표로 연결."
+          "copy": "다음 중량으로."
         }
       }
     },
@@ -559,7 +541,7 @@
       },
       "story": {
         "heroPromise": "Lift, Track, Share",
-        "heroProof": "快速記錄，美觀回顧，深入分析。",
+        "heroProof": "",
         "shareAction": "查看分享卡",
         "heroCardLabel": "Share-ready result",
         "heroCardValue": "Top 1%",
@@ -599,7 +581,7 @@
             "id": "lift",
             "kicker": "Lift",
             "heading": "幾秒內\n記錄組數",
-            "copy": "今日課表、組數輸入、筆記與休息時間放在同一節奏裡，訓練不中斷。",
+            "copy": "從今日課表到紀錄，快速完成。",
             "items": [
               "快速開始今日訓練",
               "立即保存重量、次數與筆記",
@@ -610,7 +592,7 @@
             "id": "track",
             "kicker": "Track",
             "heading": "看見肌力的\n目前位置",
-            "copy": "用 PR、估算 1RM、Strength Percentile、訓練量與肌肉熱力圖理解進步。",
+            "copy": "查看 PR、1RM、百分位與熱力圖。",
             "items": [
               "查看 PR 與估算 1RM 變化",
               "用 Top Percentile 掌握位置",
@@ -620,23 +602,17 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "今天的紀錄，\n會想留下來。",
-          "copy": "完成的訓練會成為以數字與肌肉熱力圖為主角的故事卡。",
+          "heading": "今天的紀錄，\n清楚留下。",
+          "copy": "數字與肌肉熱力圖，一張卡。",
           "modes": [
             {
-              "kicker": "Mode 01",
-              "heading": "Top Percentile",
-              "copy": "大方呈現與相近訓練者比較的位置。"
+              "heading": "Top Percentile"
             },
             {
-              "kicker": "Mode 02",
-              "heading": "Muscle Heatmap",
-              "copy": "用橘色強度顯示訓練部位。"
+              "heading": "Muscle Heatmap"
             },
             {
-              "kicker": "Mode 03",
-              "heading": "Workout Summary",
-              "copy": "將訓練量、時間與組數整理成一張卡。"
+              "heading": "Workout Summary"
             }
           ],
           "stats": [
@@ -661,17 +637,17 @@
         "library": {
           "kicker": "Find lifts",
           "heading": "從缺口找到\n下一個動作",
-          "copy": "依部位、肌肉與器材快速選擇下一個訓練動作。"
+          "copy": "依肌群或器材找下一個動作。"
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "預設私密，\n專注訓練。",
-          "copy": "沒有必須建立的帳號，也沒有社群動態。只留下你掌控的訓練紀錄。"
+          "copy": "不用帳號也能開始記錄。"
         },
         "premium": {
           "kicker": "Premium",
           "heading": "訓練越久，\n看見越多。",
-          "copy": "Premium 提供完整歷史、長期趨勢、進階課表與更深入的肌肉平衡視圖。",
+          "copy": "完整歷史、長期趨勢、進階課表。",
           "items": [
             "Full history",
             "Longer trends",
@@ -683,7 +659,7 @@
           "aria": "Shiba analytics proof preview",
           "kicker": "e1RM trend",
           "value": "+12.5 kg",
-          "copy": "把 PR 與訓練量變化帶到下一個目標。"
+          "copy": "下一個重量。"
         }
       }
     },
@@ -727,7 +703,7 @@
       },
       "story": {
         "heroPromise": "Lift, Track, Share",
-        "heroProof": "快速记录，美观回顾，深入分析。",
+        "heroProof": "",
         "shareAction": "查看分享卡",
         "heroCardLabel": "Share-ready result",
         "heroCardValue": "Top 1%",
@@ -767,7 +743,7 @@
             "id": "lift",
             "kicker": "Lift",
             "heading": "几秒内\n记录组数",
-            "copy": "今日计划、组数输入、笔记和休息时间放在同一节奏里，训练不中断。",
+            "copy": "从今日计划到记录，快速完成。",
             "items": [
               "快速开始今日训练",
               "立即保存重量、次数和笔记",
@@ -778,7 +754,7 @@
             "id": "track",
             "kicker": "Track",
             "heading": "看见力量的\n当前位置",
-            "copy": "用 PR、预估 1RM、Strength Percentile、训练量和肌肉热力图理解进步。",
+            "copy": "查看 PR、1RM、百分位和热力图。",
             "items": [
               "查看 PR 与预估 1RM 变化",
               "用 Top Percentile 掌握位置",
@@ -788,23 +764,17 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "今天的记录，\n会想留下来。",
-          "copy": "完成的训练会成为以数字和肌肉热力图为主角的故事卡。",
+          "heading": "今天的记录，\n清楚留下。",
+          "copy": "数字和肌肉热力图，一张卡。",
           "modes": [
             {
-              "kicker": "Mode 01",
-              "heading": "Top Percentile",
-              "copy": "清楚呈现与相近训练者比较的位置。"
+              "heading": "Top Percentile"
             },
             {
-              "kicker": "Mode 02",
-              "heading": "Muscle Heatmap",
-              "copy": "用橙色强度显示训练部位。"
+              "heading": "Muscle Heatmap"
             },
             {
-              "kicker": "Mode 03",
-              "heading": "Workout Summary",
-              "copy": "将训练量、时间和组数整理成一张卡。"
+              "heading": "Workout Summary"
             }
           ],
           "stats": [
@@ -829,17 +799,17 @@
         "library": {
           "kicker": "Find lifts",
           "heading": "从短板找到\n下一项动作",
-          "copy": "按部位、肌肉和器械快速选择下一项训练动作。"
+          "copy": "按肌群或器械找下一项动作。"
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "默认私密，\n专注训练。",
-          "copy": "没有必须创建的账号，也没有社交动态。只留下你掌控的训练记录。"
+          "copy": "无需账号即可开始记录。"
         },
         "premium": {
           "kicker": "Premium",
           "heading": "训练越久，\n看见越多。",
-          "copy": "Premium 提供完整历史、长期趋势、进阶计划和更深入的肌肉平衡视图。",
+          "copy": "完整历史、长期趋势、进阶计划。",
           "items": [
             "Full history",
             "Longer trends",
@@ -851,7 +821,7 @@
           "aria": "Shiba analytics proof preview",
           "kicker": "e1RM trend",
           "value": "+12.5 kg",
-          "copy": "把 PR 与训练量变化带到下一个目标。"
+          "copy": "下一个重量。"
         }
       }
     },
@@ -895,7 +865,7 @@
       },
       "story": {
         "heroPromise": "Lift, Track, Share",
-        "heroProof": "Registra rápido. Revisa bonito. Analiza a fondo.",
+        "heroProof": "",
         "shareAction": "Ver tarjetas",
         "heroCardLabel": "Share-ready result",
         "heroCardValue": "Top 1%",
@@ -935,7 +905,7 @@
             "id": "lift",
             "kicker": "Lift",
             "heading": "Registra series\nen segundos",
-            "copy": "Rutina de hoy, series, notas y descanso se mantienen cerca para no frenar el entrenamiento.",
+            "copy": "Del plan de hoy al registro, sin vueltas.",
             "items": [
               "Empieza la rutina rápido",
               "Guarda peso, reps y notas",
@@ -946,7 +916,7 @@
             "id": "track",
             "kicker": "Track",
             "heading": "Ve dónde está\ntu fuerza",
-            "copy": "PR, 1RM estimado, Strength Percentile, volumen y mapa muscular hacen claro el progreso.",
+            "copy": "Revisa PR, 1RM, percentiles y mapa muscular.",
             "items": [
               "Revisa cambios de PR y 1RM",
               "Compara con Top Percentile",
@@ -956,23 +926,17 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Tu entrenamiento se vuelve\nalgo bonito.",
-          "copy": "Las sesiones completadas se transforman en tarjetas listas para historias, con números y mapa muscular como protagonistas.",
+          "heading": "Tu entrenamiento,\nbien guardado.",
+          "copy": "Números y mapa muscular en una tarjeta.",
           "modes": [
             {
-              "kicker": "Mode 01",
-              "heading": "Top Percentile",
-              "copy": "Muestra tu posición frente a atletas similares."
+              "heading": "Top Percentile"
             },
             {
-              "kicker": "Mode 02",
-              "heading": "Muscle Heatmap",
-              "copy": "Muestra músculos trabajados con intensidad naranja."
+              "heading": "Muscle Heatmap"
             },
             {
-              "kicker": "Mode 03",
-              "heading": "Workout Summary",
-              "copy": "Resume volumen, duración y series en una tarjeta."
+              "heading": "Workout Summary"
             }
           ],
           "stats": [
@@ -997,17 +961,17 @@
         "library": {
           "kicker": "Find lifts",
           "heading": "Encuentra el siguiente ejercicio\ndesde el hueco.",
-          "copy": "Busca por zona, músculo y equipo cuando el mapa muestra qué necesita atención."
+          "copy": "Busca por músculo o equipo."
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "Privado por defecto,\nenfocado por diseño.",
-          "copy": "Sin cuenta obligatoria. Sin feed social. Solo un historial de entrenamiento bajo tu control."
+          "copy": "Registra sin crear cuenta."
         },
         "premium": {
           "kicker": "Premium",
           "heading": "Cuanto más entrenas,\nmás puedes ver.",
-          "copy": "Premium desbloquea historial completo, tendencias largas, menús ampliados y vista de balance muscular.",
+          "copy": "Historial completo, tendencias y menús ampliados.",
           "items": [
             "Full history",
             "Longer trends",
@@ -1019,7 +983,7 @@
           "aria": "Shiba analytics proof preview",
           "kicker": "e1RM trend",
           "value": "+12.5 kg",
-          "copy": "Convierte cambios de PR y volumen en el siguiente objetivo."
+          "copy": "El siguiente peso."
         }
       }
     },
@@ -1063,7 +1027,7 @@
       },
       "story": {
         "heroPromise": "Lift, Track, Share",
-        "heroProof": "Noter vite. Relire avec soin. Analyser en profondeur.",
+        "heroProof": "",
         "shareAction": "Voir les cartes",
         "heroCardLabel": "Share-ready result",
         "heroCardValue": "Top 1%",
@@ -1103,7 +1067,7 @@
             "id": "lift",
             "kicker": "Lift",
             "heading": "Noter les séries\nen quelques secondes",
-            "copy": "Séance du jour, séries, notes et repos restent proches pour ne pas ralentir l'entraînement.",
+            "copy": "De la séance du jour au suivi, sans détour.",
             "items": [
               "Lancer vite la séance du jour",
               "Enregistrer charge, reps et notes",
@@ -1114,7 +1078,7 @@
             "id": "track",
             "kicker": "Track",
             "heading": "Voir où se situe\nta force",
-            "copy": "PR, 1RM estimé, Strength Percentile, volume et carte musculaire rendent la progression lisible.",
+            "copy": "Voir PR, 1RM, percentiles et carte musculaire.",
             "items": [
               "Relire les changements de PR et 1RM",
               "Se situer avec Top Percentile",
@@ -1124,23 +1088,17 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Ton entraînement devient\nun bel objet.",
-          "copy": "Les séances terminées deviennent des cartes prêtes pour story, portées par les chiffres et la carte musculaire.",
+          "heading": "Ta séance,\nbien gardée.",
+          "copy": "Chiffres et carte musculaire en une carte.",
           "modes": [
             {
-              "kicker": "Mode 01",
-              "heading": "Top Percentile",
-              "copy": "Mettre en avant ta position face à des profils proches."
+              "heading": "Top Percentile"
             },
             {
-              "kicker": "Mode 02",
-              "heading": "Muscle Heatmap",
-              "copy": "Afficher les muscles travaillés en intensité orange."
+              "heading": "Muscle Heatmap"
             },
             {
-              "kicker": "Mode 03",
-              "heading": "Workout Summary",
-              "copy": "Résumer volume, durée et séries dans une carte."
+              "heading": "Workout Summary"
             }
           ],
           "stats": [
@@ -1165,17 +1123,17 @@
         "library": {
           "kicker": "Find lifts",
           "heading": "Trouver le prochain exercice\ndepuis le manque.",
-          "copy": "Recherche par zone, muscle et équipement quand la carte indique quoi renforcer."
+          "copy": "Chercher par muscle ou équipement."
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "Privé par défaut,\ncentré sur l'entraînement.",
-          "copy": "Pas de compte obligatoire. Pas de fil social. Seulement ton historique sous contrôle."
+          "copy": "Noter sans créer de compte."
         },
         "premium": {
           "kicker": "Premium",
           "heading": "Plus tu t'entraînes,\nplus tu peux voir.",
-          "copy": "Premium débloque historique complet, tendances longues, menus étendus et équilibre musculaire.",
+          "copy": "Historique complet, tendances et menus étendus.",
           "items": [
             "Full history",
             "Longer trends",
@@ -1187,7 +1145,7 @@
           "aria": "Shiba analytics proof preview",
           "kicker": "e1RM trend",
           "value": "+12.5 kg",
-          "copy": "Transformer PR et volume en prochain objectif."
+          "copy": "La prochaine charge."
         }
       }
     },
@@ -1231,7 +1189,7 @@
       },
       "story": {
         "heroPromise": "Lift, Track, Share",
-        "heroProof": "Schnell loggen. Schön prüfen. Tief analysieren.",
+        "heroProof": "",
         "shareAction": "Karten ansehen",
         "heroCardLabel": "Share-ready result",
         "heroCardValue": "Top 1%",
@@ -1271,7 +1229,7 @@
             "id": "lift",
             "kicker": "Lift",
             "heading": "Sätze in Sekunden\nloggen",
-            "copy": "Heutiges Workout, Satzeingabe, Notizen und Pausen bleiben nah beieinander, damit das Training fließt.",
+            "copy": "Vom heutigen Plan zum Log, ohne Umwege.",
             "items": [
               "Workout schnell starten",
               "Gewicht, Wdh. und Notizen sichern",
@@ -1282,7 +1240,7 @@
             "id": "track",
             "kicker": "Track",
             "heading": "Sehen, wo deine\nKraft steht",
-            "copy": "PRs, geschätztes 1RM, Strength Percentile, Volumen und Muskel-Heatmaps machen Fortschritt lesbar.",
+            "copy": "PRs, 1RM, Percentiles und Heatmap prüfen.",
             "items": [
               "PR- und 1RM-Änderungen prüfen",
               "Mit Top Percentile einordnen",
@@ -1292,23 +1250,17 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Dein Workout wird\nsehenswert.",
-          "copy": "Abgeschlossene Workouts werden zu Story-Karten, in denen Zahlen und Muskelbelege die Bühne bekommen.",
+          "heading": "Dein Training,\nklar gespeichert.",
+          "copy": "Zahlen und Muskel-Heatmap in einer Karte.",
           "modes": [
             {
-              "kicker": "Mode 01",
-              "heading": "Top Percentile",
-              "copy": "Deinen Stand gegenüber ähnlichen Trainierenden zeigen."
+              "heading": "Top Percentile"
             },
             {
-              "kicker": "Mode 02",
-              "heading": "Muscle Heatmap",
-              "copy": "Trainierte Muskeln mit oranger Intensität zeigen."
+              "heading": "Muscle Heatmap"
             },
             {
-              "kicker": "Mode 03",
-              "heading": "Workout Summary",
-              "copy": "Volumen, Dauer und Sätze in einer Karte bündeln."
+              "heading": "Workout Summary"
             }
           ],
           "stats": [
@@ -1333,17 +1285,17 @@
         "library": {
           "kicker": "Find lifts",
           "heading": "Die nächste Übung\naus der Lücke finden.",
-          "copy": "Suche nach Bereich, Muskel und Equipment, wenn die Heatmap zeigt, was Aufmerksamkeit braucht."
+          "copy": "Nach Muskel oder Equipment suchen."
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "Privat voreingestellt,\nfokussiert gebaut.",
-          "copy": "Kein Pflichtkonto. Kein Social Feed. Nur ein Trainingsverlauf, den du kontrollierst."
+          "copy": "Ohne Konto loggen."
         },
         "premium": {
           "kicker": "Premium",
           "heading": "Je länger du trainierst,\ndesto mehr siehst du.",
-          "copy": "Premium schaltet vollständige Historie, längere Trends, erweiterte Menüs und Muskelbalance frei.",
+          "copy": "Volle Historie, Trends und erweiterte Menüs.",
           "items": [
             "Full history",
             "Longer trends",
@@ -1355,7 +1307,7 @@
           "aria": "Shiba analytics proof preview",
           "kicker": "e1RM trend",
           "value": "+12.5 kg",
-          "copy": "PR- und Volumenänderungen ins nächste Ziel übertragen."
+          "copy": "Das nächste Gewicht."
         }
       }
     },
@@ -1399,7 +1351,7 @@
       },
       "story": {
         "heroPromise": "Lift, Track, Share",
-        "heroProof": "Catat cepat. Tinjau indah. Analisis lebih dalam.",
+        "heroProof": "",
         "shareAction": "Lihat kartu",
         "heroCardLabel": "Share-ready result",
         "heroCardValue": "Top 1%",
@@ -1439,7 +1391,7 @@
             "id": "lift",
             "kicker": "Lift",
             "heading": "Catat set\ndalam hitungan detik",
-            "copy": "Menu hari ini, input set, catatan, dan waktu istirahat tetap dekat agar latihan tidak melambat.",
+            "copy": "Dari menu hari ini ke catatan, tanpa langkah ekstra.",
             "items": [
               "Mulai latihan hari ini cepat",
               "Simpan beban, repetisi, catatan",
@@ -1450,7 +1402,7 @@
             "id": "track",
             "kicker": "Track",
             "heading": "Lihat posisi\nkekuatanmu",
-            "copy": "PR, estimasi 1RM, Strength Percentile, volume, dan heatmap otot membuat progres mudah dibaca.",
+            "copy": "Lihat PR, 1RM, percentile, dan heatmap.",
             "items": [
               "Tinjau perubahan PR dan 1RM",
               "Pahami posisi lewat Top Percentile",
@@ -1460,23 +1412,17 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Latihanmu menjadi\nsesuatu yang indah.",
-          "copy": "Latihan selesai berubah menjadi kartu story dengan angka dan heatmap otot sebagai bukti utama.",
+          "heading": "Latihan hari ini,\ntersimpan rapi.",
+          "copy": "Angka dan heatmap otot dalam satu kartu.",
           "modes": [
             {
-              "kicker": "Mode 01",
-              "heading": "Top Percentile",
-              "copy": "Tampilkan posisimu dibanding lifter serupa."
+              "heading": "Top Percentile"
             },
             {
-              "kicker": "Mode 02",
-              "heading": "Muscle Heatmap",
-              "copy": "Tampilkan otot terlatih dengan intensitas oranye."
+              "heading": "Muscle Heatmap"
             },
             {
-              "kicker": "Mode 03",
-              "heading": "Workout Summary",
-              "copy": "Ringkas volume, durasi, dan set dalam satu kartu."
+              "heading": "Workout Summary"
             }
           ],
           "stats": [
@@ -1501,17 +1447,17 @@
         "library": {
           "kicker": "Find lifts",
           "heading": "Temukan latihan berikut\ndari celah.",
-          "copy": "Cari berdasarkan area, otot, dan alat saat heatmap menunjukkan bagian yang perlu perhatian."
+          "copy": "Cari berdasarkan otot atau alat."
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "Privat sejak awal,\nfokus sejak desain.",
-          "copy": "Tanpa akun wajib. Tanpa feed sosial. Hanya riwayat latihan yang kamu kendalikan."
+          "copy": "Catat tanpa membuat akun."
         },
         "premium": {
           "kicker": "Premium",
           "heading": "Semakin lama berlatih,\nsemakin banyak yang terlihat.",
-          "copy": "Premium membuka riwayat penuh, tren lebih panjang, menu lanjutan, dan tampilan keseimbangan otot.",
+          "copy": "Riwayat penuh, tren panjang, menu lanjutan.",
           "items": [
             "Full history",
             "Longer trends",
@@ -1523,7 +1469,7 @@
           "aria": "Shiba analytics proof preview",
           "kicker": "e1RM trend",
           "value": "+12.5 kg",
-          "copy": "Ubah perubahan PR dan volume menjadi target berikutnya."
+          "copy": "Beban berikutnya."
         }
       }
     },
@@ -1567,7 +1513,7 @@
       },
       "story": {
         "heroPromise": "Lift, Track, Share",
-        "heroProof": "Registre rápido. Revise bonito. Analise melhor.",
+        "heroProof": "",
         "shareAction": "Ver cartões",
         "heroCardLabel": "Share-ready result",
         "heroCardValue": "Top 1%",
@@ -1607,7 +1553,7 @@
             "id": "lift",
             "kicker": "Lift",
             "heading": "Registre séries\nem segundos",
-            "copy": "Treino de hoje, entrada de séries, notas e descanso ficam próximos para não desacelerar o treino.",
+            "copy": "Do treino de hoje ao registro, sem rodeios.",
             "items": [
               "Comece o treino de hoje rapidamente",
               "Salve carga, repetições e notas",
@@ -1618,7 +1564,7 @@
             "id": "track",
             "kicker": "Track",
             "heading": "Veja onde sua\nforça está",
-            "copy": "PR, 1RM estimado, Strength Percentile, volume e mapa muscular deixam o progresso fácil de ler.",
+            "copy": "Veja PR, 1RM, percentis e mapa muscular.",
             "items": [
               "Revise mudanças de PR e 1RM",
               "Entenda seu nível com Top Percentile",
@@ -1628,23 +1574,17 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Seu treino vira\nalgo bonito.",
-          "copy": "Treinos concluídos viram cartões prontos para stories, com números e mapa muscular como prova principal.",
+          "heading": "Seu treino,\nbem salvo.",
+          "copy": "Números e mapa muscular em um cartão.",
           "modes": [
             {
-              "kicker": "Mode 01",
-              "heading": "Top Percentile",
-              "copy": "Mostre sua posição frente a atletas parecidos."
+              "heading": "Top Percentile"
             },
             {
-              "kicker": "Mode 02",
-              "heading": "Muscle Heatmap",
-              "copy": "Mostre músculos treinados com intensidade laranja."
+              "heading": "Muscle Heatmap"
             },
             {
-              "kicker": "Mode 03",
-              "heading": "Workout Summary",
-              "copy": "Organize volume, duração e séries em um cartão."
+              "heading": "Workout Summary"
             }
           ],
           "stats": [
@@ -1669,17 +1609,17 @@
         "library": {
           "kicker": "Find lifts",
           "heading": "Encontre o próximo exercício\npela lacuna.",
-          "copy": "Busque por região, músculo e equipamento quando o mapa mostrar o que precisa de atenção."
+          "copy": "Busque por músculo ou equipamento."
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "Privado por padrão,\nfocado por design.",
-          "copy": "Sem conta obrigatória. Sem feed social. Apenas um histórico de treino sob seu controle."
+          "copy": "Registre sem criar conta."
         },
         "premium": {
           "kicker": "Premium",
           "heading": "Quanto mais você treina,\nmais consegue ver.",
-          "copy": "Premium desbloqueia histórico completo, tendências longas, menus expandidos e visão mais profunda de equilíbrio muscular.",
+          "copy": "Histórico completo, tendências e menus expandidos.",
           "items": [
             "Histórico completo",
             "Tendências longas",
@@ -1691,7 +1631,7 @@
           "aria": "Prévia de análise do Shiba",
           "kicker": "Tendência de 1RM",
           "value": "+12.5 kg",
-          "copy": "Transforme mudanças de PR e volume no próximo alvo."
+          "copy": "A próxima carga."
         }
       }
     }

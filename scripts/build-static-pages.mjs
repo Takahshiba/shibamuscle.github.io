@@ -233,26 +233,16 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
                 <img class="app-hero-bg" src="${escapeAttribute(assetHref(images.gymHero, locale))}" alt="" aria-hidden="true" loading="eager" decoding="async" fetchpriority="high"${imageSizeAttributes(assetHref(images.gymHero, locale))}>
                 <div class="app-hero-inner">
                     <div class="app-hero-copy">
-                        <p class="app-release-badge"><span aria-hidden="true"></span>${escapeHtml(getHomeText(textLocale, "releaseStatus"))}</p>
                         <h1 class="app-hero-title"><span class="app-hero-title-name">Shiba</span><span class="app-hero-title-category">${escapeHtml(trustCopy.productCategory)}</span></h1>
-                        <p class="app-hero-rhythm">${escapeHtml(story.heroPromise || "Lift, Track, Share")}</p>
                         <p class="app-hero-subtitle">${renderMultilineText(share.heading || story.heroPromise || page.heroHeading || "")}</p>
                         <p class="app-hero-lead">${escapeHtml(share.copy || intro[0] || page.description || "")}</p>
-                        <p class="app-hero-proof">${escapeHtml(story.heroProof || "")}</p>
                         <div class="app-hero-actions">
                             ${renderAppStoreBadge(locale, "hero")}
-                            <a href="#share" class="app-pill app-pill--secondary">${escapeHtml(story.shareAction || getHomeText(textLocale, "primaryAction"))}</a>
-                        </div>
-                        <p class="app-hero-availability">${escapeHtml(getHomeText(textLocale, "availability"))}</p>
-                        <div class="app-hero-stats">
-${renderAppMetricRail(story.metrics || getHomeText(textLocale, "stats"))}
                         </div>
                     </div>
                     ${renderHeroScreenshotStack(locale, textLocale)}
                 </div>
             </section>
-
-${renderHomeRhythm(story.rhythm || [])}
 
 ${renderHomeScreenshotGallery(locale, textLocale)}
 
@@ -485,9 +475,9 @@ function renderHomeScreenshotGallery(locale, textLocale = locale) {
     return `            <section class="app-screenshot-gallery" id="screenshots" aria-labelledby="screenshots-heading">
                 <div class="app-screenshot-gallery-inner">
                     <div class="app-screenshot-copy">
-                        <p class="app-kicker">${escapeHtml(copy.kicker)}</p>
+                        ${copy.kicker ? `<p class="app-kicker">${escapeHtml(copy.kicker)}</p>` : ""}
                         <h2 id="screenshots-heading">${renderMultilineText(copy.heading)}</h2>
-                        <p>${escapeHtml(copy.copy)}</p>
+                        ${copy.copy ? `<p>${escapeHtml(copy.copy)}</p>` : ""}
                     </div>
                     <div class="app-screenshot-track" aria-label="${escapeAttribute(copy.trackAria)}">
 ${Array.from({ length: HOME_SCREENSHOT_COUNT }, (_, index) => {
@@ -500,7 +490,7 @@ ${Array.from({ length: HOME_SCREENSHOT_COUNT }, (_, index) => {
                             <div class="app-screenshot-frame">
                                 <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(title)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(imageHref)}>
                             </div>
-                            <figcaption><span>${String(position).padStart(2, "0")}</span>${escapeHtml(title)}</figcaption>
+                            <figcaption><span>${String(position).padStart(2, "0")}</span></figcaption>
                         </figure>`;
     }).join("\n")}
                     </div>
@@ -532,90 +522,90 @@ function resolveHomeScreenshotLocale(locale) {
 function getHomeScreenshotCopy(locale) {
     const copy = {
         ja: {
-            kicker: "App Store Preview",
-            heading: "9枚でわかる\nShibaの流れ",
-            copy: "Burn Fitのように、価値の順番がひと目で伝わる実画面プレビューです。",
+            kicker: "",
+            heading: "9枚の\n画面",
+            copy: "",
             aria: "Shiba App Storeスクリーンショットのプレビュー",
             trackAria: "Shibaの9枚のApp Storeスクリーンショット",
             defaultTitle: "スクリーンショット",
             titles: ["迷わず開始", "セットを素早く記録", "強さの現在地", "伸びを追跡", "鍛えた筋肉を見る", "次の種目を探す", "結果を共有", "アカウントなしで記録", "種目ごとに深掘り"]
         },
         ko: {
-            kicker: "App Store Preview",
-            heading: "9장으로 보는\nShiba의 흐름",
-            copy: "실제 화면으로 시작, 기록, 분석, 공유의 가치를 빠르게 이해할 수 있습니다.",
+            kicker: "",
+            heading: "9장의\n화면",
+            copy: "",
             aria: "Shiba App Store 스크린샷 미리보기",
             trackAria: "Shiba App Store 스크린샷 9장",
             defaultTitle: "스크린샷",
             titles: ["망설임 없이 시작", "세트를 빠르게 기록", "근력의 현재 위치", "성장 추적", "운동한 근육 확인", "다음 운동 찾기", "결과 공유", "계정 없이 기록", "운동별로 깊게 보기"]
         },
         "zh-hant": {
-            kicker: "App Store Preview",
-            heading: "用 9 張圖看懂\nShiba 流程",
-            copy: "以實際畫面呈現開始、紀錄、分析與分享，讓價值順序一眼清楚。",
+            kicker: "",
+            heading: "9 張\n畫面",
+            copy: "",
             aria: "Shiba App Store 截圖預覽",
             trackAria: "Shiba 的 9 張 App Store 截圖",
             defaultTitle: "截圖",
             titles: ["不猶豫地開始", "快速記錄組數", "肌力目前位置", "追蹤成長", "查看訓練肌肉", "尋找下一個動作", "分享成果", "免帳號記錄", "深入每個動作"]
         },
         "zh-hans": {
-            kicker: "App Store Preview",
-            heading: "用 9 张图看懂\nShiba 流程",
-            copy: "用实际画面呈现开始、记录、分析和分享，让价值顺序一眼清楚。",
+            kicker: "",
+            heading: "9 张\n画面",
+            copy: "",
             aria: "Shiba App Store 截图预览",
             trackAria: "Shiba 的 9 张 App Store 截图",
             defaultTitle: "截图",
             titles: ["不犹豫地开始", "快速记录组数", "力量当前位置", "追踪成长", "查看训练肌肉", "寻找下一项动作", "分享成果", "免账号记录", "深入每个动作"]
         },
         es: {
-            kicker: "App Store Preview",
-            heading: "El flujo de Shiba\nen 9 pantallas",
-            copy: "Pantallas reales para entender rápido cómo se empieza, registra, analiza y comparte.",
+            kicker: "",
+            heading: "9\npantallas",
+            copy: "",
             aria: "Vista previa de capturas de Shiba para App Store",
             trackAria: "9 capturas de Shiba para App Store",
             defaultTitle: "Captura",
             titles: ["Empieza sin dudar", "Registra series rápido", "Tu fuerza actual", "Sigue el progreso", "Mira músculos trabajados", "Encuentra el siguiente ejercicio", "Comparte resultados", "Registra sin cuenta", "Profundiza por ejercicio"]
         },
         fr: {
-            kicker: "App Store Preview",
-            heading: "Le flux Shiba\nen 9 écrans",
-            copy: "Des écrans réels pour comprendre vite comment commencer, noter, analyser et partager.",
+            kicker: "",
+            heading: "9\nécrans",
+            copy: "",
             aria: "Aperçu des captures App Store de Shiba",
             trackAria: "9 captures App Store de Shiba",
             defaultTitle: "Capture",
             titles: ["Commencer sans hésiter", "Noter vite les séries", "Ta force actuelle", "Suivre la progression", "Voir les muscles travaillés", "Trouver le prochain exercice", "Partager les résultats", "Noter sans compte", "Approfondir par exercice"]
         },
         de: {
-            kicker: "App Store Preview",
-            heading: "Shiba in\n9 Screens",
-            copy: "Echte Screens zeigen schnell, wie Start, Logging, Analyse und Teilen zusammenhängen.",
+            kicker: "",
+            heading: "9\nScreens",
+            copy: "",
             aria: "Vorschau der Shiba App Store Screenshots",
             trackAria: "9 Shiba App Store Screenshots",
             defaultTitle: "Screenshot",
             titles: ["Ohne Zögern starten", "Sätze schnell loggen", "Dein Kraftniveau", "Fortschritt verfolgen", "Trainierte Muskeln sehen", "Nächste Übung finden", "Ergebnisse teilen", "Ohne Konto loggen", "Jede Übung vertiefen"]
         },
         id: {
-            kicker: "App Store Preview",
-            heading: "Alur Shiba\ndalam 9 layar",
-            copy: "Layar nyata membantu pengguna memahami mulai, catat, analisis, dan bagikan dengan cepat.",
+            kicker: "",
+            heading: "9\nlayar",
+            copy: "",
             aria: "Pratinjau tangkapan layar App Store Shiba",
             trackAria: "9 tangkapan layar App Store Shiba",
             defaultTitle: "Tangkapan layar",
             titles: ["Mulai tanpa ragu", "Catat set dengan cepat", "Posisi kekuatanmu", "Pantau progres", "Lihat otot terlatih", "Temukan latihan berikut", "Bagikan hasil", "Catat tanpa akun", "Dalami tiap latihan"]
         },
         "pt-br": {
-            kicker: "App Store Preview",
-            heading: "O fluxo do Shiba\nem 9 telas",
-            copy: "Telas reais mostram rapidamente como começar, registrar, analisar e compartilhar.",
+            kicker: "",
+            heading: "9\ntelas",
+            copy: "",
             aria: "Prévia das capturas do Shiba para a App Store",
             trackAria: "9 capturas do Shiba para a App Store",
             defaultTitle: "Captura",
             titles: ["Comece sem pensar", "Registre séries rápido", "Sua força atual", "Acompanhe a evolução", "Veja músculos trabalhados", "Encontre o próximo exercício", "Compartilhe resultados", "Registre sem conta", "Aprofunde por exercício"]
         },
         en: {
-            kicker: "App Store Preview",
-            heading: "Shiba in\n9 screenshots",
-            copy: "Real screens make the value clear: start, log, analyze, and share without extra explanation.",
+            kicker: "",
+            heading: "9\nscreens",
+            copy: "",
             aria: "Preview of Shiba App Store screenshots",
             trackAria: "9 Shiba App Store screenshots",
             defaultTitle: "Screenshot",
@@ -681,7 +671,6 @@ function renderHomeStorySection(section, media, reverse = false) {
                         <p class="app-kicker">${escapeHtml(section.kicker)}</p>
                         <h2>${renderMultilineText(section.heading)}</h2>
                         <p>${escapeHtml(section.copy)}</p>
-${renderAppFeatureList(section.items || [])}
                     </div>
 ${media}
                 </div>
@@ -736,9 +725,7 @@ function renderShareSection(share, images, locale, textLocale = locale) {
 ${renderShareArtifact(copy, images, locale, textLocale)}
                         <div class="app-share-modes">
 ${copy.modes.map((mode, index) => `                            <article class="app-share-mode">
-                                <span>${escapeHtml(mode.kicker)}</span>
                                 <strong>${escapeHtml(mode.heading)}</strong>
-                                <p>${escapeHtml(mode.copy)}</p>
                                 <small>${escapeHtml(copy.stats[index]?.value || copy.stats[0]?.value || "")}</small>
                             </article>`).join("\n")}
                         </div>
@@ -764,14 +751,14 @@ function renderShareArtifact(copy, images, locale, textLocale = locale, variant 
     const modes = copy.modes || [];
     const primaryValue = copy.heroCardValue || stats[0]?.value || getHomeText(textLocale, "percentileValue");
     const primaryLabel = modes[0]?.heading || copy.heroCardLabel || getHomeText(textLocale, "percentileLabel");
-    const primaryCopy = modes[0]?.copy || getHomeText(textLocale, "heroPercentileCopy");
+    const primaryCopy = "";
 
     return `                        <figure class="app-share-artifact app-share-artifact--${escapeAttribute(variant)}">
                             <img class="app-share-artifact-bg" src="${escapeAttribute(assetHref(images.gymHero, locale))}" alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.gymHero, locale))}>
                             <figcaption>
                                 <span>${escapeHtml(primaryLabel)}</span>
                                 <strong>${escapeHtml(primaryValue)}</strong>
-                                <small>${escapeHtml(primaryCopy)}</small>
+                                ${primaryCopy ? `<small>${escapeHtml(primaryCopy)}</small>` : ""}
                             </figcaption>
                             <div class="app-share-artifact-tabs" aria-hidden="true">
 ${modes.slice(0, 3).map((mode, index) => `                                <span${index === 0 ? " class=\"is-active\"" : ""}>${escapeHtml(mode.heading)}</span>`).join("\n")}
@@ -797,7 +784,7 @@ function renderPrivacySection(trustCopy, privacy) {
                     <p>${escapeHtml(privacy.copy || "")}</p>
                 </div>
                 <div class="app-trust-grid">
-${trustCopy.items.map((item) => `                    <div class="app-trust-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.copy)}</span></div>`).join("\n")}
+${trustCopy.items.map((item) => `                    <div class="app-trust-item"><strong>${escapeHtml(item.title)}</strong></div>`).join("\n")}
                 </div>
             </section>`;
 }
@@ -879,7 +866,7 @@ function renderAppStoreBadge(locale, placement = "unknown") {
 function getHomeTrustCopy(locale) {
     const copy = {
         ja: {
-            productCategory: "本気で続ける筋トレ記録・分析アプリ",
+            productCategory: "筋トレ記録アプリ",
             heading: "アカウントなし、SNSフィードなし",
             items: [
                 { title: "登録不要", copy: "アカウントを作らずに記録開始" },
@@ -888,7 +875,7 @@ function getHomeTrustCopy(locale) {
             ]
         },
         ko: {
-            productCategory: "진지한 근력 운동 기록·분석 앱",
+            productCategory: "근력 운동 기록 앱",
             heading: "계정도 피드도 없이 시작",
             items: [
                 { title: "가입 불필요", copy: "계정 없이 기록 시작" },
@@ -897,7 +884,7 @@ function getHomeTrustCopy(locale) {
             ]
         },
         "zh-hant": {
-            productCategory: "認真重訓的紀錄與分析 App",
+            productCategory: "重訓紀錄 App",
             heading: "不用帳號，也沒有社群動態",
             items: [
                 { title: "免註冊", copy: "不建立帳號也能開始記錄" },
@@ -906,7 +893,7 @@ function getHomeTrustCopy(locale) {
             ]
         },
         "zh-hans": {
-            productCategory: "认真力量训练的记录与分析 App",
+            productCategory: "力量训练记录 App",
             heading: "不用账号，也没有社交动态",
             items: [
                 { title: "免注册", copy: "无需创建账号即可开始记录" },
@@ -915,7 +902,7 @@ function getHomeTrustCopy(locale) {
             ]
         },
         es: {
-            productCategory: "Registro y análisis para entrenar en serio",
+            productCategory: "Registro de fuerza",
             heading: "Sin cuenta y sin feed social",
             items: [
                 { title: "Sin registro", copy: "Empieza a registrar sin crear cuenta" },
@@ -924,7 +911,7 @@ function getHomeTrustCopy(locale) {
             ]
         },
         fr: {
-            productCategory: "Suivi et analyse pour s'entraîner sérieusement",
+            productCategory: "Suivi musculation",
             heading: "Sans compte et sans fil social",
             items: [
                 { title: "Sans inscription", copy: "Commence à noter sans créer de compte" },
@@ -933,7 +920,7 @@ function getHomeTrustCopy(locale) {
             ]
         },
         de: {
-            productCategory: "Ernsthaftes Krafttraining loggen und analysieren",
+            productCategory: "Krafttraining-Log",
             heading: "Ohne Konto und ohne Social Feed",
             items: [
                 { title: "Keine Anmeldung", copy: "Direkt ohne Konto loggen" },
@@ -942,7 +929,7 @@ function getHomeTrustCopy(locale) {
             ]
         },
         id: {
-            productCategory: "Catatan dan analitik untuk latihan serius",
+            productCategory: "Catatan latihan",
             heading: "Tanpa akun dan tanpa feed sosial",
             items: [
                 { title: "Tanpa daftar", copy: "Mulai mencatat tanpa membuat akun" },
@@ -951,7 +938,7 @@ function getHomeTrustCopy(locale) {
             ]
         },
         "pt-br": {
-            productCategory: "Registro e análise para treino de força sério",
+            productCategory: "Registro de treino",
             heading: "Sem conta. Sem feed social.",
             items: [
                 { title: "Sem cadastro", copy: "Comece a registrar sem criar conta" },
@@ -960,7 +947,7 @@ function getHomeTrustCopy(locale) {
             ]
         },
         en: {
-            productCategory: "Serious workout logging and analytics app",
+            productCategory: "Workout logging app",
             heading: "No account. No social feed.",
             items: [
                 { title: "No signup", copy: "Start logging without creating an account" },
@@ -1618,8 +1605,8 @@ function getHomeText(locale, key) {
             libraryKicker: "種目",
             libraryCopy: "部位や筋肉から、次に狙うトレーニング種目をすばやく探せます。",
             libraryAction: "全287種目を見る",
-            appStoreHeading: "本気の筋トレを、\n今日からデータに。",
-            appStoreCopy: "Shibaは無料で始められます。一部の全履歴・長期分析・メニュー拡張機能はShiba Premiumで利用できます。",
+            appStoreHeading: "Shibaを\n始める",
+            appStoreCopy: "無料で開始できます。",
             footerHome: "ホーム",
             footerFeatures: "機能",
             footerPrivacy: "プライバシーポリシー",
@@ -1679,8 +1666,8 @@ function getHomeText(locale, key) {
             libraryKicker: "Library",
             libraryCopy: "Search by body part and muscle when you know what needs attention next.",
             libraryAction: "Browse all 287 exercises",
-            appStoreHeading: "Turn serious training\ninto data today.",
-            appStoreCopy: "Start Shiba for free. Some full-history, long-term analytics, and expanded planning features require Shiba Premium.",
+            appStoreHeading: "Start\nShiba",
+            appStoreCopy: "Free to start.",
             footerHome: "Home",
             footerFeatures: "Features",
             footerPrivacy: "Privacy Policy",
@@ -1740,8 +1727,8 @@ function getHomeText(locale, key) {
             libraryKicker: "운동",
             libraryCopy: "주의가 필요한 부위와 근육을 기준으로 빠르게 탐색.",
             libraryAction: "287개 운동 모두 보기",
-            appStoreHeading: "진지한 훈련을\n오늘부터 데이터로.",
-            appStoreCopy: "Shiba는 무료로 시작할 수 있습니다. 전체 기록, 장기 분석, 확장 메뉴의 일부 기능은 Shiba Premium에서 제공됩니다.",
+            appStoreHeading: "Shiba\n시작하기",
+            appStoreCopy: "무료로 시작하세요.",
             footerHome: "홈",
             footerFeatures: "기능",
             footerPrivacy: "개인정보 처리방침",
@@ -1801,8 +1788,8 @@ function getHomeText(locale, key) {
             libraryKicker: "動作",
             libraryCopy: "依需要補強的部位與肌群快速搜尋。",
             libraryAction: "查看全部 287 個動作",
-            appStoreHeading: "從今天開始，\n把認真訓練變成資料。",
-            appStoreCopy: "Shiba 可免費開始使用；完整紀錄、長期分析與進階課表的部分功能需使用 Shiba Premium。",
+            appStoreHeading: "開始使用\nShiba",
+            appStoreCopy: "可免費開始。",
             footerHome: "首頁",
             footerFeatures: "功能",
             footerPrivacy: "隱私權政策",
@@ -1862,8 +1849,8 @@ function getHomeText(locale, key) {
             libraryKicker: "动作",
             libraryCopy: "按需要补强的部位和肌群快速搜索。",
             libraryAction: "查看全部 287 个动作",
-            appStoreHeading: "从今天开始，\n把认真训练变成数据。",
-            appStoreCopy: "Shiba 可免费开始使用；完整记录、长期分析与进阶计划的部分功能需要 Shiba Premium。",
+            appStoreHeading: "开始使用\nShiba",
+            appStoreCopy: "可免费开始。",
             footerHome: "首页",
             footerFeatures: "功能",
             footerPrivacy: "隐私政策",
@@ -1923,8 +1910,8 @@ function getHomeText(locale, key) {
             libraryKicker: "Ejercicios",
             libraryCopy: "Busca por zona y músculo cuando sabes qué necesita atención.",
             libraryAction: "Ver los 287 ejercicios",
-            appStoreHeading: "Convierte tu entrenamiento serio\nen datos desde hoy.",
-            appStoreCopy: "Empieza Shiba gratis. Algunas funciones de historial completo, análisis a largo plazo y planificación ampliada requieren Shiba Premium.",
+            appStoreHeading: "Empieza\nShiba",
+            appStoreCopy: "Gratis para empezar.",
             footerHome: "Inicio",
             footerFeatures: "Funciones",
             footerPrivacy: "Política de privacidad",
@@ -1984,8 +1971,8 @@ function getHomeText(locale, key) {
             libraryKicker: "Exercices",
             libraryCopy: "Recherche par zone et par muscle quand tu sais quoi renforcer.",
             libraryAction: "Voir les 287 exercices",
-            appStoreHeading: "Transformez l'entraînement sérieux\nen données dès aujourd’hui.",
-            appStoreCopy: "Commence Shiba gratuitement. Certaines fonctions d’historique complet, d’analyse longue durée et de planification avancée exigent Shiba Premium.",
+            appStoreHeading: "Commencer\nShiba",
+            appStoreCopy: "Gratuit au départ.",
             footerHome: "Accueil",
             footerFeatures: "Fonctions",
             footerPrivacy: "Politique de confidentialité",
@@ -2045,8 +2032,8 @@ function getHomeText(locale, key) {
             libraryKicker: "Übungen",
             libraryCopy: "Nach Bereich und Muskel suchen, wenn klar ist, was Aufmerksamkeit braucht.",
             libraryAction: "Alle 287 Übungen ansehen",
-            appStoreHeading: "Ernsthaftes Training ab heute\nin Daten verwandeln.",
-            appStoreCopy: "Shiba lässt sich kostenlos starten. Einige Funktionen für vollständige Historie, Langzeitanalyse und erweiterte Pläne benötigen Shiba Premium.",
+            appStoreHeading: "Shiba\nstarten",
+            appStoreCopy: "Kostenlos starten.",
             footerHome: "Start",
             footerFeatures: "Funktionen",
             footerPrivacy: "Datenschutzerklärung",
@@ -2106,8 +2093,8 @@ function getHomeText(locale, key) {
             libraryKicker: "Latihan",
             libraryCopy: "Cari berdasarkan area dan otot saat tahu apa yang perlu diperhatikan.",
             libraryAction: "Lihat semua 287 latihan",
-            appStoreHeading: "Ubah latihan serius\nmenjadi data mulai hari ini.",
-            appStoreCopy: "Mulai Shiba secara gratis. Beberapa fitur riwayat lengkap, analitik jangka panjang, dan menu lanjutan memerlukan Shiba Premium.",
+            appStoreHeading: "Mulai\nShiba",
+            appStoreCopy: "Gratis untuk mulai.",
             footerHome: "Beranda",
             footerFeatures: "Fitur",
             footerPrivacy: "Kebijakan privasi",
@@ -2167,8 +2154,8 @@ function getHomeText(locale, key) {
             libraryKicker: "Biblioteca",
             libraryCopy: "Busque por região e músculo quando souber o que precisa de atenção.",
             libraryAction: "Ver todos os 287 exercícios",
-            appStoreHeading: "Transforme treino sério\nem dados hoje.",
-            appStoreCopy: "Comece o Shiba grátis. Alguns recursos de histórico completo, análises de longo prazo e planejamento expandido exigem Shiba Premium.",
+            appStoreHeading: "Comece o\nShiba",
+            appStoreCopy: "Grátis para começar.",
             footerHome: "Início",
             footerFeatures: "Recursos",
             footerPrivacy: "Política de privacidade",
