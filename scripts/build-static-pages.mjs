@@ -2542,7 +2542,7 @@ function renderAppPolicyHeader(locale, textLocale = "en") {
     return `    <header class="site-header app-local-header">
         <nav class="site-topbar app-local-topbar" aria-label="Shiba">
             <a href="${escapeAttribute(homeHref)}" class="app-local-brand">
-                <img src="${assetHref("app/shiba-mascot.png", locale)}" alt="" aria-hidden="true" class="app-local-brand-icon"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
+                <img src="${assetHref("dumbbell-logo.png", locale)}" alt="" aria-hidden="true" class="app-local-brand-icon"${imageSizeAttributes(assetHref("dumbbell-logo.png", locale))}>
                 <span>Shiba</span>
             </a>
             <div class="app-local-nav">
