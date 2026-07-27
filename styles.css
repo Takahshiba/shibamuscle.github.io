@@ -5393,10 +5393,10 @@ body.app-content-page {
 }
 
 .home-page .app-hero-inner {
-    width: min(1320px, calc(100% - 48px));
+    width: min(1320px, calc(100% - 64px));
     grid-template-columns: minmax(360px, 0.74fr) minmax(560px, 1.26fr);
     gap: clamp(34px, 5vw, 72px);
-    padding: 40px 0 46px;
+    padding: 52px 0 60px;
 }
 
 .home-page .app-hero-copy {
@@ -5531,7 +5531,7 @@ body.app-content-page {
 }
 
 .app-screenshot-gallery-inner {
-    width: min(1320px, calc(100% - 48px));
+    width: min(1320px, calc(100% - 64px));
     margin: 0 auto;
     display: grid;
     gap: 34px;
@@ -5706,7 +5706,18 @@ body.app-content-page {
 }
 
 .home-page .app-rhythm-grid {
+    width: min(1120px, calc(100% - 64px));
     gap: 8px;
+}
+
+.home-page .app-story-inner,
+.home-page .app-share-inner,
+.home-page .app-premium-band {
+    width: min(1120px, calc(100% - 64px));
+}
+
+.home-page .app-library-inner {
+    width: min(1320px, calc(100% - 64px));
 }
 
 .home-page .app-rhythm-item {
@@ -5768,7 +5779,7 @@ body.app-content-page {
 @media (max-width: 1100px) {
     .home-page .app-hero-inner {
         grid-template-columns: 1fr;
-        width: min(760px, calc(100% - 40px));
+        width: min(760px, calc(100% - 56px));
         justify-items: center;
     }
 
@@ -5808,9 +5819,9 @@ body.app-content-page {
     }
 
     .home-page .app-hero-inner {
-        width: calc(100% - 24px);
-        gap: 22px;
-        padding: 24px 0 34px;
+        width: calc(100% - 36px);
+        gap: 26px;
+        padding: 32px 0 44px;
     }
 
     .home-page .app-hero-copy {
@@ -5925,8 +5936,16 @@ body.app-content-page {
     }
 
     .home-page .app-rhythm-grid {
-        width: calc(100% - 24px);
+        width: calc(100% - 36px);
         grid-template-columns: 1fr;
+    }
+
+    .home-page .app-story-inner,
+    .home-page .app-share-inner,
+    .home-page .app-premium-band,
+    .home-page .app-library-inner,
+    .home-page .app-section-copy {
+        width: calc(100% - 36px);
     }
 
     .home-page .app-rhythm-item {
@@ -5934,12 +5953,12 @@ body.app-content-page {
     }
 
     .app-screenshot-gallery {
-        padding: 54px 0;
+        padding: 62px 0;
     }
 
     .app-screenshot-gallery-inner {
-        width: calc(100% - 24px);
-        gap: 24px;
+        width: calc(100% - 36px);
+        gap: 28px;
     }
 
     .app-screenshot-copy h2 {
@@ -5949,8 +5968,8 @@ body.app-content-page {
     .app-screenshot-track {
         display: flex;
         gap: 12px;
-        margin-inline: -12px;
-        padding: 4px 12px 20px;
+        margin-inline: 0;
+        padding: 4px 0 20px;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;

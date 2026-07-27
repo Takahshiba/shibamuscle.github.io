@@ -47,7 +47,7 @@ const locales = getGeneratedLocales();
 const APP_THEME_COLOR = "#ff6a00";
 const SITE_ORIGIN = "https://shibamuscle.com";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
-const HOME_SCREENSHOT_COUNT = 10;
+const HOME_SCREENSHOT_COUNT = 9;
 const HOME_SCREENSHOT_HERO_INDICES = [1, 2, 4];
 assertExpectedLocales(locales);
 
@@ -533,93 +533,93 @@ function getHomeScreenshotCopy(locale) {
     const copy = {
         ja: {
             kicker: "App Store Preview",
-            heading: "10枚でわかる\nShibaの流れ",
+            heading: "9枚でわかる\nShibaの流れ",
             copy: "Burn Fitのように、価値の順番がひと目で伝わる実画面プレビューです。",
             aria: "Shiba App Storeスクリーンショットのプレビュー",
-            trackAria: "Shibaの10枚のApp Storeスクリーンショット",
+            trackAria: "Shibaの9枚のApp Storeスクリーンショット",
             defaultTitle: "スクリーンショット",
-            titles: ["迷わず開始", "セットを素早く記録", "強さの現在地", "伸びを追跡", "鍛えた筋肉を見る", "次の種目を探す", "結果を共有", "アカウントなしで記録", "種目ごとに深掘り", "Premiumで長く見る"]
+            titles: ["迷わず開始", "セットを素早く記録", "強さの現在地", "伸びを追跡", "鍛えた筋肉を見る", "次の種目を探す", "結果を共有", "アカウントなしで記録", "種目ごとに深掘り"]
         },
         ko: {
             kicker: "App Store Preview",
-            heading: "10장으로 보는\nShiba의 흐름",
+            heading: "9장으로 보는\nShiba의 흐름",
             copy: "실제 화면으로 시작, 기록, 분석, 공유의 가치를 빠르게 이해할 수 있습니다.",
             aria: "Shiba App Store 스크린샷 미리보기",
-            trackAria: "Shiba App Store 스크린샷 10장",
+            trackAria: "Shiba App Store 스크린샷 9장",
             defaultTitle: "스크린샷",
-            titles: ["망설임 없이 시작", "세트를 빠르게 기록", "근력의 현재 위치", "성장 추적", "운동한 근육 확인", "다음 운동 찾기", "결과 공유", "계정 없이 기록", "운동별로 깊게 보기", "Premium으로 길게 보기"]
+            titles: ["망설임 없이 시작", "세트를 빠르게 기록", "근력의 현재 위치", "성장 추적", "운동한 근육 확인", "다음 운동 찾기", "결과 공유", "계정 없이 기록", "운동별로 깊게 보기"]
         },
         "zh-hant": {
             kicker: "App Store Preview",
-            heading: "用 10 張圖看懂\nShiba 流程",
+            heading: "用 9 張圖看懂\nShiba 流程",
             copy: "以實際畫面呈現開始、紀錄、分析與分享，讓價值順序一眼清楚。",
             aria: "Shiba App Store 截圖預覽",
-            trackAria: "Shiba 的 10 張 App Store 截圖",
+            trackAria: "Shiba 的 9 張 App Store 截圖",
             defaultTitle: "截圖",
-            titles: ["不猶豫地開始", "快速記錄組數", "肌力目前位置", "追蹤成長", "查看訓練肌肉", "尋找下一個動作", "分享成果", "免帳號記錄", "深入每個動作", "用 Premium 看更久"]
+            titles: ["不猶豫地開始", "快速記錄組數", "肌力目前位置", "追蹤成長", "查看訓練肌肉", "尋找下一個動作", "分享成果", "免帳號記錄", "深入每個動作"]
         },
         "zh-hans": {
             kicker: "App Store Preview",
-            heading: "用 10 张图看懂\nShiba 流程",
+            heading: "用 9 张图看懂\nShiba 流程",
             copy: "用实际画面呈现开始、记录、分析和分享，让价值顺序一眼清楚。",
             aria: "Shiba App Store 截图预览",
-            trackAria: "Shiba 的 10 张 App Store 截图",
+            trackAria: "Shiba 的 9 张 App Store 截图",
             defaultTitle: "截图",
-            titles: ["不犹豫地开始", "快速记录组数", "力量当前位置", "追踪成长", "查看训练肌肉", "寻找下一项动作", "分享成果", "免账号记录", "深入每个动作", "用 Premium 看更久"]
+            titles: ["不犹豫地开始", "快速记录组数", "力量当前位置", "追踪成长", "查看训练肌肉", "寻找下一项动作", "分享成果", "免账号记录", "深入每个动作"]
         },
         es: {
             kicker: "App Store Preview",
-            heading: "El flujo de Shiba\nen 10 pantallas",
+            heading: "El flujo de Shiba\nen 9 pantallas",
             copy: "Pantallas reales para entender rápido cómo se empieza, registra, analiza y comparte.",
             aria: "Vista previa de capturas de Shiba para App Store",
-            trackAria: "10 capturas de Shiba para App Store",
+            trackAria: "9 capturas de Shiba para App Store",
             defaultTitle: "Captura",
-            titles: ["Empieza sin dudar", "Registra series rápido", "Tu fuerza actual", "Sigue el progreso", "Mira músculos trabajados", "Encuentra el siguiente ejercicio", "Comparte resultados", "Registra sin cuenta", "Profundiza por ejercicio", "Ve más con Premium"]
+            titles: ["Empieza sin dudar", "Registra series rápido", "Tu fuerza actual", "Sigue el progreso", "Mira músculos trabajados", "Encuentra el siguiente ejercicio", "Comparte resultados", "Registra sin cuenta", "Profundiza por ejercicio"]
         },
         fr: {
             kicker: "App Store Preview",
-            heading: "Le flux Shiba\nen 10 écrans",
+            heading: "Le flux Shiba\nen 9 écrans",
             copy: "Des écrans réels pour comprendre vite comment commencer, noter, analyser et partager.",
             aria: "Aperçu des captures App Store de Shiba",
-            trackAria: "10 captures App Store de Shiba",
+            trackAria: "9 captures App Store de Shiba",
             defaultTitle: "Capture",
-            titles: ["Commencer sans hésiter", "Noter vite les séries", "Ta force actuelle", "Suivre la progression", "Voir les muscles travaillés", "Trouver le prochain exercice", "Partager les résultats", "Noter sans compte", "Approfondir par exercice", "Voir plus avec Premium"]
+            titles: ["Commencer sans hésiter", "Noter vite les séries", "Ta force actuelle", "Suivre la progression", "Voir les muscles travaillés", "Trouver le prochain exercice", "Partager les résultats", "Noter sans compte", "Approfondir par exercice"]
         },
         de: {
             kicker: "App Store Preview",
-            heading: "Shiba in\n10 Screens",
+            heading: "Shiba in\n9 Screens",
             copy: "Echte Screens zeigen schnell, wie Start, Logging, Analyse und Teilen zusammenhängen.",
             aria: "Vorschau der Shiba App Store Screenshots",
-            trackAria: "10 Shiba App Store Screenshots",
+            trackAria: "9 Shiba App Store Screenshots",
             defaultTitle: "Screenshot",
-            titles: ["Ohne Zögern starten", "Sätze schnell loggen", "Dein Kraftniveau", "Fortschritt verfolgen", "Trainierte Muskeln sehen", "Nächste Übung finden", "Ergebnisse teilen", "Ohne Konto loggen", "Jede Übung vertiefen", "Mehr mit Premium sehen"]
+            titles: ["Ohne Zögern starten", "Sätze schnell loggen", "Dein Kraftniveau", "Fortschritt verfolgen", "Trainierte Muskeln sehen", "Nächste Übung finden", "Ergebnisse teilen", "Ohne Konto loggen", "Jede Übung vertiefen"]
         },
         id: {
             kicker: "App Store Preview",
-            heading: "Alur Shiba\ndalam 10 layar",
+            heading: "Alur Shiba\ndalam 9 layar",
             copy: "Layar nyata membantu pengguna memahami mulai, catat, analisis, dan bagikan dengan cepat.",
             aria: "Pratinjau tangkapan layar App Store Shiba",
-            trackAria: "10 tangkapan layar App Store Shiba",
+            trackAria: "9 tangkapan layar App Store Shiba",
             defaultTitle: "Tangkapan layar",
-            titles: ["Mulai tanpa ragu", "Catat set dengan cepat", "Posisi kekuatanmu", "Pantau progres", "Lihat otot terlatih", "Temukan latihan berikut", "Bagikan hasil", "Catat tanpa akun", "Dalami tiap latihan", "Lihat lebih jauh dengan Premium"]
+            titles: ["Mulai tanpa ragu", "Catat set dengan cepat", "Posisi kekuatanmu", "Pantau progres", "Lihat otot terlatih", "Temukan latihan berikut", "Bagikan hasil", "Catat tanpa akun", "Dalami tiap latihan"]
         },
         "pt-br": {
             kicker: "App Store Preview",
-            heading: "O fluxo do Shiba\nem 10 telas",
+            heading: "O fluxo do Shiba\nem 9 telas",
             copy: "Telas reais mostram rapidamente como começar, registrar, analisar e compartilhar.",
             aria: "Prévia das capturas do Shiba para a App Store",
-            trackAria: "10 capturas do Shiba para a App Store",
+            trackAria: "9 capturas do Shiba para a App Store",
             defaultTitle: "Captura",
-            titles: ["Comece sem pensar", "Registre séries rápido", "Sua força atual", "Acompanhe a evolução", "Veja músculos trabalhados", "Encontre o próximo exercício", "Compartilhe resultados", "Registre sem conta", "Aprofunde por exercício", "Veja mais com Premium"]
+            titles: ["Comece sem pensar", "Registre séries rápido", "Sua força atual", "Acompanhe a evolução", "Veja músculos trabalhados", "Encontre o próximo exercício", "Compartilhe resultados", "Registre sem conta", "Aprofunde por exercício"]
         },
         en: {
             kicker: "App Store Preview",
-            heading: "Shiba in\n10 screenshots",
+            heading: "Shiba in\n9 screenshots",
             copy: "Real screens make the value clear: start, log, analyze, and share without extra explanation.",
             aria: "Preview of Shiba App Store screenshots",
-            trackAria: "10 Shiba App Store screenshots",
+            trackAria: "9 Shiba App Store screenshots",
             defaultTitle: "Screenshot",
-            titles: ["Start without friction", "Log sets fast", "Know your strength", "Track growth", "See muscles worked", "Find the next lift", "Share results", "Private by default", "Compare each lift", "Go deeper with Premium"]
+            titles: ["Start without friction", "Log sets fast", "Know your strength", "Track growth", "See muscles worked", "Find the next lift", "Share results", "Private by default", "Compare each lift"]
         }
     };
 

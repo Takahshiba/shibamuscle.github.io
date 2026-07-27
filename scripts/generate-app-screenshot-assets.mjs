@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { existsSync, mkdirSync, readdirSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, unlinkSync } from "node:fs";
 import { basename, join } from "node:path";
 import { spawnSync } from "node:child_process";
 
@@ -8,6 +8,7 @@ const SOURCE_ROOT = process.env.SHIBA_APP_SCREENSHOT_SOURCE || "/Users/kokitakas
 const OUTPUT_ROOT = join(process.cwd(), "assets/app/screenshots");
 const MAX_DIMENSION = process.env.SHIBA_APP_SCREENSHOT_MAX_DIMENSION || "960";
 const JPEG_QUALITY = process.env.SHIBA_APP_SCREENSHOT_JPEG_QUALITY || "76";
+const SCREENSHOT_COUNT = 9;
 
 const SCREENSHOT_SETS = [
     { locale: "ja", sourceDir: "store-ja-burnfit-10-6-5" },
@@ -41,10 +42,10 @@ for (const set of SCREENSHOT_SETS) {
     const sourceFiles = readdirSync(sourceDir)
         .filter((file) => /^\d{2}-.+\.png$/i.test(file))
         .sort((a, b) => a.localeCompare(b, "en", { numeric: true }))
-        .slice(0, 10);
+        .slice(0, SCREENSHOT_COUNT);
 
-    if (sourceFiles.length !== 10) {
-        throw new Error(`Expected 10 screenshots for ${set.locale}, found ${sourceFiles.length} in ${sourceDir}`);
+    if (sourceFiles.length !== SCREENSHOT_COUNT) {
+        throw new Error(`Expected ${SCREENSHOT_COUNT} screenshots for ${set.locale}, found ${sourceFiles.length} in ${sourceDir}`);
     }
 
     mkdirSync(outputDir, { recursive: true });
@@ -66,6 +67,7 @@ for (const set of SCREENSHOT_SETS) {
         }
     }
 
+    removeStaleOutputs(outputDir);
     console.log(`Generated ${sourceFiles.length} ${set.locale} screenshots.`);
 }
 
@@ -73,9 +75,18 @@ console.log("Generated localized App Store screenshot web assets.");
 
 function allExpectedOutputsExist() {
     return SCREENSHOT_SETS.every((set) => {
-        return Array.from({ length: 10 }, (_, index) => {
+        return Array.from({ length: SCREENSHOT_COUNT }, (_, index) => {
             const file = `${String(index + 1).padStart(2, "0")}.jpg`;
             return existsSync(join(OUTPUT_ROOT, set.locale, file));
         }).every(Boolean);
     });
+}
+
+function removeStaleOutputs(outputDir) {
+    for (const file of readdirSync(outputDir)) {
+        const match = file.match(/^(\d{2})\.jpg$/);
+        if (match && Number(match[1]) > SCREENSHOT_COUNT) {
+            unlinkSync(join(outputDir, file));
+        }
+    }
 }
