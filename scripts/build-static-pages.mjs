@@ -48,7 +48,7 @@ const APP_THEME_COLOR = "#ff6a00";
 const SITE_ORIGIN = "https://shibamuscle.com";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const HOME_SCREENSHOT_COUNT = 9;
-const HOME_SCREENSHOT_HERO_INDICES = [1, 2, 4];
+const HOME_SCREENSHOT_HERO_INDICES = [7, 2, 4];
 assertExpectedLocales(locales);
 
 let generatedPages = 0;
@@ -722,7 +722,10 @@ function renderShareSection(share, images, locale, textLocale = locale) {
                         <p>${escapeHtml(copy.copy)}</p>
                     </div>
                     <div class="app-share-layout">
+                        <div class="app-share-showcase">
+${renderShareScreenShowcase(locale, textLocale)}
 ${renderShareArtifact(copy, images, locale, textLocale)}
+                        </div>
                         <div class="app-share-modes">
 ${copy.modes.map((mode, index) => `                            <article class="app-share-mode">
                                 <strong>${escapeHtml(mode.heading)}</strong>
@@ -744,6 +747,19 @@ function normalizeShareCopy(share, textLocale = "ja") {
         heroCardLabel: share.heroCardLabel || "Share-ready result",
         heroCardValue: share.heroCardValue || "Top 1%"
     };
+}
+
+function renderShareScreenShowcase(locale, textLocale = locale) {
+    const copy = getHomeScreenshotCopy(textLocale);
+    const image = homeScreenshotAsset(locale, 7);
+    const imageHref = assetHref(image, locale);
+    const title = copy.titles[6] || copy.defaultTitle;
+
+    return `                            <figure class="app-share-screen">
+                                <div class="app-share-screen-frame">
+                                    <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(title)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(imageHref)}>
+                                </div>
+                            </figure>`;
 }
 
 function renderShareArtifact(copy, images, locale, textLocale = locale, variant = "section") {

@@ -113,8 +113,8 @@
     ],
     "share": {
       "kicker": "Share",
-      "heading": "今日の記録を\n美しく。",
-      "copy": "数字と筋肉ヒートマップを一枚に。",
+      "heading": "今日の記録を\n残したくなる一枚に。",
+      "copy": "ボリューム、時間、セット数、筋肉ヒートマップまで、美しく残せます。",
       "modes": [
         {
           "heading": "Top Percentile"
@@ -174,7 +174,7 @@
     }
   },
   "stylesheets": [
-    "styles.css?v=app-home-simplified-20260728"
+    "styles.css?v=app-home-share-screen-20260729"
   ],
   "locales": {
     "en": {
