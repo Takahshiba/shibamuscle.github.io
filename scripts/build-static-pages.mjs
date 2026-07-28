@@ -749,10 +749,8 @@ function normalizeShareCopy(share, textLocale = "ja") {
     };
 }
 
-function renderShareScreenShowcase(shareCopy, locale, textLocale = locale) {
+function renderShareScreenShowcase(_shareCopy, locale, textLocale = locale) {
     const screenshotCopy = getHomeScreenshotCopy(textLocale);
-    const screenCopy = getShareTopScreenCopy(locale);
-    const topValue = shareCopy.heroCardValue || shareCopy.stats?.[0]?.value || getHomeText(textLocale, "percentileValue");
     const image = homeScreenshotAsset(locale, 7);
     const imageHref = assetHref(image, locale);
     const title = screenshotCopy.titles[6] || screenshotCopy.defaultTitle;
@@ -760,77 +758,8 @@ function renderShareScreenShowcase(shareCopy, locale, textLocale = locale) {
     return `                            <figure class="app-share-screen">
                                 <div class="app-share-screen-frame">
                                     <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(title)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(imageHref)}>
-                                    <div class="app-share-top-preview" aria-hidden="true">
-                                        <div class="app-share-top-tabs">
-${screenCopy.tabs.map((tab, index) => `                                            <span${index === 0 ? " class=\"is-active\"" : ""}>${escapeHtml(tab)}</span>`).join("\n")}
-                                        </div>
-                                        <div class="app-share-top-card">
-                                            <span>${escapeHtml(screenCopy.kicker)}</span>
-                                            <strong>${escapeHtml(topValue)}</strong>
-                                            <em>${escapeHtml(screenCopy.exercise)}</em>
-                                            <svg class="app-share-top-chart" viewBox="0 0 240 98" aria-hidden="true" focusable="false">
-                                                <path class="app-share-top-area" d="M8 86 C52 82 73 46 110 34 C146 22 166 64 232 74 L232 96 L8 96 Z"></path>
-                                                <path class="app-share-top-line" d="M8 86 C52 82 73 46 110 34 C146 22 166 64 232 74"></path>
-                                                <circle cx="232" cy="74" r="5"></circle>
-                                            </svg>
-                                            <small>Shiba</small>
-                                        </div>
-                                    </div>
                                 </div>
                             </figure>`;
-}
-
-function getShareTopScreenCopy(locale) {
-    const screenLocale = resolveHomeScreenshotLocale(locale);
-    const copy = {
-        ja: {
-            tabs: ["トップ", "ヒートマップ", "概要"],
-            kicker: "Strength",
-            exercise: "ベンチプレス"
-        },
-        ko: {
-            tabs: ["Top", "히트맵", "요약"],
-            kicker: "Strength",
-            exercise: "벤치프레스"
-        },
-        "zh-hant": {
-            tabs: ["Top", "熱力圖", "摘要"],
-            kicker: "Strength",
-            exercise: "臥推"
-        },
-        "zh-hans": {
-            tabs: ["Top", "热力图", "摘要"],
-            kicker: "Strength",
-            exercise: "卧推"
-        },
-        es: {
-            tabs: ["Top", "Mapa", "Resumen"],
-            kicker: "Strength",
-            exercise: "Press banca"
-        },
-        fr: {
-            tabs: ["Top", "Carte", "Résumé"],
-            kicker: "Strength",
-            exercise: "Développé couché"
-        },
-        de: {
-            tabs: ["Top", "Heatmap", "Übersicht"],
-            kicker: "Strength",
-            exercise: "Bankdrücken"
-        },
-        "pt-br": {
-            tabs: ["Top", "Mapa", "Resumo"],
-            kicker: "Strength",
-            exercise: "Supino"
-        },
-        en: {
-            tabs: ["Top", "Heatmap", "Summary"],
-            kicker: "Strength",
-            exercise: "Bench Press"
-        }
-    };
-
-    return copy[screenLocale] || copy.en;
 }
 
 function renderShareArtifact(copy, images, locale, textLocale = locale, variant = "section") {

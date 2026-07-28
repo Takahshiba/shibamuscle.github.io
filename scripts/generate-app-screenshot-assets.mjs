@@ -6,6 +6,7 @@ import { spawnSync } from "node:child_process";
 
 const SOURCE_ROOT = process.env.SHIBA_APP_SCREENSHOT_SOURCE || "/Users/kokitakashiba/Desktop/shiba/docs/app-store-screenshots";
 const OUTPUT_ROOT = join(process.cwd(), "assets/app/screenshots");
+const OVERRIDE_ROOT = join(process.cwd(), "src/app-screenshot-overrides/top-share");
 const MAX_DIMENSION = process.env.SHIBA_APP_SCREENSHOT_MAX_DIMENSION || "960";
 const JPEG_QUALITY = process.env.SHIBA_APP_SCREENSHOT_JPEG_QUALITY || "76";
 const SCREENSHOT_COUNT = 9;
@@ -51,7 +52,7 @@ for (const set of SCREENSHOT_SETS) {
     mkdirSync(outputDir, { recursive: true });
 
     for (const [index, file] of sourceFiles.entries()) {
-        const inputPath = join(sourceDir, file);
+        const inputPath = screenshotInputPath(set.locale, index + 1, join(sourceDir, file));
         const outputPath = join(outputDir, `${String(index + 1).padStart(2, "0")}.jpg`);
         const result = spawnSync("sips", [
             "-s", "format", "jpeg",
@@ -89,4 +90,13 @@ function removeStaleOutputs(outputDir) {
             unlinkSync(join(outputDir, file));
         }
     }
+}
+
+function screenshotInputPath(locale, index, fallbackPath) {
+    const basename = `${String(index).padStart(2, "0")}`;
+    const overridePaths = [
+        join(OVERRIDE_ROOT, locale, `${basename}.jpg`),
+        join(OVERRIDE_ROOT, locale, `${basename}.png`)
+    ];
+    return overridePaths.find((overridePath) => existsSync(overridePath)) || fallbackPath;
 }
