@@ -3161,6 +3161,82 @@ html:lang(zh-Hans) body.app-content-page {
     gap: 36px;
 }
 
+.app-share-card-stage {
+    position: relative;
+    width: min(1120px, 100%);
+    min-height: 790px;
+    margin: 8px auto 0;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+}
+
+.app-share-card-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(320px, 28vw);
+    margin: 0;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    transition: transform 220ms ease, filter 220ms ease, opacity 220ms ease;
+}
+
+.app-share-card-screen--top {
+    z-index: 1;
+    opacity: 0.82;
+    filter: saturate(0.9) brightness(0.74);
+    transform: translate(calc(-50% - clamp(190px, 22vw, 270px)), -50%) rotate(-4deg) scale(0.9);
+}
+
+.app-share-card-screen--heatmap {
+    z-index: 3;
+    width: min(360px, 32vw);
+}
+
+.app-share-card-screen--summary {
+    z-index: 2;
+    opacity: 0.86;
+    filter: saturate(0.92) brightness(0.78);
+    transform: translate(calc(-50% + clamp(190px, 22vw, 270px)), -50%) rotate(4deg) scale(0.9);
+}
+
+.app-share-card-screen:hover,
+.app-share-card-screen:focus-within {
+    opacity: 1;
+    filter: saturate(1) brightness(1);
+}
+
+.app-share-card-frame {
+    position: relative;
+    padding: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 189, 85, 0.28);
+    border-radius: 34px;
+    background: #070403;
+    box-shadow:
+        0 38px 96px rgba(0, 0, 0, 0.58),
+        0 0 0 1px rgba(255, 122, 0, 0.08);
+}
+
+.app-share-card-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1320 / 2868;
+    object-fit: cover;
+    border-radius: 28px;
+}
+
+.app-share-card-screen figcaption {
+    margin-top: 12px;
+    color: rgba(255, 247, 238, 0.78);
+    font-size: 0.82rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+}
+
 .app-share-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.24fr) minmax(280px, 0.66fr);
@@ -4474,64 +4550,6 @@ body.exercise-library-page {
     background: var(--accent-strong);
 }
 
-.app-logging-mock {
-    width: min(430px, 100%);
-    padding: 18px;
-    border: 1px solid rgba(255, 122, 0, 0.58);
-    border-radius: 8px;
-    background:
-        linear-gradient(180deg, rgba(255, 122, 0, 0.26), rgba(255, 255, 255, 0.025)),
-        var(--app-panel);
-    box-shadow: 0 26px 68px rgba(0, 0, 0, 0.52);
-    display: grid;
-    gap: 14px;
-}
-
-.app-logging-header,
-.app-logging-footer,
-.app-logging-row {
-    display: grid;
-    align-items: center;
-    gap: 10px;
-}
-
-.app-logging-header {
-    grid-template-columns: 1fr auto;
-    color: #ffffff;
-    font-weight: 800;
-}
-
-.app-logging-table {
-    display: grid;
-    gap: 8px;
-}
-
-.app-logging-row {
-    grid-template-columns: 1fr 74px 44px 52px;
-    min-height: 48px;
-    padding: 0 12px;
-    border: 1px solid rgba(255, 122, 0, 0.28);
-    border-radius: 8px;
-    background: var(--app-panel-raised);
-    color: #f8f4ee;
-}
-
-.app-logging-row span,
-.app-logging-row small {
-    color: rgba(255, 247, 238, 0.58);
-    font-size: 0.8rem;
-}
-
-.app-logging-row strong {
-    font-size: 0.92rem;
-}
-
-.app-logging-footer {
-    grid-template-columns: 1fr 1fr;
-    color: rgba(255, 247, 238, 0.62);
-    font-size: 0.78rem;
-}
-
 .app-scene-media--wide {
     width: 100%;
 }
@@ -5334,16 +5352,6 @@ body.app-content-page {
         font-size: 0.92rem;
     }
 
-    .app-logging-mock {
-        width: min(360px, 100%);
-        padding: 14px;
-    }
-
-    .app-logging-row {
-        grid-template-columns: 1fr 64px 36px 48px;
-        padding: 0 9px;
-    }
-
     .app-library-preview {
         grid-template-columns: 1fr;
         margin: 0 auto;
@@ -5455,19 +5463,6 @@ body.app-content-page {
         font-size: 1.28rem;
     }
 
-    .app-logging-row {
-        grid-template-columns: 1fr 58px 32px 42px;
-        gap: 6px;
-    }
-
-    .app-logging-row span,
-    .app-logging-row small {
-        font-size: 0.72rem;
-    }
-
-    .app-logging-row strong {
-        font-size: 0.82rem;
-    }
 }
 
 /* Share-first homepage redesign */
@@ -5841,26 +5836,34 @@ body.app-content-page {
 
 .app-lift-proof {
     position: relative;
-    width: min(560px, 100%);
-    min-height: 520px;
+    width: min(620px, 100%);
+    min-height: 640px;
     display: grid;
     place-items: center;
 }
 
 .app-phone--lift-proof {
-    width: min(250px, 54%);
-    transform: translateX(70px) rotate(2deg);
+    position: absolute;
+    top: 28px;
+    right: 36px;
+    width: min(250px, 44%);
+    transform: rotate(2deg);
+    opacity: 0.86;
+    z-index: 1;
 }
 
-.app-logging-mock--compact {
+.app-phone--logging-proof {
     position: absolute;
-    left: 0;
-    bottom: 54px;
-    width: min(330px, 62%);
-    border-color: rgba(255, 122, 0, 0.52);
-    background: rgba(7, 5, 4, 0.94);
-    box-shadow: 0 26px 72px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(18px);
+    left: 18px;
+    bottom: 10px;
+    width: min(310px, 58%);
+    aspect-ratio: 828 / 1774;
+    transform: rotate(-2deg);
+    border-color: rgba(255, 122, 0, 0.58);
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.58),
+        0 0 46px rgba(255, 106, 0, 0.18);
+    z-index: 2;
 }
 
 .app-share-mode small {
@@ -5902,6 +5905,27 @@ body.app-content-page {
         margin: 0 auto;
     }
 
+    .app-share-card-stage {
+        width: min(840px, 100%);
+        min-height: 730px;
+    }
+
+    .app-share-card-screen {
+        width: min(300px, 30vw);
+    }
+
+    .app-share-card-screen--top {
+        transform: translate(calc(-50% - clamp(160px, 23vw, 230px)), -50%) rotate(-4deg) scale(0.9);
+    }
+
+    .app-share-card-screen--heatmap {
+        width: min(340px, 35vw);
+    }
+
+    .app-share-card-screen--summary {
+        transform: translate(calc(-50% + clamp(160px, 23vw, 230px)), -50%) rotate(4deg) scale(0.9);
+    }
+
     .app-share-modes {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -5937,8 +5961,8 @@ body.app-content-page {
     }
 
     .home-page .app-hero-subtitle {
-        max-width: 360px;
-        font-size: 2.34rem;
+        max-width: 330px;
+        font-size: 2.18rem;
         line-height: 1.02;
     }
 
@@ -6002,8 +6026,8 @@ body.app-content-page {
 
     .app-hero-shot--analytics {
         top: 92px;
-        right: 0;
-        width: 42%;
+        right: 8%;
+        width: 36%;
     }
 
     .app-share-artifact--hero {
@@ -6084,6 +6108,43 @@ body.app-content-page {
         display: none;
     }
 
+    .app-share-card-stage {
+        min-height: 610px;
+        margin-top: 2px;
+    }
+
+    .app-share-card-screen {
+        width: min(210px, 44vw);
+    }
+
+    .app-share-card-screen--top {
+        opacity: 0.78;
+        transform: translate(calc(-50% - clamp(115px, 25vw, 172px)), -50%) rotate(-5deg) scale(0.9);
+    }
+
+    .app-share-card-screen--heatmap {
+        width: min(300px, 62vw);
+    }
+
+    .app-share-card-screen--summary {
+        opacity: 0.8;
+        transform: translate(calc(-50% + clamp(115px, 25vw, 172px)), -50%) rotate(5deg) scale(0.9);
+    }
+
+    .app-share-card-frame {
+        padding: 4px;
+        border-radius: 30px;
+    }
+
+    .app-share-card-frame img {
+        border-radius: 25px;
+    }
+
+    .app-share-card-screen figcaption {
+        margin-top: 9px;
+        font-size: 0.74rem;
+    }
+
     .home-page .app-rhythm-grid {
         width: calc(100% - 36px);
         grid-template-columns: 1fr;
@@ -6132,17 +6193,20 @@ body.app-content-page {
 
     .app-lift-proof {
         width: min(100%, 360px);
-        min-height: 420px;
+        min-height: 500px;
     }
 
     .app-phone--lift-proof {
-        width: min(190px, 54%);
-        transform: translateX(48px) rotate(2deg);
+        top: 0;
+        right: 0;
+        width: min(176px, 49%);
+        transform: rotate(2deg);
     }
 
-    .app-logging-mock--compact {
-        bottom: 30px;
-        width: min(236px, 66%);
+    .app-phone--logging-proof {
+        left: 0;
+        bottom: 0;
+        width: min(230px, 64%);
     }
 }
 
@@ -6152,11 +6216,32 @@ body.app-content-page {
     }
 
     .home-page .app-hero-subtitle {
-        font-size: 2.08rem;
+        max-width: 300px;
+        font-size: 1.78rem;
     }
 
     .app-share-artifact--hero {
         min-height: 500px;
+    }
+
+    .app-share-card-stage {
+        min-height: 540px;
+    }
+
+    .app-share-card-screen {
+        width: min(160px, 43vw);
+    }
+
+    .app-share-card-screen--top {
+        transform: translate(calc(-50% - clamp(82px, 26vw, 114px)), -50%) rotate(-5deg) scale(0.9);
+    }
+
+    .app-share-card-screen--heatmap {
+        width: min(230px, 66vw);
+    }
+
+    .app-share-card-screen--summary {
+        transform: translate(calc(-50% + clamp(82px, 26vw, 114px)), -50%) rotate(5deg) scale(0.9);
     }
 
     .app-hero-screen-stack {

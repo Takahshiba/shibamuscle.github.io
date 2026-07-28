@@ -43,6 +43,7 @@
   "ads": false,
   "appImages": {
     "today": "app/today-screen-current.png",
+    "logging": "app/workout-logging-current.png",
     "strength": "app/strength-percentile.jpg",
     "heatmap": "app/completion-heatmap.png",
     "heatmapDetail": "app/muscle-heatmap.png",
@@ -113,35 +114,23 @@
     ],
     "share": {
       "kicker": "Share",
-      "heading": "今日の記録を\n残したくなる一枚に。",
-      "copy": "ボリューム、時間、セット数、筋肉ヒートマップまで、美しく残せます。",
-      "modes": [
+      "heading": "見せたくなる\nワークアウトカード。",
+      "copy": "トップ、ヒートマップ、概要を、美しい共有カードで残せます。",
+      "screens": [
         {
-          "heading": "Top Percentile"
+          "id": "top",
+          "heading": "トップ",
+          "alt": "トップ共有カード画面"
         },
         {
-          "heading": "Muscle Heatmap"
+          "id": "heatmap",
+          "heading": "ヒートマップ",
+          "alt": "ヒートマップ共有カード画面"
         },
         {
-          "heading": "Workout Summary"
-        }
-      ],
-      "stats": [
-        {
-          "label": "Strength",
-          "value": "Top 1%"
-        },
-        {
-          "label": "Volume",
-          "value": "47,725 kg"
-        },
-        {
-          "label": "e1RM",
-          "value": "244.7 kg"
-        },
-        {
-          "label": "Time",
-          "value": "58m"
+          "id": "summary",
+          "heading": "概要",
+          "alt": "概要共有カード画面"
         }
       ]
     },
@@ -174,7 +163,7 @@
     }
   },
   "stylesheets": [
-    "styles.css?v=app-home-real-top-share-20260729"
+    "styles.css?v=app-home-share-cards-20260729"
   ],
   "locales": {
     "en": {
@@ -278,35 +267,23 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Today's workout,\ncleanly saved.",
-          "copy": "Numbers and muscle heatmap in one card.",
-          "modes": [
+          "heading": "Workout cards,\nready to share.",
+          "copy": "Choose Top, Heatmap, or Summary and save a polished card after every session.",
+          "screens": [
             {
-              "heading": "Top Percentile"
+              "id": "top",
+              "heading": "Top",
+              "alt": "Top share card screen"
             },
             {
-              "heading": "Muscle Heatmap"
+              "id": "heatmap",
+              "heading": "Heatmap",
+              "alt": "Heatmap share card screen"
             },
             {
-              "heading": "Workout Summary"
-            }
-          ],
-          "stats": [
-            {
-              "label": "Strength",
-              "value": "Top 1%"
-            },
-            {
-              "label": "Volume",
-              "value": "47,725 kg"
-            },
-            {
-              "label": "e1RM",
-              "value": "244.7 kg"
-            },
-            {
-              "label": "Time",
-              "value": "58m"
+              "id": "summary",
+              "heading": "Summary",
+              "alt": "Summary share card screen"
             }
           ]
         },
@@ -440,35 +417,23 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "오늘 기록을\n깔끔하게.",
-          "copy": "숫자와 근육 히트맵을 한 장에.",
-          "modes": [
+          "heading": "공유하고 싶은\n운동 카드.",
+          "copy": "Top, 히트맵, 요약을 세련된 공유 카드로 남길 수 있습니다.",
+          "screens": [
             {
-              "heading": "Top Percentile"
+              "id": "top",
+              "heading": "Top",
+              "alt": "Top 공유 카드 화면"
             },
             {
-              "heading": "Muscle Heatmap"
+              "id": "heatmap",
+              "heading": "히트맵",
+              "alt": "히트맵 공유 카드 화면"
             },
             {
-              "heading": "Workout Summary"
-            }
-          ],
-          "stats": [
-            {
-              "label": "Strength",
-              "value": "Top 1%"
-            },
-            {
-              "label": "Volume",
-              "value": "47,725 kg"
-            },
-            {
-              "label": "e1RM",
-              "value": "244.7 kg"
-            },
-            {
-              "label": "Time",
-              "value": "58m"
+              "id": "summary",
+              "heading": "요약",
+              "alt": "요약 공유 카드 화면"
             }
           ]
         },
@@ -602,35 +567,23 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "今天的紀錄，\n清楚留下。",
-          "copy": "數字與肌肉熱力圖，一張卡。",
-          "modes": [
+          "heading": "想分享的\n訓練卡片。",
+          "copy": "將 Top、熱力圖與摘要，保存成精緻的分享卡片。",
+          "screens": [
             {
-              "heading": "Top Percentile"
+              "id": "top",
+              "heading": "Top",
+              "alt": "Top 分享卡片畫面"
             },
             {
-              "heading": "Muscle Heatmap"
+              "id": "heatmap",
+              "heading": "熱力圖",
+              "alt": "熱力圖分享卡片畫面"
             },
             {
-              "heading": "Workout Summary"
-            }
-          ],
-          "stats": [
-            {
-              "label": "Strength",
-              "value": "Top 1%"
-            },
-            {
-              "label": "Volume",
-              "value": "47,725 kg"
-            },
-            {
-              "label": "e1RM",
-              "value": "244.7 kg"
-            },
-            {
-              "label": "Time",
-              "value": "58m"
+              "id": "summary",
+              "heading": "摘要",
+              "alt": "摘要分享卡片畫面"
             }
           ]
         },
@@ -764,35 +717,23 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "今天的记录，\n清楚留下。",
-          "copy": "数字和肌肉热力图，一张卡。",
-          "modes": [
+          "heading": "想分享的\n训练卡片。",
+          "copy": "将 Top、热力图和摘要，保存成精致的分享卡片。",
+          "screens": [
             {
-              "heading": "Top Percentile"
+              "id": "top",
+              "heading": "Top",
+              "alt": "Top 分享卡片画面"
             },
             {
-              "heading": "Muscle Heatmap"
+              "id": "heatmap",
+              "heading": "热力图",
+              "alt": "热力图分享卡片画面"
             },
             {
-              "heading": "Workout Summary"
-            }
-          ],
-          "stats": [
-            {
-              "label": "Strength",
-              "value": "Top 1%"
-            },
-            {
-              "label": "Volume",
-              "value": "47,725 kg"
-            },
-            {
-              "label": "e1RM",
-              "value": "244.7 kg"
-            },
-            {
-              "label": "Time",
-              "value": "58m"
+              "id": "summary",
+              "heading": "摘要",
+              "alt": "摘要分享卡片画面"
             }
           ]
         },
@@ -926,35 +867,23 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Tu entrenamiento,\nbien guardado.",
-          "copy": "Números y mapa muscular en una tarjeta.",
-          "modes": [
+          "heading": "Tarjetas de entrenamiento,\nlistas para compartir.",
+          "copy": "Elige Top, mapa muscular o resumen y guarda una tarjeta pulida al terminar.",
+          "screens": [
             {
-              "heading": "Top Percentile"
+              "id": "top",
+              "heading": "Top",
+              "alt": "Pantalla de tarjeta Top"
             },
             {
-              "heading": "Muscle Heatmap"
+              "id": "heatmap",
+              "heading": "Mapa muscular",
+              "alt": "Pantalla de tarjeta de mapa muscular"
             },
             {
-              "heading": "Workout Summary"
-            }
-          ],
-          "stats": [
-            {
-              "label": "Strength",
-              "value": "Top 1%"
-            },
-            {
-              "label": "Volume",
-              "value": "47,725 kg"
-            },
-            {
-              "label": "e1RM",
-              "value": "244.7 kg"
-            },
-            {
-              "label": "Time",
-              "value": "58m"
+              "id": "summary",
+              "heading": "Resumen",
+              "alt": "Pantalla de tarjeta de resumen"
             }
           ]
         },
@@ -1088,35 +1017,23 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Ta séance,\nbien gardée.",
-          "copy": "Chiffres et carte musculaire en une carte.",
-          "modes": [
+          "heading": "Des cartes d'entraînement,\nprêtes à partager.",
+          "copy": "Choisis Top, carte musculaire ou résumé et garde une carte soignée après la séance.",
+          "screens": [
             {
-              "heading": "Top Percentile"
+              "id": "top",
+              "heading": "Top",
+              "alt": "Écran de carte Top"
             },
             {
-              "heading": "Muscle Heatmap"
+              "id": "heatmap",
+              "heading": "Carte musculaire",
+              "alt": "Écran de carte musculaire"
             },
             {
-              "heading": "Workout Summary"
-            }
-          ],
-          "stats": [
-            {
-              "label": "Strength",
-              "value": "Top 1%"
-            },
-            {
-              "label": "Volume",
-              "value": "47,725 kg"
-            },
-            {
-              "label": "e1RM",
-              "value": "244.7 kg"
-            },
-            {
-              "label": "Time",
-              "value": "58m"
+              "id": "summary",
+              "heading": "Résumé",
+              "alt": "Écran de carte résumé"
             }
           ]
         },
@@ -1250,35 +1167,23 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Dein Training,\nklar gespeichert.",
-          "copy": "Zahlen und Muskel-Heatmap in einer Karte.",
-          "modes": [
+          "heading": "Workout-Karten,\nbereit zum Teilen.",
+          "copy": "Wähle Top, Muskel-Heatmap oder Zusammenfassung und speichere eine hochwertige Karte nach dem Training.",
+          "screens": [
             {
-              "heading": "Top Percentile"
+              "id": "top",
+              "heading": "Top",
+              "alt": "Top-Share-Karten-Screen"
             },
             {
-              "heading": "Muscle Heatmap"
+              "id": "heatmap",
+              "heading": "Muskel-Heatmap",
+              "alt": "Muskel-Heatmap-Share-Karten-Screen"
             },
             {
-              "heading": "Workout Summary"
-            }
-          ],
-          "stats": [
-            {
-              "label": "Strength",
-              "value": "Top 1%"
-            },
-            {
-              "label": "Volume",
-              "value": "47,725 kg"
-            },
-            {
-              "label": "e1RM",
-              "value": "244.7 kg"
-            },
-            {
-              "label": "Time",
-              "value": "58m"
+              "id": "summary",
+              "heading": "Zusammenfassung",
+              "alt": "Zusammenfassung-Share-Karten-Screen"
             }
           ]
         },
@@ -1412,35 +1317,23 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Latihan hari ini,\ntersimpan rapi.",
-          "copy": "Angka dan heatmap otot dalam satu kartu.",
-          "modes": [
+          "heading": "Kartu latihan,\nsiap dibagikan.",
+          "copy": "Pilih Top, heatmap otot, atau ringkasan lalu simpan kartu yang rapi setelah latihan.",
+          "screens": [
             {
-              "heading": "Top Percentile"
+              "id": "top",
+              "heading": "Top",
+              "alt": "Layar kartu Top"
             },
             {
-              "heading": "Muscle Heatmap"
+              "id": "heatmap",
+              "heading": "Heatmap otot",
+              "alt": "Layar kartu heatmap otot"
             },
             {
-              "heading": "Workout Summary"
-            }
-          ],
-          "stats": [
-            {
-              "label": "Strength",
-              "value": "Top 1%"
-            },
-            {
-              "label": "Volume",
-              "value": "47,725 kg"
-            },
-            {
-              "label": "e1RM",
-              "value": "244.7 kg"
-            },
-            {
-              "label": "Time",
-              "value": "58m"
+              "id": "summary",
+              "heading": "Ringkasan",
+              "alt": "Layar kartu ringkasan"
             }
           ]
         },
@@ -1574,35 +1467,23 @@
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Seu treino,\nbem salvo.",
-          "copy": "Números e mapa muscular em um cartão.",
-          "modes": [
+          "heading": "Cartões de treino,\nprontos para compartilhar.",
+          "copy": "Escolha Top, mapa muscular ou resumo e salve um cartão bonito ao terminar.",
+          "screens": [
             {
-              "heading": "Top Percentile"
+              "id": "top",
+              "heading": "Top",
+              "alt": "Tela do cartão Top"
             },
             {
-              "heading": "Muscle Heatmap"
+              "id": "heatmap",
+              "heading": "Mapa muscular",
+              "alt": "Tela do cartão de mapa muscular"
             },
             {
-              "heading": "Workout Summary"
-            }
-          ],
-          "stats": [
-            {
-              "label": "Strength",
-              "value": "Top 1%"
-            },
-            {
-              "label": "Volume",
-              "value": "47,725 kg"
-            },
-            {
-              "label": "e1RM",
-              "value": "244.7 kg"
-            },
-            {
-              "label": "Time",
-              "value": "58m"
+              "id": "summary",
+              "heading": "Resumo",
+              "alt": "Tela do cartão de resumo"
             }
           ]
         },

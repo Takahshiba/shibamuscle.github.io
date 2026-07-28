@@ -48,7 +48,6 @@ const APP_THEME_COLOR = "#ff6a00";
 const SITE_ORIGIN = "https://shibamuscle.com";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const HOME_SCREENSHOT_COUNT = 9;
-const HOME_SCREENSHOT_HERO_INDICES = [7, 2, 4];
 assertExpectedLocales(locales);
 
 let generatedPages = 0;
@@ -234,13 +233,13 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
                 <div class="app-hero-inner">
                     <div class="app-hero-copy">
                         <h1 class="app-hero-title"><span class="app-hero-title-name">Shiba</span><span class="app-hero-title-category">${escapeHtml(trustCopy.productCategory)}</span></h1>
-                        <p class="app-hero-subtitle">${renderMultilineText(share.heading || story.heroPromise || page.heroHeading || "")}</p>
+                        <p class="app-hero-subtitle">${renderMultilineText(story.heroPromise || share.heading || page.heroHeading || "")}</p>
                         <p class="app-hero-lead">${escapeHtml(share.copy || intro[0] || page.description || "")}</p>
                         <div class="app-hero-actions">
                             ${renderAppStoreBadge(locale, "hero")}
                         </div>
                     </div>
-                    ${renderHeroScreenshotStack(locale, textLocale)}
+                    ${renderHeroScreenshotStack(images, locale, textLocale)}
                 </div>
             </section>
 
@@ -308,6 +307,7 @@ ${renderPremiumSection(story.premium || {}, locale)}
 function getAppImages(page) {
     return {
         today: "app/today-screen-current.png",
+        logging: "app/workout-logging-current.png",
         strength: "app/strength-percentile.jpg",
         heatmap: "app/completion-heatmap.png",
         heatmapDetail: "app/muscle-heatmap.png",
@@ -445,24 +445,24 @@ function renderHeroShareSpotlight(share, images, locale, textLocale = locale) {
                     </div>`;
 }
 
-function renderHeroScreenshotStack(locale, textLocale = locale) {
-    const copy = getHomeScreenshotCopy(textLocale);
+function renderHeroScreenshotStack(images, locale, textLocale = locale) {
+    const heroScreens = [
+        { image: images.today, alt: getHomeText(textLocale, "todayAlt"), className: "app-hero-shot--primary" },
+        { image: images.strength, alt: getHomeText(textLocale, "strengthAlt"), className: "app-hero-shot--logging" },
+        { image: images.heatmap, alt: getHomeText(textLocale, "heatmapAlt"), className: "app-hero-shot--analytics" }
+    ];
 
-    return `<div class="app-hero-screen-stage" aria-label="${escapeAttribute(copy.aria)}">
+    return `<div class="app-hero-screen-stage" aria-label="${escapeAttribute(getHomeText(textLocale, "heroShowcaseAria"))}">
                         <div class="app-hero-screen-stack">
-${HOME_SCREENSHOT_HERO_INDICES.map((item, index) => {
-        const image = homeScreenshotAsset(locale, item);
+${heroScreens.map(({ image, alt, className }) => {
         const imageHref = assetHref(image, locale);
-        const title = copy.titles[item - 1] || copy.titles[0];
         const classes = [
             "app-hero-shot",
-            index === 0 ? "app-hero-shot--primary" : "",
-            index === 1 ? "app-hero-shot--logging" : "",
-            index === 2 ? "app-hero-shot--analytics" : ""
+            className
         ].filter(Boolean).join(" ");
 
         return `                            <figure class="${escapeAttribute(classes)}">
-                                <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(title)}" decoding="async"${imageSizeAttributes(imageHref)}>
+                                <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(alt)}" decoding="async"${imageSizeAttributes(imageHref)}>
                             </figure>`;
     }).join("\n")}
                         </div>
@@ -502,6 +502,10 @@ function homeScreenshotAsset(locale, index) {
     return `app/screenshots/${resolveHomeScreenshotLocale(locale)}/${String(index).padStart(2, "0")}.jpg`;
 }
 
+function shareCardAsset(locale, id) {
+    return `app/share-cards/${resolveShareCardLocale(locale)}/${id}.jpg`;
+}
+
 function resolveHomeScreenshotLocale(locale) {
     const screenshotLocales = {
         ja: "ja",
@@ -517,6 +521,10 @@ function resolveHomeScreenshotLocale(locale) {
     };
 
     return screenshotLocales[locale] || "en";
+}
+
+function resolveShareCardLocale(locale) {
+    return resolveHomeScreenshotLocale(locale);
 }
 
 function getHomeScreenshotCopy(locale) {
@@ -683,7 +691,9 @@ function renderLiftProof(images, locale, textLocale = locale) {
                             <div class="app-phone app-phone--screen app-phone--lift-proof">
                                 <img src="${escapeAttribute(assetHref(images.today, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "todayAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.today, locale))}>
                             </div>
-                            ${renderLoggingMock(textLocale, true)}
+                            <div class="app-phone app-phone--screen app-phone--logging-proof">
+                                <img src="${escapeAttribute(assetHref(images.logging, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "loggingAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.logging, locale))}>
+                            </div>
                         </div>
                     </div>`;
 }
@@ -711,7 +721,7 @@ function renderAnalyticsProof(images, locale, textLocale = locale, analyticsProo
                     </div>`;
 }
 
-function renderShareSection(share, images, locale, textLocale = locale) {
+function renderShareSection(share, _images, locale, textLocale = locale) {
     const copy = normalizeShareCopy(share, textLocale);
 
     return `            <section class="app-share-section" id="share">
@@ -721,17 +731,8 @@ function renderShareSection(share, images, locale, textLocale = locale) {
                         <h2>${renderMultilineText(copy.heading)}</h2>
                         <p>${escapeHtml(copy.copy)}</p>
                     </div>
-                    <div class="app-share-layout">
-                        <div class="app-share-showcase">
-${renderShareScreenShowcase(copy, locale, textLocale)}
-${renderShareArtifact(copy, images, locale, textLocale)}
-                        </div>
-                        <div class="app-share-modes">
-${copy.modes.map((mode, index) => `                            <article class="app-share-mode">
-                                <strong>${escapeHtml(mode.heading)}</strong>
-                                <small>${escapeHtml(copy.stats[index]?.value || copy.stats[0]?.value || "")}</small>
-                            </article>`).join("\n")}
-                        </div>
+                    <div class="app-share-card-stage" aria-label="${escapeAttribute(copy.stageLabel)}">
+${copy.screens.map((screen, index) => renderShareCardScreen(screen, index, locale)).join("\n")}
                     </div>
                 </div>
             </section>`;
@@ -742,11 +743,62 @@ function normalizeShareCopy(share, textLocale = "ja") {
         kicker: share.kicker || getHomeText(textLocale, "shareKicker"),
         heading: share.heading || getHomeText(textLocale, "shareHeading"),
         copy: share.copy || getHomeText(textLocale, "shareCopy"),
-        modes: share.modes || [],
-        stats: share.stats || getHomeText(textLocale, "shareStats"),
+        screens: normalizeShareScreens(share.screens || share.modes, textLocale),
+        stageLabel: share.stageLabel || getHomeText(textLocale, "shareStageLabel") || "Share card previews",
+        stats: share.stats || [],
         heroCardLabel: share.heroCardLabel || "Share-ready result",
         heroCardValue: share.heroCardValue || "Top 1%"
     };
+}
+
+function normalizeShareScreens(screens, textLocale = "ja") {
+    const defaults = getDefaultShareScreens(textLocale);
+    const sourceScreens = Array.isArray(screens) && screens.length ? screens : defaults;
+    const byId = new Map(sourceScreens.filter((screen) => screen.id).map((screen) => [screen.id, screen]));
+
+    return defaults.map((fallback, index) => {
+        const screen = byId.get(fallback.id) || sourceScreens[index] || {};
+
+        return {
+            id: fallback.id,
+            heading: screen.heading || fallback.heading,
+            alt: screen.alt || screen.heading || fallback.alt
+        };
+    });
+}
+
+function getDefaultShareScreens(textLocale = "ja") {
+    const screens = {
+        ja: [
+            { id: "top", heading: "トップ", alt: "トップ共有カード画面" },
+            { id: "heatmap", heading: "ヒートマップ", alt: "ヒートマップ共有カード画面" },
+            { id: "summary", heading: "概要", alt: "概要共有カード画面" }
+        ],
+        en: [
+            { id: "top", heading: "Top", alt: "Top share card screen" },
+            { id: "heatmap", heading: "Heatmap", alt: "Heatmap share card screen" },
+            { id: "summary", heading: "Summary", alt: "Summary share card screen" }
+        ]
+    };
+
+    return screens[textLocale] || screens.en;
+}
+
+function renderShareCardScreen(screen, index, locale) {
+    const image = shareCardAsset(locale, screen.id);
+    const imageHref = assetHref(image, locale);
+    const classes = [
+        "app-share-card-screen",
+        `app-share-card-screen--${screen.id}`,
+        index === 1 ? "is-featured" : ""
+    ].filter(Boolean).join(" ");
+
+    return `                        <figure class="${escapeAttribute(classes)}">
+                            <div class="app-share-card-frame">
+                                <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(screen.alt)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(imageHref)}>
+                            </div>
+                            <figcaption>${escapeHtml(screen.heading)}</figcaption>
+                        </figure>`;
 }
 
 function renderShareScreenShowcase(_shareCopy, locale, textLocale = locale) {
@@ -1009,8 +1061,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1050,8 +1102,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1091,8 +1143,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1132,8 +1184,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1173,8 +1225,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1214,8 +1266,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1255,8 +1307,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1296,8 +1348,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1337,8 +1389,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1378,8 +1430,8 @@ function getHomeStoryCopy(locale, overrides = {}) {
                 ],
                 stats: [
                     { label: "Strength", value: "Top 1%" },
-                    { label: "Volume", value: "47,725 kg" },
-                    { label: "e1RM", value: "244.7 kg" },
+                    { label: "Volume", value: "" },
+                    { label: "e1RM", value: "" },
                     { label: "Time", value: "58m" }
                 ]
             },
@@ -1415,43 +1467,6 @@ function mergeHomeStory(base, overrides = {}) {
         },
         analyticsProof: { ...(base.analyticsProof || {}), ...(overrides.analyticsProof || {}) }
     };
-}
-
-function renderLoggingMock(locale, compact = false) {
-    const labels = getHomeText(locale, "loggingMock");
-    const rows = [
-        ["1", "80kg", "8", labels.done],
-        ["2", "85kg", "6", labels.done],
-        ["3", "87.5kg", "5", labels.done],
-        ["4", "90kg", "3", labels.live]
-    ];
-
-    const mock = `<div class="app-logging-mock${compact ? " app-logging-mock--compact" : ""}" aria-label="${escapeAttribute(labels.aria)}">
-                            <div class="app-logging-header">
-                                <span>${escapeHtml(labels.title)}</span>
-                                <strong>4 / 5</strong>
-                            </div>
-                            <div class="app-logging-table">
-${rows.map((row) => `                                <div class="app-logging-row">
-                                    <span>${escapeHtml(labels.set)} ${escapeHtml(row[0])}</span>
-                                    <strong>${escapeHtml(row[1])}</strong>
-                                    <strong>${escapeHtml(row[2])}</strong>
-                                    <small>${escapeHtml(row[3])}</small>
-                                </div>`).join("\n")}
-                            </div>
-                            <div class="app-logging-footer">
-                                <span>${escapeHtml(labels.weight)}</span>
-                                <span>${escapeHtml(labels.reps)}</span>
-                            </div>
-                        </div>`;
-
-    if (compact) {
-        return mock;
-    }
-
-    return `<div class="app-scene-media">
-                        ${mock}
-                    </div>`;
 }
 
 function buildHomePreviewCards(catalogData, locale, unit, assetLocale = locale) {
@@ -1580,6 +1595,7 @@ function getHomeText(locale, key) {
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
             socialCardAlt: "Shibaアプリの本気の筋トレ記録・分析画面のプレビュー",
             todayAlt: "ShibaアプリのToday画面",
+            loggingAlt: "Shibaアプリのワークアウト中セット入力画面",
             strengthAlt: "筋力パーセンタイルの分析画面",
             heatmapAlt: "筋肉ヒートマップ画面",
             heroShowcaseAria: "Shibaの今日のワークアウト画面、筋力パーセンタイル、筋肉ヒートマップのプレビュー",
@@ -1626,8 +1642,7 @@ function getHomeText(locale, key) {
             footerHome: "ホーム",
             footerFeatures: "機能",
             footerPrivacy: "プライバシーポリシー",
-            footerContact: "お問い合わせ",
-            loggingMock: { aria: "ワークアウト記録プレビュー", title: "ベンチプレス", set: "Set", weight: "重量", reps: "回数", done: "完了", live: "入力中" }
+            footerContact: "お問い合わせ"
         },
         en: {
             download: "Download free on the App Store",
@@ -1641,6 +1656,7 @@ function getHomeText(locale, key) {
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
             socialCardAlt: "Preview of Shiba serious workout logging and analytics screens",
             todayAlt: "Shiba app Today screen",
+            loggingAlt: "Shiba workout set logging screen",
             strengthAlt: "Strength Percentile screen",
             heatmapAlt: "Muscle heatmap screen",
             heroShowcaseAria: "Preview of Shiba Today, Strength Percentile, and muscle heatmap screens",
@@ -1687,8 +1703,7 @@ function getHomeText(locale, key) {
             footerHome: "Home",
             footerFeatures: "Features",
             footerPrivacy: "Privacy Policy",
-            footerContact: "Contact",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Weight", reps: "Reps", done: "Done", live: "Live" }
+            footerContact: "Contact"
         },
         ko: {
             download: "App Store에서 무료 다운로드",
@@ -1702,6 +1717,7 @@ function getHomeText(locale, key) {
             databaseIntro: "평균 중량, 기준표, 자극되는 근육을 확인하고 싶다면 기존 운동 데이터베이스로 이동할 수 있습니다.",
             socialCardAlt: "Shiba의 진지한 근력 운동 기록·분석 화면 미리보기",
             todayAlt: "Shiba 앱 Today 화면",
+            loggingAlt: "Shiba 앱 운동 중 세트 입력 화면",
             strengthAlt: "Strength Percentile 화면",
             heatmapAlt: "근육 히트맵 화면",
             heroShowcaseAria: "Shiba Today, Strength Percentile, 근육 히트맵 화면 미리보기",
@@ -1748,8 +1764,7 @@ function getHomeText(locale, key) {
             footerHome: "홈",
             footerFeatures: "기능",
             footerPrivacy: "개인정보 처리방침",
-            footerContact: "문의하기",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "중량", reps: "반복", done: "완료", live: "진행 중" }
+            footerContact: "문의하기"
         },
         "zh-hant": {
             download: "在 App Store 免費下載",
@@ -1763,6 +1778,7 @@ function getHomeText(locale, key) {
             databaseIntro: "想查看平均重量、標準表與訓練肌群時，可以從這裡進入既有訓練資料庫。",
             socialCardAlt: "Shiba 認真重訓紀錄與分析畫面預覽",
             todayAlt: "Shiba App 的 Today 畫面",
+            loggingAlt: "Shiba App 訓練中的組數輸入畫面",
             strengthAlt: "Strength Percentile 畫面",
             heatmapAlt: "肌肉熱力圖畫面",
             heroShowcaseAria: "Shiba Today、Strength Percentile 與肌肉熱力圖畫面預覽",
@@ -1809,8 +1825,7 @@ function getHomeText(locale, key) {
             footerHome: "首頁",
             footerFeatures: "功能",
             footerPrivacy: "隱私權政策",
-            footerContact: "聯絡",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "重量", reps: "次數", done: "完成", live: "進行中" }
+            footerContact: "聯絡"
         },
         "zh-hans": {
             download: "在 App Store 免费下载",
@@ -1824,6 +1839,7 @@ function getHomeText(locale, key) {
             databaseIntro: "想查看平均重量、标准表和训练肌群时，可以从这里进入原有训练数据库。",
             socialCardAlt: "Shiba 认真力量训练记录与分析画面预览",
             todayAlt: "Shiba App 的 Today 画面",
+            loggingAlt: "Shiba App 训练中的组数输入画面",
             strengthAlt: "Strength Percentile 画面",
             heatmapAlt: "肌肉热力图画面",
             heroShowcaseAria: "Shiba Today、Strength Percentile 和肌肉热力图画面预览",
@@ -1870,8 +1886,7 @@ function getHomeText(locale, key) {
             footerHome: "首页",
             footerFeatures: "功能",
             footerPrivacy: "隐私政策",
-            footerContact: "联系",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "重量", reps: "次数", done: "完成", live: "进行中" }
+            footerContact: "联系"
         },
         es: {
             download: "Descargar gratis en App Store",
@@ -1885,6 +1900,7 @@ function getHomeText(locale, key) {
             databaseIntro: "Cuando quieras revisar pesos medios, estándares y músculos trabajados, entra en la base de datos existente.",
             socialCardAlt: "Vista previa de las pantallas de registro y análisis para entrenar en serio con Shiba",
             todayAlt: "Pantalla Today de la app Shiba",
+            loggingAlt: "Pantalla de registro de series durante el entrenamiento en Shiba",
             strengthAlt: "Pantalla Strength Percentile",
             heatmapAlt: "Pantalla de mapa muscular",
             heroShowcaseAria: "Vista previa de Today, Strength Percentile y mapa muscular de Shiba",
@@ -1931,8 +1947,7 @@ function getHomeText(locale, key) {
             footerHome: "Inicio",
             footerFeatures: "Funciones",
             footerPrivacy: "Política de privacidad",
-            footerContact: "Contacto",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Peso", reps: "Reps", done: "Listo", live: "En vivo" }
+            footerContact: "Contacto"
         },
         fr: {
             download: "Télécharger gratuitement",
@@ -1946,6 +1961,7 @@ function getHomeText(locale, key) {
             databaseIntro: "Pour consulter les poids moyens, standards et muscles sollicités, continue vers la base d'exercices existante.",
             socialCardAlt: "Aperçu des écrans de suivi et d'analyse pour s'entraîner sérieusement avec Shiba",
             todayAlt: "Écran Today de l'app Shiba",
+            loggingAlt: "Écran de saisie des séries pendant l'entraînement dans Shiba",
             strengthAlt: "Écran Strength Percentile",
             heatmapAlt: "Écran de carte musculaire",
             heroShowcaseAria: "Aperçu des écrans Today, Strength Percentile et carte musculaire de Shiba",
@@ -1992,8 +2008,7 @@ function getHomeText(locale, key) {
             footerHome: "Accueil",
             footerFeatures: "Fonctions",
             footerPrivacy: "Politique de confidentialité",
-            footerContact: "Contact",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Poids", reps: "Reps", done: "Fait", live: "Live" }
+            footerContact: "Contact"
         },
         de: {
             download: "Kostenlos im App Store",
@@ -2007,6 +2022,7 @@ function getHomeText(locale, key) {
             databaseIntro: "Wenn du Durchschnittsgewichte, Standards und trainierte Muskeln prüfen möchtest, nutze die bestehende Trainingsdatenbank.",
             socialCardAlt: "Vorschau der Logging- und Analyse-Screens für ernsthaftes Krafttraining mit Shiba",
             todayAlt: "Today-Screen der Shiba App",
+            loggingAlt: "Satzeingabe im laufenden Workout in der Shiba App",
             strengthAlt: "Strength Percentile Screen",
             heatmapAlt: "Muskel-Heatmap Screen",
             heroShowcaseAria: "Vorschau der Today-, Strength-Percentile- und Muskel-Heatmap-Screens von Shiba",
@@ -2053,8 +2069,7 @@ function getHomeText(locale, key) {
             footerHome: "Start",
             footerFeatures: "Funktionen",
             footerPrivacy: "Datenschutzerklärung",
-            footerContact: "Kontakt",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Gewicht", reps: "Wdh.", done: "Fertig", live: "Live" }
+            footerContact: "Kontakt"
         },
         id: {
             download: "Unduh gratis di App Store",
@@ -2068,6 +2083,7 @@ function getHomeText(locale, key) {
             databaseIntro: "Untuk melihat berat rata-rata, standar, dan otot yang dilatih, lanjutkan ke database latihan yang sudah ada.",
             socialCardAlt: "Pratinjau layar catatan dan analitik untuk latihan serius dengan Shiba",
             todayAlt: "Layar Today aplikasi Shiba",
+            loggingAlt: "Layar input set saat latihan di aplikasi Shiba",
             strengthAlt: "Layar Strength Percentile",
             heatmapAlt: "Layar heatmap otot",
             heroShowcaseAria: "Pratinjau layar Today, Strength Percentile, dan heatmap otot Shiba",
@@ -2114,8 +2130,7 @@ function getHomeText(locale, key) {
             footerHome: "Beranda",
             footerFeatures: "Fitur",
             footerPrivacy: "Kebijakan privasi",
-            footerContact: "Kontak",
-            loggingMock: { aria: "Workout logging preview", title: "Bench Press", set: "Set", weight: "Berat", reps: "Reps", done: "Selesai", live: "Live" }
+            footerContact: "Kontak"
         },
         "pt-br": {
             download: "Baixe grátis na App Store",
@@ -2129,6 +2144,7 @@ function getHomeText(locale, key) {
             databaseIntro: "As referências de exercícios ficam perto do fluxo do app para você passar do registro ao planejamento sem atrito.",
             socialCardAlt: "Prévia das telas de registro e análise de treino sério do Shiba",
             todayAlt: "Tela Today do app Shiba",
+            loggingAlt: "Tela de registro de séries durante o treino no Shiba",
             strengthAlt: "Tela de Strength Percentile",
             heatmapAlt: "Tela de mapa muscular",
             heroShowcaseAria: "Prévia das telas Today, Strength Percentile e mapa muscular do Shiba",
@@ -2175,8 +2191,7 @@ function getHomeText(locale, key) {
             footerHome: "Início",
             footerFeatures: "Recursos",
             footerPrivacy: "Política de privacidade",
-            footerContact: "Contato",
-            loggingMock: { aria: "Prévia de registro de treino", title: "Supino reto", set: "Série", weight: "Carga", reps: "Reps", done: "Feito", live: "Ao vivo" }
+            footerContact: "Contato"
         }
     };
 

@@ -2136,7 +2136,15 @@ function buildAppLanding({ sectionCount, exerciseCount, previewCards }) {
                         ${renderAppFeatureList(loggingFeatures)}
                     </div>
                     <div class="app-scene-media">
-                        ${buildLoggingMock()}
+                        <div class="app-phone app-phone--screen">
+                            <img src="${escapeAttribute(assetPath("app/workout-logging-current.png"))}" alt="${escapeAttribute(localeText({
+                                ja: "Shibaアプリのワークアウト中セット入力画面",
+                                ko: "Shiba 앱 운동 중 세트 입력 화면",
+                                es: "Pantalla de registro de series durante el entrenamiento en Shiba",
+                                id: "Layar input set saat latihan di aplikasi Shiba",
+                                en: "Shiba workout set logging screen"
+                            }))}" loading="lazy" decoding="async" fetchpriority="low">
+                        </div>
                     </div>
                 </div>
             </section>
@@ -2262,44 +2270,6 @@ function renderAppFeatureList(items) {
         <ul class="app-feature-list">
             ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
         </ul>
-    `;
-}
-
-function buildLoggingMock() {
-    const labels = localeText({
-        ja: { title: "Bench Press", set: "Set", weight: "重量", reps: "回数", done: "完了" },
-        ko: { title: "Bench Press", set: "Set", weight: "중량", reps: "반복", done: "완료" },
-        es: { title: "Bench Press", set: "Set", weight: "Peso", reps: "Reps", done: "Listo" },
-        id: { title: "Bench Press", set: "Set", weight: "Berat", reps: "Reps", done: "Selesai" },
-        en: { title: "Bench Press", set: "Set", weight: "Weight", reps: "Reps", done: "Done" }
-    });
-
-    return `
-        <div class="app-logging-mock" aria-label="Workout logging preview">
-            <div class="app-logging-header">
-                <span>${escapeHtml(labels.title)}</span>
-                <strong>4 / 5</strong>
-            </div>
-            <div class="app-logging-table">
-                ${[
-                    ["1", "80kg", "8", labels.done],
-                    ["2", "85kg", "6", labels.done],
-                    ["3", "87.5kg", "5", labels.done],
-                    ["4", "90kg", "3", "Live"]
-                ].map((row) => `
-                    <div class="app-logging-row">
-                        <span>${escapeHtml(labels.set)} ${escapeHtml(row[0])}</span>
-                        <strong>${escapeHtml(row[1])}</strong>
-                        <strong>${escapeHtml(row[2])}</strong>
-                        <small>${escapeHtml(row[3])}</small>
-                    </div>
-                `).join("")}
-            </div>
-            <div class="app-logging-footer">
-                <span>${escapeHtml(labels.weight)}</span>
-                <span>${escapeHtml(labels.reps)}</span>
-            </div>
-        </div>
     `;
 }
 
