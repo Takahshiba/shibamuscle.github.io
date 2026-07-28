@@ -155,9 +155,7 @@ ${renderBreadcrumb(breadcrumbs, locale)}
 ${renderHero(exercise, locale)}
 ${renderAverageSummary(exercise, variant, measurementKind, locale)}
 ${renderLocalizedExerciseBlock(variant.averageBlock, { exercise, unit, locale, block: "average" })}
-${isIndexableUnit ? renderStrengthLevelTool(exercise, unit, measurementKind, locale) : ""}
 ${renderLocalizedExerciseBlock(variant.standardsBlock, { exercise, unit, locale, block: "standards" })}
-${renderMuscles(exercise, locale)}
 ${postMusclesAdSlotHtml}
 ${renderAppAnalysisCta(exercise, locale)}
 ${exercise.sharedBlocks.records ? renderLocalizedExerciseBlock(exercise.sharedBlocks.records, { exercise, unit, locale, block: "records" }) : ""}
@@ -867,33 +865,6 @@ function renderAppAnalysisCta(exercise, locale) {
         </div>
         <a href="${escapeAttribute(getAppStoreUrl(locale))}" class="exercise-app-cta-button" target="_blank" rel="noopener noreferrer external" data-analytics-link="app-store" data-analytics-placement="exercise_mid">${escapeHtml(copy.cta)}</a>
     </section>
-`;
-}
-
-function renderMuscles(exercise, locale) {
-    const groups = getLocalizedMuscleGroups(exercise, locale);
-    const rows = groups.map((group) => {
-        return `                <tr>
-                    <th>${escapeHtml(group.label)}</th>
-                    <td>${escapeHtml(group.items.join(", "))}</td>
-                </tr>`;
-    }).join("\n");
-
-    return `
-    <div class="container">
-        <h2 class="section-title">${escapeHtml(getUiText(locale, "musclesHeading"))}</h2>
-        <table class="muscle-activated-table">
-            <thead>
-                <tr>
-                    <th>${escapeHtml(getUiText(locale, "group"))}</th>
-                    <th>${escapeHtml(getUiText(locale, "muscles"))}</th>
-                </tr>
-            </thead>
-            <tbody>
-${rows}
-            </tbody>
-        </table>
-    </div>
 `;
 }
 

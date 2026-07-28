@@ -2330,14 +2330,14 @@ function enhanceExercisePage(main) {
     const libraryContainer = containers.find((container) => container.querySelector("#other-workouts"));
     const adContainers = containers.filter((container) => container.querySelector(".adsbygoogle"));
 
-    if (!heroContainer || !muscleContainer || !averageContainer || !standardsContainer || !libraryContainer) {
+    if (!heroContainer || !averageContainer || !standardsContainer || !libraryContainer) {
         return null;
     }
 
     const libraryData = collectLibrarySections(libraryContainer);
     const allCards = libraryData.allCards;
     const currentCard = findCurrentCard(allCards);
-    const muscles = extractMuscleGroups(muscleContainer.querySelector(".muscle-activated-table"));
+    const muscles = muscleContainer ? extractMuscleGroups(muscleContainer.querySelector(".muscle-activated-table")) : [];
     const heroTitle = normalizeText(heroContainer.querySelector("h1")?.textContent || "");
     const heroImage = heroContainer.querySelector("img");
     const measurementKind = main.dataset.measurementKind || currentCard?.measurementKind || "weight";
@@ -2376,25 +2376,7 @@ function enhanceExercisePage(main) {
         </div>
     `;
 
-    muscleContainer.id = "muscle-groups";
-    muscleContainer.classList.add("section-band");
-    muscleContainer.innerHTML = `
-        <div class="section-heading">
-            <p class="eyebrow">${escapeHtml(t("musclesEyebrow"))}</p>
-            <h2>${escapeHtml(t("musclesHeading"))}</h2>
-            <p>${escapeHtml(t("musclesCopy"))}</p>
-        </div>
-        <div class="muscle-grid">
-            ${muscles.map((group) => {
-                return `
-                    <article class="muscle-card">
-                        <span class="metric-label">${escapeHtml(group.label)}</span>
-                        <h3>${escapeHtml(group.items.join(" / "))}</h3>
-                    </article>
-                `;
-            }).join("")}
-        </div>
-    `;
+    muscleContainer?.remove();
 
     decorateDataContainer(
         averageContainer,
@@ -2494,11 +2476,10 @@ function enhanceExercisePage(main) {
     const orderedNodes = [
         breadcrumb,
         heroContainer,
-        muscleContainer,
-        postMusclesAd,
         averageContainer,
-        recordContainer,
         standardsContainer,
+        postMusclesAd,
+        recordContainer,
         aboutContainer,
         postDetailsAd,
         relatedContainer,

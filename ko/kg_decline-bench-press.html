@@ -291,57 +291,6 @@
         <p class="average-section-note">참고: 이 기준은 평균적인 리프터의 1RM을 기준으로 한 추정치입니다. 체중, 나이 등 개인 요인에 따라 달라질 수 있습니다. 자세한 데이터는 아래 표에서 확인하세요.
         </p>
     </div>
-
-    <section class="container strength-level-tool" data-strength-level-tool
-        data-measurement-kind="weight"
-        data-unit="kg"
-        data-below-label="입문 미만"
-        data-result-template="예상 레벨: {level}"
-        data-estimate-template="추정 1RM: {value} {unit}"
-        data-next-template="다음 ‘{level}’ 기준은 약 {value} {unit}입니다."
-        data-top-template="최상위 기준을 충족했습니다."
-        data-reference-template="체중 {bodyweight} {unit} 기준으로 판정했습니다."
-        data-error-message="입력값과 기준표를 확인해 주세요.">
-        <div class="strength-level-copy">
-            <p class="eyebrow">나의 현재 위치</p>
-            <h2>디클라인 벤치프레스 추정 1RM과 레벨 계산</h2>
-            <p>실제로 든 중량과 반복 횟수로 추정 1RM을 계산해 체중별 기준과 비교합니다.</p>
-        </div>
-        <form class="strength-level-form" data-level-form>
-            <div class="strength-level-fields">
-                <label class="strength-level-field">
-                    <span>성별</span>
-                    <select data-level-gender>
-                        <option value="Male">남성</option>
-                        <option value="Female">여성</option>
-                    </select>
-                </label>
-                <label class="strength-level-field">
-                    <span>체중 (kg)</span>
-                    <input type="number" min="20" max="700" step="0.5" inputmode="decimal" autocomplete="off" required data-level-bodyweight>
-                </label>
-                <label class="strength-level-field">
-                    <span>사용 중량 (kg)</span>
-                    <input type="number" min="0.5" step="0.5" inputmode="decimal" autocomplete="off" required data-level-load>
-                </label>
-                <label class="strength-level-field">
-                    <span>반복 횟수(1~12회)</span>
-                    <input type="number" min="1" max="12" step="1" inputmode="numeric" autocomplete="off" value="1" required data-level-reps>
-                </label>
-            </div>
-            <button type="submit" class="strength-level-submit">레벨 확인</button>
-        </form>
-        <p class="strength-level-live" data-level-live role="status" aria-live="polite" aria-atomic="true"></p>
-        <div class="strength-level-result" data-level-result hidden>
-            <span class="strength-level-result-label">결과</span>
-            <strong data-level-result-primary></strong>
-            <p data-level-result-estimate></p>
-            <p data-level-result-next></p>
-            <a href="https://apps.apple.com/kr/app/id6785443075" target="_blank" rel="noopener noreferrer external" data-analytics-link="app-store" data-analytics-placement="level_result">Shiba에서 디클라인 벤치프레스 기록하기</a>
-        </div>
-        <p class="strength-level-note">추정치는 참고용입니다. 자세, 가동 범위, 피로도에 따라 달라질 수 있습니다. <a href="methodology.html">계산 방법 보기</a></p>
-    </section>
-
 <div class="container">
         <h2 class="section-title">디클라인 벤치프레스 기준 중량(kg)</h2>
         <div class="tabs-container block" data-tab-group="Standards Exercise">
@@ -534,37 +483,6 @@
             </div>
         </div>
     </div>
-
-    <div class="container">
-        <h2 class="section-title">자극되는 근육</h2>
-        <table class="muscle-activated-table">
-            <thead>
-                <tr>
-                    <th>그룹</th>
-                    <th>근육</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>주동근</th>
-                    <td>하부 대흉근, 상완삼두근, 상완이두근</td>
-                </tr>
-                <tr>
-                    <th>보조근</th>
-                    <td>삼각근</td>
-                </tr>
-                <tr>
-                    <th>안정근</th>
-                    <td>복직근</td>
-                </tr>
-                <tr>
-                    <th>그립</th>
-                    <td>전완 굴곡근군</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
 
     <div class="container ad-slot-container" data-ad-placement-key="after-muscles">
         <!-- shiba-horizontal -->

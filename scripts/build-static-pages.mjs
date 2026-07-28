@@ -523,7 +523,7 @@ function getHomeScreenshotCopy(locale) {
     const copy = {
         ja: {
             kicker: "",
-            heading: "9枚の\n画面",
+            heading: "9枚の画面",
             copy: "",
             aria: "Shiba App Storeスクリーンショットのプレビュー",
             trackAria: "Shibaの9枚のApp Storeスクリーンショット",
@@ -532,7 +532,7 @@ function getHomeScreenshotCopy(locale) {
         },
         ko: {
             kicker: "",
-            heading: "9장의\n화면",
+            heading: "9장의 화면",
             copy: "",
             aria: "Shiba App Store 스크린샷 미리보기",
             trackAria: "Shiba App Store 스크린샷 9장",
@@ -541,7 +541,7 @@ function getHomeScreenshotCopy(locale) {
         },
         "zh-hant": {
             kicker: "",
-            heading: "9 張\n畫面",
+            heading: "9 張畫面",
             copy: "",
             aria: "Shiba App Store 截圖預覽",
             trackAria: "Shiba 的 9 張 App Store 截圖",
@@ -550,7 +550,7 @@ function getHomeScreenshotCopy(locale) {
         },
         "zh-hans": {
             kicker: "",
-            heading: "9 张\n画面",
+            heading: "9 张画面",
             copy: "",
             aria: "Shiba App Store 截图预览",
             trackAria: "Shiba 的 9 张 App Store 截图",
@@ -559,7 +559,7 @@ function getHomeScreenshotCopy(locale) {
         },
         es: {
             kicker: "",
-            heading: "9\npantallas",
+            heading: "9 pantallas",
             copy: "",
             aria: "Vista previa de capturas de Shiba para App Store",
             trackAria: "9 capturas de Shiba para App Store",
@@ -568,7 +568,7 @@ function getHomeScreenshotCopy(locale) {
         },
         fr: {
             kicker: "",
-            heading: "9\nécrans",
+            heading: "9 écrans",
             copy: "",
             aria: "Aperçu des captures App Store de Shiba",
             trackAria: "9 captures App Store de Shiba",
@@ -577,7 +577,7 @@ function getHomeScreenshotCopy(locale) {
         },
         de: {
             kicker: "",
-            heading: "9\nScreens",
+            heading: "9 Screens",
             copy: "",
             aria: "Vorschau der Shiba App Store Screenshots",
             trackAria: "9 Shiba App Store Screenshots",
@@ -586,7 +586,7 @@ function getHomeScreenshotCopy(locale) {
         },
         id: {
             kicker: "",
-            heading: "9\nlayar",
+            heading: "9 layar",
             copy: "",
             aria: "Pratinjau tangkapan layar App Store Shiba",
             trackAria: "9 tangkapan layar App Store Shiba",
@@ -595,7 +595,7 @@ function getHomeScreenshotCopy(locale) {
         },
         "pt-br": {
             kicker: "",
-            heading: "9\ntelas",
+            heading: "9 telas",
             copy: "",
             aria: "Prévia das capturas do Shiba para a App Store",
             trackAria: "9 capturas do Shiba para a App Store",
@@ -604,7 +604,7 @@ function getHomeScreenshotCopy(locale) {
         },
         en: {
             kicker: "",
-            heading: "9\nscreens",
+            heading: "9 screens",
             copy: "",
             aria: "Preview of Shiba App Store screenshots",
             trackAria: "9 Shiba App Store screenshots",

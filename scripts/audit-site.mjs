@@ -385,9 +385,7 @@ function auditExerciseGrowthFeatures(entry, html, isIndexablePage) {
     const appStoreLinks = Array.from(html.matchAll(/<a\b[^>]*>/gi), (match) => match[0]).filter((tag) => {
         return extractHtmlAttribute(tag, "href").startsWith("https://apps.apple.com/");
     });
-    const expectedPlacements = isIndexablePage
-        ? ["exercise_hero", "level_result", "exercise_mid"]
-        : ["exercise_hero", "exercise_mid"];
+    const expectedPlacements = ["exercise_hero", "exercise_mid"];
 
     assert(Boolean(storefront), `${entry.relativePath}: App Store storefront is not configured for ${entry.locale}`);
     assert(relatedCardCount === 12, `${entry.relativePath}: related exercise cards should stay at 12`);
@@ -402,16 +400,15 @@ function auditExerciseGrowthFeatures(entry, html, isIndexablePage) {
         assert(html.includes(`data-analytics-placement="${placement}"`), `${entry.relativePath}: ${placement} App Store analytics placement is missing`);
     });
     assert(!/href="[^"]*#app-store"/i.test(html), `${entry.relativePath}: App Store CTA still detours through the homepage`);
+    assert(calculatorCount === 0, `${entry.relativePath}: exercise page should not expose the strength-level calculator`);
 
     if (isIndexablePage) {
-        assert(calculatorCount === 1, `${entry.relativePath}: indexable exercise page should have exactly one strength-level calculator`);
         assert(smartAppBanners.length === 1, `${entry.relativePath}: indexable exercise page should have exactly one Smart App Banner`);
         if (smartAppBanners[0]) {
             assert(extractHtmlAttribute(smartAppBanners[0], "content") === `app-id=${APP_STORE_ID}`, `${entry.relativePath}: Smart App Banner app id is incorrect`);
         }
         auditExerciseBodyweightTierOrdering(entry, html);
     } else {
-        assert(calculatorCount === 0, `${entry.relativePath}: noindex secondary-unit page should not expose the kg-based calculator`);
         assert(smartAppBanners.length === 0, `${entry.relativePath}: noindex secondary-unit page should not have a Smart App Banner`);
     }
 }

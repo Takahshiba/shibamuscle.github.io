@@ -2660,7 +2660,27 @@ body.app-content-page {
         linear-gradient(180deg, #000000 0%, #060403 430px, #000000 100%);
     color: var(--text);
     padding-top: 56px;
-    font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    font-family: "Noto Sans", "Noto Sans JP", "Noto Sans KR", "Noto Sans TC", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+}
+
+html:lang(ja) body.home-page,
+html:lang(ja) body.app-content-page {
+    font-family: "Noto Sans JP", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+html:lang(ko) body.home-page,
+html:lang(ko) body.app-content-page {
+    font-family: "Noto Sans KR", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+html:lang(zh-Hant) body.home-page,
+html:lang(zh-Hant) body.app-content-page {
+    font-family: "Noto Sans TC", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+html:lang(zh-Hans) body.home-page,
+html:lang(zh-Hans) body.app-content-page {
+    font-family: "Noto Sans SC", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 .home-page .page-main {
@@ -3096,7 +3116,6 @@ body.app-content-page {
 .app-share-artifact figcaption strong,
 .app-share-artifact-grid strong,
 .app-stat strong {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     font-variant-numeric: tabular-nums;
 }
 
@@ -5600,7 +5619,6 @@ body.app-content-page {
 
 .app-screenshot-card figcaption span {
     color: #ffbd55;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     font-size: 0.76rem;
     font-weight: 900;
 }
@@ -5769,7 +5787,6 @@ body.app-content-page {
 
 .app-share-mode small {
     color: #ffbd55;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     font-size: 1.08rem;
     font-weight: 900;
 }
