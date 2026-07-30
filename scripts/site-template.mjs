@@ -175,7 +175,7 @@ ${body}
 }
 
 function resolveStylesheetHref(href) {
-    if (href.startsWith("styles.css?v=app-home-")) {
+    if (href.startsWith("styles.css?v=app-home-") || href.startsWith("styles.css?v=library-controls-")) {
         return href;
     }
 

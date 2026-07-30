@@ -21,6 +21,9 @@
   "resetFilters": "絞り込みをリセット",
   "unit": "kg",
   "ads": false,
+  "stylesheets": [
+    "styles.css?v=library-controls-20260730"
+  ],
   "ogImage": "https://shibamuscle.com/assets/app/shiba-social-card.png",
   "locales": {
     "ko": {
