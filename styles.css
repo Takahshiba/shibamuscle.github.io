@@ -3635,9 +3635,6 @@ body.exercise-library-page {
 }
 
 .exercise-library-controls {
-    position: sticky;
-    top: 86px;
-    z-index: 30;
     display: grid;
     gap: 16px;
     margin-bottom: 26px;
@@ -3957,7 +3954,6 @@ body.exercise-library-page {
     }
 
     .exercise-library-controls {
-        position: static;
         gap: 14px;
         margin-bottom: 20px;
         padding: 14px;
