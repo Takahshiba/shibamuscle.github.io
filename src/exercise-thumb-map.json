@@ -1,0 +1,1724 @@
+[
+  {
+    "slug": "ab-wheel-rollout",
+    "sourceImageset": "exercise_thumb_ab-wheel-rollout.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/ab-wheel-roller.webp"
+  },
+  {
+    "slug": "archer-push-up",
+    "sourceImageset": "exercise_thumb_archer-push-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/archer-push-ups.webp"
+  },
+  {
+    "slug": "arnold-press",
+    "sourceImageset": "exercise_thumb_arnold-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/arnold-press.webp"
+  },
+  {
+    "slug": "back-extension",
+    "sourceImageset": "exercise_thumb_back-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/back-extension.webp"
+  },
+  {
+    "slug": "barbell-calf-raise",
+    "sourceImageset": "exercise_thumb_barbell-calf-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-calf-raise.webp"
+  },
+  {
+    "slug": "barbell-curl",
+    "sourceImageset": "exercise_thumb_barbell-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-curl.webp"
+  },
+  {
+    "slug": "barbell-french-press",
+    "sourceImageset": "exercise_thumb_barbell-french-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/tricep-extension.webp"
+  },
+  {
+    "slug": "barbell-front-raise",
+    "sourceImageset": "exercise_thumb_barbell-front-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-front-raise.webp"
+  },
+  {
+    "slug": "barbell-glute-bridge",
+    "sourceImageset": "exercise_thumb_barbell-glute-bridge.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-glute-bridge.webp"
+  },
+  {
+    "slug": "barbell-hack-squat",
+    "sourceImageset": "exercise_thumb_barbell-hack-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-hack-squat.webp"
+  },
+  {
+    "slug": "barbell-lunge",
+    "sourceImageset": "exercise_thumb_barbell-lunge.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-lunge.webp"
+  },
+  {
+    "slug": "barbell-power-shrug",
+    "sourceImageset": "exercise_thumb_barbell-power-shrug.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-power-shrug.webp"
+  },
+  {
+    "slug": "barbell-pullover",
+    "sourceImageset": "exercise_thumb_barbell-pullover.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-pullover.webp"
+  },
+  {
+    "slug": "barbell-reverse-lunge",
+    "sourceImageset": "exercise_thumb_barbell-reverse-lunge.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-reverse-lunge.webp"
+  },
+  {
+    "slug": "barbell-shrug",
+    "sourceImageset": "exercise_thumb_barbell-shrug.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/barbell-shrug.webp"
+  },
+  {
+    "slug": "behind-the-back-barbell-shrug",
+    "sourceImageset": "exercise_thumb_behind-the-back-barbell-shrug.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/behind-the-back-barbell-shrug.webp"
+  },
+  {
+    "slug": "behind-the-back-deadlift",
+    "sourceImageset": "exercise_thumb_behind-the-back-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/behind-the-back-deadlift.webp"
+  },
+  {
+    "slug": "behind-the-neck-press",
+    "sourceImageset": "exercise_thumb_behind-the-neck-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/behind-the-neck-press.webp"
+  },
+  {
+    "slug": "belt-squat",
+    "sourceImageset": "exercise_thumb_belt-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/belt-squat.webp"
+  },
+  {
+    "slug": "bench-dips",
+    "sourceImageset": "exercise_thumb_bench-dips.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bench-dips.webp"
+  },
+  {
+    "slug": "bench-pin-press",
+    "sourceImageset": "exercise_thumb_bench-pin-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bench-pin-press.webp"
+  },
+  {
+    "slug": "bench-press",
+    "sourceImageset": "exercise_thumb_bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bench-press.webp"
+  },
+  {
+    "slug": "bench-pull",
+    "sourceImageset": "exercise_thumb_bench-pull.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bench-pull.webp"
+  },
+  {
+    "slug": "bent-arm-barbell-pullover",
+    "sourceImageset": "exercise_thumb_bent-arm-barbell-pullover.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bent-arm-barbell-pullover.webp"
+  },
+  {
+    "slug": "bent-over-dumbbell-row",
+    "sourceImageset": "exercise_thumb_bent-over-dumbbell-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bent-over-dumbbell-row.webp"
+  },
+  {
+    "slug": "bent-over-row",
+    "sourceImageset": "exercise_thumb_bent-over-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bent-over-row.webp"
+  },
+  {
+    "slug": "bicycle-crunch",
+    "sourceImageset": "exercise_thumb_bicycle-crunch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bicycle-crunches.webp"
+  },
+  {
+    "slug": "bodyweight-calf-raise",
+    "sourceImageset": "exercise_thumb_bodyweight-calf-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bodyweight-calf-raise.webp"
+  },
+  {
+    "slug": "bodyweight-squat",
+    "sourceImageset": "exercise_thumb_bodyweight-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bodyweight-squat.webp"
+  },
+  {
+    "slug": "box-squat",
+    "sourceImageset": "exercise_thumb_box-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/box-squat.webp"
+  },
+  {
+    "slug": "bulgarian-split-squat",
+    "sourceImageset": "exercise_thumb_bulgarian-split-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/bulgarian-split-squat.webp"
+  },
+  {
+    "slug": "burpee-jump",
+    "sourceImageset": "exercise_thumb_burpee-jump.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/burpees.webp"
+  },
+  {
+    "slug": "cable-biceps-curl",
+    "sourceImageset": "exercise_thumb_cable-biceps-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-bicep-curl.webp"
+  },
+  {
+    "slug": "cable-crunch",
+    "sourceImageset": "exercise_thumb_cable-crunch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-crunches.webp"
+  },
+  {
+    "slug": "cable-external-rotation",
+    "sourceImageset": "exercise_thumb_cable-external-rotation.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-external-rotation.webp"
+  },
+  {
+    "slug": "cable-fly",
+    "sourceImageset": "exercise_thumb_cable-fly.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-fly.webp"
+  },
+  {
+    "slug": "cable-hammer-curl",
+    "sourceImageset": "exercise_thumb_cable-hammer-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-hammer-curl.webp"
+  },
+  {
+    "slug": "cable-kickback",
+    "sourceImageset": "exercise_thumb_cable-kickback.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-kickback.webp"
+  },
+  {
+    "slug": "cable-lateral-raise",
+    "sourceImageset": "exercise_thumb_cable-lateral-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-lateral-raise.webp"
+  },
+  {
+    "slug": "cable-leg-extension",
+    "sourceImageset": "exercise_thumb_cable-leg-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-leg-extension.webp"
+  },
+  {
+    "slug": "cable-overhead-extension",
+    "sourceImageset": "exercise_thumb_cable-overhead-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-overhead-tricep-extension.webp"
+  },
+  {
+    "slug": "cable-pull-through",
+    "sourceImageset": "exercise_thumb_cable-pull-through.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-pull-through.webp"
+  },
+  {
+    "slug": "cable-reverse-fly",
+    "sourceImageset": "exercise_thumb_cable-reverse-fly.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-reverse-fly.webp"
+  },
+  {
+    "slug": "cable-shrug",
+    "sourceImageset": "exercise_thumb_cable-shrug.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-shrug.webp"
+  },
+  {
+    "slug": "cable-upright-row",
+    "sourceImageset": "exercise_thumb_cable-upright-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-upright-row.webp"
+  },
+  {
+    "slug": "cable-woodchopper",
+    "sourceImageset": "exercise_thumb_cable-woodchopper.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cable-woodchopper.webp"
+  },
+  {
+    "slug": "cheat-curl",
+    "sourceImageset": "exercise_thumb_cheat-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/cheat-curl.webp"
+  },
+  {
+    "slug": "chest-press",
+    "sourceImageset": "exercise_thumb_chest-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/chest-press.webp"
+  },
+  {
+    "slug": "chest-supported-dumbbell-row",
+    "sourceImageset": "exercise_thumb_chest-supported-dumbbell-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/chest-supported-dumbbell-row.webp"
+  },
+  {
+    "slug": "chin-up",
+    "sourceImageset": "exercise_thumb_chin-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/chin-ups.webp"
+  },
+  {
+    "slug": "clap-pull-up",
+    "sourceImageset": "exercise_thumb_clap-pull-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/clap-pull-ups.webp"
+  },
+  {
+    "slug": "clean",
+    "sourceImageset": "exercise_thumb_clean.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/clean.webp"
+  },
+  {
+    "slug": "clean-and-jerk",
+    "sourceImageset": "exercise_thumb_clean-and-jerk.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/clean-and-jerk.webp"
+  },
+  {
+    "slug": "clean-and-press",
+    "sourceImageset": "exercise_thumb_clean-and-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/clean-and-press.webp"
+  },
+  {
+    "slug": "clean-high-pull",
+    "sourceImageset": "exercise_thumb_clean-high-pull.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/clean-high-pull.webp"
+  },
+  {
+    "slug": "clean-pull",
+    "sourceImageset": "exercise_thumb_clean-pull.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/clean-pull.webp"
+  },
+  {
+    "slug": "close-grip-bench-press",
+    "sourceImageset": "exercise_thumb_close-grip-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/close-grip-bench-press.webp"
+  },
+  {
+    "slug": "close-grip-dumbbell-bench-press",
+    "sourceImageset": "exercise_thumb_close-grip-dumbbell-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/close-grip-dumbbell-bench-press.webp"
+  },
+  {
+    "slug": "close-grip-incline-bench-press",
+    "sourceImageset": "exercise_thumb_close-grip-incline-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/close-grip-incline-bench-press.webp"
+  },
+  {
+    "slug": "close-grip-lat-pulldown",
+    "sourceImageset": "exercise_thumb_close-grip-lat-pulldown.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/close-grip-lat-pulldown.webp"
+  },
+  {
+    "slug": "close-grip-push-up",
+    "sourceImageset": "exercise_thumb_close-grip-push-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/close-grip-push-ups.webp"
+  },
+  {
+    "slug": "crunch",
+    "sourceImageset": "exercise_thumb_crunch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/crunches.webp"
+  },
+  {
+    "slug": "deadlift",
+    "sourceImageset": "exercise_thumb_deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/deadlift.webp"
+  },
+  {
+    "slug": "decline-bench-press",
+    "sourceImageset": "exercise_thumb_decline-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/decline-bench-press.webp"
+  },
+  {
+    "slug": "decline-crunch",
+    "sourceImageset": "exercise_thumb_decline-crunch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/decline-crunches.webp"
+  },
+  {
+    "slug": "decline-dumbbell-bench-press",
+    "sourceImageset": "exercise_thumb_decline-dumbbell-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/decline-dumbbell-bench-press.webp"
+  },
+  {
+    "slug": "decline-dumbbell-fly",
+    "sourceImageset": "exercise_thumb_decline-dumbbell-fly.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/decline-dumbbell-fly.webp"
+  },
+  {
+    "slug": "decline-push-up",
+    "sourceImageset": "exercise_thumb_decline-push-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/decline-push-ups.webp"
+  },
+  {
+    "slug": "decline-sit-up",
+    "sourceImageset": "exercise_thumb_decline-sit-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/decline-sit-ups.webp"
+  },
+  {
+    "slug": "deficit-deadlift",
+    "sourceImageset": "exercise_thumb_deficit-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/deficit-deadlift.webp"
+  },
+  {
+    "slug": "diamond-push-up",
+    "sourceImageset": "exercise_thumb_diamond-push-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/diamond-push-ups.webp"
+  },
+  {
+    "slug": "dips",
+    "sourceImageset": "exercise_thumb_dips.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dips.webp"
+  },
+  {
+    "slug": "donkey-calf-raise",
+    "sourceImageset": "exercise_thumb_donkey-calf-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/donkey-calf-raise.webp"
+  },
+  {
+    "slug": "dumbbell-bench-press",
+    "sourceImageset": "exercise_thumb_dumbbell-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-bench-press.webp"
+  },
+  {
+    "slug": "dumbbell-bench-pull",
+    "sourceImageset": "exercise_thumb_dumbbell-bench-pull.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-bench-pull.webp"
+  },
+  {
+    "slug": "dumbbell-bulgarian-split-squat",
+    "sourceImageset": "exercise_thumb_dumbbell-bulgarian-split-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-bulgarian-split-squat.webp"
+  },
+  {
+    "slug": "dumbbell-calf-raise",
+    "sourceImageset": "exercise_thumb_dumbbell-calf-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-calf-raise.webp"
+  },
+  {
+    "slug": "dumbbell-clean-and-press",
+    "sourceImageset": "exercise_thumb_dumbbell-clean-and-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-clean-and-press.webp"
+  },
+  {
+    "slug": "dumbbell-concentration-curl",
+    "sourceImageset": "exercise_thumb_dumbbell-concentration-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-concentration-curl.webp"
+  },
+  {
+    "slug": "dumbbell-curl",
+    "sourceImageset": "exercise_thumb_dumbbell-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-curl.webp"
+  },
+  {
+    "slug": "dumbbell-deadlift",
+    "sourceImageset": "exercise_thumb_dumbbell-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-deadlift.webp"
+  },
+  {
+    "slug": "dumbbell-external-rotation",
+    "sourceImageset": "exercise_thumb_dumbbell-external-rotation.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-external-rotation.webp"
+  },
+  {
+    "slug": "dumbbell-face-pull",
+    "sourceImageset": "exercise_thumb_dumbbell-face-pull.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-face-pull.webp"
+  },
+  {
+    "slug": "dumbbell-floor-press",
+    "sourceImageset": "exercise_thumb_dumbbell-floor-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-floor-press.webp"
+  },
+  {
+    "slug": "dumbbell-fly",
+    "sourceImageset": "exercise_thumb_dumbbell-fly.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-fly.webp"
+  },
+  {
+    "slug": "dumbbell-front-raise",
+    "sourceImageset": "exercise_thumb_dumbbell-front-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-front-raise.webp"
+  },
+  {
+    "slug": "dumbbell-front-squat",
+    "sourceImageset": "exercise_thumb_dumbbell-front-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-front-squat.webp"
+  },
+  {
+    "slug": "dumbbell-hang-clean",
+    "sourceImageset": "exercise_thumb_dumbbell-hang-clean.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-hang-clean.webp"
+  },
+  {
+    "slug": "dumbbell-high-pull",
+    "sourceImageset": "exercise_thumb_dumbbell-high-pull.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-high-pull.webp"
+  },
+  {
+    "slug": "dumbbell-incline-y-raise",
+    "sourceImageset": "exercise_thumb_dumbbell-incline-y-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-incline-y-raise.webp"
+  },
+  {
+    "slug": "dumbbell-kickback",
+    "sourceImageset": "exercise_thumb_dumbbell-kickback.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-tricep-kickback.webp"
+  },
+  {
+    "slug": "dumbbell-lateral-raise",
+    "sourceImageset": "exercise_thumb_dumbbell-lateral-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-lateral-raise.webp"
+  },
+  {
+    "slug": "dumbbell-lunge",
+    "sourceImageset": "exercise_thumb_dumbbell-lunge.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-lunge.webp"
+  },
+  {
+    "slug": "dumbbell-pullover",
+    "sourceImageset": "exercise_thumb_dumbbell-pullover.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-pullover.webp"
+  },
+  {
+    "slug": "dumbbell-push-press",
+    "sourceImageset": "exercise_thumb_dumbbell-push-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-push-press.webp"
+  },
+  {
+    "slug": "dumbbell-reverse-curl",
+    "sourceImageset": "exercise_thumb_dumbbell-reverse-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-reverse-curl.webp"
+  },
+  {
+    "slug": "dumbbell-reverse-fly",
+    "sourceImageset": "exercise_thumb_dumbbell-reverse-fly.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-reverse-fly.webp"
+  },
+  {
+    "slug": "dumbbell-reverse-wrist-curl",
+    "sourceImageset": "exercise_thumb_dumbbell-reverse-wrist-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-reverse-wrist-curl.webp"
+  },
+  {
+    "slug": "dumbbell-romanian-deadlift",
+    "sourceImageset": "exercise_thumb_dumbbell-romanian-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-romanian-deadlift.webp"
+  },
+  {
+    "slug": "dumbbell-row",
+    "sourceImageset": "exercise_thumb_dumbbell-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-row.webp"
+  },
+  {
+    "slug": "dumbbell-shoulder-press",
+    "sourceImageset": "exercise_thumb_dumbbell-shoulder-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-shoulder-press.webp"
+  },
+  {
+    "slug": "dumbbell-shrug",
+    "sourceImageset": "exercise_thumb_dumbbell-shrug.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-shrug.webp"
+  },
+  {
+    "slug": "dumbbell-side-bend",
+    "sourceImageset": "exercise_thumb_dumbbell-side-bend.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-side-bend.webp"
+  },
+  {
+    "slug": "dumbbell-snatch",
+    "sourceImageset": "exercise_thumb_dumbbell-snatch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-snatch.webp"
+  },
+  {
+    "slug": "dumbbell-split-squat",
+    "sourceImageset": "exercise_thumb_dumbbell-split-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-split-squat.webp"
+  },
+  {
+    "slug": "dumbbell-squat",
+    "sourceImageset": "exercise_thumb_dumbbell-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-squat.webp"
+  },
+  {
+    "slug": "dumbbell-thruster",
+    "sourceImageset": "exercise_thumb_dumbbell-thruster.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-thruster.webp"
+  },
+  {
+    "slug": "dumbbell-triceps-extension",
+    "sourceImageset": "exercise_thumb_dumbbell-triceps-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-tricep-extension.webp"
+  },
+  {
+    "slug": "dumbbell-upright-row",
+    "sourceImageset": "exercise_thumb_dumbbell-upright-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-upright-row.webp"
+  },
+  {
+    "slug": "dumbbell-walking-calf-raise",
+    "sourceImageset": "exercise_thumb_dumbbell-walking-calf-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-walking-calf-raise.webp"
+  },
+  {
+    "slug": "dumbbell-wrist-curl",
+    "sourceImageset": "exercise_thumb_dumbbell-wrist-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-wrist-curl.webp"
+  },
+  {
+    "slug": "dumbbell-z-press",
+    "sourceImageset": "exercise_thumb_dumbbell-z-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/dumbbell-z-press.webp"
+  },
+  {
+    "slug": "ez-bar-curl",
+    "sourceImageset": "exercise_thumb_ez-bar-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/ez-bar-curl.webp"
+  },
+  {
+    "slug": "face-pull",
+    "sourceImageset": "exercise_thumb_face-pull.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/face-pull.webp"
+  },
+  {
+    "slug": "floor-hip-abduction",
+    "sourceImageset": "exercise_thumb_floor-hip-abduction.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/floor-hip-abduction.webp"
+  },
+  {
+    "slug": "floor-hip-extension",
+    "sourceImageset": "exercise_thumb_floor-hip-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/floor-hip-extension.webp"
+  },
+  {
+    "slug": "floor-press",
+    "sourceImageset": "exercise_thumb_floor-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/floor-press.webp"
+  },
+  {
+    "slug": "flutter-kicks",
+    "sourceImageset": "exercise_thumb_flutter-kicks.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/flutter-kicks.webp"
+  },
+  {
+    "slug": "front-squat",
+    "sourceImageset": "exercise_thumb_front-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/front-squat.webp"
+  },
+  {
+    "slug": "glute-bridge",
+    "sourceImageset": "exercise_thumb_glute-bridge.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/glute-bridge.webp"
+  },
+  {
+    "slug": "glute-ham-raise",
+    "sourceImageset": "exercise_thumb_glute-ham-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/glute-ham-raise.webp"
+  },
+  {
+    "slug": "glute-kickback",
+    "sourceImageset": "exercise_thumb_glute-kickback.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/glute-kickback.webp"
+  },
+  {
+    "slug": "goblet-squat",
+    "sourceImageset": "exercise_thumb_goblet-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/goblet-squat.webp"
+  },
+  {
+    "slug": "good-morning",
+    "sourceImageset": "exercise_thumb_good-morning.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/good-morning.webp"
+  },
+  {
+    "slug": "hack-squat",
+    "sourceImageset": "exercise_thumb_hack-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hack-squat.webp"
+  },
+  {
+    "slug": "half-squat",
+    "sourceImageset": "exercise_thumb_half-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/half-squat.webp"
+  },
+  {
+    "slug": "hammer-curl",
+    "sourceImageset": "exercise_thumb_hammer-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hammer-curl.webp"
+  },
+  {
+    "slug": "handstand-push-up",
+    "sourceImageset": "exercise_thumb_handstand-push-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/handstand-push-ups.webp"
+  },
+  {
+    "slug": "hang-clean",
+    "sourceImageset": "exercise_thumb_hang-clean.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hang-clean.webp"
+  },
+  {
+    "slug": "hang-power-clean",
+    "sourceImageset": "exercise_thumb_hang-power-clean.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hang-power-clean.webp"
+  },
+  {
+    "slug": "hang-snatch",
+    "sourceImageset": "exercise_thumb_hang-snatch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hang-snatch.webp"
+  },
+  {
+    "slug": "hanging-knee-raise",
+    "sourceImageset": "exercise_thumb_hanging-knee-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hanging-knee-raise.webp"
+  },
+  {
+    "slug": "hanging-leg-raise",
+    "sourceImageset": "exercise_thumb_hanging-leg-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hanging-leg-raise.webp"
+  },
+  {
+    "slug": "hex-bar-deadlift",
+    "sourceImageset": "exercise_thumb_hex-bar-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hex-bar-deadlift.webp"
+  },
+  {
+    "slug": "hex-bar-shrug",
+    "sourceImageset": "exercise_thumb_hex-bar-shrug.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hex-bar-shrug.webp"
+  },
+  {
+    "slug": "high-pulley-crunch",
+    "sourceImageset": "exercise_thumb_high-pulley-crunch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/high-pulley-crunches.webp"
+  },
+  {
+    "slug": "hip-abduction",
+    "sourceImageset": "exercise_thumb_hip-abduction.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hip-abduction.webp"
+  },
+  {
+    "slug": "hip-adduction",
+    "sourceImageset": "exercise_thumb_hip-adduction.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hip-adduction.webp"
+  },
+  {
+    "slug": "hip-extension",
+    "sourceImageset": "exercise_thumb_hip-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hip-extension.webp"
+  },
+  {
+    "slug": "hip-thrust",
+    "sourceImageset": "exercise_thumb_hip-thrust.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/hip-thrust.webp"
+  },
+  {
+    "slug": "horizontal-leg-press",
+    "sourceImageset": "exercise_thumb_horizontal-leg-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/horizontal-leg-press.webp"
+  },
+  {
+    "slug": "incline-bench-press",
+    "sourceImageset": "exercise_thumb_incline-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/incline-bench-press.webp"
+  },
+  {
+    "slug": "incline-cable-curl",
+    "sourceImageset": "exercise_thumb_incline-cable-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/incline-cable-curl.webp"
+  },
+  {
+    "slug": "incline-dumbbell-bench-press",
+    "sourceImageset": "exercise_thumb_incline-dumbbell-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/incline-dumbbell-bench-press.webp"
+  },
+  {
+    "slug": "incline-dumbbell-curl",
+    "sourceImageset": "exercise_thumb_incline-dumbbell-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/incline-dumbbell-curl.webp"
+  },
+  {
+    "slug": "incline-dumbbell-fly",
+    "sourceImageset": "exercise_thumb_incline-dumbbell-fly.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/incline-dumbbell-fly.webp"
+  },
+  {
+    "slug": "incline-hammer-curl",
+    "sourceImageset": "exercise_thumb_incline-hammer-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/incline-hammer-curl.webp"
+  },
+  {
+    "slug": "incline-push-up",
+    "sourceImageset": "exercise_thumb_incline-push-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/incline-push-ups.webp"
+  },
+  {
+    "slug": "inverted-row",
+    "sourceImageset": "exercise_thumb_inverted-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/inverted-row.webp"
+  },
+  {
+    "slug": "jefferson-deadlift",
+    "sourceImageset": "exercise_thumb_jefferson-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/jefferson-deadlift.webp"
+  },
+  {
+    "slug": "jefferson-squat",
+    "sourceImageset": "exercise_thumb_jefferson-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/jefferson-squat.webp"
+  },
+  {
+    "slug": "jm-press",
+    "sourceImageset": "exercise_thumb_jm-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/jm-press.webp"
+  },
+  {
+    "slug": "jumping-jack",
+    "sourceImageset": "exercise_thumb_jumping-jack.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/jumping-jack.webp"
+  },
+  {
+    "slug": "landmine-press",
+    "sourceImageset": "exercise_thumb_landmine-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/landmine-press.webp"
+  },
+  {
+    "slug": "landmine-squat",
+    "sourceImageset": "exercise_thumb_landmine-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/landmine-squat.webp"
+  },
+  {
+    "slug": "lat-pulldown",
+    "sourceImageset": "exercise_thumb_lat-pulldown.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/lat-pulldown.webp"
+  },
+  {
+    "slug": "leg-extension",
+    "sourceImageset": "exercise_thumb_leg-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/leg-extension.webp"
+  },
+  {
+    "slug": "log-press",
+    "sourceImageset": "exercise_thumb_log-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/log-press.webp"
+  },
+  {
+    "slug": "lunge",
+    "sourceImageset": "exercise_thumb_lunge.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/lunge.webp"
+  },
+  {
+    "slug": "lying-cable-curl",
+    "sourceImageset": "exercise_thumb_lying-cable-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/lying-cable-curl.webp"
+  },
+  {
+    "slug": "lying-dumbbell-triceps-extension",
+    "sourceImageset": "exercise_thumb_lying-dumbbell-triceps-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/lying-dumbbell-tricep-extension.webp"
+  },
+  {
+    "slug": "lying-leg-curl",
+    "sourceImageset": "exercise_thumb_lying-leg-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/lying-leg-curl.webp"
+  },
+  {
+    "slug": "lying-leg-raise",
+    "sourceImageset": "exercise_thumb_lying-leg-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/lying-leg-raise.webp"
+  },
+  {
+    "slug": "machine-back-extension",
+    "sourceImageset": "exercise_thumb_machine-back-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-back-extension.webp"
+  },
+  {
+    "slug": "machine-biceps-curl",
+    "sourceImageset": "exercise_thumb_machine-biceps-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-bicep-curl.webp"
+  },
+  {
+    "slug": "machine-calf-raise",
+    "sourceImageset": "exercise_thumb_machine-calf-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-calf-raise.webp"
+  },
+  {
+    "slug": "machine-chest-fly",
+    "sourceImageset": "exercise_thumb_machine-chest-fly.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-chest-fly.webp"
+  },
+  {
+    "slug": "machine-lateral-raise",
+    "sourceImageset": "exercise_thumb_machine-lateral-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-lateral-raise.webp"
+  },
+  {
+    "slug": "machine-reverse-fly",
+    "sourceImageset": "exercise_thumb_machine-reverse-fly.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-reverse-fly.webp"
+  },
+  {
+    "slug": "machine-row",
+    "sourceImageset": "exercise_thumb_machine-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-row.webp"
+  },
+  {
+    "slug": "machine-seated-crunch",
+    "sourceImageset": "exercise_thumb_machine-seated-crunch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-seated-crunches.webp"
+  },
+  {
+    "slug": "machine-shoulder-press",
+    "sourceImageset": "exercise_thumb_machine-shoulder-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-shoulder-press.webp"
+  },
+  {
+    "slug": "machine-shrug",
+    "sourceImageset": "exercise_thumb_machine-shrug.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-shrug.webp"
+  },
+  {
+    "slug": "machine-triceps-extension",
+    "sourceImageset": "exercise_thumb_machine-triceps-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/machine-tricep-extension.webp"
+  },
+  {
+    "slug": "meadows-row",
+    "sourceImageset": "exercise_thumb_meadows-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/meadows-row.webp"
+  },
+  {
+    "slug": "military-press",
+    "sourceImageset": "exercise_thumb_military-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/military-press.webp"
+  },
+  {
+    "slug": "mountain-climber",
+    "sourceImageset": "exercise_thumb_mountain-climber.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/mountain-climbers.webp"
+  },
+  {
+    "slug": "muscle-snatch",
+    "sourceImageset": "exercise_thumb_muscle-snatch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/muscle-snatch.webp"
+  },
+  {
+    "slug": "muscle-up",
+    "sourceImageset": "exercise_thumb_muscle-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/muscle-ups.webp"
+  },
+  {
+    "slug": "neck-curl",
+    "sourceImageset": "exercise_thumb_neck-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/neck-curl.webp"
+  },
+  {
+    "slug": "neck-extension",
+    "sourceImageset": "exercise_thumb_neck-extension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/neck-extension.webp"
+  },
+  {
+    "slug": "neutral-grip-pull-up",
+    "sourceImageset": "exercise_thumb_neutral-grip-pull-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/neutral-grip-pull-ups.webp"
+  },
+  {
+    "slug": "nordic-hamstring-curl",
+    "sourceImageset": "exercise_thumb_nordic-hamstring-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/nordic-hamstring-curl.webp"
+  },
+  {
+    "slug": "one-arm-cable-biceps-curl",
+    "sourceImageset": "exercise_thumb_one-arm-cable-biceps-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/one-arm-cable-bicep-curl.webp"
+  },
+  {
+    "slug": "one-arm-dumbbell-preacher-curl",
+    "sourceImageset": "exercise_thumb_one-arm-dumbbell-preacher-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/one-arm-dumbbell-preacher-curl.webp"
+  },
+  {
+    "slug": "one-arm-landmine-press",
+    "sourceImageset": "exercise_thumb_one-arm-landmine-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/one-arm-landmine-press.webp"
+  },
+  {
+    "slug": "one-arm-lat-pulldown",
+    "sourceImageset": "exercise_thumb_one-arm-lat-pulldown.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/one-arm-lat-pulldown.webp"
+  },
+  {
+    "slug": "one-arm-pull-up",
+    "sourceImageset": "exercise_thumb_one-arm-pull-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/one-arm-pull-ups.webp"
+  },
+  {
+    "slug": "one-arm-push-up",
+    "sourceImageset": "exercise_thumb_one-arm-push-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/one-arm-push-ups.webp"
+  },
+  {
+    "slug": "one-arm-seated-cable-row",
+    "sourceImageset": "exercise_thumb_one-arm-seated-cable-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/one-arm-seated-cable-row.webp"
+  },
+  {
+    "slug": "one-arm-triceps-pushdown",
+    "sourceImageset": "exercise_thumb_one-arm-pulldown.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/one-arm-pulldown.webp"
+  },
+  {
+    "slug": "overhead-cable-curl",
+    "sourceImageset": "exercise_thumb_overhead-cable-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/overhead-cable-curl.webp"
+  },
+  {
+    "slug": "overhead-squat",
+    "sourceImageset": "exercise_thumb_overhead-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/overhead-squat.webp"
+  },
+  {
+    "slug": "paused-bench-press",
+    "sourceImageset": "exercise_thumb_paused-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/paused-bench-press.webp"
+  },
+  {
+    "slug": "paused-deadlift",
+    "sourceImageset": "exercise_thumb_paused-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/paused-deadlift.webp"
+  },
+  {
+    "slug": "paused-squat",
+    "sourceImageset": "exercise_thumb_paused-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/paused-squat.webp"
+  },
+  {
+    "slug": "pendlay-row",
+    "sourceImageset": "exercise_thumb_pendlay-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/pendlay-row.webp"
+  },
+  {
+    "slug": "pike-push-up",
+    "sourceImageset": "exercise_thumb_pike-push-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/pike-push-ups.webp"
+  },
+  {
+    "slug": "pin-squat",
+    "sourceImageset": "exercise_thumb_pin-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/pin-squat.webp"
+  },
+  {
+    "slug": "pistol-squat",
+    "sourceImageset": "exercise_thumb_pistol-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/pistol-squat.webp"
+  },
+  {
+    "slug": "power-clean",
+    "sourceImageset": "exercise_thumb_power-clean.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/power-clean.webp"
+  },
+  {
+    "slug": "power-snatch",
+    "sourceImageset": "exercise_thumb_power-snatch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/power-snatch.webp"
+  },
+  {
+    "slug": "preacher-curl",
+    "sourceImageset": "exercise_thumb_preacher-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/preacher-curl.webp"
+  },
+  {
+    "slug": "pull-up",
+    "sourceImageset": "exercise_thumb_pull-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/pull-ups.webp"
+  },
+  {
+    "slug": "push-jerk",
+    "sourceImageset": "exercise_thumb_push-jerk.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/push-jerk.webp"
+  },
+  {
+    "slug": "push-press",
+    "sourceImageset": "exercise_thumb_push-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/push-press.webp"
+  },
+  {
+    "slug": "push-up",
+    "sourceImageset": "exercise_thumb_push-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/push-ups.webp"
+  },
+  {
+    "slug": "rack-pull",
+    "sourceImageset": "exercise_thumb_rack-pull.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/rack-pull.webp"
+  },
+  {
+    "slug": "renegade-row",
+    "sourceImageset": "exercise_thumb_renegade-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/renegade-row.webp"
+  },
+  {
+    "slug": "reverse-barbell-curl",
+    "sourceImageset": "exercise_thumb_reverse-barbell-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/reverse-barbell-curl.webp"
+  },
+  {
+    "slug": "reverse-crunch",
+    "sourceImageset": "exercise_thumb_reverse-crunch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/reverse-crunches.webp"
+  },
+  {
+    "slug": "reverse-grip-bench-press",
+    "sourceImageset": "exercise_thumb_reverse-grip-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/reverse-grip-bench-press.webp"
+  },
+  {
+    "slug": "reverse-grip-lat-pulldown",
+    "sourceImageset": "exercise_thumb_reverse-grip-lat-pulldown.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/reverse-grip-lat-pulldown.webp"
+  },
+  {
+    "slug": "reverse-grip-pushdown",
+    "sourceImageset": "exercise_thumb_reverse-grip-pushdown.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/reverse-grip-tricep-pushdown.webp"
+  },
+  {
+    "slug": "reverse-hyperextension",
+    "sourceImageset": "exercise_thumb_reverse-hyperextension.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/reverse-hyperextension.webp"
+  },
+  {
+    "slug": "reverse-lunge",
+    "sourceImageset": "exercise_thumb_reverse-lunge.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/reverse-lunge.webp"
+  },
+  {
+    "slug": "reverse-wrist-curl",
+    "sourceImageset": "exercise_thumb_reverse-wrist-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/reverse-wrist-curl.webp"
+  },
+  {
+    "slug": "ring-dips",
+    "sourceImageset": "exercise_thumb_ring-dips.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/ring-dips.webp"
+  },
+  {
+    "slug": "ring-muscle-up",
+    "sourceImageset": "exercise_thumb_ring-muscle-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/ring-muscle-ups.webp"
+  },
+  {
+    "slug": "roman-chair-side-bend",
+    "sourceImageset": "exercise_thumb_roman-chair-side-bend.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/romanchair-side-bend.webp"
+  },
+  {
+    "slug": "romanian-deadlift",
+    "sourceImageset": "exercise_thumb_romanian-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/romanian-deadlift.webp"
+  },
+  {
+    "slug": "russian-twist",
+    "sourceImageset": "exercise_thumb_russian-twist.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/russian-twist.webp"
+  },
+  {
+    "slug": "safety-bar-squat",
+    "sourceImageset": "exercise_thumb_safety-bar-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/safety-bar-squat.webp"
+  },
+  {
+    "slug": "scissor-kicks",
+    "sourceImageset": "exercise_thumb_scissor-kicks.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/scissor-kicks.webp"
+  },
+  {
+    "slug": "seated-cable-row",
+    "sourceImageset": "exercise_thumb_seated-cable-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/seated-cable-row.webp"
+  },
+  {
+    "slug": "seated-calf-raise",
+    "sourceImageset": "exercise_thumb_seated-calf-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/seated-calf-raise.webp"
+  },
+  {
+    "slug": "seated-dips-machine",
+    "sourceImageset": "exercise_thumb_seated-dips-machine.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/seated-dips-machine.webp"
+  },
+  {
+    "slug": "seated-dumbbell-curl",
+    "sourceImageset": "exercise_thumb_seated-dumbbell-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/seated-dumbbell-curl.webp"
+  },
+  {
+    "slug": "seated-dumbbell-french-press",
+    "sourceImageset": "exercise_thumb_seated-dumbbell-french-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/seated-dumbbell-tricep-extension.webp"
+  },
+  {
+    "slug": "seated-dumbbell-shoulder-press",
+    "sourceImageset": "exercise_thumb_seated-dumbbell-shoulder-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/seated-dumbbell-shoulder-press.webp"
+  },
+  {
+    "slug": "seated-leg-curl",
+    "sourceImageset": "exercise_thumb_seated-leg-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/seated-leg-curl.webp"
+  },
+  {
+    "slug": "seated-shoulder-press",
+    "sourceImageset": "exercise_thumb_seated-shoulder-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/seated-shoulder-press.webp"
+  },
+  {
+    "slug": "shoulder-pin-press",
+    "sourceImageset": "exercise_thumb_shoulder-pin-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/shoulder-pin-press.webp"
+  },
+  {
+    "slug": "shoulder-press",
+    "sourceImageset": "exercise_thumb_shoulder-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/shoulder-press.webp"
+  },
+  {
+    "slug": "side-crunch",
+    "sourceImageset": "exercise_thumb_side-crunch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/side-crunches.webp"
+  },
+  {
+    "slug": "side-leg-raise",
+    "sourceImageset": "exercise_thumb_side-leg-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/side-leg-raise.webp"
+  },
+  {
+    "slug": "side-lunge",
+    "sourceImageset": "exercise_thumb_side-lunge.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/side-lunge.webp"
+  },
+  {
+    "slug": "single-leg-deadlift",
+    "sourceImageset": "exercise_thumb_single-leg-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/single-leg-deadlift.webp"
+  },
+  {
+    "slug": "single-leg-dumbbell-deadlift",
+    "sourceImageset": "exercise_thumb_single-leg-dumbbell-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/single-leg-dumbbell-deadlift.webp"
+  },
+  {
+    "slug": "single-leg-press",
+    "sourceImageset": "exercise_thumb_single-leg-leg-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/single-leg-press.webp"
+  },
+  {
+    "slug": "single-leg-romanian-deadlift",
+    "sourceImageset": "exercise_thumb_single-leg-romanian-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/single-leg-romanian-deadlift.webp"
+  },
+  {
+    "slug": "single-leg-seated-calf-raise",
+    "sourceImageset": "exercise_thumb_single-leg-seated-calf-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/single-leg-seated-calf-raise.webp"
+  },
+  {
+    "slug": "single-leg-squat",
+    "sourceImageset": "exercise_thumb_single-leg-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/single-leg-squat.webp"
+  },
+  {
+    "slug": "sissy-squat",
+    "sourceImageset": "exercise_thumb_sissy-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/sissy-squat.webp"
+  },
+  {
+    "slug": "sit-up",
+    "sourceImageset": "exercise_thumb_sit-up.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/sit-ups.webp"
+  },
+  {
+    "slug": "skull-crusher",
+    "sourceImageset": "exercise_thumb_skull-crusher.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/lying-tricep-extension.webp"
+  },
+  {
+    "slug": "sled-leg-press",
+    "sourceImageset": "exercise_thumb_sled-leg-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/sled-leg-press.webp"
+  },
+  {
+    "slug": "sled-press-calf-raise",
+    "sourceImageset": "exercise_thumb_sled-press-calf-raise.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/sled-press-calf-raise.webp"
+  },
+  {
+    "slug": "smith-machine-bench-press",
+    "sourceImageset": "exercise_thumb_smith-machine-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/smith-machine-bench-press.webp"
+  },
+  {
+    "slug": "smith-machine-shrug",
+    "sourceImageset": "exercise_thumb_smith-machine-shrug.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/smith-machine-shrug.webp"
+  },
+  {
+    "slug": "smith-machine-squat",
+    "sourceImageset": "exercise_thumb_smith-machine-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/smith-machine-squat.webp"
+  },
+  {
+    "slug": "snatch",
+    "sourceImageset": "exercise_thumb_snatch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/snatch.webp"
+  },
+  {
+    "slug": "snatch-deadlift",
+    "sourceImageset": "exercise_thumb_snatch-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/snatch-deadlift.webp"
+  },
+  {
+    "slug": "snatch-pull",
+    "sourceImageset": "exercise_thumb_snatch-pull.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/snatch-pull.webp"
+  },
+  {
+    "slug": "spider-curl",
+    "sourceImageset": "exercise_thumb_spider-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/spider-curl.webp"
+  },
+  {
+    "slug": "split-jerk",
+    "sourceImageset": "exercise_thumb_split-jerk.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/split-jerk.webp"
+  },
+  {
+    "slug": "split-squat",
+    "sourceImageset": "exercise_thumb_split-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/split-squat.webp"
+  },
+  {
+    "slug": "spoto-press",
+    "sourceImageset": "exercise_thumb_spoto-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/spoto-press.webp"
+  },
+  {
+    "slug": "squat",
+    "sourceImageset": "exercise_thumb_squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/squat.webp"
+  },
+  {
+    "slug": "squat-jump",
+    "sourceImageset": "exercise_thumb_squat-jump.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/squat-jump.webp"
+  },
+  {
+    "slug": "squat-thrust",
+    "sourceImageset": "exercise_thumb_squat-thrust.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/squat-thrust.webp"
+  },
+  {
+    "slug": "standing-cable-crunch",
+    "sourceImageset": "exercise_thumb_standing-cable-crunch.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/standing-cable-crunches.webp"
+  },
+  {
+    "slug": "standing-leg-curl",
+    "sourceImageset": "exercise_thumb_standing-leg-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/standing-leg-curl.webp"
+  },
+  {
+    "slug": "stiff-leg-deadlift",
+    "sourceImageset": "exercise_thumb_stiff-leg-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/stiff-leg-deadlift.webp"
+  },
+  {
+    "slug": "straight-arm-pulldown",
+    "sourceImageset": "exercise_thumb_straight-arm-pulldown.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/straight-arm-pulldown.webp"
+  },
+  {
+    "slug": "strict-curl",
+    "sourceImageset": "exercise_thumb_strict-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/strict-curl.webp"
+  },
+  {
+    "slug": "sumo-deadlift",
+    "sourceImageset": "exercise_thumb_sumo-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/sumo-deadlift.webp"
+  },
+  {
+    "slug": "sumo-squat",
+    "sourceImageset": "exercise_thumb_sumo-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/sumo-squat.webp"
+  },
+  {
+    "slug": "superman",
+    "sourceImageset": "exercise_thumb_superman.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/superman.webp"
+  },
+  {
+    "slug": "t-bar-row",
+    "sourceImageset": "exercise_thumb_t-bar-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/t-bar-row.webp"
+  },
+  {
+    "slug": "tate-press",
+    "sourceImageset": "exercise_thumb_tate-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/tate-press.webp"
+  },
+  {
+    "slug": "thruster",
+    "sourceImageset": "exercise_thumb_thruster.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/thruster.webp"
+  },
+  {
+    "slug": "toes-to-bar",
+    "sourceImageset": "exercise_thumb_toes-to-bar.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/toes-to-bar.webp"
+  },
+  {
+    "slug": "triceps-pushdown",
+    "sourceImageset": "exercise_thumb_triceps-pushdown.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/tricep-pushdown.webp"
+  },
+  {
+    "slug": "triceps-rope-pushdown",
+    "sourceImageset": "exercise_thumb_triceps-rope-pushdown.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/tricep-rope-pushdown.webp"
+  },
+  {
+    "slug": "upright-row",
+    "sourceImageset": "exercise_thumb_upright-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/upright-row.webp"
+  },
+  {
+    "slug": "vertical-leg-press",
+    "sourceImageset": "exercise_thumb_vertical-leg-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/vertical-leg-press.webp"
+  },
+  {
+    "slug": "viking-press",
+    "sourceImageset": "exercise_thumb_viking-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/viking-press.webp"
+  },
+  {
+    "slug": "walking-lunge",
+    "sourceImageset": "exercise_thumb_walking-lunge.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/walking-lunge.webp"
+  },
+  {
+    "slug": "wall-ball",
+    "sourceImageset": "exercise_thumb_wall-ball.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/wall-ball.webp"
+  },
+  {
+    "slug": "wide-grip-bench-press",
+    "sourceImageset": "exercise_thumb_wide-grip-bench-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/wide-grip-bench-press.webp"
+  },
+  {
+    "slug": "wrist-curl",
+    "sourceImageset": "exercise_thumb_wrist-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/wrist-curl.webp"
+  },
+  {
+    "slug": "yates-row",
+    "sourceImageset": "exercise_thumb_yates-row.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/yates-row.webp"
+  },
+  {
+    "slug": "z-press",
+    "sourceImageset": "exercise_thumb_z-press.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/z-press.webp"
+  },
+  {
+    "slug": "zercher-deadlift",
+    "sourceImageset": "exercise_thumb_zercher-deadlift.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/zercher-deadlift.webp"
+  },
+  {
+    "slug": "zercher-squat",
+    "sourceImageset": "exercise_thumb_zercher-squat.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/zercher-squat.webp"
+  },
+  {
+    "slug": "zottman-curl",
+    "sourceImageset": "exercise_thumb_zottman-curl.imageset",
+    "sourceFile": "image.png",
+    "output": "./assets/zottman-curl.webp"
+  }
+]
