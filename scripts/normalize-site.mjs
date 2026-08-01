@@ -117,7 +117,7 @@ function listHtmlEntries() {
         }
 
         readdirSync(dir)
-            .filter((file) => file.endsWith(".html"))
+            .filter((file) => file.endsWith(".html") && !(locale.code === "ja" && file === "index.html"))
             .sort((left, right) => left.localeCompare(right))
             .forEach((file) => {
                 entries.push({
@@ -127,7 +127,29 @@ function listHtmlEntries() {
                     path: join(dir, file)
                 });
             });
+
+        if (locale.code === "ja") {
+            const japaneseHomePath = join(ROOT, "ja", "index.html");
+            if (existsSync(japaneseHomePath)) {
+                entries.push({
+                    file: "index.html",
+                    locale: "ja",
+                    relativePath: "ja/index.html",
+                    path: japaneseHomePath
+                });
+            }
+        }
     });
+
+    const englishHomePath = join(ROOT, "index.html");
+    if (existsSync(englishHomePath)) {
+        entries.push({
+            file: "index.html",
+            locale: "en",
+            relativePath: "index.html",
+            path: englishHomePath
+        });
+    }
 
     return entries;
 }
@@ -138,7 +160,8 @@ function normalizeHtml(entry, html) {
 
     let next = html;
 
-    next = next.replace(/<html\b[^>]*>/i, `<html lang="${escapeAttribute(localeConfig.hreflang)}" dir="${escapeAttribute(localeConfig.dir || "ltr")}">`);
+    const documentLang = context.documentLang || localeConfig.hreflang;
+    next = next.replace(/<html\b[^>]*>/i, `<html lang="${escapeAttribute(documentLang)}" dir="${escapeAttribute(localeConfig.dir || "ltr")}">`);
     next = next.replace(/precaonnect/g, "preconnect");
     next = next.replace(/alt="logo"/g, 'alt="Shiba Muscle"');
     next = next.replace(/>ShibaMuscle</g, ">Shiba Muscle<");
@@ -151,7 +174,7 @@ function normalizeHtml(entry, html) {
     next = normalizeFooterLanguageLinks(next, context);
 
     if (!context.isToolPage) {
-        next = ensureFontBlock(next, entry.locale);
+        next = ensureFontBlock(next, context.fontLocale || entry.locale);
     } else {
         next = ensureStandaloneIconMetadata(next, entry.locale);
     }
@@ -162,12 +185,12 @@ function normalizeHtml(entry, html) {
     if (context.isExercisePage) {
         next = normalizeExerciseMarkup(next);
         next = ensureBreadcrumb(next, [
-            { label: context.homeLabel, href: "index.html" },
+            { label: context.homeLabel, href: absoluteUrlForFile("index.html", entry.locale) },
             { label: context.pageLabel }
         ], entry.locale);
     } else if (!context.isHomePage && !context.isToolPage) {
         next = ensureBreadcrumb(next, [
-            { label: context.homeLabel, href: "index.html" },
+            { label: context.homeLabel, href: absoluteUrlForFile("index.html", entry.locale) },
             { label: context.pageLabel }
         ], entry.locale);
     }
@@ -177,11 +200,14 @@ function normalizeHtml(entry, html) {
 
 function buildPageContext(entry, html) {
     const { file, locale } = entry;
+    const resourceLocale = entry.relativePath === "index.html" ? "ja" : entry.relativePath === "ja/index.html" ? "en" : locale;
+    const isLegacyEnglishHome = entry.relativePath === "en/index.html";
     const canonicalUrl = absoluteUrlForFile(file, locale);
     const alternates = buildAlternateUrls(file);
     const discoveryPage = discoveryFileIndex.get(file);
     const staticPage = staticPageIndex.get(file);
     const exerciseMatch = exerciseFileIndex.byFile.get(file);
+    const existingOgImageAlt = decodeHtml(extractFirst(html, /<meta property="og:image:alt" content="([^"]*)">/i));
     const homeLabel = getUiText(locale, "home");
     const canonicalFile = file.startsWith("lb_") ? file.replace(/^lb_/, "kg_") : file;
     const resolvedCanonicalUrl = absoluteUrlForFile(canonicalFile, locale);
@@ -197,13 +223,14 @@ function buildPageContext(entry, html) {
             description: page?.description || "",
             canonicalUrl,
             ogImage: page?.ogImage || DEFAULT_OG_IMAGE,
+            ogImageAlt: existingOgImageAlt || getStaticContentOgImageAlt(page, locale, page?.textLocale || ""),
             preloadImages: [
                 assetHref(
                     page?.appImages?.lcp ||
                         page?.appImages?.gymHero ||
                         page?.appImages?.today ||
                         "app/today-screen-current.png",
-                    locale
+                    resourceLocale
                 )
             ],
             type: "website",
@@ -214,7 +241,8 @@ function buildPageContext(entry, html) {
             isExercisePage: false,
             isToolPage: false,
             isHomePage: true,
-            isAppPage: true
+            isAppPage: true,
+            ...(isLegacyEnglishHome ? { robots: "noindex,follow,noarchive", standalone: true } : {})
         };
     }
 
@@ -301,7 +329,7 @@ function buildPageContext(entry, html) {
             description: page.description || decodeHtml(stripTags(extractFirst(html, /<p>([\s\S]*?)<\/p>/i))),
             canonicalUrl: englishOnly ? absoluteUrlForFile(file, "ja") : canonicalUrl,
             ogImage: page.ogImage || DEFAULT_OG_IMAGE,
-            ogImageAlt: getStaticContentOgImageAlt(page, locale, page.textLocale || ""),
+            ogImageAlt: existingOgImageAlt || getStaticContentOgImageAlt(page, locale, page.textLocale || ""),
             ogLocale: page.htmlLang === "en" ? "en_US" : undefined,
             type: isLibraryPage ? "website" : "article",
             twitterCard: isLibraryPage ? "summary_large_image" : "summary",
@@ -313,6 +341,9 @@ function buildPageContext(entry, html) {
             locale,
             robots: isIndexablePage ? undefined : "noindex,follow,noarchive",
             standalone: englishOnly || explicitNoindex,
+            isEnglishOnlyPage: englishOnly,
+            documentLang: page.htmlLang || getLocaleConfig(locale).hreflang,
+            fontLocale: page.textLocale || locale,
             isExercisePage: false,
             isToolPage: false,
             isHomePage: false,
@@ -335,6 +366,7 @@ function buildPageContext(entry, html) {
             description: buildExerciseSeoDescription(exercise, section, measurementKind, unit, locale),
             canonicalUrl: resolvedCanonicalUrl,
             ogImage: `${SITE_ORIGIN}/assets/og/exercises/${exercise.slug}.svg`,
+            ogImageAlt: existingOgImageAlt || getExerciseName(exercise, locale),
             preloadImages: isIndexableUnit ? [assetHref(exercise.image?.src || "", locale)] : [],
             type: "article",
             twitterCard: "summary_large_image",
@@ -388,6 +420,7 @@ function stripSeoHeadTags(html) {
         .replace(/\n\s*<link rel="canonical"[^>]*>/gi, "")
         .replace(/\n\s*<link rel="preload" as="image"[^>]*>/gi, "")
         .replace(/\n\s*<link rel="alternate" hreflang="[^"]+"[^>]*>/gi, "")
+        .replace(/\n\s*<meta property="article:(?:published_time|modified_time|section|tag)"[^>]*>/gi, "")
         .replace(/\n\s*<meta property="og:[^"]+"[^>]*>/gi, "")
         .replace(/\n\s*<meta name="twitter:[^"]+"[^>]*>/gi, "");
 }
@@ -409,14 +442,22 @@ function ensureHeadClose(html) {
 }
 
 function ensureFontBlock(html, locale) {
-    const family = locale === "ko" ? "Noto+Sans+KR" : locale === "ja" ? "Noto+Sans+JP" : "Noto+Sans";
+    const family = locale === "ko"
+        ? "Noto+Sans+KR"
+        : locale === "ja"
+            ? "Noto+Sans+JP"
+            : locale === "zh-hant"
+                ? "Noto+Sans+TC"
+                : locale === "zh-hans"
+                    ? "Noto+Sans+SC"
+                    : "Noto+Sans";
     const fontBlock = `
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=${family}:wght@100..900&display=swap" rel="stylesheet">
 `;
     const stripped = html
-        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
+        .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR|TC|SC):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
         .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans:wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
         .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="precaonnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans\+(?:JP|KR):wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n")
         .replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="precaonnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Noto\+Sans:wght@100\.\.900&display=swap" rel="stylesheet">\s*/gi, "\n");
@@ -457,7 +498,7 @@ function buildSeoBlock(context) {
     const alternateLinks = context.standalone ? "" : getGeneratedLocales().map((locale) => {
         return `    <link rel="alternate" hreflang="${locale.hreflang}" href="${alternates[locale.code]}">`;
     }).join("\n");
-    const xDefaultLink = context.standalone ? "" : `\n    <link rel="alternate" hreflang="x-default" href="${alternates.ja}">`;
+    const xDefaultLink = context.standalone ? "" : `\n    <link rel="alternate" hreflang="x-default" href="${alternates.en}">`;
     const robots = context.robots || INDEXABLE_ROBOTS;
     const ogImageAlt = context.ogImageAlt || context.pageLabel || context.title;
     const ogImageMetadataBlock = renderOpenGraphImageMetadata(getOpenGraphImageMetadata(context.ogImage));
@@ -820,7 +861,10 @@ function buildBreadcrumbMarkup(items, locale) {
 
 function normalizeFooterLanguageLinks(html, context) {
     let next = html;
-    const alternates = languageAlternates(context.isHomePage ? "index.html" : context.canonicalUrl.endsWith("/") ? "index.html" : context.canonicalUrl.split("/").pop());
+    const alternateFile = context.isEnglishOnlyPage
+        ? "index.html"
+        : context.isHomePage ? "index.html" : context.canonicalUrl.endsWith("/") ? "index.html" : context.canonicalUrl.split("/").pop();
+    const alternates = languageAlternates(alternateFile);
 
     alternates.forEach((item) => {
         const pattern = new RegExp(`<a href="[^"]*" data-lang="${item.code}">[^<]*<\\/a>`, "g");
@@ -840,7 +884,7 @@ function buildSitemap(entries) {
             url,
             lastmod: buildSitemapLastmod(entry),
             alternateLinks: isEnglishOnlyStaticPage(entry.file) ? "" : buildSitemapAlternateLinks(entry.file),
-            imageLinks: buildSitemapImageLinks(entry.file)
+            imageLinks: buildSitemapImageLinks(entry.file, entry.locale)
         }))
         .sort((left, right) => left.url.localeCompare(right.url));
     const xmlEntries = urls.map(({ url, lastmod, alternateLinks, imageLinks }) => {
@@ -888,6 +932,7 @@ function isSitemapEntry(entry) {
         && !entry.file.startsWith("lb_")
         && !slugAliases[getBaseSlugFromFile(entry.file)]
         && !isNoindexStaticPage(entry.file)
+        && entry.relativePath !== "en/index.html"
         && !(isEnglishOnlyStaticPage(entry.file) && entry.locale !== "ja");
 }
 
@@ -903,7 +948,7 @@ function buildSitemapAlternateLinks(file) {
     const localeLinks = getGeneratedLocales().map((locale) => {
         return buildSitemapAlternateLink(locale.hreflang, absoluteUrlForFile(file, locale.code));
     });
-    const fallbackLink = buildSitemapAlternateLink("x-default", absoluteUrlForFile(file, "ja"));
+    const fallbackLink = buildSitemapAlternateLink("x-default", absoluteUrlForFile(file, "en"));
 
     return [...localeLinks, fallbackLink].join("\n");
 }
@@ -912,15 +957,16 @@ function buildSitemapAlternateLink(hreflang, href) {
     return `    <xhtml:link rel="alternate" hreflang="${escapeAttribute(hreflang)}" href="${escapeAttribute(href)}" />`;
 }
 
-function buildSitemapImageLinks(file) {
-    return getSitemapImageUrls(file)
+function buildSitemapImageLinks(file, locale = "ja") {
+    return getSitemapImageUrls(file, locale)
         .map((url) => `    <image:image>\n      <image:loc>${escapeHtml(url)}</image:loc>\n    </image:image>`)
         .join("\n");
 }
 
-function getSitemapImageUrls(file) {
+function getSitemapImageUrls(file, locale = "ja") {
     const urls = new Set();
-    const staticPage = staticPageIndex.get(file);
+    const sourceStaticPage = staticPageIndex.get(file);
+    const staticPage = sourceStaticPage ? localizeStaticPage(sourceStaticPage, locale) : null;
     if (staticPage) {
         addSitemapImageUrl(urls, staticPage.ogImage || DEFAULT_OG_IMAGE);
         if (file === "index.html" && staticPage.appImages) {

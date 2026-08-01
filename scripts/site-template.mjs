@@ -141,10 +141,10 @@ export {
     renderStaticHeader
 };
 
-function renderDocument({ title, stylesheets = ["styles.css"], body, generatedComment, locale = "ja", seo = null, ads = true, enableAds = ads, bodyClass = "", htmlLang = null, fontLocale = null }) {
+function renderDocument({ title, stylesheets = ["styles.css"], body, generatedComment, locale = "ja", resourceLocale = locale, seo = null, ads = true, enableAds = ads, bodyClass = "", htmlLang = null, fontLocale = null }) {
     const localeConfig = getLocaleConfig(locale);
     const comment = generatedComment ? `${generatedComment}\n` : "";
-    const stylesheetLinks = stylesheets.map((href) => `    <link rel="stylesheet" href="${escapeAttribute(stylesheetHref(resolveStylesheetHref(href), locale))}">`).join("\n");
+    const stylesheetLinks = stylesheets.map((href) => `    <link rel="stylesheet" href="${escapeAttribute(stylesheetHref(resolveStylesheetHref(href), resourceLocale))}">`).join("\n");
     const documentLang = htmlLang || localeConfig.hreflang;
     const seoBlock = seo ? buildSeoBlock({ ...seo, title, locale, documentLang }) : "";
     const adsenseScript = enableAds ? `
@@ -162,7 +162,7 @@ ${comment}<html lang="${escapeAttribute(documentLang)}" dir="${escapeAttribute(l
     <title>${escapeHtml(title)}</title>
 ${adsenseScript}
 ${buildFontBlock(fontLocale || locale)}
-${buildFaviconBlock(locale)}
+${buildFaviconBlock(resourceLocale)}
 ${stylesheetLinks}
 ${seoBlock}
 </head>
@@ -193,7 +193,7 @@ function buildSeoBlock({ file, title, description = "", locale = "ja", documentL
     const alternateLinks = includeAlternates ? getGeneratedLocales().map((localeConfig) => {
         return `    <link rel="alternate" hreflang="${escapeAttribute(localeConfig.hreflang)}" href="${escapeAttribute(alternates[localeConfig.code])}">`;
     }).join("\n") : "";
-    const xDefaultLink = includeAlternates ? `\n    <link rel="alternate" hreflang="x-default" href="${escapeAttribute(alternates.ja)}">` : "";
+    const xDefaultLink = includeAlternates ? `\n    <link rel="alternate" hreflang="x-default" href="${escapeAttribute(alternates.en)}">` : "";
     const canonicalUrl = absoluteUrlForFile(canonicalFile, canonicalLocale);
     const smartAppBanner = appleAppId ? `\n    <meta name="apple-itunes-app" content="app-id=${escapeAttribute(appleAppId)}">` : "";
     const resolvedOgImage = ogImage || DEFAULT_OG_IMAGE;
@@ -709,9 +709,9 @@ function serializeJsonLd(value) {
         .replace(/\u2029/g, "\\u2029");
 }
 
-function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja", textLocale = locale, showCategoryNav = pageType !== "home" } = {}) {
+function renderStaticHeader({ pageType = "content", unitSwitchHtml = "", locale = "ja", textLocale = locale, resourceLocale = locale, showCategoryNav = pageType !== "home" } = {}) {
     if (pageType === "home") {
-        return renderAppHeader(locale, textLocale);
+        return renderAppHeader(locale, textLocale, resourceLocale);
     }
 
     const categoryNav = showCategoryNav ? renderLegacyCategoryNav(pageType, locale) : "";
@@ -724,7 +724,7 @@ ${categoryNav}
         <nav class="site-topbar" aria-label="Shiba Muscle">
             <div class="header-brand">
                 <a href="${escapeAttribute(absoluteUrlForFile("index.html", locale))}" class="header-link">
-                    <img src="${assetHref("dumbbell-logo.png", locale)}" alt="" aria-hidden="true" class="header-dumbbell-logo"${imageSizeAttributes(assetHref("dumbbell-logo.png", locale))}>
+                    <img src="${assetHref("dumbbell-logo.png", resourceLocale)}" alt="" aria-hidden="true" class="header-dumbbell-logo"${imageSizeAttributes(assetHref("dumbbell-logo.png", resourceLocale))}>
                     <span class="header-text">Shiba Muscle</span>
                 </a>
             </div>
@@ -733,19 +733,19 @@ ${subNavHtml}
     </header>`;
 }
 
-function renderAppHeader(locale = "ja", textLocale = locale) {
-    const appStoreBadgeSrc = assetHref(APP_STORE_BADGE_ASSET, locale);
-    const appStoreUrl = getAppStoreUrl(locale);
+function renderAppHeader(locale = "ja", textLocale = locale, resourceLocale = locale) {
+    const appStoreBadgeSrc = assetHref(APP_STORE_BADGE_ASSET, resourceLocale);
+    const appStoreUrl = getAppStoreUrl(textLocale);
     const navItems = [
         ["#today", getAppHeaderText(textLocale, "today")],
         ["#analytics", getAppHeaderText(textLocale, "analytics")],
-        ["exercises.html", getAppHeaderText(textLocale, "library")]
+        [absoluteUrlForFile("exercises.html", textLocale), getAppHeaderText(textLocale, "library")]
     ];
 
     return `    <header class="site-header app-local-header">
         <nav class="site-topbar app-local-topbar" aria-label="Shiba">
             <a href="${escapeAttribute(absoluteUrlForFile("index.html", locale))}" class="app-local-brand">
-                <img src="${assetHref("dumbbell-logo.png", locale)}" alt="" aria-hidden="true" class="app-local-brand-icon"${imageSizeAttributes(assetHref("dumbbell-logo.png", locale))}>
+                <img src="${assetHref("dumbbell-logo.png", resourceLocale)}" alt="" aria-hidden="true" class="app-local-brand-icon"${imageSizeAttributes(assetHref("dumbbell-logo.png", resourceLocale))}>
                 <span>Shiba</span>
             </a>
             <div class="app-local-nav">

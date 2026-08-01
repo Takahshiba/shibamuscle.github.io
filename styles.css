@@ -5875,6 +5875,11 @@ body.app-content-page {
         justify-items: center;
     }
 
+    .home-page .app-hero-screen-stage,
+    .home-page .app-hero-share-stage {
+        width: 100%;
+    }
+
     .app-hero-share-stage,
     .app-hero-screen-stage {
         order: -1;

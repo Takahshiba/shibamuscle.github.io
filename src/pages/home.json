@@ -1,8 +1,8 @@
 {
   "file": "index.html",
   "kind": "home",
-  "title": "Shiba | 本気で続ける筋トレ記録・分析アプリ",
-  "description": "Shibaは筋トレの計画、セット記録、進捗分析、種目選びを、速い入力とPR・1RM・ボリューム・筋肉ヒートマップで次の判断につなげるiPhone向けアプリです。",
+  "title": "Shiba | 筋トレを記録し、成果を残すアプリ",
+  "description": "Shibaは、筋トレの計画、速いセット記録、PR・推定1RM・ボリューム・筋肉ヒートマップによる進捗分析、種目選び、完了ワークアウトの共有カードをひとつにまとめたiPhone向け筋トレアプリです。",
   "ogImage": "https://shibamuscle.com/assets/app/shiba-social-card.png",
   "heroHeading": "本気の筋トレを、\n記録から判断へ。",
   "heading": "Shibaを見る",
@@ -42,21 +42,24 @@
   "unit": "kg",
   "ads": false,
   "appImages": {
-    "today": "app/today-screen-current.png",
-    "logging": "app/workout-logging-current.png",
-    "strength": "app/strength-percentile.jpg",
-    "heatmap": "app/completion-heatmap.png",
-    "heatmapDetail": "app/muscle-heatmap.png",
-    "lcp": "app/shiba-gym-hero.png",
-    "gymHero": "app/shiba-gym-hero.png",
+    "today": "app/website/ja/today.jpg",
+    "logging": "app/website/ja/rest-timer.jpg",
+    "strength": "app/website/ja/analytics.jpg",
+    "heatmap": "app/website/ja/heatmap.jpg",
+    "heatmapDetail": "app/website/ja/heatmap.jpg",
+    "lcp": "app/website/ja/share-summary.jpg",
+    "gymHero": "app/website/ja/share-summary.jpg",
+    "heroBackground": "",
+    "shareCard": "app/website/ja/share-summary.jpg",
+    "analytics": "app/website/ja/analytics.jpg",
     "mascot": "app/shiba-mascot.png"
   },
   "story": {
-    "heroPromise": "Lift, Track, Share",
-    "heroProof": "",
+    "heroPromise": "Lift. Track. Share.",
+    "heroProof": "完了したワークアウトを、残したくなる証拠に。",
     "shareAction": "共有画面を見る",
     "heroCardLabel": "Share-ready result",
-    "heroCardValue": "Top 1%",
+    "heroCardValue": "Shiba基準との比較",
     "metrics": [
       {
         "label": "入力",
@@ -64,7 +67,7 @@
       },
       {
         "label": "証拠",
-        "value": "Top 1%"
+        "value": "Shiba基準"
       },
       {
         "label": "分析",
@@ -85,7 +88,7 @@
       {
         "kicker": "Share",
         "heading": "Share the work",
-        "copy": "終わった記録を、残したくなるカードに。"
+        "copy": "完了した記録を、保存・共有したくなるカードに。"
       }
     ],
     "sections": [
@@ -104,10 +107,10 @@
         "id": "track",
         "kicker": "Track",
         "heading": "筋力の現在地が\n見える",
-        "copy": "PR、1RM、Percentile、ヒートマップを確認。",
+        "copy": "PR、推定1RM、ボリューム、筋肉ヒートマップを確認。",
         "items": [
           "PRと推定1RMの変化を確認",
-          "Top Percentileで現在地を把握",
+          "Shibaの筋力基準データとの比較を確認",
           "鍛えた筋肉をオレンジの強度で可視化"
         ]
       }
@@ -115,22 +118,25 @@
     "share": {
       "kicker": "Share",
       "heading": "見せたくなる\nワークアウトカード。",
-      "copy": "トップ、ヒートマップ、概要を、美しい共有カードで残せます。",
+      "copy": "完了したワークアウトが、保存・共有したくなる成果カードになります。",
       "screens": [
         {
           "id": "top",
           "heading": "トップ",
-          "alt": "トップ共有カード画面"
+          "alt": "完了したワークアウトの共有サマリー画面",
+          "image": "app/website/ja/share-summary.jpg"
         },
         {
           "id": "heatmap",
           "heading": "ヒートマップ",
-          "alt": "ヒートマップ共有カード画面"
+          "alt": "トレーニング量を筋肉ヒートマップで示す画面",
+          "image": "app/website/ja/heatmap.jpg"
         },
         {
           "id": "summary",
-          "heading": "概要",
-          "alt": "概要共有カード画面"
+          "heading": "Analytics",
+          "alt": "Shibaの推定1RMと筋力の推移を示す分析画面",
+          "image": "app/website/ja/analytics.jpg"
         }
       ]
     },
@@ -163,13 +169,26 @@
     }
   },
   "stylesheets": [
-    "styles.css?v=app-home-share-cards-20260729"
+    "styles.css?v=app-home-share-cards-20260802"
   ],
   "locales": {
     "en": {
-      "title": "Shiba | Serious Workout Logging & Analytics",
-      "description": "Shiba helps serious lifters plan strength workouts, log sets fast, review progress with PRs, 1RM, volume and heatmaps, and choose exercises from gaps.",
-      "heroHeading": "Log seriously.\nDecide what comes next.",
+      "title": "Shiba | Lift. Track. Share.",
+      "description": "Shiba helps lifters plan strength workouts, log sets fast, review progress, choose exercises, and turn completed workouts into proof with PRs, e1RM, volume, and heatmaps.",
+      "appImages": {
+        "today": "app/website/today.jpg",
+        "logging": "app/website/rest-timer.jpg",
+        "strength": "app/website/analytics.jpg",
+        "heatmap": "app/website/heatmap.jpg",
+        "heatmapDetail": "app/website/heatmap.jpg",
+        "lcp": "app/website/share-summary.jpg",
+        "gymHero": "app/website/share-summary.jpg",
+        "heroBackground": "",
+        "shareCard": "app/website/share-summary.jpg",
+        "analytics": "app/website/analytics.jpg",
+        "mascot": "app/shiba-mascot.png"
+      },
+      "heroHeading": "Turn every workout\ninto proof.",
       "heading": "Explore Shiba",
       "intro": [
         "Fast set input, deeper training insight. Review PRs, estimated 1RM, volume, and muscle heatmaps to understand progress and gaps.",
@@ -179,7 +198,7 @@
         "eyebrow": "Shiba App",
         "sectionEyebrow": "Concept",
         "title": "Log fast,\nreview deeply, choose the next move.",
-        "copy": "Today’s plan, set logging, PR and 1RM trends, volume, and muscle heatmaps stay in one flow.",
+        "copy": "Today’s plan, set logging, PRs, estimated 1RM, volume, muscle heatmaps, and share-ready results stay in one flow.",
         "items": [
           {
             "eyebrow": "Today",
@@ -192,7 +211,7 @@
             "eyebrow": "Analytics",
             "heading": "Review strength and progress",
             "paragraphs": [
-              "Track PRs, estimated 1RM, volume, and strength percentile."
+              "Track PRs, estimated 1RM, volume, and comparisons with Shiba strength standards."
             ]
           },
           {
@@ -205,11 +224,11 @@
         ]
       },
       "story": {
-        "heroPromise": "Lift, Track, Share",
-        "heroProof": "",
+        "heroPromise": "Lift. Track. Share.",
+        "heroProof": "Turn every completed workout into proof worth keeping.",
         "shareAction": "See share cards",
         "heroCardLabel": "Share-ready result",
-        "heroCardValue": "Top 1%",
+        "heroCardValue": "Shiba standard",
         "metrics": [
           {
             "label": "Input",
@@ -217,7 +236,7 @@
           },
           {
             "label": "Proof",
-            "value": "Top 1%"
+            "value": "Shiba standard"
           },
           {
             "label": "Insight",
@@ -233,12 +252,12 @@
           {
             "kicker": "Track",
             "heading": "See your strength",
-            "copy": "Review PRs, e1RM, volume, and heatmaps."
+            "copy": "Review PRs, e1RM, volume, and muscle heatmaps."
           },
           {
             "kicker": "Share",
             "heading": "Share the work",
-            "copy": "Turn the finished session into a card worth saving."
+            "copy": "Turn the finished session into proof worth saving and sharing."
           }
         ],
         "sections": [
@@ -257,45 +276,48 @@
             "id": "track",
             "kicker": "Track",
             "heading": "See where your\nstrength stands",
-            "copy": "Review PRs, 1RM, percentiles, and heatmaps.",
+            "copy": "Review PRs, estimated 1RM, training volume, and muscle heatmaps. Compare with Shiba strength standards—not a social leaderboard.",
             "items": [
               "Review PR and e1RM changes",
-              "Compare with Top Percentile context",
+              "Compare a lift with Shiba strength standards",
               "See trained muscles through orange intensity"
             ]
           }
         ],
         "share": {
           "kicker": "Share",
-          "heading": "Workout cards,\nready to share.",
-          "copy": "Choose Top, Heatmap, or Summary and save a polished card after every session.",
+          "heading": "Your workout becomes\nproof worth sharing.",
+          "copy": "Every completed workout becomes a polished result card you can save, revisit, and share.",
           "screens": [
             {
               "id": "top",
-              "heading": "Top",
-              "alt": "Top share card screen"
+              "heading": "Summary",
+              "alt": "Completed workout summary screen",
+              "image": "app/website/share-summary.jpg"
             },
             {
               "id": "heatmap",
               "heading": "Heatmap",
-              "alt": "Heatmap share card screen"
+              "alt": "Muscle heatmap screen showing trained areas",
+              "image": "app/website/heatmap.jpg"
             },
             {
               "id": "summary",
-              "heading": "Summary",
-              "alt": "Summary share card screen"
+              "heading": "Analytics",
+              "alt": "Analytics screen showing estimated 1RM and strength progress",
+              "image": "app/website/analytics.jpg"
             }
           ]
         },
         "library": {
           "kicker": "Find lifts",
           "heading": "Find the next lift\nfrom the gap.",
-          "copy": "Find lifts by muscle or equipment."
+          "copy": "Search by muscle or equipment when your training history shows what needs attention."
         },
         "privacy": {
           "kicker": "Privacy",
           "heading": "Private by default,\nfocused by design.",
-          "copy": "Log without creating an account."
+          "copy": "No required account. No social feed. No distractions—just a focused workout history you control."
         },
         "premium": {
           "kicker": "Premium",
@@ -311,7 +333,7 @@
         "analyticsProof": {
           "aria": "Shiba analytics proof preview",
           "kicker": "e1RM trend",
-          "value": "+12.5 kg",
+          "value": "+27.6 lb",
           "copy": "Set the next weight."
         }
       }
@@ -319,6 +341,19 @@
     "ko": {
       "title": "Shiba | 진지한 근력 운동 기록·분석 앱",
       "description": "Shiba는 진지하게 훈련하는 리프터가 근력 운동 계획, 세트 기록, 진행 분석, 운동 선택을 한 흐름에서 판단하도록 돕는 기록·분석 앱입니다.",
+      "appImages": {
+        "today": "app/website/ko/today.jpg",
+        "logging": "app/website/ko/rest-timer.jpg",
+        "strength": "app/website/ko/analytics.jpg",
+        "heatmap": "app/website/ko/heatmap.jpg",
+        "heatmapDetail": "app/website/ko/heatmap.jpg",
+        "lcp": "app/website/ko/share-summary.jpg",
+        "gymHero": "app/website/ko/share-summary.jpg",
+        "heroBackground": "",
+        "shareCard": "app/website/ko/share-summary.jpg",
+        "analytics": "app/website/ko/analytics.jpg",
+        "mascot": "app/shiba-mascot.png"
+      },
       "heroHeading": "진지한 훈련을\n기록에서 판단으로.",
       "heading": "Shiba 살펴보기",
       "intro": [
@@ -469,6 +504,19 @@
     "zh-hant": {
       "title": "Shiba | 認真重訓的紀錄與分析 App",
       "description": "Shiba 是給認真重訓者使用的紀錄與分析 App，幫你規劃訓練、記錄組數、查看進度，並從肌肉熱力圖選擇下一個動作。",
+      "appImages": {
+        "today": "app/website/zh-hant/today.jpg",
+        "logging": "app/website/zh-hant/rest-timer.jpg",
+        "strength": "app/website/zh-hant/analytics.jpg",
+        "heatmap": "app/website/zh-hant/heatmap.jpg",
+        "heatmapDetail": "app/website/zh-hant/heatmap.jpg",
+        "lcp": "app/website/zh-hant/share-summary.jpg",
+        "gymHero": "app/website/zh-hant/share-summary.jpg",
+        "heroBackground": "",
+        "shareCard": "app/website/zh-hant/share-summary.jpg",
+        "analytics": "app/website/zh-hant/analytics.jpg",
+        "mascot": "app/shiba-mascot.png"
+      },
       "heroHeading": "認真的重訓，\n從紀錄走向判斷。",
       "heading": "認識 Shiba",
       "intro": [
@@ -619,6 +667,19 @@
     "zh-hans": {
       "title": "Shiba | 认真力量训练的记录与分析 App",
       "description": "Shiba 是给认真力量训练者使用的记录与分析 App，帮你规划训练、记录组数、查看进度，并从肌肉热力图选择下一个动作。",
+      "appImages": {
+        "today": "app/website/zh-hans/today.jpg",
+        "logging": "app/website/zh-hans/rest-timer.jpg",
+        "strength": "app/website/zh-hans/analytics.jpg",
+        "heatmap": "app/website/zh-hans/heatmap.jpg",
+        "heatmapDetail": "app/website/zh-hans/heatmap.jpg",
+        "lcp": "app/website/zh-hans/share-summary.jpg",
+        "gymHero": "app/website/zh-hans/share-summary.jpg",
+        "heroBackground": "",
+        "shareCard": "app/website/zh-hans/share-summary.jpg",
+        "analytics": "app/website/zh-hans/analytics.jpg",
+        "mascot": "app/shiba-mascot.png"
+      },
       "heroHeading": "认真的力量训练，\n从记录走向判断。",
       "heading": "了解 Shiba",
       "intro": [
@@ -769,6 +830,19 @@
     "es": {
       "title": "Shiba | Registro y análisis para entrenar en serio",
       "description": "Shiba ayuda a planificar entrenamientos de fuerza, registrar series rápido, revisar progreso con PR, 1RM, volumen y mapa muscular, y elegir ejercicios.",
+      "appImages": {
+        "today": "app/website/es/today.jpg",
+        "logging": "app/website/es/rest-timer.jpg",
+        "strength": "app/website/es/analytics.jpg",
+        "heatmap": "app/website/es/heatmap.jpg",
+        "heatmapDetail": "app/website/es/heatmap.jpg",
+        "lcp": "app/website/es/share-summary.jpg",
+        "gymHero": "app/website/es/share-summary.jpg",
+        "heroBackground": "",
+        "shareCard": "app/website/es/share-summary.jpg",
+        "analytics": "app/website/es/analytics.jpg",
+        "mascot": "app/shiba-mascot.png"
+      },
       "heroHeading": "Entrena en serio.\nConvierte registros en decisiones.",
       "heading": "Explora Shiba",
       "intro": [
@@ -919,6 +993,19 @@
     "fr": {
       "title": "Shiba | Suivi et analyse pour s'entraîner sérieusement",
       "description": "Shiba aide à planifier tes séances de musculation, noter les séries vite, suivre les progrès avec PR, 1RM et volume, et choisir les exercices.",
+      "appImages": {
+        "today": "app/website/fr/today.jpg",
+        "logging": "app/website/fr/rest-timer.jpg",
+        "strength": "app/website/fr/analytics.jpg",
+        "heatmap": "app/website/fr/heatmap.jpg",
+        "heatmapDetail": "app/website/fr/heatmap.jpg",
+        "lcp": "app/website/fr/share-summary.jpg",
+        "gymHero": "app/website/fr/share-summary.jpg",
+        "heroBackground": "",
+        "shareCard": "app/website/fr/share-summary.jpg",
+        "analytics": "app/website/fr/analytics.jpg",
+        "mascot": "app/shiba-mascot.png"
+      },
       "heroHeading": "S'entraîner sérieusement,\ndu suivi à la décision.",
       "heading": "Découvrir Shiba",
       "intro": [
@@ -1069,6 +1156,19 @@
     "de": {
       "title": "Shiba | Ernsthaftes Krafttraining loggen und analysieren",
       "description": "Shiba hilft, Krafttrainings zu planen, Sätze zu loggen, Fortschritt zu prüfen und Übungen aus Lücken zu wählen, mit PRs, 1RM, Volumen und Heatmaps.",
+      "appImages": {
+        "today": "app/website/de/today.jpg",
+        "logging": "app/website/de/rest-timer.jpg",
+        "strength": "app/website/de/analytics.jpg",
+        "heatmap": "app/website/de/heatmap.jpg",
+        "heatmapDetail": "app/website/de/heatmap.jpg",
+        "lcp": "app/website/de/share-summary.jpg",
+        "gymHero": "app/website/de/share-summary.jpg",
+        "heroBackground": "",
+        "shareCard": "app/website/de/share-summary.jpg",
+        "analytics": "app/website/de/analytics.jpg",
+        "mascot": "app/shiba-mascot.png"
+      },
       "heroHeading": "Ernsthaft trainieren.\nAus Logs werden Entscheidungen.",
       "heading": "Shiba entdecken",
       "intro": [
@@ -1219,6 +1319,19 @@
     "id": {
       "title": "Shiba | Catatan dan analitik untuk latihan serius",
       "description": "Shiba membantu merencanakan latihan beban, mencatat set cepat, melihat progres lewat PR, 1RM, volume, dan heatmap otot, lalu memilih latihan berikutnya.",
+      "appImages": {
+        "today": "app/website/id/today.jpg",
+        "logging": "app/website/id/rest-timer.jpg",
+        "strength": "app/website/id/analytics.jpg",
+        "heatmap": "app/website/id/heatmap.jpg",
+        "heatmapDetail": "app/website/id/heatmap.jpg",
+        "lcp": "app/website/id/share-summary.jpg",
+        "gymHero": "app/website/id/share-summary.jpg",
+        "heroBackground": "",
+        "shareCard": "app/website/id/share-summary.jpg",
+        "analytics": "app/website/id/analytics.jpg",
+        "mascot": "app/shiba-mascot.png"
+      },
       "heroHeading": "Latihan serius,\ndari catatan ke keputusan.",
       "heading": "Jelajahi Shiba",
       "intro": [
@@ -1369,6 +1482,19 @@
     "pt-br": {
       "title": "Shiba | Registro e análise para treino de força sério",
       "description": "Shiba ajuda a planejar treinos de força, registrar séries rápido, acompanhar progresso com PR, 1RM e mapas musculares, e escolher exercícios.",
+      "appImages": {
+        "today": "app/website/pt-br/today.jpg",
+        "logging": "app/website/pt-br/rest-timer.jpg",
+        "strength": "app/website/pt-br/analytics.jpg",
+        "heatmap": "app/website/pt-br/heatmap.jpg",
+        "heatmapDetail": "app/website/pt-br/heatmap.jpg",
+        "lcp": "app/website/pt-br/share-summary.jpg",
+        "gymHero": "app/website/pt-br/share-summary.jpg",
+        "heroBackground": "",
+        "shareCard": "app/website/pt-br/share-summary.jpg",
+        "analytics": "app/website/pt-br/analytics.jpg",
+        "mascot": "app/shiba-mascot.png"
+      },
       "heroHeading": "Treino sério,\ndo registro à decisão.",
       "heading": "Conheça o Shiba",
       "intro": [

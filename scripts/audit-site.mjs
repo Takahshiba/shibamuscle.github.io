@@ -128,7 +128,9 @@ for (const entry of htmlEntries) {
     const isEnglishOnlyPage = sourceStaticPage?.englishOnly === true;
     const isEnglishOnlyDuplicate = isEnglishOnlyPage && entry.locale !== "ja";
     const isNoindexStaticPage = sourceStaticPage?.noindex === true;
-    const isIndexablePage = !isToolPage && !isSecondaryUnitPage && !isEnglishOnlyDuplicate && !isNoindexStaticPage && !isLegacyAliasPage;
+    const isLegacyEnglishHome = entry.relativePath === "en/index.html";
+    const isNoindexPage = isNoindexStaticPage || isLegacyEnglishHome;
+    const isIndexablePage = !isToolPage && !isSecondaryUnitPage && !isEnglishOnlyDuplicate && !isNoindexPage && !isLegacyAliasPage;
     const localeConfig = getLocaleConfig(entry.locale);
     const expectedHtmlLang = localizedStaticPage?.htmlLang || localeConfig.hreflang;
     const expectedHtmlDir = localeConfig.dir || "ltr";
@@ -136,7 +138,7 @@ for (const entry of htmlEntries) {
         ? `kg_${legacyCanonicalSlug}.html`
         : isSecondaryUnitPage ? entry.file.replace(/^lb_/, "kg_") : entry.file;
     const canonicalUrl = absoluteUrlForFile(canonicalFile, isEnglishOnlyPage ? "ja" : entry.locale);
-    const pageUrl = absoluteUrlForFile(entry.file, entry.locale);
+    const pageUrl = isLegacyEnglishHome ? `${SITE_ORIGIN}/en/` : absoluteUrlForFile(entry.file, entry.locale);
 
     assert(/^<!DOCTYPE html>/i.test(html), `${entry.relativePath}: HTML5 doctype is missing`);
     assert(!/https:\/\/(?:ko|zh-hant|zh-hans|es|fr|de|id|pt-br|en)\.shibamuscle\.com/i.test(localeConfig.origin), `${entry.locale}: old locale subdomain origin remains`);
@@ -150,12 +152,12 @@ for (const entry of htmlEntries) {
     auditHtmlAppIconMetadata(entry, html);
     auditSingletonHeadMetadata(entry, html);
     auditHeadUrlMetadata(entry, html);
-    const expectedAlternates = isToolPage || isSecondaryUnitPage || isEnglishOnlyPage || isNoindexStaticPage || isLegacyAliasPage ? 0 : getGeneratedLocales().length + 1;
+    const expectedAlternates = isToolPage || isSecondaryUnitPage || isEnglishOnlyPage || isNoindexPage || isLegacyAliasPage ? 0 : getGeneratedLocales().length + 1;
     assert((html.match(/<link rel="alternate" hreflang="/g) || []).length === expectedAlternates, `${entry.relativePath}: hreflang set is incomplete`);
     assert(html.includes(`<link rel="canonical" href="${canonicalUrl}">`), `${entry.relativePath}: canonical is missing or malformed`);
     auditCanonicalTarget(entry, canonicalUrl, {
         isToolPage,
-        isNoindexStaticPage: isNoindexStaticPage || isLegacyAliasPage
+        isNoindexStaticPage: isNoindexPage || isLegacyAliasPage
     });
     auditAdsenseMetadata(entry, html, isIndexablePage);
     auditRobotsMeta(entry, html, {
@@ -163,13 +165,14 @@ for (const entry of htmlEntries) {
         isToolPage,
         isSecondaryUnitPage,
         isEnglishOnlyDuplicate,
-        isNoindexStaticPage: isNoindexStaticPage || isLegacyAliasPage
+        isNoindexStaticPage: isNoindexPage || isLegacyAliasPage
     });
     assert(/<title>[^<]+<\/title>/.test(html), `${entry.relativePath}: title is missing`);
     assert(/<meta name="description" content="[^"]+">/.test(html), `${entry.relativePath}: meta description is missing`);
     auditSocialMetadataConsistency(entry, html, canonicalUrl);
     if (isAppHomePage) {
         auditAppHomeDescription(entry, html);
+        auditAppHomeLocalizedImages(entry, html, sourceStaticPage);
     }
     if (isAppPage) {
         auditAppTrustNavigation(entry, html, expectedHtmlLang);
@@ -204,7 +207,7 @@ for (const entry of htmlEntries) {
     if (isEnglishOnlyDuplicate) {
         assert(!sitemapUrls.has(pageUrl), `${entry.relativePath}: duplicate English-only page should not be in sitemap`);
         assert(html.includes('<meta name="robots" content="noindex,follow,noarchive">'), `${entry.relativePath}: duplicate English-only page should be noindex`);
-    } else if (isNoindexStaticPage || isLegacyAliasPage) {
+    } else if (isNoindexPage || isLegacyAliasPage) {
         assert(!sitemapUrls.has(pageUrl), `${entry.relativePath}: noindex static page should not be in sitemap`);
         assert(html.includes('<meta name="robots" content="noindex,follow,noarchive">'), `${entry.relativePath}: noindex static page robots meta is incorrect`);
     } else if (!isToolPage && !isSecondaryUnitPage) {
@@ -236,11 +239,11 @@ for (const entry of htmlEntries) {
         hasVisibleBreadcrumb: /<nav class="breadcrumb" aria-label="/.test(html)
     });
 
-    if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexStaticPage && !isLegacyAliasPage) getGeneratedLocales().forEach((locale) => {
+    if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexPage && !isLegacyAliasPage) getGeneratedLocales().forEach((locale) => {
         assert(html.includes(`<link rel="alternate" hreflang="${locale.hreflang}" href="${absoluteUrlForFile(canonicalFile, locale.code)}">`), `${entry.relativePath}: ${locale.code} hreflang target is incorrect`);
     });
-    if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexStaticPage && !isLegacyAliasPage) {
-        assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "ja")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
+    if (!isToolPage && !isSecondaryUnitPage && !isEnglishOnlyPage && !isNoindexPage && !isLegacyAliasPage) {
+        assert(html.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "en")}">`), `${entry.relativePath}: x-default hreflang target is incorrect`);
         auditOpenGraphLocaleAlternates(entry, html, expectedHtmlLang);
         getGeneratedLocales().forEach((locale) => {
             assert(html.includes(`href="${absoluteUrlForFile(canonicalFile, locale.code)}" data-lang="${locale.code}"`), `${entry.relativePath}: footer language link for ${locale.code} is incorrect`);
@@ -1003,12 +1006,20 @@ function auditImagePreloadHints(entry, html, { isIndexablePage, isHomePage, isEx
 
 function getExpectedLcpImageHref(entry, { isHomePage, isExercisePage, sourceStaticPage }) {
     if (isHomePage) {
+        const resourceLocale = entry.relativePath === "ja/index.html"
+            ? "en"
+            : entry.relativePath === "index.html"
+                ? "ja"
+                : entry.locale;
+        const localizedPage = sourceStaticPage
+            ? localizeStaticPageForAudit(sourceStaticPage, entry.locale)
+            : null;
         return assetHref(
-            sourceStaticPage?.appImages?.lcp ||
-                sourceStaticPage?.appImages?.gymHero ||
-                sourceStaticPage?.appImages?.today ||
+            localizedPage?.appImages?.lcp ||
+                localizedPage?.appImages?.gymHero ||
+                localizedPage?.appImages?.today ||
                 "app/today-screen-current.png",
-            entry.locale
+            resourceLocale
         );
     }
 
@@ -1129,6 +1140,29 @@ function auditAppHomeDescription(entry, html) {
     });
 }
 
+function auditAppHomeLocalizedImages(entry, html, sourceStaticPage) {
+    const page = sourceStaticPage ? localizeStaticPageForAudit(sourceStaticPage, entry.locale) : null;
+    const resourceLocale = entry.relativePath === "ja/index.html"
+        ? "en"
+        : entry.relativePath === "index.html"
+            ? "ja"
+            : entry.locale;
+    const imageKeys = ["shareCard", "analytics", "heatmap", "today", "logging"];
+
+    imageKeys.forEach((key) => {
+        const image = page?.appImages?.[key];
+        assert(Boolean(image), `${entry.relativePath}: localized app image ${key} is missing from the source page`);
+        if (image) {
+            assert(html.includes(`src="${assetHref(image, resourceLocale)}"`), `${entry.relativePath}: localized app image ${key} is not used by the LP`);
+        }
+    });
+
+    assert(!/assets\/app\/(?:screenshots|share-cards)\//.test(html), `${entry.relativePath}: localized LP should not mix legacy screenshot sets`);
+    const displayedUnit = extractFirstGroup(html, /<strong>\+[^<]+\s(kg|lb)<\/strong>/i)?.toLowerCase();
+    const expectedUnit = entry.locale === "en" ? "lb" : "kg";
+    assert(displayedUnit === expectedUnit, `${entry.relativePath}: app proof card should use ${expectedUnit}`);
+}
+
 function auditAppTrustNavigation(entry, html, expectedLanguage) {
     const homeHref = buildExpectedLocalizedStaticHref("index.html", entry.locale, expectedLanguage);
     const aboutHref = buildExpectedLocalizedStaticHref("about.html", entry.locale, expectedLanguage);
@@ -1154,11 +1188,7 @@ function buildExpectedLocalizedStaticHref(file, locale = "ja", language = getLoc
         return absoluteUrlForFile(file, targetLocale);
     }
 
-    if (targetLocale === locale) {
-        return file;
-    }
-
-    return locale === "ja" ? `${targetLocale}/${file}` : `../${targetLocale}/${file}`;
+    return absoluteUrlForFile(file, targetLocale);
 }
 
 function auditUniqueMetadataField(field) {
@@ -1200,7 +1230,7 @@ function auditSitemapAlternates(entry, canonicalFile, canonicalUrl) {
         auditSitemapAlternateTarget(entry, targetUrl);
     });
 
-    const defaultUrl = absoluteUrlForFile(canonicalFile, "ja");
+    const defaultUrl = absoluteUrlForFile(canonicalFile, "en");
     const expectedDefault = buildExpectedSitemapAlternateLink("x-default", defaultUrl);
     assert(block.includes(expectedDefault), `${entry.relativePath}: sitemap x-default hreflang target is incorrect`);
     auditSitemapAlternateTarget(entry, defaultUrl);
@@ -1233,7 +1263,7 @@ function auditHreflangReciprocity(entry, canonicalFile, canonicalUrl) {
         const targetHead = readHeadByRelativePath(targetPath);
         assert(targetHead.includes(`<link rel="canonical" href="${targetUrl}">`), `${entry.relativePath}: hreflang target ${targetPath} does not canonicalize to itself`);
         assert(targetHead.includes(`<link rel="alternate" hreflang="${sourceHreflang}" href="${canonicalUrl}">`), `${entry.relativePath}: hreflang target ${targetPath} does not link back to ${canonicalUrl}`);
-        assert(targetHead.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "ja")}">`), `${entry.relativePath}: hreflang target ${targetPath} has incorrect x-default`);
+        assert(targetHead.includes(`<link rel="alternate" hreflang="x-default" href="${absoluteUrlForFile(canonicalFile, "en")}">`), `${entry.relativePath}: hreflang target ${targetPath} has incorrect x-default`);
     });
 }
 
@@ -1295,7 +1325,7 @@ function auditNoSitemapAlternates(entry, canonicalUrl) {
 }
 
 function auditSitemapImages(entry, canonicalFile, canonicalUrl) {
-    const expectedImages = getExpectedSitemapImageUrls(canonicalFile);
+    const expectedImages = getExpectedSitemapImageUrls(canonicalFile, entry.locale);
     if (!expectedImages.length) {
         return;
     }
@@ -1311,9 +1341,10 @@ function auditSitemapImages(entry, canonicalFile, canonicalUrl) {
     });
 }
 
-function getExpectedSitemapImageUrls(file) {
+function getExpectedSitemapImageUrls(file, locale = "ja") {
     const urls = new Set();
-    const staticPage = staticPageByFile.get(file);
+    const sourceStaticPage = staticPageByFile.get(file);
+    const staticPage = sourceStaticPage ? localizeStaticPageForAudit(sourceStaticPage, locale) : null;
     if (staticPage) {
         addExpectedSitemapImageUrl(urls, staticPage.ogImage || DEFAULT_OG_IMAGE);
         if (file === "index.html" && staticPage.appImages) {
@@ -1881,7 +1912,16 @@ function auditStructuredData(entry, html, { canonicalUrl, isIndexable, isHomePag
     }
 
     if (isHomePage) {
-        assert(!graph.some((node) => hasType(node, "MobileApplication") || hasType(node, "SoftwareApplication")), `${entry.relativePath}: app schema should wait until real offers and ratings are available`);
+        const application = graph.find((node) => hasType(node, "SoftwareApplication"));
+        assert(Boolean(application), `${entry.relativePath}: SoftwareApplication schema is missing`);
+        if (application) {
+            assert(application.name === "Shiba", `${entry.relativePath}: SoftwareApplication name is incorrect`);
+            assert(application.url === canonicalUrl, `${entry.relativePath}: SoftwareApplication URL is incorrect`);
+            assert(application.applicationCategory === "HealthApplication", `${entry.relativePath}: SoftwareApplication category is incorrect`);
+            assert(application.operatingSystem === "iOS", `${entry.relativePath}: SoftwareApplication operating system is incorrect`);
+            assert(Array.isArray(application.featureList) && application.featureList.length >= 3, `${entry.relativePath}: SoftwareApplication feature list is incomplete`);
+            assert(/^https:\/\/apps\.apple\.com\/[^/]+\/app\/id6785443075$/.test(application.downloadUrl || ""), `${entry.relativePath}: SoftwareApplication App Store URL is incorrect`);
+        }
         auditHomeStructuredData(entry, graph, canonicalUrl, webPage);
     }
 
@@ -2471,7 +2511,7 @@ function collectStructuredDataAbsoluteUrls(value, path = [], urls = [], seen = n
 function isAllowedStructuredDataAbsoluteUrl(value) {
     try {
         const parsed = new URL(value);
-        return parsed.origin === SITE_ORIGIN || parsed.origin === "https://schema.org";
+        return parsed.origin === SITE_ORIGIN || parsed.origin === "https://schema.org" || parsed.origin === "https://apps.apple.com";
     } catch {
         return false;
     }
@@ -2625,7 +2665,7 @@ function listHtmlEntries() {
         }
 
         readdirSync(dir)
-            .filter((file) => file.endsWith(".html"))
+            .filter((file) => file.endsWith(".html") && !(locale.code === "ja" && file === "index.html"))
             .sort((left, right) => left.localeCompare(right))
             .forEach((file) => {
                 entries.push({
@@ -2635,7 +2675,29 @@ function listHtmlEntries() {
                     path: join(dir, file)
                 });
             });
+
+        if (locale.code === "ja") {
+            const japaneseHomePath = join(ROOT, "ja", "index.html");
+            if (existsSync(japaneseHomePath)) {
+                entries.push({
+                    file: "index.html",
+                    locale: "ja",
+                    relativePath: "ja/index.html",
+                    path: japaneseHomePath
+                });
+            }
+        }
     });
+
+    const englishHomePath = join(ROOT, "index.html");
+    if (existsSync(englishHomePath)) {
+        entries.push({
+            file: "index.html",
+            locale: "en",
+            relativePath: "index.html",
+            path: englishHomePath
+        });
+    }
 
     return entries;
 }

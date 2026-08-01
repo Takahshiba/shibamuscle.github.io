@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 
 import {
     APP_STORE_BADGE_ASSET,
@@ -64,7 +64,8 @@ for (const locale of locales) {
         let html = "";
 
         if (page.kind === "home") {
-            html = renderHomePage(page, catalog, locale.code);
+            const resourceLocale = locale.code === "ja" ? "en" : locale.code === "en" ? "ja" : locale.code;
+            html = renderHomePage(page, catalog, locale.code, { resourceLocale });
         } else if (page.kind === "library") {
             html = renderLibraryPage(page, catalog, locale.code);
         } else if (page.kind === "content") {
@@ -73,10 +74,19 @@ for (const locale of locales) {
             throw new Error(`Unsupported page kind "${page.kind}" in ${page.file}`);
         }
 
-        writeFileSync(buildOutputPath(page.file, locale.code), html);
+        const outputPath = buildOutputPath(page.file, locale.code);
+        ensureDirectory(dirname(outputPath));
+        writeFileSync(outputPath, html);
         generatedPages += 1;
     }
 }
+
+const englishHomeAliasPath = join(process.cwd(), "en", "index.html");
+ensureDirectory(dirname(englishHomeAliasPath));
+writeFileSync(englishHomeAliasPath, renderHomePage(localizeStaticPage(staticPageByFile.get("index.html"), "en"), catalog, "en", {
+    resourceLocale: "en",
+    robots: "noindex,follow,noarchive"
+}));
 
 console.log(`Generated ${generatedPages} localized static pages from src/pages/.`);
 
@@ -99,22 +109,22 @@ function englishOnlyPage(page) {
     return basePage;
 }
 
-function renderHomePage(page, catalogData, locale) {
+function renderHomePage(page, catalogData, locale, { resourceLocale = locale, robots = null } = {}) {
     const textLocale = locale === "ja" && page.textLocale ? page.textLocale : locale;
     const canonicalUrl = absoluteUrlForFile(page.file, locale);
     const datePublished = getStaticPageDatePublished(page.file);
     const dateModified = getStaticPageDateModified(page.file);
     const appImages = getAppImages(page);
-    const body = `${renderStaticHeader({ pageType: "home", locale, textLocale })}
+    const body = `${renderStaticHeader({ pageType: "home", locale, textLocale, resourceLocale })}
 
     <hr class="top-divider">
     <main class="page-main">
-${renderAppLanding(page, catalogData, locale, textLocale)}
+${renderAppLanding(page, catalogData, locale, textLocale, resourceLocale)}
     </main>
 
-${renderAppFooter(locale, textLocale, "index.html", true)}
+${renderAppFooter(locale, textLocale, "index.html", true, resourceLocale)}
 
-    <script src="${stylesheetHref("app.js?v=site-ui-20260716", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=site-ui-20260716", resourceLocale)}"></script>
 `;
 
     return renderDocument({
@@ -131,8 +141,10 @@ ${renderAppFooter(locale, textLocale, "index.html", true)}
             twitterCard: "summary_large_image",
             appleAppId: "6785443075",
             themeColor: APP_THEME_COLOR,
+            includeAlternates: !robots,
+            ...(robots ? { robots } : {}),
             webPageType: "CollectionPage",
-            preloadImages: [assetHref(appImages.lcp || appImages.gymHero || appImages.today, locale)],
+            preloadImages: [assetHref(appImages.lcp || appImages.gymHero || appImages.today, resourceLocale)],
             structuredData: buildHomeStructuredData({
                 page,
                 catalogData,
@@ -145,6 +157,7 @@ ${renderAppFooter(locale, textLocale, "index.html", true)}
             dateModified
         },
         enableAds: page.ads !== false,
+        resourceLocale,
         bodyClass: "home-page",
         htmlLang: locale === "ja" ? page.htmlLang || null : null,
         fontLocale: locale === "ja" ? page.htmlLang || null : null,
@@ -157,6 +170,25 @@ function buildHomeStructuredData({ page, catalogData, locale, textLocale, canoni
     const itemListId = `${canonicalUrl}#exercise-preview-list`;
 
     return [
+        {
+            "@type": "SoftwareApplication",
+            "@id": `${canonicalUrl}#application`,
+            name: "Shiba",
+            description: page.description || "Workout logging and training analytics for iPhone.",
+            url: canonicalUrl,
+            downloadUrl: getAppStoreUrl(textLocale),
+            applicationCategory: "HealthApplication",
+            operatingSystem: "iOS",
+            inLanguage: getGeneratedLocaleHreflang(locale),
+            image: absoluteStructuredDataAssetUrl(page.ogImage || DEFAULT_OG_IMAGE),
+            featureList: [
+                "Fast set logging",
+                "PR and estimated 1RM tracking",
+                "Training volume and muscle heatmaps",
+                "Share-ready workout result cards"
+            ],
+            publisher: { "@id": `${SITE_ORIGIN}/#organization` }
+        },
         {
             "@type": "ItemList",
             "@id": itemListId,
@@ -196,13 +228,13 @@ function absoluteStructuredDataAssetUrl(href) {
     return `${SITE_ORIGIN}/${href.replace(/^(\.\.\/|\.\/)+/, "")}`;
 }
 
-function renderAppLanding(page, catalogData, locale, textLocale = locale) {
+function renderAppLanding(page, catalogData, locale, textLocale = locale, assetLocale = locale) {
     const intro = page.intro || [];
     const overview = page.overview || {};
     const overviewItems = overview.items || [];
     const images = getAppImages(page);
     const story = getHomeStoryCopy(textLocale, page.story || {});
-    const previewCards = buildHomePreviewCards(catalogData, textLocale, page.unit || "kg", locale);
+    const previewCards = buildHomePreviewCards(catalogData, textLocale, page.unit || "kg", assetLocale);
     const sectionCount = catalogData.sections.length;
     const exerciseCount = new Set(catalogData.sections.flatMap((section) => section.cards.map((card) => card.slug))).size;
     const todayItem = overviewItems[0] || {};
@@ -229,29 +261,22 @@ function renderAppLanding(page, catalogData, locale, textLocale = locale) {
 
     return `        <div class="app-home-shell">
             <section class="app-hero" id="today">
-                <img class="app-hero-bg" src="${escapeAttribute(assetHref(images.gymHero, locale))}" alt="" aria-hidden="true" loading="eager" decoding="async" fetchpriority="high"${imageSizeAttributes(assetHref(images.gymHero, locale))}>
+                ${images.heroBackground ? `<img class="app-hero-bg" src="${escapeAttribute(assetHref(images.heroBackground, assetLocale))}" alt="" aria-hidden="true" loading="eager" decoding="async" fetchpriority="high"${imageSizeAttributes(assetHref(images.heroBackground, assetLocale))}>` : ""}
                 <div class="app-hero-inner">
                     <div class="app-hero-copy">
                         <h1 class="app-hero-title"><span class="app-hero-title-name">Shiba</span><span class="app-hero-title-category">${escapeHtml(trustCopy.productCategory)}</span></h1>
                         <p class="app-hero-subtitle">${renderMultilineText(story.heroPromise || share.heading || page.heroHeading || "")}</p>
+                        ${story.heroProof ? `<p class="app-hero-proof">${renderMultilineText(story.heroProof)}</p>` : ""}
                         <p class="app-hero-lead">${escapeHtml(share.copy || intro[0] || page.description || "")}</p>
                         <div class="app-hero-actions">
-                            ${renderAppStoreBadge(locale, "hero")}
+                            ${renderAppStoreBadge(locale, "hero", textLocale, assetLocale)}
                         </div>
                     </div>
-                    ${renderHeroScreenshotStack(images, locale, textLocale)}
+                    ${renderHeroScreenshotStack(images, locale, textLocale, assetLocale)}
                 </div>
             </section>
 
-${renderHomeScreenshotGallery(locale, textLocale)}
-
-${renderHomeStorySection({
-        ...liftSection,
-        kicker: liftSection.kicker || getHomeText(textLocale, "todayKicker"),
-        heading: liftSection.heading || todayItem.heading || getHomeText(textLocale, "todayHeading"),
-        copy: liftSection.copy || (todayItem.paragraphs || [getHomeText(textLocale, "todayCopy")])[0],
-        items: liftSection.items || getHomeText(textLocale, "todayFeatures")
-    }, renderLiftProof(images, locale, textLocale))}
+${renderShareSection(share, images, locale, textLocale, assetLocale)}
 
 ${renderHomeStorySection({
         ...trackSection,
@@ -260,9 +285,18 @@ ${renderHomeStorySection({
         heading: trackSection.heading || analyticsItem.heading || overview.title || getHomeText(textLocale, "analyticsHeading"),
         copy: trackSection.copy || overview.copy || getHomeText(textLocale, "analyticsCopy"),
         items: trackSection.items || getHomeText(textLocale, "analyticsFeatures")
-    }, renderAnalyticsProof(images, locale, textLocale, story.analyticsProof || {}), true)}
+    }, renderAnalyticsProof(images, locale, textLocale, story.analyticsProof || {}, assetLocale), true)}
 
-${renderShareSection(share, images, locale, textLocale)}
+${renderHomeStorySection({
+        ...liftSection,
+        id: "lift",
+        kicker: liftSection.kicker || getHomeText(textLocale, "todayKicker"),
+        heading: liftSection.heading || todayItem.heading || getHomeText(textLocale, "todayHeading"),
+        copy: liftSection.copy || (todayItem.paragraphs || [getHomeText(textLocale, "todayCopy")])[0],
+        items: liftSection.items || getHomeText(textLocale, "todayFeatures")
+    }, renderLiftProof(images, locale, textLocale, assetLocale))}
+
+${renderHomeScreenshotGallery(images, locale, textLocale, assetLocale)}
 
             <section class="app-library-section" id="library">
                 <div class="app-library-inner">
@@ -275,29 +309,29 @@ ${renderShareSection(share, images, locale, textLocale)}
                             <span>${escapeHtml(formatCategoryCount(sectionCount, textLocale))}</span>
                         </div>
                         <div class="app-library-actions">
-                            <a href="exercises.html" class="app-pill app-pill--dark">${escapeHtml(getHomeText(textLocale, "libraryAction"))}</a>
-                            ${renderAppStoreBadge(locale, "library")}
+                            <a href="${escapeAttribute(resolveLocalizedStaticPageHref("exercises.html", locale, textLocale, { absolute: true }))}" class="app-pill app-pill--dark">${escapeHtml(getHomeText(textLocale, "libraryAction"))}</a>
+                            ${renderAppStoreBadge(locale, "library", textLocale, assetLocale)}
                         </div>
                     </div>
                     <div class="app-library-preview">
-${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card)).join("\n")}
+${previewCards.slice(0, 4).map((card) => renderAppLibraryPreviewCard(card, textLocale)).join("\n")}
                         </div>
                 </div>
             </section>
 
 ${renderPrivacySection(trustCopy, story.privacy || {})}
 
-${renderPremiumSection(story.premium || {}, locale)}
+${renderPremiumSection(story.premium || {}, locale, textLocale, assetLocale)}
 
             <section class="app-cta-band" id="app-store">
                 <div class="app-cta-copy">
-                    <img src="${escapeAttribute(assetHref(images.mascot, locale))}" alt="" aria-hidden="true" class="app-cta-mascot" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.mascot, locale))}>
+                    <img src="${escapeAttribute(assetHref(images.mascot, assetLocale))}" alt="" aria-hidden="true" class="app-cta-mascot" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.mascot, assetLocale))}>
                     <p class="app-kicker">Shiba</p>
                     <h2>${renderMultilineText(getHomeText(textLocale, "appStoreHeading"))}</h2>
                     <p>${escapeHtml(getHomeText(textLocale, "appStoreCopy"))}</p>
                     <div class="app-cta-actions">
-                        ${renderAppStoreBadge(locale, "final_cta")}
-                        <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}" class="app-pill app-pill--outline-dark">${escapeHtml(getHomeText(textLocale, "privacy"))}</a>
+                        ${renderAppStoreBadge(locale, "final_cta", textLocale, assetLocale)}
+                        <a href="${escapeAttribute(resolveLocalizedStaticPageHref("shiba-privacy-policy.html", locale, textLocale, { absolute: true }))}" class="app-pill app-pill--outline-dark">${escapeHtml(getHomeText(textLocale, "privacy"))}</a>
                     </div>
                 </div>
             </section>
@@ -313,18 +347,21 @@ function getAppImages(page) {
         heatmapDetail: "app/muscle-heatmap.png",
         lcp: "app/shiba-gym-hero.png",
         gymHero: "app/shiba-gym-hero.png",
+        heroBackground: "",
+        shareCard: "app/website/share-summary.jpg",
+        analytics: "app/website/analytics.jpg",
         mascot: "app/shiba-mascot.png",
         ...(page.appImages || {})
     };
 }
 
-function renderAppFooter(locale, textLocale = locale, languageFile = "index.html", includeAppleCredit = false) {
-    const homeHref = resolveLocalizedStaticPageHref("index.html", locale, textLocale);
+function renderAppFooter(locale, textLocale = locale, languageFile = "index.html", includeAppleCredit = false, assetLocale = locale) {
+    const homeHref = resolveLocalizedStaticPageHref("index.html", locale, textLocale, { absolute: true });
     const featuresHref = resolveLocalizedContentHref("index.html#analytics", locale, textLocale);
-    const aboutHref = resolveLocalizedStaticPageHref("about.html", locale, textLocale);
-    const methodologyHref = resolveLocalizedStaticPageHref("methodology.html", locale, textLocale);
-    const dataTermsHref = resolveLocalizedStaticPageHref("data-terms.html", locale, textLocale);
-    const contactHref = resolveLocalizedStaticPageHref("contact.html", locale, textLocale);
+    const aboutHref = resolveLocalizedStaticPageHref("about.html", locale, textLocale, { absolute: true });
+    const methodologyHref = resolveLocalizedStaticPageHref("methodology.html", locale, textLocale, { absolute: true });
+    const dataTermsHref = resolveLocalizedStaticPageHref("data-terms.html", locale, textLocale, { absolute: true });
+    const contactHref = resolveLocalizedStaticPageHref("contact.html", locale, textLocale, { absolute: true });
     const languageLinks = getGeneratedLocales()
         .map((item) => `                <a href="${escapeAttribute(absoluteUrlForFile(languageFile, item.code))}" data-lang="${escapeAttribute(item.code)}">${escapeHtml(item.displayName)}</a>`)
         .join("\n");
@@ -332,17 +369,17 @@ function renderAppFooter(locale, textLocale = locale, languageFile = "index.html
     return `    <footer class="app-footer">
         <div class="app-footer-inner">
             <a href="${escapeAttribute(homeHref)}" class="app-footer-brand">
-                <img src="${escapeAttribute(assetHref("app/shiba-mascot.png", locale))}" alt="" aria-hidden="true" class="app-footer-brand-icon" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref("app/shiba-mascot.png", locale))}>
+                <img src="${escapeAttribute(assetHref("app/shiba-mascot.png", assetLocale))}" alt="" aria-hidden="true" class="app-footer-brand-icon" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref("app/shiba-mascot.png", assetLocale))}>
                 <span>Shiba</span>
             </a>
             <nav class="app-footer-links" aria-label="Shiba footer">
                 <a href="${escapeAttribute(homeHref)}">${escapeHtml(getHomeText(textLocale, "footerHome"))}</a>
                 <a href="${escapeAttribute(featuresHref)}">${escapeHtml(getHomeText(textLocale, "footerFeatures"))}</a>
-                <a href="${escapeAttribute(resolveLocalizedStaticPageHref("exercises.html", locale, textLocale))}">${escapeHtml(getUiText(textLocale, "exerciseLibrary"))}</a>
+                <a href="${escapeAttribute(resolveLocalizedStaticPageHref("exercises.html", locale, textLocale, { absolute: true }))}">${escapeHtml(getUiText(textLocale, "exerciseLibrary"))}</a>
                 <a href="${escapeAttribute(aboutHref)}">${escapeHtml(getUiText(textLocale, "about"))}</a>
                 <a href="${escapeAttribute(methodologyHref)}">${escapeHtml(getUiText(textLocale, "methodology"))}</a>
                 <a href="${escapeAttribute(dataTermsHref)}">${escapeHtml(getUiText(textLocale, "dataTerms"))}</a>
-                <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
+                <a href="${escapeAttribute(resolveLocalizedStaticPageHref("shiba-privacy-policy.html", locale, textLocale, { absolute: true }))}">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
                 <a href="${escapeAttribute(contactHref)}">${escapeHtml(getHomeText(textLocale, "footerContact"))}</a>
             </nav>
             <nav class="app-footer-languages" aria-label="${escapeAttribute(getUiText(textLocale, "language"))}">
@@ -367,30 +404,34 @@ ${blocks.map((block) => renderContentBlock(block, locale)).join("\n")}
                 </article>`;
 }
 
-function resolveStaticPageHref(file, locale = "ja") {
+function resolveStaticPageHref(file, locale = "ja", { absolute = false } = {}) {
     if (file === "index.html") {
         return absoluteUrlForFile(file, locale);
     }
 
     const page = staticPageByFile.get(file);
     if (page?.englishOnly === true && locale !== "ja") {
-        return `../${file}`;
+        return absolute ? absoluteUrlForFile(file, "ja") : `../${file}`;
     }
 
-    return file;
+    return absolute ? absoluteUrlForFile(file, locale) : file;
 }
 
-function resolveLocalizedStaticPageHref(file, locale = "ja", textLocale = locale) {
+function resolveLocalizedStaticPageHref(file, locale = "ja", textLocale = locale, { absolute = false } = {}) {
     if (file === "index.html") {
         const targetLocale = textLocale === "en" && locale !== "en" ? "en" : locale;
         return absoluteUrlForFile(file, targetLocale);
     }
 
     if (textLocale !== "en" || locale === "en") {
-        return resolveStaticPageHref(file, locale);
+        return resolveStaticPageHref(file, locale, { absolute });
     }
 
-    return locale === "ja" ? `en/${file}` : `../en/${file}`;
+    if (staticPageByFile.get(file)?.englishOnly === true) {
+        return absolute ? absoluteUrlForFile(file, "ja") : locale === "ja" ? file : `../${file}`;
+    }
+
+    return absolute ? absoluteUrlForFile(file, "en") : locale === "ja" ? `en/${file}` : `../en/${file}`;
 }
 
 function resolveContentHref(href, locale = "ja") {
@@ -445,32 +486,41 @@ function renderHeroShareSpotlight(share, images, locale, textLocale = locale) {
                     </div>`;
 }
 
-function renderHeroScreenshotStack(images, locale, textLocale = locale) {
+function renderHeroScreenshotStack(images, locale, textLocale = locale, assetLocale = locale) {
     const heroScreens = [
-        { image: images.today, alt: getHomeText(textLocale, "todayAlt"), className: "app-hero-shot--primary" },
-        { image: images.strength, alt: getHomeText(textLocale, "strengthAlt"), className: "app-hero-shot--logging" },
-        { image: images.heatmap, alt: getHomeText(textLocale, "heatmapAlt"), className: "app-hero-shot--analytics" }
+        { image: images.shareCard, alt: getHomeText(textLocale, "shareCardAlt"), className: "app-hero-shot--primary" },
+        { image: images.analytics, alt: getHomeText(textLocale, "analyticsAlt"), className: "app-hero-shot--logging" },
+        { image: images.today, alt: getHomeText(textLocale, "todayAlt"), className: "app-hero-shot--analytics" }
     ];
 
     return `<div class="app-hero-screen-stage" aria-label="${escapeAttribute(getHomeText(textLocale, "heroShowcaseAria"))}">
                         <div class="app-hero-screen-stack">
 ${heroScreens.map(({ image, alt, className }) => {
-        const imageHref = assetHref(image, locale);
+        const imageHref = assetHref(image, assetLocale);
         const classes = [
             "app-hero-shot",
             className
         ].filter(Boolean).join(" ");
 
+        const fetchPriority = className === "app-hero-shot--primary" ? "high" : "low";
+
         return `                            <figure class="${escapeAttribute(classes)}">
-                                <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(alt)}" decoding="async"${imageSizeAttributes(imageHref)}>
+                                <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(alt)}" decoding="async" fetchpriority="${fetchPriority}"${imageSizeAttributes(imageHref)}>
                             </figure>`;
     }).join("\n")}
                         </div>
                     </div>`;
 }
 
-function renderHomeScreenshotGallery(locale, textLocale = locale) {
+function renderHomeScreenshotGallery(images, locale, textLocale = locale, assetLocale = locale) {
     const copy = getHomeScreenshotCopy(textLocale);
+    const screens = [
+        { image: images.shareCard, title: getHomeText(textLocale, "shareCardAlt") },
+        { image: images.analytics, title: getHomeText(textLocale, "analyticsAlt") },
+        { image: images.heatmap, title: getHomeText(textLocale, "heatmapAlt") },
+        { image: images.today, title: getHomeText(textLocale, "todayAlt") },
+        { image: images.logging, title: getHomeText(textLocale, "loggingAlt") }
+    ];
 
     return `            <section class="app-screenshot-gallery" id="screenshots" aria-labelledby="screenshots-heading">
                 <div class="app-screenshot-gallery-inner">
@@ -480,11 +530,9 @@ function renderHomeScreenshotGallery(locale, textLocale = locale) {
                         ${copy.copy ? `<p>${escapeHtml(copy.copy)}</p>` : ""}
                     </div>
                     <div class="app-screenshot-track" aria-label="${escapeAttribute(copy.trackAria)}">
-${Array.from({ length: HOME_SCREENSHOT_COUNT }, (_, index) => {
+${screens.map(({ image, title }, index) => {
         const position = index + 1;
-        const image = homeScreenshotAsset(locale, position);
-        const imageHref = assetHref(image, locale);
-        const title = copy.titles[index] || `${copy.defaultTitle} ${position}`;
+        const imageHref = assetHref(image, assetLocale);
 
         return `                        <figure class="app-screenshot-card">
                             <div class="app-screenshot-frame">
@@ -531,10 +579,10 @@ function getHomeScreenshotCopy(locale) {
     const copy = {
         ja: {
             kicker: "",
-            heading: "9枚の画面",
-            copy: "",
+            heading: "流れを支える画面",
+            copy: "共有、分析、今日の記録まで、実際の画面で確認できます。",
             aria: "Shiba App Storeスクリーンショットのプレビュー",
-            trackAria: "Shibaの9枚のApp Storeスクリーンショット",
+            trackAria: "Shibaのワークアウト記録・分析画面",
             defaultTitle: "スクリーンショット",
             titles: ["迷わず開始", "セットを素早く記録", "強さの現在地", "伸びを追跡", "鍛えた筋肉を見る", "次の種目を探す", "結果を共有", "アカウントなしで記録", "種目ごとに深掘り"]
         },
@@ -612,10 +660,10 @@ function getHomeScreenshotCopy(locale) {
         },
         en: {
             kicker: "",
-            heading: "9 screens",
-            copy: "",
+            heading: "The screens behind the flow.",
+            copy: "See the real screens behind sharing, analysis, and today’s workout.",
             aria: "Preview of Shiba App Store screenshots",
-            trackAria: "9 Shiba App Store screenshots",
+            trackAria: "Shiba workout logging and analysis screens",
             defaultTitle: "Screenshot",
             titles: ["Start without friction", "Log sets fast", "Know your strength", "Track growth", "See muscles worked", "Find the next lift", "Share results", "Private by default", "Compare each lift"]
         }
@@ -685,25 +733,25 @@ ${media}
             </section>`;
 }
 
-function renderLiftProof(images, locale, textLocale = locale) {
+function renderLiftProof(images, locale, textLocale = locale, assetLocale = locale) {
     return `                    <div class="app-scene-media">
                         <div class="app-lift-proof">
                             <div class="app-phone app-phone--screen app-phone--lift-proof">
-                                <img src="${escapeAttribute(assetHref(images.today, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "todayAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.today, locale))}>
+                                <img src="${escapeAttribute(assetHref(images.today, assetLocale))}" alt="${escapeAttribute(getHomeText(textLocale, "todayAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.today, assetLocale))}>
                             </div>
                             <div class="app-phone app-phone--screen app-phone--logging-proof">
-                                <img src="${escapeAttribute(assetHref(images.logging, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "loggingAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.logging, locale))}>
+                                <img src="${escapeAttribute(assetHref(images.logging, assetLocale))}" alt="${escapeAttribute(getHomeText(textLocale, "loggingAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.logging, assetLocale))}>
                             </div>
                         </div>
                     </div>`;
 }
 
-function renderAnalyticsProof(images, locale, textLocale = locale, analyticsProof = {}) {
+function renderAnalyticsProof(images, locale, textLocale = locale, analyticsProof = {}, assetLocale = locale) {
     const labels = { ...getHomeStoryCopy(textLocale).analyticsProof, ...analyticsProof };
     return `                    <div class="app-scene-media">
                         <div class="app-analytics-proof">
                             <div class="app-phone app-phone--screen app-phone--analytics-proof">
-                                <img src="${escapeAttribute(assetHref(images.strength, locale))}" alt="${escapeAttribute(getHomeText(textLocale, "strengthAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.strength, locale))}>
+                                <img src="${escapeAttribute(assetHref(images.analytics, assetLocale))}" alt="${escapeAttribute(getHomeText(textLocale, "analyticsAlt"))}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(assetHref(images.analytics, assetLocale))}>
                             </div>
                             <div class="app-chart-proof" aria-label="${escapeAttribute(labels.aria)}">
                                 <span>${escapeHtml(labels.kicker)}</span>
@@ -721,7 +769,7 @@ function renderAnalyticsProof(images, locale, textLocale = locale, analyticsProo
                     </div>`;
 }
 
-function renderShareSection(share, _images, locale, textLocale = locale) {
+function renderShareSection(share, images, locale, textLocale = locale, assetLocale = locale) {
     const copy = normalizeShareCopy(share, textLocale);
 
     return `            <section class="app-share-section" id="share">
@@ -732,7 +780,7 @@ function renderShareSection(share, _images, locale, textLocale = locale) {
                         <p>${escapeHtml(copy.copy)}</p>
                     </div>
                     <div class="app-share-card-stage" aria-label="${escapeAttribute(copy.stageLabel)}">
-${copy.screens.map((screen, index) => renderShareCardScreen(screen, index, locale)).join("\n")}
+${copy.screens.map((screen, index) => renderShareCardScreen(screen, index, locale, assetLocale, images)).join("\n")}
                     </div>
                 </div>
             </section>`;
@@ -747,7 +795,7 @@ function normalizeShareCopy(share, textLocale = "ja") {
         stageLabel: share.stageLabel || getHomeText(textLocale, "shareStageLabel") || "Share card previews",
         stats: share.stats || [],
         heroCardLabel: share.heroCardLabel || "Share-ready result",
-        heroCardValue: share.heroCardValue || "Top 1%"
+            heroCardValue: share.heroCardValue || "Shiba standard"
     };
 }
 
@@ -762,7 +810,8 @@ function normalizeShareScreens(screens, textLocale = "ja") {
         return {
             id: fallback.id,
             heading: screen.heading || fallback.heading,
-            alt: screen.alt || screen.heading || fallback.alt
+            alt: screen.alt || screen.heading || fallback.alt,
+            image: screen.image || fallback.image || ""
         };
     });
 }
@@ -784,9 +833,14 @@ function getDefaultShareScreens(textLocale = "ja") {
     return screens[textLocale] || screens.en;
 }
 
-function renderShareCardScreen(screen, index, locale) {
-    const image = shareCardAsset(locale, screen.id);
-    const imageHref = assetHref(image, locale);
+function renderShareCardScreen(screen, index, locale, assetLocale = locale, images = {}) {
+    const fallbackImage = screen.id === "summary"
+        ? images.analytics
+        : screen.id === "heatmap"
+            ? images.heatmap
+            : images.shareCard;
+    const image = screen.image || fallbackImage || shareCardAsset(locale, screen.id);
+    const imageHref = assetHref(image, assetLocale);
     const classes = [
         "app-share-card-screen",
         `app-share-card-screen--${screen.id}`,
@@ -857,7 +911,7 @@ ${trustCopy.items.map((item) => `                    <div class="app-trust-item"
             </section>`;
 }
 
-function renderPremiumSection(premium, locale) {
+function renderPremiumSection(premium, locale, textLocale = locale, assetLocale = locale) {
     if (!premium.heading) {
         return "";
     }
@@ -871,7 +925,7 @@ function renderPremiumSection(premium, locale) {
                 <div class="app-premium-list">
 ${(premium.items || []).map((item) => `                    <span>${escapeHtml(item)}</span>`).join("\n")}
                 </div>
-                ${renderAppStoreBadge(locale, "premium")}
+                ${renderAppStoreBadge(locale, "premium", textLocale, assetLocale)}
             </section>`;
 }
 
@@ -924,9 +978,9 @@ function renderAppMetricRail(items) {
                             </div>`).join("\n");
 }
 
-function renderAppStoreBadge(locale, placement = "unknown") {
-    const badgeSrc = assetHref(APP_STORE_BADGE_ASSET, locale);
-    return `<a href="${escapeAttribute(getAppStoreUrl(locale))}" class="app-store-badge-link" target="_blank" rel="noopener noreferrer external" data-analytics-link="app-store" data-analytics-placement="${escapeAttribute(placement)}">
+function renderAppStoreBadge(locale, placement = "unknown", storeLocale = locale, assetLocale = locale) {
+    const badgeSrc = assetHref(APP_STORE_BADGE_ASSET, assetLocale);
+    return `<a href="${escapeAttribute(getAppStoreUrl(storeLocale))}" class="app-store-badge-link" target="_blank" rel="noopener noreferrer external" data-analytics-link="app-store" data-analytics-placement="${escapeAttribute(placement)}">
                                 <img src="${escapeAttribute(badgeSrc)}" alt="Download on the App Store" class="app-store-badge" decoding="async"${imageSizeAttributes(badgeSrc)}>
                             </a>`;
 }
@@ -1543,8 +1597,8 @@ function englishCategoryLabel(sectionId) {
     return labels[sectionId] || "Exercise";
 }
 
-function renderAppLibraryPreviewCard(card) {
-    return `                            <a class="app-library-preview-card" href="${escapeAttribute(card.href)}">
+function renderAppLibraryPreviewCard(card, locale = "en") {
+    return `                            <a class="app-library-preview-card" href="${escapeAttribute(absoluteUrlForFile(card.href, locale))}">
                                 <img src="${escapeAttribute(card.image)}" alt="${escapeAttribute(card.name)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(card.image)}>
                                 <span>
                                     <strong>${escapeHtml(card.name)}</strong>
@@ -1596,6 +1650,8 @@ function getHomeText(locale, key) {
             socialCardAlt: "Shibaアプリの本気の筋トレ記録・分析画面のプレビュー",
             todayAlt: "ShibaアプリのToday画面",
             loggingAlt: "Shibaアプリのワークアウト中セット入力画面",
+            shareCardAlt: "完了したワークアウトの共有サマリー画面",
+            analyticsAlt: "e1RMと筋力の推移を示すShibaの分析画面",
             strengthAlt: "筋力パーセンタイルの分析画面",
             heatmapAlt: "筋肉ヒートマップ画面",
             heroShowcaseAria: "Shibaの今日のワークアウト画面、筋力パーセンタイル、筋肉ヒートマップのプレビュー",
@@ -1654,15 +1710,17 @@ function getHomeText(locale, key) {
             privacy: "Privacy Policy",
             database: "Explore Library",
             databaseIntro: "Exercise references stay close to the app flow so you can move from logging to planning without friction.",
-            socialCardAlt: "Preview of Shiba serious workout logging and analytics screens",
+            socialCardAlt: "Shiba workout result card and training analytics screens",
             todayAlt: "Shiba app Today screen",
-            loggingAlt: "Shiba workout set logging screen",
-            strengthAlt: "Strength Percentile screen",
+            loggingAlt: "Shiba set logging screen with a rest timer",
+            shareCardAlt: "Shiba completed workout summary share card",
+            analyticsAlt: "Shiba Analytics screen showing e1RM and strength progress",
+            strengthAlt: "Shiba strength comparison screen",
             heatmapAlt: "Muscle heatmap screen",
-            heroShowcaseAria: "Preview of Shiba Today, Strength Percentile, and muscle heatmap screens",
-            percentileLabel: "Strength Percentile",
-            percentileValue: "Top 41%",
-            heroPercentileCopy: "Compared with similar lifters",
+            heroShowcaseAria: "Preview of Shiba workout result, analytics, and Today screens",
+            percentileLabel: "Shiba strength standard",
+            percentileValue: "Compare",
+            heroPercentileCopy: "Not a social leaderboard",
             heatmapCardLabel: "Muscle Heatmap",
             showcaseKicker: "Decision",
             showcaseHeading: "Logs become\ntraining decisions.",
@@ -1689,8 +1747,8 @@ function getHomeText(locale, key) {
             loggingCopy: "Save weight, reps, and notes quickly on the spot.",
             loggingFeatures: ["Log while seeing recent performance", "Keep each set's result visible", "Feed every entry into analytics"],
             analyticsHeading: "See growth and gaps in data",
-            analyticsCopy: "PRs, estimated 1RM, Strength Percentile, and volume trends give you a reason for the next target.",
-            analyticsFeatures: ["Understand your current level", "Review 1RM and volume trends", "Use progress to plan the next session"],
+            analyticsCopy: "PRs, estimated 1RM, volume trends, and comparisons with Shiba strength standards give you context for the next target.",
+            analyticsFeatures: ["Review PR and e1RM changes", "Compare a lift with Shiba strength standards", "Use progress to plan the next session"],
             heatmapHeading: "Use trained muscles to choose next",
             heatmapCopy: "Muscle heatmaps reveal balance and gaps before you pick the next exercise.",
             heatmapFeatures: ["Review trained areas across the body", "Spot bias and adjust the next plan", "Add visual context beyond numbers"],
@@ -2195,7 +2253,7 @@ function getHomeText(locale, key) {
         }
     };
 
-    return text[locale]?.[key] || text.ja[key] || "";
+    return text[locale]?.[key] || text.en?.[key] || text.ja[key] || "";
 }
 
 function renderLibraryPage(page, catalogData, locale) {
@@ -2395,7 +2453,7 @@ function renderContentPage(page, locale) {
     const datePublished = getStaticPageDatePublished(page.file);
     const dateModified = getStaticPageDateModified(page.file);
     const textLocale = page.textLocale || (appShell && page.htmlLang === "en" ? "en" : locale);
-    const breadcrumbs = appShell ? [] : [
+    const breadcrumbs = [
         { label: getUiText(locale, "home"), href: absoluteUrlForFile("index.html", locale) },
         { label: page.heading }
     ];
@@ -2556,6 +2614,7 @@ function renderAppPolicyHeader(locale, textLocale = "en") {
     const aboutHref = resolveLocalizedStaticPageHref("about.html", locale, textLocale);
     const methodologyHref = resolveLocalizedStaticPageHref("methodology.html", locale, textLocale);
     const dataTermsHref = resolveLocalizedStaticPageHref("data-terms.html", locale, textLocale);
+    const contactHref = resolveLocalizedStaticPageHref("contact.html", locale, textLocale);
 
     return `    <header class="site-header app-local-header">
         <nav class="site-topbar app-local-topbar" aria-label="Shiba">
@@ -2569,6 +2628,7 @@ function renderAppPolicyHeader(locale, textLocale = "en") {
                 <a href="${escapeAttribute(aboutHref)}" class="app-local-nav-link">${escapeHtml(getUiText(textLocale, "about"))}</a>
                 <a href="${escapeAttribute(methodologyHref)}" class="app-local-nav-link">${escapeHtml(getUiText(textLocale, "methodology"))}</a>
                 <a href="${escapeAttribute(dataTermsHref)}" class="app-local-nav-link">${escapeHtml(getUiText(textLocale, "dataTerms"))}</a>
+                <a href="${escapeAttribute(contactHref)}" class="app-local-nav-link">${escapeHtml(getUiText(textLocale, "contact"))}</a>
                 <a href="${escapeAttribute(resolveStaticPageHref("shiba-privacy-policy.html", locale))}" class="app-local-cta">${escapeHtml(getHomeText(textLocale, "footerPrivacy"))}</a>
             </div>
         </nav>

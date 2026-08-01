@@ -2737,6 +2737,8 @@ export {
     getCategoryNavItems,
     getExerciseName,
     getGeneratedLocales,
+    getHomeOutputDir,
+    getHomeRoutePrefix,
     getLocaleConfig,
     getLocaleConfigs,
     getLocalizedMuscleGroups,
@@ -3484,7 +3486,10 @@ function getOgLocale(localeCode) {
 
 function buildOutputPath(file, localeCode = "ja") {
     const locale = getLocaleConfig(localeCode);
-    return locale.outputDir ? join(ROOT, locale.outputDir, file) : join(ROOT, file);
+    const outputDir = file === "index.html"
+        ? getHomeOutputDir(localeCode)
+        : locale.outputDir;
+    return outputDir ? join(ROOT, outputDir, file) : join(ROOT, file);
 }
 
 function buildStaticFileEntries(files, localeCodes = getGeneratedLocales().map((locale) => locale.code)) {
@@ -3492,10 +3497,24 @@ function buildStaticFileEntries(files, localeCodes = getGeneratedLocales().map((
         return files.map((file) => ({
             file,
             locale: localeCode,
-            relativePath: localeCode === "ja" ? file : `${getLocaleConfig(localeCode).outputDir}/${file}`,
+            relativePath: file === "index.html"
+                ? (getHomeOutputDir(localeCode) ? `${getHomeOutputDir(localeCode)}/${file}` : file)
+                : (getLocaleConfig(localeCode).outputDir ? `${getLocaleConfig(localeCode).outputDir}/${file}` : file),
             path: buildOutputPath(file, localeCode)
         }));
     });
+}
+
+function getHomeOutputDir(localeCode = "ja") {
+    if (localeCode === "ja") return "ja";
+    if (localeCode === "en") return "";
+    return getLocaleConfig(localeCode).outputDir;
+}
+
+function getHomeRoutePrefix(localeCode = "ja") {
+    if (localeCode === "ja") return "/ja/";
+    if (localeCode === "en") return "/";
+    return getLocaleConfig(localeCode).routePrefix;
 }
 
 function assetPrefix(localeCode = "ja") {
@@ -3522,7 +3541,7 @@ function pageHref(file) {
 
 function absoluteUrlForFile(file, localeCode = "ja") {
     const locale = getLocaleConfig(localeCode);
-    const route = file === "index.html" ? locale.routePrefix : joinRoute(locale.routePrefix, file);
+    const route = file === "index.html" ? getHomeRoutePrefix(localeCode) : joinRoute(locale.routePrefix, file);
     return `${locale.origin}${route}`;
 }
 
