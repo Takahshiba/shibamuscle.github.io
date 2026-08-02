@@ -3253,12 +3253,10 @@ html:lang(zh-Hans) body.app-content-page {
     position: relative;
     padding: 6px;
     overflow: hidden;
-    border: 1px solid rgba(255, 189, 85, 0.28);
+    border: 0;
     border-radius: 34px;
     background: #070403;
-    box-shadow:
-        0 38px 96px rgba(0, 0, 0, 0.58),
-        0 0 0 1px rgba(255, 122, 0, 0.08);
+    box-shadow: 0 38px 96px rgba(0, 0, 0, 0.58);
 }
 
 .app-share-card-frame img {
