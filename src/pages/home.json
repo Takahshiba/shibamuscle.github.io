@@ -51,6 +51,7 @@
     "gymHero": "app/website/ja/share-summary.jpg",
     "heroBackground": "",
     "shareCard": "app/website/ja/share-summary.jpg",
+    "overview": "app/website/ja/overview.jpg",
     "analytics": "app/website/ja/analytics.jpg",
     "mascot": "app/shiba-mascot.png"
   },
@@ -134,9 +135,9 @@
         },
         {
           "id": "summary",
-          "heading": "Analytics",
-          "alt": "Shibaの推定1RMと筋力の推移を示す分析画面",
-          "image": "app/website/ja/analytics.jpg"
+          "heading": "概要",
+          "alt": "完了したワークアウトの概要共有カード画面",
+          "image": "app/website/ja/overview.jpg"
         }
       ]
     },
@@ -185,6 +186,7 @@
         "gymHero": "app/website/share-summary.jpg",
         "heroBackground": "",
         "shareCard": "app/website/share-summary.jpg",
+        "overview": "app/website/overview.jpg",
         "analytics": "app/website/analytics.jpg",
         "mascot": "app/shiba-mascot.png"
       },
@@ -291,8 +293,8 @@
           "screens": [
             {
               "id": "top",
-              "heading": "Summary",
-              "alt": "Completed workout summary screen",
+              "heading": "Top",
+              "alt": "Top percentile share card screen",
               "image": "app/website/share-summary.jpg"
             },
             {
@@ -303,9 +305,9 @@
             },
             {
               "id": "summary",
-              "heading": "Analytics",
-              "alt": "Analytics screen showing estimated 1RM and strength progress",
-              "image": "app/website/analytics.jpg"
+              "heading": "Overview",
+              "alt": "Completed workout overview share card screen",
+              "image": "app/website/overview.jpg"
             }
           ]
         },
@@ -351,6 +353,7 @@
         "gymHero": "app/website/ko/share-summary.jpg",
         "heroBackground": "",
         "shareCard": "app/website/ko/share-summary.jpg",
+        "overview": "app/website/ko/overview.jpg",
         "analytics": "app/website/ko/analytics.jpg",
         "mascot": "app/shiba-mascot.png"
       },
@@ -467,8 +470,8 @@
             },
             {
               "id": "summary",
-              "heading": "요약",
-              "alt": "요약 공유 카드 화면"
+              "heading": "개요",
+              "alt": "완료한 운동 개요 공유 카드 화면"
             }
           ]
         },
@@ -514,6 +517,7 @@
         "gymHero": "app/website/zh-hant/share-summary.jpg",
         "heroBackground": "",
         "shareCard": "app/website/zh-hant/share-summary.jpg",
+        "overview": "app/website/zh-hant/overview.jpg",
         "analytics": "app/website/zh-hant/analytics.jpg",
         "mascot": "app/shiba-mascot.png"
       },
@@ -630,8 +634,8 @@
             },
             {
               "id": "summary",
-              "heading": "摘要",
-              "alt": "摘要分享卡片畫面"
+              "heading": "概覽",
+              "alt": "完成訓練的概覽分享卡片畫面"
             }
           ]
         },
@@ -677,6 +681,7 @@
         "gymHero": "app/website/zh-hans/share-summary.jpg",
         "heroBackground": "",
         "shareCard": "app/website/zh-hans/share-summary.jpg",
+        "overview": "app/website/zh-hans/overview.jpg",
         "analytics": "app/website/zh-hans/analytics.jpg",
         "mascot": "app/shiba-mascot.png"
       },
@@ -793,8 +798,8 @@
             },
             {
               "id": "summary",
-              "heading": "摘要",
-              "alt": "摘要分享卡片画面"
+              "heading": "概览",
+              "alt": "完成训练的概览分享卡片画面"
             }
           ]
         },
@@ -840,6 +845,7 @@
         "gymHero": "app/website/es/share-summary.jpg",
         "heroBackground": "",
         "shareCard": "app/website/es/share-summary.jpg",
+        "overview": "app/website/es/overview.jpg",
         "analytics": "app/website/es/analytics.jpg",
         "mascot": "app/shiba-mascot.png"
       },
@@ -956,8 +962,8 @@
             },
             {
               "id": "summary",
-              "heading": "Resumen",
-              "alt": "Pantalla de tarjeta de resumen"
+              "heading": "Vista general",
+              "alt": "Pantalla de tarjeta con la vista general del entrenamiento completado"
             }
           ]
         },
@@ -1003,6 +1009,7 @@
         "gymHero": "app/website/fr/share-summary.jpg",
         "heroBackground": "",
         "shareCard": "app/website/fr/share-summary.jpg",
+        "overview": "app/website/fr/overview.jpg",
         "analytics": "app/website/fr/analytics.jpg",
         "mascot": "app/shiba-mascot.png"
       },
@@ -1119,8 +1126,8 @@
             },
             {
               "id": "summary",
-              "heading": "Résumé",
-              "alt": "Écran de carte résumé"
+              "heading": "Vue d’ensemble",
+              "alt": "Carte de vue d’ensemble de la séance terminée"
             }
           ]
         },
@@ -1166,6 +1173,7 @@
         "gymHero": "app/website/de/share-summary.jpg",
         "heroBackground": "",
         "shareCard": "app/website/de/share-summary.jpg",
+        "overview": "app/website/de/overview.jpg",
         "analytics": "app/website/de/analytics.jpg",
         "mascot": "app/shiba-mascot.png"
       },
@@ -1282,8 +1290,8 @@
             },
             {
               "id": "summary",
-              "heading": "Zusammenfassung",
-              "alt": "Zusammenfassung-Share-Karten-Screen"
+              "heading": "Übersicht",
+              "alt": "Übersichtskarte für das abgeschlossene Workout"
             }
           ]
         },
@@ -1329,6 +1337,7 @@
         "gymHero": "app/website/id/share-summary.jpg",
         "heroBackground": "",
         "shareCard": "app/website/id/share-summary.jpg",
+        "overview": "app/website/id/overview.jpg",
         "analytics": "app/website/id/analytics.jpg",
         "mascot": "app/shiba-mascot.png"
       },
@@ -1445,8 +1454,8 @@
             },
             {
               "id": "summary",
-              "heading": "Ringkasan",
-              "alt": "Layar kartu ringkasan"
+              "heading": "Ikhtisar",
+              "alt": "Layar kartu ikhtisar latihan yang selesai"
             }
           ]
         },
@@ -1492,6 +1501,7 @@
         "gymHero": "app/website/pt-br/share-summary.jpg",
         "heroBackground": "",
         "shareCard": "app/website/pt-br/share-summary.jpg",
+        "overview": "app/website/pt-br/overview.jpg",
         "analytics": "app/website/pt-br/analytics.jpg",
         "mascot": "app/shiba-mascot.png"
       },
@@ -1608,8 +1618,8 @@
             },
             {
               "id": "summary",
-              "heading": "Resumo",
-              "alt": "Tela do cartão de resumo"
+              "heading": "Visão geral",
+              "alt": "Tela do cartão de visão geral do treino concluído"
             }
           ]
         },

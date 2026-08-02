@@ -834,12 +834,19 @@ function getDefaultShareScreens(textLocale = "ja") {
 }
 
 function renderShareCardScreen(screen, index, locale, assetLocale = locale, images = {}) {
+    const canonicalImage = screen.id === "summary"
+        ? images.overview
+        : screen.id === "heatmap"
+            ? images.heatmap
+            : screen.id === "top"
+                ? images.shareCard
+                : null;
     const fallbackImage = screen.id === "summary"
-        ? images.analytics
+        ? images.overview || images.analytics
         : screen.id === "heatmap"
             ? images.heatmap
             : images.shareCard;
-    const image = screen.image || fallbackImage || shareCardAsset(locale, screen.id);
+    const image = canonicalImage || screen.image || fallbackImage || shareCardAsset(locale, screen.id);
     const imageHref = assetHref(image, assetLocale);
     const classes = [
         "app-share-card-screen",
