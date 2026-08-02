@@ -58,7 +58,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/icon-32x32.png?v=shiba-20260726">
     <link rel="manifest" href="../assets/manifest.json?v=shiba-20260726">
 
-    <link rel="stylesheet" href="../styles.css?v=app-home-share-cards-20260802">
+    <link rel="stylesheet" href="../styles.css?v=app-home-share-carousel-20260802">
     <meta name="apple-itunes-app" content="app-id=6785443075">
 
     <meta name="description" content="Shiba helps lifters plan strength workouts, log sets fast, review progress, choose exercises, and turn completed workouts into proof with PRs, e1RM, volume, and heatmaps.">
@@ -157,25 +157,25 @@
 <span>proof worth sharing.</span></h2>
                         <p>Every completed workout becomes a polished result card you can save, revisit, and share.</p>
                     </div>
-                    <div class="app-share-card-stage" aria-label="Share card previews">
-                        <figure class="app-share-card-screen app-share-card-screen--top">
-                            <div class="app-share-card-frame">
+                    <div class="app-share-card-stage" role="group" aria-label="Share card previews" data-share-card-carousel data-active-index="0">
+                        <button type="button" class="app-share-card-screen app-share-card-screen--top" data-share-card-carousel-item data-share-card-index="0" data-share-card-id="top" data-share-card-position="active" aria-label="Top" aria-pressed="true">
+                            <span class="app-share-card-frame">
                                 <img src="../assets/app/website/share-summary.jpg" alt="Top percentile share card screen" loading="lazy" decoding="async" fetchpriority="low" width="442" height="960">
-                            </div>
-                            <figcaption>Top</figcaption>
-                        </figure>
-                        <figure class="app-share-card-screen app-share-card-screen--heatmap is-featured">
-                            <div class="app-share-card-frame">
+                            </span>
+                            <span class="app-share-card-screen-label">Top</span>
+                        </button>
+                        <button type="button" class="app-share-card-screen app-share-card-screen--heatmap" data-share-card-carousel-item data-share-card-index="1" data-share-card-id="heatmap" data-share-card-position="next" aria-label="Heatmap" aria-pressed="false">
+                            <span class="app-share-card-frame">
                                 <img src="../assets/app/website/heatmap.jpg" alt="Muscle heatmap screen showing trained areas" loading="lazy" decoding="async" fetchpriority="low" width="442" height="960">
-                            </div>
-                            <figcaption>Heatmap</figcaption>
-                        </figure>
-                        <figure class="app-share-card-screen app-share-card-screen--summary">
-                            <div class="app-share-card-frame">
+                            </span>
+                            <span class="app-share-card-screen-label">Heatmap</span>
+                        </button>
+                        <button type="button" class="app-share-card-screen app-share-card-screen--summary" data-share-card-carousel-item data-share-card-index="2" data-share-card-id="summary" data-share-card-position="prev" aria-label="Overview" aria-pressed="false">
+                            <span class="app-share-card-frame">
                                 <img src="../assets/app/website/overview.jpg" alt="Completed workout overview share card screen" loading="lazy" decoding="async" fetchpriority="low" width="442" height="960">
-                            </div>
-                            <figcaption>Overview</figcaption>
-                        </figure>
+                            </span>
+                            <span class="app-share-card-screen-label">Overview</span>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -407,7 +407,7 @@
         </div>
     </footer>
 
-    <script src="../app.js?v=site-ui-20260716"></script>
+    <script src="../app.js?v=site-ui-20260802-share-carousel"></script>
 
 </body>
 

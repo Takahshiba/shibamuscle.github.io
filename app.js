@@ -1201,6 +1201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (pageType === "home") {
         initHomeDashboardInteractions();
+        initShareCardCarousel();
     }
 
     if (pageType !== "home") {
@@ -1209,6 +1210,106 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+function initShareCardCarousel() {
+    document.querySelectorAll("[data-share-card-carousel]").forEach((carousel) => {
+        if (carousel.dataset.shareCardCarouselReady === "true") {
+            return;
+        }
+
+        const cards = Array.from(carousel.querySelectorAll("[data-share-card-carousel-item]"));
+        if (cards.length < 2) {
+            return;
+        }
+
+        carousel.dataset.shareCardCarouselReady = "true";
+        let activeIndex = Number.parseInt(carousel.dataset.activeIndex || "0", 10);
+        if (!Number.isFinite(activeIndex)) {
+            activeIndex = 0;
+        }
+        let pointerStart = null;
+        let suppressClickUntil = 0;
+
+        const normalizeIndex = (index) => (index + cards.length) % cards.length;
+
+        const setActiveCard = (nextIndex, { focus = false } = {}) => {
+            activeIndex = normalizeIndex(nextIndex);
+            carousel.dataset.activeIndex = String(activeIndex);
+
+            cards.forEach((card, index) => {
+                const offset = normalizeIndex(index - activeIndex);
+                const position = offset === 0 ? "active" : offset === 1 ? "next" : "prev";
+                const isActive = position === "active";
+
+                card.dataset.shareCardPosition = position;
+                card.setAttribute("aria-pressed", isActive ? "true" : "false");
+                card.classList.toggle("is-active", isActive);
+            });
+
+            if (focus) {
+                cards[activeIndex].focus({ preventScroll: true });
+            }
+        };
+
+        cards.forEach((card, index) => {
+            card.addEventListener("click", (event) => {
+                if (Date.now() < suppressClickUntil) {
+                    event.preventDefault();
+                    return;
+                }
+
+                setActiveCard(index);
+            });
+        });
+
+        carousel.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                setActiveCard(activeIndex - 1, { focus: true });
+            } else if (event.key === "ArrowRight") {
+                event.preventDefault();
+                setActiveCard(activeIndex + 1, { focus: true });
+            } else if (event.key === "Home") {
+                event.preventDefault();
+                setActiveCard(0, { focus: true });
+            } else if (event.key === "End") {
+                event.preventDefault();
+                setActiveCard(cards.length - 1, { focus: true });
+            }
+        });
+
+        carousel.addEventListener("pointerdown", (event) => {
+            if (event.pointerType === "mouse" && event.button !== 0) {
+                return;
+            }
+
+            pointerStart = { x: event.clientX, y: event.clientY };
+        });
+
+        carousel.addEventListener("pointerup", (event) => {
+            if (!pointerStart) {
+                return;
+            }
+
+            const deltaX = event.clientX - pointerStart.x;
+            const deltaY = event.clientY - pointerStart.y;
+            pointerStart = null;
+
+            if (Math.abs(deltaX) < 44 || Math.abs(deltaX) <= Math.abs(deltaY)) {
+                return;
+            }
+
+            suppressClickUntil = Date.now() + 400;
+            setActiveCard(activeIndex + (deltaX < 0 ? 1 : -1));
+        });
+
+        carousel.addEventListener("pointercancel", () => {
+            pointerStart = null;
+        });
+
+        setActiveCard(activeIndex);
+    });
+}
 
 function initGrowthAnalytics(pageType, locale) {
     if (document.body.dataset.growthAnalyticsReady === "true") {

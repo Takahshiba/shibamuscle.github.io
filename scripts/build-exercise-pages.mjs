@@ -177,7 +177,7 @@ ${preFooterAdSlotHtml}
 
 ${renderStaticFooter(currentFile, locale)}
 
-    <script src="${stylesheetHref("app.js?v=site-ui-20260716", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=site-ui-20260802-share-carousel", locale)}"></script>
 `;
 
     return renderDocument({

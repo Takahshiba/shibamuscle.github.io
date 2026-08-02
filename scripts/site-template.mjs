@@ -41,7 +41,7 @@ const APP_STORE_STOREFRONTS = {
 };
 const APP_STORE_URL = `https://apps.apple.com/us/app/id${APP_STORE_ID}`;
 const APP_STORE_BADGE_ASSET = "app/download-on-the-app-store.svg";
-const SITE_STYLESHEET = "styles.css?v=site-ui-20260716";
+const SITE_STYLESHEET = "styles.css?v=site-ui-20260802-share-carousel";
 const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/app/shiba-mascot.png`;
 const ICON_ASSET_VERSION = "shiba-20260726";
 const ROOT = process.cwd();

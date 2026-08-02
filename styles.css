@@ -3169,17 +3169,29 @@ html:lang(zh-Hans) body.app-content-page {
     display: grid;
     place-items: center;
     isolation: isolate;
+    touch-action: pan-y;
+    --share-card-active-width: min(360px, 32vw);
+    --share-card-side-width: min(320px, 28vw);
+    --share-card-side-offset: clamp(190px, 22vw, 270px);
 }
 
 .app-share-card-screen {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: min(320px, 28vw);
+    width: var(--share-card-side-width);
     margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 34px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: center;
+    cursor: pointer;
     transform: translate(-50%, -50%);
     transform-origin: center;
-    transition: transform 220ms ease, filter 220ms ease, opacity 220ms ease;
+    transition: transform 300ms cubic-bezier(0.22, 0.8, 0.2, 1), filter 300ms ease, opacity 300ms ease, width 300ms cubic-bezier(0.22, 0.8, 0.2, 1);
 }
 
 .app-share-card-screen--top {
@@ -3207,6 +3219,36 @@ html:lang(zh-Hans) body.app-content-page {
     filter: saturate(1) brightness(1);
 }
 
+.app-share-card-screen[data-share-card-position="prev"] {
+    z-index: 2;
+    width: var(--share-card-side-width);
+    opacity: 0.82;
+    filter: saturate(0.9) brightness(0.74);
+    transform: translate(calc(-50% - var(--share-card-side-offset)), -50%) rotate(-4deg) scale(0.9);
+}
+
+.app-share-card-screen[data-share-card-position="active"] {
+    z-index: 4;
+    width: var(--share-card-active-width);
+    opacity: 1;
+    filter: saturate(1) brightness(1);
+    cursor: default;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.app-share-card-screen[data-share-card-position="next"] {
+    z-index: 1;
+    width: var(--share-card-side-width);
+    opacity: 0.86;
+    filter: saturate(0.92) brightness(0.78);
+    transform: translate(calc(-50% + var(--share-card-side-offset)), -50%) rotate(4deg) scale(0.9);
+}
+
+.app-share-card-screen:focus-visible {
+    outline: 2px solid #ffbd55;
+    outline-offset: 10px;
+}
+
 .app-share-card-frame {
     position: relative;
     padding: 6px;
@@ -3228,7 +3270,7 @@ html:lang(zh-Hans) body.app-content-page {
     border-radius: 28px;
 }
 
-.app-share-card-screen figcaption {
+.app-share-card-screen-label {
     margin-top: 12px;
     color: rgba(255, 247, 238, 0.78);
     font-size: 0.82rem;
@@ -5909,6 +5951,9 @@ body.app-content-page {
     .app-share-card-stage {
         width: min(840px, 100%);
         min-height: 730px;
+        --share-card-active-width: min(340px, 35vw);
+        --share-card-side-width: min(300px, 30vw);
+        --share-card-side-offset: clamp(160px, 23vw, 230px);
     }
 
     .app-share-card-screen {
@@ -6112,6 +6157,9 @@ body.app-content-page {
     .app-share-card-stage {
         min-height: 610px;
         margin-top: 2px;
+        --share-card-active-width: min(300px, 62vw);
+        --share-card-side-width: min(210px, 44vw);
+        --share-card-side-offset: clamp(115px, 25vw, 172px);
     }
 
     .app-share-card-screen {
@@ -6141,7 +6189,7 @@ body.app-content-page {
         border-radius: 25px;
     }
 
-    .app-share-card-screen figcaption {
+    .app-share-card-screen-label {
         margin-top: 9px;
         font-size: 0.74rem;
     }
@@ -6227,6 +6275,9 @@ body.app-content-page {
 
     .app-share-card-stage {
         min-height: 540px;
+        --share-card-active-width: min(230px, 66vw);
+        --share-card-side-width: min(160px, 43vw);
+        --share-card-side-offset: clamp(82px, 26vw, 114px);
     }
 
     .app-share-card-screen {

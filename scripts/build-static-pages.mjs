@@ -124,7 +124,7 @@ ${renderAppLanding(page, catalogData, locale, textLocale, resourceLocale)}
 
 ${renderAppFooter(locale, textLocale, "index.html", true, resourceLocale)}
 
-    <script src="${stylesheetHref("app.js?v=site-ui-20260716", resourceLocale)}"></script>
+    <script src="${stylesheetHref("app.js?v=site-ui-20260802-share-carousel", resourceLocale)}"></script>
 `;
 
     return renderDocument({
@@ -779,7 +779,7 @@ function renderShareSection(share, images, locale, textLocale = locale, assetLoc
                         <h2>${renderMultilineText(copy.heading)}</h2>
                         <p>${escapeHtml(copy.copy)}</p>
                     </div>
-                    <div class="app-share-card-stage" aria-label="${escapeAttribute(copy.stageLabel)}">
+                    <div class="app-share-card-stage" role="group" aria-label="${escapeAttribute(copy.stageLabel)}" data-share-card-carousel data-active-index="0">
 ${copy.screens.map((screen, index) => renderShareCardScreen(screen, index, locale, assetLocale, images)).join("\n")}
                     </div>
                 </div>
@@ -850,16 +850,16 @@ function renderShareCardScreen(screen, index, locale, assetLocale = locale, imag
     const imageHref = assetHref(image, assetLocale);
     const classes = [
         "app-share-card-screen",
-        `app-share-card-screen--${screen.id}`,
-        index === 1 ? "is-featured" : ""
+        `app-share-card-screen--${screen.id}`
     ].filter(Boolean).join(" ");
+    const position = index === 0 ? "active" : index === 1 ? "next" : "prev";
 
-    return `                        <figure class="${escapeAttribute(classes)}">
-                            <div class="app-share-card-frame">
+    return `                        <button type="button" class="${escapeAttribute(classes)}" data-share-card-carousel-item data-share-card-index="${index}" data-share-card-id="${escapeAttribute(screen.id)}" data-share-card-position="${position}" aria-label="${escapeAttribute(screen.heading)}" aria-pressed="${index === 0 ? "true" : "false"}">
+                            <span class="app-share-card-frame">
                                 <img src="${escapeAttribute(imageHref)}" alt="${escapeAttribute(screen.alt)}" loading="lazy" decoding="async" fetchpriority="low"${imageSizeAttributes(imageHref)}>
-                            </div>
-                            <figcaption>${escapeHtml(screen.heading)}</figcaption>
-                        </figure>`;
+                            </span>
+                            <span class="app-share-card-screen-label">${escapeHtml(screen.heading)}</span>
+                        </button>`;
 }
 
 function renderShareScreenShowcase(_shareCopy, locale, textLocale = locale) {
@@ -2339,7 +2339,7 @@ ${cards}
 
 ${renderStaticFooter(page.file, locale)}
 
-    <script src="${stylesheetHref("app.js?v=site-ui-20260716", locale)}"></script>
+    <script src="${stylesheetHref("app.js?v=site-ui-20260802-share-carousel", locale)}"></script>
 `;
 
     return renderDocument({
@@ -2490,7 +2490,7 @@ ${content}
 
 ${renderStaticFooter(page.file, locale)}
 
-${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=site-ui-20260716", locale)}"></script>`}
+${page.scripts === false ? "" : `    <script src="${stylesheetHref("app.js?v=site-ui-20260802-share-carousel", locale)}"></script>`}
 `;
 
     return renderDocument({
